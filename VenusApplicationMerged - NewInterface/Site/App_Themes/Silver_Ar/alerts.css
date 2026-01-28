@@ -1,0 +1,76 @@
+#popup_container {
+	font-family: tahoma;
+	font-weight: bold;
+	font-size: 12px;
+	width: 400px; 
+	height: 150px; 
+	background: #FFF;
+	border: solid 1px gray;
+	color: #000;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background-image:url(../../Common/Images/Alerts/BackS.png);
+	float:right;
+	direction:rtl;
+}
+
+#popup_title {
+	font-size: 11px;
+	font-weight: normal;
+	text-align: right;
+	line-height: 1.75em;
+	color: black;
+	background: #CCC url(../../Common/Images/Alerts/TiltleS.png) top repeat-x;
+	border: solid 0px #FFF;
+	border-bottom: solid 1px #999;
+	padding-right:10px;
+	cursor: default;
+	margin: 0em;
+}
+#popup_content {
+	width: 48px; 
+	height: 48px; 
+	float:left;
+	direction:rtl;
+	margin: -35px 0px;
+}
+#popup_content.Success 
+{
+	background-image: url(../../Common/Images/Alerts/Success.png);
+	background-repeat:no-repeat;
+}
+#popup_content.Failled 
+{
+	background-image: url(../../Common/Images/Alerts/Failled.png);
+	background-repeat:no-repeat;
+}
+#popup_content.Warning 
+{
+	background-image: url(../../Common/Images/Alerts/Warning.png);
+	background-repeat:no-repeat;
+}
+#popup_content.Question 
+{
+	background-image: url(../../Common/Images/Alerts/Questions.png);
+	background-repeat:no-repeat;
+}
+#popup_message 
+{
+    background:white;
+    width: 380px; 
+	height: 70px; 
+	margin: 10px 10px 10px 10px;
+	padding-top:10px;
+	float:right;
+	text-align:center;
+	font-size: 11px;
+	font-weight: normal;
+	direction:rtl;
+}
+#popup_panel {
+	text-align: left;
+	margin: 70px 10px;
+}
+#popup_prompt {
+	margin: .5em 0em;
+}

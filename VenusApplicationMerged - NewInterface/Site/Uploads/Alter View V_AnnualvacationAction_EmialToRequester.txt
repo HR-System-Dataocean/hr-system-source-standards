@@ -1,0 +1,8 @@
+ALTER VIEW [dbo].[V_AnnualvacationAction_EmialToRequester]
+AS
+SELECT SS.ActionSerial AS ID, SS.RequestSerial, E.WorkE_Mail, VR.Code AS RequestCode, CASE WHEN ActionID = 1 THEN 'Accepted' WHEN ActionID = 2 THEN 'Rejected' WHEN ActionID = 4 THEN 'Delegated' END AS Action, 
+                  dbo.fn_GetEmpName(SSEMP.Code, 0) AS RequestActionBy, SS.FormCode
+FROM     dbo.SS_RequestActions AS SS INNER JOIN
+                  dbo.hrs_Employees AS E ON SS.EmployeeID = E.ID INNER JOIN
+                  dbo.SS_VacationRequest AS VR ON SS.RequestSerial = VR.ID INNER JOIN
+                  dbo.hrs_Employees AS SSEMP ON SSEMP.ID = SS.SS_EmployeeID

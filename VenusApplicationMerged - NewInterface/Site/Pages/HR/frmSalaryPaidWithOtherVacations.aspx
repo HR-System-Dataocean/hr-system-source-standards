@@ -1,0 +1,786 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="frmSalaryPaidWithOtherVacations.aspx.vb"
+    Inherits="frmEmployeesVacationTransactions" Culture="auto" meta:resourcekey="PageResource1"
+    UICulture="auto" %>
+
+<%@ Register Assembly="Infragistics35.WebUI.UltraWebTab.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
+    Namespace="Infragistics.WebUI.UltraWebTab" TagPrefix="igtab" %>
+<%@ Register Assembly="Infragistics35.WebUI.WebDataInput.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
+    Namespace="Infragistics.WebUI.WebDataInput" TagPrefix="igtxt" %>
+<%@ Register Assembly="Infragistics35.WebUI.UltraWebListbar.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
+    Namespace="Infragistics.WebUI.UltraWebListbar" TagPrefix="iglbar" %>
+<%@ Register Assembly="Infragistics35.WebUI.UltraWebGrid.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
+    Namespace="Infragistics.WebUI.UltraWebGrid" TagPrefix="igtbl" %>
+<%@ Register Assembly="Infragistics35.WebUI.WebDateChooser.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
+    Namespace="Infragistics.WebUI.WebSchedule" TagPrefix="igsch" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>* Venus Payroll * ~Employees Vacation Transactions</title>
+    <script src="Scripts/App_JScript.js" type="text/javascript"></script>
+    <script src="Scripts/App_JScript_M.js" type="text/javascript"></script>
+    <script src="Scripts/App_OtherFields_JScript.js" type="text/javascript"></script>
+    <script src="Scripts/App_Search_JScript.js" type="text/javascript"></script>
+    <script src="Scripts/App_JScript_PayRoll.js" type="text/javascript"></script>
+    <script src="../../Common/Script/JQuery/jquery-1.6.2.js" type="text/javascript"></script>
+    <script src="../../Common/Script/JQuery/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+    <script src="../../Common/Script/JQuery/jquery.blockUI.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+        function OpenPrintedScreen(v) {
+            var hight = window.screen.availHeight - 35;
+            var width = window.screen.availWidth - 10;
+            var win = window.open("../../Interfaces/frmReportsGridViewer.aspx?Language=false&Criteria=EmployeeTransactionID&preview=1&ReportCode=OtherVacPaySlip&sq0=''&v=" + v, "_NEW", "height=" + hight + ",width=" + width + ",resizable=0,menubar=0,toolbar=0,location=0,directories=0,scrollbars=0,status=0,center=0");
+            win.focus();
+        }
+        function btnPrint() {
+            var hdnEmpTrans = window.document.getElementById("hdnEmpTrans")
+            if (parseInt(hdnEmpTrans.value) > 0) {
+                OpenPrintedScreen(parseInt(hdnEmpTrans.value));
+            }
+        }
+    </script>
+    <style type="text/css">
+        .auto-style1 {
+            width: 5px;
+            height: 22px;
+        }
+        .auto-style2 {
+            width: 40px;
+            height: 22px;
+        }
+        .auto-style3 {
+            height: 22px;
+        }
+        .auto-style4 {
+            width: 3px;
+            height: 22px;
+        }
+    </style>
+</head>
+<body style="height: 100%; margin: 0; padding: 0;">
+    <form id="frmEmployeesVacationTransactions" runat="server">
+    <script type="text/javascript" id="Script1">
+        $(function () {
+            $('#<%= ButtonLoad.ClientID%>').click(function () {
+                $.blockUI({ message: '' });
+            });
+        });
+        function dopostback() {
+            var clickButton = document.getElementById("<%= ButtonLoad.ClientID %>");
+            clickButton.click();
+            __doPostBack('<%= ButtonLoad.UniqueID %>', '');
+        }
+    </script>
+    <div style="display: none">
+        <asp:HiddenField ID="txtEmployeeId" runat="server" Value="0" />
+        <asp:HiddenField ID="hdnEmpTrans" runat="server" Value="0" />
+        <asp:Button ID="ButtonLoad" runat="server" Text="Button" />
+    </div>
+    <div class="Div_MasterContainer" runat="server" id="DIV">
+        <table align="center" style="width: 100%;">
+            <tr>
+                <td class="Details">
+                    <igtab:UltraWebTab ID="UltraWebTab1" runat="server" EnableAppStyling="True" SkinID="Default"
+                        meta:resourcekey="UltraWebTab1Resource1">
+                        <Tabs>
+                            <igtab:Tab Text="عام" meta:resourcekey="TabResource1">
+                                <ContentTemplate>
+                                    <table style="width: 100%; vertical-align: top" cellspacing="0">
+                                        <tr>
+                                            <td style="height: 18px">
+                                                <table style="width: 100%; height: 18px; vertical-align: top; border-bottom: 1px solid silver">
+                                                    <tr>
+                                                        <td class="auto-style1">
+                                                        </td>
+                                                        <td style="text-align: center;" class="auto-style2">
+                                                            <igtxt:WebImageButton ID="btnSave" runat="server" Style="cursor: pointer;" Height="18px"
+                                                                Overflow="NoWordWrap" UseBrowserDefaults="False" CommandName="Save" Width="24px"
+                                                                meta:resourcekey="btnSaveResource1">
+                                                                <Alignments TextImage="ImageBottom" />
+                                                                <Appearance>
+                                                                    <Image Url="~/Common/Images/ToolBox/Hr_ToolBox/SaveN.png" />
+                                                                </Appearance>
+                                                            </igtxt:WebImageButton>
+                                                        </td>
+                                                        <td class="auto-style4">
+                                                            <asp:Label ID="Label_TSP3" runat="server" meta:resourcekey="Label_TSP1Resource1"
+                                                                Text="|"></asp:Label>
+                                                        </td>
+                                                        <td style="text-align: center;" class="auto-style2">
+                                                            <igtxt:WebImageButton ID="btnDelete" runat="server" Height="18px" CommandName="Refund" 
+                                                                meta:resourcekey="btnDeleteResource1" Overflow="NoWordWrap" UseBrowserDefaults="False"
+                                                                Width="24px">
+                                                                
+                                                                <Alignments TextImage="ImageBottom" />
+                                                                <Appearance>
+                                                                    <Image Url="~/Common/Images/ToolBox/Hr_ToolBox/Delete.png" />
+                                                                </Appearance>
+                                                            </igtxt:WebImageButton>
+                                                        </td>
+                                                        <td class="auto-style1">
+                                                            <asp:Label ID="Label7" runat="server" meta:resourcekey="Label_TSP1Resource1" Text="|"></asp:Label>
+                                                        </td>
+                                                        <td style="text-align: center;" class="auto-style2">
+                                                            <igtxt:WebImageButton ID="btnPrint" runat="server" Height="18px" meta:resourcekey="btnPrintResource1"
+                                                                Overflow="WordWrap" UseBrowserDefaults="False" Width="24px">
+                                                                <ClientSideEvents Click="btnPrint()" />
+                                                                <Alignments TextImage="ImageBottom" />
+                                                                <Appearance>
+                                                                    <Image Url="~/Common/Images/ToolBox/Hr_ToolBox/Print.png" />
+                                                                </Appearance>
+                                                            </igtxt:WebImageButton>
+                                                        </td>
+                                                        <td class="auto-style3">
+                                                            &nbsp;
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="height: 18px">
+                                                <table style="width: 100%; height: 18px; vertical-align: top; border-bottom: 1px solid silver">
+                                                    <tr>
+                                                        <td style="width: 5px">
+                                                        </td>
+                                                        <td style="width: 40px">
+                                                            <asp:Label ID="lblUser" runat="server" Width="40px" SkinID="Label_CopyRightsBold"
+                                                                Text="Code" meta:resourcekey="lblUserResource1"></asp:Label>
+                                                        </td>
+                                                        <td style="width: 80px">
+                                                            <asp:Label ID="txtCode" runat="server" Width="80px" SkinID="Label_CopyRightsNormal"
+                                                                meta:resourcekey="lblDescEmployeeCodeResource1"></asp:Label>
+                                                        </td>
+                                                        <td style="width: 40px">
+                                                            <asp:Label ID="lblName" runat="server" SkinID="Label_CopyRightsBold" Text="Name"
+                                                                Width="40px" meta:resourcekey="lblNameResource1"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label ID="lblEmployeeName" runat="server" SkinID="Label_CopyRightsNormal" meta:resourcekey="lblDescEnglishNameResource1"></asp:Label>
+                                                        </td>
+                                                        <td style="width: 80px">
+                                                            &nbsp;
+                                                        </td>
+                                                        <td style="width: 120px">
+                                                      
+                                                        </td>
+                                                        <td style="width: 50px">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table style="width: 100%; height: 100%; vertical-align: top" cellspacing="0">
+                                        
+                                        
+                                        <tr>
+                                            <td style="width: 47%; height: 30px; vertical-align: top;">
+                                                
+                                                <table style="width: 100%; vertical-align: top; border-bottom: 1px solid black" cellspacing="0">
+                                                    <tr>
+                                                        <td class="SeparArea">
+                                                        </td>
+                                                        <td class="LabelArea" colspan="2">
+                                                            
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="SeparArea">
+                                                        </td>
+                                                        <td class="LabelArea">
+                                                            
+                                                        </td>
+                                                        <td class="DataArea">
+                                                            <asp:CheckBox ID="CheckBox_SalaryPayment" runat="server" Enabled="False" AutoPostBack="True" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="SeparArea">
+                                                        </td>
+                                                        <td class="LabelArea">
+                                                            <asp:Label ID="lbWorkingDays" runat="server" SkinID="Label_DefaultNormal" Text="Working Days"
+                                                                Width="100px" meta:resourcekey="lbWorkingDaysResource1"></asp:Label>
+                                                        </td>
+                                                        <td class="DataArea">
+                                                            <asp:TextBox ID="lblWorkingDays" runat="server" ReadOnly="True" SkinID="TextBox_SmalltNormalC"
+                                                                meta:resourcekey="lblWorkingDaysResource1"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="SeparArea">
+                                                        </td>
+                                                        <td class="LabelArea">
+                                                            <asp:Label ID="Label_Salary" runat="server" SkinID="Label_DefaultNormal" Text="Salary Amount"
+                                                                Width="100px" meta:resourcekey="Label_SalaryResource1"></asp:Label>
+                                                        </td>
+                                                        <td class="DataArea">
+                                                            <asp:TextBox ID="TextBox_SalaryAmount" runat="server" ReadOnly="True" SkinID="TextBox_SmalltNormalC"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td class="SeparArea">
+                                                    </td>
+                                                      <td class="LabelArea">
+                                                          <!-- <asp:Label ID="Label5" runat="server" SkinID="Label_DefaultNormal" Text="Add Travels Days"
+                                                                Width="100px" ></asp:Label>-->
+                                                        </td>
+                                                        <td class="DataArea">
+                                                         <!--  <asp:CheckBox ID="ChkAddTravalsDay" runat="server" AutoPostBack="True" />-->
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="width: 6%; vertical-align: top;">
+                                            </td>
+                                            <td style="width: 47%; vertical-align: top;">
+                                            <table style="width:100%"><tr>
+                                            <td class="LabelArea">
+                                            
+                                            </td>
+                                            <td>  </td>
+                                            </tr></table>
+                                            
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 47%; height: 30px; vertical-align: top;">
+                                                &nbsp;<asp:Label ID="Label_Title1" runat="server" meta:resourcekey="Label_Title1Resource1"
+                                                    SkinID="Label_DefaultBold" Text="Current Employee Benifits"></asp:Label>
+                                                <igtbl:UltraWebGrid  Browser="UpLevel"   ID="uwgEmployeeTransaction" runat="server" EnableAppStyling="True"
+                                                    Height="120px" meta:resourcekey="uwgEmployeeTransactionResource1" SkinID="Default"
+                                                    Width="100%">
+                                                    <DisplayLayout AllowColSizingDefault="Free" AllowColumnMovingDefault="OnServer" AllowDeleteDefault="Yes"
+                                                        AllowSortingDefault="OnClient" AllowUpdateDefault="Yes" AutoGenerateColumns="False"
+                                                        BorderCollapseDefault="Separate" HeaderClickActionDefault="SortSingle" Name="uwgForNationality"
+                                                        RowHeightDefault="18px" SelectTypeRowDefault="Extended" StationaryMargins="Header"
+                                                        StationaryMarginsOutlookGroupBy="True" TableLayout="Fixed" Version="4.00" ViewType="OutlookGroupBy">
+                                                        <FrameStyle BackColor="Window" BorderColor="InactiveCaption" BorderStyle="Solid"
+                                                            BorderWidth="1px" Font-Names="Microsoft Sans Serif" Font-Size="8.25pt" Height="120px"
+                                                            Width="100%">
+                                                        </FrameStyle>
+                                                        <Pager MinimumPagesForDisplay="2">
+                                                            <PagerStyle BackColor="LightGray" BorderStyle="Solid" BorderWidth="1px">
+                                                                <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
+                                                            </PagerStyle>
+                                                        </Pager>
+                                                        <EditCellStyleDefault BorderStyle="None" BorderWidth="0px">
+                                                        </EditCellStyleDefault>
+                                                        <FooterStyleDefault BackColor="LightGray" BorderStyle="Solid" BorderWidth="1px">
+                                                            <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
+                                                        </FooterStyleDefault>
+                                                        <HeaderStyleDefault BackColor="#DFDFDF" BorderStyle="Solid" Font-Names="tahoma" Font-Size="9pt"
+                                                            Height="20px" HorizontalAlign="Center" VerticalAlign="Middle">
+                                                            <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
+                                                        </HeaderStyleDefault>
+                                                        <RowStyleDefault BackColor="Window" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px"
+                                                            Font-Names="tahoma" Font-Size="8pt" Height="18px">
+                                                            <Padding Left="3px" />
+                                                            <BorderDetails ColorLeft="Window" ColorTop="Window" />
+                                                        </RowStyleDefault>
+                                                        <GroupByRowStyleDefault BackColor="Control" BorderColor="Window">
+                                                        </GroupByRowStyleDefault>
+                                                        <GroupByBox Hidden="True">
+                                                            <BoxStyle BackColor="ActiveBorder" BorderColor="Window">
+                                                            </BoxStyle>
+                                                        </GroupByBox>
+                                                        <AddNewBox>
+                                                            <BoxStyle BackColor="Window" BorderColor="InactiveCaption" BorderStyle="Solid" BorderWidth="1px">
+                                                                <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
+                                                            </BoxStyle>
+                                                        </AddNewBox>
+                                                        <ActivationObject BorderColor="" BorderWidth="">
+                                                        </ActivationObject>
+                                                        <FilterOptionsDefault>
+                                                            <FilterDropDownStyle BackColor="White" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px"
+                                                                CustomRules="overflow:auto;" Font-Names="Verdana,Arial,Helvetica,sans-serif"
+                                                                Font-Size="11px" Height="300px" Width="200px">
+                                                                <Padding Left="2px" />
+                                                            </FilterDropDownStyle>
+                                                            <FilterHighlightRowStyle BackColor="#151C55" ForeColor="White">
+                                                            </FilterHighlightRowStyle>
+                                                            <FilterOperandDropDownStyle BackColor="White" BorderColor="Silver" BorderStyle="Solid"
+                                                                BorderWidth="1px" CustomRules="overflow:auto;" Font-Names="Verdana,Arial,Helvetica,sans-serif"
+                                                                Font-Size="11px">
+                                                                <Padding Left="2px" />
+                                                            </FilterOperandDropDownStyle>
+                                                        </FilterOptionsDefault>
+                                                    </DisplayLayout>
+                                                    <Bands>
+                                                        <igtbl:UltraGridBand meta:resourcekey="UltraGridBandResource3">
+                                                            <AddNewRow View="NotSet" Visible="NotSet">
+                                                            </AddNewRow>
+                                                            <FilterOptions AllString="" EmptyString="" NonEmptyString="">
+                                                                <FilterHighlightRowStyle BackColor="#151C55" ForeColor="White">
+                                                                </FilterHighlightRowStyle>
+                                                                <FilterDropDownStyle BackColor="White" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px"
+                                                                    CustomRules="overflow:auto;" Font-Names="Verdana,Arial,Helvetica,sans-serif"
+                                                                    Font-Size="11px" Width="200px">
+                                                                    <Padding Left="2px" />
+                                                                </FilterDropDownStyle>
+                                                            </FilterOptions>
+                                                            <Columns>
+                                                                <igtbl:UltraGridColumn AllowGroupBy="No" AllowUpdate="No" BaseColumnName="TransactionTypeID"
+                                                                    Key="TransactionTypeID" meta:resourcekey="UltraGridColumnResource11" Type="DropDownList"
+                                                                    Width="45%">
+                                                                    <Header Caption="Benifits">
+                                                                    </Header>
+                                                                    <CellStyle CssClass="DescriptionCellgrid">
+                                                                    </CellStyle>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="Amount" DataType="System.Double"
+                                                                    Format="###,###,###.##" Key="Value" meta:resourcekey="UltraGridColumnResource12"
+                                                                    Width="20%">
+                                                                    <Header Caption="Amount">
+                                                                        <RowLayoutColumnInfo OriginX="1" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="1" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="Description" Key="Description"
+                                                                    meta:resourcekey="UltraGridColumnResource13" Width="35%">
+                                                                    <Header Caption="Description">
+                                                                        <RowLayoutColumnInfo OriginX="2" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="2" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn AllowUpdate="No" BaseColumnName="TransactionTypeID" Hidden="True"
+                                                                    Key="Transaction Type" meta:resourcekey="UltraGridColumnResource14" Width="0px">
+                                                                    <Header Caption="Transaction Type">
+                                                                        <RowLayoutColumnInfo OriginX="3" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="3" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn BaseColumnName="EmpSchID" Hidden="True" Key="ID" meta:resourcekey="UltraGridColumnResource15"
+                                                                    Width="0px">
+                                                                    <Header>
+                                                                        <RowLayoutColumnInfo OriginX="4" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="4" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn BaseColumnName="DescriptionSign" Hidden="True" Key="DescriptionSign"
+                                                                    meta:resourcekey="UltraGridColumnResource16">
+                                                                    <Header>
+                                                                        <RowLayoutColumnInfo OriginX="5" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="5" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                            </Columns>
+                                                        </igtbl:UltraGridBand>
+                                                    </Bands>
+                                                </igtbl:UltraWebGrid>
+                                            </td>
+                                            <td style="width: 6%; vertical-align: top;">
+                                                &nbsp;
+                                            </td>
+                                            <td style="width: 47%; vertical-align: top;">
+                                                <asp:Label ID="Label1" runat="server" Text="Current Employee Deduction" SkinID="Label_DefaultBold"
+                                                    meta:resourcekey="Label1Resource1"></asp:Label>
+                                                <igtbl:UltraWebGrid   Browser="UpLevel"  ID="uwgPayabilities" runat="server" EnableAppStyling="True" Height="120px"
+                                                    meta:resourcekey="uwgPayabilitiesResource1" SkinID="Default" Width="100%">
+                                                    <DisplayLayout AllowColSizingDefault="Free" AllowColumnMovingDefault="OnServer" AllowDeleteDefault="Yes"
+                                                        AllowSortingDefault="OnClient" AllowUpdateDefault="Yes" AutoGenerateColumns="False"
+                                                        BorderCollapseDefault="Separate" HeaderClickActionDefault="SortSingle" Name="uwgForNationality"
+                                                        RowHeightDefault="18px" SelectTypeRowDefault="Extended" StationaryMargins="Header"
+                                                        StationaryMarginsOutlookGroupBy="True" TableLayout="Fixed" Version="4.00" ViewType="OutlookGroupBy">
+                                                        <FrameStyle BackColor="Window" BorderColor="InactiveCaption" BorderStyle="Solid"
+                                                            BorderWidth="1px" Font-Names="Microsoft Sans Serif" Font-Size="8.25pt" Height="120px"
+                                                            Width="100%">
+                                                        </FrameStyle>
+                                                        <Pager MinimumPagesForDisplay="2">
+                                                            <PagerStyle BackColor="LightGray" BorderStyle="Solid" BorderWidth="1px">
+                                                                <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
+                                                            </PagerStyle>
+                                                        </Pager>
+                                                        <EditCellStyleDefault BorderStyle="None" BorderWidth="0px">
+                                                        </EditCellStyleDefault>
+                                                        <FooterStyleDefault BackColor="LightGray" BorderStyle="Solid" BorderWidth="1px">
+                                                            <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
+                                                        </FooterStyleDefault>
+                                                        <HeaderStyleDefault BackColor="#DFDFDF" BorderStyle="Solid" Font-Names="tahoma" Font-Size="9pt"
+                                                            Height="20px" HorizontalAlign="Center" VerticalAlign="Middle">
+                                                            <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
+                                                        </HeaderStyleDefault>
+                                                        <RowStyleDefault BackColor="Window" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px"
+                                                            Font-Names="tahoma" Font-Size="8pt" Height="18px">
+                                                            <Padding Left="3px" />
+                                                            <BorderDetails ColorLeft="Window" ColorTop="Window" />
+                                                        </RowStyleDefault>
+                                                        <GroupByRowStyleDefault BackColor="Control" BorderColor="Window">
+                                                        </GroupByRowStyleDefault>
+                                                        <GroupByBox Hidden="True">
+                                                            <BoxStyle BackColor="ActiveBorder" BorderColor="Window">
+                                                            </BoxStyle>
+                                                        </GroupByBox>
+                                                        <AddNewBox>
+                                                            <BoxStyle BackColor="Window" BorderColor="InactiveCaption" BorderStyle="Solid" BorderWidth="1px">
+                                                                <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
+                                                            </BoxStyle>
+                                                        </AddNewBox>
+                                                        <ActivationObject BorderColor="" BorderWidth="">
+                                                        </ActivationObject>
+                                                        <FilterOptionsDefault>
+                                                            <FilterDropDownStyle BackColor="White" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px"
+                                                                CustomRules="overflow:auto;" Font-Names="Verdana,Arial,Helvetica,sans-serif"
+                                                                Font-Size="11px" Height="300px" Width="200px">
+                                                                <Padding Left="2px" />
+                                                            </FilterDropDownStyle>
+                                                            <FilterHighlightRowStyle BackColor="#151C55" ForeColor="White">
+                                                            </FilterHighlightRowStyle>
+                                                            <FilterOperandDropDownStyle BackColor="White" BorderColor="Silver" BorderStyle="Solid"
+                                                                BorderWidth="1px" CustomRules="overflow:auto;" Font-Names="Verdana,Arial,Helvetica,sans-serif"
+                                                                Font-Size="11px">
+                                                                <Padding Left="2px" />
+                                                            </FilterOperandDropDownStyle>
+                                                        </FilterOptionsDefault>
+                                                    </DisplayLayout>
+                                                    <Bands>
+                                                        <igtbl:UltraGridBand meta:resourcekey="UltraGridBandResource4">
+                                                            <AddNewRow View="NotSet" Visible="NotSet">
+                                                            </AddNewRow>
+                                                            <Columns>
+                                                                <igtbl:UltraGridColumn AllowGroupBy="No" AllowUpdate="No" BaseColumnName="TransactionTypeID"
+                                                                    Key="TransactionTypeID" meta:resourcekey="UltraGridColumnResource17" Type="DropDownList"
+                                                                    Width="45%">
+                                                                    <Header Caption="Deduction">
+                                                                    </Header>
+                                                                    <CellStyle CssClass="DescriptionCellgrid">
+                                                                    </CellStyle>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="Amount" DataType="System.Double"
+                                                                    Format="###,###,###.##" Key="Value" meta:resourcekey="UltraGridColumnResource18"
+                                                                    Width="20%">
+                                                                    <Header Caption="Amount">
+                                                                        <RowLayoutColumnInfo OriginX="1" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="1" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="Description" Key="Description"
+                                                                    meta:resourcekey="UltraGridColumnResource19" Width="35%">
+                                                                    <Header Caption="Description">
+                                                                        <RowLayoutColumnInfo OriginX="2" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="2" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn Hidden="True" Key="TransactionTypeID" meta:resourcekey="UltraGridColumnResource20"
+                                                                    Width="0px">
+                                                                    <Header>
+                                                                        <RowLayoutColumnInfo OriginX="3" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="3" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn BaseColumnName="EmpSchID" Hidden="True" Key="EmpSchID" meta:resourcekey="UltraGridColumnResource21"
+                                                                    Width="0px">
+                                                                    <Header>
+                                                                        <RowLayoutColumnInfo OriginX="4" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="4" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn BaseColumnName="DescriptionSign" Hidden="True" Key="DescriptionSign"
+                                                                    meta:resourcekey="UltraGridColumnResource22">
+                                                                    <Header>
+                                                                        <RowLayoutColumnInfo OriginX="5" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="5" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                            </Columns>
+                                                            <FilterOptions AllString="" EmptyString="" NonEmptyString="">
+                                                                <FilterHighlightRowStyle BackColor="#151C55" ForeColor="White">
+                                                                </FilterHighlightRowStyle>
+                                                                <FilterDropDownStyle BackColor="White" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px"
+                                                                    CustomRules="overflow:auto;" Font-Names="Verdana,Arial,Helvetica,sans-serif"
+                                                                    Font-Size="11px" Width="200px">
+                                                                    <Padding Left="2px" />
+                                                                </FilterDropDownStyle>
+                                                            </FilterOptions>
+                                                        </igtbl:UltraGridBand>
+                                                    </Bands>
+                                                </igtbl:UltraWebGrid>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="height: 30px; vertical-align: top;" colspan="3">
+                                                <table style="width: 100%; height: 30px; vertical-align: bottom; border-bottom: 1px solid black"
+                                                    cellspacing="6">
+                                                    <tr>
+                                                        <td style="vertical-align: bottom">
+                                                            <asp:Label ID="lblother" runat="server" Text="Other benfits" SkinID="Label_DefaultBold"
+                                                                meta:resourcekey="lblotherResource1"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width: 47%; height: 16px; vertical-align: top">
+                                                <table style="width: 100%; vertical-align: top" cellspacing="0">
+                                                    <tr>
+                                                        <td class="SeparArea">
+                                                        </td>
+                                                        <td class="LabelArea">
+                                                            <asp:Label ID="lblExtraBenfits" runat="server" SkinID="Label_DefaultNormal" Text="Extra Benfits Amount"
+                                                                Width="100px" meta:resourcekey="lblExtraBenfitsResource1"></asp:Label>
+                                                        </td>
+                                                        <td class="DataArea">
+                                                            <asp:TextBox ID="txtExtraBenfitsAmount" runat="server"  SkinID=""
+                                                                meta:resourcekey="lblVacationDueResource1"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="width: 6%; height: 16px; vertical-align: top">
+                                            </td>
+                                            <td style="width: 47%; height: 16px; vertical-align: top">
+                                                <table style="width: 100%; vertical-align: top" cellspacing="0">
+                                                    <tr>
+                                                        <td class="SeparArea">
+                                                        </td>
+                                                        <td class="LabelArea">
+                                                            <asp:Label ID="lblExtraDeductionAmount" runat="server" SkinID="Label_DefaultNormal" Text="Extra Dudection Amount"
+                                                                Width="100px" meta:resourcekey="lblExtraDeductionAmountResource1"></asp:Label>
+                                                        </td>
+                                                        <td class="DataArea">
+                                                            <asp:TextBox ID="txtExtraDudectionAmount" runat="server"  SkinID=""
+                                                                meta:resourcekey="txtExtraDudectionAmountResource1" ></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+
+
+
+                                        <tr>
+                                            <td style="width: 47%; height: 16px; vertical-align: top">
+                                                <table style="width: 100%; vertical-align: top" cellspacing="0">
+                                                    <tr>
+                                                        <td class="SeparArea">
+                                                        </td>
+                                                        <td class="LabelArea">
+                                                            <asp:Label ID="lblExtraBenfitsRemarks" runat="server" SkinID="Label_DefaultNormal" Text="Extra Benfits Remarks"
+                                                                Width="100px" meta:resourcekey="lblExtraBenfitsRemarksResource1"></asp:Label>
+                                                        </td>
+                                                        <td class="DataArea">
+                                                            <asp:TextBox ID="txtExtraBenfitsRemarks" runat="server"  SkinID=""
+                                                                meta:resourcekey="lblVacationDueResource1" Width="100%"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="width: 6%; height: 16px; vertical-align: top">
+                                            </td>
+                                            <td style="width: 47%; height: 16px; vertical-align: top">
+                                                <table style="width: 100%; vertical-align: top" cellspacing="0">
+                                                    <tr>
+                                                        <td class="SeparArea">
+                                                        </td>
+                                                        <td class="LabelArea">
+                                                            <asp:Label ID="lblExtraDeductionRemarks" runat="server" SkinID="Label_DefaultNormal" Text="Extra Deduction Remarks"
+                                                                Width="100px" meta:resourcekey="lblExtraDeductionRemarksResource1"></asp:Label>
+                                                        </td>
+                                                        <td class="DataArea">
+                                                            <asp:TextBox ID="txtExtraDeductionRemarks" runat="server"  SkinID=""
+                                                                meta:resourcekey="lblVacationDueResource1" Width="100%"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="height: 30px; vertical-align: top;" colspan="3">
+                                                <table style="width: 100%; height: 30px; vertical-align: bottom; border-bottom: 1px solid black"
+                                                    cellspacing="6">
+                                                    <tr>
+                                                        <td style="vertical-align: bottom">
+                                                            <asp:Label ID="Label3" runat="server" Text="Employee Vacation History" SkinID="Label_DefaultBold"
+                                                                meta:resourcekey="Label3Resource1" Visible="False"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+
+
+
+
+
+                                        
+
+
+
+
+
+
+
+
+
+
+
+                                        <tr>
+                                            <td style="height: 30px; vertical-align: top;" colspan="3">
+                                                <igtbl:UltraWebGrid  Browser="UpLevel"   ID="uwgVacationHistory" runat="server" EnableAppStyling="True"
+                                                    Height="120px" SkinID="Default" Width="99%" meta:resourcekey="uwgVacationHistoryResource1" Visible="False">
+                                                    <DisplayLayout AllowColSizingDefault="Free" AllowColumnMovingDefault="OnServer" AllowSortingDefault="OnClient"
+                                                        AutoGenerateColumns="False" BorderCollapseDefault="Separate" CellClickActionDefault="RowSelect"
+                                                        CellPaddingDefault="1" CellSpacingDefault="1"   GridLinesDefault="NotSet"
+                                                        HeaderClickActionDefault="SortMulti" Name="uwgEmployeeVacations" RowHeightDefault="15px"
+                                                        SelectTypeRowDefault="Extended" StationaryMargins="Header" StationaryMarginsOutlookGroupBy="True"
+                                                        TableLayout="Fixed" Version="4.00" ViewType="OutlookGroupBy">
+                                                        <FrameStyle BackColor="Window" BorderColor="InactiveCaption" BorderStyle="Solid"
+                                                            BorderWidth="1px" Font-Names="Microsoft Sans Serif" Font-Size="8.25pt" Height="120px"
+                                                            Width="99%">
+                                                        </FrameStyle>
+                                                        <Pager MinimumPagesForDisplay="2">
+                                                            <PagerStyle BackColor="LightGray" BorderStyle="Solid" BorderWidth="1px">
+                                                                <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
+                                                            </PagerStyle>
+                                                        </Pager>
+                                                        <EditCellStyleDefault BorderStyle="None" BorderWidth="0px">
+                                                        </EditCellStyleDefault>
+                                                        <FooterStyleDefault BackColor="LightGray" BorderStyle="Solid" BorderWidth="1px">
+                                                            <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
+                                                        </FooterStyleDefault>
+                                                        <HeaderStyleDefault BackColor="#DFDFDF" BorderStyle="Solid" Font-Names="tahoma" Font-Size="9pt"
+                                                            Height="20px" HorizontalAlign="Center" VerticalAlign="Middle">
+                                                            <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
+                                                        </HeaderStyleDefault>
+                                                        <RowStyleDefault BackColor="Window" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px"
+                                                            Font-Names="tahoma" Font-Size="8pt" Height="18px">
+                                                            <Padding Left="3px" />
+                                                            <BorderDetails ColorLeft="Window" ColorTop="Window" />
+                                                        </RowStyleDefault>
+                                                        <GroupByRowStyleDefault BackColor="Control" BorderColor="Window">
+                                                        </GroupByRowStyleDefault>
+                                                        <GroupByBox Hidden="True">
+                                                            <BoxStyle BackColor="ActiveBorder" BorderColor="Window">
+                                                            </BoxStyle>
+                                                        </GroupByBox>
+                                                        <AddNewBox>
+                                                            <BoxStyle BackColor="Window" BorderColor="InactiveCaption" BorderStyle="Solid" BorderWidth="1px">
+                                                                <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
+                                                            </BoxStyle>
+                                                        </AddNewBox>
+                                                        <ActivationObject BorderColor="" BorderWidth="">
+                                                        </ActivationObject>
+                                                        <FilterOptionsDefault>
+                                                            <FilterDropDownStyle BackColor="White" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px"
+                                                                CustomRules="overflow:auto;" Font-Names="Verdana,Arial,Helvetica,sans-serif"
+                                                                Font-Size="11px" Height="300px" Width="200px">
+                                                                <Padding Left="2px" />
+                                                            </FilterDropDownStyle>
+                                                            <FilterHighlightRowStyle BackColor="#151C55" ForeColor="White">
+                                                            </FilterHighlightRowStyle>
+                                                            <FilterOperandDropDownStyle BackColor="White" BorderColor="Silver" BorderStyle="Solid"
+                                                                BorderWidth="1px" CustomRules="overflow:auto;" Font-Names="Verdana,Arial,Helvetica,sans-serif"
+                                                                Font-Size="11px">
+                                                                <Padding Left="2px" />
+                                                            </FilterOperandDropDownStyle>
+                                                        </FilterOptionsDefault>
+                                                    </DisplayLayout>
+                                                    <Bands>
+                                                        <igtbl:UltraGridBand meta:resourcekey="UltraGridBandResource6" AllowAdd="No" AllowDelete="No"
+                                                            AllowUpdate="No">
+                                                            <AddNewRow View="NotSet" Visible="NotSet">
+                                                            </AddNewRow>
+                                                            <Columns>
+                                                                <igtbl:UltraGridColumn BaseColumnName="PaidDate" DataType="System.DateTime" Format="dd/MM/yyyy"
+                                                                    Key="PaidDate" Width="35%" meta:resourcekey="UltraGridColumnResource23">
+                                                                    <Header Caption="Vacation Paid At">
+                                                                    </Header>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn BaseColumnName="PaidDays" Format="###,###,###.##" Key="PaidDays"
+                                                                    Width="35%" meta:resourcekey="UltraGridColumnResource24">
+                                                                    <Header Caption="Paid Days">
+                                                                        <RowLayoutColumnInfo OriginX="1" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="1" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn BaseColumnName="Amount" Format="###,###,###.##" Key="Amount"
+                                                                    Width="35%" meta:resourcekey="UltraGridColumnResource25">
+                                                                    <Header Caption="Amount">
+                                                                        <RowLayoutColumnInfo OriginX="2" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="2" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                                <igtbl:UltraGridColumn BaseColumnName="ID" DataType="System.Int32" Hidden="True"
+                                                                    Key="ID" meta:resourcekey="UltraGridColumnResource26">
+                                                                    <Header>
+                                                                        <RowLayoutColumnInfo OriginX="3" />
+                                                                    </Header>
+                                                                    <Footer>
+                                                                        <RowLayoutColumnInfo OriginX="3" />
+                                                                    </Footer>
+                                                                </igtbl:UltraGridColumn>
+                                                            </Columns>
+                                                        </igtbl:UltraGridBand>
+                                                    </Bands>
+                                                </igtbl:UltraWebGrid>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="height: 16px; vertical-align: top; display: none" colspan="3">
+                                                <igsch:WebDateChooser ID="WebDateChooser1" runat="server" meta:resourcekey="WebDateChooser1Resource1">
+                                                </igsch:WebDateChooser>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="height: 100%" colspan="3">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </ContentTemplate>
+                            </igtab:Tab>
+                        </Tabs>
+                    </igtab:UltraWebTab>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+
+                <script type="text/javascript" id="igClientScript">
+        $(document).ready(function () {
+          
+                var Deletebtn = $("#<%=btnDelete.ClientID%>")
+                Deletebtn.click(function () {
+                    if (confirm("هل انت متأكد من الحذف؟") == false)
+                 {
+                      
+                        return false;
+                 } 
+               
+            })
+                  
+
+        });
+
+       </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+.Portalcolumn
+{
+   width: 95%;
+   float: right;
+   padding-left:10px;
+   padding-top:10px;
+   padding-bottom: 10px;
+   padding-right: 10px;
+}
+.portlet
+{
+   margin: 0 1em 1em 0;
+}
+.portlet-header
+{
+   text-align:right; 
+   margin: 0.3em;
+   padding-bottom: 4px;
+   padding-left: 0.2em;
+}
+.portlet-header .ui-icon
+{
+   float: right;
+}
+.portlet-content
+{
+   padding: 0.4em;
+   height:200px;
+}
+.portlet-contentOpen
+{
+   padding: 0.1em;
+   height:500px;
+}
+.ui-sortable-placeholder
+{
+   border: 1px dotted black;
+   visibility: visible !important;
+   height: 50px !important;
+}
+.ui-sortable-placeholder *
+{
+   visibility: hidden;
+}

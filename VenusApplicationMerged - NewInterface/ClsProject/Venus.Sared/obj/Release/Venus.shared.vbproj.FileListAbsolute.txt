@@ -1,0 +1,97 @@
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.dll
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.pdb
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Sared.xml
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.Resources.resources
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.GenerateResource.Cache
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.dll
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Sared.xml
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.pdb
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.pdb
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Sared.xml
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbprojResolveAssemblyReference.cache
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.Resources.resources
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.GenerateResource.Cache
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Sared.xml
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.pdb
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.dll
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.pdb
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Sared.xml
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.Resources.resources
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.GenerateResource.cache
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.CoreCompileInputs.cache
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.dll
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Sared.xml
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.pdb
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.AssemblyReference.cache
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.dll
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.pdb
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Sared.xml
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.AssemblyReference.cache
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.Resources.resources
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.GenerateResource.cache
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.CoreCompileInputs.cache
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.dll
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Sared.xml
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.pdb
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.dll
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.pdb
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Sared.xml
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.AssemblyReference.cache
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.Resources.resources
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.GenerateResource.cache
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.CoreCompileInputs.cache
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.dll
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Sared.xml
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.pdb
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.dll
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.pdb
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Sared.xml
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.AssemblyReference.cache
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.Resources.resources
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.GenerateResource.cache
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.CoreCompileInputs.cache
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.dll
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Sared.xml
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.pdb
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.dll
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.pdb
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Sared.xml
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.AssemblyReference.cache
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.Resources.resources
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.GenerateResource.cache
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.CoreCompileInputs.cache
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.dll
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Sared.xml
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.pdb
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.dll
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.pdb
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Sared.xml
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.AssemblyReference.cache
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.Resources.resources
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.GenerateResource.cache
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.CoreCompileInputs.cache
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.dll
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Sared.xml
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.pdb
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.dll
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.pdb
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Sared.xml
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.AssemblyReference.cache
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.Resources.resources
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.GenerateResource.cache
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.CoreCompileInputs.cache
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.dll
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Sared.xml
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.pdb
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.dll
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Shared.pdb
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Release\Venus.Sared.xml
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.AssemblyReference.cache
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.Resources.resources
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.GenerateResource.cache
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.shared.vbproj.CoreCompileInputs.cache
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.dll
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Sared.xml
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Release\Venus.Shared.pdb

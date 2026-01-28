@@ -1,0 +1,199 @@
+
+ALTER     FUNCTION [dbo].[AttendanceEffects]
+(
+  @EmpID int,
+  @AttandanceFromDate date,
+  @AttandanceToDate date,
+  @intFiscalperiod int,
+  @IsToAttandanceToDate bit = 0,
+  @ToAttendDate date,
+  @isEndOfservice bit = 0,
+  @FiscalFromdDate date,
+  @FiscalToDate date
+)
+RETURNS @Attendace TABLE
+   (
+		WorkingDays int,
+		AbsentDays  int,
+		vactiondays int
+   )
+AS
+BEGIN
+		--declare		@FiscalFromdDate as date=(SELECT TOP 1 fromdate FROM sys_FiscalYearsPeriods WHERE id=@intFiscalperiod)
+		--declare		@FiscalToDate as date=(SELECT TOP 1 ToDate  FROM sys_FiscalYearsPeriods WHERE id=@intFiscalperiod)
+				DECLARE		@WorkingDays int	= 0,
+					@AbsentDays int		= 0,
+					@vactiondays int	= 0,
+					@AcutalStartVaction date,
+					@AcutalEndVaction date,
+					@joindateDaysDeduction int = 0,
+					@EndOfserviceDaysDetuction int = 0,
+					@AttToEndDays int = 0,
+					@contractID int		= (SELECT TOP 1 id FROM hrs_Contracts
+					                        WHERE EmployeeID = @EmpID
+											ORDER BY StartDate DESC)
+		
+		   DECLARE @NODPP int			= (SELECT TOP 1 NoOfDaysPerPeriod
+											FROM hrs_EmployeesClasses Ec INNER JOIN hrs_Contracts c
+											ON c.EmployeeClassID = Ec.ID
+											WHERE c.ID = @contractID),
+		
+				@JoinDate date		= (SELECT  joindate FROM hrs_employees WHERE id = @EmpID ),
+				@lastDayOfMonth int = 30 --DAY((SELECT DATEADD(d, -1, DATEADD(m, DATEDIFF(m, 0, @FiscalToDate) + 1, 0))))
+		--IF @NODPP =30
+		--	BEGIN
+				SET @WorkingDays = 30
+				--======== joindate ==============================		{
+				IF @JoinDate > @FiscalFromdDate
+				BEGIN
+				SET @joindateDaysDeduction = DATEDIFF(DAY, @FiscalFromdDate, @JoinDate)
+				IF((DATEDIFF(DAY, @FiscalFromdDate, @FiscalToDate) + 1) = 31)
+				    --SET @WorkingDays = 30
+					--Rabie Modify To Calc Working days as per month days
+					SET @WorkingDays = 31
+
+				ELSE
+					SET @WorkingDays = @lastDayOfMonth
+				END
+				--=================================================		}
+				
+				--================= END Of service ==================		{
+				IF	   @isEndOfservice = 1
+				BEGIN
+				SET @EndOfserviceDaysDetuction = @WorkingDays - DATEDIFF(DAY,@FiscalFromdDate,@AttandanceToDate) - 1
+				END
+				--=================================================		}
+				
+				--================== Vaction =======================	{	
+				-- start vaction date smaller than fiscal strat date AND return vaction is null or greater than fiscal END date
+				--01
+					--Ýì ÍÇáÉ Çä ÇáÇÌÇÒÉ ÈÏÃÊ ÞÈá ÇáÝÊÑÉ ÇáãÇáíÉ æÇáÚæÏÉ áíÓÊ Ýì ÇáÝÊÑÉ ÇáãÇáíÉ --
+					-- ÚÏÏ ÇáÇíÇã ÇáÇÌÇÒÉ äÝÓ ÇíÇã ÇáÚãá
+				IF EXISTS(SELECT TOP 1 id FROM hrs_EmployeesVacations
+				           WHERE EmployeeID = @EmpID
+						   AND  CancelDate IS NULL
+						   AND ActualStartDate  < @FiscalFromdDate
+						   AND (ActualEndDate IS NULL OR ActualEndDate > @Fiscaltodate )
+						   AND VacationTypeID IN(SELECT ID FROM hrs_VacationsTypes
+													WHERE  IsAnnual = 1
+													or  IsPaid = -1)
+												                                               )
+					BEGIN
+						
+						SET @VactionDays = @WorkingDays
+					END
+					--=================================================		}
+				-- StartVaction Greeter than Fiscal start date AND acutl END vaction is null or greeter than ficalto date
+				--02
+				-- Ýì ÍÇáÉ ÇáÇÌÇÒÉ ÏÇÎá ÇáÝÊÑÉ ÇáãÇáíÉ æÇáÚæÏÉ ÎÇÑÌ ÇáÝÊÑÉ ÇáãÇáíÉ --
+					IF EXISTS(SELECT TOP 1 id FROM hrs_EmployeesVacations
+					            WHERE EmployeeID = @EmpID
+								AND  CancelDate IS NULL
+								AND ActualStartDate  >= @FiscalFromdDate
+								AND ActualStartDate  <= @Fiscaltodate
+								AND (ActualEndDate IS NULL OR ActualEndDate > @Fiscaltodate )
+									AND VacationTypeID IN(SELECT ID FROM hrs_VacationsTypes
+																				WHERE   IsAnnual = 1
+																				or  IsPaid = -1)
+																				)
+					BEGIN
+						SET @AcutalStartVaction = (SELECT TOP 1 ActualStartDate FROM hrs_EmployeesVacations
+						                           WHERE EmployeeID = @EmpID
+												   AND  CancelDate IS NULL
+												   AND ActualStartDate  >= @FiscalFromdDate
+												   AND ActualStartDate  <= @Fiscaltodate
+												   AND (ActualEndDate IS NULL OR ActualEndDate > @Fiscaltodate )
+														AND VacationTypeID IN(SELECT ID FROM hrs_VacationsTypes
+																				WHERE   IsAnnual = 1
+																				or  IsPaid = -1)
+																				)
+						IF @JoinDate >= @FiscalFromdDate AND @JoinDate <= @FiscalToDate
+						SET @VactionDays = @WorkingDays - DATEDIFF (DAY,@JoinDate,@AcutalStartVaction)
+						ELSE
+						SET @VactionDays = @WorkingDays - DATEDIFF (DAY,@FiscalFromdDate ,@AcutalStartVaction)
+					END
+				--================================================		}
+				-- EndVactiondate Smaller than Fiscal END date AND Start  vaction is not BETWEEN acual start date AND acual END date
+				--03
+				-- ÇáÚæÏÉ ãä ÇáÇÌÇÒÉ ÏÇÎá ÇáÝÊÑÉ æáßä ÈÏÇíÉ ÇáÇÌÇÒÉ áíÓÊ Öãä ÇáÝÑÉ
+				IF EXISTS(SELECT TOP 1 id FROM hrs_EmployeesVacations
+				           WHERE EmployeeID=@EmpID
+						   AND CancelDate IS NULL
+						   AND ActualEndDate > @FiscalFromdDate
+						   AND ActualEndDate <= @Fiscaltodate
+						   AND ActualStartDate NOT BETWEEN  @FiscalFromdDate AND @Fiscaltodate
+						  		AND VacationTypeID IN(SELECT ID FROM hrs_VacationsTypes
+																				WHERE   IsAnnual = 1
+																				or  IsPaid = -1)
+																				)
+				BEGIN
+					SET @AcutalEndVaction = (SELECT TOP 1 ActualEndDate FROM hrs_EmployeesVacations
+												WHERE EmployeeID = @EmpID
+												AND CancelDate IS NULL
+												AND ActualEndDate >= @FiscalFromdDate
+												AND ActualEndDate <= @Fiscaltodate
+												AND ActualStartDate NOT BETWEEN @FiscalFromdDate AND @Fiscaltodate
+														AND VacationTypeID IN(SELECT ID FROM hrs_VacationsTypes
+																				WHERE   IsAnnual = 1
+																				or  IsPaid = -1)
+																				)
+					BEGIN
+							SET @VactionDays = @VactionDays + DATEDIFF (DAY, @FiscalFromdDate, @AcutalEndVaction )
+					SET @WorkingDays = @lastDayOfMonth
+					END
+	
+				END
+				--================================================		}
+				--ÏÇÎá ÇáÝÊÑÉ --
+				--04
+				-- IF return date AND start date IN same period ==		{
+						IF EXISTS(SELECT TOP 1 id FROM hrs_EmployeesVacations
+							WHERE EmployeeID = @EmpID AND  CancelDate IS NULL
+							AND ActualStartDate BETWEEN @FiscalFromdDate
+							AND @Fiscaltodate
+							AND ActualEndDate BETWEEN @FiscalFromdDate AND @Fiscaltodate
+							AND VacationTypeID IN(SELECT ID FROM hrs_VacationsTypes
+																				WHERE   IsAnnual = 1
+																				or  IsPaid = -1)
+																				)
+				BEGIN
+					
+					SET @VactionDays = @VactionDays + (SELECT SUM(DATEDIFF (DAY, ActualStartDate, ActualEndDate))
+														FROM hrs_EmployeesVacations
+														WHERE EmployeeID = @EmpID
+														AND  CancelDate IS NULL
+														AND ActualStartDate BETWEEN @FiscalFromdDate AND  @Fiscaltodate
+														AND ActualEndDate BETWEEN @FiscalFromdDate AND  @Fiscaltodate
+														AND VacationTypeID IN(SELECT ID FROM hrs_VacationsTypes
+																				WHERE   IsAnnual = 1
+																				or  IsPaid = -1)
+																				)
+				SET @WorkingDays = @lastDayOfMonth
+				
+				END				--=============== ABSENT ==========================		{
+				SET @AbsentDays =
+				(
+				SELECT ISNULL(count(id),0)
+				FROM Att_AttendancePreparationDetails
+				WHERE EmployeeID = @EmpID
+				AND CONVERT(Datetime, GAttendDate, 103) >= CONVERT(Datetime, @AttandanceFromDate, 103)
+				AND CONVERT(Datetime, GAttendDate, 103) <= CONVERT(Datetime, @AttandanceTodate, 103)
+				AND IsAbsent = 1
+				AND isnull(LeavingType,0) = 0
+				)
+				--================================================		}
+				IF @IsToAttandanceToDate = 1
+				BEGIN
+						SET @AtttoEndDays = @WorkingDays-@vactiondays - DAY(@ToAttendDate) + 1
+				END
+				SET @WorkingDays = @WorkingDays - @vactiondays -@AbsentDays - @joindateDaysDeduction - @EndOfserviceDaysDetuction - @AtttoEndDays
+				IF	@WorkingDays < 0  SET @WorkingDays = 0
+				IF	@WorkingDays > 30 SET @WorkingDays = 30
+	--	END
+		SET @vactiondays = @vactiondays + @AtttoEndDays
+		
+				INSERT INTO @Attendace (WorkingDays, AbsentDays, vactiondays)
+								SELECT @WorkingDays, @AbsentDays, @vactiondays
+			
+		  RETURN
+END

@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5687F571-E48B-4158-81BB-21801599A8B7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Venus.Application.SystemFiles.System</RootNamespace>
+    <AssemblyName>Venus.Application.SystemFiles.System</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Venus.Application.SystemFiles.System.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Venus.Application.SystemFiles.System.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Infragistics35.WebUI.Shared.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.Shared.v11.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics35.WebUI.UltraWebGrid.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.UltraWebGrid.v11.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics35.WebUI.UltraWebListbar.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.UltraWebListbar.v11.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics35.WebUI.UltraWebNavigator.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.UltraWebNavigator.v11.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics35.WebUI.UltraWebTab.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.UltraWebTab.v11.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics35.WebUI.WebCombo.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.WebCombo.v11.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics35.WebUI.WebDataInput.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.WebDataInput.v11.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Infragistics35.WebUI.WebDateChooser.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.WebDateChooser.v11.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Venus.Shared.Errors, Version=1.0.0.16, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Venus.Shared.Errors.dll</HintPath>
+    </Reference>
+    <Reference Include="Venus.Shared.Security, Version=1.0.0.16, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Venus.Shared.Security.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClsBasicFiles.vb" />
+    <Compile Include="ClsDataAcessLayer.vb" />
+    <Compile Include="ClsDataAcessLayer2.vb" />
+    <Compile Include="Clsfcs_Customers.vb" />
+    <Compile Include="ClsFileUpload.vb" />
+    <Compile Include="clsFingerprintSetting.vb" />
+    <Compile Include="Clshrs_DocumentsNationalities.vb" />
+    <Compile Include="Clshrs_DocumentsProfessions.vb" />
+    <Compile Include="Clshrs_EmployeesClassesWeeklyCustomize.vb" />
+    <Compile Include="Clshrs_EmployeesClassesWeeklyCustomizeDays.vb" />
+    <Compile Include="Clshrs_EmployeesOvertimeList.vb" />
+    <Compile Include="Clshrs_GeneralSetting.vb" />
+    <Compile Include="ClsMainBasic.vb" />
+    <Compile Include="ClsMian.vb" />
+    <Compile Include="Clsmms_OperationsHead.vb" />
+    <Compile Include="ClsPositionsStructure.vb" />
+    <Compile Include="ClsRemarks.vb" />
+    <Compile Include="ClsReportsControlsProperties.vb" />
+    <Compile Include="ClsReportsCriterias.vb" />
+    <Compile Include="ClsReportsCustomizations.vb" />
+    <Compile Include="ClsRpw_DefaultValuesEditor.vb" />
+    <Compile Include="ClsRpw_ReportColumnsProperties.vb" />
+    <Compile Include="ClsRpw_ReportRowsProperties.vb" />
+    <Compile Include="ClsRpw_ReportsCriterias.vb" />
+    <Compile Include="ClsRpw_ReportsGroupByColumns.vb" />
+    <Compile Include="ClsRpw_ReportsProperties.vb" />
+    <Compile Include="ClsRpw_Reports_Main.vb" />
+    <Compile Include="ClsSysCompanyStructure.vb" />
+    <Compile Include="ClsSysDepartmentStructure.vb" />
+    <Compile Include="ClsSys_Archives.vb" />
+    <Compile Include="Clssys_Banks.vb" />
+    <Compile Include="ClsSys_Branches.vb" />
+    <Compile Include="ClsSys_Cities.vb" />
+    <Compile Include="ClsSys_Companies.vb" />
+    <Compile Include="ClsSys_CompaniesUsers.vb" />
+    <Compile Include="Clssys_CompanyRoles.vb" />
+    <Compile Include="ClsSys_Countries.vb" />
+    <Compile Include="ClsSys_Currencies.vb" />
+    <Compile Include="ClsSys_DataTypes.vb" />
+    <Compile Include="ClsSys_Departments.vb" />
+    <Compile Include="Clssys_Documents.vb" />
+    <Compile Include="Clssys_DocumentsInformationAttachments.vb" />
+    <Compile Include="Clssys_DocumentsInformations.vb" />
+    <Compile Include="Clssys_DocumentsTypes.vb" />
+    <Compile Include="Clssys_DocumentTypesGroup.vb" />
+    <Compile Include="ClsSys_Fields.vb" />
+    <Compile Include="Clssys_FiscalYears.vb" />
+    <Compile Include="Clssys_FiscalYearsPeriods.vb" />
+    <Compile Include="Clssys_FiscalYearsPeriodsModules.vb" />
+    <Compile Include="Clssys_FiscalYearsPeriodsObjects.vb" />
+    <Compile Include="ClsSys_Forms.vb" />
+    <Compile Include="ClsSys_FormsControls.vb" />
+    <Compile Include="ClsSys_FormsControlsPermissions.vb" />
+    <Compile Include="ClsSys_FormsPermissions.vb" />
+    <Compile Include="ClsSys_GHCalendar.vb" />
+    <Compile Include="ClsSys_Groups.vb" />
+    <Compile Include="ClsSys_GroupsUsers.vb" />
+    <Compile Include="ClsSys_History.vb" />
+    <Compile Include="ClsSys_Locations.vb" />
+    <Compile Include="clsSys_MainOtherFields.vb" />
+    <Compile Include="Clssys_Menus.vb" />
+    <Compile Include="ClsSys_Modules.vb" />
+    <Compile Include="ClsSys_ModulesPermissions.vb" />
+    <Compile Include="Clssys_Nationality.vb" />
+    <Compile Include="ClsSys_Objects.vb" />
+    <Compile Include="Clssys_ObjectsAttachments.vb" />
+    <Compile Include="ClsSys_OtherFields.vb" />
+    <Compile Include="clsSys_OtherFieldsData.vb" />
+    <Compile Include="ClsSys_OtherFieldsGroups.vb" />
+    <Compile Include="ClsSys_Projects.vb" />
+    <Compile Include="Clssys_RecordProperties.vb" />
+    <Compile Include="ClsSys_RecordsPermissions.vb" />
+    <Compile Include="ClsSys_Regions.vb" />
+    <Compile Include="Clssys_Reports.vb" />
+    <Compile Include="ClsSys_ReportsColumns.vb" />
+    <Compile Include="ClsSys_ReportsCriteria.vb" />
+    <Compile Include="ClsSys_ReportsDriver.vb" />
+    <Compile Include="ClsSys_ReportsDriverSti.vb" />
+    <Compile Include="ClsSys_ReportsFields.vb" />
+    <Compile Include="ClsSys_ReportsGroups.vb" />
+    <Compile Include="Clssys_ReportsParameters.vb" />
+    <Compile Include="ClsSys_ReportsPermissions.vb" />
+    <Compile Include="ClsSys_Reports_Main.vb" />
+    <Compile Include="ClsSys_Search.vb" />
+    <Compile Include="ClsSys_Searchs.vb" />
+    <Compile Include="ClsSys_SearchsColumns.vb" />
+    <Compile Include="ClsSys_SearchViews.vb" />
+    <Compile Include="ClsSys_SearchViewsColumns.vb" />
+    <Compile Include="ClsSys_Search_Main.vb" />
+    <Compile Include="ClsSys_Sectors.vb" />
+    <Compile Include="Clssys_SendEmailSetting.vb" />
+    <Compile Include="Clssys_SendEmailSettingFixedEmails.vb" />
+    <Compile Include="ClsSys_Sequences.vb" />
+    <Compile Include="ClsSys_SystemClass.vb" />
+    <Compile Include="Clssys_Tasks.aspx.vb" />
+    <Compile Include="ClsSys_UpdateDB.vb" />
+    <Compile Include="ClsSys_UpdateLoginScript.vb" />
+    <Compile Include="ClsSys_Users.vb" />
+    <Compile Include="Cls_hrs_EmployeeAttendance.vb" />
+    <Compile Include="Cls_sys_Languages.vb" />
+    <Compile Include="Clssys_Announces.vb" />
+    <Compile Include="hrs_ContractsTransactionsScheduling.vb" />
+    <Compile Include="hrs_EmployeesEducations.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="sys_DataUpdateSchedule.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Venus.Sared\Venus.shared.vbproj">
+      <Project>{508826FC-7C7E-4B72-B7FE-88D2DF5A6B59}</Project>
+      <Name>Venus.shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Venus.Shared.Web\Venus.Shared.Web.vbproj">
+      <Project>{7651331C-9D05-4F7F-B28A-09EDCF403698}</Project>
+      <Name>Venus.Shared.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

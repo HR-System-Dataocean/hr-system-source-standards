@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BankAccountTypeLabelResource.Text" xml:space="preserve">
+    <value>نوع الحساب البنكي</value>
+  </data>
+  <data name="lblAddressAsPerContractResource1.Text" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="lblAraFatherNameRes.Text" xml:space="preserve">
+    <value>اسم الاب عربي</value>
+  </data>
+  <data name="lblAraGrandNameRes.Text" xml:space="preserve">
+    <value>اسم الجد عربي</value>
+  </data>
+  <data name="lblAraNameRes.Text" xml:space="preserve">
+    <value>الاسم العربي</value>
+  </data>
+  <data name="lblBankAccountResource1.Text" xml:space="preserve">
+    <value>حساب البنك</value>
+  </data>
+  <data name="lblBankResource1.Text" xml:space="preserve">
+    <value>البنك</value>
+  </data>
+  <data name="lblBirthCitysResource1.Text" xml:space="preserve">
+    <value>مكان الميلاد</value>
+  </data>
+  <data name="lblBirthRes.Text" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+  <data name="lblBloodGroupsResource1.Text" xml:space="preserve">
+    <value>فصيلة الدم</value>
+  </data>
+  <data name="lblBranchResource1.Text" xml:space="preserve">
+    <value>الفرع</value>
+  </data>
+  <data name="lblCodeResource1.Text" xml:space="preserve">
+    <value>كود الموظف</value>
+  </data>
+  <data name="lblCodeResource16.Text" xml:space="preserve">
+    <value>الكود</value>
+  </data>
+  <data name="lblContractTypeResource1.Text" xml:space="preserve">
+    <value>نوع العقد</value>
+  </data>
+  <data name="lblCost1Resource1.Text" xml:space="preserve">
+    <value>توزيع 1</value>
+  </data>
+  <data name="lblCost2Resource1.Text" xml:space="preserve">
+    <value>توزيع 2</value>
+  </data>
+  <data name="lblCost3Resource1.Text" xml:space="preserve">
+    <value>توزيع 3</value>
+  </data>
+  <data name="lblCost4Resource1.Text" xml:space="preserve">
+    <value>توزيع 4</value>
+  </data>
+  <data name="lblDepartmentResource1.Text" xml:space="preserve">
+    <value>القسم</value>
+  </data>
+  <data name="lblEmailResource1.Text" xml:space="preserve">
+    <value>الايميل</value>
+  </data>
+  <data name="lblEmployeeClassResource1.Text" xml:space="preserve">
+    <value>الفئة</value>
+  </data>
+  <data name="lblEngFamilyNameRes.Text" xml:space="preserve">
+    <value>اسم العائلة انجليزي</value>
+  </data>
+  <data name="lblEngFatherNameRes.Text" xml:space="preserve">
+    <value>اسم الاب انجليزي</value>
+  </data>
+  <data name="lblEngGrandNameRes.Text" xml:space="preserve">
+    <value>اسم الجد انجليزي</value>
+  </data>
+  <data name="lblEngNameRes.Text" xml:space="preserve">
+    <value>الاسم الانجليزي</value>
+  </data>
+  <data name="lblFamilyNameRes.Text" xml:space="preserve">
+    <value>اسم العائلة عربي</value>
+  </data>
+  <data name="lblGenderResource1.Text" xml:space="preserve">
+    <value>الجنس</value>
+  </data>
+  <data name="lblGOSIJoinDateResource1.Text" xml:space="preserve">
+    <value>تاريخ بدء التأمينات</value>
+  </data>
+  <data name="lblGosiNumberResource1.Text" xml:space="preserve">
+    <value>رقم التأمينات</value>
+  </data>
+  <data name="lblGradeStepResource1.Text" xml:space="preserve">
+    <value>الرتية</value>
+  </data>
+  <data name="lblGraduationDateResource1.Text" xml:space="preserve">
+    <value>تاريخ التخرج</value>
+  </data>
+  <data name="lblIdentityResource1.Text" xml:space="preserve">
+    <value>رقم الهوية</value>
+  </data>
+  <data name="lblJoinDateResource1.Text" xml:space="preserve">
+    <value>تاريخ البدء</value>
+  </data>
+  <data name="lblLastEducationsResource1.Text" xml:space="preserve">
+    <value>المؤهل الدراسي</value>
+  </data>
+  <data name="lblLocationResource101.Text" xml:space="preserve">
+    <value>المشروع</value>
+  </data>
+  <data name="lblMachineCodeResource1.Text" xml:space="preserve">
+    <value>كود الدوام</value>
+  </data>
+  <data name="lblManagerResource1.Text" xml:space="preserve">
+    <value>المدير المباشر</value>
+  </data>
+  <data name="lblMaritalStatusResource1.Text" xml:space="preserve">
+    <value>الحالة الاجتماعية</value>
+  </data>
+  <data name="lblMobileResource1.Text" xml:space="preserve">
+    <value>الموبايل</value>
+  </data>
+  <data name="lblNameResource16.Text" xml:space="preserve">
+    <value>التوصيف</value>
+  </data>
+  <data name="lblNationalityRes.Text" xml:space="preserve">
+    <value>الجنسية</value>
+  </data>
+  <data name="lblPassportExpireDateResource1.Text" xml:space="preserve">
+    <value>تاريخ انتهاء الباسبور</value>
+  </data>
+  <data name="lblPassportIssueDateResource1.Text" xml:space="preserve">
+    <value>تاريخ اصدار الباسبور</value>
+  </data>
+  <data name="lblPassportResource1.Text" xml:space="preserve">
+    <value>رقم الباسبور</value>
+  </data>
+  <data name="LblPaymentTypeResource.Text" xml:space="preserve">
+    <value>نوع الدفع</value>
+  </data>
+  <data name="lblPositionResource1.text" xml:space="preserve">
+    <value>الوظيفة</value>
+  </data>
+  <data name="lblProfessionsResource1.Text" xml:space="preserve">
+    <value>المهنة</value>
+  </data>
+  <data name="lblReligionResource1.Text" xml:space="preserve">
+    <value>الديانة</value>
+  </data>
+  <data name="lblRemarksResource1.Text" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="lblSectorsResource1.Text" xml:space="preserve">
+    <value>القطاع</value>
+  </data>
+  <data name="lblSponsorResource1.Text" xml:space="preserve">
+    <value>الوكيل</value>
+  </data>
+  <data name="lblSSNOExpireDateResource1.Text" xml:space="preserve">
+    <value>تاريخ انتهاء الهوية</value>
+  </data>
+  <data name="lblSSNOIssueDateResource1.Text" xml:space="preserve">
+    <value>تاريخ اصدار الهوية</value>
+  </data>
+  <data name="lblStartDateResource1.Text" xml:space="preserve">
+    <value>تاريخ البداية</value>
+  </data>
+  <data name="linkEnd.Text" xml:space="preserve">
+    <value>انهاء</value>
+  </data>
+  <data name="linkNext.Text" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+  <data name="linkPrevious.Text" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="RegularAccountLabel.Text" xml:space="preserve">
+    <value>بطاقة بنك</value>
+  </data>
+  <data name="SalaryAccountLabel.Text" xml:space="preserve">
+    <value>بطاقة راتب</value>
+  </data>
+  <data name="SelectOptionBankLabel.Text" xml:space="preserve">
+    <value>[برجاء الاختيار]</value>
+  </data>
+  <data name="TabContract.Text" xml:space="preserve">
+    <value>بيانات للعقد الحالي</value>
+  </data>
+  <data name="TabEdit.Text" xml:space="preserve">
+    <value>معلومات التعديل</value>
+  </data>
+  <data name="TabOrganizData.Text" xml:space="preserve">
+    <value>بيانات التنظيمية</value>
+  </data>
+  <data name="TabOtherData.Text" xml:space="preserve">
+    <value>بيانات اخرى</value>
+  </data>
+  <data name="TabPersonal.Text" xml:space="preserve">
+    <value>بيانات الشخصية</value>
+  </data>
+</root>

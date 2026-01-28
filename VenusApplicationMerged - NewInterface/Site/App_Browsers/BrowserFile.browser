@@ -1,0 +1,13 @@
+﻿<browsers>
+    
+    
+  <browser id="IE11OV" parentID="Mozilla" >
+    <identification>
+      <userAgent match="Trident" />
+      <capability name="majorversion" match="11" />
+    </identification>
+    <capabilities>
+      <capability name="browser" value="IE" />
+    </capabilities>
+  </browser>
+</browsers>

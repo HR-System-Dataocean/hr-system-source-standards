@@ -1,0 +1,408 @@
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\ResGen.read.1.tlog
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\ResGen.write.1.tlog
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface - WAM\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface - WAM\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface - WAM\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface - WAM\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface - WAM\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface - WAM\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface - WAM\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface - WAM\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface - WAM\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface - WAM\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface - WAM\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface - WAM\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.Shared.v11.1.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebGrid.v11.1.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebListbar.v11.1.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebNavigator.v11.1.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebTab.v11.1.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebToolbar.v11.1.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.WebDataInput.v11.1.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.WebDateChooser.v11.1.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.Shared.v11.1.xml
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebGrid.v11.1.xml
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebListbar.v11.1.xml
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebNavigator.v11.1.xml
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebTab.v11.1.xml
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebToolbar.v11.1.xml
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.WebDataInput.v11.1.xml
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.WebDateChooser.v11.1.xml
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.Shared.v11.1.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebGrid.v11.1.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebListbar.v11.1.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebNavigator.v11.1.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebTab.v11.1.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebToolbar.v11.1.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.WebDataInput.v11.1.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.WebDateChooser.v11.1.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.Shared.v11.1.xml
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebGrid.v11.1.xml
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebListbar.v11.1.xml
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebNavigator.v11.1.xml
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebTab.v11.1.xml
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.UltraWebToolbar.v11.1.xml
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.WebDataInput.v11.1.xml
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Infragistics35.WebUI.WebDateChooser.v11.1.xml
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojResolveAssemblyReference.cache
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.Cache
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Drive D\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.AssemblyReference.cache
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CopyComplete
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.AssemblyReference.cache
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CopyComplete
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\HR\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.AssemblyReference.cache
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CopyComplete
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+D:\Data Ocean\Clients\HR\Standard Code\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.AssemblyReference.cache
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CopyComplete
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+D:\Data Ocean\Clients\HR\Standard Code\Standard_Code_2022-09-26\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.AssemblyReference.cache
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CopyComplete
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+C:\Source Code\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.AssemblyReference.cache
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CopyComplete
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.AssemblyReference.cache
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CopyComplete
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.AssemblyReference.cache
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CopyComplete
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+D:\Old Data--D--20-11-2023\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.AssemblyReference.cache
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CopyComplete
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojAssemblyReference.cache
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CopyComplete
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojAssemblyReference.cache
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CopyComplete
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbprojAssemblyReference.cache
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CopyComplete
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.dll
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.pdb
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.Web.Menu.xml
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.dll
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Debug\Venus.Shared.pdb
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.AssemblyReference.cache
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Resources.resources
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Sh.603CFBB9.Up2Date
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.dll
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.Menu.xml
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Debug\Venus.Shared.Web.pdb

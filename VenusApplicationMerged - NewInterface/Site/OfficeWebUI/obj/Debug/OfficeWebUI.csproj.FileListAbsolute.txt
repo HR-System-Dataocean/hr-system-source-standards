@@ -1,0 +1,150 @@
+C:\Documents and Settings\Administrator\Desktop\TeamSuite\VenusApplication\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Documents and Settings\Administrator\Desktop\TeamSuite\VenusApplication\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Documents and Settings\Administrator\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Documents and Settings\Administrator\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Documents and Settings\Administrator\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Documents and Settings\Administrator\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\GenerateResource-ResGen.read.4.tlog
+C:\Documents and Settings\Administrator\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Documents and Settings\Administrator\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Documents and Settings\Administrator\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\Users\Developer\Desktop\TeamSuite\New folder\VenusApplication\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Users\Developer\Desktop\TeamSuite\New folder\VenusApplication\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Users\Developer\Desktop\TeamSuite\New folder\VenusApplication\OfficeWebUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Developer\Desktop\TeamSuite\New folder\VenusApplication\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Users\Developer\Desktop\TeamSuite\New folder\VenusApplication\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Users\Developer\Desktop\TeamSuite\New folder\VenusApplication\OfficeWebUI\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\Developer\Desktop\TeamSuite\New folder\VenusApplication\OfficeWebUI\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Users\Developer\Desktop\TeamSuite\New folder\VenusApplication\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Users\Developer\Desktop\TeamSuite\New folder\VenusApplication\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\Users\Developer\Desktop\TeamSuite\VenusApplication\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Users\Developer\Desktop\TeamSuite\VenusApplication\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Users\Developer\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Developer\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Users\Developer\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Users\Developer\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\Developer\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Users\Developer\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Users\Developer\Desktop\TeamSuite\VenusApplication\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\My Work\DataOcean\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csprojResolveAssemblyReference.cache
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Users\Developer\Desktop\TeamSuite\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\ResGen.read.1.tlog
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\ResGen.write.1.tlog
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Users\Developer\Desktop\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Users\Administrator\Desktop\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+D:\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Users\Administrator\My Work\Dataocean\Projects\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Users\Administrator\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Users\Administrator\Documents\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Users\Administrator\Desktop\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\My Work\Dataocean\VenusApplicationMerged - NewInterface - Copy\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csprojResolveAssemblyReference.cache
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csprojResolveAssemblyReference.cache
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\Drive D\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\Drive D\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csprojResolveAssemblyReference.cache
+C:\Drive D\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Drive D\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\Drive D\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.Cache
+C:\Drive D\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\Drive D\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.AssemblyReference.cache
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.cache
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.CoreCompileInputs.cache
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.pdb
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.dll
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Debug\OfficeWebUI.pdb
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.AssemblyReference.cache
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.AboutOfficeWebUI.resources
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.Properties.Resources.resources
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.GenerateResource.cache
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.csproj.CoreCompileInputs.cache
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.dll
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Debug\OfficeWebUI.pdb

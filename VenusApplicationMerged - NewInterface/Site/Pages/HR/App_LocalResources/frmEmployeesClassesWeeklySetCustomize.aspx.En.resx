@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Label_Star1Resource1.Text" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="Label_Star1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_TSP1Resource1.Text" xml:space="preserve">
+    <value>|</value>
+  </data>
+  <data name="Label_TSP1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_TSP2Resource1.Text" xml:space="preserve">
+    <value>|</value>
+  </data>
+  <data name="Label_TSP2Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblArbNameResource1.Text" xml:space="preserve">
+    <value>Arabic Name</value>
+  </data>
+  <data name="lblArbNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCancelDateResource1.Text" xml:space="preserve">
+    <value>Cancel Date</value>
+  </data>
+  <data name="lblCodeResource1.Text" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="lblCodeResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblEngNameResource1.Text" xml:space="preserve">
+    <value>English Name</value>
+  </data>
+  <data name="lblEngNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegDateResource1.Text" xml:space="preserve">
+    <value>Reg Date</value>
+  </data>
+  <data name="lblRegDateResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegDateValueResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegDateValueResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegUserResource1.Text" xml:space="preserve">
+    <value>Reg User</value>
+  </data>
+  <data name="lblRegUserResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegUserValueResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegUserValueResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkButton_HelpResource1.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="LinkButton_HelpResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkButton_PropertiesResource1.Text" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="LinkButton_PropertiesResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkButton_RemarksResource1.Text" xml:space="preserve">
+    <value>Remarks</value>
+  </data>
+  <data name="LinkButton_RemarksResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkButton_SaveNResource1.Text" xml:space="preserve">
+    <value>Save &amp; New</value>
+  </data>
+  <data name="LinkButton_SaveNResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PageResource1.Title" xml:space="preserve">
+    <value>* Venus Payroll * ~ Branches</value>
+  </data>
+  <data name="TabResource1.Text" xml:space="preserve">
+    <value>Main Info.</value>
+  </data>
+  <data name="lblAdminLocationResource1.Text" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Day1NameResource1.DisplayText" xml:space="preserve">
+    <value>Saturday</value>
+  </data>
+  <data name="Day2NameResource1.DisplayText" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="Day3NameResource1.DisplayText" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="Day4NameResource1.DisplayText" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="Day5NameResource1.DisplayText" xml:space="preserve">
+    <value>Wensday</value>
+  </data>
+  <data name="Day6NameResource1.DisplayText" xml:space="preserve">
+    <value>Turesday</value>
+  </data>
+  <data name="Day7NameResource1.DisplayText" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="DayNameResource1.Header.Caption" xml:space="preserve">
+    <value>Weekly Day</value>
+  </data>
+  <data name="IsDayOfResource1.Header.Caption" xml:space="preserve">
+    <value>DayOff</value>
+  </data>
+  <data name="Label_Title1Resource1.Text" xml:space="preserve">
+    <value>Please Define Time In &amp; Time Out For Weekly Days</value>
+  </data>
+  <data name="lblAttendanceClassResource1.Text" xml:space="preserve">
+    <value>Attendance Plan</value>
+  </data>
+  <data name="TimeIn1Resource1.Header.Caption" xml:space="preserve">
+    <value>Time In 1</value>
+  </data>
+  <data name="TimeIn2Resource1.Header.Caption" xml:space="preserve">
+    <value>Time In 2</value>
+  </data>
+  <data name="TimeOut1Resource1.Header.Caption" xml:space="preserve">
+    <value>Time Out 1</value>
+  </data>
+  <data name="TimeOut2Resource1.Header.Caption" xml:space="preserve">
+    <value>Time Out 2</value>
+  </data>
+  <data name="FromDateResource1.Text" xml:space="preserve">
+    <value>From Date</value>
+  </data>
+  <data name="ToDateResource1.Text" xml:space="preserve">
+    <value>To Date</value>
+  </data>
+  <data name="AttCustomizeOptsLabelResource.Text" xml:space="preserve">
+    <value>Customization Options</value>
+  </data>
+  <data name="EmpArbNameLabelResource.Text" xml:space="preserve">
+    <value>Arabic Name</value>
+  </data>
+  <data name="EmpEngNameLabelResource.Text" xml:space="preserve">
+    <value>English Name</value>
+  </data>
+  <data name="EmployeeCodeLabelResource.Text" xml:space="preserve">
+    <value>Employee Code</value>
+  </data>
+  <data name="EmployeeRadioButtonResource.Text" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="PlanRadioButtonResource.Text" xml:space="preserve">
+    <value>Plan</value>
+  </data>
+  <data name="shiftEntryTimeInCloseResource.Header.Caption" xml:space="preserve">
+    <value>Shift Entry Time In Close</value>
+  </data>
+  <data name="shiftFingerprintEndResource.Header.Caption" xml:space="preserve">
+    <value>Shift Fingerprint End</value>
+  </data>
+  <data name="shiftFingerprintStartResource.Header.Caption" xml:space="preserve">
+    <value>Shift Fingerprint Start</value>
+  </data>
+</root>

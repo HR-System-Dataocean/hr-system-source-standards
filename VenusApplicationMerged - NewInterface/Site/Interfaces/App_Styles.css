@@ -1,0 +1,274 @@
+.MainBackColor
+{
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#083E7C, EndColorStr=#CCCCCC); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+}
+
+.Toolbar
+{
+ 	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#ffffff, EndColorStr=#bfdbff); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+}
+
+
+.MainApplicationToolbar
+{
+ 	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#dcdcdc, EndColorStr=#083E7C); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+}
+
+.OppositeMainApplicationToolbar
+{
+ 	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#083E7C, EndColorStr=#dcdcdc); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+}
+
+.Button
+{
+	
+}
+
+.HoverToolBarButton
+{
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=lightsteelblue, EndColorStr=#083E7C);
+	color: black;
+	font-family: Tahoma, Verdana, Arial;
+	font-weight: bold;
+	font-size: 11px;
+	
+}
+
+.DefultToolBarButton
+{
+	background-color:Transparent; 
+	color: black;
+	font-family: Tahoma, Verdana, Arial;
+	font-weight: bold;
+	font-size: 11px;
+}
+
+.PressedToolBarButton
+{
+	background-color: lightsteelblue;
+} 
+
+.TextBox 
+{
+ background-color:White ; font-family:Tahoma;	 height :auto;
+	
+}
+
+.Lable 
+{
+	
+	
+}
+
+.dropDownCalender
+{
+	
+	
+}
+
+
+.Button
+{
+	  
+	
+}
+
+.MainHeaderCaption
+{
+	font-size: 11px;
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=lightSteelBlue, EndColorStr=#bfdbff);
+	color: black;
+	font-family: Times New Roman , Verdana, Arial;
+	background-color: #ffffff;
+}
+
+.linkLable
+{
+	width: 123px;
+	height: 21px;
+	color:  Blue;
+	 font-size:small;
+	  border-bottom-style:outset ;
+	  border-top-style:outset ;
+	  border-right-style:outset ;
+	  border-left-style:outset ; 
+	  border-bottom-width:1px;
+	  border-top-width:1px;
+	  border-right-width:1px;
+	  border-left-width:1px;
+	  cursor:hand;
+	
+}
+
+
+.MainApplicationListBarButton
+{
+ 	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#dcdcdc, EndColorStr=#083E7C); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+}
+
+.MainApplicationListBarButtonHover
+{
+ 	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#dcdcdc, EndColorStr=Orange); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+ 	  
+}
+
+.First
+{
+ top: 12px; left: 12px; background-color: Aqua; 	
+}
+
+.Second
+{
+ top: 18px; left: 18px; 	
+}
+
+.ReportSearchHeadColors
+{
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#dcdcdc, EndColorStr=#ccccff); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff	
+}
+
+.SearchHeaderStyle
+{
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#d8e4f8, EndColorStr=#ccccff); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff	 	
+}
+
+.LableSearchCriteria
+{
+	 background-color: #FFC080; border-color: White ; border-style:solid ; border-width:1px;
+}
+
+.TextBoxSearchCriteria
+{
+	 background-color: #CCCCFF; border-color: InactiveCaption ; border-style:solid ; border-width:1px;
+}
+
+.DateBoxSearchCriteria
+{
+	 background-color: #CCCCFF; border-color: InactiveCaption ; border-style:solid ; border-width:1px;
+}
+
+.NumericBoxSearchCriteria
+{
+	 background-color: #CCCCFF; border-color: InactiveCaption ; border-style:solid ; border-width:1px;
+}
+
+.MonyBoxSearchCriteria
+{
+	 background-color: #CCCCFF; border-color: InactiveCaption ; border-style:solid ; border-width:1px;
+}
+
+.DdlSearchCriteria
+{
+	 background-color: #CCCCFF; border-color: InactiveCaption ; border-style:solid ; border-width:1px;
+}
+
+.btnSearchCriteria
+{
+	background-color: #ccccff; border-color: InactiveCaption ; border-style: outset ; border-width:1px; cursor: Hand;
+}
+
+.vacationIndicatorColor
+{
+	background-color: red;
+}
+
+.holidayIndicatorColor
+{
+	background-color: Gray;
+}
+
+.noramlRemain
+{
+	background-color : #b0c4de
+}
+
+.worningRemain
+{
+	background-color :Red 
+}
+
+.OtherFieldsLabel
+{
+	width: 123px;
+	height: 21px;
+	font-style :inherit ;
+	font-variant :inherit ;
+	font-size :inherit ;
+	border-bottom-style:outset ;
+	border-top-style:outset ;
+	border-right-style:outset ;
+	border-left-style:outset ; 
+	border-bottom-width:1px;
+	border-top-width:1px;
+	border-right-width:1px;
+	border-left-width:1px;
+	overflow : hidden ;
+	background-color:Transparent 
+}
+
+.OtherFieldsSearchDesc
+{
+	width: 150px;
+	height: 20px;
+	border-bottom-style:solid ;
+	border-top-style:solid ;
+	border-right-style:solid ;
+	border-left-style:solid ; 
+	border-bottom-width:1px;
+	border-top-width:1px;
+	border-right-width:1px;
+	border-left-width:1px;
+	background-color : InactiveCaptionText ;
+	border-style :solid ;
+}
+
+
+.VoucherDetailsGridHeader
+{
+ 	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#dcdcdc, EndColorStr=Orange); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+}
+
+.ReportHeaderStep1
+{
+ 	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#BFDBFF, EndColorStr=#d8e4f8); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+}
+
+.ReportBottomPanel
+{
+ 	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#d8e4f8, EndColorStr=#BFDBFF); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+}
+
+.VeritcalLine
+{
+ 	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.8, StartColorStr=#d8e4f8, EndColorStr=#BFDBFF); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+}
+
+.HeaderCaption
+{
+ 	FONT-SIZE: 9px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#d8e4f8, EndColorStr=#BFDBFF); COLOR: #000000; FONT-FAMILY: Arial, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+}
+
+.SearchGridHead
+{
+ 	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#dcdcdc, EndColorStr=Orange); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+ 	  
+}
+
+.ReportWriterSep1Checkboxs
+{
+	 font-size:small ; height: 24 ; color:Black ;
+}
+
+.ReportToolbarColor
+{
+ 	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#DDECFE, EndColorStr=#8FB3E6); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff
+}
+
+.SearchHeadColors
+{
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=.5, StartColorStr=#ffffff, EndColorStr=#FFC080); COLOR: #000000; FONT-FAMILY: Tahoma, Verdana, Arial; BACKGROUND-COLOR: #ffffff	
+}
+
+.EmployeesMonthlyTransactionsClasificationPartHeader
+{ background-color:Orange  
+}

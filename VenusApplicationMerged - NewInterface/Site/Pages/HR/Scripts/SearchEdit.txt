@@ -1,0 +1,5 @@
+﻿//        cellControl = window.opener.document.all.item("UltraWebTab1__ctl0_" + TargetValue);
+//        cellControl.value = cell;
+//        cellControl.focus();
+//        window.close();
+//        return;

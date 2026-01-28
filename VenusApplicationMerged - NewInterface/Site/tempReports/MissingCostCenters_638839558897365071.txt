@@ -1,0 +1,17 @@
+Employee Code	Employee Name	Cost1	Cost2	Cost3	Cost4
+10001	Adel Abdulaziz Abdulrahim Al Dajani 	LTAC1			
+10002	Nouria Botha 	LTAC1			
+10003	Waell Habis Shaker Al Dughmi 	LTAC1			
+9999	Test Employee 	LTAC1			
+5002	Nayef - -   	LTAC1			
+5003	Khalaf - - Al Enazi  	LTAC1			
+10154	Ayman  Osman  Mohamed  Omer  	LTAC1			
+10155	Ahmed Ali Ahmed Abdulmotaleb 	LTAC1			
+10158	Abdulmozid OMEDALI 	LTAC1			
+10160	Noha Abdelrahman Hamed Abdelalem 	LTAC1			
+10163	Rochelle Maala Tomas Dionisio 	LTAC1			
+10165	Wedyan Saleh Faisal Alsegami  				
+10166	Sara Babikir Hassan Mohamed 				
+10167	Munirah Abdulaziz Abdulrahman Alabbad 				
+10168	Khalid Majed Mohammed Almajed 				
+10169	Mohammed Ibrahim Saleh Alarifi 				

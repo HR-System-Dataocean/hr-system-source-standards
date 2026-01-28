@@ -1,0 +1,1034 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnFillResource1.Style" xml:space="preserve">
+    <value>left: 7px; position: absolute; top: 3px</value>
+  </data>
+  <data name="btnFillResource1.Text" xml:space="preserve">
+    <value>إملاء</value>
+  </data>
+  <data name="btnReCalculateResource1.Style" xml:space="preserve">
+    <value>left: 332px; position: absolute;top: 3px;direction :rtl ;text-align :center</value>
+  </data>
+  <data name="btnReCalculateResource1.Text" xml:space="preserve">
+    <value>أعد حساب</value>
+  </data>
+  <data name="chkIncludeTimeAttendanceResource1.Style" xml:space="preserve">
+    <value>left: 482px; position: absolute;top: 6px;direction :rtl ;text-align :right</value>
+  </data>
+  <data name="chkIncludeTimeAttendanceResource1.Text" xml:space="preserve">
+    <value>تضمّنْ وقت الحضورَ</value>
+  </data>
+  <data name="chkpaidResource1.Text" xml:space="preserve">
+    <value>مدفوع</value>
+  </data>
+  <data name="chkpaidResource1Style" xml:space="preserve">
+    <value>z-index: 122; left:20px; position: absolute; top: 29px;direction :rtl ;text-align :right</value>
+  </data>
+  <data name="ddlActualDatesResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ddlPeriodRes1.style" xml:space="preserve">
+    <value>left: 471px; position: absolute;top: 30px;text-align:right;direction:rtl</value>
+  </data>
+  <data name="ddlProjectsResource1.Style" xml:space="preserve">
+    <value>z-index: 128; left: 94px; position: absolute; top: 4px;direction:rtl ;text-align :right </value>
+  </data>
+  <data name="Label13Resource1.Style" xml:space="preserve">
+    <value>z-index: 109; left: 226px; position: absolute;
+                top: 154px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="Label13Resource1.Text" xml:space="preserve">
+    <value>الراتب الأساسي</value>
+  </data>
+  <data name="Label13Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label14Resource1.Style" xml:space="preserve">
+    <value>z-index: 109; left: 658px; position: absolute;
+                top: 153px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="Label14Resource1.Text" xml:space="preserve">
+    <value>الأجر اليومي</value>
+  </data>
+  <data name="Label14Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label15Resource1.Style" xml:space="preserve">
+    <value>z-index: 109; left: 658px; position: absolute;
+                top: 186px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="Label15Resource1.Text" xml:space="preserve">
+    <value>الأجر في الساعة</value>
+  </data>
+  <data name="Label15Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label16Resource1.Style" xml:space="preserve">
+    <value>z-index: 109; left: 226px; position: absolute;
+                top: 186px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="Label16Resource1.Text" xml:space="preserve">
+    <value>الإضافي بالساعة</value>
+  </data>
+  <data name="Label16Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label1Resource1.Style" xml:space="preserve">
+    <value>z-index: 102; left: 658px; position: absolute;
+                top: 90px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="Label1Resource1.Text" xml:space="preserve">
+    <value>عدد أيام العمل</value>
+  </data>
+  <data name="Label1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label2Resource1.Style" xml:space="preserve">
+    <value>z-index: 109; left: 658px; position: absolute;
+                            top: 463px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="Label2Resource1.Text" xml:space="preserve">
+    <value>إجمالي المستحقات</value>
+  </data>
+  <data name="Label2Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label3Resource1.Style" xml:space="preserve">
+    <value>z-index: 124; left: 468px;
+                            position: absolute; top: 224px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="Label3Resource1.Text" xml:space="preserve">
+    <value>المستحقات</value>
+  </data>
+  <data name="Label3Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label4Resource1.Style" xml:space="preserve">
+    <value>z-index: 109; left: 221px; position: absolute;
+                            top: 463px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="Label4Resource1.Text" xml:space="preserve">
+    <value>إجمالي المستقطعات</value>
+  </data>
+  <data name="Label4Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label5Resource1.Style" xml:space="preserve">
+    <value>z-index: 109; left: 226px; position: absolute;
+                top: 90px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="Label5Resource1.Text" xml:space="preserve">
+    <value>عدد ساعات الإضافي</value>
+  </data>
+  <data name="Label5Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label6Resource1.Style" xml:space="preserve">
+    <value>z-index: 109; left: 658px; position: absolute;
+                            top: 122px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="Label6Resource1.Text" xml:space="preserve">
+    <value>ساعات الأجازة</value>
+  </data>
+  <data name="Label6Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label7Resource1.Style" xml:space="preserve">
+    <value>z-index: 109; left: 221px; position: absolute;
+                            top: 486px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="Label7Resource1.Text" xml:space="preserve">
+    <value>صافي الراتب</value>
+  </data>
+  <data name="Label7Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbError2Res.style" xml:space="preserve">
+    <value>left: 45px; position: absolute;top: 31px;text-align:right</value>
+  </data>
+  <data name="lbErrorRes1.style" xml:space="preserve">
+    <value>left: 45px; position: absolute;top: 31px;text-align:right</value>
+  </data>
+  <data name="lbFromResource1.Style" xml:space="preserve">
+    <value>left: 594px; position: absolute; top: 5px;direction :rtl ;text-align :right</value>
+  </data>
+  <data name="lbFromResource1.Text" xml:space="preserve">
+    <value>من</value>
+  </data>
+  <data name="lblBasicSalaryResource1.HorizontalAlign" xml:space="preserve">
+    <value>right</value>
+  </data>
+  <data name="lblBasicSalaryResource1.Style" xml:space="preserve">
+    <value>z-index: 114; left: 40px;
+                position: absolute; top: 154px ; direction : rtl; text-align : right; width: 180px</value>
+  </data>
+  <data name="lblBasicSalaryResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBasicSalaryResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCurrentPeriodResource1.Style" xml:space="preserve">
+    <value>z-index: 114; left: 40px;
+                            position: absolute; top: 122px ; direction : rtl; text-align : Right; width: 180px</value>
+  </data>
+  <data name="lblCurrentPeriodResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCurrentPeriodResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblDescEmployeeCodeResource1.Style" xml:space="preserve">
+    <value>z-index: 114; left: 469px;
+                position: absolute; top: 58px ; direction : rtl; text-align : Right;</value>
+  </data>
+  <data name="lblDescEmployeeCodeResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblDescEmployeeCodeResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblDescEnglishNameResource1.Style" xml:space="preserve">
+    <value>z-index: 114; left: 40px; position: absolute; top: 58px; width:315px; direction : rtl; text-align : Right;</value>
+  </data>
+  <data name="lblDescEnglishNameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblDescEnglishNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblEffectPeriodResource1.Style" xml:space="preserve">
+    <value>z-index: 109; left: 226px;
+                position: absolute; top: 122px ; direction : rtl; text-align :Right;</value>
+  </data>
+  <data name="lblEffectPeriodResource1.Text" xml:space="preserve">
+    <value>الفترة المالية</value>
+  </data>
+  <data name="lblEffectPeriodResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblEmployeeCodeResource1.Style" xml:space="preserve">
+    <value>z-index: 102; left: 658px; position: absolute;
+                            top: 58px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="lblEmployeeCodeResource1.Text" xml:space="preserve">
+    <value>الموظف</value>
+  </data>
+  <data name="lblEmployeeCodeResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblEmployeePayabilitiesResource1.Style" xml:space="preserve">
+    <value>z-index: 125; left: 40px; position: absolute; top: 224px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="lblEmployeePayabilitiesResource1.Text" xml:space="preserve">
+    <value>المستقطعات</value>
+  </data>
+  <data name="lblEmployeePayabilitiesResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblNetSalaryResource1.Style" xml:space="preserve">
+    <value>z-index: 109; left:38px; position: absolute;
+                            top: 486px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="lblNetSalaryResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblNetSalaryResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblOverTimePerHourResource1.Style" xml:space="preserve">
+    <value>z-index: 114; left: 40px;
+                position: absolute; top: 187px ; direction : rtl; text-align : right; width: 180px</value>
+  </data>
+  <data name="lblOverTimePerHourResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblOverTimePerHourResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSalaryPerDayResource1.HorizontalAlign" xml:space="preserve">
+    <value>right</value>
+  </data>
+  <data name="lblSalaryPerDayResource1.Style" xml:space="preserve">
+    <value>z-index: 114; left: 471px;
+                position: absolute; top: 153px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="lblSalaryPerDayResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSalaryPerDayResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSalaryPerHourResource1.HorizontalAlign" xml:space="preserve">
+    <value>right</value>
+  </data>
+  <data name="lblSalaryPerHourResource1.Style" xml:space="preserve">
+    <value>z-index: 114; left: 471px;
+                position: absolute; top: 186px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="lblSalaryPerHourResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSalaryPerHourResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTotalBenefitsResource1.Style" xml:space="preserve">
+    <value>z-index: 109; left: 468px; position: absolute;
+                            top: 463px ; direction : rtl; text-align :right;</value>
+  </data>
+  <data name="lblTotalBenefitsResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTotalBenefitsResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTotalDeductionsResource1.Style" xml:space="preserve">
+    <value>z-index: 109; left: 38px; position: absolute;
+                            top: 463px ; direction : rtl; text-align : right;</value>
+  </data>
+  <data name="lblTotalDeductionsResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTotalDeductionsResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbPeriodRes1.style" xml:space="preserve">
+    <value>z-index: 102; left: 659px;position: absolute; top: 31px;text-align:right</value>
+  </data>
+  <data name="lbPeriodRes1.Text" xml:space="preserve">
+    <value>الفترة المالية</value>
+  </data>
+  <data name="lbProjectResource1.Style" xml:space="preserve">
+    <value>left: 254px; position: absolute;top: 6px;direction :rtl ;text-align :right</value>
+  </data>
+  <data name="lbProjectResource1.Text" xml:space="preserve">
+    <value>المشروع</value>
+  </data>
+  <data name="lbToResource1.Style" xml:space="preserve">
+    <value>left:439px; position: absolute; top: 5px;direction :rtl ;text-align :right</value>
+  </data>
+  <data name="lbToResource1.Text" xml:space="preserve">
+    <value>إلى</value>
+  </data>
+  <data name="PageResource1.Title" xml:space="preserve">
+    <value>  *برنامج الرواتب* ~تجهيز الراتب</value>
+  </data>
+  <data name="Tab1Resource1.Text" xml:space="preserve">
+    <value>            معلومات الموظف             </value>
+  </data>
+  <data name="Tab2Resource1.Text" xml:space="preserve">
+    <value>توزيع العمل على المشاريع</value>
+  </data>
+  <data name="Tab3Resource1.Text" xml:space="preserve">
+    <value>معلومات القسم</value>
+  </data>
+  <data name="TBarButtonRefundResource1.Text" xml:space="preserve">
+    <value>إعادة</value>
+  </data>
+  <data name="TBarButtonResource.Text" xml:space="preserve">
+    <value>سابق</value>
+  </data>
+  <data name="TBarButtonResource1.AccessKey" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TBarButtonResource1.Text" xml:space="preserve">
+    <value>إعداد</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TBarButtonResource1.ToolTip" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="TBarButtonResource3.Text" xml:space="preserve">
+    <value>لاحق</value>
+  </data>
+  <data name="TBarButtonResource4.Text" xml:space="preserve">
+    <value>أخير</value>
+  </data>
+  <data name="TBarFButtonResource1.Text" xml:space="preserve">
+    <value>أول</value>
+  </data>
+  <data name="TlbMainToolbarResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtHolidayWorkHoursResource1.HorizontalAlign" xml:space="preserve">
+    <value>right</value>
+  </data>
+  <data name="txtHolidayWorkHoursResource1.Style" xml:space="preserve">
+    <value>left: 468px; position: absolute; top: 121px ;</value>
+  </data>
+  <data name="txtHolidayWorkHoursResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtNoOfWorkingDaysResource1.HorizontalAlign" xml:space="preserve">
+    <value>right</value>
+  </data>
+  <data name="txtNoOfWorkingDaysResource1.Style" xml:space="preserve">
+    <value>left: 468px; position: absolute; top: 90px ; direction : rtl; text-align : Center;</value>
+  </data>
+  <data name="txtNoOfWorkingDaysResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtOvertimeWorkHoursResource1.HorizontalAlign" xml:space="preserve">
+    <value>right</value>
+  </data>
+  <data name="txtOvertimeWorkHoursResource1.Style" xml:space="preserve">
+    <value>left: 40px; position: absolute; top: 90px</value>
+  </data>
+  <data name="txtOvertimeWorkHoursResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtWorkingHoursPerDayResource1.HorizontalAlign" xml:space="preserve">
+    <value>Center</value>
+  </data>
+  <data name="txtWorkingHoursPerDayResource1.Style" xml:space="preserve">
+    <value>left: 553px; position: absolute; top: 26px; text-align : center</value>
+  </data>
+  <data name="txtWorkingHoursPerDayResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtWorkingHoursPerDayResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UltraGridColumnResource1.Header.Caption" xml:space="preserve">
+    <value>بنــــد الراتب</value>
+  </data>
+  <data name="UltraGridColumnResource1.HeaderText" xml:space="preserve">
+    <value>بنــــد الراتب</value>
+  </data>
+  <data name="UltraGridColumnResource10.Header.Caption" xml:space="preserve">
+    <value>ساعات العمل الإضافية</value>
+  </data>
+  <data name="UltraGridColumnResource10.HeaderText" xml:space="preserve">
+    <value>ساعات العمل الإضافية</value>
+  </data>
+  <data name="UltraGridColumnResource11.Header.Caption" xml:space="preserve">
+    <value>أضف إلى الأجازة</value>
+  </data>
+  <data name="UltraGridColumnResource11.HeaderText" xml:space="preserve">
+    <value>أضف إلى الأجازة</value>
+  </data>
+  <data name="UltraGridColumnResource12.Header.Caption" xml:space="preserve">
+    <value>بنــــد الراتب</value>
+  </data>
+  <data name="UltraGridColumnResource12.HeaderText" xml:space="preserve">
+    <value>بنــــد الراتب</value>
+  </data>
+  <data name="UltraGridColumnResource13.Header.Caption" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="UltraGridColumnResource13.HeaderText" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="UltraGridColumnResource14.Header.Caption" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="UltraGridColumnResource14.HeaderText" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="UltraGridColumnResource15.Header.Caption" xml:space="preserve">
+    <value>بنــــد الراتب</value>
+  </data>
+  <data name="UltraGridColumnResource15.HeaderText" xml:space="preserve">
+    <value>بنــــد الراتب</value>
+  </data>
+  <data name="UltraGridColumnResource16.Header.Caption" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="UltraGridColumnResource16.HeaderText" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="UltraGridColumnResource17.Header.Caption" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="UltraGridColumnResource17.HeaderText" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="UltraGridColumnResource2.Header.Caption" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="UltraGridColumnResource2.HeaderText" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="UltraGridColumnResource3.Header.Caption" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="UltraGridColumnResource3.HeaderText" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="UltraGridColumnResource4.Header.Caption" xml:space="preserve">
+    <value>بنــــد الراتب</value>
+  </data>
+  <data name="UltraGridColumnResource4.HeaderText" xml:space="preserve">
+    <value>بنــــد الراتب</value>
+  </data>
+  <data name="UltraGridColumnResource5.Header.Caption" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="UltraGridColumnResource5.HeaderText" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="UltraGridColumnResource6.Header.Caption" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="UltraGridColumnResource6.HeaderText" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="UltraGridColumnResource7.Header.Caption" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="UltraGridColumnResource7.HeaderText" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="UltraGridColumnResource8.Header.Caption" xml:space="preserve">
+    <value>المشروع</value>
+  </data>
+  <data name="UltraGridColumnResource8.HeaderText" xml:space="preserve">
+    <value>المشروع</value>
+  </data>
+  <data name="UltraGridColumnResource9.Header.Caption" xml:space="preserve">
+    <value>ساعات العمل</value>
+  </data>
+  <data name="UltraGridColumnResource9.HeaderText" xml:space="preserve">
+    <value>ساعات العمل</value>
+  </data>
+  <data name="UltraWebTab1Resource1.TabOrientation" xml:space="preserve">
+    <value>TopRight</value>
+  </data>
+  <data name="UltraWebTab1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="uwgEmployeeProjectsTransactionsResource1.caption" xml:space="preserve">
+    <value />
+  </data>
+  <data name="uwgEmployeeProjectsTransactionsResource1.Style" xml:space="preserve">
+    <value>left: 29px; position: absolute; top: 102px</value>
+  </data>
+  <data name="uwgEmployeeTransactionResource1.Caption" xml:space="preserve">
+    <value />
+  </data>
+  <data name="uwgEmployeeTransactionResource1.Style" xml:space="preserve">
+    <value>left: 465px; position: absolute; top: 248px</value>
+  </data>
+  <data name="uwgPayabilitiesResource1.Style" xml:space="preserve">
+    <value>left: 40px; position: absolute; top: 248px</value>
+  </data>
+  <data name="uwgPreparedEmployeeTransactionResource1.Style" xml:space="preserve">
+    <value>left: 360px; position: absolute; top: 56px</value>
+  </data>
+  <data name="uwgPreparedPayabiletiesResource1.Style" xml:space="preserve">
+    <value>left: 32px; position: absolute; top: 56px</value>
+  </data>
+  <data name="wdcFromResource1.Style" xml:space="preserve">
+    <value>z-index: 122; left:472px; position: absolute; top: 4px;direction :rtl ;text-align :right</value>
+  </data>
+  <data name="wdcToResource1.Style" xml:space="preserve">
+    <value>z-index: 122; left: 319px; position: absolute; top: 3px;direction :rtl ;text-align :right</value>
+  </data>
+  <data name="WebAsyncRefreshPanel1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.AllString" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.ContainsString" xml:space="preserve">
+    <value>Contains</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.DoesNotContainString" xml:space="preserve">
+    <value>Does Not Contain</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.DoesNotEndWithString" xml:space="preserve">
+    <value>Does Not End With</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.DoesNotStartWithString" xml:space="preserve">
+    <value>Does Not Start With</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.EmptyString" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.EndsWithString" xml:space="preserve">
+    <value>Ends With</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.EqualsString" xml:space="preserve">
+    <value>Equals</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.GreaterThanOrEqualsString" xml:space="preserve">
+    <value>Greater Than Or Equals</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.GreaterThanString" xml:space="preserve">
+    <value>Greater Than</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.LessThanOrEqualsString" xml:space="preserve">
+    <value>Less Than Or Equals</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.LessThanString" xml:space="preserve">
+    <value>Less Than</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.LikeString" xml:space="preserve">
+    <value>Like</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.NonEmptyString" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.NotEqualsString" xml:space="preserve">
+    <value>Not Equals</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.NotLikeString" xml:space="preserve">
+    <value>Not Like</value>
+  </data>
+  <data name="ZResource1ZUltraGridBandResource1.FilterOptions.StartsWithString" xml:space="preserve">
+    <value>Starts With</value>
+  </data>
+  <data name="ZResource1ZUltraGridColumnResource3.Header.Caption" xml:space="preserve">
+    <value>الأيام المرضية</value>
+  </data>
+  <data name="ZResource1ZUltraGridColumnResource3.HeaderText" xml:space="preserve">
+    <value>الأيام المرضية</value>
+  </data>
+  <data name="ZResource1ZUltraGridColumnResource4.Header.Caption" xml:space="preserve">
+    <value>المشروع</value>
+  </data>
+  <data name="ZResource1ZUltraGridColumnResource4.HeaderText" xml:space="preserve">
+    <value>المشروع</value>
+  </data>
+  <data name="ZResource1ZUltraGridColumnResource5.Header.Caption" xml:space="preserve">
+    <value>أيام العمل</value>
+  </data>
+  <data name="ZResource1ZUltraGridColumnResource5.HeaderText" xml:space="preserve">
+    <value>أيام العمل</value>
+  </data>
+  <data name="ZResource1ZUltraGridColumnResource6.Header.Caption" xml:space="preserve">
+    <value>ساعات العمل</value>
+  </data>
+  <data name="ZResource1ZUltraGridColumnResource6.HeaderText" xml:space="preserve">
+    <value>ساعات العمل</value>
+  </data>
+  <data name="ZResource1ZUltraGridColumnResource7.Header.Caption" xml:space="preserve">
+    <value>ساعات اضافية</value>
+  </data>
+  <data name="ZResource1ZUltraGridColumnResource7.HeaderText" xml:space="preserve">
+    <value>ساعات اضافية</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.Caption" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.AddNewBox.Prompt" xml:space="preserve">
+    <value>Add...</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.AllString" xml:space="preserve">
+    <value>(All)</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.ContainsString" xml:space="preserve">
+    <value>Contains</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.DoesNotContainString" xml:space="preserve">
+    <value>Does Not Contain</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.DoesNotEndWithString" xml:space="preserve">
+    <value>Does Not End With</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.DoesNotStartWithString" xml:space="preserve">
+    <value>Does Not Start With</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.EmptyString" xml:space="preserve">
+    <value>(Empty)</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.EndsWithString" xml:space="preserve">
+    <value>Ends With</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.EqualsString" xml:space="preserve">
+    <value>Equals</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.GreaterThanOrEqualsString" xml:space="preserve">
+    <value>Greater Than Or Equals</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.GreaterThanString" xml:space="preserve">
+    <value>Greater Than</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.LessThanOrEqualsString" xml:space="preserve">
+    <value>Less Than Or Equals</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.LessThanString" xml:space="preserve">
+    <value>Less Than</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.LikeString" xml:space="preserve">
+    <value>Like</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.NonEmptyString" xml:space="preserve">
+    <value>(NonEmpty)</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.NotEqualsString" xml:space="preserve">
+    <value>Not Equals</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.NotLikeString" xml:space="preserve">
+    <value>Not Like</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.StartsWithString" xml:space="preserve">
+    <value>Starts With</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.GroupByBox.Prompt" xml:space="preserve">
+    <value>Drag a column header here to group by that column</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.Pager.NextText" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.DisplayLayout.Pager.PrevText" xml:space="preserve">
+    <value>Prev</value>
+  </data>
+  <data name="ZResource1ZuwgDepartmentsTransactionsResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.Caption" xml:space="preserve">
+    <value />
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.AddNewBox.Prompt" xml:space="preserve">
+    <value>Add...</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.AllString" xml:space="preserve">
+    <value>(All)</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.ContainsString" xml:space="preserve">
+    <value>Contains</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.DoesNotContainString" xml:space="preserve">
+    <value>Does Not Contain</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.DoesNotEndWithString" xml:space="preserve">
+    <value>Does Not End With</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.DoesNotStartWithString" xml:space="preserve">
+    <value>Does Not Start With</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.EmptyString" xml:space="preserve">
+    <value>(Empty)</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.EndsWithString" xml:space="preserve">
+    <value>Ends With</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.EqualsString" xml:space="preserve">
+    <value>Equals</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.GreaterThanOrEqualsString" xml:space="preserve">
+    <value>Greater Than Or Equals</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.GreaterThanString" xml:space="preserve">
+    <value>Greater Than</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.LessThanOrEqualsString" xml:space="preserve">
+    <value>Less Than Or Equals</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.LessThanString" xml:space="preserve">
+    <value>Less Than</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.LikeString" xml:space="preserve">
+    <value>Like</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.NonEmptyString" xml:space="preserve">
+    <value>(NonEmpty)</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.NotEqualsString" xml:space="preserve">
+    <value>Not Equals</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.NotLikeString" xml:space="preserve">
+    <value>Not Like</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.FilterOptionsDefault.StartsWithString" xml:space="preserve">
+    <value>Starts With</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.GroupByBox.Prompt" xml:space="preserve">
+    <value>Drag a column header here to group by that column</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.Pager.NextText" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.DisplayLayout.Pager.PrevText" xml:space="preserve">
+    <value>Prev</value>
+  </data>
+  <data name="uwgDepartmentsTransactionsResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.AllString" xml:space="preserve">
+    <value>(All)</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.ContainsString" xml:space="preserve">
+    <value>Contains</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.DoesNotContainString" xml:space="preserve">
+    <value>Does Not Contain</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.DoesNotEndWithString" xml:space="preserve">
+    <value>Does Not End With</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.DoesNotStartWithString" xml:space="preserve">
+    <value>Does Not Start With</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.EmptyString" xml:space="preserve">
+    <value>(Empty)</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.EndsWithString" xml:space="preserve">
+    <value>Ends With</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.EqualsString" xml:space="preserve">
+    <value>Equals</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.GreaterThanOrEqualsString" xml:space="preserve">
+    <value>Greater Than Or Equals</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.GreaterThanString" xml:space="preserve">
+    <value>Greater Than</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.LessThanOrEqualsString" xml:space="preserve">
+    <value>Less Than Or Equals</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.LessThanString" xml:space="preserve">
+    <value>Less Than</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.LikeString" xml:space="preserve">
+    <value>Like</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.NonEmptyString" xml:space="preserve">
+    <value>(NonEmpty)</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.NotEqualsString" xml:space="preserve">
+    <value>Not Equals</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.NotLikeString" xml:space="preserve">
+    <value>Not Like</value>
+  </data>
+  <data name="ZZZ_UltraGridBandResource1.FilterOptions.StartsWithString" xml:space="preserve">
+    <value>Starts With</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource10.Header.Caption" xml:space="preserve">
+    <value>ساعات الاجازة الإضافية</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource10.HeaderText" xml:space="preserve">
+    <value>ساعات الاجازة الإضافية</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource11.Header.Caption" xml:space="preserve">
+    <value>القيمة</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource11.HeaderText" xml:space="preserve">
+    <value>القيمة</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource12.Header.Caption" xml:space="preserve">
+    <value>الاجمالي</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource12.HeaderText" xml:space="preserve">
+    <value>الاجمالي</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource3.Footer.Caption" xml:space="preserve">
+    <value>الاجمالي</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource3.Footer.Title" xml:space="preserve">
+    <value>الاجمالي</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource3.FooterText" xml:space="preserve">
+    <value>الاجمالي</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource3.Header.Caption" xml:space="preserve">
+    <value>المشروع</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource3.HeaderText" xml:space="preserve">
+    <value>المشروع</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource4.Header.Caption" xml:space="preserve">
+    <value>أيام العمل</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource4.HeaderText" xml:space="preserve">
+    <value>أيام العمل</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource5.Header.Caption" xml:space="preserve">
+    <value>القيمة</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource5.HeaderText" xml:space="preserve">
+    <value>القيمة</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource6.Header.Caption" xml:space="preserve">
+    <value>الاضافي</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource6.HeaderText" xml:space="preserve">
+    <value>الاضافي</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource7.Header.Caption" xml:space="preserve">
+    <value>القيمة</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource7.HeaderText" xml:space="preserve">
+    <value>القيمة</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource8.Header.Caption" xml:space="preserve">
+    <value>أيام الاجازة</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource8.HeaderText" xml:space="preserve">
+    <value>أيام الاجازة</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource9.Header.Caption" xml:space="preserve">
+    <value>القيمة</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource9.HeaderText" xml:space="preserve">
+    <value>القيمة</value>
+  </data>
+  <data name="btnRecalculateWHRes1.Text" xml:space="preserve">
+    <value>إعادة الحساب</value>
+  </data>
+  <data name="lblDescEnglishName2Resource1.style" xml:space="preserve">
+    <value>z-index: 114; left: 21px;position: absolute; top: 38px;direction:rtl;text-align:right</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource15.Header.Caption" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource15.HeaderText" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource.Header.Caption" xml:space="preserve">
+    <value>نوع الاجازة</value>
+  </data>
+  <data name="ZZZ_UltraGridColumnResource13.HeaderText" xml:space="preserve">
+    <value>نوع الإجازة</value>
+  </data>
+  <data name="chkpaidResource1.Style" xml:space="preserve">
+    <value>z-index: 1; left: 44px; top: 25px; position: absolute;direction:rtl;text-align:right</value>
+  </data>
+  <data name="btnVacationResource1.Style" xml:space="preserve">
+    <value>z-index: 114; left: 131px; direction: ltr; position: absolute; top: 31px;text-align: center; height: 5px; width: 94px</value>
+  </data>
+  <data name="btnVacationResource1.Text" xml:space="preserve">
+    <value>الاجازات</value>
+  </data>
+  <data name="TBarButtonVacationsResource1.Text" xml:space="preserve">
+    <value>الاجازات</value>
+  </data>
+  <data name="TabPrepareSalary.Text" xml:space="preserve">
+    <value>تجهيز الراتب</value>
+  </data>
+  <data name="TabProjects.Text" xml:space="preserve">
+    <value>المشاريع</value>
+  </data>
+  <data name="TabTansClass.Text" xml:space="preserve">
+    <value>فئات التعاقد</value>
+  </data>
+  <data name="TBPrepare.Text" xml:space="preserve">
+    <value>تجهيز</value>
+  </data>
+  <data name="TBRefund.Text" xml:space="preserve">
+    <value>إعادة</value>
+  </data>
+  <data name="TBRePrepare.Text" xml:space="preserve">
+    <value>إعادة تجهيز</value>
+  </data>
+</root>

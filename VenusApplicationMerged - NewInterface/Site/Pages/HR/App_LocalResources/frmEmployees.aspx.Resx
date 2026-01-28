@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="nameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="realnameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label21Resource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkButton_SaveNResource1.Text" xml:space="preserve">
+    <value>حفظ مع جديد</value>
+  </data>
+  <data name="LinkButton_SaveNResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_TSP1Resource1.Text" xml:space="preserve">
+    <value>|</value>
+  </data>
+  <data name="Label_TSP1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkButton_PropertiesResource1.Text" xml:space="preserve">
+    <value>خصائص</value>
+  </data>
+  <data name="LinkButton_PropertiesResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkButton_RemarksResource1.Text" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="LinkButton_RemarksResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_TSP2Resource1.Text" xml:space="preserve">
+    <value>|</value>
+  </data>
+  <data name="Label_TSP2Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkButton_HelpResource1.Text" xml:space="preserve">
+    <value>مساعدة</value>
+  </data>
+  <data name="LinkButton_HelpResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_HeaderResource1.Text" xml:space="preserve">
+    <value>&lt;b&gt; الموظفين : &lt;/b&gt;( تم تصميم هذا النموذج لانشاء ملفات للموظفين وتحديد العقود لهم )</value>
+  </data>
+  <data name="Label_HeaderResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegDateResource1.Text" xml:space="preserve">
+    <value>سجل فى</value>
+  </data>
+  <data name="lblRegDateResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegDateValueResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegDateValueResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegUserResource1.Text" xml:space="preserve">
+    <value>سجل بواسطة</value>
+  </data>
+  <data name="lblRegUserResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegUserValueResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegUserValueResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCancelDateResource1.Text" xml:space="preserve">
+    <value>تاريخ الالغاء</value>
+  </data>
+  <data name="lblCancelDateResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCancelDateValueResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCancelDateValueResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabResource1.Text" xml:space="preserve">
+    <value>عام</value>
+  </data>
+  <data name="lblCodeResource1.Text" xml:space="preserve">
+    <value>الكود</value>
+  </data>
+  <data name="lblCodeResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_Star1Resource1.Text" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="Label_Star1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnSearchCodeResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnSearchCodeResource1.ToolTip" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="Label_Title1Resource1.Text" xml:space="preserve">
+    <value>بيانات الشخصية</value>
+  </data>
+  <data name="lblNameResource1.Text" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="lblFatherNameResource1.Text" xml:space="preserve">
+    <value>اسم الأب</value>
+  </data>
+  <data name="lblGrandNameResource1.Text" xml:space="preserve">
+    <value>اسم الجد</value>
+  </data>
+  <data name="lblFamilyNameResource1.Text" xml:space="preserve">
+    <value>اسم العائلة</value>
+  </data>
+  <data name="lblEngNameResource1.Text" xml:space="preserve">
+    <value>الاسم الانجليزي</value>
+  </data>
+  <data name="lblEngNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblArbNameResource1.Text" xml:space="preserve">
+    <value>الاسم العربي</value>
+  </data>
+  <data name="lblArbNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBirthDateResource1.Text" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+  <data name="lblBirthCitysResource1.Text" xml:space="preserve">
+    <value>مكان الميلاد</value>
+  </data>
+  <data name="lblNationalityResource1.Text" xml:space="preserve">
+    <value>الجنسية</value>
+  </data>
+  <data name="lblReligionResource1.Text" xml:space="preserve">
+    <value>الديانة</value>
+  </data>
+  <data name="lblGenderResource1.Text" xml:space="preserve">
+    <value>الجنس</value>
+  </data>
+  <data name="ListItemResource1.Text" xml:space="preserve">
+    <value>ذكر</value>
+  </data>
+  <data name="ListItemResource2.Text" xml:space="preserve">
+    <value>أنثى</value>
+  </data>
+  <data name="lblMaritalStatusResource1.Text" xml:space="preserve">
+    <value>الحالة الاجتماعية</value>
+  </data>
+  <data name="lblBloodGroupsResource1.Text" xml:space="preserve">
+    <value>فصيلة الدم</value>
+  </data>
+  <data name="lblEmailResource1.Text" xml:space="preserve">
+    <value>البريد  الشخصي</value>
+  </data>
+  <data name="lblMobileResource1.Text" xml:space="preserve">
+    <value>رقم الجوال</value>
+  </data>
+  <data name="lblPhoneResource1.Text" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="Label17Resource1.Text" xml:space="preserve">
+    <value>بيانات التنظيمية</value>
+  </data>
+  <data name="lblManagerResource1.Text" xml:space="preserve">
+    <value>المدير المباشر</value>
+  </data>
+  <data name="btnManagerResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblMachineCodeResource1.Text" xml:space="preserve">
+    <value>كود الدوام</value>
+  </data>
+  <data name="lblJoinDateResource1.Text" xml:space="preserve">
+    <value>تاريخ المباشرة</value>
+  </data>
+  <data name="lblSponsorResource1.Text" xml:space="preserve">
+    <value>الكفيل</value>
+  </data>
+  <data name="lblDepartmentResource1.Text" xml:space="preserve">
+    <value>القسم</value>
+  </data>
+  <data name="lblBranchResource1.Text" xml:space="preserve">
+    <value>الفرع</value>
+  </data>
+  <data name="lblBankResource1.Text" xml:space="preserve">
+    <value>البنك</value>
+  </data>
+  <data name="lblBankAccountResource1.Text" xml:space="preserve">
+    <value>رقم البنك</value>
+  </data>
+  <data name="lblGosiNumberResource1.Text" xml:space="preserve">
+    <value>رقم التأمينات</value>
+  </data>
+  <data name="lblGOSIJoinDateResource1.Text" xml:space="preserve">
+    <value>تاريخ بدء التامينات</value>
+  </data>
+  <data name="lblGOSIExcludeDateResource1.Text" xml:space="preserve">
+    <value>تاريخ الانتهاء</value>
+  </data>
+  <data name="Label6Resource1.Text" xml:space="preserve">
+    <value>بيانات للعقد الحالي</value>
+  </data>
+  <data name="lblNoContractNotifyResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCode2Resource1.Text" xml:space="preserve">
+    <value>رقم العقد</value>
+  </data>
+  <data name="btnAddContractResource1.ToolTip" xml:space="preserve">
+    <value>اضافة عقد جديد</value>
+  </data>
+  <data name="lblStartDateResource1.Text" xml:space="preserve">
+    <value>تاريخ البدء</value>
+  </data>
+  <data name="lblContractTypeResource1.Text" xml:space="preserve">
+    <value>نوع العقد</value>
+  </data>
+  <data name="lblEndDateResource1.Text" xml:space="preserve">
+    <value>تاريخ الانتهاء</value>
+  </data>
+  <data name="lblProfessionsResource1.Text" xml:space="preserve">
+    <value>المهنة</value>
+  </data>
+  <data name="lblGradeStepResource1.Text" xml:space="preserve">
+    <value>الرتبة</value>
+  </data>
+  <data name="lblPositionResource1.Text" xml:space="preserve">
+    <value>الوظيفة</value>
+  </data>
+  <data name="lblCurrencyResource1.Text" xml:space="preserve">
+    <value>العملة</value>
+  </data>
+  <data name="lblEmployeeClassResource1.Text" xml:space="preserve">
+    <value>الفئة</value>
+  </data>
+  <data name="btnGetVacationDefaultResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblContractDurationResource1.Text" xml:space="preserve">
+    <value>الفترة</value>
+  </data>
+  <data name="btnEditClsResource1.Text" xml:space="preserve">
+    <value>عرض العقود والاجازات</value>
+  </data>
+  <data name="btnContractsTransactionsResource1.Text" xml:space="preserve">
+    <value>تحديد بنود التعاقد</value>
+  </data>
+  <data name="btnSaveResource1.ToolTip" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="btnNewResource1.ToolTip" xml:space="preserve">
+    <value>جديد</value>
+  </data>
+  <data name="btnDeleteResource1.ToolTip" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="lblUserResource1.Text" xml:space="preserve">
+    <value>الكود</value>
+  </data>
+  <data name="lblDescEmployeeCodeResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblDescEnglishNameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblNoBasicSalaryResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTransactionTypeResource1.Text" xml:space="preserve">
+    <value>نوع البند</value>
+  </data>
+  <data name="lbFormulaResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblFormulaResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label5Resource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbFormulaDescResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblFormulaDescResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblAmountResource1.Text" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="lblActiveResource1.Text" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="lblIntervalTypeResource1.Text" xml:space="preserve">
+    <value>نوع الفترة</value>
+  </data>
+  <data name="lblPaidAtVacationResource1.Text" xml:space="preserve">
+    <value>شامل الاجازة</value>
+  </data>
+  <data name="liNoResource.Text" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="liVacResource.Text" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="liVacEndResource.Text" xml:space="preserve">
+    <value>في الاجازة فقط</value>
+  </data>
+  <data name="lblOncePerPeriodResource1.Text" xml:space="preserve">
+    <value>مرة في الفترة</value>
+  </data>
+  <data name="lblActiveDateResource1.Text" xml:space="preserve">
+    <value>تاريخ التفعيل</value>
+  </data>
+  <data name="Label213Resource1.Text" xml:space="preserve">
+    <value>البنود التعاقد</value>
+  </data>
+  <data name="btnGetDefaultResource1.Text" xml:space="preserve">
+    <value>اضافة البنود الافتراضية</value>
+  </data>
+  <data name="Label214Resource1.Text" xml:space="preserve">
+    <value>العقود الحالية</value>
+  </data>
+  <data name="Label215Resource1.Text" xml:space="preserve">
+    <value>توزيع الاجازات</value>
+  </data>
+  <data name="ImageButton_BackResource1.AlternateText" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="ImageButton_BackResource1.ToolTip" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="ImageButton_DeleteResource1.Text" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="ImageButton_FirstResource1.AlternateText" xml:space="preserve">
+    <value>الأول</value>
+  </data>
+  <data name="ImageButton_FirstResource1.ToolTip" xml:space="preserve">
+    <value>الأول</value>
+  </data>
+  <data name="ImageButton_HelpResource1.AlternateText" xml:space="preserve">
+    <value>مساعدة</value>
+  </data>
+  <data name="ImageButton_HelpResource1.ToolTip" xml:space="preserve">
+    <value>مساعدة</value>
+  </data>
+  <data name="ImageButton_LastResource1.AlternateText" xml:space="preserve">
+    <value>الأخير</value>
+  </data>
+  <data name="ImageButton_LastResource1.ToolTip" xml:space="preserve">
+    <value>الأخير</value>
+  </data>
+  <data name="ImageButton_NewResource1.AlternateText" xml:space="preserve">
+    <value>جديد</value>
+  </data>
+  <data name="ImageButton_NewResource1.ToolTip" xml:space="preserve">
+    <value>جديد</value>
+  </data>
+  <data name="ImageButton_NextResource1.AlternateText" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+  <data name="ImageButton_NextResource1.ToolTip" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+  <data name="ImageButton_PrintResource1.AlternateText" xml:space="preserve">
+    <value>طباعة</value>
+  </data>
+  <data name="ImageButton_PrintResource1.ToolTip" xml:space="preserve">
+    <value>طباعة</value>
+  </data>
+  <data name="ImageButton_PropertiesResource1.AlternateText" xml:space="preserve">
+    <value>خصائص</value>
+  </data>
+  <data name="ImageButton_PropertiesResource1.ToolTip" xml:space="preserve">
+    <value>خصائص</value>
+  </data>
+  <data name="ImageButton_RemarksResource1.AlternateText" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="ImageButton_RemarksResource1.ToolTip" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="ImageButton_SaveNResource1.AlternateText" xml:space="preserve">
+    <value>حفظ مع جديد</value>
+  </data>
+  <data name="ImageButton_SaveNResource1.ToolTip" xml:space="preserve">
+    <value>حفظ مع جديد</value>
+  </data>
+  <data name="ImageButton_SaveResource1.AlternateText" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="ImageButton_SaveResource1.ToolTip" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="UltraGridColumnResource10.Header.Caption" xml:space="preserve">
+    <value>العملة</value>
+  </data>
+  <data name="UltraGridColumnResource11.Header.Caption" xml:space="preserve">
+    <value>RegUser</value>
+  </data>
+  <data name="UltraGridColumnResource12.Header.Caption" xml:space="preserve">
+    <value>RegDate</value>
+  </data>
+  <data name="UltraGridColumnResource13.Header.Caption" xml:space="preserve">
+    <value>CancelDate</value>
+  </data>
+  <data name="UltraGridColumnResource14.Header.Caption" xml:space="preserve">
+    <value>Remarks</value>
+  </data>
+  <data name="UltraGridColumnResource17.Header.Caption" xml:space="preserve">
+    <value>من يوم</value>
+  </data>
+  <data name="UltraGridColumnResource18.Header.Caption" xml:space="preserve">
+    <value>إلى يوم</value>
+  </data>
+  <data name="UltraGridColumnResource19.Header.Caption" xml:space="preserve">
+    <value>أيام العمل المطلوبة</value>
+  </data>
+  <data name="UltraGridColumnResource2.Header.Caption" xml:space="preserve">
+    <value>رقم العقد</value>
+  </data>
+  <data name="UltraGridColumnResource20.Header.Caption" xml:space="preserve">
+    <value>أيام الاجازة</value>
+  </data>
+  <data name="UltraGridColumnResource22.Header.Caption" xml:space="preserve">
+    <value>نوع الاجازة</value>
+  </data>
+  <data name="UltraGridColumnResource24.Header.Caption" xml:space="preserve">
+    <value>كود البند</value>
+  </data>
+  <data name="UltraGridColumnResource25.Header.Caption" xml:space="preserve">
+    <value>نوع البند</value>
+  </data>
+  <data name="UltraGridColumnResource26.Header.Caption" xml:space="preserve">
+    <value>المبلع</value>
+  </data>
+  <data name="UltraGridColumnResource27.Header.Caption" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="UltraGridColumnResource28.Header.Caption" xml:space="preserve">
+    <value>RegUser</value>
+  </data>
+  <data name="UltraGridColumnResource29.Header.Caption" xml:space="preserve">
+    <value>RegDate</value>
+  </data>
+  <data name="UltraGridColumnResource3.Header.Caption" xml:space="preserve">
+    <value>تاريخ البدء</value>
+  </data>
+  <data name="UltraGridColumnResource30.Header.Caption" xml:space="preserve">
+    <value>CancelDate</value>
+  </data>
+  <data name="UltraGridColumnResource31.Header.Caption" xml:space="preserve">
+    <value>Remarks</value>
+  </data>
+  <data name="UltraGridColumnResource38.Header.Caption" xml:space="preserve">
+    <value>تاريخ التفيل</value>
+  </data>
+  <data name="UltraGridColumnResource4.Header.Caption" xml:space="preserve">
+    <value>تاريخ الاتنهاء</value>
+  </data>
+  <data name="UltraGridColumnResource40.Header.Caption" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="UltraGridColumnResource5.Header.Caption" xml:space="preserve">
+    <value>المهنة</value>
+  </data>
+  <data name="UltraGridColumnResource6.Header.Caption" xml:space="preserve">
+    <value>نوع العقد</value>
+  </data>
+  <data name="UltraGridColumnResource7.Header.Caption" xml:space="preserve">
+    <value>الوظيفة</value>
+  </data>
+  <data name="UltraGridColumnResource8.Header.Caption" xml:space="preserve">
+    <value>فئة الموظفين</value>
+  </data>
+  <data name="UltraGridColumnResource9.Header.Caption" xml:space="preserve">
+    <value>الرتبة</value>
+  </data>
+  <data name="lblEducationClassResource1.Text" xml:space="preserve">
+    <value>فئة التعليم</value>
+  </data>
+  <data name="lblEducationTypeResource1.Text" xml:space="preserve">
+    <value>نوع التعليم</value>
+  </data>
+  <data name="lblEntryResource1.Text" xml:space="preserve">
+    <value>رقم الدخول</value>
+  </data>
+  <data name="lblIdentityResource1.Text" xml:space="preserve">
+    <value>رقم الهوية</value>
+  </data>
+  <data name="lblPassportResource1.Text" xml:space="preserve">
+    <value>رقم الجواز</value>
+  </data>
+  <data name="lblSectorsResource1.Text" xml:space="preserve">
+    <value>القطاع</value>
+  </data>
+  <data name="lblCost1Resource1.Text" xml:space="preserve">
+    <value>توزيع 1</value>
+  </data>
+  <data name="lblCost2Resource1.Text" xml:space="preserve">
+    <value>توزيع 2</value>
+  </data>
+  <data name="lblCost3Resource1.Text" xml:space="preserve">
+    <value>توزيع 3</value>
+  </data>
+  <data name="lblCost4Resource1.Text" xml:space="preserve">
+    <value>توزيع 4</value>
+  </data>
+  <data name="LinkButton_ContractsResource1.Text" xml:space="preserve">
+    <value>عرض العقود والاجازات</value>
+  </data>
+  <data name="LinkButton_DependantsResource1.Text" xml:space="preserve">
+    <value>اضافة مرافقين</value>
+  </data>
+  <data name="LinkButton_DocumentsResource1.Text" xml:space="preserve">
+    <value>اضافة مستندات</value>
+  </data>
+  <data name="LinkButton_TransactionResource1.Text" xml:space="preserve">
+    <value>اضافة البنود التعاقد</value>
+  </data>
+  <data name="btnSaveAllResource1.Text" xml:space="preserve">
+    <value>موافق</value>
+  </data>
+  <data name="Label15Resource1.Text" xml:space="preserve">
+    <value>بيانات أخرى</value>
+  </data>
+  <data name="LinkButton_HTResource1.Text" xml:space="preserve">
+    <value>عرض التأمين الصحي والتذاكر</value>
+  </data>
+  <data name="ImageButton_ContractsRes.ToolTip" xml:space="preserve">
+    <value>عرض العقود والاجازات</value>
+  </data>
+  <data name="ImageButton_DependantsRec.ToolTip" xml:space="preserve">
+    <value>إضافة المرافقين</value>
+  </data>
+  <data name="ImageButton_DocumentsRec.ToolTip" xml:space="preserve">
+    <value>إضافة المستندات</value>
+  </data>
+  <data name="ImageButton_HealthInsuranceRes.ToolTip" xml:space="preserve">
+    <value>عرض التأمين الصحي والتذاكر</value>
+  </data>
+  <data name="ImageButton_TransactionRes.ToolTip" xml:space="preserve">
+    <value>إضافة البنود التعاقد</value>
+  </data>
+  <data name="lblGergResource1.Text" xml:space="preserve">
+    <value>م</value>
+  </data>
+  <data name="lblHijriResource1.Text" xml:space="preserve">
+    <value>هـ</value>
+  </data>
+  <data name="lblGraduationDateResource1.Text" xml:space="preserve">
+    <value>تاريخ التخرج</value>
+  </data>
+  <data name="lblLastEducationsResource1.Text" xml:space="preserve">
+    <value>المؤهل الدراسي</value>
+  </data>
+  <data name="LinkButton_RoleResource1.Text" xml:space="preserve">
+    <value>الإجراءات</value>
+  </data>
+  <data name="lblLocationResource1.Text" xml:space="preserve">
+    <value>الموقع</value>
+  </data>
+  <data name="Label_LocationResource1.Text" xml:space="preserve">
+    <value>الموقع الحالى</value>
+  </data>
+  <data name="lblHasTaqatResource1.Text" xml:space="preserve">
+    <value>طاقات</value>
+  </data>
+  <data name="lblflexiblesalarydistResource1.Text" xml:space="preserve">
+    <value>توزيع مرن للراتب</value>
+  </data>
+  <data name="BankAccountTypeLabelResource.Text" xml:space="preserve">
+    <value>نوع الحساب البنكي</value>
+  </data>
+  <data name="RegularAccountLabel.Text" xml:space="preserve">
+    <value>حساب بنكي</value>
+  </data>
+  <data name="SalaryAccountLabel.Text" xml:space="preserve">
+    <value>حساب راتب</value>
+  </data>
+  <data name="LblPaymentTypeResource.Text" xml:space="preserve">
+    <value>نوع الدفع</value>
+  </data>
+  <data name="LblWorkEmailResource1.Text" xml:space="preserve">
+    <value>بريد العمل</value>
+  </data>
+  <data name="lblProjectResource1.Text" xml:space="preserve">
+    <value>الكود المحاسبى</value>
+  </data>
+  <data name="LinkButton_ImportResource1.Text" xml:space="preserve">
+    <value>التحقق من رقم الهوية</value>
+  </data>
+  <data name="SelectOptionBankLabel.Text" xml:space="preserve">
+    <value>حدد الخيار</value>
+  </data>
+  <data name="lblLocationResource101.text" xml:space="preserve">
+    <value>المشروع</value>
+  </data>
+  <data name="lblAddressResource1.Text" xml:space="preserve">
+    <value>العنوان بالعقد</value>
+  </data>
+  <data name="lblIdentityExpireDateResource1.Text" xml:space="preserve">
+    <value>تاريخ انتهاء الهوية/الاقامة</value>
+  </data>
+  <data name="lblIdentityIssueDateResource1.Text" xml:space="preserve">
+    <value>تاريخ اصدار الهوية/الاقامة</value>
+  </data>
+  <data name="lblPassportExpireDateResource1.Text" xml:space="preserve">
+    <value>تاريخ انتهاء الجواز</value>
+  </data>
+  <data name="lblPassportIssueDateResource1.Text" xml:space="preserve">
+    <value>تاريخ اصدار الجواز</value>
+  </data>
+  <data name="lblInsertRequestsForAnotherEmployeeResource1.Text" xml:space="preserve">
+    <value>انشاء طلبات لموظف اخر</value>
+  </data>
+  <data name="ImageButton_PropertiesResource1.Text" xml:space="preserve">
+    <value>السجل</value>
+  </data>
+  <data name="LinkButton_HistoryResource1.Text" xml:space="preserve">
+    <value>سجل الموظف</value>
+  </data>
+  <data name="lblIsSocialInsuranceIncludedResource1.Text" xml:space="preserve">
+    <value>شامل التأمين الاجتماعي</value>
+  </data>
+  <data name="LinkButton_MaxCodeResource1.Text" xml:space="preserve">
+    <value>استعلامات</value>
+  </data>
+  <data name="LblLastUpdateByResource1.Text" xml:space="preserve">
+    <value>اخر تعديل بواسطة</value>
+  </data>
+</root>

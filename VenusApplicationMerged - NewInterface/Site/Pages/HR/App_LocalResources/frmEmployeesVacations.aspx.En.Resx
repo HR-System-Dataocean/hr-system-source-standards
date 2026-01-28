@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LinkButton_OverDueMessageResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="realnameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="valueResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TargetControlResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton_SaveResource1.ToolTip" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="ImageButton_SaveResource1.AlternateText" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="ImageButton_NewResource1.ToolTip" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="ImageButton_NewResource1.AlternateText" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="ImageButton_DeleteResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_TSP1Resource1.Text" xml:space="preserve">
+    <value>|</value>
+  </data>
+  <data name="Label_TSP1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton_PrintResource1.ToolTip" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="ImageButton_PrintResource1.AlternateText" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="ImageButton_PropertiesResource1.ToolTip" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="ImageButton_PropertiesResource1.AlternateText" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="LinkButton_PropertiesResource1.Text" xml:space="preserve">
+    <value>Properities</value>
+  </data>
+  <data name="LinkButton_PropertiesResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton_RemarksResource1.ToolTip" xml:space="preserve">
+    <value>Remarks</value>
+  </data>
+  <data name="ImageButton_RemarksResource1.AlternateText" xml:space="preserve">
+    <value>Remarks</value>
+  </data>
+  <data name="LinkButton_RemarksResource1.Text" xml:space="preserve">
+    <value>Remarks</value>
+  </data>
+  <data name="LinkButton_RemarksResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_TSP2Resource1.Text" xml:space="preserve">
+    <value>|</value>
+  </data>
+  <data name="Label_TSP2Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton_HistoryResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkButton_HistoryResource1.Text" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="ImageButton_PaymentsResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkButton_PaymentsResource1.Text" xml:space="preserve">
+    <value>Payments</value>
+  </data>
+  <data name="ImageButton_LastResource1.ToolTip" xml:space="preserve">
+    <value>Last</value>
+  </data>
+  <data name="ImageButton_LastResource1.AlternateText" xml:space="preserve">
+    <value>Last</value>
+  </data>
+  <data name="ImageButton_NextResource1.ToolTip" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="ImageButton_NextResource1.AlternateText" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="ImageButton_BackResource1.ToolTip" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="ImageButton_BackResource1.AlternateText" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="ImageButton_FirstResource1.ToolTip" xml:space="preserve">
+    <value>First</value>
+  </data>
+  <data name="ImageButton_FirstResource1.AlternateText" xml:space="preserve">
+    <value>First</value>
+  </data>
+  <data name="ImageButton_SaveNResource1.ToolTip" xml:space="preserve">
+    <value>Save &amp; New</value>
+  </data>
+  <data name="ImageButton_SaveNResource1.AlternateText" xml:space="preserve">
+    <value>Save &amp; New</value>
+  </data>
+  <data name="LinkButton_SaveNResource1.Text" xml:space="preserve">
+    <value>Save &amp; New</value>
+  </data>
+  <data name="LinkButton_SaveNResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ImageButton_HelpResource1.ToolTip" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="ImageButton_HelpResource1.AlternateText" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="LinkButton_HelpResource1.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="LinkButton_HelpResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Image_LogoResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Image_LogoResource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_HeaderResource1.Text" xml:space="preserve">
+    <value>&lt;b&gt; Annual Vacations :&lt;/b&gt; (This form is designed to add annual vacations for employees)</value>
+  </data>
+  <data name="Label_HeaderResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegDateResource1.Text" xml:space="preserve">
+    <value>Register Date</value>
+  </data>
+  <data name="lblRegDateResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegDateValueResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegDateValueResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegUserResource1.Text" xml:space="preserve">
+    <value>Register By</value>
+  </data>
+  <data name="lblRegUserResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegUserValueResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRegUserValueResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCancelDateResource1.Text" xml:space="preserve">
+    <value>Cancel Date</value>
+  </data>
+  <data name="lblCancelDateResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCancelDateValueResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCancelDateValueResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UltraWebTab1Resource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabResource1.Text" xml:space="preserve">
+    <value>Main Info.</value>
+  </data>
+  <data name="TabResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblCodeResource1.Text" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="lblCodeResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_Star1Resource1.Text" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="Label_Star1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtEmployeeResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnEmployeeResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbVactionIDResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelDescEnglishNameResource1.Text" xml:space="preserve">
+    <value>Employee Name</value>
+  </data>
+  <data name="lblDescEnglishNameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelDescNationalityResource1.Text" xml:space="preserve">
+    <value>Nationality</value>
+  </data>
+  <data name="lblDescNationalityResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_Title1Resource2.Text" xml:space="preserve">
+    <value>Vacation Setting</value>
+  </data>
+  <data name="lblVacationTypeResource1.Text" xml:space="preserve">
+    <value>Vacation Type</value>
+  </data>
+  <data name="DdlVacationTypeResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelTotalValResource1.Text" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="lbTotalValResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelRemainValResource1.Text" xml:space="preserve">
+    <value>Remain</value>
+  </data>
+  <data name="lbRemainValResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblvactiondaysResource1.Text" xml:space="preserve">
+    <value>Vaction Days</value>
+  </data>
+  <data name="lbConsumeValResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblWebDateChooser1Resource1.Text" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="WebDateChooser1Resource2.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblWebDateChooser2Resource1.Text" xml:space="preserve">
+    <value>Return Date</value>
+  </data>
+  <data name="WebDateChooser2Resource2.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblWebDateChooser3Resource1.Text" xml:space="preserve">
+    <value>Expected Return </value>
+  </data>
+  <data name="WebDateChooser3Resource2.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="uwgEmployeeVacationsResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UltraGridColumnResource1.Header.Caption" xml:space="preserve">
+    <value>Vacation Type</value>
+  </data>
+  <data name="UltraGridColumnResource2.Header.Caption" xml:space="preserve">
+    <value>Expected Start Date</value>
+  </data>
+  <data name="UltraGridColumnResource3.Header.Caption" xml:space="preserve">
+    <value>Expected Return Date</value>
+  </data>
+  <data name="UltraGridColumnResource4.Header.Caption" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="UltraGridColumnResource5.Header.Caption" xml:space="preserve">
+    <value>Return Date</value>
+  </data>
+  <data name="UltraGridColumnResource6.Header.Caption" xml:space="preserve">
+    <value>Remarks</value>
+  </data>
+  <data name="UltraGridColumnResource7.Header.Caption" xml:space="preserve">
+    <value>Dep Approval</value>
+  </data>
+  <data name="UltraGridColumnResource8.Header.Caption" xml:space="preserve">
+    <value>Vacation Approval</value>
+  </data>
+  <data name="UltraGridColumnResource9.Header.Caption" xml:space="preserve">
+    <value>Paper Processed</value>
+  </data>
+  <data name="Label_Title2Resource2.Text" xml:space="preserve">
+    <value>History Vacations</value>
+  </data>
+  <data name="LinkButton_RoleResource1.Text" xml:space="preserve">
+    <value>Procedures</value>
+  </data>
+  <data name="lblisContractialResource1.Text" xml:space="preserve">
+    <value>Is Contractial</value>
+  </data>
+  <data name="UltraGridColumnResource11.Header.Caption" xml:space="preserve">
+    <value>Total balance</value>
+  </data>
+  <data name="UltraGridColumnResource12.Header.Caption" xml:space="preserve">
+    <value>Requird days</value>
+  </data>
+  <data name="UltraGridColumnResource13.Header.Caption" xml:space="preserve">
+    <value>Over days</value>
+  </data>
+  <data name="UltraGridColumnResource14.Header.Caption" xml:space="preserve">
+    <value>Remaining Balance</value>
+  </data>
+  <data name="UltraGridColumnResource15.Header.Caption" xml:space="preserve">
+    <value>Total vaction days</value>
+  </data>
+  <data name="UltraGridColumnResource16.Header.Caption" xml:space="preserve">
+    <value>Vaction benfits print</value>
+  </data>
+  <data name="UltraGridColumnResource31.Header.Caption" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="UltraGridColumnResource32.Header.Caption" xml:space="preserve">
+    <value>Describtion</value>
+  </data>
+  <data name="UltraGridColumnResource17.Header.Caption" xml:space="preserve">
+    <value>Attachments</value>
+  </data>
+  <data name="lblZeroBalAfterVacResource.text" xml:space="preserve">
+    <value>Zero Vacation Balance After Return </value>
+  </data>
+  <data name="lblEndDateResource1.Text" xml:space="preserve">
+    <value>Vacation End Date</value>
+  </data>
+  <data name="LblRequestIDResource1.Text" xml:space="preserve">
+    <value>Request ID</value>
+  </data>
+</root>

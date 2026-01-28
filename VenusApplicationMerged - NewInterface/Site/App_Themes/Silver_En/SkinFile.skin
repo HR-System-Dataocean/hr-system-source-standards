@@ -1,0 +1,102 @@
+﻿<%@ Register Assembly="Infragistics35.Web.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
+    Namespace="Infragistics.Web.UI.LayoutControls" TagPrefix="ig" %>
+<%@ Register Assembly="Infragistics35.WebUI.UltraWebToolbar.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
+    Namespace="Infragistics.WebUI.UltraWebToolbar" TagPrefix="igtbar" %>
+<%@ Register Assembly="Infragistics35.WebUI.UltraWebGrid.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
+    Namespace="Infragistics.WebUI.UltraWebGrid" TagPrefix="igtbl" %>
+<%@ Register Assembly="Infragistics35.WebUI.UltraWebTab.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
+    Namespace="Infragistics.WebUI.UltraWebTab" TagPrefix="igtab" %>
+<%@ Register TagPrefix="igtxt" Namespace="Infragistics.WebUI.WebDataInput" Assembly="Infragistics35.WebUI.WebDataInput.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" %>
+<%@ Register Assembly="Infragistics35.WebUI.WebDataInput.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
+    Namespace="Infragistics.WebUI.WebDataInput" TagPrefix="igtxt" %>
+
+<%--Label--%>
+<asp:Label SkinId="Label_PageHeader" runat="server" style="font-family: Tahoma; font-size: 9pt; font-weight: bold;color:Black" ></asp:Label>
+<asp:Label SkinId="Label_DefaultBold" runat="server" style="font-family: Tahoma; font-size: 8pt; font-weight: bold;color:Black" ></asp:Label>
+<asp:Label SkinId="Label_DefaultNormal" runat="server" style="font-family: Tahoma; font-size: 8pt; font-weight: Normal;color:Black" ></asp:Label>
+<asp:Label SkinId="Label_CopyRightsBold" runat="server" style="font-family: Tahoma; font-size: 7pt; font-weight: Bold;color:Gray" ></asp:Label>
+<asp:Label SkinId="Label_CopyRightsNormal" runat="server" style="font-family: Tahoma; font-size: 7pt; font-weight: Normal;color:Gray" ></asp:Label>
+<asp:Label SkinId="Label_WarningBold" runat="server" style="font-family: Tahoma; font-size: 8pt; font-weight: bold;color:Red" ></asp:Label>
+<asp:Label SkinId="Label_WhiteBold" runat="server" style="font-family: Tahoma; font-size: 9pt; font-weight: bold;color:silver" ></asp:Label>
+<asp:Label SkinId="Label_MarqueeNormal" runat="server" style="font-family: Tahoma; font-size: 8pt; font-weight: Normal;color:Black" ></asp:Label>
+<%--Hyperlink--%>
+<asp:LinkButton SkinId="LinkButton_DefaultBold" runat="server" style="font-family: Tahoma;text-decoration: underline; font-size: 8pt;font-weight: Bold; color:Chocolate"/>
+<asp:LinkButton SkinId="LinkButton_DefaultNormal" runat="server" style="font-family: Tahoma;text-decoration: underline; font-size: 8pt;font-weight: Normal; color:Chocolate"/>
+
+<%--DropDownList--%>
+<asp:DropDownList SkinId="DropDownList_LargBold" runat="server" BorderColor="#CCCCCC"  BorderStyle="Solid" BorderWidth="1px" width="300px" Height="20px" style ="font-family: Tahoma; font-size: 8pt; font-weight: bold;color:Black;border:solid 1px #CCCCCC"/>
+<asp:DropDownList SkinId="DropDownList_LargNormal" runat="server" BorderColor="#CCCCCC"  BorderStyle="Solid" BorderWidth="1px" width="100%" Height="20px" style ="font-family: Tahoma; font-size: 8pt; font-weight: Normal;color:Black;border:solid 1px #CCCCCC"/>
+<asp:DropDownList SkinId="DropDownList_DefaultBold" runat="server" BorderColor="#CCCCCC"  BorderStyle="Solid" BorderWidth="1px" width="250px" Height="20px" style ="font-family: Tahoma; font-size: 8pt; font-weight: bold;color:Black;border:solid 1px #CCCCCC"/>
+<asp:DropDownList SkinId="DropDownList_DefaultNormal" runat="server" BorderColor="#CCCCCC"  BorderStyle="Solid" BorderWidth="1px" width="250px" Height="20px" style ="font-family: Tahoma; font-size: 8pt; font-weight: Normal;color:Black;border:solid 1px #CCCCCC"/>
+<asp:DropDownList SkinId="DropDownList_SmalltBold" runat="server" BorderColor="#CCCCCC"  BorderStyle="Solid" BorderWidth="1px" width="120px" Height="20px" style ="font-family: Tahoma; font-size: 8pt; font-weight: bold;color:Black;border:solid 1px #CCCCCC"/>
+<asp:DropDownList SkinId="DropDownList_SmalltNormal" runat="server" BorderColor="#CCCCCC"  BorderStyle="Solid" BorderWidth="1px" width="120px" Height="20px" style ="font-family: Tahoma; font-size: 8pt; font-weight: Normal;color:Black;border:solid 1px #CCCCCC"/>
+<%--CheckBox--%>
+<asp:CheckBox SkinId="CheckBox_DefaultNormal" runat="server" style="font-family: Tahoma; font-size: 8pt; font-weight: Normal;color:Black" ></asp:CheckBox>
+<%--RadioButton--%>
+<asp:RadioButton SkinId="RadioButton_DefaultNormal" runat="server" style="font-family: Tahoma; font-size: 8pt; font-weight: Normal;color:Black" ></asp:RadioButton>
+<%--TextBox--%>
+<asp:TextBox SkinId="TextBox_SmallNormalrtl" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Right" BorderStyle="Solid" BorderWidth="1px" width="130px" Height="18px"/>
+<asp:TextBox SkinId="TextBox_SmalltNormalltr" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Left" BorderStyle="Solid" BorderWidth="1px" width="130px" Height="18px"/>
+<asp:TextBox SkinId="TextBox_SmalltNormalC" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Left" BorderStyle="Solid" BorderWidth="1px" width="130px" Height="16px"/>
+
+<asp:TextBox SkinId="TextBox_SmallBoldrtl" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: bold; color:black; vertical-align:middle; text-align:Right" BorderStyle="Solid" BorderWidth="1px" width="130px" Height="18px"/>
+<asp:TextBox SkinId="TextBox_SmallBoldltr" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: bold; color:black; vertical-align:middle; text-align:Left" BorderStyle="Solid" BorderWidth="1px" width="130px" Height="18px"/>
+<asp:TextBox SkinId="TextBox_SmallBoldC" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: bold; color:black; vertical-align:middle; text-align:Left" BorderStyle="Solid" BorderWidth="1px" width="130px" Height="16px"/>
+
+<asp:TextBox SkinId="TextBox_DefaultNormalrtl" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Right" BorderStyle="Solid" BorderWidth="1px" width="200px" Height="18px"/>
+<asp:TextBox SkinId="TextBox_DefaultNormalltr" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Left" BorderStyle="Solid" BorderWidth="1px" width="200px" Height="18px"/>
+<asp:TextBox SkinId="TextBox_DefaultNormalC" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:center" BorderStyle="Solid" BorderWidth="1px" width="200px" Height="18px"/>
+
+<asp:TextBox SkinId="TextBox_DefaultBoldrtl" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: bold; color:black; vertical-align:middle; text-align:Right" BorderStyle="Solid" BorderWidth="1px" width="200px" Height="18px"/>
+<asp:TextBox SkinId="TextBox_DefaultBoldltr" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: bold; color:black; vertical-align:middle; text-align:Left" BorderStyle="Solid" BorderWidth="1px" width="200px" Height="18px"/>
+<asp:TextBox SkinId="TextBox_DefaultBoldC" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: bold; color:black; vertical-align:middle; text-align:center" BorderStyle="Solid" BorderWidth="1px" width="200px" Height="18px"/>
+
+<asp:TextBox SkinId="TextBox_LargeNormalrtl" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Right" BorderStyle="Solid" BorderWidth="1px" width="100%" Height="16px"/>
+<asp:TextBox SkinId="TextBox_LargeNormalltr" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Left" BorderStyle="Solid" BorderWidth="1px" width="100%" Height="16px"/>
+<asp:TextBox SkinId="TextBox_LargeNormalC" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:center" BorderStyle="Solid" BorderWidth="1px" width="100%" Height="16px"/>
+
+<asp:TextBox SkinId="TextBox_LargeBoldrtl" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: bold; color:black; vertical-align:middle; text-align:Right" BorderStyle="Solid" BorderWidth="1px" width="100%" Height="16px"/>
+<asp:TextBox SkinId="TextBox_LargeBoldltr" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: bold; color:black; vertical-align:middle; text-align:Left" BorderStyle="Solid" BorderWidth="1px" width="100%" Height="16px"/>
+<asp:TextBox SkinId="TextBox_LargeBoldC" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: bold; color:black; vertical-align:middle; text-align:center" BorderStyle="Solid" BorderWidth="1px" width="100%" Height="16px"/>
+
+<asp:TextBox SkinId="TextBox_FreeNormalrtl" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Right" BorderStyle="Solid" BorderWidth="1px" width="130px" Height="100%"/>
+<asp:TextBox SkinId="TextBox_FreeNormalltr" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Left" BorderStyle="Solid" BorderWidth="1px" width="130px" Height="100%"/>
+<asp:TextBox SkinId="TextBox_FreeNormalC" runat="server" BorderColor="#CCCCCC" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Right" BorderStyle="Solid" BorderWidth="1px" width="130px" Height="100%"/>
+<%-- command buttons--%>
+<asp:ImageButton SkinId="New_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/Commands/New.png"/>
+<asp:ImageButton SkinId="Save_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/Commands/Save.png"/>
+<asp:ImageButton SkinId="Delete_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/Commands/Delete.png"/>
+<asp:ImageButton SkinId="Cancel_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/Commands/Cancel.png"/>
+<asp:ImageButton SkinId="Search_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/Commands/Search.png"/>
+<asp:ImageButton SkinId="Next_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/Commands/Back.png"/>
+<asp:ImageButton SkinId="Last_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/Commands/Firest.png"/>
+<asp:ImageButton SkinId="Back_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/Commands/Next.png"/>
+<asp:ImageButton SkinId="Firest_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/Commands/Last.png"/>
+
+<asp:ImageButton SkinId="HrNew_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/New.png"/>
+<asp:ImageButton SkinId="HrSave_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/Save.png"/>
+<asp:ImageButton SkinId="HrSaveN_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/SaveN.png"/>
+<asp:ImageButton SkinId="HrDelete_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/Delete.png"/>
+<asp:ImageButton SkinId="HrPrint_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/Print.png"/>
+<asp:ImageButton SkinId="HrProperties_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/Properties.png"/>
+<asp:ImageButton SkinId="HrRemarks_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/Remarks.png"/>
+<asp:ImageButton SkinId="HrBack_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/Next.png"/>
+<asp:ImageButton SkinId="HrFirest_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/Last.png"/>
+<asp:ImageButton SkinId="HrNext_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/Back.png"/>
+<asp:ImageButton SkinId="HrLast_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/First.png"/>
+<asp:ImageButton SkinId="HrHelp_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/Help.png"/>
+<asp:ImageButton SkinId="HrRole_Command" runat="server" ImageAlign="Middle" ImageUrl="../../Common/Images/ToolBox/Hr_ToolBox/Procedure.png"/>
+
+<%-- Infragistics Mask Edit --%>
+<igtxt:WebMaskEdit SkinId="WebMaskEdit_Default" runat="server" BorderColor="#CCCCCC" StyleSetName="Office2007Silver" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Left" BorderStyle="Solid" BorderWidth="1px" width="100%" Height="16px"/>
+<igtxt:WebMaskEdit SkinId="WebMaskEdit_Fix" runat="server" BorderColor="#CCCCCC" StyleSetName="Office2007Silver" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Left" BorderStyle="Solid" BorderWidth="1px" width="130px" Height="16px"/>
+
+<%-- Infragistics Tab--%>
+<ig:WebTab SkinId="Default" runat="server" Width="100%" Height="100%" StyleSetName="Office2007Silver" TabLocation="TopLeft"/>
+<igtbar:UltraWebToolbar SkinId="Default" runat="server" Width="100%" Height="24px" StyleSetName="Office2007Silver"/>
+<igtbl:UltraWebGrid   SkinId="Default" runat="server" Width="100%" StyleSetName="Office2007Silver"/>
+<igtab:UltraWebTab SkinId="Default" runat="server" Width="100%" Height="100%" StyleSetName="Office2007Silver"/>
+<igtxt:WebDateTimeEdit SkinId="WebDateTimeEdit_Default" runat="server" StyleSetName="Office2007Silver" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Left" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" width="100%" Height="16px" />
+<igtxt:WebDateTimeEdit SkinId="WebDateTimeEdit_Fix" runat="server" StyleSetName="Office2007Silver" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Left" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" width="130px" Height="16px" />
+<igtxt:WebNumericEdit SkinId="WebNumericEdit_Default" runat="server" StyleSetName="Office2007Silver" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Left" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" width="100%" Height="16px"></igtxt:WebNumericEdit>
+<igtxt:WebNumericEdit SkinId="WebNumericEdit_Fix" runat="server" StyleSetName="Office2007Silver" style="font-family: Tahoma; font-size: 8pt;font-weight: Normal; color:black; vertical-align:middle; text-align:Left" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" width="130px" Height="16px"></igtxt:WebNumericEdit>

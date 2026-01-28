@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lblCodeResource1.Text" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="lblCodeResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblProjectCodeResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblNameResource1.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblProjectNameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UltraWebTab1Resource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabResource1.Text" xml:space="preserve">
+    <value>Main Info.</value>
+  </data>
+  <data name="TabResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkButton2Resource1.Text" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Label1Resource1.Text" xml:space="preserve">
+    <value>Enter Iqama No</value>
+  </data>
+  <data name="txtCodeResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabResource2.Text" xml:space="preserve">
+    <value>Main Informations</value>
+  </data>
+  <data name="LinkButton5Resource1.Text" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="LinkButton6Resource1.Text" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="td1Resource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label2Resource1.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Label3Resource1.Text" xml:space="preserve">
+    <value>Father Name</value>
+  </data>
+  <data name="Label4Resource1.Text" xml:space="preserve">
+    <value>Grand Name</value>
+  </data>
+  <data name="Label5Resource1.Text" xml:space="preserve">
+    <value>Family Name</value>
+  </data>
+  <data name="lblEngNameResource1.Text" xml:space="preserve">
+    <value>English Description</value>
+  </data>
+  <data name="lblEngNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtEngNameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtEngFathernameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtEngGrandNameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtEngFamilyNameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblArbNameResource1.Text" xml:space="preserve">
+    <value>Arabic Description</value>
+  </data>
+  <data name="lblArbNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtArbNameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtArbFatherNameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtArbGrandNameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtArbFamilyNameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBirthDateResource1.Text" xml:space="preserve">
+    <value>Birth Date</value>
+  </data>
+  <data name="txtBirthDateResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblHijri2Resource1.Text" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="txtBirthDateHResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblHijriResource1.Text" xml:space="preserve">
+    <value>H</value>
+  </data>
+  <data name="td2Resource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBirthCitysResource1.Text" xml:space="preserve">
+    <value>Birth City</value>
+  </data>
+  <data name="DdlBirthCityResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblNationalityResource1.Text" xml:space="preserve">
+    <value>Nationality</value>
+  </data>
+  <data name="DdlNationalityResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblReligionResource1.Text" xml:space="preserve">
+    <value>Religion</value>
+  </data>
+  <data name="DdlReligionResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblGenderResource1.Text" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="DdlGenderResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ListItemResource1.Text" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="ListItemResource2.Text" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="lblMaritalStatusResource1.Text" xml:space="preserve">
+    <value>Marital Status</value>
+  </data>
+  <data name="DdlMaritalStatusResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBloodGroupsResource1.Text" xml:space="preserve">
+    <value>Blood Group</value>
+  </data>
+  <data name="DdlBloodGroupsResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblEmailResource1.Text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="txtEmailResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblMobileResource1.Text" xml:space="preserve">
+    <value>Mobile No</value>
+  </data>
+  <data name="txtMobileResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblPhoneResource1.Text" xml:space="preserve">
+    <value>Phone No</value>
+  </data>
+  <data name="txtPhoneResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblLastEducationsResource1.Text" xml:space="preserve">
+    <value>Last Educations</value>
+  </data>
+  <data name="ddlLastEducationsResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblGraduationDateResource1.Text" xml:space="preserve">
+    <value>Graduation Date</value>
+  </data>
+  <data name="txtGraduationDateResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_ExpectedJoinDateResource1.Text" xml:space="preserve">
+    <value>Expected Join Date</value>
+  </data>
+  <data name="WebMaskEdit_ExpectedJoinDateResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSponsorResource1.Text" xml:space="preserve">
+    <value>Sponsor</value>
+  </data>
+  <data name="ddlSponsorResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WebMaskEdit1Resource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabResource3.Text" xml:space="preserve">
+    <value>Financial Informations</value>
+  </data>
+  <data name="LinkButton7Resource1.Text" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="LinkButton8Resource1.Text" xml:space="preserve">
+    <value>التالى</value>
+  </data>
+  <data name="OrgAmountResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label_CreditLimitResource1.Text" xml:space="preserve">
+    <value>Salary</value>
+  </data>
+  <data name="txtSalaryResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabResource4.Text" xml:space="preserve">
+    <value>Document Archieve</value>
+  </data>
+  <data name="LinkButton9Resource1.Text" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="LinkButton10Resource1.Text" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="TabResource5.Text" xml:space="preserve">
+    <value>Prints</value>
+  </data>
+  <data name="LinkButton15Resource1.Text" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="LinkButton16Resource1.Text" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="LinkButton1Resource1.Text" xml:space="preserve">
+    <value>Print Contract</value>
+  </data>
+  <data name="LinkButton3Resource1.Text" xml:space="preserve">
+    <value>Print Attendance Table</value>
+  </data>
+  <data name="LinkButton4Resource1.Text" xml:space="preserve">
+    <value>Preview Contract Informations</value>
+  </data>
+  <data name="LinkButton11Resource1.Text" xml:space="preserve">
+    <value>Preview Documents</value>
+  </data>
+  <data name="LinkButton12Resource1.Text" xml:space="preserve">
+    <value>Confirm Employee</value>
+  </data>
+</root>

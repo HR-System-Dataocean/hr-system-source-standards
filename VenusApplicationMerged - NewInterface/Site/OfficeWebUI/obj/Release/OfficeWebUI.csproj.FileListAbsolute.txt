@@ -1,0 +1,34 @@
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.csprojResolveAssemblyReference.cache
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.Cache
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Release\OfficeWebUI.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.csprojResolveAssemblyReference.cache
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.Cache
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.dll
+C:\Drive D\DataOcean\HR\From Talaat LastSystem\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+D:\HandOver To Hassan\HR Standerd - DB\HR standerd\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.csproj.AssemblyReference.cache
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Release\OfficeWebUI.dll
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.csproj.AssemblyReference.cache
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.dll
+C:\HR\VenusApplicationMerged - NewInterface\OfficeWebUI\obj\Release\OfficeWebUI.pdb

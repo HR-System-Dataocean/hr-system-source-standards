@@ -1,0 +1,112 @@
+﻿div.Div_LoginContainer
+{
+    background-image:url('../../Common/Images/Silver_Ar/Login.png');
+    width:600px;
+    height:400px;
+    background-position:center;
+    background-repeat:no-repeat;
+    direction:rtl;
+}
+div.Div_MasterContainer
+{
+    width:100%;
+    height:100%;
+    min-height:450px;
+    direction:rtl;
+    background-color:#E5E5E6;
+}
+div.Div_FormsContainer
+{
+    width:100%;
+    height:100%;
+    direction:rtl;
+}
+div.Div_FormsMenuContainer
+{
+    width:100%;
+    height:350px;
+    direction:ltr;
+    margin-left:5px;
+    margin-top:5px;
+}
+div.Div_MainContainerMaster
+{
+    background-image:url('../../Common/Images/MainHeaderBG.png');
+    background-position:center;
+    background-repeat:repeat;
+    width:100%;
+    height:90px;
+    direction:rtl;
+}
+table.MainContainerMaster
+{
+    width:100%;
+    direction:rtl;
+}
+table.ThemeLangManager
+{
+    width:100%;
+    height: 11px;
+    direction:rtl;
+}
+td.RSide
+{
+    width: 3%;
+    direction: rtl;
+    vertical-align: top;
+    text-align: right;
+}
+td.LSide
+{
+    width: 3%;
+    direction: rtl;
+    vertical-align: top;
+    text-align: right;
+}
+td.Details
+{
+    width: 100%;
+    direction: rtl;
+    vertical-align: top;
+    text-align: right;
+}
+td.LabelArea
+{
+    width:23%;
+    height:16px;
+    direction:rtl;
+    vertical-align :middle; 
+    text-align:right;
+}
+td.SeparArea
+{
+    width:2%;
+    height:16px;
+    direction:rtl;
+    vertical-align :middle; 
+    text-align:center;
+}
+td.DataArea
+{
+    width:75%;
+    height:16px;
+    direction:rtl;
+    vertical-align :middle; 
+    text-align:right;
+}
+td.DataAreawithsearch
+{
+    width:30%;
+    height:16px;
+    direction:rtl;
+    vertical-align :middle; 
+    text-align:right;
+}
+td.search
+{
+    width:45%;
+    height:16px;
+    direction:rtl;
+    vertical-align :middle; 
+    text-align:right;
+}

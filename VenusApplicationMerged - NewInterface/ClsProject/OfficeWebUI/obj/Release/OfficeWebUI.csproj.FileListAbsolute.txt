@@ -1,0 +1,140 @@
+D:\DataOcean\TeamTime\TeamTimeNew\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\DataOcean\TeamTime\TeamTimeNew\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\DataOcean\TeamTime\TeamTimeNew\OfficeWebUI\obj\Release\OfficeWebUI.csprojResolveAssemblyReference.cache
+D:\DataOcean\TeamTime\TeamTimeNew\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\DataOcean\TeamTime\TeamTimeNew\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\DataOcean\TeamTime\TeamTimeNew\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.Cache
+D:\DataOcean\TeamTime\TeamTimeNew\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\DataOcean\TeamTime\TeamTimeNew\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+E:\TeamTime\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.dll
+E:\TeamTime\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+E:\TeamTime\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csprojResolveAssemblyReference.cache
+E:\TeamTime\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+E:\TeamTime\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+E:\TeamTime\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.Cache
+E:\TeamTime\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.dll
+E:\TeamTime\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+D:\Batkook\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\Batkook\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\Batkook\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csprojResolveAssemblyReference.cache
+D:\Batkook\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\Batkook\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\Batkook\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.Cache
+D:\Batkook\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\Batkook\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+D:\InternationalFoodServices\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\InternationalFoodServices\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\InternationalFoodServices\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csprojAssemblyReference.cache
+D:\InternationalFoodServices\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\InternationalFoodServices\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\InternationalFoodServices\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+D:\InternationalFoodServices\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+D:\InternationalFoodServices\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\InternationalFoodServices\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+H:\IFCGCompany\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.dll
+H:\IFCGCompany\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+H:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csprojAssemblyReference.cache
+H:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+H:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+H:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+H:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+H:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.dll
+H:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+D:\IFCGCompany\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\IFCGCompany\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+D:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+C:\Users\kafif\Desktop\Ultimate2\OfficeWebUI\bin\Release\OfficeWebUI.dll
+C:\Users\kafif\Desktop\Ultimate2\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+C:\Users\kafif\Desktop\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.csprojAssemblyReference.cache
+C:\Users\kafif\Desktop\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Users\kafif\Desktop\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+C:\Users\kafif\Desktop\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+C:\Users\kafif\Desktop\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.dll
+C:\Users\kafif\Desktop\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+D:\IFCGCompany\Ultimate2\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\IFCGCompany\Ultimate2\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\IFCGCompany\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.csprojAssemblyReference.cache
+D:\IFCGCompany\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\IFCGCompany\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\IFCGCompany\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+D:\IFCGCompany\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\IFCGCompany\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+D:\IFCGCompany\Ultimate2\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+D:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+D:\IFCGCompany\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.AssemblyReference.cache
+D:\DataoceanProjects\IFCGCompany\UltimateNew\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\DataoceanProjects\IFCGCompany\UltimateNew\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\DataoceanProjects\IFCGCompany\UltimateNew\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.AssemblyReference.cache
+D:\DataoceanProjects\IFCGCompany\UltimateNew\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\DataoceanProjects\IFCGCompany\UltimateNew\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\DataoceanProjects\IFCGCompany\UltimateNew\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+D:\DataoceanProjects\IFCGCompany\UltimateNew\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+D:\DataoceanProjects\IFCGCompany\UltimateNew\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\DataoceanProjects\IFCGCompany\UltimateNew\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+D:\Data Ocean\Clients\HR\IFCG\Company\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\Data Ocean\Clients\HR\IFCG\Company\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\Data Ocean\Clients\HR\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.AssemblyReference.cache
+D:\Data Ocean\Clients\HR\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\Data Ocean\Clients\HR\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\Data Ocean\Clients\HR\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+D:\Data Ocean\Clients\HR\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+D:\Data Ocean\Clients\HR\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\Data Ocean\Clients\HR\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+C:\Source Code\IFCG\Company\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.dll
+C:\Source Code\IFCG\Company\Ultimate\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+C:\Source Code\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.AssemblyReference.cache
+C:\Source Code\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+C:\Source Code\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+C:\Source Code\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+C:\Source Code\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+C:\Source Code\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.dll
+C:\Source Code\IFCG\Company\Ultimate\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\bin\Release\OfficeWebUI.dll
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.AssemblyReference.cache
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.dll
+E:\Data Ocean\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\bin\Release\OfficeWebUI.dll
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.AssemblyReference.cache
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.dll
+E:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.AssemblyReference.cache
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\Data Ocean\SourceCode\Standard\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.AssemblyReference.cache
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.AssemblyReference.cache
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.pdb

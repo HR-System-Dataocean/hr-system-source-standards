@@ -1,0 +1,726 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="UltraWebTab1Recourcekey.Style" xml:space="preserve">
+    <value>position: absolute; top :1px; left : 0px; height: 590px; width: 792px;</value>
+  </data>
+  <data name="tab1Res.Text" xml:space="preserve">
+    <value>الإستمارات الحكومية</value>
+  </data>
+  <data name="lblOtherRecourcekey.Text" xml:space="preserve">
+    <value>اخرى</value>
+  </data>
+  <data name="lblOtherRecourcekey.Style" xml:space="preserve">
+    <value>z-index:101; left:303px; position:absolute; top:128px; height:22px; width:45px; text-align:right;</value>
+  </data>
+  <data name="lblDayRecourcekey.Text" xml:space="preserve">
+    <value>يوما</value>
+  </data>
+  <data name="lblDayRecourcekey.Style" xml:space="preserve">
+    <value>z-index:101; left:428px; position:absolute; top:128px; height:20px; width:39px; text-align:right;</value>
+  </data>
+  <data name="lblMonthRecourcekey.Text" xml:space="preserve">
+    <value>شهر</value>
+  </data>
+  <data name="lblMonthRecourcekey.Style" xml:space="preserve">
+    <value>z-index:101; left:633px; position:absolute; top:128px; height:20px; width:39px; text-align:right;</value>
+  </data>
+  <data name="lblDayPeriodRecourcekey.Text" xml:space="preserve">
+    <value>المدة</value>
+  </data>
+  <data name="lblDayPeriodRecourcekey.Style" xml:space="preserve">
+    <value>z-index:101; left:529px; position:absolute; top:128px; height:20px; width:39px; text-align:right;</value>
+  </data>
+  <data name="lblMonthPeriodRecourcekey.Text" xml:space="preserve">
+    <value>المدة</value>
+  </data>
+  <data name="lblMonthPeriodRecourcekey.Style" xml:space="preserve">
+    <value>z-index:101; left:735px; position:absolute; top:128px; height:20px; width:42px; text-align:right;</value>
+  </data>
+  <data name="txtOtherRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtOtherRecourcekey.Style" xml:space="preserve">
+    <value>z-index:106; left:147px; position:absolute; top:128px; height:17px; width:150px; text-align:right;</value>
+  </data>
+  <data name="chkDamagedRecourcekey.Text" xml:space="preserve">
+    <value>تالف</value>
+  </data>
+  <data name="chkDamagedRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:592px; top:100px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkLostRecourcekey.Text" xml:space="preserve">
+    <value>مفقود</value>
+  </data>
+  <data name="chkLostRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:592px; top:75px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkReNewRecourcekey.Text" xml:space="preserve">
+    <value>تجديد</value>
+  </data>
+  <data name="chkReNewRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:689px; top:97px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkTravelMoreRecourcekey.Text" xml:space="preserve">
+    <value>عدة سفرات</value>
+  </data>
+  <data name="chkTravelMoreRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:379px; top:77px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkFinalExitRecourcekey.Text" xml:space="preserve">
+    <value>خروج نهائى</value>
+  </data>
+  <data name="chkFinalExitRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:480px; top:102px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkSecondTimeRecourcekey.Text" xml:space="preserve">
+    <value>الرة الثانية</value>
+  </data>
+  <data name="chkSecondTimeRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:165px; top:74px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkThirdTimeRecourcekey.Text" xml:space="preserve">
+    <value>المرة الثالثة</value>
+  </data>
+  <data name="chkThirdTimeRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:263px; top:104px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkFirstTimeRecourcekey.Text" xml:space="preserve">
+    <value>المرة الاولى</value>
+  </data>
+  <data name="chkFirstTimeRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:263px; top:74px; position:absolute; right:269px; height:22px;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkTravelOnceRecourcekey.Text" xml:space="preserve">
+    <value>سفرة واحدة</value>
+  </data>
+  <data name="chkTravelOnceRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:454px; top:76px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkNewRecourcekey.Text" xml:space="preserve">
+    <value>جديد</value>
+  </data>
+  <data name="chkNewRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:663px; top:72px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="rbtnAddDependantRecourcekey.Text" xml:space="preserve">
+    <value>إضافة تابع</value>
+  </data>
+  <data name="rbtnAddDependantRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:6px; top:43px; position:absolute; height:20px;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="rbtnTransferBailRecourcekey.Text" xml:space="preserve">
+    <value>نقل كفالة</value>
+  </data>
+  <data name="rbtnTransferBailRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:242px; top:43px; position:absolute; height:20px;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="rbtnTravelVisaRecourcekey.Text" xml:space="preserve">
+    <value>تاشيرة سفر</value>
+  </data>
+  <data name="rbtnTravelVisaRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:453px; top:43px; position:absolute; height:20px;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="rbtnResidentIssueRecourcekey.Text" xml:space="preserve">
+    <value>إصدار إقامة</value>
+  </data>
+  <data name="rbtnResidentIssueRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:665px; top:43px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="UltraWebTab2Recourcekey.Style" xml:space="preserve">
+    <value>z-index: 1; left: 0px; top: 170px; position: absolute; height: 414px; width: 760px</value>
+  </data>
+  <data name="PersonalInfoTab.Text" xml:space="preserve">
+    <value>المعلومات الشخصية</value>
+  </data>
+  <data name="Image1Recourcekey.Style" xml:space="preserve">
+    <value>left:681px; position:absolute; top:33px; height:91px; width:93px; text-align:right;</value>
+  </data>
+  <data name="lblIssueDateRecourcekey.Text" xml:space="preserve">
+    <value>تاريخ الاصدار</value>
+  </data>
+  <data name="lblIssueDateRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:688px; position:absolute; top:172px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblExpireDateRecourcekey.Text" xml:space="preserve">
+    <value>تاريخ الانتهاء</value>
+  </data>
+  <data name="lblExpireDateRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:688px; position:absolute; top:201px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblIssueCountryRecourcekey.Text" xml:space="preserve">
+    <value>مكان الاصدار</value>
+  </data>
+  <data name="lblIssueCountryRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:688px; position:absolute; top:229px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblCode1003Recourcekey.Text" xml:space="preserve">
+    <value>رقم الكفيل</value>
+  </data>
+  <data name="lblCode1003Recourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:688px; position:absolute; top:331px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblResidentExpireDateRecourcekey.Text" xml:space="preserve">
+    <value>تاريخ الانتهاء</value>
+  </data>
+  <data name="lblResidentExpireDateRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:688px; position:absolute; top:301px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblResidentNoRecourcekey.Text" xml:space="preserve">
+    <value>رقم الاقامة</value>
+  </data>
+  <data name="lblResidentNoRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:688px; position:absolute; top:272px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblEntDateRecourcekey.Text" xml:space="preserve">
+    <value>تاريخ الدخول</value>
+  </data>
+  <data name="lblEntDateRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:384px; position:absolute; top:331px; height:21px; width:86px; text-align:right;</value>
+  </data>
+  <data name="lblEntOutletRecourcekey.Text" xml:space="preserve">
+    <value>منفذ الدخول</value>
+  </data>
+  <data name="lblEntOutletRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:384px; position:absolute; top:362px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblBorderEntNoRecourcekey.Text" xml:space="preserve">
+    <value>رقم دخول الحدود</value>
+  </data>
+  <data name="lblBorderEntNoRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:384px; position:absolute; top:301px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblResidentSponsorTelRecourcekey.Text" xml:space="preserve">
+    <value>ت</value>
+  </data>
+  <data name="lblResidentSponsorTelRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:384px; position:absolute; top:235px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblResidentSponsorAddressRecourcekey.Text" xml:space="preserve">
+    <value>عنوان الكفيل</value>
+  </data>
+  <data name="lblResidentSponsorAddressRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:384px; position:absolute; top:207px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblResidentSponsorNameRecourcekey.Text" xml:space="preserve">
+    <value>اسم الكفيل</value>
+  </data>
+  <data name="lblResidentSponsorNameRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:384px; position:absolute; top:179px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblNewResidentIssueRecourcekey.Text" xml:space="preserve">
+    <value>هذه الخانة لاصدار إقامة جديدة</value>
+  </data>
+  <data name="lblNewResidentIssueRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:43px; position:absolute; top:268px; height:22px; width:430px; text-align:right;</value>
+  </data>
+  <data name="lblPassportNoRecourcekey.Text" xml:space="preserve">
+    <value>رقم الجواز</value>
+  </data>
+  <data name="lblPassportNoRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:688px; position:absolute; top:143px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblBirthDateRecourcekey.Text" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+  <data name="lblBirthDateRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:229px; position:absolute; top:87px; height:19px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblReligionRecourcekey.Text" xml:space="preserve">
+    <value>الديانة</value>
+  </data>
+  <data name="lblReligionRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:229px; position:absolute; top:60px; height:23px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblProfessionRecourcekey.Text" xml:space="preserve">
+    <value>الوظيفة</value>
+  </data>
+  <data name="lblProfessionRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:229px; position:absolute; top:33px; height:21px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblNameRecourcekey.Text" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="lblNameRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:587px; position:absolute; top:60px; height:18px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblEmpCodeRecourcekey.Text" xml:space="preserve">
+    <value>كود الموظف</value>
+  </data>
+  <data name="lblEmpCodeRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:586px; position:absolute; top:33px; height:18px; width:87px; text-align:right;</value>
+  </data>
+  <data name="lblNationalityRecourcekey.Text" xml:space="preserve">
+    <value>الجنسية</value>
+  </data>
+  <data name="lblNationalityRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:586px; position:absolute; top:87px; height:19px; width:87px; text-align:right;</value>
+  </data>
+  <data name="txtBirthDateRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtBirthDateRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:61px; position:absolute; top:87px; height:20px; width:161px; text-align:right;</value>
+  </data>
+  <data name="txtReligionRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtReligionRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:61px; position:absolute; top:60px; height:20px; width:161px; text-align:right;</value>
+  </data>
+  <data name="txtResidentNoRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtResidentNoRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:519px; position:absolute; top:272px; height:18px; width:161px; text-align:right;</value>
+  </data>
+  <data name="txtProfessionRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtProfessionRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:61px; position:absolute; top:33px; height:20px; width:161px; text-align:right;</value>
+  </data>
+  <data name="txtEntOutletRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtEntOutletRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:216px; position:absolute; top:362px; height:18px; width:161px; text-align:right;</value>
+  </data>
+  <data name="txtBorderEntNoRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtBorderEntNoRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:216px; position:absolute; top:301px; height:18px; width:161px; text-align:right;</value>
+  </data>
+  <data name="txtResidentSponsorTelRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtResidentSponsorTelRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:216px; position:absolute; top:236px; height:18px; width:161px; text-align:right;</value>
+  </data>
+  <data name="txtResidentSponsorAddressRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtResidentSponsorAddressRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:128px; position:absolute; top:209px; height:18px; width:249px; text-align:right;</value>
+  </data>
+  <data name="txtPassportNoRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtPassportNoRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:519px; position:absolute; top:143px; height:18px; width:161px; text-align:right;</value>
+  </data>
+  <data name="txtResidentSponsorNoRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtResidentSponsorNoRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:519px; position:absolute; top:331px; height:18px; width:161px; text-align:right;</value>
+  </data>
+  <data name="txtResidentSponsorNameRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtResidentSponsorNameRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:128px; position:absolute; top:180px; height:18px; width:249px; bottom:214px; text-align:right;</value>
+  </data>
+  <data name="txtNationalityRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtNationalityRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:418px; position:absolute; top:87px; height:20px; width:161px; text-align:right;</value>
+  </data>
+  <data name="txtNameRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtNameRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:340px; position:absolute; top:60px; height:20px; width:239px; text-align:right;</value>
+  </data>
+  <data name="txtEmpCodeRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtEmpCodeRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:454px; position:absolute; top:33px; width:125px; right:422px; text-align:right;</value>
+  </data>
+  <data name="btnSearchEmpCodeRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnSearchEmpCodeRecourcekey.Style" xml:space="preserve">
+    <value>z-index:121; left:421px; position:absolute; top:33px; height:18px; text-align:right;</value>
+  </data>
+  <data name="wdcPassportIssueDateRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="wdcPassportIssueDateRecourcekey.Style" xml:space="preserve">
+    <value>left:525px; position:absolute; top:172px; text-align:right;</value>
+  </data>
+  <data name="wdcPassportExpireDateRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="wdcPassportExpireDateRecourcekey.Style" xml:space="preserve">
+    <value>left:525px; position:absolute; top:201px; text-align:right;</value>
+  </data>
+  <data name="wdcEntDateRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="wdcEntDateRecourcekey.Style" xml:space="preserve">
+    <value>left:222px; position:absolute; top:331px; text-align:right;</value>
+  </data>
+  <data name="wdcResidentExpireDateRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="wdcResidentExpireDateRecourcekey.Style" xml:space="preserve">
+    <value>left:525px; position:absolute; top:301px; text-align:right;</value>
+  </data>
+  <data name="chkResidentGovernmentRecourcekey.Text" xml:space="preserve">
+    <value>جهة حكومية</value>
+  </data>
+  <data name="chkResidentGovernmentRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:374px; top:151px; position:absolute; width:101px;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkResidentPersonsRecourcekey.Text" xml:space="preserve">
+    <value>أفراد</value>
+  </data>
+  <data name="chkResidentPersonsRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:46px; top:151px; position:absolute; height:20px;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkResidentCompaniesRecourcekey.Text" xml:space="preserve">
+    <value>شركات</value>
+  </data>
+  <data name="chkResidentCompaniesRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:152px; top:151px; position:absolute; height:20px;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkResidentInstitutionsRecourcekey.Text" xml:space="preserve">
+    <value>مؤسسات</value>
+  </data>
+  <data name="chkResidentInstitutionsRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:268px; top:151px; position:absolute; height:20px;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="sep4Recourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:476px; top:265px; position:absolute; height:2px; width:297px; text-align:right;</value>
+  </data>
+  <data name="ddlIssueCountryRecourcekey.Style" xml:space="preserve">
+    <value>left:522px; position:absolute; top:229px; z-index:116; text-align:right;direction:rtl</value>
+  </data>
+  <data name="TransferBailTab.Text" xml:space="preserve">
+    <value>نقل كفالة</value>
+  </data>
+  <data name="chkTransferBailPersonsRecourcekey.Text" xml:space="preserve">
+    <value>أفراد</value>
+  </data>
+  <data name="chkTransferBailPersonsRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:329px; top:49px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkTransferBailCompaniesRecourcekey.Text" xml:space="preserve">
+    <value>شركات</value>
+  </data>
+  <data name="chkTransferBailCompaniesRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:443px; top:49px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkTransferBailInstitutionsRecourcekey.Text" xml:space="preserve">
+    <value>مؤسسات</value>
+  </data>
+  <data name="chkTransferBailInstitutionsRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:561px; top:48px; position:absolute;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="chkTransferBailGovernmentRecourcekey.Text" xml:space="preserve">
+    <value>جهة حكومية</value>
+  </data>
+  <data name="chkTransferBailGovernmentRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:665px; top:49px; position:absolute; height:18px; width:99px;  direction:rtl; text-align:right;</value>
+  </data>
+  <data name="lblCode1009Recourcekey.Text" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="lblCode1009Recourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:414px; position:absolute; top:110px; height:18px; width:18px; text-align:right;</value>
+  </data>
+  <data name="lblCode1010Recourcekey.Text" xml:space="preserve">
+    <value>الكفيل المتنازل</value>
+  </data>
+  <data name="lblCode1010Recourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:677px; position:absolute; top:135px; height:21px; width:109px; text-align:right;</value>
+  </data>
+  <data name="lblTransferBailNewSponsorNoRecourcekey.Text" xml:space="preserve">
+    <value>رقم الكفيل</value>
+  </data>
+  <data name="lblTransferBailNewSponsorNoRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:677px; position:absolute; top:107px; height:21px; width:109px; text-align:right;</value>
+  </data>
+  <data name="lblTransferorSponsorNoRecourcekey.Text" xml:space="preserve">
+    <value>رقم الكفيل</value>
+  </data>
+  <data name="lblTransferorSponsorNoRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:343px; position:absolute; top:135px; height:21px; width:109px; text-align:right;</value>
+  </data>
+  <data name="lblCode1007Recourcekey.Text" xml:space="preserve">
+    <value>عنوان الكفيل</value>
+  </data>
+  <data name="lblCode1007Recourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:343px; position:absolute; top:81px; height:21px; width:109px; text-align:right;</value>
+  </data>
+  <data name="lblTransferBailNewSponsorNameRecourcekey.Text" xml:space="preserve">
+    <value>اسم الكفيل الجديد</value>
+  </data>
+  <data name="lblTransferBailNewSponsorNameRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:677px; position:absolute; top:80px; height:21px; width:109px; text-align:right;</value>
+  </data>
+  <data name="txtTransferorSponsorRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtTransferorSponsorRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:468px; position:absolute; top:135px; text-align:right;</value>
+  </data>
+  <data name="txtTransferBailNewSponsorNoRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtTransferBailNewSponsorNoRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:468px; position:absolute; top:107px; text-align:right;</value>
+  </data>
+  <data name="txTransferorSponsorNoRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txTransferorSponsorNoRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:139px; position:absolute; top:135px; text-align:right;</value>
+  </data>
+  <data name="txtTransferBailNewSponsorNo2Recourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtTransferBailNewSponsorNo2Recourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:139px; position:absolute; top:106px; text-align:right;</value>
+  </data>
+  <data name="txtTransferBailSponsorAddressRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtTransferBailSponsorAddressRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:139px; position:absolute; top:81px; text-align:right;</value>
+  </data>
+  <data name="txtTransferBailNewSponsorNameRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtTransferBailNewSponsorNameRecourcekey.Style" xml:space="preserve">
+    <value>z-index:105; left:468px; position:absolute; top:80px; height:20px; width:197px; text-align:right;</value>
+  </data>
+  <data name="AddDependantTab.Text" xml:space="preserve">
+    <value>إضافة تابع</value>
+  </data>
+  <data name="wdcCBirthDateRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="wdcCBirthDateRecourcekey.Style" xml:space="preserve">
+    <value />
+  </data>
+  <data name="wdcCExpiryDateRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="wdcCExpiryDateRecourcekey.Style" xml:space="preserve">
+    <value />
+  </data>
+  <data name="uwgDependentsRecourcekey.Style" xml:space="preserve">
+    <value>left: 9px; position: absolute;top: 37px; z-index: 118</value>
+  </data>
+  <data name="NoRecourcekey.Header.Caption" xml:space="preserve">
+    <value>م</value>
+  </data>
+  <data name="cNameRecourcekey.Header.Caption" xml:space="preserve">
+    <value>الاسم كما فى الجواز</value>
+  </data>
+  <data name="CBirthDateRecourcekey.Header.Caption" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+  <data name="RelationIDRecourcekey.Header.Caption" xml:space="preserve">
+    <value>القرابة</value>
+  </data>
+  <data name="PassportNoRecourcekey.Header.Caption" xml:space="preserve">
+    <value>رقم الجواز</value>
+  </data>
+  <data name="CExpiryDateRecourcekey.Header.Caption" xml:space="preserve">
+    <value>تاريخ الانتهاء</value>
+  </data>
+  <data name="EntOutletRecourcekey.Header.Caption" xml:space="preserve">
+    <value>منفذ الدخول</value>
+  </data>
+  <data name="BorderEntNoRecourcekey.Header.Caption" xml:space="preserve">
+    <value>رقم دخول الحدود</value>
+  </data>
+  <data name="BirthDateRecourcekey.Header.Caption" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BirthDate_DRecourcekey.Header.Caption" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ExpiryDateRecourcekey.Header.Caption" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ExpiryDate_DRecourcekey.Header.Caption" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IDRecourcekey.Header.Caption" xml:space="preserve">
+    <value />
+  </data>
+  <data name="sep1Recourcekey.Style" xml:space="preserve">
+    <value>width:3px; height:126px; z-index:1; left:122px; top:50px; position:absolute; text-align:right;</value>
+  </data>
+  <data name="sep2Recourcekey.Style" xml:space="preserve">
+    <value>width:3px; height:126px; z-index:1; left:361px; top:50px; position:absolute; text-align:right;</value>
+  </data>
+  <data name="sep3Recourcekey.Style" xml:space="preserve">
+    <value>width:3px; height:126px; z-index:1; left:588px; top:50px; position:absolute; text-align:right;</value>
+  </data>
+  <data name="wneDaysRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:477px; top:128px; position:absolute; height:15px; width:45px; text-align:right;</value>
+  </data>
+  <data name="wneMonthPeriodRecourcekey.Style" xml:space="preserve">
+    <value>z-index:1; left:684px; top:128px; position:absolute; height:15px; width:45px; text-align:right;</value>
+  </data>
+  <data name="TlbMainToolbarRecourcekey.Style" xml:space="preserve">
+    <value>z-index:103; left:0px; position:absolute; top:0px; text-align:right;</value>
+  </data>
+  <data name="SaveRecourcekey.Text" xml:space="preserve">
+    <value>حفظ وطباعة</value>
+  </data>
+  <data name="DeleteRecourcekey.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="PropertyRecourcekey.Text" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="PrintRecourcekey.Text" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="RemarksRecourcekey.Text" xml:space="preserve">
+    <value>Remarks</value>
+  </data>
+  <data name="nameRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nameRecourcekey.Style" xml:space="preserve">
+    <value>z-index:101; left:-146px; position:absolute; top:112px; text-align:right;</value>
+  </data>
+  <data name="realnameRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="realnameRecourcekey.Style" xml:space="preserve">
+    <value>z-index:102; left:-317px; position:absolute; top:139px; text-align:right;</value>
+  </data>
+  <data name="TargetControlRecourcekey.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TargetControlRecourcekey.Style" xml:space="preserve">
+    <value>z-index:104; left:-486px; position:absolute; top:241px; text-align:right;</value>
+  </data>
+</root>

@@ -1,0 +1,632 @@
+<?xml version="1.0"?>
+<Reports>
+  <!--Report *** CF_113 ***-->
+  <Report version="2.5.20071.235">
+    <Name>CF_113</Name>
+    <ReportInfo />
+    <DataSource>
+      <RecordSource>PARAMETERS P_UserCode String '',P_UserName String '',P_CompanyName String '',P_CompanyHeader_1 String '',P_CompanyHeader_2 String '',P_CompanyHeader_3 String '',CriValCode String '',CriValFromCode String '',CriValToCode String '';hrs_repBloodGroups('','','')</RecordSource>
+    </DataSource>
+    <Layout>
+      <Width>11670</Width>
+      <MarginLeft>200</MarginLeft>
+      <MarginTop>200</MarginTop>
+      <MarginRight>200</MarginRight>
+      <MarginBottom>200</MarginBottom>
+      <Orientation>1</Orientation>
+      <PaperSize>9</PaperSize>
+    </Layout>
+    <Font>
+      <Name>Microsoft Sans Serif</Name>
+      <Size>12</Size>
+    </Font>
+    <Groups />
+    <Sections>
+      <Section>
+        <Name>Detail</Name>
+        <Type>0</Type>
+        <Height>13590</Height>
+      </Section>
+      <Section>
+        <Name>ReportHeader</Name>
+        <Type>1</Type>
+      </Section>
+      <Section>
+        <Name>ReportFooter</Name>
+        <Type>2</Type>
+      </Section>
+      <Section>
+        <Name>PageHeader</Name>
+        <Type>3</Type>
+        <Height>15</Height>
+      </Section>
+      <Section>
+        <Name>PageFooter</Name>
+        <Type>4</Type>
+      </Section>
+    </Sections>
+    <Fields>
+      <Field>
+        <Name>Field1</Name>
+        <Section>0</Section>
+        <Text>Change Duty Request</Text>
+        <Width>5805</Width>
+        <Height>900</Height>
+        <Align>7</Align>
+        <BackColor>13882323</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Bold>-1</Bold>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>16</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field2</Name>
+        <Section>0</Section>
+        <Text>طلب تغيير دوام</Text>
+        <Left>5790</Left>
+        <Width>5790</Width>
+        <Height>900</Height>
+        <Align>7</Align>
+        <BackColor>13882323</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Bold>-1</Bold>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>16</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field3</Name>
+        <Section>0</Section>
+        <Text>Document Date</Text>
+        <Top>900</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field4</Name>
+        <Section>0</Section>
+        <Text>تاريخ الطلب</Text>
+        <Left>4335</Left>
+        <Top>900</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field5</Name>
+        <Section>0</Section>
+        <Text>رقم الطلب</Text>
+        <Left>10125</Left>
+        <Top>900</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field6</Name>
+        <Section>0</Section>
+        <Text>Document No.</Text>
+        <Left>5790</Left>
+        <Top>900</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field7</Name>
+        <Section>0</Section>
+        <Text>DocumentDate</Text>
+        <Calculated>-1</Calculated>
+        <Left>1440</Left>
+        <Top>915</Top>
+        <Width>2895</Width>
+        <Height>405</Height>
+        <Align>7</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field9</Name>
+        <Section>0</Section>
+        <Text>DocumentNumber</Text>
+        <Calculated>-1</Calculated>
+        <Left>7230</Left>
+        <Top>915</Top>
+        <Width>2895</Width>
+        <Height>405</Height>
+        <Align>7</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field10</Name>
+        <Section>0</Section>
+        <Text>الرقم الوظيفي</Text>
+        <Left>10125</Left>
+        <Top>1410</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field12</Name>
+        <Section>0</Section>
+        <Text>EmpCode</Text>
+        <Calculated>-1</Calculated>
+        <Left>1470</Left>
+        <Top>1425</Top>
+        <Width>8640</Width>
+        <Height>420</Height>
+        <Align>7</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field15</Name>
+        <Section>0</Section>
+        <Text>Employee Code</Text>
+        <Top>1410</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field30</Name>
+        <Section>0</Section>
+        <Text>الإسم</Text>
+        <Left>10125</Left>
+        <Top>1860</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field31</Name>
+        <Section>0</Section>
+        <Text>EmpNameArb</Text>
+        <Calculated>-1</Calculated>
+        <Left>5775</Left>
+        <Top>1860</Top>
+        <Width>4335</Width>
+        <Height>435</Height>
+        <Align>8</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field32</Name>
+        <Section>0</Section>
+        <Text>EmpNameEng</Text>
+        <Calculated>-1</Calculated>
+        <Left>1470</Left>
+        <Top>1860</Top>
+        <Width>4290</Width>
+        <Height>435</Height>
+        <Align>6</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field33</Name>
+        <Section>0</Section>
+        <Text>Name</Text>
+        <Top>1860</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field34</Name>
+        <Section>0</Section>
+        <Text>تاريخ التعيين</Text>
+        <Left>10125</Left>
+        <Top>2310</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field36</Name>
+        <Section>0</Section>
+        <Text>JoinDate</Text>
+        <Calculated>-1</Calculated>
+        <Left>1470</Left>
+        <Top>2310</Top>
+        <Width>8640</Width>
+        <Height>435</Height>
+        <Align>7</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field37</Name>
+        <Section>0</Section>
+        <Text>Join Date</Text>
+        <Top>2310</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field38</Name>
+        <Section>0</Section>
+        <Text>الإدارة</Text>
+        <Left>10125</Left>
+        <Top>2760</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field39</Name>
+        <Section>0</Section>
+        <Text>DepartmentArb</Text>
+        <Calculated>-1</Calculated>
+        <Left>5775</Left>
+        <Top>2760</Top>
+        <Width>4335</Width>
+        <Height>435</Height>
+        <Align>8</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field40</Name>
+        <Section>0</Section>
+        <Text>DepartmentEng</Text>
+        <Calculated>-1</Calculated>
+        <Left>1470</Left>
+        <Top>2760</Top>
+        <Width>4290</Width>
+        <Height>435</Height>
+        <Align>6</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field41</Name>
+        <Section>0</Section>
+        <Text>Department</Text>
+        <Top>2760</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field42</Name>
+        <Section>0</Section>
+        <Text>الوظيفة</Text>
+        <Left>10125</Left>
+        <Top>3210</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field43</Name>
+        <Section>0</Section>
+        <Text>PositionArb</Text>
+        <Calculated>-1</Calculated>
+        <Left>5775</Left>
+        <Top>3210</Top>
+        <Width>4335</Width>
+        <Height>435</Height>
+        <Align>8</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field44</Name>
+        <Section>0</Section>
+        <Text>PositionEng</Text>
+        <Calculated>-1</Calculated>
+        <Left>1470</Left>
+        <Top>3210</Top>
+        <Width>4290</Width>
+        <Height>435</Height>
+        <Align>6</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field45</Name>
+        <Section>0</Section>
+        <Text>Position</Text>
+        <Top>3210</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field28</Name>
+        <Section>0</Section>
+        <Text>الدوام الحالي</Text>
+        <Left>10125</Left>
+        <Top>4935</Top>
+        <Width>1455</Width>
+        <Height>945</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field29</Name>
+        <Section>0</Section>
+        <Text>Remarks</Text>
+        <Calculated>-1</Calculated>
+        <Left>1470</Left>
+        <Top>4950</Top>
+        <Width>8640</Width>
+        <Height>1755</Height>
+        <Align>7</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field46</Name>
+        <Section>0</Section>
+        <Text>Current &amp; New</Text>
+        <Top>4935</Top>
+        <Width>1455</Width>
+        <Height>945</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field11</Name>
+        <Section>0</Section>
+        <Text>Duty</Text>
+        <Top>5865</Top>
+        <Width>1455</Width>
+        <Height>870</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field13</Name>
+        <Section>0</Section>
+        <Text>و الجديد</Text>
+        <Left>10140</Left>
+        <Top>5865</Top>
+        <Width>1440</Width>
+        <Height>870</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field14</Name>
+        <Section>0</Section>
+        <Text>تاريخ تغيير الدوام</Text>
+        <Left>10125</Left>
+        <Top>4290</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field16</Name>
+        <Section>0</Section>
+        <Text>ChangeDate</Text>
+        <Calculated>-1</Calculated>
+        <Left>1470</Left>
+        <Top>4305</Top>
+        <Width>8640</Width>
+        <Height>405</Height>
+        <Align>7</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field17</Name>
+        <Section>0</Section>
+        <Text>Change Date</Text>
+        <Top>4290</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field18</Name>
+        <Section>0</Section>
+        <Text>رقم الهوية</Text>
+        <Left>10125</Left>
+        <Top>3645</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field21</Name>
+        <Section>0</Section>
+        <Text>NID</Text>
+        <Calculated>-1</Calculated>
+        <Left>1470</Left>
+        <Top>3660</Top>
+        <Width>8640</Width>
+        <Height>405</Height>
+        <Align>7</Align>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>10</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field22</Name>
+        <Section>0</Section>
+        <Text>ID No.</Text>
+        <Top>3645</Top>
+        <Width>1455</Width>
+        <Height>450</Height>
+        <Align>7</Align>
+        <BackColor>15128749</BackColor>
+        <BackStyle>1</BackStyle>
+        <Font>
+          <Name>Microsoft Sans Serif</Name>
+          <Size>8</Size>
+        </Font>
+      </Field>
+    </Fields>
+  </Report>
+</Reports>

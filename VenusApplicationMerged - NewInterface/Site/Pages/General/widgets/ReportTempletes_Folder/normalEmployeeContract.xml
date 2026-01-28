@@ -1,0 +1,4196 @@
+<?xml version="1.0"?>
+<Reports>
+  <!--Report *** normalEmployeeContract ***-->
+  <Report version="2.5.20071.235">
+    <Name>normalEmployeeContract</Name>
+    <ReportInfo />
+    <DataSource>
+      <ConnectionString>Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa;Initial Catalog=VenusMurij;Data Source=DOTNETDVLPR2\MSSQLSERVERHAMDO</ConnectionString>
+      <RecordSource>PARAMETERS CriValEmpCode String '',CriValExpireFromDate date Null,CriValExpireToDate Date Null,CriValDeptCode String '',CriValBranchCode String '',CriValFilterType String '',CriValLang String '';hrs_rptGetAllExpiredDocuments('',Null,Null,'','',0,1)</RecordSource>
+    </DataSource>
+    <Layout>
+      <Width>12015</Width>
+      <MarginLeft>200</MarginLeft>
+      <MarginTop>200</MarginTop>
+      <MarginRight>200</MarginRight>
+      <MarginBottom>200</MarginBottom>
+      <Orientation>1</Orientation>
+      <PaperSize>9</PaperSize>
+    </Layout>
+    <Font>
+      <Name>Microsoft Sans Serif</Name>
+      <Size>12</Size>
+    </Font>
+    <Groups />
+    <Sections>
+      <Section>
+        <Name>Detail</Name>
+        <Type>0</Type>
+        <Height>65010</Height>
+      </Section>
+      <Section>
+        <Name>ReportHeader</Name>
+        <Type>1</Type>
+        <Height>10</Height>
+      </Section>
+      <Section>
+        <Name>ReportFooter</Name>
+        <Type>2</Type>
+      </Section>
+      <Section>
+        <Name>PageHeader</Name>
+        <Type>3</Type>
+      </Section>
+      <Section>
+        <Name>PageFooter</Name>
+        <Type>4</Type>
+        <Height>645</Height>
+      </Section>
+    </Sections>
+    <Fields>
+      <Field>
+        <Name>Field2</Name>
+        <Section>0</Section>
+        <Text>عقد عمل</Text>
+        <Left>5670</Left>
+        <Top>900</Top>
+        <Width>5940</Width>
+        <Height>540</Height>
+        <Align>7</Align>
+        <BackColor>13882323</BackColor>
+        <BackStyle>1</BackStyle>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Bold>-1</Bold>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field3</Name>
+        <Section>0</Section>
+        <Text>انه فى يوم</Text>
+        <Left>10395</Left>
+        <Top>1680</Top>
+        <Width>990</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field4</Name>
+        <Section>0</Section>
+        <Text>JoinDate</Text>
+        <Calculated>-1</Calculated>
+        <Left>8865</Left>
+        <Top>1680</Top>
+        <Width>1530</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field5</Name>
+        <Section>0</Section>
+        <Text>JoinDateH</Text>
+        <Calculated>-1</Calculated>
+        <Left>6315</Left>
+        <Top>1680</Top>
+        <Width>1995</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field6</Name>
+        <Section>0</Section>
+        <Text>الموافق</Text>
+        <Left>7785</Left>
+        <Top>1680</Top>
+        <Width>1080</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field7</Name>
+        <Section>0</Section>
+        <Text>تم الاتفاق بين كل من </Text>
+        <Left>9675</Left>
+        <Top>2040</Top>
+        <Width>1710</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field8</Name>
+        <Section>0</Section>
+        <Text>- :</Text>
+        <Calculated>-1</Calculated>
+        <Left>5790</Left>
+        <Top>2040</Top>
+        <Width>3885</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field9</Name>
+        <Section>0</Section>
+        <Text>(أ)</Text>
+        <Left>11100</Left>
+        <Top>2290</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field10</Name>
+        <Section>0</Section>
+        <Text> شركة مجمع السلام الطبي بعنيزة سجل تجاري رقم  </Text>
+        <Calculated>-1</Calculated>
+        <Left>5760</Left>
+        <Top>2340</Top>
+        <Width>5265</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field13</Name>
+        <Section>0</Section>
+        <Text>ويمثلها السيد                              </Text>
+        <Left>9900</Left>
+        <Top>3045</Top>
+        <Width>1125</Width>
+        <Height>270</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field12</Name>
+        <Section>0</Section>
+        <Text>(ب)</Text>
+        <Left>11100</Left>
+        <Top>3480</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field18</Name>
+        <Section>0</Section>
+        <Text> / وبين السيد</Text>
+        <Left>9960</Left>
+        <Top>3480</Top>
+        <Width>1065</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field19</Name>
+        <Section>0</Section>
+        <Text>الجنسية</Text>
+        <Left>9270</Left>
+        <Top>3820</Top>
+        <Width>630</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field20</Name>
+        <Section>0</Section>
+        <Text>رقم الهوية الوطنية</Text>
+        <Calculated>-1</Calculated>
+        <Left>7665</Left>
+        <Top>3820</Top>
+        <Width>1530</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field21</Name>
+        <Section>0</Section>
+        <Text>EmployeeArbName</Text>
+        <Calculated>-1</Calculated>
+        <Left>5715</Left>
+        <Top>3480</Top>
+        <Width>4245</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field16</Name>
+        <Section>0</Section>
+        <Text>SSN_IqamaNo</Text>
+        <Calculated>-1</Calculated>
+        <Left>5775</Left>
+        <Top>3820</Top>
+        <Width>1890</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field22</Name>
+        <Section>0</Section>
+        <Text>صادرة من </Text>
+        <Left>9690</Left>
+        <Top>4165</Top>
+        <Width>1335</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field25</Name>
+        <Section>0</Section>
+        <Text>SSN_CityArb</Text>
+        <Calculated>-1</Calculated>
+        <Left>8025</Left>
+        <Top>4165</Top>
+        <Width>2055</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field17</Name>
+        <Section>0</Section>
+        <Text> / بتاريخ</Text>
+        <Left>7125</Left>
+        <Top>4165</Top>
+        <Width>975</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field27</Name>
+        <Section>0</Section>
+        <Text>SSN_IqamaIssueDate</Text>
+        <Calculated>-1</Calculated>
+        <Left>5805</Left>
+        <Top>4165</Top>
+        <Width>1620</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field34</Name>
+        <Section>0</Section>
+        <Text>طرف ثانى</Text>
+        <Calculated>-1</Calculated>
+        <Left>5805</Left>
+        <Top>4515</Top>
+        <Width>1560</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field28</Name>
+        <Section>0</Section>
+        <Text>-1</Text>
+        <Left>11100</Left>
+        <Top>4920</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field31</Name>
+        <Section>0</Section>
+        <Text>يعمل الطرف الثانى لدى الطرف الاول وفق  شروط هذا العقد وملحقاته</Text>
+        <Left>5790</Left>
+        <Top>4920</Top>
+        <Width>5310</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field35</Name>
+        <Section>0</Section>
+        <Text>/ بمهنة</Text>
+        <Calculated>-1</Calculated>
+        <Left>10290</Left>
+        <Top>5260</Top>
+        <Width>810</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field37</Name>
+        <Section>0</Section>
+        <Text>PositionArb</Text>
+        <Calculated>-1</Calculated>
+        <Left>6015</Left>
+        <Top>5260</Top>
+        <Width>4500</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field38</Name>
+        <Section>0</Section>
+        <Text>أو أي مهنة أو وظيفة يحددها الطرف الأول حسب متطلبات العمل  </Text>
+        <Left>5790</Left>
+        <Top>5600</Top>
+        <Width>5310</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field39</Name>
+        <Section>0</Section>
+        <Text>ومصالحه ويطلب من الطرف الثاني القيام بها من وقت لاخر في أي   </Text>
+        <Left>5700</Left>
+        <Top>5940</Top>
+        <Width>5400</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field33</Name>
+        <Section>0</Section>
+        <Text> فرع من فروعه أو مؤسسات المشتركة أو المتعاونة معه </Text>
+        <Left>5790</Left>
+        <Top>6280</Top>
+        <Width>5310</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field23</Name>
+        <Section>0</Section>
+        <Text>-2</Text>
+        <Left>11100</Left>
+        <Top>7134.1689453125</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field24</Name>
+        <Section>0</Section>
+        <Text>يسري هذا العقد اعتبارا من تاريخ إستلام الطرف الثاني لعمله لدى   </Text>
+        <Left>5595</Left>
+        <Top>7134.1689453125</Top>
+        <Width>5505</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field36</Name>
+        <Section>0</Section>
+        <Text>2</Text>
+        <Calculated>-1</Calculated>
+        <Left>9180</Left>
+        <Top>7474.1689453125</Top>
+        <Width>450</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field40</Name>
+        <Section>0</Section>
+        <Text>خطية في عدم تجديد هذا العقد </Text>
+        <Left>5595</Left>
+        <Top>8154.1689453125</Top>
+        <Width>5505</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field43</Name>
+        <Section>0</Section>
+        <Text>سنة ميلادية تجدد المدة لمدة لاحقة  </Text>
+        <Calculated>-1</Calculated>
+        <Left>6060</Left>
+        <Top>7474.1689453125</Top>
+        <Width>3210</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field41</Name>
+        <Section>0</Section>
+        <Text>-3</Text>
+        <Left>11205</Left>
+        <Top>8809.1708984375</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field42</Name>
+        <Section>0</Section>
+        <Text>يعتبر الطرف الثاني معينا تحت الاختبار لمدة ثلاثة شهور تبدأ من </Text>
+        <Left>5595</Left>
+        <Top>8809.1708984375</Top>
+        <Width>5505</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field46</Name>
+        <Section>0</Section>
+        <Text>  العقد دون مكافأة أو إعلام أو تعويض للطرف الثاني يحق للطرف الأول </Text>
+        <Left>5595</Left>
+        <Top>9494.1708984375</Top>
+        <Width>5505</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field47</Name>
+        <Section>0</Section>
+        <Text>  استلام مهام وظيفته فعلا ويحق خلالها للطرف الأول وحده فسخ </Text>
+        <Calculated>-1</Calculated>
+        <Left>5595</Left>
+        <Top>9154.1708984375</Top>
+        <Width>5505</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field44</Name>
+        <Section>0</Section>
+        <Text>-4</Text>
+        <Left>11205</Left>
+        <Top>10920</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field45</Name>
+        <Section>0</Section>
+        <Text>  يدفع الطـرف الأول للطــرف الثــاني خـــلال قـــيامه بــــكل واجباته</Text>
+        <Left>5775</Left>
+        <Top>10920</Top>
+        <Width>5280</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field48</Name>
+        <Section>0</Section>
+        <Text>ريال سعودي </Text>
+        <Left>6075</Left>
+        <Top>11265</Top>
+        <Width>2325</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field49</Name>
+        <Section>0</Section>
+        <Text>أجــراً شـهرياً وقـدره </Text>
+        <Calculated>-1</Calculated>
+        <Left>9390</Left>
+        <Top>11265</Top>
+        <Width>1665</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field50</Name>
+        <Section>0</Section>
+        <Text>totalsalary</Text>
+        <Calculated>-1</Calculated>
+        <Left>8520</Left>
+        <Top>11265</Top>
+        <Width>885</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field51</Name>
+        <Section>0</Section>
+        <Text>-5</Text>
+        <Left>11130</Left>
+        <Top>12300</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field52</Name>
+        <Section>0</Section>
+        <Text>بالإضافة إلى ما ورد بالبند رقم </Text>
+        <Left>8745</Left>
+        <Top>12300</Top>
+        <Width>2310</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field54</Name>
+        <Section>0</Section>
+        <Text> -: للطرف الثاني ما يلي </Text>
+        <Calculated>-1</Calculated>
+        <Left>8115</Left>
+        <Top>12640</Top>
+        <Width>2940</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field56</Name>
+        <Section>0</Section>
+        <Text>(4)</Text>
+        <Left>8325</Left>
+        <Top>12300</Top>
+        <Width>420</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field57</Name>
+        <Section>0</Section>
+        <Text>من هذا العقد يقدم الطرف الأول </Text>
+        <Left>5865</Left>
+        <Top>12300</Top>
+        <Width>2445</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field29</Name>
+        <Section>0</Section>
+        <Text>(أ)</Text>
+        <Left>10920</Left>
+        <Top>13275</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field30</Name>
+        <Section>0</Section>
+        <Text>سكن جماعي بموقع العمل ، أو أي مكان آخـر يحدده الطرف الأول </Text>
+        <Left>5820</Left>
+        <Top>13230</Top>
+        <Width>4995</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field32</Name>
+        <Section>0</Section>
+        <Text>أو حسب بنود عقد الموظف المتفق عليه </Text>
+        <Calculated>-1</Calculated>
+        <Left>7875</Left>
+        <Top>13575</Top>
+        <Width>2940</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field55</Name>
+        <Section>0</Section>
+        <Text>(ب)</Text>
+        <Left>10920</Left>
+        <Top>14310</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field58</Name>
+        <Section>0</Section>
+        <Text>المواصلات موفر من قبل المجمع أو حسب سياسة الشركة والعقد </Text>
+        <Left>5910</Left>
+        <Top>14310</Top>
+        <Width>4905</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field66</Name>
+        <Section>0</Section>
+        <Text>-6</Text>
+        <Left>11205</Left>
+        <Top>17070</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field67</Name>
+        <Section>0</Section>
+        <Text>يحـــق للطـــــرف الثاني إجازة سنوية مدتـــــها </Text>
+        <Left>7650</Left>
+        <Top>17070</Top>
+        <Width>3480</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field68</Name>
+        <Section>0</Section>
+        <Text>شهراً من الخدمة المستمرة بموجب هذا العقد وتدفع  أجور هذه الإجازة </Text>
+        <Calculated>-1</Calculated>
+        <Left>5580</Left>
+        <Top>17410</Top>
+        <Width>5550</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field69</Name>
+        <Section>0</Section>
+        <Text>21</Text>
+        <Left>7320</Left>
+        <Top>17070</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field70</Name>
+        <Section>0</Section>
+        <Text>يوما بعد كل </Text>
+        <Calculated>-1</Calculated>
+        <Left>6225</Left>
+        <Top>17070</Top>
+        <Width>960</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field71</Name>
+        <Section>0</Section>
+        <Text>12</Text>
+        <Calculated>-1</Calculated>
+        <Left>5850</Left>
+        <Top>17070</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field72</Name>
+        <Section>0</Section>
+        <Text>-7</Text>
+        <Left>11205</Left>
+        <Top>18720</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field73</Name>
+        <Section>0</Section>
+        <Text>يتحمل الطرف الأول تكاليف إنتقال الطرف الثاني من بلده إلى مقر</Text>
+        <Left>5760</Left>
+        <Top>18720</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field74</Name>
+        <Section>0</Section>
+        <Text>  عمله في المملكة العربية السعودية بالدرجة السياحية المخفضة للقدوم </Text>
+        <Left>5745</Left>
+        <Top>19065</Top>
+        <Width>5385</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field75</Name>
+        <Section>0</Section>
+        <Text>للقدوم قبل بداية العقد والعودة بعد إنهاء العقد في حالة</Text>
+        <Left>5730</Left>
+        <Top>19410</Top>
+        <Width>5400</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field76</Name>
+        <Section>0</Section>
+        <Text>-8</Text>
+        <Left>11205</Left>
+        <Top>20805</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field77</Name>
+        <Section>0</Section>
+        <Text>يلتزم الطرف الثاني بدفع جميع المصاريف والرسوم التي تؤخذ عادة على </Text>
+        <Left>5850</Left>
+        <Top>20805</Top>
+        <Width>5280</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field78</Name>
+        <Section>0</Section>
+        <Text>على تجديد الجواز ورخصة القيادة وأي رسوم مماثلة وكذلك كآفة أنواع </Text>
+        <Left>5835</Left>
+        <Top>21150</Top>
+        <Width>5295</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field88</Name>
+        <Section>0</Section>
+        <Text>(ب)</Text>
+        <Left>10770</Left>
+        <Top>25065</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field89</Name>
+        <Section>0</Section>
+        <Text>يجوز تعويض الطرف الثاني عن التذاكر في   حالة عدم </Text>
+        <Left>6480</Left>
+        <Top>25065</Top>
+        <Width>4200</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field90</Name>
+        <Section>0</Section>
+        <Text>عدم استخدام إجازته بنسبة </Text>
+        <Left>9180</Left>
+        <Top>25410</Top>
+        <Width>1500</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field94</Name>
+        <Section>0</Section>
+        <Text>-11</Text>
+        <Left>11190</Left>
+        <Top>26280</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field95</Name>
+        <Section>0</Section>
+        <Text>يقدم الطرف الأول للطرف الثاني الخدمات الطبية مفرداً وذلك حسب</Text>
+        <Left>5760</Left>
+        <Top>26280</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field96</Name>
+        <Section>0</Section>
+        <Text>سياسة الشركة ونظام التأمين الصحي </Text>
+        <Left>5760</Left>
+        <Top>26625</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field100</Name>
+        <Section>0</Section>
+        <Text>-13</Text>
+        <Left>11205</Left>
+        <Top>32850</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field101</Name>
+        <Section>0</Section>
+        <Text>يلتزم الطرف الثاني بعدم العمل لحسابه الخاص أو لحساب أي رب عمل </Text>
+        <Left>5760</Left>
+        <Top>32850</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field102</Name>
+        <Section>0</Section>
+        <Text>آخر ، سواء كان بأجر أو بدون أجر ، سواء خلال ساعات العمل</Text>
+        <Left>5760</Left>
+        <Top>33195</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field103</Name>
+        <Section>0</Section>
+        <Text>الرسمية أو بعدها وأن يرعى في ذلك التعليمات والأوامر الصادرة</Text>
+        <Left>5760</Left>
+        <Top>33540</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field104</Name>
+        <Section>0</Section>
+        <Text>من الطرف الأول بخصوص ذلك وإلا يعتبر الطرف الثاني مخالفاً</Text>
+        <Left>5760</Left>
+        <Top>33885</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field113</Name>
+        <Section>0</Section>
+        <Text>حـــــــرر هــــــــــــــــذا العــــقـــــــد بتـــــاريخ </Text>
+        <Left>7575</Left>
+        <Top>44520</Top>
+        <Width>3570</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field114</Name>
+        <Section>0</Section>
+        <Text>من نسختين وإستلم كل طرف نسخة للعمل بموجبها 
+
+</Text>
+        <Left>5520</Left>
+        <Top>44940</Top>
+        <Width>5565</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field119</Name>
+        <Section>0</Section>
+        <Text>JoinDate</Text>
+        <Calculated>-1</Calculated>
+        <Left>6045</Left>
+        <Top>44475</Top>
+        <Width>1530</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field116</Name>
+        <Section>0</Section>
+        <Text>والله ولي التوفيق</Text>
+        <Left>6000</Left>
+        <Top>52725</Top>
+        <Width>5535</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field117</Name>
+        <Section>0</Section>
+        <Text>الطرف الأول</Text>
+        <Left>5775</Left>
+        <Top>53070</Top>
+        <Width>5535</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Bold>-1</Bold>
+          <Underline>-1</Underline>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field118</Name>
+        <Section>0</Section>
+        <Text>شركة مجمع السلام الطبي بعنيزة   </Text>
+        <Left>8745</Left>
+        <Top>53455</Top>
+        <Width>2565</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field120</Name>
+        <Section>0</Section>
+        <Text> / ويمثلها السيد </Text>
+        <Left>8730</Left>
+        <Top>53840</Top>
+        <Width>2580</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field121</Name>
+        <Section>0</Section>
+        <Text> / التوقيع </Text>
+        <Left>8730</Left>
+        <Top>54225</Top>
+        <Width>2580</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field122</Name>
+        <Section>0</Section>
+        <Text>الطرف الثانى</Text>
+        <Left>5775</Left>
+        <Top>54610</Top>
+        <Width>5535</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Bold>-1</Bold>
+          <Underline>-1</Underline>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field124</Name>
+        <Section>0</Section>
+        <Text> / الاسم</Text>
+        <Left>10530</Left>
+        <Top>54995</Top>
+        <Width>780</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field125</Name>
+        <Section>0</Section>
+        <Text> / التوقيع </Text>
+        <Left>10530</Left>
+        <Top>55380</Top>
+        <Width>780</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field123</Name>
+        <Section>0</Section>
+        <Text>EMPLOYMENT CONTRACT</Text>
+        <Top>900</Top>
+        <Width>5670</Width>
+        <Height>540</Height>
+        <Align>7</Align>
+        <BackColor>13882323</BackColor>
+        <BackStyle>1</BackStyle>
+        <BorderStyle>1</BorderStyle>
+        <Font>
+          <Bold>-1</Bold>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field126</Name>
+        <Section>0</Section>
+        <Text>On this day</Text>
+        <Left>180</Left>
+        <Top>1680</Top>
+        <Width>1410</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field128</Name>
+        <Section>0</Section>
+        <Text>JoinDate</Text>
+        <Calculated>-1</Calculated>
+        <Left>1410</Left>
+        <Top>1680</Top>
+        <Width>1260</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field130</Name>
+        <Section>0</Section>
+        <Text>correspond in to</Text>
+        <Left>2670</Left>
+        <Top>1680</Top>
+        <Width>1710</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field133</Name>
+        <Section>0</Section>
+        <Text>--------------------------------------------------</Text>
+        <Calculated>-1</Calculated>
+        <Left>450</Left>
+        <Top>2335</Top>
+        <Width>4680</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field135</Name>
+        <Section>0</Section>
+        <Text>represented by : </Text>
+        <Left>255</Left>
+        <Top>2690</Top>
+        <Width>5250</Width>
+        <Height>255</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field137</Name>
+        <Section>0</Section>
+        <Text> hereinafter referred to as FIRST PARTY</Text>
+        <Left>255</Left>
+        <Top>2985</Top>
+        <Width>5250</Width>
+        <Height>255</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field139</Name>
+        <Section>0</Section>
+        <Text>and</Text>
+        <Top>3285</Top>
+        <Width>5400</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field141</Name>
+        <Section>0</Section>
+        <Text>MR :</Text>
+        <Calculated>-1</Calculated>
+        <Left>225</Left>
+        <Top>3580</Top>
+        <Width>450</Width>
+        <Height>300</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field127</Name>
+        <Section>0</Section>
+        <Text>an agreement is hereby entered by the between</Text>
+        <Left>180</Left>
+        <Top>2040</Top>
+        <Width>5460</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field129</Name>
+        <Section>0</Section>
+        <Text>JoinDateH</Text>
+        <Calculated>-1</Calculated>
+        <Left>4380</Left>
+        <Top>1680</Top>
+        <Width>1260</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field131</Name>
+        <Section>0</Section>
+        <Text>A-</Text>
+        <Left>75</Left>
+        <Top>2335</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field132</Name>
+        <Section>0</Section>
+        <Text>EmployeeEngName</Text>
+        <Calculated>-1</Calculated>
+        <Left>750</Left>
+        <Top>3580</Top>
+        <Width>2790</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field134</Name>
+        <Section>0</Section>
+        <Text> nationality,holder of Passport No
+</Text>
+        <Left>1260</Left>
+        <Top>3870</Top>
+        <Width>3300</Width>
+        <Height>255</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field136</Name>
+        <Section>0</Section>
+        <Text>SSN_IqamaNo</Text>
+        <Calculated>-1</Calculated>
+        <Left>4470</Left>
+        <Top>3870</Top>
+        <Width>1290</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field138</Name>
+        <Section>0</Section>
+        <Text>hereinafter referred to as "The SECOND PARTY", 
+</Text>
+        <Left>210</Left>
+        <Top>4170</Top>
+        <Width>5295</Width>
+        <Height>255</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field140</Name>
+        <Section>0</Section>
+        <Text> have agreed as follows:</Text>
+        <Left>210</Left>
+        <Top>4465</Top>
+        <Width>5295</Width>
+        <Height>255</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field142</Name>
+        <Section>0</Section>
+        <Text>1- </Text>
+        <Top>4920</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field143</Name>
+        <Section>0</Section>
+        <Text>Second party shall work for the first party in </Text>
+        <Left>360</Left>
+        <Top>4920</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field144</Name>
+        <Section>0</Section>
+        <Text>accordance with the terms of this agreement and of any </Text>
+        <Left>360</Left>
+        <Top>5215</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field145</Name>
+        <Section>0</Section>
+        <Text>supplements thereto . as a </Text>
+        <Left>360</Left>
+        <Top>5510</Top>
+        <Width>2685</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field146</Name>
+        <Section>0</Section>
+        <Text>PositionEng</Text>
+        <Calculated>-1</Calculated>
+        <Left>3150</Left>
+        <Top>5510</Top>
+        <Width>2430</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field147</Name>
+        <Section>0</Section>
+        <Text>or in any party from time to time determine and 
+</Text>
+        <Left>360</Left>
+        <Top>5805</Top>
+        <Width>5265</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field148</Name>
+        <Section>0</Section>
+        <Text>request the second party to assume at the  head  office </Text>
+        <Left>360</Left>
+        <Top>6100</Top>
+        <Width>5265</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field149</Name>
+        <Section>0</Section>
+        <Text>or branches of the first party or in any organization
+</Text>
+        <Left>360</Left>
+        <Top>6395</Top>
+        <Width>5265</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field150</Name>
+        <Section>0</Section>
+        <Text>associated or incorporated with </Text>
+        <Left>360</Left>
+        <Top>6690</Top>
+        <Width>5265</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>11.25</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field151</Name>
+        <Section>0</Section>
+        <Text>2- </Text>
+        <Left>15</Left>
+        <Top>7134.1689453125</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field152</Name>
+        <Section>0</Section>
+        <Text>This Agreement shall become effective and shall</Text>
+        <Left>315</Left>
+        <Top>7134.1689453125</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field153</Name>
+        <Section>0</Section>
+        <Text>be in force for a period of </Text>
+        <Left>315</Left>
+        <Top>7429.1689453125</Top>
+        <Width>2685</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field154</Name>
+        <Section>0</Section>
+        <Text>Gregorian year</Text>
+        <Left>3495</Left>
+        <Top>7429.1689453125</Top>
+        <Width>1530</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field155</Name>
+        <Section>0</Section>
+        <Text>renewable for another period of  ONE year/s  under </Text>
+        <Left>315</Left>
+        <Top>7724.1689453125</Top>
+        <Width>5205</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field156</Name>
+        <Section>0</Section>
+        <Text>his desire, in writing, not to renew this Agreement</Text>
+        <Left>315</Left>
+        <Top>8314.1689453125</Top>
+        <Width>5100</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field159</Name>
+        <Section>0</Section>
+        <Text>ContractPeriod</Text>
+        <Calculated>-1</Calculated>
+        <Left>2925</Left>
+        <Top>7425</Top>
+        <Width>405</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field160</Name>
+        <Section>0</Section>
+        <Text>same terms and conditions,unless either Party  expresses </Text>
+        <Left>315</Left>
+        <Top>8019.1689453125</Top>
+        <Width>5460</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field158</Name>
+        <Section>0</Section>
+        <Text>The Second Party is considered to be on proba-tion
+</Text>
+        <Left>375</Left>
+        <Top>8809.1708984375</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field161</Name>
+        <Section>0</Section>
+        <Text>3- </Text>
+        <Top>8809.1708984375</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field162</Name>
+        <Section>0</Section>
+        <Text> for a period of three (3) months as of the actual date </Text>
+        <Left>375</Left>
+        <Top>9138.337890625</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field163</Name>
+        <Section>0</Section>
+        <Text>of starting his full duties.Only the First Party  has</Text>
+        <Left>375</Left>
+        <Top>9467.5048828125</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field164</Name>
+        <Section>0</Section>
+        <Text> the right to break the contract without being obliged</Text>
+        <Left>375</Left>
+        <Top>9796.671875</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field165</Name>
+        <Section>0</Section>
+        <Text> to pay the Second Party any awards or compensation </Text>
+        <Left>375</Left>
+        <Top>10125.8388671875</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field166</Name>
+        <Section>0</Section>
+        <Text> or to give him any</Text>
+        <Left>375</Left>
+        <Top>10455.005859375</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field167</Name>
+        <Section>0</Section>
+        <Text>The First Party shall pay to the Second Party during </Text>
+        <Left>375</Left>
+        <Top>10920</Top>
+        <Width>5055</Width>
+        <Height>255</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field168</Name>
+        <Section>0</Section>
+        <Text>4- </Text>
+        <Top>10920</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field157</Name>
+        <Section>0</Section>
+        <Text>a monthly salary of  </Text>
+        <Left>375</Left>
+        <Top>11510</Top>
+        <Width>1950</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field169</Name>
+        <Section>0</Section>
+        <Text>totalsalary</Text>
+        <Calculated>-1</Calculated>
+        <Left>2655</Left>
+        <Top>11510</Top>
+        <Width>1080</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field170</Name>
+        <Section>0</Section>
+        <Text>SR</Text>
+        <Left>3735</Left>
+        <Top>11510</Top>
+        <Width>1950</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field171</Name>
+        <Section>0</Section>
+        <Text>latter's performance of his full duties,</Text>
+        <Left>375</Left>
+        <Top>11215</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field172</Name>
+        <Section>0</Section>
+        <Text>5- </Text>
+        <Left>15</Left>
+        <Top>12300</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field173</Name>
+        <Section>0</Section>
+        <Text>In addition to the compensation prescribed in Article </Text>
+        <Left>420</Left>
+        <Top>12300</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field174</Name>
+        <Section>0</Section>
+        <Text>4 the First Party provides to the Second Party</Text>
+        <Left>420</Left>
+        <Top>12575</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field175</Name>
+        <Section>0</Section>
+        <Text>the following privileges : -</Text>
+        <Left>420</Left>
+        <Top>12825</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field176</Name>
+        <Section>0</Section>
+        <Text>Collective housing on job site or any other place designated by the First Party orThe terms of the agreed employee contract shall be calculated</Text>
+        <Left>525</Left>
+        <Top>13260</Top>
+        <Width>4800</Width>
+        <Height>1125</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field177</Name>
+        <Section>0</Section>
+        <Text>A- </Text>
+        <Left>150</Left>
+        <Top>13260</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field183</Name>
+        <Section>0</Section>
+        <Text>B- </Text>
+        <Left>180</Left>
+        <Top>14400</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field184</Name>
+        <Section>0</Section>
+        <Text>Transportation is provided by the complex or 
+according to the company policy and the contract</Text>
+        <Left>555</Left>
+        <Top>14400</Top>
+        <Width>4800</Width>
+        <Height>705</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field194</Name>
+        <Section>0</Section>
+        <Text>The Second Party shall be entitled to a vacation</Text>
+        <Left>405</Left>
+        <Top>16995</Top>
+        <Width>5235</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field195</Name>
+        <Section>0</Section>
+        <Text>6- </Text>
+        <Top>16995</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field196</Name>
+        <Section>0</Section>
+        <Text>leave of   </Text>
+        <Left>420</Left>
+        <Top>17290</Top>
+        <Width>840</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field197</Name>
+        <Section>0</Section>
+        <Text>21</Text>
+        <Calculated>-1</Calculated>
+        <Left>1275</Left>
+        <Top>17280</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field198</Name>
+        <Section>0</Section>
+        <Text>days after each</Text>
+        <Left>1695</Left>
+        <Top>17280</Top>
+        <Width>1530</Width>
+        <Height>250</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field199</Name>
+        <Section>0</Section>
+        <Text>12</Text>
+        <Calculated>-1</Calculated>
+        <Left>3240</Left>
+        <Top>17280</Top>
+        <Width>360</Width>
+        <Height>250</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field201</Name>
+        <Section>0</Section>
+        <Text>months of continuous service under this  Agree-
+ment.The salary for this vacation leave shall be paid 
+in advance.
+</Text>
+        <Left>450</Left>
+        <Top>17585</Top>
+        <Width>5220</Width>
+        <Height>900</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field203</Name>
+        <Section>0</Section>
+        <Text>The Second Party will pay all expenses and fees 
+for Passport renewal, driving license or any other 
+similar fees. He will also pay any legal penalties 
+he is directly responsible for  its occurrence and 
+any taxes which may become applicable towards 
+him, The second party shall pay monthly electricity 
+and water bills on his own dwelling granted by 
+the company</Text>
+        <Left>360</Left>
+        <Top>20655</Top>
+        <Width>5235</Width>
+        <Height>2145</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field204</Name>
+        <Section>0</Section>
+        <Text>8- </Text>
+        <Top>20655</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field223</Name>
+        <Section>0</Section>
+        <Text>11- </Text>
+        <Left>15</Left>
+        <Top>26130</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field224</Name>
+        <Section>0</Section>
+        <Text>The first party provides the medical services
+to the second party individually, according to 
+the company policy and the health insurance system .</Text>
+        <Left>420</Left>
+        <Top>26130</Top>
+        <Width>5235</Width>
+        <Height>930</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field225</Name>
+        <Section>0</Section>
+        <Text>12- </Text>
+        <Left>30</Left>
+        <Top>27120</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field226</Name>
+        <Section>0</Section>
+        <Text>The second Party agrees to depart from 
+the Kingdom of Saudi Arabia immediately 
+upon termination of this Agreement by either 
+Party in accordance with its terms  except 
+if he remains in the Kingdom with the agreement 
+of the First Party and 
+the authorities concerned.</Text>
+        <Left>435</Left>
+        <Top>27120</Top>
+        <Width>5235</Width>
+        <Height>1740</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field227</Name>
+        <Section>0</Section>
+        <Text>15- </Text>
+        <Left>90</Left>
+        <Top>37140</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field228</Name>
+        <Section>0</Section>
+        <Text>The Second Party undertakes and refrains from 
+working for himself or for any other employer 
+whether the work is done during or after official 
+working hours.  Failure to abide leads to instant 
+cancellation of the contract  with no awards or 
+warnings and Second Party will be deported to 
+his country and he will pay for all deportation 
+expenses and all recruitment Expenses.</Text>
+        <Left>435</Left>
+        <Top>32805</Top>
+        <Width>5235</Width>
+        <Height>2280</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field235</Name>
+        <Section>0</Section>
+        <Text>SECOND PARTY</Text>
+        <Left>315</Left>
+        <Top>54835</Top>
+        <Width>5235</Width>
+        <Height>255</Height>
+        <Align>0</Align>
+        <Font>
+          <Bold>-1</Bold>
+          <Underline>-1</Underline>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field236</Name>
+        <Section>0</Section>
+        <Text>Sign  :___________________________________</Text>
+        <Left>315</Left>
+        <Top>53445</Top>
+        <Width>5235</Width>
+        <Height>450</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field237</Name>
+        <Section>0</Section>
+        <Text>FIRST PARTY</Text>
+        <Left>315</Left>
+        <Top>52995</Top>
+        <Width>5235</Width>
+        <Height>255</Height>
+        <Align>0</Align>
+        <Font>
+          <Bold>-1</Bold>
+          <Underline>-1</Underline>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field238</Name>
+        <Section>0</Section>
+        <Text>Sign  :___________________________________</Text>
+        <Left>330</Left>
+        <Top>55220</Top>
+        <Width>5235</Width>
+        <Height>450</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field1</Name>
+        <Section>0</Section>
+        <Text>الطرف الاول ولمدة</Text>
+        <Left>9465</Left>
+        <Top>7474.1689453125</Top>
+        <Width>1635</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field26</Name>
+        <Section>0</Section>
+        <Text>أخرى بنفس البنود والشروط إذا لم يبد أحد الطرفين  رغبة </Text>
+        <Calculated>-1</Calculated>
+        <Left>6525</Left>
+        <Top>7814.1689453125</Top>
+        <Width>4575</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field239</Name>
+        <Section>0</Section>
+        <Text>مقدما </Text>
+        <Calculated>-1</Calculated>
+        <Left>5580</Left>
+        <Top>17750</Top>
+        <Width>5550</Width>
+        <Height>250</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field240</Name>
+        <Section>0</Section>
+        <Left>5670</Left>
+        <Top>1470</Top>
+        <Width>90</Width>
+        <Height>13830</Height>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field241</Name>
+        <Section>0</Section>
+        <Left>11610</Left>
+        <Top>1470</Top>
+        <Width>90</Width>
+        <Height>13830</Height>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field242</Name>
+        <Section>0</Section>
+        <Top>1470</Top>
+        <Width>90</Width>
+        <Height>13830</Height>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field192</Name>
+        <Section>0</Section>
+        <Left>5670</Left>
+        <Top>16485</Top>
+        <Height>15375</Height>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field193</Name>
+        <Section>0</Section>
+        <Left>11610</Left>
+        <Top>16485</Top>
+        <Height>15375</Height>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field200</Name>
+        <Section>0</Section>
+        <Top>16485</Top>
+        <Height>15375</Height>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field207</Name>
+        <Section>0</Section>
+        <Left>5670</Left>
+        <Top>32430</Top>
+        <Width>90</Width>
+        <Height>15465</Height>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field208</Name>
+        <Section>0</Section>
+        <Left>11610</Left>
+        <Top>32430</Top>
+        <Width>90</Width>
+        <Height>15465</Height>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field243</Name>
+        <Section>0</Section>
+        <Top>32430</Top>
+        <Width>90</Width>
+        <Height>15465</Height>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field272</Name>
+        <Section>0</Section>
+        <Top>15325</Top>
+        <Width>11610</Width>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field273</Name>
+        <Section>0</Section>
+        <Left>15</Left>
+        <Top>16485</Top>
+        <Width>11610</Width>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field11</Name>
+        <Section>0</Section>
+        <Top>31845</Top>
+        <Width>11610</Width>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field266</Name>
+        <Section>0</Section>
+        <Text>تمديد فترة التجربة لمدة ثلاث شهور أخري حسب قانون </Text>
+        <Left>5580</Left>
+        <Top>9834.1708984375</Top>
+        <Width>5520</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field274</Name>
+        <Section>0</Section>
+        <Text>قانون نظام العمل والعمال </Text>
+        <Left>5580</Left>
+        <Top>10179.1708984375</Top>
+        <Width>5520</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field290</Name>
+        <Section>0</Section>
+        <Text>ويشار إلى البدلات حسب ملحق العقد المرفق </Text>
+        <Calculated>-1</Calculated>
+        <Left>6675</Left>
+        <Top>11605</Top>
+        <Width>4380</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field53</Name>
+        <Section>0</Section>
+        <Text>The First Party shall bear the cost of Transport
+station of the Second Party from  Of the employee's 
+country   to  the Kingdom of Saudi Arabia  for 
+the latter's incoming trip and for return trip 
+at the economy class air fares at 
+the effective/finishing date of this Contract.
+
+</Text>
+        <Left>375</Left>
+        <Top>18645</Top>
+        <Width>5235</Width>
+        <Height>1665</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field59</Name>
+        <Section>0</Section>
+        <Text>7- </Text>
+        <Left>15</Left>
+        <Top>18645</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field60</Name>
+        <Section>0</Section>
+        <Text>If the Second Party violates the Contract with 
+respect to its duration by resigning or leaving
+the assigned work before its end or refuses the
+assigned work, he will immediately be depor-ted 
+to his country of origin and also pay for his
+recruitment expenses.
+</Text>
+        <Left>435</Left>
+        <Top>35235</Top>
+        <Width>4755</Width>
+        <Height>1665</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field62</Name>
+        <Section>0</Section>
+        <Text>The official working hours are (9) hours per day
+and (6) days per week according to the company 
+policy which is determined by the work need.</Text>
+        <Left>450</Left>
+        <Top>42390</Top>
+        <Width>5130</Width>
+        <Height>900</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field63</Name>
+        <Section>0</Section>
+        <Text>14- </Text>
+        <Top>35235</Top>
+        <Width>465</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field64</Name>
+        <Section>0</Section>
+        <Text>الضرائب وغيرها التي تستحق عليه  يلتزم الطرف الثاني بسداد فواتير  </Text>
+        <Left>5835</Left>
+        <Top>21490</Top>
+        <Width>5295</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field65</Name>
+        <Section>0</Section>
+        <Text>من قيمة التذاكر المخفضة</Text>
+        <Left>6750</Left>
+        <Top>25410</Top>
+        <Width>1770</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field79</Name>
+        <Section>0</Section>
+        <Text>(50%) </Text>
+        <Left>8460</Left>
+        <Top>25410</Top>
+        <Width>690</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field81</Name>
+        <Section>0</Section>
+        <Text>فور إنتهاء هذا العقد وفق شروطه إلا في حالة بقائه بموافقة الطرف </Text>
+        <Left>5760</Left>
+        <Top>28065</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field83</Name>
+        <Section>0</Section>
+        <Text>يجب على الطرف الثاني مغادرة أراضي المملكة  العربية السعودية</Text>
+        <Left>5760</Left>
+        <Top>27720</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field85</Name>
+        <Section>0</Section>
+        <Text>-12</Text>
+        <Left>11190</Left>
+        <Top>27720</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field86</Name>
+        <Section>0</Section>
+        <Text>الأول والسلطات المختصة </Text>
+        <Left>5760</Left>
+        <Top>28410</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field107</Name>
+        <Section>0</Section>
+        <Text>The Second Party hereby declares that he 
+has familiarized himself with the Labor Law,
+Social Security Law, and the First Party's 
+own work rules, awards and penalties The Second 
+Party declares he understood them before 
+he commenced his work and considers the Laws 
+and rules as integral part of this Contract</Text>
+        <Left>450</Left>
+        <Top>38700</Top>
+        <Width>5235</Width>
+        <Height>2115</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field108</Name>
+        <Section>0</Section>
+        <Text>16- </Text>
+        <Left>90</Left>
+        <Top>38700</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field109</Name>
+        <Section>0</Section>
+        <Text>The Second Party cannot return to the Kingdom 
+to work for another employer except after obtaining 
+the prior written approval of  the First Party or 
+after a period of three (3) years from date of departure.</Text>
+        <Left>450</Left>
+        <Top>40770</Top>
+        <Width>5235</Width>
+        <Height>1440</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field182</Name>
+        <Section>0</Section>
+        <Text>17- </Text>
+        <Left>45</Left>
+        <Top>40770</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field187</Name>
+        <Section>0</Section>
+        <Text>لهذا العقد وبذلك يصبح العقد منتهى حسب المادة 83 من النظام </Text>
+        <Left>5760</Left>
+        <Top>34230</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field189</Name>
+        <Section>0</Section>
+        <Text>يقر الطرف الثاني بإطلاعه على أحكام نظام العمل والعمال ، ونظام </Text>
+        <Left>5850</Left>
+        <Top>38700</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field190</Name>
+        <Section>0</Section>
+        <Text>الخاصتين بالمؤسسة وفهم مضامينها قبل مباشرته للعمل وإعتبارها</Text>
+        <Left>5850</Left>
+        <Top>39390</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field191</Name>
+        <Section>0</Section>
+        <Text>التأمينات الإجتماعية ، وكذلك لائحتي تنظيم العمل والجزاءات والمكافات </Text>
+        <Left>5850</Left>
+        <Top>39045</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field202</Name>
+        <Section>0</Section>
+        <Text>جزءً لا يتجزأ من هذا العقد فيما لم يرفق به نص خاص </Text>
+        <Left>5850</Left>
+        <Top>39735</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field205</Name>
+        <Section>0</Section>
+        <Text>-16</Text>
+        <Left>11250</Left>
+        <Top>38700</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field206</Name>
+        <Section>0</Section>
+        <Text>من تاريخ سفره  النقل</Text>
+        <Left>5760</Left>
+        <Top>41775</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field211</Name>
+        <Section>0</Section>
+        <Text>الخطية المسبقة من قبل الطرف الأول إلا بعد مضي ثلاث سنوات </Text>
+        <Left>5760</Left>
+        <Top>41430</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field212</Name>
+        <Section>0</Section>
+        <Text>للعمل لدى رب عمل آخر في نفس المنطقة أو المدينة دون الموافقة</Text>
+        <Left>5760</Left>
+        <Top>41055</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field213</Name>
+        <Section>0</Section>
+        <Text>لايحق للطرف الثاني والمستقدم من خارج المملكة العودة إلى المملكة</Text>
+        <Left>5760</Left>
+        <Top>40710</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field216</Name>
+        <Section>0</Section>
+        <Text>-17</Text>
+        <Left>11160</Left>
+        <Top>40710</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field305</Name>
+        <Section>0</Section>
+        <Text>This Agreement was drawn up on 
+in duplicate whereby one copy is received by
+each Party and the Arabic text of the Contract
+shall prevail.</Text>
+        <Left>540</Left>
+        <Top>44295</Top>
+        <Width>4950</Width>
+        <Height>1410</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field112</Name>
+        <Section>0</Section>
+        <Text> والنص العربي هو النص المعتمد</Text>
+        <Left>6480</Left>
+        <Top>51915</Top>
+        <Width>4785</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Bold>-1</Bold>
+          <Underline>-1</Underline>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field87</Name>
+        <Section>0</Section>
+        <Left>15</Left>
+        <Top>32430</Top>
+        <Width>11610</Width>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field245</Name>
+        <Section>0</Section>
+        <Top>47895</Top>
+        <Width>11610</Width>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field320</Name>
+        <Section>0</Section>
+        <Left>5685</Left>
+        <Top>49545</Top>
+        <Width>90</Width>
+        <Height>15465</Height>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field321</Name>
+        <Section>0</Section>
+        <Left>11625</Left>
+        <Top>49545</Top>
+        <Width>90</Width>
+        <Height>15465</Height>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field322</Name>
+        <Section>0</Section>
+        <Left>15</Left>
+        <Top>49545</Top>
+        <Width>90</Width>
+        <Height>15465</Height>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field324</Name>
+        <Section>0</Section>
+        <Left>15</Left>
+        <Top>49545</Top>
+        <Width>11610</Width>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field337</Name>
+        <Section>0</Section>
+        <Left>30</Left>
+        <Top>65010</Top>
+        <Width>11610</Width>
+        <BorderStyle>1</BorderStyle>
+        <LineSlant>1</LineSlant>
+      </Field>
+      <Field>
+        <Name>Field345</Name>
+        <Section>0</Section>
+        <Text>طرف أول</Text>
+        <Left>5880</Left>
+        <Top>3045</Top>
+        <Width>1050</Width>
+        <Height>300</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field346</Name>
+        <Section>0</Section>
+        <Text>(1128002741) </Text>
+        <Calculated>-1</Calculated>
+        <Left>5670</Left>
+        <Top>2340</Top>
+        <Width>1485</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field15</Name>
+        <Section>0</Section>
+        <Text>تلفون 3610009 </Text>
+        <Left>5940</Left>
+        <Top>2625</Top>
+        <Width>3960</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field347</Name>
+        <Section>0</Section>
+        <Text>ص.ب 160 </Text>
+        <Left>9900</Left>
+        <Top>2625</Top>
+        <Width>1215</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field14</Name>
+        <Section>0</Section>
+        <Text>/</Text>
+        <Left>8940</Left>
+        <Top>3045</Top>
+        <Width>1125</Width>
+        <Height>270</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field348</Name>
+        <Section>0</Section>
+        <Text>الكهرباء والماء شهرياً التي على مسكنه الخاص الممنوح له من الشركة</Text>
+        <Left>5925</Left>
+        <Top>21810</Top>
+        <Width>5295</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field210</Name>
+        <Section>0</Section>
+        <Text>13- </Text>
+        <Left>30</Left>
+        <Top>32805</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field350</Name>
+        <Section>0</Section>
+        <Text>يقبل الطرف الثاني بأن يحل هذا العقد محل كآفة الاتفاقيات </Text>
+        <Left>5760</Left>
+        <Top>37260</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field351</Name>
+        <Section>0</Section>
+        <Text>هذا العقد الإدعاء بأي حق أو ميزة أو مدفعة خلاف ما ذكر فيه</Text>
+        <Left>5760</Left>
+        <Top>37950</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field352</Name>
+        <Section>0</Section>
+        <Text>والارتباطات السابقة له إن وجدت ولا يحق لأي من الطرفين بعد توقيع </Text>
+        <Left>5760</Left>
+        <Top>37605</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field354</Name>
+        <Section>0</Section>
+        <Text>-15</Text>
+        <Left>11220</Left>
+        <Top>37260</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field353</Name>
+        <Section>0</Section>
+        <Text>The second party accepts that this contract 
+replaces all previous agreements and engagements 
+thereof if any, and neither party has the right,after 
+signing this contract, to claim any right, advantage 
+or payment other than what is mentioned in it</Text>
+        <Left>450</Left>
+        <Top>37140</Top>
+        <Width>5235</Width>
+        <Height>1845</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field251</Name>
+        <Section>0</Section>
+        <Text>التعاقد من الخارج </Text>
+        <Left>5730</Left>
+        <Top>19725</Top>
+        <Width>5400</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field259</Name>
+        <Section>0</Section>
+        <Text>يلتزم الطرف الثاني بسداد فواتير الكهرباء والماء شهرياً التي </Text>
+        <Left>5865</Left>
+        <Top>22650</Top>
+        <Width>5295</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field260</Name>
+        <Section>0</Section>
+        <Text>-9</Text>
+        <Left>11265</Left>
+        <Top>22650</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field261</Name>
+        <Section>0</Section>
+        <Text>على مسكنه الخاص الممنوح له من الشركة</Text>
+        <Left>5955</Left>
+        <Top>22965</Top>
+        <Width>5295</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field262</Name>
+        <Section>0</Section>
+        <Text>The second party shall pay monthly electricity and 
+water bills on his own dwelling granted by the company.</Text>
+        <Left>375</Left>
+        <Top>22620</Top>
+        <Width>5235</Width>
+        <Height>960</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field263</Name>
+        <Section>0</Section>
+        <Text>9- </Text>
+        <Left>15</Left>
+        <Top>22620</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field265</Name>
+        <Section>0</Section>
+        <Text>يتحمل الطرف الأول تكاليف إنتقال الطرف الثاني ذهاباً وإياباً</Text>
+        <Left>5790</Left>
+        <Top>23565</Top>
+        <Width>4935</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field267</Name>
+        <Section>0</Section>
+        <Text>-10</Text>
+        <Left>11205</Left>
+        <Top>23565</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field270</Name>
+        <Section>0</Section>
+        <Text>تذكرة واحدة فقط بالدرجة السياحية المخفضة من موقع عمله </Text>
+        <Left>5790</Left>
+        <Top>23910</Top>
+        <Width>4935</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field284</Name>
+        <Section>0</Section>
+        <Text>(أ)</Text>
+        <Left>10770</Left>
+        <Top>23580</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field285</Name>
+        <Section>0</Section>
+        <Text>إلى (بلده) لقضاء الإجازة السنوية مرة واحــدة بعد كل (12) شهراً </Text>
+        <Left>5790</Left>
+        <Top>24255</Top>
+        <Width>4935</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field286</Name>
+        <Section>0</Section>
+        <Text>شهراً من الخدمة المتواصلة له </Text>
+        <Left>5790</Left>
+        <Top>24600</Top>
+        <Width>4935</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field287</Name>
+        <Section>0</Section>
+        <Text>The First Party shall bear the cost of 
+transportation of the Second Party on 
+a round trip at excursion/economy class 
+air fare where the Second Party shall 
+spend his vacation once after 12 months 
+uninterrupted service.  </Text>
+        <Left>900</Left>
+        <Top>23565</Top>
+        <Width>4500</Width>
+        <Height>1170</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field288</Name>
+        <Section>0</Section>
+        <Text>10- </Text>
+        <Left>105</Left>
+        <Top>23565</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field291</Name>
+        <Section>0</Section>
+        <Text>(a)</Text>
+        <Left>570</Left>
+        <Top>23565</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field292</Name>
+        <Section>0</Section>
+        <Text>The Second Party can claim 50 % in cash
+of the air fare cost if he expresses the 
+desire to defer the utilization of his vaca-
+tion leave to the following year
+</Text>
+        <Left>900</Left>
+        <Top>24825</Top>
+        <Width>4500</Width>
+        <Height>1170</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field293</Name>
+        <Section>0</Section>
+        <Text>(b)</Text>
+        <Left>570</Left>
+        <Top>24825</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field214</Name>
+        <Section>0</Section>
+        <Text>لا يحق للطرف الثاني إنهاء العقد قبل انتهاء مدته  وإذا رغب </Text>
+        <Left>5805</Left>
+        <Top>28905</Top>
+        <Width>4935</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field215</Name>
+        <Section>0</Section>
+        <Text>الطرف الثاني في عدم تجديد عقده عليه إشعار الطرف الأول </Text>
+        <Left>5805</Left>
+        <Top>29250</Top>
+        <Width>4935</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field294</Name>
+        <Section>0</Section>
+        <Text>(أ)</Text>
+        <Left>10785</Left>
+        <Top>28905</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field295</Name>
+        <Section>0</Section>
+        <Text>بمدة لا تقل عن شهرين من تاريخ نهاية العقد</Text>
+        <Left>5805</Left>
+        <Top>29565</Top>
+        <Width>4935</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field296</Name>
+        <Section>0</Section>
+        <Text>يجوز للطرف الأول وحده إنهاء العقد حسب ما ورد في المادة 83</Text>
+        <Left>5850</Left>
+        <Top>30495</Top>
+        <Width>4980</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field297</Name>
+        <Section>0</Section>
+        <Text>الطرف الثاني في عدم تجديد عقده عليه إشعار الطرف الأول </Text>
+        <Left>5895</Left>
+        <Top>30840</Top>
+        <Width>4935</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field298</Name>
+        <Section>0</Section>
+        <Text>(ب)</Text>
+        <Left>10875</Left>
+        <Top>30510</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field299</Name>
+        <Section>0</Section>
+        <Text>بمدة لا تقل عن شهرين من تاريخ نهاية العقد</Text>
+        <Left>5895</Left>
+        <Top>31185</Top>
+        <Width>4935</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field300</Name>
+        <Section>0</Section>
+        <Text>Only the First Party has the right to 
+terminate the Contract under Article 
+(83) of the Labor Law
+
+</Text>
+        <Left>840</Left>
+        <Top>30840</Top>
+        <Width>4500</Width>
+        <Height>990</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field301</Name>
+        <Section>0</Section>
+        <Text>(b)</Text>
+        <Left>510</Left>
+        <Top>30840</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field302</Name>
+        <Section>0</Section>
+        <Text>(a)</Text>
+        <Left>510</Left>
+        <Top>28905</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field303</Name>
+        <Section>0</Section>
+        <Text>The second party is not entitled to terminate 
+the contract before its term expires Either 
+Party has the right to terminate the Contract 
+prior to its expiration date by a Written 
+notice from the terminating Party (2) month 
+before the expiration date.</Text>
+        <Left>840</Left>
+        <Top>28905</Top>
+        <Width>4500</Width>
+        <Height>1875</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field61</Name>
+        <Section>0</Section>
+        <Text>إذا أخل الطرف الثاني بالعـقد مـــن حـيث مـــدته  بأن استقال أو ترك</Text>
+        <Left>5775</Left>
+        <Top>35190</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field331</Name>
+        <Section>0</Section>
+        <Text>العمل أو رفض العمل الموكول إليه يرحل فوراً على حسابه إلى البلد</Text>
+        <Left>5775</Left>
+        <Top>35535</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field332</Name>
+        <Section>0</Section>
+        <Text>الذي أستقدم منه مع تحميله مصاريف إستقدامه </Text>
+        <Left>5775</Left>
+        <Top>35880</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field333</Name>
+        <Section>0</Section>
+        <Text>-14</Text>
+        <Left>11220</Left>
+        <Top>35190</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field229</Name>
+        <Section>0</Section>
+        <Text>حسب سياسة الشركة التي تحدده وحسب حاجة العمل</Text>
+        <Left>5775</Left>
+        <Top>42795</Top>
+        <Width>5370</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field334</Name>
+        <Section>0</Section>
+        <Text>ساعات العمل الرسمية بمعدل (9) ساعات في اليوم و(6) أيام في الأسبوع </Text>
+        <Left>5580</Left>
+        <Top>42450</Top>
+        <Width>5565</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field343</Name>
+        <Section>0</Section>
+        <Text>-18</Text>
+        <Left>11175</Left>
+        <Top>42450</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field186</Name>
+        <Section>0</Section>
+        <Text>18- </Text>
+        <Left>60</Left>
+        <Top>42390</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field82</Name>
+        <Section>0</Section>
+        <Text>يجب على الطرف الثاني الالتزام بالزي الرسمي للشركة </Text>
+        <Left>5580</Left>
+        <Top>43590</Top>
+        <Width>5565</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field84</Name>
+        <Section>0</Section>
+        <Text>-19</Text>
+        <Left>11175</Left>
+        <Top>43590</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field80</Name>
+        <Section>0</Section>
+        <Text>-20</Text>
+        <Left>11175</Left>
+        <Top>44550</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field91</Name>
+        <Section>0</Section>
+        <Text>The second party must adhere to the company 
+uniform</Text>
+        <Left>540</Left>
+        <Top>43560</Top>
+        <Width>5130</Width>
+        <Height>720</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field92</Name>
+        <Section>0</Section>
+        <Text>19- </Text>
+        <Left>150</Left>
+        <Top>43530</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field93</Name>
+        <Section>0</Section>
+        <Text>20- </Text>
+        <Left>90</Left>
+        <Top>44295</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field97</Name>
+        <Section>0</Section>
+        <Text>JoinDate</Text>
+        <Calculated>-1</Calculated>
+        <Left>3780</Left>
+        <Top>44295</Top>
+        <Width>1530</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field98</Name>
+        <Section>0</Section>
+        <Text>بالتأشـيرة الممنوحة من شركة مجمع السلام الطبي العام وبعد </Text>
+        <Left>5580</Left>
+        <Top>46455</Top>
+        <Width>5565</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field99</Name>
+        <Section>0</Section>
+        <Text> يسري هذا العقد إعتباراً من تاريخ الدخول الى المملكة العربية السعودية</Text>
+        <Left>5730</Left>
+        <Top>46110</Top>
+        <Width>5415</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field105</Name>
+        <Section>0</Section>
+        <Text>-21</Text>
+        <Left>11175</Left>
+        <Top>46140</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field106</Name>
+        <Section>0</Section>
+        <Text>المباشرة الفعلية ، وإلا يعتبر هذا العقد غير ساري </Text>
+        <Left>5580</Left>
+        <Top>46800</Top>
+        <Width>5565</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field110</Name>
+        <Section>0</Section>
+        <Text>This contract is valid from the entering date 
+of the second party to the Kingdom of Saudi Arabia 
+by the visa offered by the first party &amp; after the 
+actual starting the job, otherwise it will be 
+considered as cancelled.
+</Text>
+        <Left>630</Left>
+        <Top>46110</Top>
+        <Width>5130</Width>
+        <Height>1680</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field111</Name>
+        <Section>0</Section>
+        <Text>21- </Text>
+        <Left>180</Left>
+        <Top>46110</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field115</Name>
+        <Section>0</Section>
+        <Text> يسري هذا العقد إعتباراً من تاريخ الدخول الى المملكة العربية السعودية</Text>
+        <Left>5730</Left>
+        <Top>50025</Top>
+        <Width>5415</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field178</Name>
+        <Section>0</Section>
+        <Text>-22</Text>
+        <Left>11190</Left>
+        <Top>50025</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field179</Name>
+        <Section>0</Section>
+        <Text>This contract is valid from the entering date
+of the second party to the Kingdom of Saudi Arabia
+by the visa offered by the first party &amp; after the 
+actual starting the job, otherwise it will be considered 
+as cancelled.</Text>
+        <Left>570</Left>
+        <Top>50025</Top>
+        <Width>5130</Width>
+        <Height>1275</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field180</Name>
+        <Section>0</Section>
+        <Text>22- </Text>
+        <Left>120</Left>
+        <Top>50025</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field181</Name>
+        <Section>0</Section>
+        <Text>NationalityArb</Text>
+        <Calculated>-1</Calculated>
+        <Left>9870</Left>
+        <Top>3820</Top>
+        <Width>1650</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field185</Name>
+        <Section>0</Section>
+        <Text>NationalityEng</Text>
+        <Calculated>-1</Calculated>
+        <Left>120</Left>
+        <Top>3870</Top>
+        <Width>1140</Width>
+        <Height>255</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field209</Name>
+        <Section>0</Section>
+        <Text>السعودية بالتأشـيرة الممنوحة من شركة مجمع السلام الطبي العام وبعد </Text>
+        <Left>5730</Left>
+        <Top>50415</Top>
+        <Width>5415</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field188</Name>
+        <Section>0</Section>
+        <Text>المباشرة الفعلية ، وإلا يعتبر هذا العقد غير ساري</Text>
+        <Left>5730</Left>
+        <Top>50805</Top>
+        <Width>5415</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field217</Name>
+        <Section>0</Section>
+        <Text>أي ملحق في العقد يعتبر جزء من العقــد </Text>
+        <Left>5730</Left>
+        <Top>51390</Top>
+        <Width>5415</Width>
+        <Height>300</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field218</Name>
+        <Section>0</Section>
+        <Text>-23</Text>
+        <Left>11190</Left>
+        <Top>51390</Top>
+        <Width>360</Width>
+        <Height>255</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field219</Name>
+        <Section>0</Section>
+        <Text>Any appendix in the contract is part of the contract</Text>
+        <Left>510</Left>
+        <Top>51390</Top>
+        <Width>5130</Width>
+        <Height>435</Height>
+        <Align>0</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field220</Name>
+        <Section>0</Section>
+        <Text>23- </Text>
+        <Left>60</Left>
+        <Top>51390</Top>
+        <Width>360</Width>
+        <Height>300</Height>
+        <Align>7</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field221</Name>
+        <Section>0</Section>
+        <Text>ArabicMangerName</Text>
+        <Calculated>-1</Calculated>
+        <Left>5805</Left>
+        <Top>3045</Top>
+        <Width>4245</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field222</Name>
+        <Section>0</Section>
+        <Text>EnglishMangerName</Text>
+        <Calculated>-1</Calculated>
+        <Left>1845</Left>
+        <Top>2685</Top>
+        <Width>3735</Width>
+        <Height>255</Height>
+        <Align>6</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>9.75</Size>
+        </Font>
+      </Field>
+      <Field>
+        <Name>Field230</Name>
+        <Section>0</Section>
+        <Text>ArabicMangerName</Text>
+        <Calculated>-1</Calculated>
+        <Left>5940</Left>
+        <Top>53820</Top>
+        <Width>4245</Width>
+        <Height>255</Height>
+        <Align>8</Align>
+        <Font>
+          <Name>Times New Roman</Name>
+          <Size>12</Size>
+        </Font>
+      </Field>
+    </Fields>
+  </Report>
+</Reports>

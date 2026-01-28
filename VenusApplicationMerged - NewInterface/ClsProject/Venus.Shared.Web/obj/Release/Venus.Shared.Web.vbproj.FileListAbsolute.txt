@@ -1,0 +1,56 @@
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.Web.dll
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.Web.pdb
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.Web.Menu.xml
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Microsoft.ApplicationBlocks.Data.dll
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.dll
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.pdb
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbprojAssemblyReference.cache
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.Resources.resources
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.CopyComplete
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.dll
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.Menu.xml
+D:\OcApp\DownLoad\Standard SourceCode_22-06-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.pdb
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.Web.dll
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.Web.pdb
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.Web.Menu.xml
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Microsoft.ApplicationBlocks.Data.dll
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.dll
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.pdb
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbprojAssemblyReference.cache
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.Resources.resources
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.CopyComplete
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.dll
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.Menu.xml
+D:\OcApp\DownLoad\Standard_Source Code 22-07-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.pdb
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.Web.dll
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.Web.pdb
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.Web.Menu.xml
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Microsoft.ApplicationBlocks.Data.dll
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.dll
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.pdb
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.AssemblyReference.cache
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.Resources.resources
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Sh.603CFBB9.Up2Date
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.dll
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.Menu.xml
+D:\OcApp\DownLoad\Standard Source Code 05-11-2025\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.pdb
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.Web.dll
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.Web.pdb
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.Web.Menu.xml
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Microsoft.ApplicationBlocks.Data.dll
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.dll
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Venus.Shared.pdb
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.AssemblyReference.cache
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.Resources.resources
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Sh.603CFBB9.Up2Date
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.dll
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.Menu.xml
+D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.pdb
