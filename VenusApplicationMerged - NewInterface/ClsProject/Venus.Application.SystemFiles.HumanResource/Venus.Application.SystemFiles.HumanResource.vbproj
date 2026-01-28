@@ -51,18 +51,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Infragistics35.WebUI.Shared.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.Shared.v11.1.dll</HintPath>
+    <Reference Include="Infragistics35.WebUI.Shared.v11.1">
+      <HintPath>..\..\Dlls\Infragistics35.WebUI.Shared.v11.1.dll</HintPath>
     </Reference>
-    <Reference Include="Infragistics35.WebUI.UltraWebGrid.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.UltraWebGrid.v11.1.dll</HintPath>
+    <Reference Include="Infragistics35.WebUI.UltraWebGrid.v11.1">
+      <HintPath>..\..\Dlls\Infragistics35.WebUI.UltraWebGrid.v11.1.dll</HintPath>
     </Reference>
-    <Reference Include="Infragistics35.WebUI.WebCombo.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.WebCombo.v11.1.dll</HintPath>
+    <Reference Include="Infragistics35.WebUI.WebCombo.v11.1">
+      <HintPath>..\..\Dlls\Infragistics35.WebUI.WebCombo.v11.1.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+    <Reference Include="Microsoft.ApplicationBlocks.Data">
+      <HintPath>..\..\Dlls\Microsoft.ApplicationBlocks.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -75,10 +74,10 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="Venus.Shared.Errors">
-      <HintPath>bin\Venus.Shared.Errors.dll</HintPath>
+      <HintPath>..\..\Dlls\Venus.Shared.Errors.dll</HintPath>
     </Reference>
     <Reference Include="Venus.Shared.Security">
-      <HintPath>bin\Venus.Shared.Security.dll</HintPath>
+      <HintPath>..\..\Dlls\Venus.Shared.Security.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

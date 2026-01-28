@@ -241,3 +241,13 @@ D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProje
 D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Debug\Venus.Shared.dll
 D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Debug\Venus.Sared.xml
 D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Debug\Venus.Shared.pdb
+D:\OcApp\AAA GitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Debug\Venus.Shared.dll
+D:\OcApp\AAA GitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Debug\Venus.Shared.pdb
+D:\OcApp\AAA GitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\bin\Debug\Venus.Sared.xml
+D:\OcApp\AAA GitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Debug\Venus.shared.vbproj.AssemblyReference.cache
+D:\OcApp\AAA GitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Debug\Venus.Shared.Resources.resources
+D:\OcApp\AAA GitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Debug\Venus.shared.vbproj.GenerateResource.cache
+D:\OcApp\AAA GitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Debug\Venus.shared.vbproj.CoreCompileInputs.cache
+D:\OcApp\AAA GitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Debug\Venus.Shared.dll
+D:\OcApp\AAA GitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Debug\Venus.Sared.xml
+D:\OcApp\AAA GitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Sared\obj\Debug\Venus.Shared.pdb
