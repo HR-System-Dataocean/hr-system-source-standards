@@ -34,7 +34,7 @@ Partial Class frmOvertimeRequestAction
         Dim ClsVacationsTypes As New Clshrs_VacationsTypes(Page)
         Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsEmployees.ConnectionString)
         Dim ClsWebHandler As New Venus.Shared.Web.WebHandler
-
+        Dim push As String = ""
         If Not IsPostBack Then
             Dim strselectAction As String = "select ActionCode as ID,ActionAraName,ActionEngName from SS_UserActions where ID<4 "
             Dim Item As Global.System.Web.UI.WebControls.ListItem
