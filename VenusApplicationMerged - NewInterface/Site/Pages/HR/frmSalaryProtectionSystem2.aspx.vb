@@ -516,7 +516,7 @@ Partial Class frmSalaryProtectionSystem2
             Dim strFilter As String = " And isnull(e.Code,'') like '%" & txtCode.Text & "%'  "
 
             If TextBox_Sponsor.Text <> "" Then
-                strFilter &= " And e.SponsorID in (select ID from hrs_Sponsors where Code in (" & TextBox_Sponsor.Text & ") "
+                strFilter &= " And e.SponsorID in (select ID from hrs_Sponsors where Code in (" & TextBox_Sponsor.Text & ")) "
             End If
             If TextBox_Contract.Text <> "" Then
                 strFilter &= " and e.ID in (select EmployeeID from hrs_Contracts where ContractTypeID in (select ID from hrs_ContractsTypes where Code in (" & TextBox_Contract.Text & "))) "
