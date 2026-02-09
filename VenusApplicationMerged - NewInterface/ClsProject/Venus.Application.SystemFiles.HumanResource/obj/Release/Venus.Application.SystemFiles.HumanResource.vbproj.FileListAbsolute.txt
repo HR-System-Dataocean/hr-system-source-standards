@@ -336,3 +336,9 @@ D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProje
 D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.dll
 D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.xml
 D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.pdb
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.vbproj.AssemblyReference.cache
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.Resources.resources
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.vbproj.GenerateResource.cache
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.vbproj.CoreCompileInputs.cache
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.xml
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.pdb

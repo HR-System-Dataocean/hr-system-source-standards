@@ -7,6 +7,7 @@ Imports Stimulsoft.Report
 Imports Stimulsoft.Report.Dictionary
 Imports Stimulsoft.Report.Components
 Imports Stimulsoft.Report.Web
+Imports Stimulsoft.Base.Drawing
 
 Partial Class Pages_Reports_StiViewer
     Inherits System.Web.UI.Page
@@ -102,13 +103,13 @@ Partial Class Pages_Reports_StiViewer
             End If
 
             Dim alreadyExists As Boolean = False
-            For Each c As StiComponent In footer.Components
-                Dim t = TryCast(c, StiText)
-                If t IsNot Nothing AndAlso Not String.IsNullOrEmpty(t.Text) AndAlso t.Text.IndexOf("PrintedBy", StringComparison.OrdinalIgnoreCase) >= 0 Then
-                    alreadyExists = True
-                    Exit For
-                End If
-            Next
+            'For Each c As StiComponent In footer.Components
+            '    Dim t = TryCast(c, StiText)
+            '    If t IsNot Nothing AndAlso Not String.IsNullOrEmpty(t.Text) AndAlso t.Text.IndexOf("PrintedBy", StringComparison.OrdinalIgnoreCase) >= 0 Then
+            '        alreadyExists = True
+            '        Exit For
+            '    End If
+            'Next
             If alreadyExists Then Continue For
 
             Dim isArabic As Boolean = String.Equals(ProfileCls.CurrentLanguage(), "Ar", StringComparison.OrdinalIgnoreCase)
@@ -120,7 +121,7 @@ Partial Class Pages_Reports_StiViewer
             txt.HorAlignment = If(isArabic, StiTextHorAlignment.Right, StiTextHorAlignment.Left)
             txt.VertAlignment = StiVertAlignment.Center
             txt.Font = New Drawing.Font("Arial", 8.0F, Drawing.FontStyle.Regular)
-            txt.ClientRectangle = New Drawing.RectangleD(0, 0, p.Width, footer.Height)
+            txt.ClientRectangle = New Stimulsoft.Base.Drawing.RectangleD(0, 0, p.Width, footer.Height)
             footer.Components.Add(txt)
         Next
     End Sub

@@ -530,7 +530,7 @@
                                                             </asp:DropDownList>
                                                         </td>
                                     <td  style="width:10px" class="LabelArea">
-                                                            <asp:Label ID="Label1" runat="server" Width="50px" SkinID="Label_LargtNormal"
+                                                            <asp:Label ID="Label1" runat="server" Width="90px" SkinID="Label_LargtNormal"
                                                                 Text="من تاريخ" meta:resourcekey="lblYearResource1"></asp:Label>
                                                         </td>
                                                         <td class="DataArea">
@@ -542,7 +542,7 @@
    </igsch:WebDateChooser>
                                                         </td>
                                 <td  style="width:20px" class="LabelArea">
-                                                            <asp:Label ID="Label2" runat="server" Width="50px" SkinID="Label_LargtNormal"
+                                                            <asp:Label ID="Label2" runat="server" Width="90px" SkinID="Label_LargtNormal"
                                                                 Text="الي تاريخ" meta:resourcekey="lblMonthResource1"></asp:Label>
                                                         </td>
                                                         <td class="DataArea">
@@ -554,15 +554,7 @@
    </igsch:WebDateChooser>
                                                         </td>
                             <%--حالة الطلب--%>
-                              <td  style="width:20px" class="LabelArea">
-                              <asp:Label ID="lblStatus" runat="server" Width="50px" SkinID="Label_LargtNormal"
-                                  Text="حالة الطلب" meta:resourcekey="lblStatusResource1"></asp:Label>
-                          </td>
-                          <td class="DataArea">
-                              <asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="True" SkinID="DropDownList_DefaultNormal"
-                                  meta:resourcekey="RequestStatusResource1" TabIndex="3">
-                              </asp:DropDownList>
-                          </td>
+                             
 
 
                             <%--كود الموظف--%>
@@ -601,6 +593,90 @@
 
 
                         </tr>
+
+                                                <tr>
+                            <td style="width: 32px; vertical-align: top">
+                               
+                            </td>
+                               <td class="SeparArea">
+                                   </td>
+                               <td class="SeparArea">
+                                                        </td>
+                                                        <td  style="width:20px" class="LabelArea">
+                                                               <asp:Label ID="lblStatus" runat="server" Width="70px" SkinID="Label_LargtNormal"
+        Text="حالة الطلب" meta:resourcekey="lblStatusResource1"></asp:Label>
+</td>
+<td class="DataArea">
+    <asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="True" SkinID="DropDownList_DefaultNormal"
+        meta:resourcekey="RequestStatusResource1" TabIndex="3">
+    </asp:DropDownList>
+                                                        </td>
+                                    <td  style="width:10px" class="LabelArea">
+                                                            <asp:Label ID="lblTrxFromDate" runat="server" Width="90px" SkinID="Label_LargtNormal"
+                                                                Text="من تاريخ" meta:resourcekey="lblTrxFromDateResource1"></asp:Label>
+                                                        </td>
+                                                        <td class="DataArea">
+                                                           <igsch:WebDateChooser ID="txtTrxFromDate" runat="server" BorderColor="#CCCCCC" BorderStyle="Solid"
+       BorderWidth="1px" Height="18px" NullDateLabel="" Style="font-family: Tahoma;
+       font-size: 8pt; font-weight: Normal; color: Black; border: solid 1px #CCCCCC"
+       Width="130px">
+       <AutoPostBack ValueChanged="True" />
+   </igsch:WebDateChooser>
+                                                        </td>
+                                <td  style="width:20px" class="LabelArea">
+                                                            <asp:Label ID="lblTrxToDate" runat="server" Width="90px" SkinID="Label_LargtNormal"
+                                                                Text="الي تاريخ" meta:resourcekey="lblTrxToDateResource1"></asp:Label>
+                                                        </td>
+                                                        <td class="DataArea">
+                                                        <igsch:WebDateChooser ID="txtTrxToDate" runat="server" BorderColor="#CCCCCC" BorderStyle="Solid"
+       BorderWidth="1px" Height="18px" NullDateLabel="" Style="font-family: Tahoma;
+       font-size: 8pt; font-weight: Normal; color: Black; border: solid 1px #CCCCCC"
+       Width="130px">
+       <AutoPostBack ValueChanged="True" />
+   </igsch:WebDateChooser>
+                                                        </td>
+                          
+                                                    
+                            <%--كود المدير المباشر--%>
+
+
+
+                                                           <td class="LabelArea">
+                                                                  <asp:Label ID="lblMananger" runat="server" Width="50px" meta:resourcekey="lblManangerResource1"
+                                                                    SkinID="Label_DefaultNormal" Text="كود المدير " style="margin-right: 10px;"></asp:Label>
+                                                                
+                                                            </td>
+                                                               <td>
+                  <asp:TextBox ID="txtMananger" Width="50px" runat="server"  MaxLength="15"
+         AutoPostBack="True" meta:resourcekey="txtManangerResource1">
+    </asp:TextBox>
+              </td>  
+                                                            
+ 
+<td>
+                 <igtxt:WebImageButton ID="btnManagerSearch" runat="server" Height="18px" AutoSubmit="False"
+                     meta:resourcekey="btnManagerSearchResource1" Overflow="NoWordWrap" UseBrowserDefaults="False"
+                     Width="24px">
+                     <Alignments TextImage="ImageBottom" />
+                     <Appearance>
+                         <Image Url="./Img/forum_search.gif" />
+                     </Appearance>
+                 </igtxt:WebImageButton>
+             </td>  
+                                                            
+                                                                <td class="spacearea">
+
+</td>
+<td>
+
+ <asp:TextBox ID="txtManagerName" Width="160px" runat="server"  MaxLength="100"
+        AutoPostBack="false"  meta:resourcekey="txtEmployeeResource1">
+   </asp:TextBox>
+    </td>
+                                                            
+ 
+
+                        </tr>
                          </table>
                     <table style="width: 45%; height: 30px; vertical-align: top">
                          <tr>
@@ -635,39 +711,6 @@
                                  
 
 
-                            <%--كود المدير المباشر--%>
-
-
-
-                                                           <td class="LabelArea">
-                                                                  <asp:Label ID="lblMananger" runat="server" Width="50px" meta:resourcekey="lblManangerResource1"
-                                                                    SkinID="Label_DefaultNormal" Text="كود المدير " style="margin-right: 10px;"></asp:Label>
-                                                                
-                                                            </td>
-                                                               <td>
-                  <asp:TextBox ID="txtMananger" Width="50px" runat="server"  MaxLength="15"
-         AutoPostBack="True" meta:resourcekey="txtManangerResource1">
-    </asp:TextBox>
-              </td>  
-                                                            
- 
-<td>
-                 <igtxt:WebImageButton ID="btnManagerSearch" runat="server" Height="18px" AutoSubmit="False"
-                     meta:resourcekey="btnManagerSearchResource1" Overflow="NoWordWrap" UseBrowserDefaults="False"
-                     Width="24px">
-                     <Alignments TextImage="ImageBottom" />
-                     <Appearance>
-                         <Image Url="./Img/forum_search.gif" />
-                     </Appearance>
-                 </igtxt:WebImageButton>
-             </td>  
-                                                            
- 
-<td>
- <asp:TextBox ID="txtManagerName" Width="160px" runat="server"  MaxLength="100"
-        AutoPostBack="false"  meta:resourcekey="txtEmployeeResource1">
-   </asp:TextBox>
-    </td>
 
 
                         <%--    <td style="width: 50%; vertical-align: middle"></td>

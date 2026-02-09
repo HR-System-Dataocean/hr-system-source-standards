@@ -292,6 +292,12 @@ Partial Class frmEmployeesVacations
             If ddlBranch.SelectedValue > 0 Then
                 Where += " and SS_VFollowup.EmployeeID in (select ID from hrs_Employees where BranchID=" & ddlBranch.SelectedValue & ") "
             End If
+            If Not String.IsNullOrEmpty(txtTrxFromDate.Text) Then
+                Where += " and TrxDate>=convert(datetime,'" & txtTrxFromDate.Value & "',103) "
+            End If
+            If Not String.IsNullOrEmpty(txtTrxToDate.Text) Then
+                Where += " and TrxDate<=convert(datetime,'" & txtTrxToDate.Value & "',103)"
+            End If
             If ddlDepartment.SelectedValue > 0 Then
                 Where += " and SS_VFollowup.EmployeeID in (select ID from hrs_Employees where DepartmentID=" & ddlDepartment.SelectedValue & ") "
             End If
@@ -501,6 +507,12 @@ Partial Class frmEmployeesVacations
             If ddlBranch.SelectedValue > 0 Then
                 Where += " and SS_VFollowup.EmployeeID in (select ID from hrs_Employees where BranchID=" & ddlBranch.SelectedValue & ") "
             End If
+            If Not String.IsNullOrEmpty(txtTrxFromDate.Text) Then
+                Where += " and TrxDate>=convert(datetime,'" & txtTrxFromDate.Value & "',103) "
+            End If
+            If Not String.IsNullOrEmpty(txtTrxToDate.Text) Then
+                Where += " and TrxDate<=convert(datetime,'" & txtTrxToDate.Value & "',103)"
+            End If
             If ddlDepartment.SelectedValue > 0 Then
                 Where += " and SS_VFollowup.EmployeeID in (select ID from hrs_Employees where DepartmentID=" & ddlDepartment.SelectedValue & ") "
             End If
@@ -631,6 +643,13 @@ Partial Class frmEmployeesVacations
             If Not String.IsNullOrEmpty(txtMananger.Text) Then
                 ClsEmployees.Find("Code='" & txtMananger.Text & "'")
                 Criteria += " and SS_VFollowup.EmployeeID in (select ID from hrs_Employees where ManagerID=" & ClsEmployees.ID & ") "
+            End If
+
+            If Not String.IsNullOrEmpty(txtTrxFromDate.Text) Then
+                Criteria += " and TrxDate>=convert(datetime,'" & txtTrxFromDate.Value & "',103) "
+            End If
+            If Not String.IsNullOrEmpty(txtTrxToDate.Text) Then
+                Criteria += " and TrxDate<=convert(datetime,'" & txtTrxToDate.Value & "',103)"
             End If
 
             If str1 <> "" Then

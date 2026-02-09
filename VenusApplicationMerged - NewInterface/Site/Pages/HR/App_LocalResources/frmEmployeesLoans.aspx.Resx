@@ -432,4 +432,7 @@
   <data name="UltraGridColumnResource17.Header.Caption" xml:space="preserve">
     <value>المدفوع</value>
   </data>
+  <data name="lblEndContractDateResource1.Text" xml:space="preserve">
+    <value>تاريخ نهاية العقد</value>
+  </data>
 </root>

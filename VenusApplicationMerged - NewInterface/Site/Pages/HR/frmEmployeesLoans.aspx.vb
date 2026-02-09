@@ -286,7 +286,33 @@ Partial Class frmEmployeesLoans
                 Clear()
 
             Case "Delete"
+
                 If ClsEmployees.Find("Code = '" & txtCode.Text & "'") Then
+
+                    '// Check if the record is locked
+                    Dim ClsForms As New ClsSys_Forms(Page)
+                    ClsForms.Find("EngName = 'frmEmployeesLoans.aspx'")
+                    Dim ClsFisicalYearsPeriods As New Clssys_FiscalYearsPeriods(Me)
+                    ClsFisicalYearsPeriods.Find("FromDate <= '" & ClsEmployees.SetHigriDate(txtTransactionDate.Value) & "' and ToDate >='" & ClsEmployees.SetHigriDate(txtTransactionDate.Value) & "'")
+
+                    Dim clsFiscalYearsPeriodsModules As New Clssys_FiscalYearsPeriodsModules(Page)
+                    clsFiscalYearsPeriodsModules.Find(" FiscalYearPeriodID=" & ClsFisicalYearsPeriods.ID & " and ModuleID=" & ClsForms.ModuleID)
+                    'Dim IntSelectedPeriod = ClsFisicalYearsPeriods.GetLastOpenedFiscalPieriod(ClsForms.ModuleID)
+                    If Not String.IsNullOrWhiteSpace(Convert.ToString(clsFiscalYearsPeriodsModules.CloseDate)) Then
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "TransactionDate in Closed Period !/!تاريخ الحركة في فترة مغلقة"))
+                        Return
+                    End If
+
+                    Dim periodSql As String
+                    Dim periodPrepared As Integer
+                    periodSql = "select count(hrs_EmployeesTransactions.ID) from hrs_EmployeesTransactions where hrs_EmployeesTransactions.PrepareType='N' and hrs_EmployeesTransactions.FiscalYearPeriodID=" & ClsFisicalYearsPeriods.ID & " and hrs_EmployeesTransactions.EmployeeID=" & ClsEmployees.ID
+                    periodPrepared = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, periodSql)
+
+                    If periodPrepared > 0 Then
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Attention...Please Note that this financil period has been closed!/!يرجي العلم انه قد تم اغلاق هذه الفترة المالية "))
+
+                    End If
+
                     ClsEmployeesPayability.Find("Number='" & lblDescLoanCode.Text & "'")
                     Dim hrsemployeeTransactions As New Clshrs_EmployeesTransactions(Me)
                     If hrsemployeeTransactions.Find("PostDate is not null and ID = " & ClsEmployeesPayability.RegComputerID) Then
@@ -441,7 +467,19 @@ Partial Class frmEmployeesLoans
         If ClsEmployees.Find(" Code='" & txtCode.Text & "'") Then
             If CheckValid(ClsEmployees.ID) Then
 
-                lblDescEnglishName.Text = ClsEmployees.EnglishName
+                Dim ClsContract As New Clshrs_Contracts(Page)
+                Dim ValidContractChek As Integer = ClsContract.ContractValidatoinId(ClsEmployees.ID, DateTime.Now.Date)
+                If ValidContractChek > 0 Then
+                    ClsContract.Find("ID = " & ValidContractChek)
+                    If ClsContract.EndDate IsNot Nothing Then
+                        lblEndContractDate.Text = Convert.ToDateTime(ClsEmployees.GetHigriDate(ClsContract.EndDate)).ToString("dd/MM/yyyy")
+                    Else
+                        lblEndContractDate.Text = ""
+                    End If
+                End If
+
+
+                    lblDescEnglishName.Text = ClsEmployees.EnglishName
                 ClsEmployeesPayability.AddDataUpdateSchedules(Page, UltraWebTab1, "frmEmployeeLoans", ClsEmployees.ID)
                 ClsEmployeesPayability.Find(" EmployeeID=" & ClsEmployees.ID)
                 uwgEmployeeLoans.DataSource = ClsEmployeesPayability.DataSet.Tables(0).DefaultView

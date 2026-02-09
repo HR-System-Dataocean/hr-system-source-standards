@@ -114,28 +114,36 @@
 
         function CloseModalAndRefresh() {
             try {
-                // التحقق من أننا في modal dialog
+                // التحقق من أننا داخل modal dialog
                 if (window.parent && window.parent.ODialoge) {
+
                     // إغلاق الـ modal
                     window.parent.ODialoge.dialog('close');
 
-                    // تحديث الصفحة الأم بعد تأخير بسيط
+                    // Redirect بدل Reload (يمنع رسالة Firefox)
                     setTimeout(function () {
                         if (window.parent.location) {
-                            window.parent.location.reload();
+                            window.parent.location.href =
+                                window.parent.location.pathname;
                         }
-                    }, 500);
+                    }, 300);
 
                     return;
                 }
 
-                // إذا لم نكن في modal، استخدم CloseMe العادية
-                CloseMe();
+                // إذا لم نكن داخل modal
+                if (typeof CloseMe === "function") {
+                    CloseMe();
+                } else {
+                    window.location.href = window.location.pathname;
+                }
+
             } catch (e) {
                 console.error('Error in CloseModalAndRefresh:', e);
-                window.close();
+                window.location.href = window.location.pathname;
             }
         }
+
 
         function CloseMe() {
             try {

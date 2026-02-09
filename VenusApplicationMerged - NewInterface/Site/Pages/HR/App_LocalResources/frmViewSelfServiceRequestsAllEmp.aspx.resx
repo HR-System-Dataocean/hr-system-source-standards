@@ -145,7 +145,7 @@
     <value>المدير</value>
   </data>
   <data name="lblMonthResource1.Text" xml:space="preserve">
-    <value>الي تاريخ</value>
+    <value>الطلب الي تاريخ</value>
   </data>
   <data name="lblRegDateResource1.Text" xml:space="preserve">
     <value>سجل فى</value>
@@ -159,8 +159,14 @@
   <data name="lblStatusResource1.Text" xml:space="preserve">
     <value>حالة الطلب</value>
   </data>
+  <data name="lblTrxFromDateResource1.Text" xml:space="preserve">
+    <value>الحركة من تاريخ</value>
+  </data>
+  <data name="lblTrxToDateResource1.Text" xml:space="preserve">
+    <value>الحركة الى تاريخ</value>
+  </data>
   <data name="lblYearResource1.Text" xml:space="preserve">
-    <value>من تاريخ</value>
+    <value>الطلب من تاريخ</value>
   </data>
   <data name="LinkButton_HelpResource1.Text" xml:space="preserve">
     <value>مساعدة</value>

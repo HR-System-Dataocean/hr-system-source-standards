@@ -1,0 +1,39 @@
+# Build outputs
+bin/
+obj/
+
+# NuGet packages (classic)
+packages/
+
+# Logs
+*.log
+
+# Compiled binaries
+*.dll
+*.exe
+*.pdb
+
+# NuGet artifacts
+*.nupkg
+*.snupkg
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+/VenusApplicationMerged - NewInterface/ClsProject/OfficeWebUI/obj/Debug/OfficeWebUI.csproj.FileListAbsolute.txt
+/VenusApplicationMerged - NewInterface/ClsProject/OfficeWebUI/obj/Debug/OfficeWebUI.csproj.GenerateResource.cache
+/VenusApplicationMerged - NewInterface/ClsProject/Venus.Application.SystemFiles.HumanResource/bin/Debug/Venus.Application.SystemFiles.HumanResource.pdb
+/VenusApplicationMerged - NewInterface/ClsProject/Venus.Application.SystemFiles.HumanResource/bin/Debug/Venus.Application.SystemFiles.System.pdb
+/VenusApplicationMerged - NewInterface/ClsProject/Venus.Application.SystemFiles.HumanResource/bin/Debug/Venus.Shared.Web.pdb
+/VenusApplicationMerged - NewInterface/ClsProject/Venus.Application.SystemFiles.HumanResource/obj/Debug/Venus.Application.SystemFiles.HumanResource.pdb
+/VenusApplicationMerged - NewInterface/ClsProject/Venus.Application.SystemFiles.System/bin/Debug/Venus.Application.SystemFiles.System.pdb
+/VenusApplicationMerged - NewInterface/ClsProject/Venus.Application.SystemFiles.System/bin/Debug/Venus.Shared.Web.pdb
+/VenusApplicationMerged - NewInterface/ClsProject/Venus.Sared/obj/Debug/Venus.shared.vbproj.FileListAbsolute.txt
+/VenusApplicationMerged - NewInterface/ClsProject/Venus.Sared/obj/Debug/Venus.shared.vbproj.GenerateResource.cache
+/VenusApplicationMerged - NewInterface/ClsProject/Venus.Shared.Web/bin/Debug/Venus.Shared.Web.pdb

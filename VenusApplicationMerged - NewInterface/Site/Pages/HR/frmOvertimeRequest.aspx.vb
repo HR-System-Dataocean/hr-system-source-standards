@@ -138,6 +138,10 @@ Partial Class frmOvertimeRequest
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please Enter Overttime Date /برجاءإدخال تاريخ الوقت الإضافي"))
                     Exit Sub
                 End If
+                If CDate(OverTimeDate.Text) > DateTime.Now Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " The date of the extra time must be before today's date. /تاريخ الوقت الإضافي يجب ان يكون قبل تاريخ اليوم"))
+                    Exit Sub
+                End If
                 If Convert.ToInt16(txtHoursNo.Text) > 12 Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " The count of hours cannot exceed 12 hours. /لا يمكن زيادة عدد الساعات عن 12 ساعه"))
                     Exit Sub
@@ -159,6 +163,10 @@ Partial Class frmOvertimeRequest
                 End If
                 If OverTimeDate.Text = "" Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please Enter Overttime Date /برجاءإدخال تاريخ الوقت الإضافي"))
+                    Exit Sub
+                End If
+                If CDate(OverTimeDate.Text) > DateTime.Now Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " The date of the extra time must be before today's date. /تاريخ الوقت الإضافي يجب ان يكون قبل تاريخ اليوم"))
                     Exit Sub
                 End If
                 If Convert.ToInt16(txtHoursNo.Text) > 12 Then

@@ -408,7 +408,7 @@ Partial Class frmAttendancePreparation
                     End If
 
                     Dim periodSql As String
-                    periodSql = "select count(hrs_EmployeesTransactions.ID) from hrs_EmployeesTransactions where hrs_EmployeesTransactions.FiscalYearPeriodID=" & ClsFisicalYearsPeriods.ID
+                    periodSql = "select count(hrs_EmployeesTransactions.ID) from hrs_EmployeesTransactions where PrepareType='N' and EmployeeID=" & ClsEmployees.ID & " and hrs_EmployeesTransactions.FiscalYearPeriodID=" & ClsFisicalYearsPeriods.ID
                     Dim periodPrepared As Integer
                     periodPrepared = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, periodSql)
                     If periodPrepared > 0 Then
@@ -768,8 +768,6 @@ Partial Class frmAttendancePreparation
         Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
         Dim notes As String = "Request Serial " & RequestSerial & " .. Installment start date=" & ClsEmployeesPayability.SetHigriDate(CDate(InstallmentDate.Value).AddMonths(1)) & ",IntallmentsCount=" & txtInstallmentsNo.Text
         ClsEmployeesPayability.TransactionComment = notes
-        ClsEmployeesPayability.Src = "SS_001913"
-        ClsEmployeesPayability.RequestID = RequestSerial
 
         Dim PayID As Integer = ClsEmployeesPayability.Save()
         SaveInstalment(PayID, employeeId)

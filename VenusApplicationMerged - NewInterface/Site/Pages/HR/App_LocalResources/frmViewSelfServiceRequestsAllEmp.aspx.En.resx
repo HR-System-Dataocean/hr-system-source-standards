@@ -145,7 +145,7 @@
     <value>Manager</value>
   </data>
   <data name="lblMonthResource1.Text" xml:space="preserve">
-    <value>To Date</value>
+    <value>Request To Date</value>
   </data>
   <data name="lblRegDateResource1.Text" xml:space="preserve">
     <value>Log In</value>
@@ -159,8 +159,14 @@
   <data name="lblStatusResource1.Text" xml:space="preserve">
     <value>Request Statues</value>
   </data>
+  <data name="lblTrxFromDateResource1.Text" xml:space="preserve">
+    <value>Trx From Date</value>
+  </data>
+  <data name="lblTrxToDateResource1.Text" xml:space="preserve">
+    <value>Trx To Date</value>
+  </data>
   <data name="lblYearResource1.Text" xml:space="preserve">
-    <value>From Date</value>
+    <value>Request From Date</value>
   </data>
   <data name="LinkButton_HelpResource1.Text" xml:space="preserve">
     <value>Help</value>

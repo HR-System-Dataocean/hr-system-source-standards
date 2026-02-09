@@ -289,7 +289,7 @@ Partial Class frmPreparedPosting
 
             If Not String.IsNullOrWhiteSpace(sponsor) Then
                 'strFilter &= " And e.SponsorID in (select ID from hrs_Sponsors where Code = '" & TextBox_Sponsor.Text & "') "
-                strFilter &= " And e.SponsorID in (select ID from hrs_Sponsors where Code in (" & TextBox_Sponsor.Text & ") "
+                strFilter &= " And e.SponsorID in (select ID from hrs_Sponsors where Code in (" & TextBox_Sponsor.Text & ")) "
             End If
 
             If TextBox_Contract.Text <> "" Then

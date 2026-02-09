@@ -11840,6 +11840,271 @@ GO
 
         ExecuteUpdate(SQL)
 
+
+
+        SQL = "
+
+CREATE OR ALTER VIEW [dbo].[SS_VFollowup]
+AS
+/*-1==============================الاجازة==================*/ SELECT SS_VacationRequest.ID, SS_VacationRequest.VacationType, SS_VacationRequest.Code AS RequestSerial, SS_VacationRequest.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_VacationRequest.RequestDate, CASE WHEN SS_VacationRequest.VacationType = 'SS_0011' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'اجازة سنوي اداري' WHEN SS_VacationRequest.VacationType = 'SS_0012' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'اجازة سنوي طبي' WHEN SS_VacationRequest.VacationType = 'SS_0030' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'اجازة سنوي تشغيلي' WHEN SS_VacationRequest.VacationType = 'SS_0031' THEN 'اجازة اخرى تشغيلي' WHEN SS_VacationRequest.VacationType = 'SS_0035' THEN 'طلب اجازة اخرى – إداري داخلي' WHEN
+                   SS_VacationRequest.VacationType = 'SS_0036' THEN 'طلب اجازة اخرى – تمريض' WHEN SS_VacationRequest.VacationType = 'SS_0037' THEN 'طلب اجازة اخرى – الإدارة العامة' WHEN SS_VacationRequest.VacationType = 'SS_0032' THEN 'طلب إجازة سنوية – إداري داخلي'
+                   WHEN SS_VacationRequest.VacationType = 'SS_0033' THEN 'طلب إجازة سنوية – تمريض' WHEN SS_VacationRequest.VacationType = 'SS_0034' THEN 'طلب إجازة سنوية – الإدارة العامة' ELSE hrs_VacationsTypes.ArbName4S END AS RequestArbName,
+                   CASE WHEN SS_VacationRequest.VacationType = 'SS_0011' AND SS_VacationRequest.VacationTypeID = 1 THEN 'Annual Vacation Admin' WHEN SS_VacationRequest.VacationType = 'SS_0012' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'Annual Vacation Medical' WHEN SS_VacationRequest.VacationType = 'SS_0030' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'Annual Vacation Operational' WHEN SS_VacationRequest.VacationType = 'SS_0031' THEN 'Other Vacation Operational' WHEN SS_VacationRequest.VacationType = 'SS_0032' THEN 'Annual Leave Request – Internal Administration'
+                   WHEN SS_VacationRequest.VacationType = 'SS_0033' THEN 'Annual Leave Request – Nursing' WHEN SS_VacationRequest.VacationType = 'SS_0034' THEN 'Annual Leave Request – General Administration' WHEN SS_VacationRequest.VacationType
+                   = 'SS_0035' THEN 'Other Leave Request – Internal Administration' WHEN SS_VacationRequest.VacationType = 'SS_0036' THEN 'Other Leave Request – Nursing' WHEN SS_VacationRequest.VacationType = 'SS_0037' THEN 'Other Leave Request – General Administration'
+                   ELSE hrs_VacationsTypes.EngName END AS RequestEngName, CASE WHEN SS_VacationRequest.VacationType = 'SS_0011' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'SS_0011' WHEN SS_VacationRequest.VacationType = 'SS_0012' AND SS_VacationRequest.VacationTypeID = 1 THEN 'SS_0012' WHEN SS_VacationRequest.VacationType = 'SS_0030' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'SS_0030' WHEN SS_VacationRequest.VacationType = 'SS_0031' THEN 'SS_0031' WHEN SS_VacationRequest.VacationType = 'SS_0032' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'SS_0032' WHEN SS_VacationRequest.VacationType = 'SS_0033' AND SS_VacationRequest.VacationTypeID = 1 THEN 'SS_0033' WHEN SS_VacationRequest.VacationType = 'SS_0034' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'SS_0034' WHEN SS_VacationRequest.VacationType = 'SS_0035' THEN 'SS_0035' WHEN SS_VacationRequest.VacationType = 'SS_0036' THEN 'SS_0036' WHEN SS_VacationRequest.VacationType
+                   = 'SS_0037' THEN 'SS_0037' WHEN SS_VacationRequest.VacationType = 'SS_0018' THEN 'SS_0018' ELSE 'SS_0013' END AS FormCode, RequestStautsTypeID,SS_VacationRequest.StartDate AS TrxDate
+FROM     SS_VacationRequest JOIN
+                  hrs_Employees ON SS_VacationRequest.EmployeeID = hrs_Employees.id JOIN
+                  hrs_VacationsTypes ON SS_VacationRequest.VacationTypeID = hrs_VacationsTypes.ID INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*-2==============================الاستئذان=======================================================*/ UNION
+SELECT SS_ExecuseRequest.ID, '' AS VacationType, SS_ExecuseRequest.Code AS RequestSerial, SS_ExecuseRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_ExecuseRequest.RequestDate, 'طلب استئذان' AS RequestArbName, 'Execuse Request' AS RequestEngName, 'SS_0014' AS FormCode, RequestStautsTypeID,SS_ExecuseRequest .ExecuseDate AS TrxDate
+FROM     SS_ExecuseRequest JOIN
+                  hrs_Employees ON SS_ExecuseRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*3 ============================انهاء خدمة ===============================================================*/ UNION
+SELECT SS_EndOfServiceRequest.ID, '' AS VacationType, SS_EndOfServiceRequest.Code AS RequestSerial, SS_EndOfServiceRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_EndOfServiceRequest.RequestDate, CASE WHEN FormCode = 'SS_0015' THEN 'طلب انهاء خدمة' ELSE 'طلب انهاء خدمة طبي' END AS RequestArbName, 
+                  CASE WHEN FormCode = 'SS_0015' THEN 'End Of Service Request' ELSE 'End Of Service Medical Request' END AS RequestEngName, FormCode AS FormCode, RequestStautsTypeID,SS_EndOfServiceRequest.EOSDate AS TrxDate
+FROM     SS_EndOfServiceRequest JOIN
+                  hrs_Employees ON SS_EndOfServiceRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*4============================خروج وعودة ==============================================*/ UNION
+SELECT SS_ExitEntryRequest.ID, '' AS VacationType, SS_ExitEntryRequest.Code AS RequestSerial, SS_ExitEntryRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_ExitEntryRequest.RequestDate, 'طلب خروج وعودة' AS RequestArbName, 'Exit & Re-entry Requests' AS RequestEngName, 'SS_00191' AS FormCode, RequestStautsTypeID,SS_ExitEntryRequest.ExitDate AS TrxDate
+
+FROM     SS_ExitEntryRequest JOIN
+                  hrs_Employees ON SS_ExitEntryRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*5============================ تأشيرة الأسرة أو تأشيرة الزيارة ==============================================*/ UNION
+SELECT SS_VisaRequest.ID, '' AS VacationType, SS_VisaRequest.Code AS RequestSerial, SS_VisaRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_VisaRequest.RequestDate, 
+                  'طلب تأشيرة' AS RequestArbName, 'visa Requests' AS RequestEngName, 'SS_00192' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_VisaRequest JOIN
+                  hrs_Employees ON SS_VisaRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*6============================  خطاب قرض ==============================================*/ UNION
+SELECT SS_LoanLetterRequest.ID, '' AS VacationType, SS_LoanLetterRequest.Code AS RequestSerial, SS_LoanLetterRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_LoanLetterRequest.RequestDate, 'طلب خطاب قرض' AS RequestArbName, 'Loan Letter Request' AS RequestEngName, 'SS_00193' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_LoanLetterRequest JOIN
+                  hrs_Employees ON SS_LoanLetterRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*7============================   خطاب آخر ==============================================*/ UNION
+SELECT SS_OtherLetterRequest.ID, '' AS VacationType, SS_OtherLetterRequest.Code AS RequestSerial, SS_OtherLetterRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_OtherLetterRequest.RequestDate, 'طلب خطاب آخر' AS RequestArbName, 'Other Letter Request' AS RequestEngName, 'SS_00194' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_OtherLetterRequest JOIN
+                  hrs_Employees ON SS_OtherLetterRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*8============================    طلب تدريب ==============================================*/ UNION
+SELECT SS_TrainingRequest.ID, '' AS VacationType, SS_TrainingRequest.Code AS RequestSerial, SS_TrainingRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_TrainingRequest.RequestDate, 'طلب تدريب' AS RequestArbName, 'Training Request' AS RequestEngName, 'SS_00195' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_TrainingRequest JOIN
+                  hrs_Employees ON SS_TrainingRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*9============================     استمارة التظلم ==============================================*/ UNION
+SELECT SS_GrievanceFormRequest.ID, '' AS VacationType, SS_GrievanceFormRequest.Code AS RequestSerial, SS_GrievanceFormRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_GrievanceFormRequest.RequestDate, 'طلب استمارة التظلم' AS RequestArbName, 'Grievance Form Request' AS RequestEngName, 'SS_00196' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_GrievanceFormRequest JOIN
+                  hrs_Employees ON SS_GrievanceFormRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*10============================     طلب استمارة تقييم المقابلة ==============================================*/ UNION
+SELECT SS_InterviewEvaluationFormRequest.ID, '' AS VacationType, SS_InterviewEvaluationFormRequest.Code AS RequestSerial, SS_InterviewEvaluationFormRequest.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_InterviewEvaluationFormRequest.RequestDate, 'طلب استمارة تقييم المقابلة' AS RequestArbName, 'Interview Evaluation Form Request' AS RequestEngName, 
+                  'SS_00197' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_InterviewEvaluationFormRequest JOIN
+                  hrs_Employees ON SS_InterviewEvaluationFormRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*11============================     طلب استمارة تصعيد حالات الاعتداء ==============================================*/ UNION
+SELECT SS_AssaultEscalationFormRequest.ID, '' AS VacationType, SS_AssaultEscalationFormRequest.Code AS RequestSerial, SS_AssaultEscalationFormRequest.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_AssaultEscalationFormRequest.RequestDate, 'طلب استمارة تصعيد حالات الاعتداء' AS RequestArbName, 'Assault Escalation Form Request' AS RequestEngName, 
+                  'SS_00198' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_AssaultEscalationFormRequest JOIN
+                  hrs_Employees ON SS_AssaultEscalationFormRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*12============================   طلب استمارة تضارب المصالح ==============================================*/ UNION
+SELECT SS_ConflictofInterestFormRequest.ID, '' AS VacationType, SS_ConflictofInterestFormRequest.Code AS RequestSerial, SS_ConflictofInterestFormRequest.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_ConflictofInterestFormRequest.RequestDate, 'طلب استمارة تضارب المصالح' AS RequestArbName, 'Conflict of Interest Form Request' AS RequestEngName, 
+                  'SS_00199' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_ConflictofInterestFormRequest JOIN
+                  hrs_Employees ON SS_ConflictofInterestFormRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*13============================   طلب استمارة امتيازات الأطباء ==============================================*/ UNION
+SELECT SS_PhysiciansPrivilegingFormRequest.ID, '' AS VacationType, SS_PhysiciansPrivilegingFormRequest.Code AS RequestSerial, SS_PhysiciansPrivilegingFormRequest.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_PhysiciansPrivilegingFormRequest.RequestDate, 'طلب استمارة امتيازات الأطباء' AS RequestArbName, 'Physicians Privileging Form Request' AS RequestEngName, 
+                  'SS_001910' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_PhysiciansPrivilegingFormRequest JOIN
+                  hrs_Employees ON SS_PhysiciansPrivilegingFormRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*14============================   طلب دعم رعاية الأطفال ==============================================*/ UNION
+SELECT SS_DaycareSupportReaquest.ID, '' AS VacationType, SS_DaycareSupportReaquest.Code AS RequestSerial, SS_DaycareSupportReaquest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_DaycareSupportReaquest.RequestDate, 'طلب دعم رعاية الأطفال' AS RequestArbName, 'Daycare Support' AS RequestEngName, 'SS_001911' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_DaycareSupportReaquest JOIN
+                  hrs_Employees ON SS_DaycareSupportReaquest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*15============================طلب دعم التعليم  ==============================================*/ UNION
+SELECT SS_EducationSupportRequest.ID, '' AS VacationType, SS_EducationSupportRequest.Code AS RequestSerial, SS_EducationSupportRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 
+                  1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_EducationSupportRequest.RequestDate, 'طلب دعم التعليم' AS RequestArbName, 'Education Support' AS RequestEngName, 'SS_001912' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_EducationSupportRequest JOIN
+                  hrs_Employees ON SS_EducationSupportRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*16===========================طلب  بدل السكن مقدم  ==============================================*/ UNION
+SELECT SS_AdvanceHousingRequest.ID, '' AS VacationType, SS_AdvanceHousingRequest.Code AS RequestSerial, SS_AdvanceHousingRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_AdvanceHousingRequest.RequestDate, 'طلب  بدل السكن مقدم' AS RequestArbName, ' Advance Housing Request' AS RequestEngName, 'SS_001913' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_AdvanceHousingRequest JOIN
+                  hrs_Employees ON SS_AdvanceHousingRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*17===========================طلب  الراتب مقدم  ==============================================*/ UNION
+SELECT SS_AdvanceSalaryRequest.ID, '' AS VacationType, SS_AdvanceSalaryRequest.Code AS RequestSerial, SS_AdvanceSalaryRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_AdvanceSalaryRequest.RequestDate, 'طلب الراتب مقدم' AS RequestArbName, 'Advance Salary Request' AS RequestEngName, 'SS_001914' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_AdvanceSalaryRequest JOIN
+                  hrs_Employees ON SS_AdvanceSalaryRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*18===========================طلب خطاب الغرفة التجارية ==============================================*/ UNION
+SELECT SS_ChamberofCommerceLetterRequest.ID, '' AS VacationType, SS_ChamberofCommerceLetterRequest.Code AS RequestSerial, SS_ChamberofCommerceLetterRequest.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_ChamberofCommerceLetterRequest.RequestDate, 'طلب خطاب الغرفة التجارية' AS RequestArbName, 'Chamber of Commerce Letter Reques' AS RequestEngName, 
+                  'SS_001915' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_ChamberofCommerceLetterRequest JOIN
+                  hrs_Employees ON SS_ChamberofCommerceLetterRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*19===========================طلب خطاب تصنيف هيئة التخصصات الطبية ==============================================*/ UNION
+SELECT SS_SCFHSLetterRequest.ID, '' AS VacationType, SS_SCFHSLetterRequest.Code AS RequestSerial, SS_SCFHSLetterRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_SCFHSLetterRequest.RequestDate, 'طلب خطاب تصنيف هيئة التخصصات الطبية' AS RequestArbName, 'SCFHS Letter Request' AS RequestEngName, 'SS_001916' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_SCFHSLetterRequest JOIN
+                  hrs_Employees ON SS_SCFHSLetterRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*20===========================طلب خطاب تعريف الراتب ==============================================*/ UNION
+SELECT SS_PaySlipRequest.ID, '' AS VacationType, SS_PaySlipRequest.Code AS RequestSerial, SS_PaySlipRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_PaySlipRequest.RequestDate, 'طلب خطاب تعريف الراتب' AS RequestArbName, 'Pay Slip Request' AS RequestEngName, 'SS_001917' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_PaySlipRequest JOIN
+                  hrs_Employees ON SS_PaySlipRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*21============================خطابات الإبلاغ عن التباين  ==============================================*/ UNION
+SELECT SS_OccurrenceVarianceReportingLetters.ID, '' AS VacationType, SS_OccurrenceVarianceReportingLetters.Code AS RequestSerial, SS_OccurrenceVarianceReportingLetters.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_OccurrenceVarianceReportingLetters.RequestDate, '
+خطابات الإبلاغ عن التباين' AS RequestArbName, 'Accommodation escalation request' AS RequestEngName, 
+                  'SS_001918' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_OccurrenceVarianceReportingLetters JOIN
+                  hrs_Employees ON SS_OccurrenceVarianceReportingLetters.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*22============================طلب وقت اضافي  ==============================================*/ UNION
+SELECT SS_OvertimeRequest.ID, '' AS VacationType, SS_OvertimeRequest.Code AS RequestSerial, SS_OvertimeRequest.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_OvertimeRequest.RequestDate, 'طلب وقت اضافي' AS RequestArbName, 'Over Time' AS RequestEngName, 'SS_001919' AS FormCode, RequestStautsTypeID, OvertimeDate AS TrxDate
+FROM     SS_OvertimeRequest JOIN
+                  hrs_Employees ON SS_OvertimeRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*23===========================طلب تعويض رسوم التعليم  ================================*/ UNION
+SELECT SS_EducationFeesCompensationApplication.ID, '' AS VacationType, SS_EducationFeesCompensationApplication.Code AS RequestSerial, SS_EducationFeesCompensationApplication.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_EducationFeesCompensationApplication.RequestDate, 'طلب تعويض رسوم التعليم' AS RequestArbName, 'Education Fees Compensation Application' AS RequestEngName, 
+                  'SS_001920' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_EducationFeesCompensationApplication JOIN
+                  hrs_Employees ON SS_EducationFeesCompensationApplication.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*24===========================طلب تحديث حساب البنك  ================================*/ UNION
+SELECT SS_BankAccountUpdate.ID, '' AS VacationType, SS_BankAccountUpdate.Code AS RequestSerial, SS_BankAccountUpdate.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_BankAccountUpdate.RequestDate, 'طلب تحديث حساب البنك' AS RequestArbName, 'Bank Account Update' AS RequestEngName, 'SS_001921' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_BankAccountUpdate JOIN
+                  hrs_Employees ON SS_BankAccountUpdate.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*25===========================طلب تحديث معلومات الاتصال  ================================*/ UNION
+SELECT SS_ContactInformationUpdate.ID, '' AS VacationType, SS_ContactInformationUpdate.Code AS RequestSerial, SS_ContactInformationUpdate.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 
+                  1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_ContactInformationUpdate.RequestDate, 'طلب تحديث معلومات الاتصال' AS RequestArbName, 'Contact Information Update' AS RequestEngName, 'SS_001922' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_ContactInformationUpdate JOIN
+                  hrs_Employees ON SS_ContactInformationUpdate.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*26===========================طلب تحديث معلومات المعالين  ================================*/ UNION
+SELECT SS_DependentsInformationUpdate.ID, '' AS VacationType, SS_DependentsInformationUpdate.Code AS RequestSerial, SS_DependentsInformationUpdate.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_DependentsInformationUpdate.RequestDate, 'طلب تحديث معلومات المعالين' AS RequestArbName, 'Dependents Information Update' AS RequestEngName, 
+                  'SS_001923' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_DependentsInformationUpdate JOIN
+                  hrs_Employees ON SS_DependentsInformationUpdate.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*27===========================طلب تعديلات التأمين الطبي  ================================*/ UNION
+SELECT SS_MedicalInsuranceAdjustments.ID, '' AS VacationType, SS_MedicalInsuranceAdjustments.Code AS RequestSerial, SS_MedicalInsuranceAdjustments.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_MedicalInsuranceAdjustments.RequestDate, 'طلب تعديلات التأمين الطبي' AS RequestArbName, 'Medical Insurance Adjustments' AS RequestEngName, 
+                  'SS_001924' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_MedicalInsuranceAdjustments JOIN
+                  hrs_Employees ON SS_MedicalInsuranceAdjustments.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*28===========================طلب تحديثات المستندات القانونية الأخرى  ================================*/ UNION
+SELECT SS_OtherLegalDocumentUpdates.ID, '' AS VacationType, SS_OtherLegalDocumentUpdates.Code AS RequestSerial, SS_OtherLegalDocumentUpdates.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_OtherLegalDocumentUpdates.RequestDate, 'طلب تحديثات المستندات القانونية الأخرى' AS RequestArbName, 'Other Legal Document Updates' AS RequestEngName, 
+                  'SS_001925' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_OtherLegalDocumentUpdates JOIN
+                  hrs_Employees ON SS_OtherLegalDocumentUpdates.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*29===========================طلب تحديث ملف الموظف  ================================*/ UNION
+SELECT SS_EmployeeFileUpdate.ID, '' AS VacationType, SS_EmployeeFileUpdate.Code AS RequestSerial, SS_EmployeeFileUpdate.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) 
+                  + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_EmployeeFileUpdate.RequestDate, 'طلب تحديث ملف الموظف' AS RequestArbName, 'Employee File Update' AS RequestEngName, 'SS_001926' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_EmployeeFileUpdate JOIN
+                  hrs_Employees ON SS_EmployeeFileUpdate.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*30===========================طلب سفر عمل او تدريب  ================================*/ UNION
+SELECT SS_BusinessORTrainingTravel.ID, '' AS VacationType, SS_BusinessORTrainingTravel.Code AS RequestSerial, SS_BusinessORTrainingTravel.EmployeeID, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 
+                  1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, 
+                  SS_BusinessORTrainingTravel.RequestDate, 'طلب سفر عمل او تدريب' AS RequestArbName, 'Business OR Training Travel' AS RequestEngName, 'SS_001927' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_BusinessORTrainingTravel JOIN
+                  hrs_Employees ON SS_BusinessORTrainingTravel.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*31===========================الطلبات المتعلقة بالتذاكر السنوية  ================================*/ UNION
+SELECT SS_AnnualTicketRelatedRequests.ID, '' AS VacationType, SS_AnnualTicketRelatedRequests.Code AS RequestSerial, SS_AnnualTicketRelatedRequests.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_AnnualTicketRelatedRequests.RequestDate, 'الطلبات المتعلقة بالتذاكر السنوية' AS RequestArbName, 'Annual Ticket Related Requests' AS RequestEngName, 
+                  'SS_001928' AS FormCode, RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_AnnualTicketRelatedRequests JOIN
+                  hrs_Employees ON SS_AnnualTicketRelatedRequests.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID
+/*32===========================طلب تغيير الدوام  ================================*/ UNION
+SELECT SS_ChangeWorkHoursRequest.ID, '' AS VacationType, SS_ChangeWorkHoursRequest.Code AS RequestSerial, SS_ChangeWorkHoursRequest.EmployeeID, 
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_ChangeWorkHoursRequest.RequestDate, 'طلب تغيير الدوام' AS RequestArbName, 'Change Work Hours' AS RequestEngName, 'SS_001929' AS FormCode, 
+                  RequestStautsTypeID, RequestDate AS TrxDate
+FROM     SS_ChangeWorkHoursRequest JOIN
+                  hrs_Employees ON SS_ChangeWorkHoursRequest.EmployeeID = hrs_Employees.id INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID; 
+"
+        ExecuteUpdate(SQL)
+
+
     End Function
 	Public Function ExecuteUpdate(ByVal mySQLQuery As String) As Boolean
 

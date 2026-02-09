@@ -54,3 +54,9 @@ D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProje
 D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.dll
 D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.Menu.xml
 D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.pdb
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.AssemblyReference.cache
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.Resources.resources
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.GenerateResource.cache
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.vbproj.CoreCompileInputs.cache
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.Menu.xml
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.pdb

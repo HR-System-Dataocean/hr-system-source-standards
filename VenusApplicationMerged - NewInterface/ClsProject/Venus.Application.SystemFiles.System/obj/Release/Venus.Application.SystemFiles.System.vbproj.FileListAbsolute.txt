@@ -59,3 +59,9 @@ D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProje
 D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.dll
 D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.xml
 D:\Data Ocean\SourceCode\Standard\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.pdb
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.vbproj.AssemblyReference.cache
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.Resources.resources
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.vbproj.GenerateResource.cache
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.vbproj.CoreCompileInputs.cache
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.xml
+D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.pdb

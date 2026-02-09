@@ -386,8 +386,12 @@
                                             <table style="width: 100%; vertical-align: top" cellspacing="0">
                                                 <tr>
                                                     <td style="width: 40%; height: 16px; vertical-align: middle;">
-                                                    </td>
-                                                    <td style="width: 60%; height: 16px; vertical-align: middle;">
+                                                        <asp:Label ID="lblEndConDate" runat="server" Text="تاريخ انتهاء العقد" SkinID="Label_CopyRightsBold"
+        meta:resourcekey="lblEndContractDateResource1"></asp:Label>
+</td>
+<td style="width: 60%; height: 16px; vertical-align: middle;">
+    <asp:Label ID="lblEndContractDate" runat="server" SkinID="Label_CopyRightsNormal"
+        meta:resourcekey="lblEndContractDateValueResource1"></asp:Label>
                                                     </td>
                                                 </tr>
                                             </table>
