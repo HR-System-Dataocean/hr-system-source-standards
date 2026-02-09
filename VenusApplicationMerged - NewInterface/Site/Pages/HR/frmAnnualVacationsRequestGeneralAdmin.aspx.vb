@@ -2244,7 +2244,7 @@ Partial Class frmAnnualVacationsRequestGeneralAdmin
         If result Is DBNull.Value OrElse result Is Nothing Then
             Return True
         Else
-            LastReturnDate = Convert.ToDateTime(result).AddDays(-1)
+            LastReturnDate = Convert.ToDateTime(result)
         End If
 
         ' Get the new vacation start date
@@ -2253,14 +2253,14 @@ Partial Class frmAnnualVacationsRequestGeneralAdmin
         ' Check if the new vacation request is within 3 days of the last return date
         If DateDiff(DateInterval.Day, LastReturnDate, NewStartDate) <= 3 Then
             ' Retrieve employee's day-off schedule
-            Dim strSelectDayOff As String = "SELECT DayNo FROM dbo.Att_AttendShiftDays " &
-                                        "WHERE AttendShiftID IN (" &
-                                        "    SELECT sh.ID FROM dbo.Att_AttendShifts AS sh " &
-                                        "    INNER JOIN dbo.Att_AttendAppointment AS P ON sh.ID = P.AttendaceShiftID " &
-                                        "    INNER JOIN dbo.Att_AttendAppointmentMembers AS M ON P.ID = M.AppointID " &
-                                        "    WHERE M.EmployeeID = " & ClsEmployees.ID & " ) " &
-                                        "AND IsDayOff = 1 And CancelDate is null"
-
+            'Dim strSelectDayOff As String = "SELECT DayNo FROM dbo.Att_AttendShiftDays " &
+            '                            "WHERE AttendShiftID IN (" &
+            '                            "    SELECT sh.ID FROM dbo.Att_AttendShifts AS sh " &
+            '                            "    INNER JOIN dbo.Att_AttendAppointment AS P ON sh.ID = P.AttendaceShiftID " &
+            '                            "    INNER JOIN dbo.Att_AttendAppointmentMembers AS M ON P.ID = M.AppointID " &
+            '                            "    WHERE M.EmployeeID = " & ClsEmployees.ID & " ) " &
+            '                            "AND IsDayOff = 1"
+            Dim strSelectDayOff As String = "set dateformat dmy; SELECT distinct( d.DayNo ) FROM dbo.Att_AttendShiftDays AS d INNER JOIN dbo.Att_AttendShifts AS sh ON d.AttendShiftID = sh.ID INNER JOIN dbo.Att_AttendAppointment AS P ON sh.ID = P.AttendaceShiftID INNER JOIN dbo.Att_AttendAppointmentMembers AS M ON P.ID = M.AppointID WHERE M.EmployeeID = " & ClsEmployees.ID & "      AND d.IsDayOff = 1 And p.FromDate <='" & WebDateChooser1.Value & "' and p.ToDate>='" & WebDateChooser2.Value & "'"
             Dim ds As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strSelectDayOff)
 
             ' If dataset has no records, return true (no day offs configured)

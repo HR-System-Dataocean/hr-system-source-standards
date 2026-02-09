@@ -1155,10 +1155,16 @@ Public Class Clshrs_EndOfServices
             IntYearDays = IntYear * CsIntYearDays
             IntYearRemaining = Totaldays - IntYearDays
 
-            IntMonth = (IntYearRemaining * 360 \ CsIntYearDays) \ CsIntMonthDays
+            ' IntMonth = (IntYearRemaining * 360 \ CsIntYearDays) \ CsIntMonthDays
+            'Rabie 09-02-2026
+            IntMonth = (IntYearRemaining * clsCompaniesDays \ CsIntYearDays) \ CsIntMonthDays
             IntMonthDays = IntMonth * CsIntMonthDays
             intDays = IntYearRemaining - IntMonthDays
 
+            'New Rabie 09-02-2026
+            If IntMonth = 0 And (Totaldays - IntYearDays) > 0 And intDays = 0 Then
+                intDays = Totaldays - IntYearDays
+            End If
             Return True
         Catch ex As Exception
             mPage.Session.Add("ErrorValue", ex)

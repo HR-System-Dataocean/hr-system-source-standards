@@ -48,6 +48,14 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       <Project>{8192EECB-F2F1-4753-A29F-246F7E2973BF}</Project>
       <Name>OfficeWebUI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClsProject\Venus.Application.SystemFiles.HumanResource\Venus.Application.SystemFiles.HumanResource.vbproj">
+      <Project>{3A5A8CDD-70BF-4E8C-8755-3B327864C623}</Project>
+      <Name>Venus.Application.SystemFiles.HumanResource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClsProject\Venus.Application.SystemFiles.System\Venus.Application.SystemFiles.System.vbproj">
+      <Project>{5687F571-E48B-4158-81BB-21801599A8B7}</Project>
+      <Name>Venus.Application.SystemFiles.System</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClsProject\Venus.Sared\Venus.shared.vbproj">
       <Project>{508826FC-7C7E-4B72-B7FE-88D2DF5A6B59}</Project>
       <Name>Venus.shared</Name>

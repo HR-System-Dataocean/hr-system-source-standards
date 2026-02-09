@@ -538,7 +538,7 @@ Partial Class frmEmployees
                         End If
                     End If
                     If txtIdentity.Text <> "" Then
-                        Dim checkCnt = "select top 1 Code from hrs_employees where SSnNo = '" & txtIdentity.Text & "' and Code <> '" & txtCode.Text & "' and branchID = '" & ddlBranch.SelectedValue & "'"
+                        Dim checkCnt = "select top 1 Code from hrs_employees where SSnNo = '" & txtIdentity.Text & "' and Code <> '" & txtCode.Text & "' "
                         Dim cnt As String = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, CommandType.Text, checkCnt)
                         If cnt <> "" Then
                             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " ID NO Used Before Employee No. /رقم الهوية مستخدم سابقا للموظف رقم") & cnt)

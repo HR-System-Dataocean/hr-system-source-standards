@@ -1217,7 +1217,7 @@ Public Class Clshrs_Contracts
         If clsCompanies.RegComputerID = 360 Then
             IntNoofworkingDays = days360(duedate, DateToCheck)
         Else
-            IntNoofworkingDays = (DateToCheck - duedate).TotalDays
+            IntNoofworkingDays = (DateToCheck.AddDays(-1) - duedate).TotalDays
         End If
 
         TotalDays = IntNoofworkingDays

@@ -2269,7 +2269,7 @@ Partial Class frmEmployeesVacations
             '                            "    INNER JOIN dbo.Att_AttendAppointmentMembers AS M ON P.ID = M.AppointID " &
             '                            "    WHERE M.EmployeeID = " & ClsEmployees.ID & " ) " &
             '                            "AND IsDayOff = 1"
-            Dim strSelectDayOff As String = "SELECT distinct( d.DayNo ) FROM dbo.Att_AttendShiftDays AS d INNER JOIN dbo.Att_AttendShifts AS sh ON d.AttendShiftID = sh.ID INNER JOIN dbo.Att_AttendAppointment AS P ON sh.ID = P.AttendaceShiftID INNER JOIN dbo.Att_AttendAppointmentMembers AS M ON P.ID = M.AppointID WHERE M.EmployeeID = " & ClsEmployees.ID & "      AND d.IsDayOff = 1 And p.FromDate <='" & WebDateChooser1.Value & "' and p.ToDate>='" & WebDateChooser2.Value & "'"
+            Dim strSelectDayOff As String = "set dateformat dmy; SELECT distinct( d.DayNo ) FROM dbo.Att_AttendShiftDays AS d INNER JOIN dbo.Att_AttendShifts AS sh ON d.AttendShiftID = sh.ID INNER JOIN dbo.Att_AttendAppointment AS P ON sh.ID = P.AttendaceShiftID INNER JOIN dbo.Att_AttendAppointmentMembers AS M ON P.ID = M.AppointID WHERE M.EmployeeID = " & ClsEmployees.ID & "      AND d.IsDayOff = 1 And p.FromDate <='" & WebDateChooser1.Value & "' and p.ToDate>='" & WebDateChooser2.Value & "'"
             Dim ds As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strSelectDayOff)
 
             ' If dataset has no records, return true (no day offs configured)
