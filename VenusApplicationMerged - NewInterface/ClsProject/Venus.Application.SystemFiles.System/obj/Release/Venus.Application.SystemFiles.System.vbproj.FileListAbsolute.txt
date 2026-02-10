@@ -65,3 +65,22 @@ D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Ve
 D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.vbproj.CoreCompileInputs.cache
 D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.xml
 D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.pdb
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Venus.Application.SystemFiles.System.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Venus.Application.SystemFiles.System.pdb
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Venus.Application.SystemFiles.System.xml
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Microsoft.ApplicationBlocks.Data.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Venus.Shared.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Venus.Shared.Errors.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Venus.Shared.Security.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Venus.Shared.Web.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Infragistics35.WebUI.UltraWebToolbar.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Venus.Shared.pdb
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Venus.Shared.Web.pdb
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.vbproj.AssemblyReference.cache
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.Resources.resources
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.vbproj.GenerateResource.cache
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.vbproj.CoreCompileInputs.cache
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Ap.F2C3F44E.Up2Date
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.xml
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.pdb

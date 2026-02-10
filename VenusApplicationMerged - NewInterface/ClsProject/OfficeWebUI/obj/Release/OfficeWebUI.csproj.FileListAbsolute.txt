@@ -147,3 +147,12 @@ D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\Of
 D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
 D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.dll
 D:\OcApp\AAAGitHup\Standered\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.pdb
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\bin\Release\OfficeWebUI.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\bin\Release\OfficeWebUI.pdb
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.AssemblyReference.cache
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.AboutOfficeWebUI.resources
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.Properties.Resources.resources
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.GenerateResource.cache
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.csproj.CoreCompileInputs.cache
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\OfficeWebUI\obj\Release\OfficeWebUI.pdb
