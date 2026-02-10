@@ -309,8 +309,8 @@ Partial Class frmEmployeesLoans
                     periodPrepared = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, periodSql)
 
                     If periodPrepared > 0 Then
-                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Attention...Please Note that this financil period has been closed!/!يرجي العلم انه قد تم اغلاق هذه الفترة المالية "))
-
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "A movement cannot be deleted within a Prepared period.!/!لايمكن حذف حركة داخل فترة مجهزة "))
+                        Return
                     End If
 
                     ClsEmployeesPayability.Find("Number='" & lblDescLoanCode.Text & "'")
