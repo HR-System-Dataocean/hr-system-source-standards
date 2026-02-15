@@ -7834,6 +7834,18 @@ ALTER TABLE dbo.sys_Documents ADD
 	OldExpireDate date NULL "
         ExecuteUpdate(SQL)
 
+        SQL = " ALTER TABLE dbo.hrs_VacationsTypes ADD
+	RequiredAttach bit NULL "
+        ExecuteUpdate(SQL)
+
+        SQL = " ALTER TABLE dbo.sys_SystemConfig ADD
+	AllowDelayInstallmentPart bit NULL "
+        ExecuteUpdate(SQL)
+
+        SQL = " ALTER TABLE dbo.sys_SystemConfig ADD
+	CompanyId int NULL "
+        ExecuteUpdate(SQL)
+
     End Function
 
     Public Function UpdateSS() As Boolean

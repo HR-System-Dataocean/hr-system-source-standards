@@ -582,74 +582,7 @@
     </td>
 </tr>
 
-                                        <tr>
-    <td style="width: 47%; height: 16px; vertical-align: top">
-        <table style="width: 100%; vertical-align: top" cellspacing="0">
-            <tr>
-                <td class="SeparArea">
-                </td>
-                <td class="LabelArea">
-                    <asp:Label ID="lblIsCanceled" runat="server" Text="الغاء" SkinID="Label_DefaultNormal"
-                        meta:resourcekey="lblIsCanceledResource1"></asp:Label>
-                </td>
-                <td class="DataArea">
-                     <asp:CheckBox ID="chkIsCanceled" runat="server" />
-                </td>
-            </tr>
-        </table>
-    </td>
-    <td style="width: 6%; height: 16px; vertical-align: top">
-    </td>
-    <td style="width: 47%; height: 16px; vertical-align: top">
-        <table style="width: 100%; vertical-align: top" cellspacing="0">
-            <tr>
-                <td class="SeparArea">
-                </td>
-                <td class="LabelArea">
-                </td>
-                <td class="DataArea">
-                </td>
-            </tr>
-        </table>
-    </td>
-</tr>
-
-                                        <tr>
-    <td style="width: 47%; height: 16px; vertical-align: top">
-        <table style="width: 100%; vertical-align: top" cellspacing="0">
-            <tr>
-                <td class="SeparArea">
-                </td>
-                <td class="LabelArea">
-                    <asp:Label ID="lablCancelDate" runat="server" Text="تاريخ الإلغاء" SkinID="Label_DefaultNormal"
-                        meta:resourcekey="lblCancelDateResource1"></asp:Label>
-                </td>
-                <td class="DataArea">
-                     <igsch:WebDateChooser ID="txtCancelDate" runat="server" BorderColor="#CCCCCC" BorderStyle="Solid"
-                                                                BorderWidth="1px" Height="18px" NullDateLabel="" Style="font-family: Tahoma;
-                                                                font-size: 8pt; font-weight: Normal; color: Black; border: solid 1px #CCCCCC"
-                                                                Width="130px">
-                                                               
-                                                            </igsch:WebDateChooser>
-                </td>
-            </tr>
-        </table>
-    </td>
-    <td style="width: 6%; height: 16px; vertical-align: top">
-    </td>
-    <td style="width: 47%; height: 16px; vertical-align: top">
-        <table style="width: 100%; vertical-align: top" cellspacing="0">
-            <tr>
-                <td class="SeparArea">
-                </td>
-                <td class="LabelArea">
-                </td>
-                <td class="DataArea">
-                </td>
-            </tr>
-        </table>
-    </td>
-</tr>
+                                       
                                       
                                        
 

@@ -22,15 +22,7 @@ Partial Class frmDelegationSChedule
         Try
             Dim clsSearchsColumns As New Clssys_SearchsColumns(Page)
 
-            If ClsObjects.Find(" Code='" & ClsDelegationSChedule.Table.Trim & "'") Then
-                If ClsSearchs.Find(" ObjectID='" & ClsObjects.ID & "'") Then
-                    SearchID = ClsSearchs.ID
 
-                    Dim IntDimension As Integer = 510
-                    Dim UrlString = "'frmModalSearchScreen.aspx?TargetControl=" & txtCode.ID & "&SearchID=" & SearchID & "&'," & IntDimension & ",720,false,'" & txtCode.ClientID & "'"
-                    btnSearchCode.ClientSideEvents.Click = "OpenModal1(" & UrlString & ")"
-                End If
-            End If
             txtDelegatedName.Enabled = False
             TxtDelegatorName.Enabled = False
 
@@ -71,6 +63,16 @@ Partial Class frmDelegationSChedule
                         btnSearchCode.ClientSideEvents.Click = "OpenModal1(" & UrlString & ")"
                     End If
                 End If
+
+                'If ClsObjects.Find(" Code='" & ClsDelegationSChedule.Table.Trim & "'") Then
+                '    If ClsSearchs.Find(" ObjectID='" & ClsObjects.ID & "'") Then
+                '        SearchID = ClsSearchs.ID
+
+                '        IntDimension = 510
+                '        UrlString = "'frmModalSearchScreen.aspx?TargetControl=" & txtCode.ID & "&SearchID=" & SearchID & "&'," & IntDimension & ",720,false,'" & txtCode.ClientID & "'"
+                '        btnSearchCode.ClientSideEvents.Click = "OpenModal1(" & UrlString & ")"
+                '    End If
+                'End If
                 '================================= Exit & Navigation Notification [ End ]
 
                 'Venus.Shared.Web.ClientSideActions.SetLanguage(Page, txtArbName, Venus.Shared.Web.ClientSideActions.LANGUAGE_TYPE.ARABIC)
@@ -326,10 +328,10 @@ Partial Class frmDelegationSChedule
                 End If
 
                 .Remarks = txtRemarks.Text
-                .IsCanceled = chkIsCanceled.Checked
-                If Convert.ToString(txtCancelDate.Value) <> "" Then
-                    .CancelDate = Convert.ToDateTime(txtCancelDate.Value).Date
-                End If
+                '.IsCanceled = chkIsCanceled.Checked
+                'If Convert.ToString(txtCancelDate.Value) <> "" Then
+                '    .CancelDate = Convert.ToDateTime(txtCancelDate.Value).Date
+                'End If
 
 
 
@@ -363,8 +365,8 @@ Partial Class frmDelegationSChedule
                 txtFromDate.Value = .FromDate
                 txtTodate.Value = .Todate
                 txtRemarks.Text = .Remarks
-                chkIsCanceled.Checked = .IsCanceled
-                txtCancelDate.Value = .CancelDate
+                'chkIsCanceled.Checked = .IsCanceled
+                'txtCancelDate.Value = .CancelDate
                 'txtFormName.Text = .FormName
                 'chkSaveSend.Checked = .SendAfterSave
                 'chkDeleteSend.Checked = .SendAfterDelete
@@ -553,8 +555,8 @@ Partial Class frmDelegationSChedule
         txtFromDate.Value = Nothing
         txtRemarks.Text = String.Empty
         txtTodate.Value = Nothing
-        txtCancelDate.Value = Nothing
-        chkIsCanceled.Checked = False
+        'txtCancelDate.Value = Nothing
+        'chkIsCanceled.Checked = False
 
         ImageButton_Delete.Enabled = False
         lblRegDateValue.Text = ""
