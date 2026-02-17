@@ -224,7 +224,9 @@ Partial Class Login
         Try
 
             If txtForgetPassEmp.Text <> "" Then
-                Dim clsEmployee As Clshrs_Employees = New Clshrs_Employees(Me)
+                '  Dim clsEmployee As Clshrs_Employees = New Clshrs_Employees(Me)
+                Dim clsEmployee As New Clshrs_Employees(Page)
+
                 clsEmployee.Find("Code='" & txtForgetPassEmp.Text & "'")
                 If Not String.IsNullOrWhiteSpace(clsEmployee.WorkE_Mail) Then
                     Dim passwordLength As Integer = 8 ' Change as needed

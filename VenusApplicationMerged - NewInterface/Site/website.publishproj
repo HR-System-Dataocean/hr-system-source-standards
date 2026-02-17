@@ -60,6 +60,10 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       <Project>{508826FC-7C7E-4B72-B7FE-88D2DF5A6B59}</Project>
       <Name>Venus.shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClsProject\Venus.Shared.Web\Venus.Shared.Web.vbproj">
+      <Project>{7651331C-9D05-4F7F-B28A-09EDCF403698}</Project>
+      <Name>Venus.Shared.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(_WebPublishTargetsPath)\Web\Microsoft.WebSite.Publishing.targets" />
 </Project>

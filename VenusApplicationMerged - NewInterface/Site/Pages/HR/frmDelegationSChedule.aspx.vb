@@ -42,8 +42,14 @@ Partial Class frmDelegationSChedule
                 WebHandler.GetCookies(Page, "UserID", User)
                 Dim _sys_User As New Clssys_Users(Page)
                 _sys_User.Find("ID = '" & User & "'")
-                txtDelegatorEmployeeID.Text = _sys_User.Code
-                txtDelegatorEmployeeID_TextChanged(Nothing, Nothing)
+
+                clsEmployees.Find("Code='" & _sys_User.Code & "'")
+
+                If clsEmployees.ID > 0 Then
+                    txtDelegatorEmployeeID.Text = _sys_User.Code
+                    txtDelegatorEmployeeID_TextChanged(Nothing, Nothing)
+
+                End If
                 ClsObjects.Find(" Code='" & clsEmployees.Table.Trim & "'")
                 ClsSearchs.Find(" ObjectID=" & ClsObjects.ID)
                 Dim csSearchID As Integer
