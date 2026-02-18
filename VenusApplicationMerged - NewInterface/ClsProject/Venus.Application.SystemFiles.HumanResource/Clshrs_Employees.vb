@@ -769,6 +769,8 @@ Public Class Clshrs_EmployeesBase
         Try
             '==================== Order By Modification [Start]
             Dim orderByStr As String = ""
+
+
             If Filter.ToLower.IndexOf("order by") = -1 Then
                 orderByStr = " Order By Code "
             End If

@@ -94,8 +94,6 @@ Partial Class frmEmployeesEndofService
             wdcEndOfServiceDate.Value = ClsContract.GetHigriDate(DteEOSDate)
             CheckCode()
 
-            uwgExtraBenfits.Rows.Add()
-            uwgExtraDeduction.Rows.Add()
         End If
 
 
@@ -599,7 +597,18 @@ Partial Class frmEmployeesEndofService
         ImageButton_Print.Enabled = False
         ImageButton2.Enabled = False
         ImageButton_Print0.Enabled = True
+        uwgExtraBenfits.DataSource = Nothing
+        uwgExtraDeduction.DataSource = Nothing
 
+
+
+        uwgExtraBenfits.DataBind()
+
+        uwgExtraDeduction.DataBind()
+        uwgExtraBenfits.Rows.Add()
+        uwgExtraDeduction.Rows.Add()
+        LblTotalExtraDeductions.Text = "0"
+        LblTotaExtraBenefits.Text = "0"
         Clshrs_EmployeesJoins = New Clshrs_EmployeesJoins(Me.Page)
         If IntEmployeeId <= 0 Then
             lblDescEmployeeCode.Text = ""
@@ -640,6 +649,16 @@ Partial Class frmEmployeesEndofService
                 ImageButton_Print0.Enabled = False
                 SetData(0, DateTime.Now.Date)
                 GetEosData(IntEmployeeId)
+                Dim str As String = "select RegUserID,RegDate from   hrs_EmployeesTransactions where EmployeeID=" & ClsEmployee.ID & " and PrepareType='E'"
+                Dim Ds As DataSet
+                Ds = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(Clshrs_EmployeesJoins.ConnectionString, Data.CommandType.Text, str)
+                If Ds.Tables(0).Rows.Count > 0 Then
+                    Dim _sys_User As New Clssys_Users(Page)
+                    _sys_User.Find("ID = '" & Ds.Tables(0).Rows(0)("RegUserID") & "'")
+                    lblRegUser.Text = _sys_User.EngName.ToString()
+                    lblRegDateValue.Text = Ds.Tables(0).Rows(0)("RegDate")
+                End If
+
                 Return 0
             Else
 
@@ -2060,12 +2079,18 @@ Partial Class frmEmployeesEndofService
         uwgTransactions.DataSource = Nothing
         uwgVacationsTransactions.DataSource = Nothing
 
+        uwgExtraBenfits.DataSource = Nothing
+        uwgExtraDeduction.DataSource = Nothing
+
         uwgPayabilities.DataBind()
         uwgTransactions.DataBind()
         uwgVacationsTransactions.DataBind()
 
+        uwgExtraBenfits.DataBind()
 
-
+        uwgExtraDeduction.DataBind()
+        uwgExtraBenfits.Rows.Add()
+        uwgExtraDeduction.Rows.Add()
 
     End Sub
 
@@ -2159,22 +2184,56 @@ Partial Class frmEmployeesEndofService
     '        - Double.Parse(IIf(IsNumeric(txtExtraDudectionAmount.Text), txtExtraDudectionAmount.Text, 0))
     'End Sub
     Protected Sub uwgExtraBenfits_UpdateRow(sender As Object, e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles uwgExtraBenfits.UpdateRow
+        Dim TotalExtraBenefits As Decimal = 0
         If e.Row.DataChanged = DataChanged.Modified Then
-            For Each ObjRowDet In uwgExtraBenfits.Rows
+            For i As Integer = uwgExtraBenfits.Rows.Count - 1 To 0 Step -1
+                Dim ObjRowDet = uwgExtraBenfits.Rows(i)
                 If ObjRowDet.Cells(0).Value = 0 Then
                     ObjRowDet.Delete()
+                Else
+                    TotalExtraBenefits += ObjRowDet.Cells(0).Value
                 End If
+            Next
+        End If
+        uwgExtraBenfits.Rows.Add()
 
+        lblDescTotalDue.Text = Double.Parse(IIf(IsNumeric(lblTotalBenefits2.Text), lblTotalBenefits2.Text, 0)) _
+                             + Double.Parse(IIf(IsNumeric(lblTotalBenefit1.Text), lblTotalBenefit1.Text, 0)) _
+                             + Double.Parse(IIf(IsNumeric(lblDescAmount.Text), lblDescAmount.Text, 0)) _
+                             - Double.Parse(IIf(IsNumeric(lblRemainAmount.Text), lblRemainAmount.Text, 0))
+
+        Dim TotaExtraDeductions As Double = Double.Parse(IIf(IsNumeric(LblTotalExtraDeductions.Text), LblTotalExtraDeductions.Text, 0))
+
+        LblTotaExtraBenefits.Text = TotalExtraBenefits.ToString()
+        Dim TotalDue As Double = Double.Parse(IIf(IsNumeric(lblDescTotalDue.Text), lblDescTotalDue.Text, 0))
+        TotalDue += Double.Parse(IIf(IsNumeric(LblTotaExtraBenefits.Text), LblTotaExtraBenefits.Text, 0)) - Double.Parse(IIf(IsNumeric(LblTotalExtraDeductions.Text), LblTotalExtraDeductions.Text, 0))
+
+        lblDescTotalDue.Text = TotalDue.ToString()
+     End Sub
+    Protected Sub uwgExtraDeduction_UpdateRow(sender As Object, e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles uwgExtraDeduction.UpdateRow
+        Dim TotalExtraDeductions As Decimal = 0
+
+
+        If e.Row.DataChanged = DataChanged.Modified Then
+            For i As Integer = uwgExtraDeduction.Rows.Count - 1 To 0 Step -1
+                Dim ObjRowDet = uwgExtraDeduction.Rows(i)
+                If ObjRowDet.Cells(0).Value = 0 Then
+                    ObjRowDet.Delete()
+                Else
+                    TotalExtraDeductions += ObjRowDet.Cells(0).Value
+                End If
             Next
 
-            uwgExtraBenfits.Rows.Add()
-        End If
-    End Sub
-    Protected Sub uwgExtraDeduction_UpdateRow(sender As Object, e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles uwgExtraDeduction.UpdateRow
-        If e.Row.DataChanged = DataChanged.Modified Then
-
-
+            lblDescTotalDue.Text = Double.Parse(IIf(IsNumeric(lblTotalBenefits2.Text), lblTotalBenefits2.Text, 0)) _
+                             + Double.Parse(IIf(IsNumeric(lblTotalBenefit1.Text), lblTotalBenefit1.Text, 0)) _
+                             + Double.Parse(IIf(IsNumeric(lblDescAmount.Text), lblDescAmount.Text, 0)) _
+                             - Double.Parse(IIf(IsNumeric(lblRemainAmount.Text), lblRemainAmount.Text, 0))
+            Dim TotalBenifits As Double = Double.Parse(IIf(IsNumeric(LblTotaExtraBenefits.Text), LblTotaExtraBenefits.Text, 0))
+            LblTotalExtraDeductions.Text = TotalExtraDeductions.ToString()
             uwgExtraDeduction.Rows.Add()
+            Dim TotalDue As Double = Double.Parse(IIf(IsNumeric(lblDescTotalDue.Text), lblDescTotalDue.Text, 0))
+            TotalDue -= TotalExtraDeductions
+            lblDescTotalDue.Text = TotalDue + TotalBenifits
         End If
     End Sub
 End Class

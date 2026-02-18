@@ -1245,9 +1245,29 @@
                                                             
                                                         </td>
                                                     </tr>
+                                                     <td style="width: 10px">
+      <asp:Label ID="Label3" runat="server" SkinID="Label_DefaultBold" Text="Total" meta:resourcekey="Label1Resource1"></asp:Label>
+                                                         <asp:Label ID="LblTotaExtraBenefits" runat="server" SkinID="Label_DefaultBold" meta:resourcekey="lblTotalBenefits2Resource1"></asp:Label>
+  </td>
+  <td>
+      
+  </td>
+                                                     
+                                                      <td  >
+      <asp:Label ID="Label5" runat="server" SkinID="Label_DefaultBold" Width="50" Text="Total" meta:resourcekey="Label1Resource1"></asp:Label>
+  
+                                                            <asp:Label ID="LblTotalExtraDeductions" runat="server" SkinID="Label_DefaultBold" meta:resourcekey="lblTotalBenefits2Resource1"></asp:Label>
 
-                                                    
+                                                      </td>
+  <td>
+  </td>
+                                                           <td style="width: 33%">
+       
+                                                             </td>
+                                                    <tr>
 
+
+                                                    </tr>
                                                     
 
                                                     
