@@ -65,32 +65,32 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Infragistics35.WebUI.Shared.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.Shared.v11.1.dll</HintPath>
+      <HintPath>..\..\Dlls\Infragistics35.WebUI.Shared.v11.1.dll</HintPath>
     </Reference>
     <Reference Include="Infragistics35.WebUI.UltraWebGrid.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.UltraWebGrid.v11.1.dll</HintPath>
+      <HintPath>..\..\Dlls\Infragistics35.WebUI.UltraWebGrid.v11.1.dll</HintPath>
     </Reference>
     <Reference Include="Infragistics35.WebUI.UltraWebListbar.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.UltraWebListbar.v11.1.dll</HintPath>
+      <HintPath>..\..\Dlls\Infragistics35.WebUI.UltraWebListbar.v11.1.dll</HintPath>
     </Reference>
     <Reference Include="Infragistics35.WebUI.UltraWebNavigator.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.UltraWebNavigator.v11.1.dll</HintPath>
+      <HintPath>..\..\Dlls\Infragistics35.WebUI.UltraWebNavigator.v11.1.dll</HintPath>
     </Reference>
     <Reference Include="Infragistics35.WebUI.UltraWebTab.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.UltraWebTab.v11.1.dll</HintPath>
+      <HintPath>..\..\Dlls\Infragistics35.WebUI.UltraWebTab.v11.1.dll</HintPath>
     </Reference>
     <Reference Include="Infragistics35.WebUI.UltraWebToolbar.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.UltraWebToolbar.v11.1.dll</HintPath>
+      <HintPath>..\..\Dlls\Infragistics35.WebUI.UltraWebToolbar.v11.1.dll</HintPath>
     </Reference>
     <Reference Include="Infragistics35.WebUI.WebDataInput.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.WebDataInput.v11.1.dll</HintPath>
+      <HintPath>..\..\Dlls\Infragistics35.WebUI.WebDataInput.v11.1.dll</HintPath>
     </Reference>
     <Reference Include="Infragistics35.WebUI.WebDateChooser.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\VenusApplication_Clients\ClsProject\Venus.Application.SystemFiles.System\bin\Debug\Infragistics35.WebUI.WebDateChooser.v11.1.dll</HintPath>
+      <HintPath>..\..\Dlls\Infragistics35.WebUI.WebDateChooser.v11.1.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+      <HintPath>..\..\Dlls\Microsoft.ApplicationBlocks.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
