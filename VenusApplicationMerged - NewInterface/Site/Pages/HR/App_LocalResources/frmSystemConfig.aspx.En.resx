@@ -351,4 +351,10 @@
   <data name="TabResource0.Text" xml:space="preserve">
     <value>General</value>
   </data>
+  <data name="lblAllowDelayInstallmentPartResource1.Text" xml:space="preserve">
+    <value>Allow Delay Installment Part</value>
+  </data>
+  <data name="TabResource3.Text" xml:space="preserve">
+    <value>Loans</value>
+  </data>
 </root>

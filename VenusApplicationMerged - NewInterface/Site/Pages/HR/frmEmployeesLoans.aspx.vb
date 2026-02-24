@@ -1,5 +1,6 @@
-﻿Imports Venus.Application.SystemFiles.System
+﻿Imports System.Data
 Imports Venus.Application.SystemFiles.HumanResource
+Imports Venus.Application.SystemFiles.System
 Partial Class frmEmployeesLoans
     Inherits MainPage
 #Region "Public Decleration"
@@ -63,8 +64,27 @@ Partial Class frmEmployeesLoans
                 txtTransactionDate1.Text = Format(currDate, "dd/MM/yyyy")
                 txtTransactionDate.Value = Format(currDate, "dd/MM/yyyy")
                 WebDateChooser1.Value = Format(currDate, "dd/MM/yyyy")
+
+                Dim AllowDelayInstallmentPart As Boolean
+                Dim dt As DataSet
+                Dim struseccenter As String = "select AllowDelayInstallmentPart from sys_SystemConfig"
+                dt = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, Data.CommandType.Text, struseccenter)
+                If dt.Tables(0).Rows.Count > 0 Then
+                    If IsDBNull(dt.Tables(0).Rows(0)("AllowDelayInstallmentPart")) Then
+                        AllowDelayInstallmentPart = False
+                    Else
+                        AllowDelayInstallmentPart = dt.Tables(0).Rows(0)("AllowDelayInstallmentPart")
+                    End If
+                    'AllowDelayInstallmentPart = dt.Tables(0).Rows(0)("AllowDelayInstallmentPart")
+                    If AllowDelayInstallmentPart Then
+                        btnOpenPartSettlements.Visible = True
+                    Else
+                        btnOpenPartSettlements.Visible = False
+                    End If
+                End If
             Else
-                SetScreenInformation("E")
+
+                    SetScreenInformation("E")
 
             End If
 

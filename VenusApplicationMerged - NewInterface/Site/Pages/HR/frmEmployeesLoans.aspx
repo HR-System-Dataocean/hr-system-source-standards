@@ -535,7 +535,16 @@
                                                                     <Image Url="./Img/forum_newmsg.gif" />
                                                                 </Appearance>
                                                             </igtxt:WebImageButton>
-                                                        </td>
+                                                      
+    <igtxt:WebImageButton ID="btnOpenPartSettlements" runat="server" AutoSubmit="False" Height="18px"
+        Overflow="WordWrap" UseBrowserDefaults="False" Width="24px" meta:resourcekey="btnOpenPartSettlementsResource1">
+        <ClientSideEvents Click="btnOpenPartSettlements_Click()" />
+        <Alignments TextImage="ImageBottom" />
+        <Appearance>
+            <Image Url="./Img/cal_date_picker.gif" />
+        </Appearance>
+    </igtxt:WebImageButton>
+</td>
                                                     </tr>
                                                 </table>
                                             </td>

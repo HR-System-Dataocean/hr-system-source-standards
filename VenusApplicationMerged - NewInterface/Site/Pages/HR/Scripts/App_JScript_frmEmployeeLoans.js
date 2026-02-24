@@ -516,7 +516,23 @@ function btnOpenSettlements_Click() {
     }
 
 }
+function btnOpenPartSettlements_Click() {
+    //Add code to handle your event here.
+    var webTab = igtab_getTabById("UltraWebTab1");
+    if (webTab == null)
+        return;
 
+    var ctrlId = window.document.getElementById("hdnID");
+
+    var hdnSettelment = window.document.getElementById("hdnSettelment");
+    hdnSettelment.value = "1"
+
+    if (ctrlId.value != 0) {
+        var winopen = window.open("frmTransferPayParts.aspx?ID=" + ctrlId.value + "&Mode=E", "_Parent" + 1, "height=490,width=700,resizable=0,menubar=0,toolbar=0,location=0,directories=0,scrollbars=0,status=0,dependent=No");
+        winopen.document.focus();
+    }
+
+}
 
 
 function uwgEmployeeLoans_AfterRowActivateHandler(gridName, id) {
