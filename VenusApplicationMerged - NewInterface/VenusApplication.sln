@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32505.173
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Site", "Site\", "{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -38,6 +38,54 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Venus.Application.SystemFiles.HumanResource", "ClsProject\Venus.Application.SystemFiles.HumanResource\Venus.Application.SystemFiles.HumanResource.vbproj", "{3A5A8CDD-70BF-4E8C-8755-3B327864C623}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeWebUI", "ClsProject\OfficeWebUI\OfficeWebUI.csproj", "{8192EECB-F2F1-4753-A29F-246F7E2973BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DLLs", "DLLs", "{3DF9EFF9-3290-4FE9-A18F-D94672843C70}"
+	ProjectSection(SolutionItems) = preProject
+		Dlls\Ajax.dll = Dlls\Ajax.dll
+		Dlls\C1.Web.Wijmo.Controls.3.dll = Dlls\C1.Web.Wijmo.Controls.3.dll
+		Dlls\EPPlus.dll = Dlls\EPPlus.dll
+		Dlls\EPPlus.dll.refresh = Dlls\EPPlus.dll.refresh
+		Dlls\EPPlus.Interfaces.dll = Dlls\EPPlus.Interfaces.dll
+		Dlls\EPPlus.Interfaces.dll.refresh = Dlls\EPPlus.Interfaces.dll.refresh
+		Dlls\EPPlus.System.Drawing.dll = Dlls\EPPlus.System.Drawing.dll
+		Dlls\Infragistics35.Web.jQuery.v11.1.dll = Dlls\Infragistics35.Web.jQuery.v11.1.dll
+		Dlls\Infragistics35.Web.v11.1.dll = Dlls\Infragistics35.Web.v11.1.dll
+		Dlls\Infragistics35.WebUI.Documents.Core.v11.1.dll = Dlls\Infragistics35.WebUI.Documents.Core.v11.1.dll
+		Dlls\Infragistics35.WebUI.Documents.Excel.v11.1.dll = Dlls\Infragistics35.WebUI.Documents.Excel.v11.1.dll
+		Dlls\Infragistics35.WebUI.Documents.IO.v11.1.dll = Dlls\Infragistics35.WebUI.Documents.IO.v11.1.dll
+		Dlls\Infragistics35.WebUI.Documents.Reports.v11.1.dll = Dlls\Infragistics35.WebUI.Documents.Reports.v11.1.dll
+		Dlls\Infragistics35.WebUI.Documents.Word.v11.1.dll = Dlls\Infragistics35.WebUI.Documents.Word.v11.1.dll
+		Dlls\Infragistics35.WebUI.Misc.v11.1.dll = Dlls\Infragistics35.WebUI.Misc.v11.1.dll
+		Dlls\Infragistics35.WebUI.Shared.v11.1.dll = Dlls\Infragistics35.WebUI.Shared.v11.1.dll
+		Dlls\Infragistics35.WebUI.UltraWebCalcManager.v11.1.dll = Dlls\Infragistics35.WebUI.UltraWebCalcManager.v11.1.dll
+		Dlls\Infragistics35.WebUI.UltraWebChart.v11.1.dll = Dlls\Infragistics35.WebUI.UltraWebChart.v11.1.dll
+		Dlls\Infragistics35.WebUI.UltraWebGauge.v11.1.dll = Dlls\Infragistics35.WebUI.UltraWebGauge.v11.1.dll
+		Dlls\Infragistics35.WebUI.UltraWebGrid.DocumentExport.v11.1.dll = Dlls\Infragistics35.WebUI.UltraWebGrid.DocumentExport.v11.1.dll
+		Dlls\Infragistics35.WebUI.UltraWebGrid.ExcelExport.v11.1.dll = Dlls\Infragistics35.WebUI.UltraWebGrid.ExcelExport.v11.1.dll
+		Dlls\Infragistics35.WebUI.UltraWebGrid.v11.1.dll = Dlls\Infragistics35.WebUI.UltraWebGrid.v11.1.dll
+		Dlls\Infragistics35.WebUI.UltraWebListbar.v11.1.dll = Dlls\Infragistics35.WebUI.UltraWebListbar.v11.1.dll
+		Dlls\Infragistics35.WebUI.UltraWebNavigator.v11.1.dll = Dlls\Infragistics35.WebUI.UltraWebNavigator.v11.1.dll
+		Dlls\Infragistics35.WebUI.UltraWebTab.v11.1.dll = Dlls\Infragistics35.WebUI.UltraWebTab.v11.1.dll
+		Dlls\Infragistics35.WebUI.UltraWebToolbar.v11.1.dll = Dlls\Infragistics35.WebUI.UltraWebToolbar.v11.1.dll
+		Dlls\Infragistics35.WebUI.WebCombo.v11.1.dll = Dlls\Infragistics35.WebUI.WebCombo.v11.1.dll
+		Dlls\Infragistics35.WebUI.WebDataInput.v11.1.dll = Dlls\Infragistics35.WebUI.WebDataInput.v11.1.dll
+		Dlls\Infragistics35.WebUI.WebDateChooser.v11.1.dll = Dlls\Infragistics35.WebUI.WebDateChooser.v11.1.dll
+		Dlls\Infragistics35.WebUI.WebHtmlEditor.v11.1.dll = Dlls\Infragistics35.WebUI.WebHtmlEditor.v11.1.dll
+		Dlls\Infragistics35.WebUI.WebNavBar.v11.1.dll = Dlls\Infragistics35.WebUI.WebNavBar.v11.1.dll
+		Dlls\Infragistics35.WebUI.WebResizingExtender.v11.1.dll = Dlls\Infragistics35.WebUI.WebResizingExtender.v11.1.dll
+		Dlls\Infragistics35.WebUI.WebSchedule.v11.1.dll = Dlls\Infragistics35.WebUI.WebSchedule.v11.1.dll
+		Dlls\Infragistics35.WebUI.WebScheduleDataProvider.v11.1.dll = Dlls\Infragistics35.WebUI.WebScheduleDataProvider.v11.1.dll
+		Dlls\Infragistics35.WebUI.WebSpellChecker.v11.1.dll = Dlls\Infragistics35.WebUI.WebSpellChecker.v11.1.dll
+		Dlls\Microsoft.ApplicationBlocks.Data.dll = Dlls\Microsoft.ApplicationBlocks.Data.dll
+		Dlls\Stimulsoft.Base.dll = Dlls\Stimulsoft.Base.dll
+		Dlls\Stimulsoft.Base.dll.refresh = Dlls\Stimulsoft.Base.dll.refresh
+		Dlls\Stimulsoft.Report.dll = Dlls\Stimulsoft.Report.dll
+		Dlls\Stimulsoft.Report.dll.refresh = Dlls\Stimulsoft.Report.dll.refresh
+		Dlls\Stimulsoft.Report.Web.dll = Dlls\Stimulsoft.Report.Web.dll
+		Dlls\Stimulsoft.Report.Web.dll.refresh = Dlls\Stimulsoft.Report.Web.dll.refresh
+		Dlls\Venus.Shared.Errors.dll = Dlls\Venus.Shared.Errors.dll
+		Dlls\Venus.Shared.Security.dll = Dlls\Venus.Shared.Security.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

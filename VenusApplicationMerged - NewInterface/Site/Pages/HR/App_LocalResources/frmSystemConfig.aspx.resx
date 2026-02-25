@@ -351,4 +351,10 @@
   <data name="TabResource0.Text" xml:space="preserve">
     <value>عام</value>
   </data>
+  <data name="lblAllowDelayInstallmentPartResource1.Text" xml:space="preserve">
+    <value>السماح بترحيل جزء من القسط</value>
+  </data>
+  <data name="TabResource3.Text" xml:space="preserve">
+    <value>السلف والمكافأت</value>
+  </data>
 </root>

@@ -434,6 +434,50 @@
                                                             </table>
                                                         </ContentTemplate></asp:UpdatePanel></div>
 
+
+                        <h3>
+                        <asp:Label ID="Label1" runat="server" Text="Loans" SkinID="Label_DefaultBold"
+                            meta:resourcekey="TabResource3"></asp:Label>
+                    </h3>
+                    <div>
+                        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                            <ContentTemplate>
+                                <table style="width: 100%;">
+                                     <tr>
+                    <td style="width: 47%; height: 16px; vertical-align: top">
+                        <table style="width: 100%; vertical-align: top" cellspacing="0">
+                            <tr>
+                                <td class="SeparArea">
+                                </td>
+                                <td class="LabelArea">
+                                    <asp:Label ID="lblAllowDelayInstallmentPart" runat="server" Text="AllowDelayInstallmentPart" SkinID="Label_DefaultNormal"
+                                        meta:resourcekey="lblAllowDelayInstallmentPartResource1"></asp:Label>
+                                </td>
+                                <td class="DataArea">
+                                    <asp:CheckBox ID="chkAllowDelayInstallmentPart" runat="server" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 6%; height: 16px; vertical-align: top">
+                    </td>
+                    <td style="width: 47%; height: 16px; vertical-align: top">
+                        <table style="width: 100%; vertical-align: top" cellspacing="0">
+                            <tr>
+                                <td class="SeparArea">
+                                </td>
+                                <td class="LabelArea">
+                                </td>
+                                <td class="DataArea">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+               
+                                    </table>
+                                </ContentTemplate></asp:UpdatePanel></div>
+
                         </div>
                 </td>
             </tr>

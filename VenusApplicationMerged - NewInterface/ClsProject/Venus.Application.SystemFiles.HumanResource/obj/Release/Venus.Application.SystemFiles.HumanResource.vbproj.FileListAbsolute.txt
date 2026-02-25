@@ -367,3 +367,33 @@ D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsP
 D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.dll
 D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.xml
 D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.pdb
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Application.SystemFiles.HumanResource.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Application.SystemFiles.HumanResource.pdb
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Application.SystemFiles.HumanResource.xml
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Infragistics35.WebUI.Shared.v11.1.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Infragistics35.WebUI.UltraWebGrid.v11.1.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Infragistics35.WebUI.WebCombo.v11.1.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Microsoft.ApplicationBlocks.Data.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Application.SystemFiles.System.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Shared.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Shared.Errors.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Shared.Security.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Shared.Web.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Infragistics35.WebUI.UltraWebTab.v11.1.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Infragistics35.WebUI.UltraWebNavigator.v11.1.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Infragistics35.WebUI.WebDataInput.v11.1.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Infragistics35.WebUI.WebDateChooser.v11.1.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Infragistics35.WebUI.UltraWebListbar.v11.1.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Infragistics35.WebUI.UltraWebToolbar.v11.1.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Application.SystemFiles.System.pdb
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Application.SystemFiles.System.xml
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Shared.pdb
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Shared.Web.pdb
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.vbproj.AssemblyReference.cache
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.Resources.resources
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.vbproj.GenerateResource.cache
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.vbproj.CoreCompileInputs.cache
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Ap.21E01F9E.Up2Date
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.dll
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.xml
+D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.pdb
