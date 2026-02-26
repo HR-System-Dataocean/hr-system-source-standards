@@ -36,7 +36,7 @@ Partial Class frmEmployeesVacations
                 WebHandler.GetCookies(Page, "UserID", User)
                 Dim _sys_User As New Clssys_Users(Page)
                 _sys_User.Find("ID = '" & User & "'")
-                txtEmployee.Text = _sys_User.Code
+                ' txtEmployee.Text = _sys_User.Code
                 ClsEmployees.Find("Code ='" & txtEmployee.Text & "'")
                 btnSearchCode.Visible = True
                 txtEmployee.Enabled = True
@@ -256,6 +256,7 @@ Partial Class frmEmployeesVacations
             TxtCurrentYearBalanceExpireDate.Text = ""
             TxttranferedBalance.Text = ""
             TxtExpireDate.Text = ""
+            TxtNewExpireDate.Value = ""
 
         Catch ex As Exception
             mErrorHandler = New Venus.Shared.ErrorsHandler(ClsEmployeesVacations.ConnectionString)
@@ -432,40 +433,46 @@ Partial Class frmEmployeesVacations
         Try
             SetTime()
 
+            If txtEmployee.Text <> "" Then
+                ClsEmployees.Find("Code ='" & txtEmployee.Text & "'")
+                If ClsEmployees.ID > 0 Then
+                    txtEmployee.Text = ClsEmployees.Code
+                    lblDescEnglishName.Text = ClsEmployees.EnglishName
+                    lblDescEnglishName.Enabled = False
 
-            ClsEmployees.Find("Code ='" & txtEmployee.Text & "'")
-            If ClsEmployees.ID > 0 Then
-                txtEmployee.Text = ClsEmployees.Code
-                lblDescEnglishName.Text = ClsEmployees.EnglishName
-                lblDescEnglishName.Enabled = False
+                    ClsNationality.Find("Id=" & ClsEmployees.NationalityID)
+                    txtNationality.Text = ClsNationality.EngName
+                    ClsDepartment.Find("id=" & ClsEmployees.DepartmentID)
+                    txtDepartment.Text = ClsDepartment.EngName
+                    SetScreenInformation("N")
+                    Dim ClsEmployeeRelated = New Clshrs_Employees(Page)
+                    Dim intContractID As Integer
+                    Dim dteWebDateChooser1 As Date = ddlRequestDate.Value
+                    With ClsEmployees
+                        dteWebDateChooser1 = .SetHigriDate(dteWebDateChooser1)
+                    End With
+                    intContractID = clsContract.ContractValidatoinId(ClsEmployees.ID, dteWebDateChooser1)
+                    clsContract.Find(" ID =" & intContractID)
+                    clsPositions.Find("id=" & clsContract.PositionID)
+                    txtPosition.Text = clsPositions.EngName
 
-                ClsNationality.Find("Id=" & ClsEmployees.NationalityID)
-                txtNationality.Text = ClsNationality.EngName
-                ClsDepartment.Find("id=" & ClsEmployees.DepartmentID)
-                txtDepartment.Text = ClsDepartment.EngName
-                SetScreenInformation("N")
-                Dim ClsEmployeeRelated = New Clshrs_Employees(Page)
-                Dim intContractID As Integer
-                Dim dteWebDateChooser1 As Date = ddlRequestDate.Value
-                With ClsEmployees
-                    dteWebDateChooser1 = .SetHigriDate(dteWebDateChooser1)
-                End With
-                intContractID = clsContract.ContractValidatoinId(ClsEmployees.ID, dteWebDateChooser1)
-                clsContract.Find(" ID =" & intContractID)
-                clsPositions.Find("id=" & clsContract.PositionID)
-                txtPosition.Text = clsPositions.EngName
-
-                Dim str As String = "select * from (select Year,Balance as NewBalance,ExpireDate as NewBalanceExpireDate,EmployeeID from hrs_VacationsBalance where BalanceTypeID=1 and year=" & DateTime.Now.Year & " and EmployeeID=" & ClsEmployees.ID & ")T1 join (select Year,Balance as TransferedBalance,ExpireDate as TransferedBalanceExpireDate,EmployeeID from hrs_VacationsBalance where BalanceTypeID=2 and year=" & DateTime.Now.Year & " and EmployeeID=" & ClsEmployees.ID & ")T2 on T1.EmployeeID=T2.EmployeeID and T1.Year=T2.Year "
+                    Dim str As String = "select * from (select Year,Balance as NewBalance,ExpireDate as NewBalanceExpireDate,EmployeeID from hrs_VacationsBalance where BalanceTypeID=1 and year=" & DateTime.Now.Year & " and EmployeeID=" & ClsEmployees.ID & ")T1 join (select Year,Balance as TransferedBalance,ExpireDate as TransferedBalanceExpireDate,EmployeeID from hrs_VacationsBalance where BalanceTypeID=2 and year=" & DateTime.Now.Year & " and EmployeeID=" & ClsEmployees.ID & ")T2 on T1.EmployeeID=T2.EmployeeID and T1.Year=T2.Year "
 
 
-                Dim dsObject As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, str)
-                If dsObject.Tables(0).Rows.Count > 0 Then
-                    TxtCurrentYearBalance.Text = dsObject.Tables(0).Rows(0)("NewBalance")
-                    TxtCurrentYearBalanceExpireDate.Text = dsObject.Tables(0).Rows(0)("NewBalanceExpireDate")
-                    TxttranferedBalance.Text = Math.Round(dsObject.Tables(0).Rows(0)("TransferedBalance"), 0).ToString()
-                    TxtExpireDate.Text = dsObject.Tables(0).Rows(0)("TransferedBalanceExpireDate")
+                    Dim dsObject As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, str)
+                    If dsObject.Tables(0).Rows.Count > 0 Then
+                        TxtCurrentYearBalance.Text = dsObject.Tables(0).Rows(0)("NewBalance")
+                        TxtCurrentYearBalanceExpireDate.Text = dsObject.Tables(0).Rows(0)("NewBalanceExpireDate")
+                        TxttranferedBalance.Text = Math.Round(dsObject.Tables(0).Rows(0)("TransferedBalance"), 0).ToString()
+                        TxtExpireDate.Text = dsObject.Tables(0).Rows(0)("TransferedBalanceExpireDate")
+                    End If
+
+                Else
+                    SetNew()
+
                 End If
-
+            Else
+                SetNew()
             End If
 
         Catch ex As Exception

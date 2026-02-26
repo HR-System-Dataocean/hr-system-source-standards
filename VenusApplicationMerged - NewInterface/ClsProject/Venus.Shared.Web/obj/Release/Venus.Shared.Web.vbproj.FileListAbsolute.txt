@@ -96,3 +96,11 @@ D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\
 D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.dll
 D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.Menu.xml
 D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\obj\Release\Venus.Shared.Web.pdb
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Infragistics35.WebUI.Shared.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Infragistics35.WebUI.UltraWebGrid.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Infragistics35.WebUI.UltraWebListbar.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Infragistics35.WebUI.UltraWebNavigator.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Infragistics35.WebUI.UltraWebTab.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Infragistics35.WebUI.UltraWebToolbar.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Infragistics35.WebUI.WebDataInput.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Shared.Web\bin\Release\Infragistics35.WebUI.WebDateChooser.v11.1.dll
