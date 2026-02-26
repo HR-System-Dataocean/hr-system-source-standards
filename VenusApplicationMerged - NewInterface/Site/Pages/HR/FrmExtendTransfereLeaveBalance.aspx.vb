@@ -13,6 +13,7 @@ Partial Class frmEmployeesVacations
 #Region "Public Decleration"
     Private ClsEmployeesVacations As Clshrs_EmployeesVacations
     Private ClsEmployees As Clshrs_Employees
+    Private ClsEmployees2 As Clshrs_Employees
     Private clsMainOtherFields As clsSys_MainOtherFields
     Private mErrorHandler As Venus.Shared.ErrorsHandler
     Const csOtherFields = 11
@@ -37,14 +38,9 @@ Partial Class frmEmployeesVacations
                 _sys_User.Find("ID = '" & User & "'")
                 txtEmployee.Text = _sys_User.Code
                 ClsEmployees.Find("Code ='" & txtEmployee.Text & "'")
-                If ClsEmployees.InsertRequestsForAnotherEmployee Then
-                    btnSearchCode.Visible = True
-                    txtEmployee.Enabled = True
-                Else
-                    btnSearchCode.Visible = False
-                    txtEmployee.Enabled = False
+                btnSearchCode.Visible = True
+                txtEmployee.Enabled = True
 
-                End If
                 Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
                 'txtEmployee.Enabled = False
                 ddlRequestDate.Value = ClsEmployeesVacations.GetHigriDate(Date.Now.Date)
@@ -87,7 +83,21 @@ Partial Class frmEmployeesVacations
                         DteEndDate = Request.QueryString.Item("ToDate")
                     End If
                 End If
-                'WebDateChooser1.Value = ClsEmployeesVacations.GetHigriDate(DteStartDate)
+                txtDepartment.Enabled = False
+
+                txtNationality.Enabled = False
+                txtPosition.Enabled = False
+                lblDescEnglishName.Enabled = False
+                TxtCurrentYearBalance.Enabled = False
+                TxtCurrentYearBalanceExpireDate.Enabled = False
+                TxttranferedBalance.Enabled = False
+                TxtExpireDate.Enabled = False
+
+
+
+
+
+
                 If (lbVactionID.Text <> "") Then
                     ClsEmployeesVacations.Find("ID=" & lbVactionID.Text)
                     recordID = ClsEmployeesVacations.ID
@@ -139,7 +149,6 @@ Partial Class frmEmployeesVacations
                 End If
                 If SavePart() Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Save Done/تم الحفظ"))
-                    ClientScript.RegisterClientScriptBlock(ClientScript.GetType, "Load", "<script language=""javascript"">OpenPrintedScreen(" & PrintRequestSerial & ");</script>")
 
                 End If
             Case "New"
@@ -237,7 +246,16 @@ Partial Class frmEmployeesVacations
 
             ImageButton_Delete.Enabled = False
 
+            txtEmployee.Text = ""
+            txtDepartment.Text = ""
 
+            txtNationality.Text = ""
+            txtPosition.Text = ""
+            lblDescEnglishName.Text = ""
+            TxtCurrentYearBalance.Text = ""
+            TxtCurrentYearBalanceExpireDate.Text = ""
+            TxttranferedBalance.Text = ""
+            TxtExpireDate.Text = ""
 
         Catch ex As Exception
             mErrorHandler = New Venus.Shared.ErrorsHandler(ClsEmployeesVacations.ConnectionString)
@@ -444,7 +462,7 @@ Partial Class frmEmployeesVacations
                 If dsObject.Tables(0).Rows.Count > 0 Then
                     TxtCurrentYearBalance.Text = dsObject.Tables(0).Rows(0)("NewBalance")
                     TxtCurrentYearBalanceExpireDate.Text = dsObject.Tables(0).Rows(0)("NewBalanceExpireDate")
-                    TxttranferedBalance.Text = dsObject.Tables(0).Rows(0)("TransferedBalance")
+                    TxttranferedBalance.Text = Math.Round(dsObject.Tables(0).Rows(0)("TransferedBalance"), 0).ToString()
                     TxtExpireDate.Text = dsObject.Tables(0).Rows(0)("TransferedBalanceExpireDate")
                 End If
 
@@ -467,6 +485,7 @@ Partial Class frmEmployeesVacations
         Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployeesVacations.ConnectionString)
         Dim cls_Company = New Clssys_Companies(Page)
         Dim cls_Employee = New Clshrs_Employees(Page)
+        Dim ClsEmployees2 = New Clshrs_Employees(Page)
 
         Dim recordId As Integer
         Dim RemVal As Integer = 0
@@ -477,7 +496,9 @@ Partial Class frmEmployeesVacations
             Dim _sys_User As New Clssys_Users(Page)
             _sys_User.Find("ID = '" & User & "'")
             ClsEmployees.Find("Code='" & _sys_User.Code & "'")
-            Dim str As String = " Update hrs_VacationsBalance set ExpireDate='" & CDate(TxtExpireDate.Text).ToString("yyyy-MM-dd") & "',LastUpdateBy=" & _sys_User.ID & ",LastUpdateDate=" & DateTime.Now.ToString("yyyy-MM-dd") & " where BalanceTypeID=2 and Year=" & DateTime.Now.Year & ""
+            ClsEmployees2.Find("Code='" & txtEmployee.Text & "'")
+            Dim str As String = " Update hrs_VacationsBalance set ExpireDate='" & CDate(TxtNewExpireDate.Text).ToString("yyyy-MM-dd") & "',LastUpdateBy=" & _sys_User.ID & ",LastUpdateDate='" & DateTime.Now.ToString("yyyy-MM-dd") & "' where BalanceTypeID=2 and Year=" & DateTime.Now.Year & " And EmployeeID=" & ClsEmployees2.ID & ""
+            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(cls_Employee.ConnectionString, CommandType.Text, str)
 
             SetNew()
             Return True

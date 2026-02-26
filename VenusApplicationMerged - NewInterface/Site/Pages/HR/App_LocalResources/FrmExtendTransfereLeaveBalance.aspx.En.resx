@@ -280,7 +280,7 @@
     <value />
   </data>
   <data name="PageResource1.Title" xml:space="preserve">
-    <value>* Venus Payroll * ~ Loan Letter Request</value>
+    <value>* Venus Payroll * ~ Extend Transferred Annual laeave Balance</value>
   </data>
   <data name="realnameResource1.Text" xml:space="preserve">
     <value />
@@ -326,5 +326,17 @@
   </data>
   <data name="txtEmployeeResource1.Text" xml:space="preserve">
     <value>Employee Name</value>
+  </data>
+  <data name="labelDescEnglishNameResource1.Text" xml:space="preserve">
+    <value>Employee Name</value>
+  </data>
+  <data name="labelNationalityResource1.Text" xml:space="preserve">
+    <value>Nationality</value>
+  </data>
+  <data name="lblExtendDateResource1.Text" xml:space="preserve">
+    <value>Extend date</value>
+  </data>
+  <data name="TabResource1.Text" xml:space="preserve">
+    <value>Extend Transferred Annual laeave Balance</value>
   </data>
 </root>
