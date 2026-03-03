@@ -397,3 +397,8 @@ D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\
 D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.dll
 D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.xml
 D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\obj\Release\Venus.Application.SystemFiles.HumanResource.pdb
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Infragistics35.WebUI.Shared.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Infragistics35.WebUI.UltraWebGrid.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Infragistics35.WebUI.WebCombo.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Shared.Errors.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.HumanResource\bin\Release\Venus.Shared.Security.dll

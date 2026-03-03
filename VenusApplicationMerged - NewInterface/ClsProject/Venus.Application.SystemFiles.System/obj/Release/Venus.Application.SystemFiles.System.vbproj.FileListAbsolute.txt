@@ -111,3 +111,11 @@ D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\
 D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.dll
 D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.xml
 D:\OcApp\AAAGitHup\NewStanderd\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\obj\Release\Venus.Application.SystemFiles.System.pdb
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Infragistics35.WebUI.Shared.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Infragistics35.WebUI.UltraWebGrid.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Infragistics35.WebUI.UltraWebListbar.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Infragistics35.WebUI.UltraWebNavigator.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Infragistics35.WebUI.UltraWebTab.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Infragistics35.WebUI.WebCombo.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Infragistics35.WebUI.WebDataInput.v11.1.dll
+D:\Data Ocean\SourceCode\Standard_New\VenusApplicationMerged - NewInterface\ClsProject\Venus.Application.SystemFiles.System\bin\Release\Infragistics35.WebUI.WebDateChooser.v11.1.dll
