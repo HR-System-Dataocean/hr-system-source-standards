@@ -419,12 +419,12 @@ Partial Class frmAttendancePreparation
 
                                         clsTransType.Find("ID= " & ClsClasses.RegComputerID)
                                         Dim ClsSolver = New Clshrs_FormulaSolver(clsTransType.ConnectionString, Page)
-                                        ClsSolver.EmployeeID = ClsEmployees.ID
+                                        ClsSolver.EmployeeID = EmpID
                                         ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
                                         ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
                                         ClsSolver.Executedate = ToDate
                                         ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
-                                        ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output
+                                        ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
                                     End If
                                 End If
                             Else
@@ -442,12 +442,12 @@ Partial Class frmAttendancePreparation
 
                                         clsTransType.Find("ID= " & ClsClasses.RegComputerID)
                                         Dim ClsSolver = New Clshrs_FormulaSolver(clsTransType.ConnectionString, Page)
-                                        ClsSolver.EmployeeID = ClsEmployees.ID
+                                        ClsSolver.EmployeeID = EmpID
                                         ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
                                         ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
                                         ClsSolver.Executedate = ToDate
                                         ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
-                                        ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output
+                                        ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
                                     End If
                                 End If
                             End If
