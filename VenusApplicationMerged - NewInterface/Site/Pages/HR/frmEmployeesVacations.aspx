@@ -284,6 +284,31 @@
                                     meta:resourcekey="ImageButton_DocumentsRec" Height="16px" ImageUrl="./img/abook_add_1.gif"
                                     Width="16px" />
                             </td>
+
+                            <td style="width: 40px">
+    <asp:Label ID="Label3" runat="server" Text="|" meta:resourcekey="Label_TSP2Resource1"></asp:Label>
+</td>
+<td style="width: 24px">
+    <asp:ImageButton ID="ImageButton_Last" Width="16px" Height="16px" runat="server"
+        SkinID="HrLast_Command" meta:resourcekey="ImageButton_LastResource1" CommandArgument="Last" />
+</td>
+<td style="width: 24px">
+    <asp:ImageButton ID="ImageButton_Next" Width="16px" Height="16px" runat="server"
+        SkinID="HrNext_Command" meta:resourcekey="ImageButton_NextResource1" CommandArgument="Next" />
+</td>
+<td style="width: 10px">
+</td>
+<td style="width: 24px">
+    <asp:ImageButton ID="ImageButton_Back" Width="16px" Height="16px" runat="server"
+        SkinID="HrBack_Command" meta:resourcekey="ImageButton_BackResource1" CommandArgument="Previous" />
+</td>
+<td style="width: 24px">
+    <asp:ImageButton ID="ImageButton_First" Width="16px" Height="16px" runat="server"
+        SkinID="HrFirest_Command" meta:resourcekey="ImageButton_FirstResource1" CommandArgument="First" />
+</td>
+<td style="width: 30%">
+</td>
+                            
                             <td style="width: 80px">
                                 <asp:ImageButton ID="ImageButton_Help" Width="16px" Height="16px" runat="server"
                                     SkinID="HrHelp_Command" meta:resourcekey="ImageButton_HelpResource1" />

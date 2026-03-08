@@ -1,6 +1,7 @@
-﻿Imports Venus.Application.SystemFiles.System
+﻿Imports System.Data
+Imports System.Runtime.CompilerServices.RuntimeHelpers
 Imports Venus.Application.SystemFiles.HumanResource
-Imports System.Data
+Imports Venus.Application.SystemFiles.System
 
 Partial Class frmEmployeesVacations
     Inherits MainPage
@@ -116,7 +117,7 @@ Partial Class frmEmployeesVacations
             Page.Response.Redirect("ErrorPage.aspx")
         End Try
     End Sub
-    Protected Sub ImageButton_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles ImageButton_Save.Command, ImageButton_New.Command, ImageButton_Print.Command, ImageButton_Properties.Command, LinkButton_Properties.Command, ImageButton_Remarks.Command, LinkButton_Remarks.Command, ImageButton_Delete.Command
+    Protected Sub ImageButton_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles ImageButton_Save.Command, ImageButton_New.Command, ImageButton_Print.Command, ImageButton_Properties.Command, LinkButton_Properties.Command, ImageButton_Remarks.Command, LinkButton_Remarks.Command, ImageButton_Delete.Command, ImageButton_First.Command, ImageButton_Next.Command, ImageButton_Last.Command, ImageButton_Back.Command
         Dim IntId As Integer
         Dim strMode As String
         ClsEmployeesVacations = New Clshrs_EmployeesVacations(Page)
@@ -200,32 +201,94 @@ Partial Class frmEmployeesVacations
 
             Case "Exit"
 
+                'Case "First"
+                '    ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+                '    ClsEmployees.FirstRecord()
+                '    txtEmployee.Text = ClsEmployees.Code
+                '    txtEmployee_TextChanged(Nothing, Nothing)
+                'Case "Previous"
+                '    ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+                '    If Not ClsEmployees.previousRecord() Then
+                '        ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+                '        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This is the first page /هذه أول صفحة"))
+                '    End If
+                '    txtEmployee.Text = ClsEmployees.Code
+                '    txtEmployee_TextChanged(Nothing, Nothing)
+                'Case "Next"
+                '    ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+                '    If Not ClsEmployees.NextRecord() Then
+                '        ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+                '        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This is the last page /هذه أخر صفحة"))
+                '    End If
+                '    txtEmployee.Text = ClsEmployees.Code
+                '    txtEmployee_TextChanged(Nothing, Nothing)
+                'Case "Last"
+                '    ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+                '    ClsEmployees.LastRecord()
+                '    txtEmployee.Text = ClsEmployees.Code
+                '    txtEmployee_TextChanged(Nothing, Nothing)
             Case "First"
-                ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
-                ClsEmployees.FirstRecord()
-                txtEmployee.Text = ClsEmployees.Code
+                Dim clsEmployees As New Clshrs_Employees(Page)
+                Dim StrSelectCommand = "SELECT TOP 1 EmployeeID,ID,RegDate FROM hrs_EmployeesVacations where isnull(CancelDate,'')='' and VacationTypeID=1 ORDER BY RegDate ASC"
+                Dim FirstCode As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(clsEmployees.ConnectionString, Data.CommandType.Text, StrSelectCommand)
+                clsEmployees.Find("ID=" & FirstCode.Tables(0).Rows(0).Item(0))
+                txtEmployee.Text = clsEmployees.Code
                 txtEmployee_TextChanged(Nothing, Nothing)
+
+                Dim targetID As String = FirstCode.Tables(0).Rows(0).Item(1).ToString()
+                'المسح المسبق لأي تحديد
+                SelectVac(targetID)
+                'lblRegDateValue.Text = FirstCode.Tables(0).Rows(0).Item(2).ToString()
+                'uwgEmployeeVacations.CurrentCell = Me.DataGridView1.Rows(rowIndexToSelect).Cells(0)
+
             Case "Previous"
-                ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
-                If Not ClsEmployees.previousRecord() Then
-                    ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+                Dim clsEmployees As New Clshrs_Employees(Page)
+                Dim StrSelectCommand = "SELECT TOP 1 EmployeeID,ID,RegDate FROM hrs_EmployeesVacations where isnull(CancelDate,'')='' and VacationTypeID=1 and RegDate <'" & CDate(lblRegDateValue.Text).ToString("yyyy-MM-dd HH:mm") & "' ORDER BY RegDate Desc"
+                Dim FirstCode As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(clsEmployees.ConnectionString, Data.CommandType.Text, StrSelectCommand)
+
+                If FirstCode.Tables(0).Rows.Count = 0 Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This is the first page /هذه أول صفحة"))
+                Else
+                    clsEmployees.Find("ID=" & FirstCode.Tables(0).Rows(0).Item(0))
+                    txtEmployee.Text = clsEmployees.Code
+                    txtEmployee.Text = clsEmployees.Code
+                    txtEmployee_TextChanged(Nothing, Nothing)
+                    Dim targetID As String = FirstCode.Tables(0).Rows(0).Item(1).ToString()
+                    'المسح المسبق لأي تحديد
+                    SelectVac(targetID)
+                    'lblRegDateValue.Text = FirstCode.Tables(0).Rows(0).Item(2).ToString()
                 End If
-                txtEmployee.Text = ClsEmployees.Code
-                txtEmployee_TextChanged(Nothing, Nothing)
+
             Case "Next"
-                ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
-                If Not ClsEmployees.NextRecord() Then
-                    ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+                Dim clsEmployees As New Clshrs_Employees(Page)
+                Dim StrSelectCommand = "SELECT TOP 1 EmployeeID,ID,RegDate FROM hrs_EmployeesVacations where isnull(CancelDate,'')='' and VacationTypeID=1 and CAST(RegDate AS DATE) >'" & CDate(lblRegDateValue.Text).ToString("yyyy-MM-dd") & "' ORDER BY RegDate ASC"
+                Dim FirstCode As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(clsEmployees.ConnectionString, Data.CommandType.Text, StrSelectCommand)
+
+                If FirstCode.Tables(0).Rows.Count = 0 Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This is the last page /هذه أخر صفحة"))
+                Else
+                    clsEmployees.Find("ID=" & FirstCode.Tables(0).Rows(0).Item(0))
+                    txtEmployee.Text = clsEmployees.Code
+                    txtEmployee.Text = clsEmployees.Code
+                    txtEmployee_TextChanged(Nothing, Nothing)
+                    Dim targetID As String = FirstCode.Tables(0).Rows(0).Item(1).ToString()
+                    'المسح المسبق لأي تحديد
+                    SelectVac(targetID)
+                    'lblRegDateValue.Text = FirstCode.Tables(0).Rows(0).Item(2).ToString()
                 End If
-                txtEmployee.Text = ClsEmployees.Code
-                txtEmployee_TextChanged(Nothing, Nothing)
+
             Case "Last"
-                ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
-                ClsEmployees.LastRecord()
-                txtEmployee.Text = ClsEmployees.Code
+                Dim clsEmployees As New Clshrs_Employees(Page)
+                Dim StrSelectCommand = "SELECT TOP 1 EmployeeID,ID,RegDate FROM hrs_EmployeesVacations where isnull(CancelDate,'')='' and VacationTypeID=1 ORDER BY RegDate Desc"
+                Dim FirstCode As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(clsEmployees.ConnectionString, Data.CommandType.Text, StrSelectCommand)
+
+                clsEmployees.Find("ID=" & FirstCode.Tables(0).Rows(0).Item(0))
+                txtEmployee.Text = clsEmployees.Code
                 txtEmployee_TextChanged(Nothing, Nothing)
+                Dim targetID As String = FirstCode.Tables(0).Rows(0).Item(1).ToString()
+                'المسح المسبق لأي تحديد
+                SelectVac(targetID)
+                'lblRegDateValue.Text = FirstCode.Tables(0).Rows(0).Item(2).ToString()
         End Select
         If uwgEmployeeVacations.Rows.Count > 0 Then
             IntId = uwgEmployeeVacations.Rows(0).Cells.FromKey("ID").Value
@@ -239,6 +302,118 @@ Partial Class frmEmployeesVacations
         If strMode = "N" Then
             ImageButton_Delete.Enabled = False
         End If
+    End Sub
+
+    Private Sub SelectVac(targetID As String)
+        uwgEmployeeVacations.DisplayLayout.SelectedRows.Clear()
+
+        For Each row As Infragistics.WebUI.UltraWebGrid.UltraGridRow In uwgEmployeeVacations.Rows
+            ' 2. التأكد أن الخلية موجودة وليست فارغة (Null) لتجنب خطأ Evaluation
+            If row.Cells.FromKey("ID").Value IsNot Nothing AndAlso Not IsDBNull(row.Cells.FromKey("ID").Value) Then
+
+                ' 3. تحويل الطرفين لنص وعمل Trim للفراغات لضمان دقة المطابقة
+                If row.Cells.FromKey("ID").Value.ToString().Trim() = targetID.Trim() Then
+
+                    ' 4. تحديد الصف
+                    row.Selected = True
+                    uwgEmployeeVacations.DisplayLayout.ActiveRow = row
+
+                    ' استدعاء الدالة فوراً لتعبئة البيانات وتلوين الصف
+                    FillVacationDetails(row)
+
+                    Exit For
+                End If
+            End If
+        Next
+    End Sub
+
+    Private Sub FillVacationDetails(ByVal selectedRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow)
+        ' 1. تلوين الصفوف
+        For Each row As Infragistics.WebUI.UltraWebGrid.UltraGridRow In uwgEmployeeVacations.Rows
+            row.Style.BackColor = System.Drawing.Color.Transparent
+        Next
+
+        selectedRow.Style.BackColor = System.Drawing.ColorTranslator.FromHtml("#92c2fb")
+
+        Try
+            If txtEmployee.Text <> "" Then
+                LinkButton_OverDueMessage.Visible = False
+                ' هنا استخدمنا selectedRow مباشرة بدلاً من e.SelectedRows.Item(0)
+                DdlVacationType.SelectedValue = selectedRow.Cells.FromKey("VacationTypeID").Value
+                WebDateChooser1.Value = selectedRow.Cells.FromKey("ActualStartDate").Value
+                WebDateChooser2.Value = selectedRow.Cells.FromKey("ActualEndDate").Value
+
+                If selectedRow.Cells.FromKey("ActualEndDate").Value Is Nothing Then
+                    WebDateChooser1.Enabled = False
+                    WebDateChooser3.Enabled = False
+                    txtVactiondays.Enabled = False
+                    WebDateChooser2.Enabled = True
+                    ImageButton_Save.Enabled = True
+                Else
+                    WebDateChooser1.Enabled = False
+                    txtVactiondays.Enabled = False
+                    WebDateChooser2.Enabled = False
+                    ImageButton_Save.Enabled = False
+                End If
+
+                lbVactionID.Text = selectedRow.Cells.FromKey("ID").Value
+
+                Dim clsEmp As New Clshrs_Employees(Page)
+                Dim clsEmpVac As New Clshrs_EmployeesVacations(Page)
+                Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsEmpVac.ConnectionString)
+                Dim dteFiscalYear As Date = CDate(WebDateChooser1.Value)
+                dteFiscalYear = ClsDataAcessLayer.HijriToGreg(dteFiscalYear, "dd/MM/yyyy")
+                If clsEmp.Find("Code='" & txtEmployee.Text & "'") Then
+                    If clsEmpVac.Find("ID=" & lbVactionID.Text) Then
+                        Dim cls_OTHER_VACATION As New Clshrs_EmployeesVacations(Page)
+                        If cls_OTHER_VACATION.Find("ParentVacationID=" & clsEmpVac.ID) Then
+                            WebDateChooser2.Value = cls_OTHER_VACATION.ActualEndDate
+                        End If
+                        'lblTotalDays.Text = Math.Round(Convert.ToDecimal(clsEmpVac.TotalDays), 2)
+
+                        lblTotalDays.Text = Math.Round(Convert.ToDecimal(clsEmpVac.RemainingDays), 2) + Math.Round(Convert.ToDecimal(clsEmpVac.vactiondays), 2)
+                        lbTotalVal.Text = Math.Round(Convert.ToDecimal(clsEmpVac.TotalDays), 2)
+                        lbRemainVal.Text = Math.Round(Convert.ToDecimal(clsEmpVac.RemainingDays), 2)
+                        txtVactiondays.Text = Math.Round(Convert.ToDecimal(clsEmpVac.vactiondays), 2)
+                        chk_ZeroingBalance.Checked = clsEmpVac.ZeroingBalance
+                        Dim vl As DateTime = WebDateChooser1.Value
+                        WebDateChooser3.Value = vl.Date.AddDays(IIf(txtVactiondays.Text < 1, 0, txtVactiondays.Text))
+                        If clsEmpVac.OverDueVacation <> Nothing Then
+                            clsEmpVac.Find("ID=" & clsEmpVac.OverDueVacation)
+                            Dim days As Integer = (DateDiff(DateInterval.Day, clsEmpVac.ActualStartDate, clsEmpVac.ActualEndDate)) + 1
+                            LinkButton_OverDueMessage.Visible = True
+                            LinkButton_OverDueMessage.Text = ObjNavigationHandler.SetLanguage(Page, "There Is (" & days & ") Days OverDue Vacations/هناك عدد (" & days & ") يوم تجاوز لرصيد الأجازة")
+                        End If
+
+                        LblRequestIDValue.Text = clsEmpVac.VacationRequestID
+
+                        Dim ClsUser As New Clssys_Users(Page)
+
+                        If Not clsEmpVac.RegUserID = Nothing Then
+                            ClsUser.Find("ID=" & clsEmpVac.RegUserID)
+                        End If
+                        If ClsUser.EngName = Nothing Then
+                            lblRegUserValue.Text = ""
+                        Else
+                            lblRegUserValue.Text = ClsUser.EngName
+                        End If
+                        If Convert.ToDateTime(clsEmpVac.RegDate).Date = Nothing Then
+                            lblRegDateValue.Text = ""
+                        Else
+                            lblRegDateValue.Text = Convert.ToDateTime(clsEmpVac.RegDate).Date
+                        End If
+
+                    End If
+
+                End If
+
+                ' في نهاية الكود:
+                'GetRecordInfoAjax(selectedRow.Cells.FromKey("ID").Value)
+                Session("EmpVacID") = selectedRow.Cells.FromKey("ID").Value
+            End If
+        Catch ex As Exception
+            ' معالجة الخطأ
+        End Try
     End Sub
 
     Protected Sub txtEmployee_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtEmployee.TextChanged, ImageButton_Refresh.Click
@@ -392,7 +567,7 @@ Partial Class frmEmployeesVacations
                 End If
                 ImageButton_Delete.Enabled = True
                 ImageButton_Print.Enabled = True
-                GetRecordInfoAjax(e.SelectedRows.Item(0).Cells.FromKey("ID").Value)
+                'GetRecordInfoAjax(e.SelectedRows.Item(0).Cells.FromKey("ID").Value)
 
                 Session("EmpVacID") = e.SelectedRows.Item(0).Cells.FromKey("ID").Value
             End If
