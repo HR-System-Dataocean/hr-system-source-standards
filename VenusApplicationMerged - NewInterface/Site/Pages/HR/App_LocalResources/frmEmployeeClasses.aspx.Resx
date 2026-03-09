@@ -579,4 +579,7 @@
   <data name="AccumulatedBalanceResource1.Text" xml:space="preserve">
     <value>الرصيد لأكثر من عام</value>
   </data>
+  <data name="LblRamadanWorkHoursResource1.Text" xml:space="preserve">
+    <value>ساعات العمل في رمضان/ يومي</value>
+  </data>
 </root>
