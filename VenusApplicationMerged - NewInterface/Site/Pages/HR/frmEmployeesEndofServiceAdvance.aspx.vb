@@ -596,6 +596,8 @@ Partial Class frmEmployeesEndofServiceAdvance
         ImageButton_Print0.Enabled = True
 
         Clshrs_EmployeesJoins = New Clshrs_EmployeesJoins(Me.Page)
+
+
         If IntEmployeeId <= 0 Then
             lblDescEmployeeCode.Text = ""
             lblDescEnglishName.Text = ""
@@ -1369,6 +1371,7 @@ Partial Class frmEmployeesEndofServiceAdvance
             Clear()
             Exit Sub
         End If
+        Clear()
         Dim ClsContract As New Clshrs_Contracts(Page)
         Dim ClsPayabilities As New Clshrs_EmployeesPayability(Page)
         Dim ClsTransactionTypes As New Clshrs_TransactionsTypes(Page)
