@@ -218,7 +218,11 @@ Partial Class frmEmployeesOthersVacations
 
             Case "Previous"
                 Dim clsEmployees As New Clshrs_Employees(Page)
-                Dim StrSelectCommand = "SELECT TOP 1 EmployeeID,ID,RegDate FROM hrs_EmployeesVacations where isnull(CancelDate,'')='' and VacationTypeID<>1 and RegDate <'" & CDate(lblRegDateValue.Text).ToString("yyyy-MM-dd HH:mm") & "' ORDER BY RegDate Desc"
+                Dim StrSelectCommand = "SELECT TOP 1 EmployeeID,ID,RegDate FROM hrs_EmployeesVacations where isnull(CancelDate,'')='' and VacationTypeID<>1 ORDER BY RegDate ASC"
+                If lblRegDateValue.Text <> "" Then
+
+                    StrSelectCommand = "SELECT TOP 1 EmployeeID,ID,RegDate FROM hrs_EmployeesVacations where isnull(CancelDate,'')='' and VacationTypeID<>1 and RegDate <'" & CDate(lblRegDateValue.Text).ToString("yyyy-MM-dd HH:mm") & "' ORDER BY RegDate Desc"
+                End If
                 Dim FirstCode As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(clsEmployees.ConnectionString, Data.CommandType.Text, StrSelectCommand)
 
                 If FirstCode.Tables(0).Rows.Count = 0 Then
@@ -236,7 +240,12 @@ Partial Class frmEmployeesOthersVacations
 
             Case "Next"
                 Dim clsEmployees As New Clshrs_Employees(Page)
-                Dim StrSelectCommand = "SELECT TOP 1 EmployeeID,ID,RegDate FROM hrs_EmployeesVacations where isnull(CancelDate,'')='' and VacationTypeID<>1 and CAST(RegDate AS DATE) >'" & CDate(lblRegDateValue.Text).ToString("yyyy-MM-dd") & "' ORDER BY RegDate ASC"
+                Dim StrSelectCommand = "SELECT TOP 1 EmployeeID,ID,RegDate FROM hrs_EmployeesVacations where isnull(CancelDate,'')='' and VacationTypeID<>1 ORDER BY RegDate Desc"
+
+
+                If lblRegDateValue.Text <> "" Then
+                    StrSelectCommand = "SELECT TOP 1 EmployeeID,ID,RegDate FROM hrs_EmployeesVacations where isnull(CancelDate,'')='' and VacationTypeID<>1 and CAST(RegDate AS DATE) >'" & CDate(lblRegDateValue.Text).ToString("yyyy-MM-dd") & "' ORDER BY RegDate ASC"
+                End If
                 Dim FirstCode As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(clsEmployees.ConnectionString, Data.CommandType.Text, StrSelectCommand)
 
                 If FirstCode.Tables(0).Rows.Count = 0 Then
