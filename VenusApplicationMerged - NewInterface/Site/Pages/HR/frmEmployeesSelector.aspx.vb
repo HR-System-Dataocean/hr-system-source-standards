@@ -2890,7 +2890,22 @@ Partial Class frmEmployeesSelector
                                                     Next
                                                     NotPermitLattime = IIf((IIf(TotalLattime > 0, (TotalLattime - Convert.ToDouble(latslice(IIf(charIdx - 1 < 0, 0, charIdx - 1)).ToString())), 0)) < 0, 0, IIf(TotalLattime > 0, (TotalLattime - Convert.ToDouble(latslice(IIf(charIdx - 1 < 0, 0, charIdx - 1)).ToString())), 0))
                                                     ClsAttendancePreparationProjects.NotpermitLate = NotPermitLattime / 60
-                                                    ClsAttendancePreparationProjects.LatPunishment = Convert.ToDouble(latPunslice(charIdx).ToString())
+                                                    If ClsClasses.LateFormula <> "" Then
+
+                                                        'Dim ClsEmployeeClass As Clshrs_EmployeeClasses = New Clshrs_EmployeeClasses(Page)
+                                                        'ClsEmployeesContracts.Find("ID = " & intEmployeeContarctID)
+                                                        'ClsEmployeeClass.Find("ID =" & ClsEmployeesContracts.EmployeeClassID)
+                                                        Dim clsTransType As Clshrs_TransactionsTypes = New Clshrs_TransactionsTypes(Page)
+
+                                                        clsTransType.Find("ID= " & ClsClasses.RegComputerID)
+                                                        Dim ClsSolver = New Clshrs_FormulaSolver(clsTransType.ConnectionString, Page)
+                                                        ClsSolver.EmployeeID = ClsEmployees.ID
+                                                        ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
+                                                        ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
+                                                        ClsSolver.Executedate = ToDate
+                                                        ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
+                                                        ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                    End If
                                                     totallat = totallat + ClsAttendancePreparationProjects.NotpermitLate
                                                 Else
                                                     TotalLattime = Convert.ToDouble(EmployeetrnsDt.Rows(i)("TotalLat"))
@@ -3385,11 +3400,43 @@ Partial Class frmEmployeesSelector
                                                     If DT.Rows.Count > 0 Then
                                                         If ClsClasses.PunishementCalc = 1 Then
                                                             'ClsAttendancePreparationDetails.LatPunishment += (Amount / NumberOfDays) * ClsClassDelay.PunishPCT / 100
-                                                            ClsAttendancePreparationDetails.LatPunishment += (salaryAmount / NumberOfDays) * ClsClassDelay.PunishPCT / 100
+                                                            'ClsAttendancePreparationDetails.LatPunishment += (salaryAmount / NumberOfDays) * ClsClassDelay.PunishPCT / 100
+                                                            If ClsClasses.LateFormula <> "" Then
+
+                                                                'Dim ClsEmployeeClass As Clshrs_EmployeeClasses = New Clshrs_EmployeeClasses(Page)
+                                                                'ClsEmployeesContracts.Find("ID = " & intEmployeeContarctID)
+                                                                'ClsEmployeeClass.Find("ID =" & ClsEmployeesContracts.EmployeeClassID)
+                                                                Dim clsTransType As Clshrs_TransactionsTypes = New Clshrs_TransactionsTypes(Page)
+
+                                                                clsTransType.Find("ID= " & ClsClasses.RegComputerID)
+                                                                Dim ClsSolver = New Clshrs_FormulaSolver(clsTransType.ConnectionString, Page)
+                                                                ClsSolver.EmployeeID = ClsEmployees.ID
+                                                                ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
+                                                                ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
+                                                                ClsSolver.Executedate = ToDate
+                                                                ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
+                                                                ClsAttendancePreparationDetails.LatPunishment += ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                            End If
 
                                                         Else
                                                             'ClsAttendancePreparationDetails.LatPunishment += ((Amount / NumberOfDays / ClsClasses.WorkHoursPerDay) * ClsAttendancePreparationDetails.NotpermitLate) * ClsClassDelay.PunishPCT / 100
-                                                            ClsAttendancePreparationDetails.LatPunishment += ((salaryAmount / NumberOfDays / ClsClasses.WorkHoursPerDay) * ClsAttendancePreparationDetails.NotpermitLate) * ClsClassDelay.PunishPCT / 100
+                                                            'ClsAttendancePreparationDetails.LatPunishment += ((salaryAmount / NumberOfDays / ClsClasses.WorkHoursPerDay) * ClsAttendancePreparationDetails.NotpermitLate) * ClsClassDelay.PunishPCT / 100
+                                                            If ClsClasses.LateFormula <> "" Then
+
+                                                                'Dim ClsEmployeeClass As Clshrs_EmployeeClasses = New Clshrs_EmployeeClasses(Page)
+                                                                'ClsEmployeesContracts.Find("ID = " & intEmployeeContarctID)
+                                                                'ClsEmployeeClass.Find("ID =" & ClsEmployeesContracts.EmployeeClassID)
+                                                                Dim clsTransType As Clshrs_TransactionsTypes = New Clshrs_TransactionsTypes(Page)
+
+                                                                clsTransType.Find("ID= " & ClsClasses.RegComputerID)
+                                                                Dim ClsSolver = New Clshrs_FormulaSolver(clsTransType.ConnectionString, Page)
+                                                                ClsSolver.EmployeeID = ClsEmployees.ID
+                                                                ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
+                                                                ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
+                                                                ClsSolver.Executedate = ToDate
+                                                                ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
+                                                                ClsAttendancePreparationDetails.LatPunishment += ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                            End If
                                                         End If
                                                     End If
                                                 Else
@@ -3398,10 +3445,42 @@ Partial Class frmEmployeesSelector
                                                     If DT.Rows.Count > 0 Then
                                                         If ClsClasses.PunishementCalc = 1 Then
                                                             'ClsAttendancePreparationDetails.LatPunishment += (Amount / NumberOfDays) * ClsClassDelay.PunishPCT / 100
-                                                            ClsAttendancePreparationDetails.LatPunishment += (salaryAmount / NumberOfDays) * ClsClassDelay.PunishPCT / 100
+                                                            'ClsAttendancePreparationDetails.LatPunishment += (salaryAmount / NumberOfDays) * ClsClassDelay.PunishPCT / 100
+                                                            If ClsClasses.LateFormula <> "" Then
+
+                                                                'Dim ClsEmployeeClass As Clshrs_EmployeeClasses = New Clshrs_EmployeeClasses(Page)
+                                                                'ClsEmployeesContracts.Find("ID = " & intEmployeeContarctID)
+                                                                'ClsEmployeeClass.Find("ID =" & ClsEmployeesContracts.EmployeeClassID)
+                                                                Dim clsTransType As Clshrs_TransactionsTypes = New Clshrs_TransactionsTypes(Page)
+
+                                                                clsTransType.Find("ID= " & ClsClasses.RegComputerID)
+                                                                Dim ClsSolver = New Clshrs_FormulaSolver(clsTransType.ConnectionString, Page)
+                                                                ClsSolver.EmployeeID = ClsEmployees.ID
+                                                                ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
+                                                                ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
+                                                                ClsSolver.Executedate = ToDate
+                                                                ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
+                                                                ClsAttendancePreparationDetails.LatPunishment += ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                            End If
                                                         Else
                                                             'ClsAttendancePreparationDetails.LatPunishment += ((Amount / NumberOfDays / ClsClasses.WorkHoursPerDay) * ClsAttendancePreparationDetails.TotalLate) * ClsClassDelay.PunishPCT / 100
-                                                            ClsAttendancePreparationDetails.LatPunishment += ((salaryAmount / NumberOfDays / ClsClasses.WorkHoursPerDay) * ClsAttendancePreparationDetails.TotalLate) * ClsClassDelay.PunishPCT / 100
+                                                            'ClsAttendancePreparationDetails.LatPunishment += ((salaryAmount / NumberOfDays / ClsClasses.WorkHoursPerDay) * ClsAttendancePreparationDetails.TotalLate) * ClsClassDelay.PunishPCT / 100
+                                                            If ClsClasses.LateFormula <> "" Then
+
+                                                                'Dim ClsEmployeeClass As Clshrs_EmployeeClasses = New Clshrs_EmployeeClasses(Page)
+                                                                'ClsEmployeesContracts.Find("ID = " & intEmployeeContarctID)
+                                                                'ClsEmployeeClass.Find("ID =" & ClsEmployeesContracts.EmployeeClassID)
+                                                                Dim clsTransType As Clshrs_TransactionsTypes = New Clshrs_TransactionsTypes(Page)
+
+                                                                clsTransType.Find("ID= " & ClsClasses.RegComputerID)
+                                                                Dim ClsSolver = New Clshrs_FormulaSolver(clsTransType.ConnectionString, Page)
+                                                                ClsSolver.EmployeeID = ClsEmployees.ID
+                                                                ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
+                                                                ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
+                                                                ClsSolver.Executedate = ToDate
+                                                                ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
+                                                                ClsAttendancePreparationDetails.LatPunishment += ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                            End If
                                                         End If
                                                     End If
                                                 End If
