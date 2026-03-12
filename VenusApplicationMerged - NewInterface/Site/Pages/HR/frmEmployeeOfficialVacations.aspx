@@ -411,7 +411,7 @@
                                                                                 </Header>
                                                                             </igtbl:UltraGridColumn>
                                                                             
-                                                                            <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="VacationTypeID" Key="VacationTypeID"
+                                                                           <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="VacationTypeID" Key="VacationTypeID"
                                                                                 meta:resourcekey="UltraGridColumnArbName" Width="25%" Type="DropDownList">
                                                                                 
                                                                                 <Header Caption="VacationTypeID">
@@ -424,19 +424,9 @@
                                                                                     <RowLayoutColumnInfo OriginX="2" />
                                                                                 </Footer>
                                                                             </igtbl:UltraGridColumn>
-<%--                                                                            <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="EngName" Key="EngName"
-                                                                                meta:resourcekey="UltraGridColumnEngName" Width="25%">
-                                                                                <Header Caption="EngName">
-                                                                                    <RowLayoutColumnInfo OriginX="2" />
-                                                                                </Header>
-                                                                                <CellStyle HorizontalAlign="Center">
-                                                                                </CellStyle>
-                                                                                <Footer>
-                                                                                    <RowLayoutColumnInfo OriginX="2" />
-                                                                                </Footer>
-                                                                            </igtbl:UltraGridColumn>--%>
-                                                                           <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="FromDate" Key="FromDate" Type="Custom" EditorControlID="txtDate"
-                                                                    Format="dd/MM/yyyy"  meta:resourcekey="UltraGridColumnFromDate" Width="25%">
+
+                                                                           <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="FromDate"  Key="FromDate" Type="Custom" EditorControlID="txtDate"
+                                                                     meta:resourcekey="UltraGridColumnFromDate" Width="25%">
                                                                                 <Header Caption="FromDate">
                                                                                     <RowLayoutColumnInfo OriginX="2" />
                                                                                 </Header>
@@ -446,9 +436,21 @@
                                                                                     <RowLayoutColumnInfo OriginX="2" />
                                                                                 </Footer>
                                                                             </igtbl:UltraGridColumn>
-                                                                            <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="ToDate" Key="ToDate" Type="Custom" EditorControlID="txtDate"
-                                                                    Format="dd/MM/yyyy" meta:resourcekey="UltraGridColumnToDate"  Width="25%">
+                                                                           <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="ToDate" DataType="system.Date" Key="ToDate" Type="Custom" EditorControlID="txtDate"
+                                                                      meta:resourcekey="UltraGridColumnToDate"  Width="25%">
                                                                                 <Header Caption="ToDate">
+                                                                                    <RowLayoutColumnInfo OriginX="2" />
+                                                                                </Header>
+                                                                                <CellStyle HorizontalAlign="Center">
+                                                                                </CellStyle>
+                                                                                <Footer>
+                                                                                    <RowLayoutColumnInfo OriginX="2" />
+                                                                                </Footer>
+                                                                            </igtbl:UltraGridColumn>
+                                                                          
+                                                                           <igtbl:UltraGridColumn AllowUpdate="Yes" Type="CheckBox" BaseColumnName="IsRamadan" Key="IsRamadan"
+                                                                                meta:resourcekey="UltraGridColumnIsRamadan" Width="25%">
+                                                                                <Header Caption="Is Ramadan">
                                                                                     <RowLayoutColumnInfo OriginX="2" />
                                                                                 </Header>
                                                                                 <CellStyle HorizontalAlign="Center">

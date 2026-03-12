@@ -926,6 +926,42 @@
                                                     </table>
                                                 </td>
                                             </tr>
+                                            <%-- Work Hours In Ramadan --%>
+
+
+
+                                                  <tr>
+          <td style="width: 47%; height: 16px; vertical-align: top">
+              <table style="width: 100%; vertical-align: top" cellspacing="0">
+                  <tr>
+                      <td class="SeparArea"></td>
+                      <td>
+                          <asp:Label ID="LblRamadanWorkHoursPerDay" runat="server" meta:resourcekey="LblRamadanWorkHoursResource1"
+                              SkinID="Label_DefaultNormal" Text="Holiday Factor" Width="100px"></asp:Label>
+                      </td>
+                        <td class="DataArea">
+       <igtxt:WebNumericEdit ID="TxtRamadanWorkHoursPerDay" runat="server" meta:resourcekey="txtWorkhoursperdayResource1"
+           MinValue="0" NullText="0" SkinID="WebNumericEdit_Default" ValueText="0">
+       </igtxt:WebNumericEdit>
+   </td>
+                  </tr>
+              </table>
+          </td>
+          <td style="width: 6%; height: 16px; vertical-align: top"></td>
+          <td style="width: 47%; height: 16px; vertical-align: top">
+              <table style="width: 100%; vertical-align: top" cellspacing="0">
+                  <tr>
+                      <td class="SeparArea"></td>
+                      <td>
+                        
+                      </td>
+                      <td class="DataArea">
+                          
+                      </td>
+                  </tr>
+              </table>
+          </td>
+      </tr>
                                             <tr>
                                                 <td style="height: 16px; vertical-align: top" colspan="3">
                                                     <table cellspacing="6" style="width: 100%; height: 30px; vertical-align: bottom; border-bottom: 1px solid black">

@@ -258,6 +258,7 @@ Partial Class frmEmployeeClasses
                 .MaxLoanAmtPCT = txtMaxLoanAmtPCT.Text
                 .MinServiceMonth = txtMinServiceMonth.Text
                 .WorkHoursPerDay = txtWorkhoursperday.Text
+                .RamadanWorkHoursPerDay = TxtRamadanWorkHoursPerDay.Text
                 .NoOfHoursPerWeek = txtNoofhoursperweek.Text
                 .NoOfHoursPerPeriod = txtNoofhoursperperiod.Text
                 .OvertimeFactor = txtOvertimefactor.Text
@@ -302,6 +303,7 @@ Partial Class frmEmployeeClasses
                 .VactionTransType = ddlVactionTransType.SelectedValue
                 .TransValue = IIf(txtTransValue.Text <> "", Convert.ToInt16(txtTransValue.Text), 0)
                 .AddBalanceInAddEmp = chkAddBalanceInAddEmp.Checked
+
                 'End
                 Try
                     .DefaultProjectID = DdlProjects.SelectedValue
@@ -352,6 +354,7 @@ Partial Class frmEmployeeClasses
                 txtMaxLoanAmtPCT.Text = .MaxLoanAmtPCT
                 txtMinServiceMonth.Text = .MinServiceMonth
                 txtWorkhoursperday.Text = .WorkHoursPerDay
+                TxtRamadanWorkHoursPerDay.Text = .RamadanWorkHoursPerDay
                 txtNoofhoursperweek.Text = .NoOfHoursPerWeek
                 txtNoofhoursperperiod.Text = .NoOfHoursPerPeriod
                 txtOvertimefactor.Text = .OvertimeFactor
@@ -683,6 +686,7 @@ Partial Class frmEmployeeClasses
         txtHolidayfactor.Text = ""
         txtOvertimefactor.Text = ""
         txtWorkhoursperday.Text = ""
+        TxtRamadanWorkHoursPerDay.Text = ""
         txtStartTime.Text = String.Empty
         txtEndTime.Text = String.Empty
         DdlFirstdayofweek.SelectedValue = 1

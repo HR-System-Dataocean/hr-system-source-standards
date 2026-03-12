@@ -588,4 +588,7 @@
   <data name="AccumulatedBalanceResource1.Text" xml:space="preserve">
     <value>Accumulated Balance</value>
   </data>
+  <data name="LblRamadanWorkHoursResource1.Text" xml:space="preserve">
+    <value>Ramadan Work Hour/Day</value>
+  </data>
 </root>

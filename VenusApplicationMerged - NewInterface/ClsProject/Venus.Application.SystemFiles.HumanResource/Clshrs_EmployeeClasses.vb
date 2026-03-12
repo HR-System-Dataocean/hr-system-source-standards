@@ -59,7 +59,8 @@ Public Class Clshrs_EmployeeClassesBases
            "VacationTrans," &
            "VactionTransType," &
            "TransValue," &
-           "AddBalanceInAddEmp"
+           "AddBalanceInAddEmp," &
+           "RamadanWorkHoursPerDay"
 
         mInsertParameterValues = "" &
           " @Code," &
@@ -115,7 +116,8 @@ Public Class Clshrs_EmployeeClassesBases
            " @VacationTrans," &
            " @VactionTransType," &
            " @TransValue," &
-           " @AddBalanceInAddEmp"
+           " @AddBalanceInAddEmp," &
+           " @RamadanWorkHoursPerDay"
         mUpdateParameter = "" &
           "Code=@Code," &
           "EngName=@EngName," &
@@ -168,7 +170,8 @@ Public Class Clshrs_EmployeeClassesBases
           "VacationTrans=@VacationTrans," &
           "VactionTransType=@VactionTransType," &
           "TransValue=@TransValue," &
-          "AddBalanceInAddEmp=@AddBalanceInAddEmp"
+          "AddBalanceInAddEmp=@AddBalanceInAddEmp," &
+          "RamadanWorkHoursPerDay=@RamadanWorkHoursPerDay"
         mSelectCommand = CONFIG_DATEFORMAT & " Select * From  " & mTable
         mInsertCommand = CONFIG_DATEFORMAT & " insert into " & mTable & "( " & mInsertParameter & ")Values(" & mInsertParameterValues & ")"
         mUpdateCommand = CONFIG_DATEFORMAT & " Update " & mTable & " Set " & mUpdateParameter
@@ -236,6 +239,7 @@ Public Class Clshrs_EmployeeClassesBases
     Private mHasFlexableFingerPrint As Boolean
     Private mHasOvertimeList As Boolean
     Private mAttendanceFromTimeSheet As Boolean
+    Private mRamadanWorkHoursPerDay As Object
 
 #End Region
 
@@ -295,6 +299,14 @@ Public Class Clshrs_EmployeeClassesBases
         End Get
         Set(ByVal Value As Object)
             mWorkHoursPerDay = Value
+        End Set
+    End Property
+    Public Property RamadanWorkHoursPerDay() As Object
+        Get
+            Return mRamadanWorkHoursPerDay
+        End Get
+        Set(ByVal Value As Object)
+            mRamadanWorkHoursPerDay = Value
         End Set
     End Property
     Public Property NoOfHoursPerWeek() As Integer
@@ -893,6 +905,7 @@ Public Class Clshrs_EmployeeClassesBases
             mArbName4S = String.Empty
             mNoOfDaysPerPeriod = Nothing
             mWorkHoursPerDay = Nothing
+            mRamadanWorkHoursPerDay = Nothing
             mNoOfHoursPerWeek = 0
             mNoOfHoursPerPeriod = 0
             mOvertimeFactor = Nothing
@@ -1204,6 +1217,7 @@ Public Class Clshrs_EmployeeClassesBases
                 mArbName4S = [Shared].DataHandler.DataValue_Out(.Item("ArbName4S"), SqlDbType.VarChar)
                 mNoOfDaysPerPeriod = [Shared].DataHandler.DataValue_Out(.Item("NoOfDaysPerPeriod"), SqlDbType.TinyInt)
                 mWorkHoursPerDay = [Shared].DataHandler.DataValue_Out(.Item("WorkHoursPerDay"), SqlDbType.Real)
+                mRamadanWorkHoursPerDay = [Shared].DataHandler.DataValue_Out(.Item("RamadanWorkHoursPerDay"), SqlDbType.Real)
                 mNoOfHoursPerWeek = [Shared].DataHandler.DataValue_Out(.Item("NoOfHoursPerWeek"), SqlDbType.Int, True)
                 mNoOfHoursPerPeriod = [Shared].DataHandler.DataValue_Out(.Item("NoOfHoursPerPeriod"), SqlDbType.Int, True)
                 mOvertimeFactor = [Shared].DataHandler.DataValue_Out(.Item("OvertimeFactor"), SqlDbType.Real)
@@ -1288,6 +1302,7 @@ Public Class Clshrs_EmployeeClassesBases
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ArbName4S", SqlDbType.VarChar)).Value = [Shared].DataHandler.DataValue_In(mArbName4S, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@NoOfDaysPerPeriod", SqlDbType.TinyInt)).Value = [Shared].DataHandler.DataValue_In(mNoOfDaysPerPeriod, SqlDbType.TinyInt)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@WorkHoursPerDay", SqlDbType.Real)).Value = [Shared].DataHandler.DataValue_In(mWorkHoursPerDay, SqlDbType.Real)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@RamadanWorkHoursPerDay", SqlDbType.Real)).Value = [Shared].DataHandler.DataValue_In(mRamadanWorkHoursPerDay, SqlDbType.Real)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@NoOfHoursPerWeek", SqlDbType.Int)).Value = [Shared].DataHandler.DataValue_In(mNoOfHoursPerWeek, SqlDbType.Int)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@NoOfHoursPerPeriod", SqlDbType.Int)).Value = [Shared].DataHandler.DataValue_In(mNoOfHoursPerPeriod, SqlDbType.Int)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@OvertimeFactor", SqlDbType.Real)).Value = [Shared].DataHandler.DataValue_In(mOvertimeFactor, SqlDbType.Real)

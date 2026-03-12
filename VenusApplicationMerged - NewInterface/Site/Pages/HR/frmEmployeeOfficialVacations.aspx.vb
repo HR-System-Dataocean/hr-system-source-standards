@@ -75,11 +75,12 @@ Partial Class frmEmployeeOfficialVacations
                     If Not IsNothing(DGRow.Cells("3").Value) Then
                         LineNumber = LineNumber + 1
                         SqlCommand &= " Set DateFormat DMY Insert Into hrs_OfficialVacations " &
-                         "(LineNum, VacationTypeID , FromDate, ToDate, Year)Values(" &
+                         "(LineNum, VacationTypeID , FromDate, ToDate,isramadan, Year)Values(" &
                          LineNumber & ", " &
                          "" & DGRow.Cells("3").Value & ", " &
                          "'" & CDate(DGRow.Cells("4").Text) & "', " &
                          "'" & CDate(DGRow.Cells("5").Text) & "', " &
+                         "'" & CDate(DGRow.Cells("6").Text) & "', " &
                          "'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
                     End If
 
@@ -103,10 +104,10 @@ Partial Class frmEmployeeOfficialVacations
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please Enter Year /برجاء إدخال العام"))
                     Exit Sub
                 End If
-                If Not ValidateFromToDateValues() Then
-                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " FromDate and ToDate are required. /يجب ادخال من تاريخ و الى تاريخ بكل المناسبات"))
-                    Exit Sub
-                End If
+                'If Not ValidateFromToDateValues() Then
+                '    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " FromDate and ToDate are required. /يجب ادخال من تاريخ و الى تاريخ بكل المناسبات"))
+                '    Exit Sub
+                'End If
                 Dim Deletecommand As String = "Delete from hrs_OfficialVacations where Year='" & ddlFiscalYear.SelectedItem.Text & "' "
                 Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(clsHrsEmployeeOfficialVacations.ConnectionString, Data.CommandType.Text, Deletecommand)
                 'clsHrsEmployeeOfficialVacations.Find("Year='" & ddlFiscalYear.SelectedItem.Text & "'")
@@ -115,11 +116,12 @@ Partial Class frmEmployeeOfficialVacations
                     If Not IsNothing(DGRow.Cells("3").Value) Then
                         LineNumber = LineNumber + 1
                         SqlCommand &= " Set DateFormat DMY Insert Into hrs_OfficialVacations " &
-                         "(LineNum, VacationTypeID , FromDate, ToDate, Year)Values(" &
+                         "(LineNum, VacationTypeID , FromDate, ToDate ,isramadan, Year)Values(" &
                          LineNumber & ", " &
                          "" & DGRow.Cells("3").Value & ", " &
-                         "'" & CDate(DGRow.Cells("4").Text) & "', " &
-                         "'" & CDate(DGRow.Cells("5").Text) & "', " &
+                         "'" & DGRow.Cells("4").Text & "', " &
+                         "'" & DGRow.Cells("5").Text & "', " &
+                         "'" & DGRow.Cells("6").Text & "', " &
                          "'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
                     End If
 
@@ -219,20 +221,48 @@ Partial Class frmEmployeeOfficialVacations
 
     Private Function ValidateFromToDateValues() As Boolean
         Try
-            Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsHrsEmployeeOfficialVacations.ConnectionString)
+            Dim rowNumber As Integer = 0
+
             For Each DGRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
-                If Not IsNothing(DGRow.Cells("3").Value) Then
-                    If IsNothing(DGRow.Cells("4").Value) Or CStr(DGRow.Cells("4").Value) = "  /  /    " Then
+                rowNumber = rowNumber + 1
+
+                ' لو في بيانات في الخلية بتاعة نوع الإجازة
+                If DGRow.Cells("3").Value IsNot Nothing Then
+
+                    ' ===== التحقق من FromDate (الخلية 4) =====
+                    Try
+                        ' مجرد محاولة تحويل التاريخ - لو نجح يبقى تمام
+                        Dim fromDate As Date = CDate(DGRow.Cells("4").Text)
+
+                        ' من غير أي شرط على اليوم - نقبل أي يوم
+
+                    Catch ex As Exception
+                        ' لو حصل خطأ في التحويل، يبقى التاريخ غلط
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
+                        "من فضلك أدخل تاريخ صحيح في 'من تاريخ' بالصف " & rowNumber)
                         Return False
-                    End If
-                    If IsNothing(DGRow.Cells("5").Value) Or CStr(DGRow.Cells("5").Value) = "  /  /    " Then
+                    End Try
+
+                    ' ===== التحقق من ToDate (الخلية 5) =====
+                    Try
+                        Dim toDate As Date = CDate(DGRow.Cells("5").Text)
+
+                        ' من غير أي شرط على اليوم - نقبل أي يوم
+
+                    Catch ex As Exception
+                        ' لو حصل خطأ في التحويل، يبقى التاريخ غلط
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
+                        "من فضلك أدخل تاريخ صحيح في 'إلى تاريخ' بالصف " & rowNumber)
                         Return False
-                    End If
+                    End Try
+
                 End If
             Next
+
             Return True
+
         Catch ex As Exception
-            Dim str = ex.ToString()
+            Return False
         End Try
     End Function
     Private Function GetValues() As Boolean

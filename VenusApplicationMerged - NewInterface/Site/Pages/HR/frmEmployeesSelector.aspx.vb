@@ -3082,7 +3082,15 @@ Partial Class frmEmployeesSelector
                         'Rabie4-1-2023 Flexable Finger Print
                         If ClsEmployeeClass.HasflexableFingerPrint Then
                             DeleteEmployeeAttendTransactions(EmployeeID, OperDate, OperDate)
-                            SetEmployeeAttendanceTransactions(EmployeeID, OperDate, ClsEmployeeClass.HasOvertimeList, True, ClsClasses.WorkHoursPerDay)
+                            'Rabie 29-03-2026  Ramadan Work Hours Per Day
+                            Dim hrsofficialvacations As New Clshrs_OfficialVacations(Page)
+                            hrsofficialvacations.Find(" CONVERT(date,'" & OperDate.ToString("dd/MM/yyyy") & "',103)  between fromdate and todate And isRamadan = 1")
+                            If (hrsofficialvacations.DataSet.Tables(0).Rows.Count > 0) Then
+                                SetEmployeeAttendanceTransactions(EmployeeID, OperDate, ClsEmployeeClass.HasOvertimeList, True, ClsClasses.RamadanWorkHoursPerDay)
+                            Else
+                                SetEmployeeAttendanceTransactions(EmployeeID, OperDate, ClsEmployeeClass.HasOvertimeList, True, ClsClasses.WorkHoursPerDay)
+
+                            End If
                         End If
                         If ClsEmployees.JoinDate > OperDate Then
                             Continue For
@@ -3125,7 +3133,7 @@ Partial Class frmEmployeesSelector
                             Dim hrsEmployeesVacations As New Clshrs_EmployeesVacations(Page)
                             Dim hrsofficialvacations As New Clshrs_OfficialVacations(Page)
                             hrsEmployeesVacations.Find("EmployeeID = " & ClsEmployees.ID & " and CONVERT(date,'" & OperDate.ToString("dd/MM/yyyy") & "',103) >= CONVERT(date,ActualStartDate,103) and CONVERT(date,'" & OperDate.ToString("dd/MM/yyyy") & "',103) < CONVERT(date,isnull(ActualEndDate,'01/01/2050'),103)")
-                            hrsofficialvacations.Find(" CONVERT(date,'" & OperDate.ToString("dd/MM/yyyy") & "',103)  between fromdate and todate")
+                            hrsofficialvacations.Find(" CONVERT(date,'" & OperDate.ToString("dd/MM/yyyy") & "',103)  between fromdate and todate And isRamadan <> 1")
 
                             If (hrsEmployeesVacations.DataSet.Tables(0).Rows.Count > 0) Then
                                 Dim ClsVacationsTypes As New Clshrs_VacationsTypes(Me.Page)

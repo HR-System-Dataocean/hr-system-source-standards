@@ -348,4 +348,7 @@
   <data name="UltraGridColumnToDate.Header.Caption" xml:space="preserve">
     <value>To Date</value>
   </data>
+  <data name="UltraGridColumnIsRamadan.Header.Caption" xml:space="preserve">
+    <value>Is Ramadan</value>
+  </data>
 </root>
