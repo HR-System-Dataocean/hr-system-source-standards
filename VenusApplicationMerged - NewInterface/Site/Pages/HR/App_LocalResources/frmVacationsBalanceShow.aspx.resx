@@ -144,8 +144,14 @@
   <data name="EmployeeNameResource1.Header.Caption" xml:space="preserve">
     <value>الاسم</value>
   </data>
+  <data name="ExpireDateNewResource1.Header.Caption" xml:space="preserve">
+    <value>انتهاء الصلاحية الجديد</value>
+  </data>
   <data name="ExpireDateResource1.Header.Caption" xml:space="preserve">
     <value>تاريخ الإنتهاء</value>
+  </data>
+  <data name="ExpireDateTransResource1.Header.Caption" xml:space="preserve">
+    <value>انتهاء الصلاحية المرحل</value>
   </data>
   <data name="FollowupMyRequestsTabResource1.Text" xml:space="preserve">
     <value>ارصدة الاجازات</value>

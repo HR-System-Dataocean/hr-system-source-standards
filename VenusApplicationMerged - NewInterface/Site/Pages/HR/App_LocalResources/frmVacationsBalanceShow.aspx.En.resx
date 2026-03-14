@@ -144,8 +144,14 @@
   <data name="EmployeeNameResource1.Header.Caption" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="ExpireDateNewResource1.Header.Caption" xml:space="preserve">
+    <value>New Expire Date</value>
+  </data>
   <data name="ExpireDateResource1.Header.Caption" xml:space="preserve">
     <value>Expire Date</value>
+  </data>
+  <data name="ExpireDateTransResource1.Header.Caption" xml:space="preserve">
+    <value>Transfer Expire Date</value>
   </data>
   <data name="FollowupMyRequestsTabResource1.Text" xml:space="preserve">
     <value>Vacations Balance</value>

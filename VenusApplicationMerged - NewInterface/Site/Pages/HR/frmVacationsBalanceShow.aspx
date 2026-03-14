@@ -576,7 +576,7 @@
                                                                     </CellStyle>
                                                                     </igtbl:UltraGridColumn>
                                                                       
-                                                                      <igtbl:UltraGridColumn BaseColumnName="EmployeeName" Width="30%" DataType="System.String" Hidden="False"
+                                                                      <igtbl:UltraGridColumn BaseColumnName="EmployeeName" Width="20%" DataType="System.String" Hidden="False"
                                                                         Key="EmployeeName" meta:resourcekey="EmployeeNameResource1" Type="DropDownList">
                                                                         
                                                                         <Header Caption=" الأسم ">
@@ -584,7 +584,7 @@
                                                                            <CellStyle HorizontalAlign="Center">
                                                                     </CellStyle>
                                                                     </igtbl:UltraGridColumn>
-<igtbl:UltraGridColumn BaseColumnName="Position" Width="30%" DataType="System.String" Hidden="False"
+<igtbl:UltraGridColumn BaseColumnName="Position" Width="20%" DataType="System.String" Hidden="False"
     Key="Position" meta:resourcekey="PositionResource1" Type="DropDownList">
     
     <Header Caption="Position">
@@ -593,7 +593,7 @@
 </CellStyle>
 </igtbl:UltraGridColumn>
 
-                                                                          <igtbl:UltraGridColumn BaseColumnName="Department" Width="30%" DataType="System.String" Hidden="False"
+                                                                          <igtbl:UltraGridColumn BaseColumnName="Department" Width="20%" DataType="System.String" Hidden="False"
         Key="Department" meta:resourcekey="DepartmentResource1" Type="DropDownList">
         
         <Header Caption=" Department ">
@@ -639,6 +639,18 @@
         <RowLayoutColumnInfo OriginX="2" />
     </Footer>
 </igtbl:UltraGridColumn>
+                                                                    <igtbl:UltraGridColumn BaseColumnName="ExpireDateTrans" Width="15%" DataType="System.String"
+     Hidden="false" Key="ExpireDateTrans" meta:resourcekey="ExpireDateTransResource1">
+    
+    <Header Caption="ExpireDateTrans">
+        <RowLayoutColumnInfo OriginX="1" />
+    </Header>
+    <CellStyle HorizontalAlign="Center">
+</CellStyle>
+    <Footer>
+        <RowLayoutColumnInfo OriginX="1" />
+    </Footer>
+</igtbl:UltraGridColumn>
 
             <igtbl:UltraGridColumn BaseColumnName="BalanceNew" Width="10%" DataType="System.Int32"
       Hidden="False" Key="BalanceNew" meta:resourcekey="BalanceNewResource1">
@@ -652,6 +664,20 @@
         <RowLayoutColumnInfo OriginX="2" />
     </Footer>
 </igtbl:UltraGridColumn>
+
+                                                                    <igtbl:UltraGridColumn BaseColumnName="ExpireDateNew" Width="15%" DataType="System.Date"
+    Format="dd/MM/yyyy" Hidden="false" Key="ExpireDateNew" meta:resourcekey="ExpireDateNewResource1">
+    
+    <Header Caption="ExpireDateNew">
+        <RowLayoutColumnInfo OriginX="1" />
+    </Header>
+    <CellStyle HorizontalAlign="Center">
+</CellStyle>
+    <Footer>
+        <RowLayoutColumnInfo OriginX="1" />
+    </Footer>
+</igtbl:UltraGridColumn>
+
 
                                                                      <igtbl:UltraGridColumn BaseColumnName="Comp" Width="10%" DataType="System.Int32"
       Hidden="False" Key="Comp" meta:resourcekey="CompResource1">
@@ -729,18 +755,7 @@
         <RowLayoutColumnInfo OriginX="1" />
     </Footer>
 </igtbl:UltraGridColumn>
-                                                                    <igtbl:UltraGridColumn BaseColumnName="Expire Date" Width="15%" DataType="System.Date"
-                                                                        Format="dd/MM/yyyy" Hidden="true" Key="ExpireDate" meta:resourcekey="ExpireDateResource1">
-                                                                        
-                                                                        <Header Caption="ExpireDate">
-                                                                            <RowLayoutColumnInfo OriginX="1" />
-                                                                        </Header>
-                                                                        <CellStyle HorizontalAlign="Center">
-                                                                    </CellStyle>
-                                                                        <Footer>
-                                                                            <RowLayoutColumnInfo OriginX="1" />
-                                                                        </Footer>
-                                                                    </igtbl:UltraGridColumn>
+                                                                    
 
                                                                     <igtbl:UltraGridColumn BaseColumnName="Src" Width="15%" DataType="System.string"
                                                                           Hidden="True" Key="Src" meta:resourcekey="SrcResource1">
