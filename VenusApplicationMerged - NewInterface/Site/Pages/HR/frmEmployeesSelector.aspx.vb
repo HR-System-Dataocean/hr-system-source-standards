@@ -2904,7 +2904,12 @@ Partial Class frmEmployeesSelector
                                                         ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
                                                         ClsSolver.Executedate = ToDate
                                                         ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
-                                                        ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                        If ClsClasses.DeductionMethod > 0 Then
+                                                            ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.TotalLate
+                                                        Else
+                                                            ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                        End If
+
                                                     End If
                                                     totallat = totallat + ClsAttendancePreparationProjects.NotpermitLate
                                                 Else
@@ -3423,7 +3428,11 @@ Partial Class frmEmployeesSelector
                                                                 ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
                                                                 ClsSolver.Executedate = ToDate
                                                                 ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
-                                                                ClsAttendancePreparationDetails.LatPunishment += ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                                If ClsClasses.DeductionMethod > 0 Then
+                                                                    ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.TotalLate
+                                                                Else
+                                                                    ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                                End If
                                                             End If
 
                                                         Else
@@ -3443,7 +3452,11 @@ Partial Class frmEmployeesSelector
                                                                 ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
                                                                 ClsSolver.Executedate = ToDate
                                                                 ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
-                                                                ClsAttendancePreparationDetails.LatPunishment += ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                                If ClsClasses.DeductionMethod > 0 Then
+                                                                    ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.TotalLate
+                                                                Else
+                                                                    ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                                End If
                                                             End If
                                                         End If
                                                     End If
@@ -3468,7 +3481,11 @@ Partial Class frmEmployeesSelector
                                                                 ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
                                                                 ClsSolver.Executedate = ToDate
                                                                 ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
-                                                                ClsAttendancePreparationDetails.LatPunishment += ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                                If ClsClasses.DeductionMethod > 0 Then
+                                                                    ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.TotalLate
+                                                                Else
+                                                                    ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                                End If
                                                             End If
                                                         Else
                                                             'ClsAttendancePreparationDetails.LatPunishment += ((Amount / NumberOfDays / ClsClasses.WorkHoursPerDay) * ClsAttendancePreparationDetails.TotalLate) * ClsClassDelay.PunishPCT / 100
@@ -3487,7 +3504,11 @@ Partial Class frmEmployeesSelector
                                                                 ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
                                                                 ClsSolver.Executedate = ToDate
                                                                 ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
-                                                                ClsAttendancePreparationDetails.LatPunishment += ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                                If ClsClasses.DeductionMethod > 0 Then
+                                                                    ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.TotalLate
+                                                                Else
+                                                                    ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                                                End If
                                                             End If
                                                         End If
                                                     End If

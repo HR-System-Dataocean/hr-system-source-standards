@@ -424,7 +424,11 @@ Partial Class frmAttendancePreparation
                                         ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
                                         ClsSolver.Executedate = ToDate
                                         ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
-                                        ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                        If ClsClasses.DeductionMethod > 0 Then
+                                            ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.TotalLate
+                                        Else
+                                            ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                        End If
                                     End If
                                 End If
                             Else
@@ -447,7 +451,11 @@ Partial Class frmAttendancePreparation
                                         ClsSolver.NoOfDaysPerPeriod = ClsClasses.NoOfDaysPerPeriod
                                         ClsSolver.Executedate = ToDate
                                         ClsSolver.EvaluateExpression(ClsClasses.LateFormula)
-                                        ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                        If ClsClasses.DeductionMethod > 0 Then
+                                            ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.TotalLate
+                                        Else
+                                            ClsAttendancePreparationDetails.LatPunishment = ClsSolver.Output * ClsAttendancePreparationDetails.NotpermitLate
+                                        End If
                                     End If
                                 End If
                             End If
