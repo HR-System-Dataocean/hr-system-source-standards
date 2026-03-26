@@ -101,7 +101,7 @@ Partial Class frmTransferPayParts
         ClsEmployeesPayability.Find("ID=" & IntId)
         GetValues(ClsEmployeesPayability)
         With ClsEmployeesPayability
-            If Not ClsEmploueesPayabilitySchedules.FindPayments("EmployeePayabilityId=" & IIf(.ID Is Nothing, 0, .ID) & " and hrs_EmployeesPayabilitiesSchedules.dueAmount - IsNull((Select Sum(Amount) From hrs_EmployeesPayabilitiesSchedulesSettlement Where hrs_EmployeesPayabilitiesSchedulesSettlement.EmployeePayabilityScheduleID=hrs_EmployeesPayabilitiesSchedules.id),0) > 0") Then
+            If Not ClsEmploueesPayabilitySchedules.FindPayments("EmployeePayabilityId=" & IIf(.ID Is Nothing, 0, .ID) & " and hrs_EmployeesPayabilitiesSchedules.dueAmount - IsNull((Select Sum(Amount) From hrs_EmployeesPayabilitiesSchedulesSettlement Where hrs_EmployeesPayabilitiesSchedulesSettlement.EmployeePayabilityScheduleID=hrs_EmployeesPayabilitiesSchedules.id),0) > 0  order by hrs_EmployeesPayabilitiesSchedules.Id asc") Then
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "No due schedules found / لا يوجد أقساط مستحقة"))
                 Return
             End If
