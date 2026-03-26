@@ -120,7 +120,7 @@ Partial Class frmEmployeeOfficialVacations
                          LineNumber & ", " &
                          "" & DGRow.Cells("3").Value & ", " &
                          "'" & DGRow.Cells("4").Text & "', " &
-                         "'" & DGRow.Cells("5").Text & "', " &
+                         "'" & DGRow.Cells("5").Value & "', " &
                          "'" & DGRow.Cells("6").Text & "', " &
                          "'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
                     End If

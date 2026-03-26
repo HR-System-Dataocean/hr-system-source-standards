@@ -7846,7 +7846,7 @@ ALTER TABLE dbo.sys_Documents ADD
 	CompanyId int NULL "
         ExecuteUpdate(SQL)
 
-        SQL = " alter table hrs_EmployeesClasses add RamadanWorkHoursPerDay real nul "
+        SQL = " alter table hrs_EmployeesClasses add RamadanWorkHoursPerDay real null "
         ExecuteUpdate(SQL)
         SQL = " alter table Hrs_OfficialVacations add IsRamadan Bit null"
         ExecuteUpdate(SQL)

@@ -1761,7 +1761,17 @@ Partial Class frmEmployeesEndofServiceAdvance
 
             If DataSet.Tables(0).Rows.Count > 0 Then
                 For i = 0 To DataSet.Tables(0).Rows.Count - 1
-                    Dim allDays = DateDiff(DateInterval.Day, CDate(DataSet.Tables(0).Rows(i).Item("DueDate")), CDate(DataSet.Tables(0).Rows(i).Item("ExpireDate")))
+
+                    Dim dueDate As DateTime = CDate(DataSet.Tables(0).Rows(i).Item("DueDate"))
+                    Dim lastDayOfYear As DateTime = New DateTime(dueDate.Year, 12, 31)
+
+                    Dim allDays As Decimal
+                    If DataSet.Tables(0).Rows(i).Item("BalanceTypeID") = 1 Then
+                        allDays = 360 ' DateDiff(DateInterval.Day, CDate(DataSet.Tables(0).Rows(i).Item("DueDate")), lastDayOfYear)
+                    Else
+                        allDays = DateDiff(DateInterval.Day, CDate(DataSet.Tables(0).Rows(i).Item("DueDate")), CDate(DataSet.Tables(0).Rows(i).Item("ExpireDate")))
+
+                    End If
                     Dim myDays = DateDiff(DateInterval.Day, CDate(DataSet.Tables(0).Rows(i).Item("DueDate")), CDate(wdcEndOfServiceDate.Value))
 
                     Dim allBalance As Decimal = DataSet.Tables(0).Rows(i).Item("Balance")
