@@ -74,14 +74,16 @@ Partial Class frmEmployeeOfficialVacations
                 For Each DGRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
                     If Not IsNothing(DGRow.Cells("3").Value) Then
                         LineNumber = LineNumber + 1
+                        Dim isRamadanValue As Integer = If(CBool(DGRow.Cells("6").Text), 1, 0)
+
                         SqlCommand &= " Set DateFormat DMY Insert Into hrs_OfficialVacations " &
-                         "(LineNum, VacationTypeID , FromDate, ToDate,isramadan, Year)Values(" &
-                         LineNumber & ", " &
-                         "" & DGRow.Cells("3").Value & ", " &
-                         "'" & CDate(DGRow.Cells("4").Text) & "', " &
-                         "'" & CDate(DGRow.Cells("5").Text) & "', " &
-                         "'" & CDate(DGRow.Cells("6").Text) & "', " &
-                         "'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
+ "(LineNum, VacationTypeID , FromDate, ToDate,isramadan, Year)Values(" &
+ LineNumber & ", " &
+ DGRow.Cells("3").Value & ", " &
+ "'" & CDate(DGRow.Cells("4").Text) & "', " &
+ "'" & CDate(DGRow.Cells("5").Text) & "', " &
+ isRamadanValue & ", " &
+ "'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
                     End If
 
 
@@ -115,14 +117,16 @@ Partial Class frmEmployeeOfficialVacations
                 For Each DGRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
                     If Not IsNothing(DGRow.Cells("3").Value) Then
                         LineNumber = LineNumber + 1
+                        Dim isRamadanValue As Integer = If(CBool(DGRow.Cells("6").Text), 1, 0)
+
                         SqlCommand &= " Set DateFormat DMY Insert Into hrs_OfficialVacations " &
-                         "(LineNum, VacationTypeID , FromDate, ToDate ,isramadan, Year)Values(" &
-                         LineNumber & ", " &
-                         "" & DGRow.Cells("3").Value & ", " &
-                         "'" & DGRow.Cells("4").Text & "', " &
-                         "'" & DGRow.Cells("5").Value & "', " &
-                         "'" & DGRow.Cells("6").Text & "', " &
-                         "'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
+ "(LineNum, VacationTypeID , FromDate, ToDate,isramadan, Year)Values(" &
+ LineNumber & ", " &
+ DGRow.Cells("3").Value & ", " &
+ "'" & CDate(DGRow.Cells("4").Text) & "', " &
+ "'" & CDate(DGRow.Cells("5").Text) & "', " &
+ isRamadanValue & ", " &
+ "'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
                     End If
 
 
