@@ -1,6 +1,7 @@
-﻿Imports Venus.Application.SystemFiles.System
-Imports Venus.Application.SystemFiles.HumanResource
+﻿Imports System.Activities.Statements
 Imports System.Data
+Imports Venus.Application.SystemFiles.HumanResource
+Imports Venus.Application.SystemFiles.System
 
 Partial Class frmEmployeeOfficialVacations
     Inherits MainPage
@@ -23,7 +24,9 @@ Partial Class frmEmployeeOfficialVacations
 
             '===================================== Exit & Navigation Notification [Start]
             If Not IsPostBack Then
-
+                txtDate.Culture = System.Globalization.CultureInfo.CurrentCulture
+                txtDate.DisplayModeFormat = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern
+                txtDate.EditModeFormat = txtDate.DisplayModeFormat
                 Page.Session.Add("ConnectionString", clsHrsEmployeeOfficialVacations.ConnectionString)
                 clsHrsEmployeeOfficialVacations.AddOnChangeEventToControls("frmEmployeeOfficialVacations", Page, UltraWebTab1)
 
@@ -50,6 +53,27 @@ Partial Class frmEmployeeOfficialVacations
             mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, clsHrsEmployeeOfficialVacations.RegUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
             Page.Response.Redirect("ErrorPage.aspx")
         End Try
+    End Sub
+
+    Protected Sub UltraWebGrid1_UpdateRow(sender As Object, e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles UwgSearchEmployees.UpdateRow
+
+        If txtDate.Value IsNot Nothing And Not IsNothing(e.Row.Cells("3").Value) Then
+            e.Row.Cells(4).Value = CType(txtDate.Value, DateTime).ToString("yyyy-MM-dd")
+        End If
+        If txtToDate.Value IsNot Nothing And Not IsNothing(e.Row.Cells("3").Value) Then
+            e.Row.Cells(5).Value = CType(txtToDate.Value, DateTime).ToString("yyyy-MM-dd")
+        End If
+
+    End Sub
+    Protected Sub UltraWebGrid1_InitializeRow(sender As Object, e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles UwgSearchEmployees.InitializeRow
+
+        If Not IsDBNull(e.Row.Cells(4).Value) Then
+            txtDate.Value = e.Row.Cells(4).Value
+        End If
+        If Not IsDBNull(e.Row.Cells(5).Value) Then
+            txtToDate.Value = e.Row.Cells(5).Value
+        End If
+
     End Sub
     Protected Sub ImageButton_Command(sender As Object, e As System.Web.UI.WebControls.CommandEventArgs) Handles ImageButton_Save.Command, ImageButton_SaveN.Command, LinkButton_SaveN.Command, ImageButton_New.Command, ImageButton_Print.Command, ImageButton_Properties.Command, LinkButton_Properties.Command, ImageButton_Remarks.Command, LinkButton_Remarks.Command, ImageButton_Last.Command, ImageButton_Next.Command, ImageButton_Back.Command, ImageButton_First.Command, ImageButton_Delete.Command
         clsHrsEmployeeOfficialVacations = New Clshrs_OfficialVacations(Me)
@@ -80,8 +104,8 @@ Partial Class frmEmployeeOfficialVacations
  "(LineNum, VacationTypeID , FromDate, ToDate,isramadan, Year)Values(" &
  LineNumber & ", " &
  DGRow.Cells("3").Value & ", " &
- "'" & CDate(DGRow.Cells("4").Text) & "', " &
- "'" & CDate(DGRow.Cells("5").Text) & "', " &
+ "'" & CDate(DGRow.Cells("4").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
+ "'" & CDate(DGRow.Cells("5").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
  isRamadanValue & ", " &
  "'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
                     End If
@@ -123,8 +147,8 @@ Partial Class frmEmployeeOfficialVacations
  "(LineNum, VacationTypeID , FromDate, ToDate,isramadan, Year)Values(" &
  LineNumber & ", " &
  DGRow.Cells("3").Value & ", " &
- "'" & CDate(DGRow.Cells("4").Text) & "', " &
- "'" & CDate(DGRow.Cells("5").Text) & "', " &
+ "'" & CDate(DGRow.Cells("4").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
+ "'" & CDate(DGRow.Cells("5").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
  isRamadanValue & ", " &
  "'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
                     End If

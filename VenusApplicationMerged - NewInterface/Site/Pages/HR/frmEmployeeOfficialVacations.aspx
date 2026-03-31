@@ -124,9 +124,10 @@
             <asp:TextBox ID="value" runat="server" BorderStyle="None" ForeColor="White" TabIndex="-1"
                 Width="91px"></asp:TextBox>
             <asp:Label ID="TargetControl" runat="server" ForeColor="White" TabIndex="-1" Width="99px"></asp:Label>
-             <igtxt:WebDateTimeEdit ID="txtDate" runat="server" meta:resourcekey="txtDateResource1"
-            DisplayModeFormat="dd/MM/yyyy" EditModeFormat="dd/MM/yyyy">
+             <igtxt:WebDateTimeEdit ID="txtDate" runat="server" meta:resourcekey="txtDateResource1">
         </igtxt:WebDateTimeEdit>
+                 <igtxt:WebDateTimeEdit ID="txtToDate" runat="server" meta:resourcekey="txtDateResource1">
+</igtxt:WebDateTimeEdit>
         </div>
         <div class="Div_MasterContainer" runat="server" id="DIV">
             <table align="center" style="width: 100%;">
@@ -436,7 +437,7 @@
                                                                                     <RowLayoutColumnInfo OriginX="2" />
                                                                                 </Footer>
                                                                             </igtbl:UltraGridColumn>
-                                                                           <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="ToDate" DataType="system.Date" Key="ToDate" Type="Custom" EditorControlID="txtDate"
+                                                                           <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="ToDate"  Key="ToDate" Type="Custom"  EditorControlID="txtToDate"
                                                                       meta:resourcekey="UltraGridColumnToDate"  Width="25%">
                                                                                 <Header Caption="ToDate">
                                                                                     <RowLayoutColumnInfo OriginX="2" />
