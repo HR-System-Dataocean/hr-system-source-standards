@@ -1,6 +1,7 @@
-﻿Imports Venus.Application.SystemFiles.System
+﻿Imports System.Data
 Imports Venus.Application.SystemFiles.HumanResource
-Imports System.Data
+Imports Venus.Application.SystemFiles.System
+Imports Venus.Shared.Web
 
 Partial Class frmEmployeesVacationsAdvance
     Inherits MainPage
@@ -184,7 +185,13 @@ Partial Class frmEmployeesVacationsAdvance
                         Cls_EmployeeVacationOpenBalance.Update("ID = " & ClsEmployeesVacations.RegComputerID)
                     End If
                     ClsEmployeesTransactions.Find("EmployeesVacationsID=" & ClsEmployeesVacations.ID)
-                    If Not String.IsNullOrWhiteSpace(ClsEmployeesVacations.Src) Then
+                    Dim User As String = String.Empty
+                    Dim WebHandler As New Venus.Shared.Web.WebHandler
+
+                    WebHandler.GetCookies(Page, "UserID", User)
+                    Dim _sys_User As New Clssys_Users(Page)
+                    _sys_User.Find("ID = '" & User & "'")
+                    If Not String.IsNullOrWhiteSpace(ClsEmployeesVacations.Src) And Not _sys_User.IsAdmin Then
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This vacation was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الإجازة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))
                         Exit Sub
 

@@ -7851,6 +7851,28 @@ ALTER TABLE dbo.sys_Documents ADD
         SQL = " alter table Hrs_OfficialVacations add IsRamadan Bit null"
         ExecuteUpdate(SQL)
 
+        SQL = "CREATE TABLE [dbo].[Hrs_Att_Salary_Log](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Transaction] [varchar](50) NULL,
+	[TransactionType] [varchar](50) NULL,
+	[EmployeeCode] [varchar](50) NULL,
+	[UserID] [int] NULL,
+	[Transactiondate] [datetime] NULL,
+	[FisicalPeriod] [int] NULL,
+	[DepartmentID] [int] NULL,
+	[BranchID] [int] NULL,
+	[ContractType] [varchar](50) NULL,
+	[Sponsor] [varchar](50) NULL,
+	[ProjectID] [int] NULL,
+	[Nationality] [int] NULL,
+	[FilterType] [varchar](50) NULL,
+ CONSTRAINT [PK_Hrs_Att_Salary_Log] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]"
+        ExecuteUpdate(SQL)
+
     End Function
 
     Public Function UpdateSS() As Boolean

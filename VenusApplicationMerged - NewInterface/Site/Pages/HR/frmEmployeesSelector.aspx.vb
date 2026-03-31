@@ -411,6 +411,17 @@ Partial Class frmEmployeesSelector
                             strwhr = " and EmployeeID in(" & EmpIDs & ") "
                             Dim str As String = "Set DateFormat DMY delete from hrs_EmployeesTransactions where isnull(Applyed,0) = 0 and PostDate is null and FiscalYearPeriodID = '" & DdlPeriods.SelectedValue & "' and PrepareType = 'N' and ID not in (select isnull(mstr.RegComputerID,0) from hrs_EmployeesTransactions mstr)" & strwhr
                             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployee.ConnectionString, Data.CommandType.Text, str)
+
+
+                            Dim WebHandler As New Venus.Shared.Web.WebHandler
+                            Dim User As String = String.Empty
+
+                            WebHandler.GetCookies(Page, "UserID", User)
+                            Dim _sys_User As New Clssys_Users(Page)
+                            _sys_User.Find("ID = '" & User & "'")
+                            Dim strlog As String = "Insert into Hrs_Att_Salary_Log values ('Salary','Refund','" & txtCode.Text & "'," & _sys_User.ID & ",GetDate()," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsFisicalPeriods.ConnectionString, Data.CommandType.Text, strlog)
+
                             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Operation Done !/!تمت العملية"))
                             GetData(True)
                         Catch ex As Exception
@@ -1939,6 +1950,16 @@ Partial Class frmEmployeesSelector
                 End Try
             Next
 
+            Dim WebHandler As New Venus.Shared.Web.WebHandler
+            Dim User As String = String.Empty
+
+            WebHandler.GetCookies(Page, "UserID", User)
+            Dim _sys_User As New Clssys_Users(Page)
+            _sys_User.Find("ID = '" & User & "'")
+
+            Dim strlog As String = "INsert into Hrs_Att_Salary_Log values('Salary','Prepare','" & txtCode.Text & "'," & _sys_User.ID & ",GetDate()," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
+            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsFisicalPeriods.ConnectionString, Data.CommandType.Text, strlog)
+
             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Operation Done !/!تمت العملية"))
             GetData(True)
 
@@ -2217,14 +2238,36 @@ Partial Class frmEmployeesSelector
                 Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsFisicalPeriods.ConnectionString, Data.CommandType.Text, str)
                 If IsSave Then
                     If FillAttend(mAllBranches, EmpIDs) Then
+
+                        Dim WebHandler As New Venus.Shared.Web.WebHandler
+                        Dim User As String = String.Empty
+
+                        WebHandler.GetCookies(Page, "UserID", User)
+                        Dim _sys_User As New Clssys_Users(Page)
+                        _sys_User.Find("ID = '" & User & "'")
+
+                        Dim strlog As String = "INsert into Hrs_Att_Salary_Log values('Attendance','Prepare','" & txtCode.Text & "'," & _sys_User.ID & ",GetDate()," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
+                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsFisicalPeriods.ConnectionString, Data.CommandType.Text, strlog)
+
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
                             objNav.SetLanguage(Page, "Operation Done !/!تمت العملية"))
+
                     End If
                 Else
+
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
                             objNav.SetLanguage(Page, "Operation Done !/!تمت العملية"))
                 End If
             Else
+                Dim WebHandler As New Venus.Shared.Web.WebHandler
+                Dim User As String = String.Empty
+
+                WebHandler.GetCookies(Page, "UserID", User)
+                Dim _sys_User As New Clssys_Users(Page)
+                _sys_User.Find("ID = '" & User & "'")
+                Dim strlog As String = "INsert into Hrs_Att_Salary_Log values('Attendance','Refund','" & txtCode.Text & "'," & _sys_User.ID & ",GetDate()," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
+                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsFisicalPeriods.ConnectionString, Data.CommandType.Text, strlog)
+
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
                     objNav.SetLanguage(Page, "Please select Period/الرجاء إختيار الفترة المالية"))
             End If
