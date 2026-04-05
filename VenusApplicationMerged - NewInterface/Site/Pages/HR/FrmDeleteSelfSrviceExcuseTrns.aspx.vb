@@ -35,6 +35,7 @@ Partial Class frmAttendancePreparation
         Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
 
         Dim clsEmployees As New Clshrs_Employees(Page)
+        Dim ClsEmployeesExcuses As New Clshrs_EmployeesExcuses(Page)
 
 
 
@@ -76,6 +77,7 @@ Partial Class frmAttendancePreparation
                 Else
                     Try
                         Dim ClsEmployees As New Clshrs_Employees(Page)
+                        Dim ClsEmployeesExcuses As New Clshrs_EmployeesExcuses(Page)
 
 
                         Dim TrnsID As Integer = Request.QueryString.Item("TrnsID")
@@ -125,6 +127,7 @@ Partial Class frmAttendancePreparation
         Dim CanbeCanceled As Boolean = False
         Dim TrnsID As Integer = Request.QueryString.Item("TrnsID")
         Dim ClsEmployeesVacations As New Clshrs_EmployeesVacations(Page)
+        Dim ClsEmployeesExcuses As New Clshrs_EmployeesExcuses(Page)
 
         ClsEmployeesExcuses.Find("ID=" & TrnsID & "")
         '1-
@@ -144,7 +147,6 @@ Partial Class frmAttendancePreparation
         Dim _sys_User As New Clssys_Users(Page)
         _sys_User.Find("ID = '" & User & "'")
         Dim ClsEmployees As New Clshrs_Employees(Me)
-        Dim ClsEmployeesExcuses As New Clshrs_EmployeesExcuses(Me)
         ClsEmployees.Find("Code='" & _sys_User.Code & "'")
         Dim InsertCommand As String
         Dim SqlCommand As Data.SqlClient.SqlCommand
@@ -162,7 +164,7 @@ Partial Class frmAttendancePreparation
         Dim UpdateCommandRank As String = ""
         UpdateCommandRank = "UPDATE SS_ExecuseRequest SET [RequestStautsTypeID] = 5 WHERE ID=" & RequestSerial & ""
         SqlCommandRank = New SqlClient.SqlCommand
-        SqlCommandRank.Connection = New SqlClient.SqlConnection(ClsEmployeesExcuses.ConnectionString)
+        SqlCommandRank.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
         SqlCommandRank.CommandType = CommandType.Text
         SqlCommandRank.CommandText = UpdateCommandRank
         SqlCommandRank.Connection.Open()
