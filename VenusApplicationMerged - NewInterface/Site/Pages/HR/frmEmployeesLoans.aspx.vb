@@ -308,6 +308,7 @@ Partial Class frmEmployeesLoans
             Case "Delete"
 
                 If ClsEmployees.Find("Code = '" & txtCode.Text & "'") Then
+                    ClsEmployeesPayability.Find("Number='" & lblDescLoanCode.Text & "'")
 
                     '// Check if the record is locked
                     Dim ClsForms As New ClsSys_Forms(Page)
@@ -339,6 +340,33 @@ Partial Class frmEmployeesLoans
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Locked Record /الملف مغلق"))
                         Return
                     End If
+
+
+                    If Not String.IsNullOrEmpty(ClsEmployeesPayability.Src) Then
+
+                        Dim User As String = String.Empty
+                        Dim WebHandler As New Venus.Shared.Web.WebHandler
+
+                        WebHandler.GetCookies(Page, "UserID", User)
+                        Dim _sys_User As New Clssys_Users(Page)
+                        _sys_User.Find("ID = '" & User & "'")
+                        '1- Check if user has permission to delete or not
+                        Dim strCheckPermission As String = " select CanDeleteSelfServiceTransactions from SS_SelfServiceTransactionUserPermissions where UserID=" & _sys_User.ID & ""
+                        Dim HasDeletePermission As Boolean = CBool(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesPayability.ConnectionString, Data.CommandType.Text, strCheckPermission))
+                        If HasDeletePermission Then
+                            Dim Url As String
+                            Url = "OpenModal1('FrmDeleteSelfSrviceAddition_Deduction.aspx?TrnsID=" & IIf(ClsEmployeesPayability.ID = "", 0, ClsEmployeesPayability.ID) & "Number=" & lblDescLoanCode.Text & "&FormCode=" & ClsEmployeesPayability.Src & "& RequestID=" & ClsEmployeesPayability.RequestID & "',600,900,false,'');"
+                            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", Url, True)
+                        Else
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This Transaction was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الحركة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))
+                            Return
+
+                        End If
+
+
+                    End If
+
+
                     Dim str As String = "delete from hrs_EmployeesTransactions where ID =" & ClsEmployeesPayability.RegComputerID
                     Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesPayability.ConnectionString, System.Data.CommandType.Text, str)
                     ClsEmployeesPayability.Delete("Number='" & lblDescLoanCode.Text & "'")

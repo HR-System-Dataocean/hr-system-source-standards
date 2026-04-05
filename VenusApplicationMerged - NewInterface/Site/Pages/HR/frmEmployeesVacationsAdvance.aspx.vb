@@ -1,4 +1,5 @@
 ﻿Imports System.Data
+Imports System.Security.Policy
 Imports Venus.Application.SystemFiles.HumanResource
 Imports Venus.Application.SystemFiles.System
 Imports Venus.Shared.Web
@@ -191,8 +192,25 @@ Partial Class frmEmployeesVacationsAdvance
                     WebHandler.GetCookies(Page, "UserID", User)
                     Dim _sys_User As New Clssys_Users(Page)
                     _sys_User.Find("ID = '" & User & "'")
-                    If Not String.IsNullOrWhiteSpace(ClsEmployeesVacations.Src) And Not _sys_User.IsAdmin Then
-                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This vacation was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الإجازة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))
+                    If Not String.IsNullOrWhiteSpace(ClsEmployeesVacations.Src) Then
+                        'Rabie 31-03-2026
+                        '1- Check if user has permission to delete or not
+                        Dim strCheckPermission As String = " select CanDeleteSelfServiceTransactions from SS_SelfServiceTransactionUserPermissions where UserID=" & _sys_User.ID & ""
+                        Dim HasDeletePermission As Boolean = CBool(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strCheckPermission))
+                        If HasDeletePermission Then
+                            Dim Url As String
+                            Url = "OpenModal1('FrmDeleteSelfSrviceAnnualvacationAdvance.aspx?TrnsID=" & IIf(lbVactionID.Text = "", 0, lbVactionID.Text) & "&FormCode=" & ClsEmployeesVacations.Src & "&VacationRequestID=" & ClsEmployeesVacations.VacationRequestID & "',600,900,false,'');"
+                            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", Url, True)
+                        Else
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This vacation was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الإجازة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))
+
+                        End If
+
+
+
+
+
+
                         Exit Sub
 
                     End If

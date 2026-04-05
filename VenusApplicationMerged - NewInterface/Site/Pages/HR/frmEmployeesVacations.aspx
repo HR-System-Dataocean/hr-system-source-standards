@@ -129,6 +129,7 @@
                    modal: true,
                    height: height,
                    width: width
+
                });
                 ODialoge = $dialog;
                 OSender = SenderCtrl;

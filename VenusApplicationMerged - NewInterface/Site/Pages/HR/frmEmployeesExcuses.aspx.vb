@@ -165,11 +165,41 @@ Partial Class frmEmployeesExcuses
                 If Not String.IsNullOrWhiteSpace(ClsEmployeesExcuses.SRC) Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This Transaction was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الحركة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))
                     Exit Sub
-                Else
-                    ClsEmployeesExcuses.Delete("ID=" & lbExcuseID.Text)
+                End If
+                If Not String.IsNullOrEmpty(ClsEmployeesExcuses.SRC) Then
+
+                    Dim User As String = String.Empty
+                    Dim WebHandler As New Venus.Shared.Web.WebHandler
+
+                    WebHandler.GetCookies(Page, "UserID", User)
+                    Dim _sys_User As New Clssys_Users(Page)
+                    _sys_User.Find("ID = '" & User & "'")
+                    '1- Check if user has permission to delete or not
+                    Dim strCheckPermission As String = " select CanDeleteSelfServiceTransactions from SS_SelfServiceTransactionUserPermissions where UserID=" & _sys_User.ID & ""
+                    Dim HasDeletePermission As Boolean = CBool(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesExcuses.ConnectionString, Data.CommandType.Text, strCheckPermission))
+                    If HasDeletePermission Then
+                        Dim Url As String
+                        Url = "OpenModal1('FrmDeleteSelfSrviceExcuseTrns.aspx?TrnsID=" & IIf(ClsEmployeesExcuses.ID = "", 0, ClsEmployeesExcuses.ID) & "&FormCode=" & ClsEmployeesExcuses.SRC & "& RequestID=" & ClsEmployeesExcuses.RequestID & "',600,900,false,'');"
+                        Page.ClientScript.RegisterStartupScript(Me.GetType(), "", Url, True)
+                    Else
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This Transaction was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الحركة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))
+                        Return
+
+                    End If
+
+
+                End If
+
+
+
+
+
+
+
+
+                ClsEmployeesExcuses.Delete("ID=" & lbExcuseID.Text)
                     GetValues()
                     AfterOperation()
-                End If
 
             Case "Property"
                 ClsEmployeesExcuses.Find("ID=" & lbExcuseID.Text)

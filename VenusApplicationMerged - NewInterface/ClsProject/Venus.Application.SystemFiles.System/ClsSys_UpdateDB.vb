@@ -12143,6 +12143,19 @@ FROM     SS_ChangeWorkHoursRequest JOIN
 "
         ExecuteUpdate(SQL)
 
+        SQL = "CREATE TABLE [dbo].[SS_SelfServiceTransactionUserPermissions](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[UserID] [int] NULL,
+	[CanDeleteSelfServiceTransactions] [bit] NULL,
+	[RegDate] [datetime] NULL,
+	[RegUserID] [int] NULL,
+ CONSTRAINT [PK_SS_SelfServiceTransactionUserPermissions] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]"
+        ExecuteUpdate(SQL)
+
 
     End Function
 	Public Function ExecuteUpdate(ByVal mySQLQuery As String) As Boolean

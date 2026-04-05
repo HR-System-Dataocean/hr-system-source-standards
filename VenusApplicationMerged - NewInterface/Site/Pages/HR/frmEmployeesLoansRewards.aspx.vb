@@ -293,10 +293,39 @@ Partial Class frmEmployeesLoansRewards
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Locked Record /الملف مغلق"))
                         Return
                     End If
-                    If Not String.IsNullOrEmpty(ClsEmployeesPayability.Src) Then
-                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This Transaction was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الحركة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))
+                    Dim ClsFisicalYearsPeriods As New Clssys_FiscalYearsPeriods(Me)
+                    ClsFisicalYearsPeriods.Find("FromDate <= '" & ClsEmployees.SetHigriDate(txtTransactionDate.Value) & "' and ToDate >='" & ClsEmployees.SetHigriDate(txtTransactionDate.Value) & "'")
 
+                    Dim periodSql As String
+                    Dim periodPrepared As Integer
+                    periodSql = "select count(hrs_EmployeesTransactions.ID) from hrs_EmployeesTransactions where hrs_EmployeesTransactions.PrepareType='N' and hrs_EmployeesTransactions.FiscalYearPeriodID=" & ClsFisicalYearsPeriods.ID & " and hrs_EmployeesTransactions.EmployeeID=" & ClsEmployees.ID
+                    periodPrepared = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, periodSql)
+
+                    If periodPrepared > 0 Then
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "A movement cannot be deleted within a Prepared period.!/!لايمكن حذف حركة داخل فترة مجهزة "))
                         Return
+                    End If
+                    If Not String.IsNullOrEmpty(ClsEmployeesPayability.Src) Then
+
+                        Dim User As String = String.Empty
+                        Dim WebHandler As New Venus.Shared.Web.WebHandler
+
+                        WebHandler.GetCookies(Page, "UserID", User)
+                        Dim _sys_User As New Clssys_Users(Page)
+                        _sys_User.Find("ID = '" & User & "'")
+                        '1- Check if user has permission to delete or not
+                        Dim strCheckPermission As String = " select CanDeleteSelfServiceTransactions from SS_SelfServiceTransactionUserPermissions where UserID=" & _sys_User.ID & ""
+                        Dim HasDeletePermission As Boolean = CBool(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesPayability.ConnectionString, Data.CommandType.Text, strCheckPermission))
+                        If HasDeletePermission Then
+                            Dim Url As String
+                            Url = "OpenModal1('FrmDeleteSelfSrviceAddition_Deduction.aspx?TrnsID=" & IIf(ClsEmployeesPayability.ID = "", 0, ClsEmployeesPayability.ID) & "Number=" & lblDescLoanCode.Text & "&FormCode=" & ClsEmployeesPayability.Src & "& RequestID=" & ClsEmployeesPayability.RequestID & "',600,900,false,'');"
+                            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", Url, True)
+                        Else
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This Transaction was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الحركة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))
+                            Return
+
+                        End If
+
 
                     End If
 
