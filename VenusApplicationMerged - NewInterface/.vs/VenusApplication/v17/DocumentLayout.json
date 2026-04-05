@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|d:\\data ocean\\sourcecode\\standard_new\\venusapplicationmerged - newinterface\\clsproject\\venus.application.systemfiles.humanresource\\clshrs_employeeaccounts.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|solutionrelative:clsproject\\venus.application.systemfiles.humanresource\\clshrs_employeeaccounts.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|d:\\data ocean\\sourcecode\\standard_new\\venusapplicationmerged - newinterface\\site\\pages\\hr\\frmdeleteselfsrviceexcusetrns.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmdeleteselfsrviceexcusetrns.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
@@ -114,11 +118,24 @@
       "DocumentGroups": [
         {
           "DockedHeight": 577,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "Clshrs_EmployeeAccounts.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeeAccounts.vb",
+              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeeAccounts.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeeAccounts.vb",
+              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeeAccounts.vb",
+              "ViewState": "AgIAAIQCAAAAAAAAAAAwwJYCAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-05T09:52:33.986Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "frmEmployeesSelector.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesSelector.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesSelector.aspx.vb",
@@ -131,7 +148,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "FrmDeleteSelfSrviceAddition_Deduction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmDeleteSelfSrviceAddition_Deduction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmDeleteSelfSrviceAddition_Deduction.aspx.vb",
@@ -144,7 +161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "FrmDeleteSelfSrviceExcuseTrns.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmDeleteSelfSrviceExcuseTrns.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmDeleteSelfSrviceExcuseTrns.aspx.vb",
@@ -157,7 +174,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "frmEmployeesExcuses.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesExcuses.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesExcuses.aspx.vb",
@@ -170,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "frmEmployeesLoans.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesLoans.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesLoans.aspx.vb",
@@ -183,7 +200,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "frmNationalities.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmNationalities.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmNationalities.aspx.vb",
@@ -196,7 +213,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "FrmDeleteSelfSrviceAnnualvacationAdvance.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmDeleteSelfSrviceAnnualvacationAdvance.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmDeleteSelfSrviceAnnualvacationAdvance.aspx.vb",
@@ -209,7 +226,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "web.config",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\web.config",
               "RelativeDocumentMoniker": "Site\\web.config",
@@ -222,7 +239,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "frmEmployeesSelector.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesSelector.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesSelector.aspx",
@@ -235,7 +252,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "frmEmployeesLoansDeductions.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesLoansDeductions.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesLoansDeductions.aspx.vb",
@@ -248,7 +265,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "frmEmployeesOthersVacations.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesOthersVacations.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesOthersVacations.aspx.vb",
@@ -261,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "FrmDeleteSelfSrviceAddition_Deduction.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmDeleteSelfSrviceAddition_Deduction.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmDeleteSelfSrviceAddition_Deduction.aspx",
@@ -274,7 +291,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "frmEmployeesLoansRewards.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesLoansRewards.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesLoansRewards.aspx.vb",
@@ -287,7 +304,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "frmEmployeesVacations.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesVacations.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesVacations.aspx.vb",
@@ -300,7 +317,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "WebHandler.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Shared.Web\\WebHandler.vb",
               "RelativeDocumentMoniker": "ClsProject\\Venus.Shared.Web\\WebHandler.vb",
@@ -313,7 +330,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "FrmDeleteSelfSrviceAnnualvacation.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmDeleteSelfSrviceAnnualvacation.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmDeleteSelfSrviceAnnualvacation.aspx.vb",
@@ -326,7 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "FrmSelfServiceTransUserPermissions.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmSelfServiceTransUserPermissions.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmSelfServiceTransUserPermissions.aspx",
@@ -339,7 +356,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "FrmDeleteSelfSrviceAnnualvacation.aspx.En.resx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\App_LocalResources\\FrmDeleteSelfSrviceAnnualvacation.aspx.En.resx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\App_LocalResources\\FrmDeleteSelfSrviceAnnualvacation.aspx.En.resx",
@@ -351,7 +368,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "frmEmployeesVacationsAdvance.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesVacationsAdvance.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesVacationsAdvance.aspx.vb",
@@ -364,7 +381,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "FrmDeleteSelfSrviceAnnualvacation.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmDeleteSelfSrviceAnnualvacation.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmDeleteSelfSrviceAnnualvacation.aspx",
@@ -377,7 +394,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "frmEmployeesVacations.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesVacations.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesVacations.aspx",
@@ -390,7 +407,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "FrmDeleteSelfSrviceAnnualvacationAdvance.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmDeleteSelfSrviceAnnualvacationAdvance.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmDeleteSelfSrviceAnnualvacationAdvance.aspx",
@@ -403,7 +420,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "frmAnnualVacationsRequestStatus.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAnnualVacationsRequestStatus.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAnnualVacationsRequestStatus.aspx.vb",
@@ -416,7 +433,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "frmViewSelfServiceRequestsAllEmp.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmViewSelfServiceRequestsAllEmp.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmViewSelfServiceRequestsAllEmp.aspx.vb",
@@ -429,7 +446,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "frmViewSelfServiceRequestsAllEmp.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmViewSelfServiceRequestsAllEmp.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmViewSelfServiceRequestsAllEmp.aspx",
@@ -442,7 +459,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "FrmSelfServiceTransUserPermissions.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmSelfServiceTransUserPermissions.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmSelfServiceTransUserPermissions.aspx.vb",
