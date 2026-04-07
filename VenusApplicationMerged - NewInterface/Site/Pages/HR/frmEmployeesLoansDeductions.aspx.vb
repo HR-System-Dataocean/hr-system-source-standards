@@ -320,7 +320,7 @@ Partial Class frmEmployeesLoansDeductions
                         Dim HasDeletePermission As Boolean = CBool(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesPayability.ConnectionString, Data.CommandType.Text, strCheckPermission))
                         If HasDeletePermission Then
                             Dim Url As String
-                            Url = "OpenModal1('FrmDeleteSelfSrviceAddition_Deduction.aspx?TrnsID=" & IIf(ClsEmployeesPayability.ID = "", 0, ClsEmployeesPayability.ID) & "Number=" & lblDescLoanCode.Text & "&FormCode=" & ClsEmployeesPayability.Src & "& RequestID=" & ClsEmployeesPayability.RequestID & "',600,900,false,'');"
+                            Url = "OpenModal1('FrmDeleteSelfSrviceAddition_Deduction.aspx?TrnsID=" & IIf(ClsEmployeesPayability.ID.ToString() = "", 0, ClsEmployeesPayability.ID.ToString()) & "Number=" & lblDescLoanCode.Text & "&FormCode=" & ClsEmployeesPayability.Src & "& RequestID=" & ClsEmployeesPayability.RequestID & "',600,900,false,'');"
                             Page.ClientScript.RegisterStartupScript(Me.GetType(), "", Url, True)
                         Else
                             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This Transaction was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الحركة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))

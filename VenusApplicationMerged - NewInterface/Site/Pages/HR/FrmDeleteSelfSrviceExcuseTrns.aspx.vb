@@ -29,8 +29,8 @@ Partial Class frmAttendancePreparation
 #Region "Protected Sub"
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim TrnsID As Integer = Request.QueryString.Item("TrnsID")
-        Dim VacationRequestID As Integer = Request.QueryString.Item("VacationRequestID")
+        Dim TrnsID As Double = Request.QueryString.Item("TrnsID")
+        Dim VacationRequestID As Double = Request.QueryString.Item("VacationRequestID")
 
         Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
 

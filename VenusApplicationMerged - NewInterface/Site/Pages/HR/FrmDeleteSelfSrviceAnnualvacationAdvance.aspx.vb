@@ -92,55 +92,58 @@ Partial Class frmAttendancePreparation
                         ClsEmployeesVacations.Find("ID=" & TrnsID & "")
                         ClsEmployeesTransactions.Find("EmployeesVacationsID=" & ClsEmployeesVacations.ID)
                         If (ClsEmployeesTransactions.DataSet.Tables(0).Rows.Count < 1) Then
+                            ClsEmployeesVacations.Remarks = TxtDeleteReason.Text
+                            ClsEmployeesVacations.Update("ID=" & ClsEmployeesVacations.ID)
                             ClsEmployeesVacations.Delete("ID=" & TrnsID)
                             Dim cls_OTHER_VACATION = New Clshrs_EmployeesVacations(Page)
                             If cls_OTHER_VACATION.Find("ParentVacationID = " & TrnsID) Then
                                 cls_OTHER_VACATION.Delete("ParentVacationID = " & TrnsID)
                             End If
+                            Dim Diffe As Single
+                            Diffe = (DateDiff(DateInterval.Day, ClsEmployeesVacations.ActualStartDate, ClsEmployeesVacations.ActualEndDate))
+
+                            Dim cls_Employee = New Clshrs_Employees(Page)
+                            ' cls_Employee.Find("Code='" & txtEmployee.Text & "'")
+
+                            Dim str = "SELECT    Consumed FROM hrs_VacationsBalance where ISNULL(Posted,0)=0 and  BalanceTypeID=2 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
+                            Dim remainTrans As Decimal
+                            remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
+                            If remainTrans = 0 Then
+                                str = "SELECT    Consumed FROM hrs_VacationsBalance where ISNULL(Posted,0)=0 and  BalanceTypeID=2 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "'"
+                                remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
+                                If remainTrans > 0 Then
+                                    str = "SELECT    ExpireDate FROM hrs_VacationsBalance where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ActualStartDate & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(ClsEmployeesVacations.ActualEndDate).ToString("yyyy-MM-dd") & "')"
+                                    Dim expire As Date = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
+                                    Dim AllowDays = (DateDiff(DateInterval.Day, ClsEmployeesVacations.ActualStartDate, expire))
+                                    If AllowDays < remainTrans Then
+                                        remainTrans = AllowDays
+                                    End If
+                                End If
+                            End If
+
+
+
+                            If remainTrans > Diffe Then
+                                Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & Diffe & " ,Remaining = Remaining+" & Diffe & " where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
+                                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(cls_Employee.ConnectionString, Data.CommandType.Text, strUpdateTrans)
+                            Else
+                                If remainTrans > 0 Then
+                                    Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & remainTrans & " ,Remaining = Remaining+" & remainTrans & " where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
+                                    Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(cls_Employee.ConnectionString, Data.CommandType.Text, strUpdateTrans)
+                                End If
+                                Dim strUpdateNew As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & (Diffe - remainTrans) & " ,Remaining = Remaining+" & (Diffe - remainTrans) & " where ISNULL(Posted,0)=0 and BalanceTypeID=1 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
+                                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(cls_Employee.ConnectionString, Data.CommandType.Text, strUpdateNew)
+                            End If
+
+                            If CancelRequest(VacationRequestID, FormCode, ClsEmployeesVacations.EmployeeID) Then
+                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, " Delete Done !/!تم الحذف"))
+                                Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                            End If
                         Else
                             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, " Cannot delete this vacation because it has a transaction  /لا يمكن حذف الاجازة لان لها مستحقات "))
                         End If
 
-                        Dim Diffe As Single
-                        Diffe = (DateDiff(DateInterval.Day, ClsEmployeesVacations.ActualStartDate, ClsEmployeesVacations.ActualEndDate))
 
-                        Dim cls_Employee = New Clshrs_Employees(Page)
-                        ' cls_Employee.Find("Code='" & txtEmployee.Text & "'")
-
-                        Dim str = "SELECT    Consumed FROM hrs_VacationsBalance where ISNULL(Posted,0)=0 and  BalanceTypeID=2 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
-                        Dim remainTrans As Decimal
-                        remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
-                        If remainTrans = 0 Then
-                            str = "SELECT    Consumed FROM hrs_VacationsBalance where ISNULL(Posted,0)=0 and  BalanceTypeID=2 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "'"
-                            remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
-                            If remainTrans > 0 Then
-                                str = "SELECT    ExpireDate FROM hrs_VacationsBalance where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ActualStartDate & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(ClsEmployeesVacations.ActualEndDate).ToString("yyyy-MM-dd") & "')"
-                                Dim expire As Date = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
-                                Dim AllowDays = (DateDiff(DateInterval.Day, ClsEmployeesVacations.ActualStartDate, expire))
-                                If AllowDays < remainTrans Then
-                                    remainTrans = AllowDays
-                                End If
-                            End If
-                        End If
-
-
-
-                        If remainTrans > Diffe Then
-                            Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & Diffe & " ,Remaining = Remaining+" & Diffe & " where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
-                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(cls_Employee.ConnectionString, Data.CommandType.Text, strUpdateTrans)
-                        Else
-                            If remainTrans > 0 Then
-                                Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & remainTrans & " ,Remaining = Remaining+" & remainTrans & " where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
-                                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(cls_Employee.ConnectionString, Data.CommandType.Text, strUpdateTrans)
-                            End If
-                            Dim strUpdateNew As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & (Diffe - remainTrans) & " ,Remaining = Remaining+" & (Diffe - remainTrans) & " where ISNULL(Posted,0)=0 and BalanceTypeID=1 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
-                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(cls_Employee.ConnectionString, Data.CommandType.Text, strUpdateNew)
-                        End If
-
-                        If CancelRequest(VacationRequestID, FormCode, ClsEmployeesVacations.EmployeeID) Then
-                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, " Delete Done !/!تم الحذف"))
-                            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
-                        End If
 
                     Catch ex As Exception
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, " Delete Operation Failed !/!فشل عملية الحذف"))

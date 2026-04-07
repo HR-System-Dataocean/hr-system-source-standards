@@ -162,10 +162,7 @@ Partial Class frmEmployeesExcuses
             Case "Delete"
 
                 ClsEmployeesExcuses.Find("ID=" & lbExcuseID.Text)
-                If Not String.IsNullOrWhiteSpace(ClsEmployeesExcuses.SRC) Then
-                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This Transaction was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الحركة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))
-                    Exit Sub
-                End If
+
                 If Not String.IsNullOrEmpty(ClsEmployeesExcuses.SRC) Then
 
                     Dim User As String = String.Empty
@@ -179,7 +176,7 @@ Partial Class frmEmployeesExcuses
                     Dim HasDeletePermission As Boolean = CBool(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesExcuses.ConnectionString, Data.CommandType.Text, strCheckPermission))
                     If HasDeletePermission Then
                         Dim Url As String
-                        Url = "OpenModal1('FrmDeleteSelfSrviceExcuseTrns.aspx?TrnsID=" & IIf(ClsEmployeesExcuses.ID = "", 0, ClsEmployeesExcuses.ID) & "&FormCode=" & ClsEmployeesExcuses.SRC & "& RequestID=" & ClsEmployeesExcuses.RequestID & "',600,900,false,'');"
+                        Url = "OpenModal1('FrmDeleteSelfSrviceExcuseTrns.aspx?TrnsID=" & IIf(ClsEmployeesExcuses.ID.ToString() = "", 0, ClsEmployeesExcuses.ID.ToString()) & "&FormCode=" & ClsEmployeesExcuses.SRC & "& RequestID=" & ClsEmployeesExcuses.RequestID & "',600,900,false,'');"
                         Page.ClientScript.RegisterStartupScript(Me.GetType(), "", Url, True)
                     Else
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This Transaction was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الحركة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))

@@ -91,21 +91,27 @@ Partial Class frmAttendancePreparation
                         ClsEmployeesVacations.Find("ID=" & TrnsID & "")
                         ClsEmployeesTransactions.Find("EmployeesVacationsID=" & ClsEmployeesVacations.ID)
                         If (ClsEmployeesTransactions.DataSet.Tables(0).Rows.Count < 1) Then
+                            ClsEmployeesVacations.Remarks = TxtDeleteReason.Text
+                            ClsEmployeesVacations.Update("ID=" & ClsEmployeesVacations.ID)
                             ClsEmployeesVacations.Delete("ID=" & TrnsID)
+
+
                             Dim cls_OTHER_VACATION = New Clshrs_EmployeesVacations(Page)
                             If cls_OTHER_VACATION.Find("ParentVacationID = " & TrnsID) Then
                                 cls_OTHER_VACATION.Delete("ParentVacationID = " & TrnsID)
+
                             End If
+                            If CancelRequest(VacationRequestID, FormCode, ClsEmployeesVacations.EmployeeID) Then
+                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, " Delete Done !/!تم الحذف"))
+                                Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                            End If
+
                         Else
                             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, " Cannot delete this vacation because it has a transaction  /لا يمكن حذف الاجازة لان لها مستحقات "))
                         End If
 
 
 
-                        If CancelRequest(VacationRequestID, FormCode, ClsEmployeesVacations.EmployeeID) Then
-                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, " Delete Done !/!تم الحذف"))
-                            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
-                        End If
 
                     Catch ex As Exception
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, " Delete Operation Failed !/!فشل عملية الحذف"))

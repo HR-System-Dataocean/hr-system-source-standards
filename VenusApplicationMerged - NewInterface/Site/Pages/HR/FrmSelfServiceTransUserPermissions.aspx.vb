@@ -94,7 +94,7 @@ Partial Class frmUsers
 
 
 
-                Dim strinsert = "Insert Into SS_SelfServiceTransactionUserPermissions values(" & ObjClsSys_Users.ID & "," & ChkCanDeleteSelfServiceTransactions.Checked & ",GetDate()," & _sys_User.ID & ")"
+                Dim strinsert = "Insert Into SS_SelfServiceTransactionUserPermissions values(" & ObjClsSys_Users.ID & ",'" & ChkCanDeleteSelfServiceTransactions.Checked & "',GetDate()," & _sys_User.ID & ")"
 
                 Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ObjClsSys_Users.ConnectionString, Data.CommandType.Text, strinsert)
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Save Done /تم الحفظ"))
