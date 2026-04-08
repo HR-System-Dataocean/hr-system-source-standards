@@ -30,7 +30,7 @@ Partial Class frmAttendancePreparation
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim TrnsID As Double = Request.QueryString.Item("TrnsID")
-        Dim VacationRequestID As Double = Request.QueryString.Item("VacationRequestID")
+        Dim VacationRequestID As Double = Request.QueryString.Item("RequestID")
 
         Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
 
@@ -89,6 +89,8 @@ Partial Class frmAttendancePreparation
                         Dim _sys_User As New Clssys_Users(Page)
                         _sys_User.Find("ID = '" & User & "'")
                         WebHandler.GetCookies(Page, "UserID", User)
+                        ClsEmployeesExcuses.Find("ID=" & TrnsID)
+
                         ClsEmployeesExcuses.Delete("ID=" & TrnsID)
 
 
