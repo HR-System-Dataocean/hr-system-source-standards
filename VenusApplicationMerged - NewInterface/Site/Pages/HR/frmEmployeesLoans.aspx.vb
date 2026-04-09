@@ -355,21 +355,22 @@ Partial Class frmEmployeesLoans
                         Dim HasDeletePermission As Boolean = CBool(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesPayability.ConnectionString, Data.CommandType.Text, strCheckPermission))
                         If HasDeletePermission Then
                             Dim Url As String
-                            Url = "OpenModal1('FrmDeleteSelfSrviceAddition_Deduction.aspx?TrnsID=" & IIf(ClsEmployeesPayability.ID.ToString() = "", 0, ClsEmployeesPayability.ID.ToString()) & "Number=" & lblDescLoanCode.Text & "&FormCode=" & ClsEmployeesPayability.Src & "& RequestID=" & ClsEmployeesPayability.RequestID & "',600,900,false,'');"
+                            Url = "OpenModal1('FrmDeleteSelfSrviceAddition_Deduction.aspx?TrnsID=" & IIf(ClsEmployeesPayability.ID.ToString() = "", 0, ClsEmployeesPayability.ID.ToString()) & "&Number=" & lblDescLoanCode.Text & "&FormCode=" & ClsEmployeesPayability.Src & "&RequestID=" & ClsEmployeesPayability.RequestID & "',600,900,false,'');"
                             Page.ClientScript.RegisterStartupScript(Me.GetType(), "", Url, True)
                         Else
                             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This Transaction was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الحركة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))
                             Return
 
                         End If
+                    Else
 
-
+                        Dim str As String = "delete from hrs_EmployeesTransactions where ID =" & ClsEmployeesPayability.RegComputerID
+                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesPayability.ConnectionString, System.Data.CommandType.Text, str)
+                        ClsEmployeesPayability.Delete("Number='" & lblDescLoanCode.Text & "'")
                     End If
 
 
-                    Dim str As String = "delete from hrs_EmployeesTransactions where ID =" & ClsEmployeesPayability.RegComputerID
-                    Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesPayability.ConnectionString, System.Data.CommandType.Text, str)
-                    ClsEmployeesPayability.Delete("Number='" & lblDescLoanCode.Text & "'")
+
                 End If
                 Clear()
             Case "Property"

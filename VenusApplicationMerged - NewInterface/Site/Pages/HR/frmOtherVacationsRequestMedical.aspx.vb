@@ -1055,7 +1055,7 @@ Partial Class frmEmployeesVacations
                         If DsPositionEmployees.Tables(0).Rows.Count > 0 Then
                             Dim strinsert As String
                             Dim strMaxRequestSerial As String
-                            strMaxRequestSerial = "select isnull(Max (ID),1) from SS_VacationRequest where EmployeeID=" & ClsEmployees.ID & " and AnnualVacationType='SS_0018' "
+                            strMaxRequestSerial = "select isnull(Max (ID),1) from SS_VacationRequest where EmployeeID=" & ClsEmployees.ID & " and VacationType='SS_0018' "
                             Dim MaxSerial As Integer
                             SqlCommand = New SqlClient.SqlCommand
                             SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)

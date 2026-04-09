@@ -29,8 +29,8 @@ Partial Class frmAttendancePreparation
 #Region "Protected Sub"
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim TrnsID As Integer = Request.QueryString.Item("TrnsID")
-        Dim VacationRequestID As Integer = Request.QueryString.Item("VacationRequestID")
+        Dim TrnsID As String = Request.QueryString.Item("TrnsID")
+        Dim VacationRequestID As Integer = Request.QueryString.Item("RequestID")
 
         Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
 
@@ -79,7 +79,8 @@ Partial Class frmAttendancePreparation
                         Dim ClsEmployees As New Clshrs_Employees(Page)
 
 
-                        Dim TrnsID As Integer = Request.QueryString.Item("TrnsID")
+                        Dim TrnsID As String = Request.QueryString.Item("TrnsID")
+                        Dim VacationRequestID As Integer = Request.QueryString.Item("RequestID")
                         Dim Number As Integer = Request.QueryString.Item("Number")
                         Dim RequestID As Integer = Request.QueryString.Item("RequestID")
                         Dim FormCode As String = Request.QueryString.Item("FormCode")
@@ -90,6 +91,8 @@ Partial Class frmAttendancePreparation
                         _sys_User.Find("ID = '" & User & "'")
                         WebHandler.GetCookies(Page, "UserID", User)
                         Dim ClsEmployeesTransactions As New Clshrs_EmployeesTransactions(Page)
+                        ClsEmployeesPayability = New Clshrs_EmployeesPayability(Page)
+
                         ClsEmployeesPayability.Find("Number='" & Number & "'")
                         Dim str As String = "delete from hrs_EmployeesTransactions where ID =" & ClsEmployeesPayability.RegComputerID
                         Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesPayability.ConnectionString, System.Data.CommandType.Text, str)
@@ -127,7 +130,7 @@ Partial Class frmAttendancePreparation
     Private Function CancelRequest(RequestSerial As String, FormCode As String, EmployeeID As Integer) As Boolean
         Dim ConfigID As Integer = 0
         Dim CanbeCanceled As Boolean = False
-        Dim TrnsID As Integer = Request.QueryString.Item("TrnsID")
+        Dim TrnsID As String = Request.QueryString.Item("TrnsID")
         Dim ClsEmployeesVacations As New Clshrs_EmployeesVacations(Page)
 
         ClsEmployeesVacations.Find("ID=" & TrnsID & "")
