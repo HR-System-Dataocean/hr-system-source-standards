@@ -770,7 +770,7 @@ Public Class ClsSys_Search_Main
                     mSqlDataAdapter = New SqlClient.SqlDataAdapter(SqlSelectCommand & " Order By Case When IsNumeric(Code) = 1 then Right(Replicate('0',51) + Code, 50) When IsNumeric(Code) = 0 then Left(Code + Replicate('',51), 50) Else Code End ASC", mConnectionString)
                     mSqlDataAdapter.Fill(Ds)
                 Catch ex As Exception
-                    mSqlDataAdapter = New SqlClient.SqlDataAdapter(SqlSelectCommand & " Order By ID ASC", mConnectionString)
+                    mSqlDataAdapter = New SqlClient.SqlDataAdapter(SqlSelectCommand, mConnectionString)
                     mSqlDataAdapter.Fill(Ds)
                 End Try
                 Return True

@@ -72,11 +72,40 @@
                var count = igtbl_getGridById(gridName).Rows.length - 1;
                var rowIndex = igtbl_getRowById(cellId).Id.split("_")[2];
 
+               var value = cell.innerText;
+               var columnKey = cell.columnKey;
+
+               // اقرأ ClientID من HiddenField
+               var txtDateID = document.getElementById('hfTxtDateID').value;
+               var txtToDateID = document.getElementById('hfTxtToDateID').value;
+               if (cell.columnKey === "FromDate") {
+                   var editor = igedit_getById(txtDateID);
+                   editor.setValue(value);
+                   txtDateID.value = value
+               }
+               if (columnKey === "FromDate") {
+                   var editor = igedit_getById(txtDateID);
+                   editor.setValue(value);
+                   txtToDateID.value = value
+               }
+
+               if (cell.columnKey === "ToDate") {
+                   var editor2 = igedit_getById(txtToDateID);
+                   editor2.setValue(value);
+               }
+               if (columnKey === "ToDate") {
+                   var editor2 = igedit_getById(txtToDateID);
+                   editor2.setValue(value);
+               }
+
                if (rowIndex == count) {
 
                    igtbl_addNew(gridName, 0, true, false);
-
                }
+
+               
+              
+
            }
        }
 
@@ -124,6 +153,10 @@
             <asp:TextBox ID="value" runat="server" BorderStyle="None" ForeColor="White" TabIndex="-1"
                 Width="91px"></asp:TextBox>
             <asp:Label ID="TargetControl" runat="server" ForeColor="White" TabIndex="-1" Width="99px"></asp:Label>
+            <!-- HiddenFields لتخزين ClientID -->
+        <asp:HiddenField ID="hfTxtDateID" runat="server"  OnValueChanged="txthdDate_TextChanged" />
+        <asp:HiddenField ID="hfTxtToDateID" runat="server" OnValueChanged="txthdToDate_TextChanged" />
+
              <igtxt:WebDateTimeEdit ID="txtDate" runat="server" meta:resourcekey="txtDateResource1">
         </igtxt:WebDateTimeEdit>
                  <igtxt:WebDateTimeEdit ID="txtToDate" runat="server" meta:resourcekey="txtDateResource1">

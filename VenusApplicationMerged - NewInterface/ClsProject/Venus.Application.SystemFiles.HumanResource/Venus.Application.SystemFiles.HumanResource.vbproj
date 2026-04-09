@@ -260,6 +260,7 @@
     <Compile Include="ClsAtt_AttendancePreparationDetails.vb" />
     <Compile Include="ClsAtt_AttendancePreparationProjects.vb" />
     <Compile Include="ClsAtt_AttendTransactions.vb" />
+    <Compile Include="ClsSS_RequestTypes.vb" />
     <Compile Include="ClsSS_DelegationSChedule.vb" />
     <Compile Include="ClsSS_DelegationSCheduleRequests.vb" />
     <Compile Include="cls_Att_OvertimeReviewDetail.aspx.vb" />

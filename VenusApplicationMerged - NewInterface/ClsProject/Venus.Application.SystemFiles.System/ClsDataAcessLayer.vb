@@ -588,7 +588,12 @@ Public Class ClsDataAcessLayer
         Dim StrSelectCommand As String
         Dim ID As Integer = 0
         Try
-            StrSelectCommand = "Select ID From " & mTable & IIf(StrFilter.Trim.Length > 0, " Where " & StrFilter, "")
+            If mTable.Trim() = "SS_RequestTypes" Then
+                StrSelectCommand = "Select RequestID From " & mTable & IIf(StrFilter.Trim.Length > 0, " Where " & StrFilter, "")
+            Else
+                StrSelectCommand = "Select ID From " & mTable & IIf(StrFilter.Trim.Length > 0, " Where " & StrFilter, "")
+            End If
+
             mSqlCommand = New SqlClient.SqlCommand
             mSqlCommand.Connection = New SqlClient.SqlConnection(mConnectionString)
             mSqlCommand.CommandType = CommandType.Text

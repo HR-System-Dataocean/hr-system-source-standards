@@ -57,22 +57,22 @@ Partial Class frmEmployeeOfficialVacations
 
     Protected Sub UltraWebGrid1_UpdateRow(sender As Object, e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles UwgSearchEmployees.UpdateRow
 
-        If txtDate.Value IsNot Nothing And Not IsNothing(e.Row.Cells("3").Value) Then
-            e.Row.Cells(4).Value = CType(txtDate.Value, DateTime).ToString("yyyy-MM-dd")
-        End If
-        If txtToDate.Value IsNot Nothing And Not IsNothing(e.Row.Cells("3").Value) Then
-            e.Row.Cells(5).Value = CType(txtToDate.Value, DateTime).ToString("yyyy-MM-dd")
-        End If
+        'If txtDate.Value IsNot Nothing And Not IsNothing(e.Row.Cells("3").Value) Then
+        '    e.Row.Cells(4).Value = CType(txtDate.Value, DateTime)
+        'End If
+        'If txtToDate.Value IsNot Nothing And Not IsNothing(e.Row.Cells("3").Value) Then
+        '    e.Row.Cells(5).Value = CType(txtToDate.Value, DateTime)
+        'End If
 
     End Sub
     Protected Sub UltraWebGrid1_InitializeRow(sender As Object, e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles UwgSearchEmployees.InitializeRow
 
-        If Not IsDBNull(e.Row.Cells(4).Value) Then
-            txtDate.Value = e.Row.Cells(4).Value
-        End If
-        If Not IsDBNull(e.Row.Cells(5).Value) Then
-            txtToDate.Value = e.Row.Cells(5).Value
-        End If
+        'If Not IsDBNull(e.Row.Cells(4).Value) Then
+        '    txtDate.Value = e.Row.Cells(4).Value
+        'End If
+        'If Not IsDBNull(e.Row.Cells(5).Value) Then
+        '    txtToDate.Value = e.Row.Cells(5).Value
+        'End If
 
     End Sub
     Protected Sub ImageButton_Command(sender As Object, e As System.Web.UI.WebControls.CommandEventArgs) Handles ImageButton_Save.Command, ImageButton_SaveN.Command, LinkButton_SaveN.Command, ImageButton_New.Command, ImageButton_Print.Command, ImageButton_Properties.Command, LinkButton_Properties.Command, ImageButton_Remarks.Command, LinkButton_Remarks.Command, ImageButton_Last.Command, ImageButton_Next.Command, ImageButton_Back.Command, ImageButton_First.Command, ImageButton_Delete.Command
@@ -233,7 +233,12 @@ Partial Class frmEmployeeOfficialVacations
     Protected Sub txtCode_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlFiscalYear.TextChanged
         CheckCode()
     End Sub
-
+    Protected Sub txthdDate_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles hfTxtDateID.ValueChanged
+        txtDate.Value = hfTxtDateID.Value
+    End Sub
+    Protected Sub txthdToDate_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles hfTxtToDateID.ValueChanged
+        txtToDate.Value = hfTxtToDateID.Value
+    End Sub
 #End Region
 
 #Region "Private Functions"

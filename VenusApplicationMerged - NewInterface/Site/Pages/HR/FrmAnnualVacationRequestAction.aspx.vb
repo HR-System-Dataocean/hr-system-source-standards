@@ -21,6 +21,56 @@ Partial Class frmAttendancePreparation
     Private ClsEmployeesVacations As Clshrs_EmployeesVacations
     Private ClsEmployees As Clshrs_Employees
 
+    Private Class VacationSalaryResult
+        Public Property TotalBenefits As Double
+        Public Property TotalDeductions As Double
+        Public Property DtBenefits As DataTable
+        Public Property DtDeductions As DataTable
+    End Class
+
+    Private Function GetFiscalPeriodIdByDate(ByVal periodDate As Date, ByVal periods As Clssys_FiscalYearsPeriods, ByVal branch As Clssys_Branches) As Integer
+        Dim fiscID As Integer = 0
+        Dim fiscfrom As DateTime
+        Dim fiscto As DateTime
+        If Not IsNothing(branch) AndAlso branch.AffectPeriod Then
+            periods.GetFisicalperiodInfoByPrepareDay(periodDate, fiscID, fiscfrom, fiscto)
+        Else
+            periods.GetFisicalperiodInfo(periodDate, fiscID, fiscfrom, fiscto)
+        End If
+        Return fiscID
+    End Function
+
+    Private Function GetDaysSplitAcrossTwoMonths(ByVal startDate As Date, ByVal endDate As Date, ByRef month1Days As Double, ByRef month2Days As Double, ByRef month1Date As Date, ByRef month2Date As Date) As Boolean
+        month1Days = 0
+        month2Days = 0
+        month1Date = startDate
+        month2Date = endDate
+
+        If startDate.Year = endDate.Year AndAlso startDate.Month = endDate.Month Then
+            Return False
+        End If
+        If startDate > endDate Then
+            Return False
+        End If
+
+        Dim month1End As Date = New Date(startDate.Year, startDate.Month, Date.DaysInMonth(startDate.Year, startDate.Month))
+        If month1End >= endDate Then
+            Return False
+        End If
+
+        Dim month2Start As Date = month1End.AddDays(1)
+        If Not (month2Start.Year = endDate.Year AndAlso month2Start.Month = endDate.Month) Then
+            Return False
+        End If
+
+        month1Days = DateDiff(DateInterval.Day, startDate.Date, month1End.Date) + 1
+        month2Days = DateDiff(DateInterval.Day, month2Start.Date, endDate.Date)
+        month1Date = startDate.Date
+        month2Date = month2Start.Date
+
+        Return (month1Days > 0 AndAlso month2Days > 0)
+    End Function
+
 
 #End Region
 
@@ -246,28 +296,28 @@ Partial Class frmAttendancePreparation
             Else
 
                 TxtRequestSerial.Text = DS2.Tables(0).Rows(0)("RequestSerial").ToString()
-            txtEmployee.Text = DS2.Tables(0).Rows(0)("EmployeeCode").ToString()
-            txtDescEnglishName.Text = DS2.Tables(0).Rows(0)("EmployeeName").ToString()
-            TxtPosition.Text = DS2.Tables(0).Rows(0)("Position").ToString()
-            TxtDepartment.Text = DS2.Tables(0).Rows(0)("Department").ToString()
-            txtAlternativeUser.Text = DS2.Tables(0).Rows(0)("alternativecode").ToString()
-            txtContactNo.Text = DS2.Tables(0).Rows(0)("ContactNo").ToString()
-            txtRequestDate.Text = CDate(DS2.Tables(0).Rows(0)("RequestDate").ToString()).ToShortDateString()
-            txtStartDate.Text = CDate(DS2.Tables(0).Rows(0)("StartDate").ToString()).ToShortDateString()
-            txtEndDate.Text = CDate(DS2.Tables(0).Rows(0)("EndDate").ToString()).ToShortDateString()
-            txtTotalVal.Text = DS2.Tables(0).Rows(0)("TotalBalance").ToString()
-            txtRemainVal.Text = DS2.Tables(0).Rows(0)("NoOfDays").ToString()
-            txtContactNo.Text = DS2.Tables(0).Rows(0)("ContactNo").ToString()
-            TxtAlternativeEmpName.Text = DS2.Tables(0).Rows(0)("AlternativeEmployeeName").ToString()
-            txtConfirmedDays.Text = DS2.Tables(0).Rows(0)("NoOfDays").ToString()
-            DdlVacationType.SelectedValue = DS2.Tables(0).Rows(0)("VacationID").ToString()
-            TxtRemarks.Text = DS2.Tables(0).Rows(0)("Remarks").ToString()
-            If CInt(DS2.Tables(0).Rows(0)("VacationID").ToString()) > 1 Then
-                txtAlternativeUser.Visible = False
-                lblWebDateChooser3.Visible = False
-                btnSearchCode.Visible = False
-                TxtAlternativeEmpName.Visible = False
-            End If
+                txtEmployee.Text = DS2.Tables(0).Rows(0)("EmployeeCode").ToString()
+                txtDescEnglishName.Text = DS2.Tables(0).Rows(0)("EmployeeName").ToString()
+                TxtPosition.Text = DS2.Tables(0).Rows(0)("Position").ToString()
+                TxtDepartment.Text = DS2.Tables(0).Rows(0)("Department").ToString()
+                txtAlternativeUser.Text = DS2.Tables(0).Rows(0)("alternativecode").ToString()
+                txtContactNo.Text = DS2.Tables(0).Rows(0)("ContactNo").ToString()
+                txtRequestDate.Text = CDate(DS2.Tables(0).Rows(0)("RequestDate").ToString()).ToShortDateString()
+                txtStartDate.Text = CDate(DS2.Tables(0).Rows(0)("StartDate").ToString()).ToShortDateString()
+                txtEndDate.Text = CDate(DS2.Tables(0).Rows(0)("EndDate").ToString()).ToShortDateString()
+                txtTotalVal.Text = DS2.Tables(0).Rows(0)("TotalBalance").ToString()
+                txtRemainVal.Text = DS2.Tables(0).Rows(0)("NoOfDays").ToString()
+                txtContactNo.Text = DS2.Tables(0).Rows(0)("ContactNo").ToString()
+                TxtAlternativeEmpName.Text = DS2.Tables(0).Rows(0)("AlternativeEmployeeName").ToString()
+                txtConfirmedDays.Text = DS2.Tables(0).Rows(0)("NoOfDays").ToString()
+                DdlVacationType.SelectedValue = DS2.Tables(0).Rows(0)("VacationID").ToString()
+                TxtRemarks.Text = DS2.Tables(0).Rows(0)("Remarks").ToString()
+                If CInt(DS2.Tables(0).Rows(0)("VacationID").ToString()) > 1 Then
+                    txtAlternativeUser.Visible = False
+                    lblWebDateChooser3.Visible = False
+                    btnSearchCode.Visible = False
+                    TxtAlternativeEmpName.Visible = False
+                End If
             End If
         Catch ex As Exception
             mErrorHandler = New Venus.Shared.ErrorsHandler(ClsEmployeesVacations.ConnectionString)
@@ -511,6 +561,15 @@ Partial Class frmAttendancePreparation
 
                     If CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
 
+
+                        '===Insert Vacation Tranaction
+                        If Not SaveVacation() Then
+                            Return
+                            'Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+                            'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                            'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
+
+                        End If
                         Dim SqlCommandRank As Data.SqlClient.SqlCommand
                         Dim UpdateCommandRank As String = ""
                         UpdateCommandRank = "UPDATE SS_VacationRequest SET [RequestStautsTypeID] = 1 WHERE ID=" & RequestSerial & ""
@@ -530,15 +589,6 @@ Partial Class frmAttendancePreparation
                         SqlCommandU.Connection.Open()
                         SqlCommandU.ExecuteNonQuery()
                         SqlCommandU.Connection.Close()
-                        '===Insert Vacation Tranaction
-                        If Not SaveVacation() Then
-                            Return
-                            'Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
-                            'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
-                            'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
-
-                        End If
-
                     Else
                         NextRank = CInt(dsconfig.Tables(0).Rows(0)("Rank")) + 1
                         Dim STRNextID As String
@@ -845,11 +895,19 @@ Partial Class frmAttendancePreparation
             ClsEmployeeVacation.Find("EmployeeID=" & ClsEmployees.ID)
 
             Dim intContractID As Integer = Cls_Contracts.ContractValidatoinId(ClsEmployees.ID, dat_NEW_RETURN)
-                Cls_Contracts.Find(" ID =" & intContractID)
-                ClsClasses.Find("ID=" & IIf(Cls_Contracts.EmployeeClassID > 0, Cls_Contracts.EmployeeClassID, 0))
+            Cls_Contracts.Find(" ID =" & intContractID)
+            ClsClasses.Find("ID=" & IIf(Cls_Contracts.EmployeeClassID > 0, Cls_Contracts.EmployeeClassID, 0))
             If ClsEmployeesVacations2.GetEmployeeLastVacation(ClsEmployees.ID) Then
                 If IsDBNull(ClsEmployeesVacations2.ActualEndDate) Or ClsEmployeesVacations2.ActualEndDate = "01/01/0001" Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "There is a vacation without return date /يوجد اجازة سابقة من غير تاريخ رجوع  "))
+                    Return False
+                    Exit Function
+                End If
+
+                Dim EmployeesVacationBeforeLastOne As Clshrs_EmployeesVacations = ClsEmployeesVacations2
+                Dim LastEmployeesVacationTransactions = New Clshrs_EmployeesTransactions(Me.Page)
+                If EmployeesVacationBeforeLastOne.ID > 0 AndAlso Not LastEmployeesVacationTransactions.Find("EmployeesVacationsID = " & EmployeesVacationBeforeLastOne.ID) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " There Is a previous vacation without settlement / يوجد اجازة سابقة من دون مستحق "))
                     Return False
                     Exit Function
                 End If
@@ -937,16 +995,16 @@ Partial Class frmAttendancePreparation
                     End If
                 End If
                 Dim Diffe As Single = 0
-                    Dim OfficialVacations As Integer = 0
-                    OfficialVacations = GetOverlappingOfficialVacationDays(CDate(txtStartDate.Text), CDate(txtEndDate.Text).AddDays(-1))
+                Dim OfficialVacations As Integer = 0
+                OfficialVacations = GetOverlappingOfficialVacationDays(CDate(txtStartDate.Text), CDate(txtEndDate.Text).AddDays(-1))
 
-                    Try
+                Try
 
-                        Diffe = (DateDiff(DateInterval.Day, Convert.ToDateTime(txtStartDate.Text), dat_NEW_RETURN))
-                        'Diffe = Diffe - OfficialVacations
-                    Catch ex As Exception
-                        Diffe = 0
-                    End Try
+                    Diffe = (DateDiff(DateInterval.Day, Convert.ToDateTime(txtStartDate.Text), dat_NEW_RETURN))
+                    'Diffe = Diffe - OfficialVacations
+                Catch ex As Exception
+                    Diffe = 0
+                End Try
 
                 If ClsEmployeesVacations.VacationTypeID = 1 Then
                     Dim str = "SELECT    ROUND( Remaining,0) FROM hrs_VacationsBalance where BalanceTypeID=2 and ISNULL(Posted,0)=0 and EmployeeID=" & ClsEmployees.ID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "')"
@@ -983,10 +1041,10 @@ Partial Class frmAttendancePreparation
                 End If
 
                 If ClsEmployeesVacations.VacationTypeID <> 1 Then
-                        CheckVacationsOverlapping()
-                    End If
-                Else
-                    ClsEmployeesVacations.TotalBalance = txtTotalVal.Text
+                    CheckVacationsOverlapping()
+                End If
+            Else
+                ClsEmployeesVacations.TotalBalance = txtTotalVal.Text
                 ClsEmployeesVacations.TotalDays = txtTotalVal.Text
                 If CInt(txtTotalVal.Text) > 0 Then
                     ClsEmployeesVacations.RemainingDays = Convert.ToDouble(txtTotalVal.Text) - Convert.ToDouble(txtConfirmedDays.Text)
@@ -1015,11 +1073,365 @@ Partial Class frmAttendancePreparation
 
             Dim recordId As Integer
             recordId = ClsEmployeesVacations.SaveVacation()
+
+            Dim requestType As New ClsSS_RequestTypes(Page)
+            If requestType.Find("RequestCode='" & FormCode & "'") Then
+                If Not IsDBNull(requestType.IsPaidWithSalary) AndAlso CBool(requestType.IsPaidWithSalary) Then
+                    Dim annualVacType As New Clshrs_VacationsTypes(Page)
+                    annualVacType.Find("ID=" & ClsEmployeesVacations.VacationTypeID)
+
+                    If annualVacType.ForSalaryTransaction > 0 Then
+                        Dim settlementDays As Double
+                        If Not Double.TryParse(txtConfirmedDays.Text, settlementDays) Then
+                            settlementDays = 0
+                        End If
+
+                        If settlementDays <= 0 Then
+                            Return True
+                        End If
+
+                        Dim paidDate As Date
+                        If Not Date.TryParse(txtStartDate.Text, paidDate) Then
+                            paidDate = Date.Now
+                        End If
+
+                        Dim fiscalPeriodId As Integer = 0
+                        Dim fiscalFrom As Date = Nothing
+                        Dim fiscalTo As Date = Nothing
+                        Dim fiscalPeriods As New Clssys_FiscalYearsPeriods(Page)
+                        fiscalPeriods.GetFisicalperiodInfo(paidDate, fiscalPeriodId, fiscalFrom, fiscalTo)
+                        If fiscalPeriodId <= 0 Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Not fiscal period/لايوجد فترة مالية"))
+                            Return False
+                        End If
+
+                        Dim salaryResult As VacationSalaryResult = GetVacationSalaryForPaidWithSalary(ClsEmployees.ID, fiscalPeriodId, fiscalTo, settlementDays)
+                        Dim netAmount As Double = Math.Round(Val(salaryResult.TotalBenefits), 2)
+
+                        Dim vacStart As Date = paidDate
+                        Dim vacEnd As Date = paidDate
+                        Date.TryParse(txtStartDate.Text, vacStart)
+                        Date.TryParse(txtEndDate.Text, vacEnd)
+
+                        Dim didSplit As Boolean = False
+                        Dim splitFactor1 As Double = 0
+                        Dim splitFactor2 As Double = 0
+                        Dim splitPeriodId1 As Integer = 0
+                        Dim splitPeriodId2 As Integer = 0
+                        Dim splitTransId1 As Integer = 0
+                        Dim splitTransId2 As Integer = 0
+                        Dim month1Days As Double = 0
+                        Dim month2Days As Double = 0
+                        Dim month1Date As Date = paidDate
+                        Dim month2Date As Date = paidDate
+
+                        didSplit = GetDaysSplitAcrossTwoMonths(vacStart, vacEnd, month1Days, month2Days, month1Date, month2Date)
+                        If didSplit Then
+                            Dim totalVacDays As Double = month1Days + month2Days
+                            If totalVacDays <= 0 OrElse settlementDays <= 0 Then
+                                didSplit = False
+                            End If
+                        End If
+
+                        Dim clsLocalBranch As New Clssys_Branches(Page)
+                        If ClsEmployees.BranchID > 0 Then
+                            clsLocalBranch.Find("ID=" & ClsEmployees.BranchID)
+                        End If
+
+                        Dim employeeTransactionId As Integer = 0
+                        If Not didSplit Then
+                            Dim empTrans As New Clshrs_EmployeesTransactions(Page)
+                            empTrans.EmployeeID = ClsEmployees.ID
+                            empTrans.FiscalYearPeriodID = fiscalPeriodId
+                            empTrans.PrepareType = "V"
+                            empTrans.FinancialWorkingUnits = settlementDays
+                            empTrans.PaidDate = paidDate
+                            empTrans.CBranchID = ClsEmployees.BranchID
+                            empTrans.EmployeesVacationsID = recordId
+                            empTrans.TotalVacDaySettlement = settlementDays
+                            empTrans.RemainVacDaySettlement = 0
+                            empTrans.LastPaidDate = paidDate
+                            empTrans.RemainVacSettlement = 0
+
+                            employeeTransactionId = empTrans.Save()
+                            If employeeTransactionId <= 0 Then
+                                Return False
+                            End If
+
+                            SaveVacationSettlementDetails(employeeTransactionId, settlementDays, salaryResult.DtBenefits, salaryResult.DtDeductions)
+
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, "Update hrs_EmployeesVacations Set PaymentTrnID =" & employeeTransactionId & ", PaidFromBalance = " & settlementDays & ", RemainingBalance = TotalBalance - " & settlementDays & " where ID=" & recordId)
+
+                            Dim transType As New Clshrs_TransactionsTypes(Me)
+                            transType.Find("ID = " & annualVacType.ForSalaryTransaction)
+                            Dim strcommand As String = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & ClsEmployees.ID & "),''," & transType.Code & "," & netAmount & "," & fiscalPeriodId & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & employeeTransactionId & "','101','')"
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, strcommand)
+                        Else
+                            Dim totalVacDays As Double = month1Days + month2Days
+                            'Dim factor1 As Double = month1Days / totalVacDays
+                            'Dim factor2 As Double = month2Days / totalVacDays
+                            'splitFactor1 = factor1
+                            'splitFactor2 = factor2
+
+                            Dim settleDays1 As Double = month1Days
+                            Dim settleDays2 As Double = month2Days
+
+                            Dim periodId1 As Integer = GetFiscalPeriodIdByDate(month1Date, fiscalPeriods, clsLocalBranch)
+                            Dim periodId2 As Integer = GetFiscalPeriodIdByDate(month2Date, fiscalPeriods, clsLocalBranch)
+                            splitPeriodId1 = periodId1
+                            splitPeriodId2 = periodId2
+
+                            Dim transId1 As Integer = 0
+                            Dim transId2 As Integer = 0
+
+                            Dim empTrans1 As New Clshrs_EmployeesTransactions(Page)
+                            With empTrans1
+                                .EmployeeID = ClsEmployees.ID
+                                .FiscalYearPeriodID = periodId1
+                                .PrepareType = "V"
+                                .FinancialWorkingUnits = settleDays1
+                                .PaidDate = month1Date
+                                .CBranchID = ClsEmployees.BranchID
+                                .EmployeesVacationsID = recordId
+                                .TotalVacDaySettlement = settleDays1
+                                .RemainVacDaySettlement = 0
+                                .LastPaidDate = paidDate
+                                .RemainVacSettlement = 0
+                                transId1 = .Save()
+                            End With
+
+                            If settleDays2 > 0 Then
+                                Dim empTrans2 As New Clshrs_EmployeesTransactions(Page)
+                                With empTrans2
+                                    .EmployeeID = ClsEmployees.ID
+                                    .FiscalYearPeriodID = periodId2
+                                    .PrepareType = "V"
+                                    .FinancialWorkingUnits = settleDays2
+                                    .PaidDate = month2Date
+                                    .CBranchID = ClsEmployees.BranchID
+                                    .EmployeesVacationsID = recordId
+                                    .TotalVacDaySettlement = settleDays2
+                                    .RemainVacDaySettlement = 0
+                                    .LastPaidDate = month1Date
+                                    .RemainVacSettlement = 0
+                                    transId2 = .Save()
+                                End With
+                            End If
+
+                            splitTransId1 = transId1
+                            splitTransId2 = transId2
+                            employeeTransactionId = transId1
+
+                            If transId1 > 0 Then
+                                SaveVacationSettlementDetails(transId1, settleDays1, salaryResult.DtBenefits, salaryResult.DtDeductions, month1Days)
+                            End If
+                            If transId2 > 0 Then
+                                SaveVacationSettlementDetails(transId2, settleDays2, salaryResult.DtBenefits, salaryResult.DtDeductions, month2Days)
+                            End If
+
+                            If employeeTransactionId > 0 Then
+                                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, "Update hrs_EmployeesVacations Set PaymentTrnID =" & employeeTransactionId & ", PaidFromBalance = " & settlementDays & ", RemainingBalance = TotalBalance - " & settlementDays & " where ID=" & recordId)
+                            End If
+
+                            Dim transType As New Clshrs_TransactionsTypes(Me)
+                            transType.Find("ID = " & annualVacType.ForSalaryTransaction)
+                            If splitTransId1 > 0 AndAlso splitTransId2 > 0 AndAlso splitPeriodId1 > 0 AndAlso splitPeriodId2 > 0 Then
+                                Dim totalAmt As Double = Convert.ToDouble(netAmount)
+                                Dim amt1 As Double = Math.Round(totalAmt * splitFactor1, 2, MidpointRounding.AwayFromZero)
+                                Dim amt2 As Double = Math.Round(totalAmt - amt1, 2, MidpointRounding.AwayFromZero)
+                                Dim strcommand As String = "set dateformat dmy; " &
+                                    "insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & ClsEmployees.ID & "),''," & transType.Code & "," & amt1 & "," & splitPeriodId1 & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & splitTransId1 & "','101','');" &
+                                    "insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & ClsEmployees.ID & "),''," & transType.Code & "," & amt2 & "," & splitPeriodId2 & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & splitTransId2 & "','101','')"
+                                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, strcommand)
+                            Else
+                                Dim strcommand As String = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & ClsEmployees.ID & "),''," & transType.Code & "," & netAmount & "," & fiscalPeriodId & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & employeeTransactionId & "','101','')"
+                                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, strcommand)
+                            End If
+                        End If
+                    End If
+                End If
+            End If
             Return True
         Catch ex As Exception
             ' Handle exception
+            Return False
         End Try
     End Function
+
+    Private Function GetVacationSalaryForPaidWithSalary(employeeId As Integer, fiscalPeriodId As Integer, toDate As Date, vacationDays As Double) As VacationSalaryResult
+        Dim result As New VacationSalaryResult()
+        Dim dtBenefitsCurr As New Data.DataTable
+        Dim dtDeductionsCurr As New Data.DataTable
+        Dim dblBenefits As Double = 0
+        Dim dblDeductions As Double = 0
+
+        Dim clsEmployeesLocal As New Clshrs_Employees(Page)
+        clsEmployeesLocal.Find("ID=" & employeeId)
+        clsEmployeesLocal.CollectEmployeesTransactionsForSettlement("", toDate, employeeId, fiscalPeriodId, dtBenefitsCurr, dtDeductionsCurr, dblBenefits, dblDeductions, vacationDays, 0, vacationDays, 0, 0, 0, 0, 0, 0, Clshrs_EmployeesBase.ePrepareType.EndOfContract, Clshrs_EmployeesBase.ePrepareStage.Vacation)
+
+        Dim totalBenefits As Double = 0
+        Dim totalDeductions As Double = 0
+
+        Dim dtBenefits As DataTable = dtBenefitsCurr.Copy()
+        If dtBenefits.Columns.Contains("NumericValue") AndAlso Not dtBenefits.Columns.Contains("Amount") Then
+            dtBenefits.Columns("NumericValue").ColumnName = "Amount"
+        End If
+        If dtBenefits.Columns.Contains("TextValue") AndAlso Not dtBenefits.Columns.Contains("Description") Then
+            dtBenefits.Columns("TextValue").ColumnName = "Description"
+        End If
+        If Not dtBenefits.Columns.Contains("Description") Then
+            dtBenefits.Columns.Add("Description", GetType(String))
+        End If
+        For Each r As DataRow In dtBenefits.Rows
+            r("Description") = "Vac"
+            If r.Table.Columns.Contains("DescriptionSign") Then
+                Dim sign As String = Convert.ToString(r("DescriptionSign"))
+                If sign = "Paid" OrElse sign = "Paid By Days" Then
+                    If Not IsDBNull(r("Amount")) Then
+                        totalBenefits += Convert.ToDouble(Val(r("Amount")))
+                    End If
+                End If
+            End If
+        Next
+
+        Dim dtDeductions As DataTable = dtDeductionsCurr.Copy()
+        If dtDeductions.Columns.Contains("NumericValue") AndAlso Not dtDeductions.Columns.Contains("Amount") Then
+            dtDeductions.Columns("NumericValue").ColumnName = "Amount"
+        End If
+        If dtDeductions.Columns.Contains("TextValue") AndAlso Not dtDeductions.Columns.Contains("Description") Then
+            dtDeductions.Columns("TextValue").ColumnName = "Description"
+        End If
+        If Not dtDeductions.Columns.Contains("Description") Then
+            dtDeductions.Columns.Add("Description", GetType(String))
+        End If
+        For Each r As DataRow In dtDeductions.Rows
+            r("Description") = "Vac"
+            If r.Table.Columns.Contains("DescriptionSign") Then
+                Dim sign As String = Convert.ToString(r("DescriptionSign"))
+                If sign = "Paid" OrElse sign = "Paid By Days" Then
+                    If Not IsDBNull(r("Amount")) Then
+                        totalDeductions += Convert.ToDouble(Val(r("Amount")))
+                    End If
+                End If
+            End If
+        Next
+
+        result.TotalBenefits = totalBenefits
+        result.TotalDeductions = totalDeductions
+        result.DtBenefits = dtBenefits
+        result.DtDeductions = dtDeductions
+        Return result
+    End Function
+
+    Private Sub SaveVacationSettlementDetails(transactionHeadId As Integer, workingUnits As Double, dtBenefits As DataTable, dtDeductions As DataTable)
+        Dim clsEmployeesLocal As New Clshrs_Employees(Page)
+        Dim clsProjects As New Clshrs_Projects(Page, "hrs_projects")
+        If Not clsProjects.Find(" CancelDate Is Null") Then
+            Exit Sub
+        End If
+
+        Dim projectId As Integer = clsProjects.ID
+        Dim strSaveCommand As String = "Declare @ProjectTransID Int; " &
+            " Insert Into hrs_EmployeesTransactionsProjects([EmployeeTransactionID],[ProjectID],[WorkingUnits],[RegUserID]) " &
+            " Select " & transactionHeadId & "," & projectId & "," & workingUnits & "," & clsEmployeesLocal.DataBaseUserRelatedID & ";" &
+            " Select IDENT_CURRENT('hrs_EmployeesTransactionsProjects'); "
+        Dim empTransProjId As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsEmployeesLocal.ConnectionString, Data.CommandType.Text, strSaveCommand)
+
+        For Each row As DataRow In dtBenefits.Rows
+            If Convert.ToString(row("Description")) = "Vac" Then
+                Dim sign As String = If(dtBenefits.Columns.Contains("DescriptionSign"), Convert.ToString(row("DescriptionSign")), "")
+                If sign = "Paid" OrElse sign = "Paid By Days" Then
+                    Dim amount As Double = If(IsDBNull(row("Amount")), 0, Convert.ToDouble(Val(row("Amount"))))
+                    If amount > 0 Then
+                        Dim det As New Clshrs_EmployeesTransactionsDetails(Page)
+                        det.TransactionTypeID = Convert.ToInt32(row("TransactionTypeID"))
+                        det.EmpTransProjID = empTransProjId
+                        det.TextValue = If(dtBenefits.Columns.Contains("Description"), Convert.ToString(row("Description")), "")
+                        det.NumericValue = amount
+                        det.Save()
+
+                        If dtBenefits.Columns.Contains("EmpSchID") AndAlso Not IsDBNull(row("EmpSchID")) AndAlso Val(row("EmpSchID")) > 0 Then
+                            Dim comstring = "insert into hrs_EmployeeVacationOpenBalanceSettlement (OpenBalanceID,EmployeeTransactionID,Amount,Date,RegDate) values (" & row("EmpSchID") & "," & empTransProjId & "," & amount & ",getdate(),getdate())"
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsEmployeesLocal.ConnectionString, Data.CommandType.Text, comstring)
+                        End If
+                    End If
+                End If
+            End If
+        Next
+
+        For Each row As DataRow In dtDeductions.Rows
+            If Convert.ToString(row("Description")) = "Vac" Then
+                Dim sign As String = If(dtDeductions.Columns.Contains("DescriptionSign"), Convert.ToString(row("DescriptionSign")), "")
+                If sign = "Paid" OrElse sign = "Paid By Days" Then
+                    Dim amount As Double = If(IsDBNull(row("Amount")), 0, Convert.ToDouble(Val(row("Amount"))))
+                    If amount > 0 Then
+                        Dim det As New Clshrs_EmployeesTransactionsDetails(Page)
+                        det.TransactionTypeID = Convert.ToInt32(row("TransactionTypeID"))
+                        det.EmpTransProjID = empTransProjId
+                        det.TextValue = If(dtDeductions.Columns.Contains("Description"), Convert.ToString(row("Description")), "")
+                        det.NumericValue = amount
+                        det.Save()
+                    End If
+                End If
+            End If
+        Next
+    End Sub
+
+    Private Sub SaveVacationSettlementDetails(transactionHeadId As Integer, workingUnits As Double, dtBenefits As DataTable, dtDeductions As DataTable, splitFactor As Double)
+        Dim clsEmployeesLocal As New Clshrs_Employees(Page)
+        Dim clsProjects As New Clshrs_Projects(Page, "hrs_projects")
+        If Not clsProjects.Find(" CancelDate Is Null") Then
+            Exit Sub
+        End If
+
+        Dim projectId As Integer = clsProjects.ID
+        Dim strSaveCommand As String = "Declare @ProjectTransID Int; " &
+            " Insert Into hrs_EmployeesTransactionsProjects([EmployeeTransactionID],[ProjectID],[WorkingUnits],[RegUserID]) " &
+            " Select " & transactionHeadId & "," & projectId & "," & workingUnits & "," & clsEmployeesLocal.DataBaseUserRelatedID & ";" &
+            " Select IDENT_CURRENT('hrs_EmployeesTransactionsProjects'); "
+        Dim empTransProjId As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsEmployeesLocal.ConnectionString, Data.CommandType.Text, strSaveCommand)
+
+        For Each row As DataRow In dtBenefits.Rows
+            If Convert.ToString(row("Description")) = "Vac" Then
+                Dim sign As String = If(dtBenefits.Columns.Contains("DescriptionSign"), Convert.ToString(row("DescriptionSign")), "")
+                If sign = "Paid" OrElse sign = "Paid By Days" Then
+                    Dim amount As Double = If(IsDBNull(row("Amount")), 0, Convert.ToDouble(Val(row("Amount"))))
+                    amount = Math.Round(amount * splitFactor, 2, MidpointRounding.AwayFromZero)
+                    If amount > 0 Then
+                        Dim det As New Clshrs_EmployeesTransactionsDetails(Page)
+                        det.TransactionTypeID = Convert.ToInt32(row("TransactionTypeID"))
+                        det.EmpTransProjID = empTransProjId
+                        det.TextValue = If(dtBenefits.Columns.Contains("Description"), Convert.ToString(row("Description")), "")
+                        det.NumericValue = amount
+                        det.Save()
+
+                        If dtBenefits.Columns.Contains("EmpSchID") AndAlso Not IsDBNull(row("EmpSchID")) AndAlso Val(row("EmpSchID")) > 0 Then
+                            Dim comstring = "insert into hrs_EmployeeVacationOpenBalanceSettlement (OpenBalanceID,EmployeeTransactionID,Amount,Date,RegDate) values (" & row("EmpSchID") & "," & empTransProjId & "," & amount & ",getdate(),getdate())"
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsEmployeesLocal.ConnectionString, Data.CommandType.Text, comstring)
+                        End If
+                    End If
+                End If
+            End If
+        Next
+
+        For Each row As DataRow In dtDeductions.Rows
+            If Convert.ToString(row("Description")) = "Vac" Then
+                Dim sign As String = If(dtDeductions.Columns.Contains("DescriptionSign"), Convert.ToString(row("DescriptionSign")), "")
+                If sign = "Paid" OrElse sign = "Paid By Days" Then
+                    Dim amount As Double = If(IsDBNull(row("Amount")), 0, Convert.ToDouble(Val(row("Amount"))))
+                    amount = Math.Round(amount * splitFactor, 2, MidpointRounding.AwayFromZero)
+                    If amount > 0 Then
+                        Dim det As New Clshrs_EmployeesTransactionsDetails(Page)
+                        det.TransactionTypeID = Convert.ToInt32(row("TransactionTypeID"))
+                        det.EmpTransProjID = empTransProjId
+                        det.TextValue = If(dtDeductions.Columns.Contains("Description"), Convert.ToString(row("Description")), "")
+                        det.NumericValue = amount
+                        det.Save()
+                    End If
+                End If
+            End If
+        Next
+    End Sub
     Private Sub setOverDueDays(ClsVacationTypes As Clshrs_VacationsTypes, dat_NEW_RETURN As Date)
 
         ClsEmployeesVacations.ConsumDays = dat_NEW_RETURN.Subtract(ClsEmployeesVacations.ActualStartDate).Days
