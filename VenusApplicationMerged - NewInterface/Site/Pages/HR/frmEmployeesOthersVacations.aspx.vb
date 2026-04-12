@@ -192,14 +192,15 @@ Partial Class frmEmployeesOthersVacations
                         End If
 
                         Exit Sub
+                    Else
+                        If ClsEmployeesVacations.VacationTypeID <> 1 Then
+                            CheckVacationsOverlappingCancel()
+                        End If
 
+                        ClsEmployeesVacations.Delete("ID=" & lbVactionID.Text)
                     End If
 
-                    If ClsEmployeesVacations.VacationTypeID <> 1 Then
-                        CheckVacationsOverlappingCancel()
-                    End If
 
-                    ClsEmployeesVacations.Delete("ID=" & lbVactionID.Text)
                 End If
                 CheckEmpCode()
                 SetNew()

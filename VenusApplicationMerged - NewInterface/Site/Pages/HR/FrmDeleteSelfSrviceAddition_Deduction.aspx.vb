@@ -133,7 +133,6 @@ Partial Class frmAttendancePreparation
         Dim TrnsID As String = Request.QueryString.Item("TrnsID")
         Dim ClsEmployeesVacations As New Clshrs_EmployeesVacations(Page)
 
-        ClsEmployeesVacations.Find("ID=" & TrnsID & "")
         '1-
         'Get the Current Pending Action
         Dim StrSelectCommand As String = String.Empty

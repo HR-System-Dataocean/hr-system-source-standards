@@ -93,6 +93,8 @@ Partial Class frmAttendancePreparation
                         ClsEmployeesTransactions.Find("EmployeesVacationsID=" & ClsEmployeesVacations.ID)
                         If (ClsEmployeesTransactions.DataSet.Tables(0).Rows.Count < 1) Then
                             ClsEmployeesVacations.Remarks = TxtDeleteReason.Text
+                            ClsEmployeesVacations.Remarks = TxtDeleteReason.Text & " & UserID = " & _sys_User.ID & " "
+
                             ClsEmployeesVacations.Update("ID=" & ClsEmployeesVacations.ID)
                             ClsEmployeesVacations.Delete("ID=" & TrnsID)
                             Dim cls_OTHER_VACATION = New Clshrs_EmployeesVacations(Page)
