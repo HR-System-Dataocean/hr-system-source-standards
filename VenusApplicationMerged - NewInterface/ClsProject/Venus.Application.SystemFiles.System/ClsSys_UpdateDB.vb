@@ -1543,7 +1543,27 @@
         '"
         '		ExecuteUpdate(SQL)
 
-        '		SQL = "
+        SQL = "
+
+        IF COL_LENGTH('hrs_EmployeesClasses', 'LeaveDeductionFormula') IS NULL  
+        BEGIN
+            ALTER TABLE hrs_EmployeesClasses
+            ADD LeaveDeductionFormula varchar(2048)
+        END
+        "
+        ExecuteUpdate(SQL)
+
+        SQL = "
+
+        IF COL_LENGTH('hrs_EmployeesClasses', 'LeaveDeductionTrans') IS NULL  
+        BEGIN
+            ALTER TABLE hrs_EmployeesClasses
+            ADD LeaveDeductionTrans int
+        END
+        "
+        ExecuteUpdate(SQL)
+
+        ''		SQL = "
 
         'IF NOT EXISTS
         '(
@@ -10323,6 +10343,10 @@ CREATE TABLE [dbo].[SS_TravelReasons](
 
         SQL = "ALTER TABLE dbo.hrs_VacationsTypes ADD
 	ExcludedFromSSRequests bit NULL"
+        ExecuteUpdate(SQL)
+
+        SQL = "ALTER TABLE dbo.hrs_VacationsTypes ADD
+	LeaveSubjectToDeduction bit NULL"
         ExecuteUpdate(SQL)
 
         SQL = "

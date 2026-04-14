@@ -536,6 +536,19 @@
                                                         </td>
 
 </tr>
+
+                                                    <tr>
+    <td class="SeparArea">
+    </td>
+    <td class="LabelArea">
+        <asp:Label ID="lblLeaveSubjectToDeduction" runat="server" Width="160px" SkinID="Label_DefaultNormal"
+            Text="Leave Subject to Deduction" meta:resourcekey="lblLeaveSubjectToDeductionResource1"></asp:Label>
+    </td>
+    <td class="DataArea">
+        <asp:CheckBox ID="chkLeaveSubjectToDeduction" runat="server" meta:resourcekey="chkLeaveSubjectToDeductionResource1" />
+    </td>
+
+</tr>
                                                 </table>
                                             </td>
                                             <td style="width: 6%; height: 16px; vertical-align: top">

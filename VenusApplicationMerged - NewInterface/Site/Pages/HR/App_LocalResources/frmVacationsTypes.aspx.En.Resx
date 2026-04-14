@@ -450,4 +450,10 @@
   <data name="LblExcludedResource1.Text" xml:space="preserve">
     <value>Excluded From SS Requests</value>
   </data>
+  <data name="lblLeaveSubjectToDeductionResource1.Text" xml:space="preserve">
+    <value>Leave Subject to Deduction</value>
+  </data>
+  <data name="chkLeaveSubjectToDeductionResource1.Text" xml:space="preserve">
+    <value />
+  </data>
 </root>

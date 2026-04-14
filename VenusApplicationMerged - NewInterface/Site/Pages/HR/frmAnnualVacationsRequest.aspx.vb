@@ -678,7 +678,8 @@ Partial Class frmEmployeesVacations
                     End If
                     If existingCount > 0 Then
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, "There is an incomplete annual leave request. Please complete the steps for the current request first./يوجد طلب اجازة سنوى لم يكتمل بعد برجاء اكمال مراحل الطلب السارى اولا")
-                        Exit Function
+                        Return False
+                        'Exit Function
                     End If
                 End If
             End If

@@ -1,5 +1,6 @@
 ﻿Imports System.Data
 Imports System.Security.Policy
+Imports System.Data.SqlClient
 Imports Infragistics.WebUI.UltraWebGrid
 Imports Infragistics.WebUI.WebSchedule
 Imports Venus.Application.SystemFiles.HumanResource
@@ -15,6 +16,122 @@ Partial Class frmEmployeesOthersVacations
     Private clsEmpTransaction As Clshrs_EmployeesTransactions
     Const csOtherFields = 11
 #End Region
+
+    Private Function GetEmployeeClassForDate(ByVal employeeId As Integer, ByVal transDate As Date) As Clshrs_EmployeeClasses
+        Dim clsEmployeeClass As New Clshrs_EmployeeClasses(Page)
+        Dim clsContract As New Clshrs_Contracts(Page)
+        Dim contractId As Integer = clsContract.ContractValidatoinId(employeeId, transDate)
+        clsContract.Find("ID =" & contractId)
+        clsEmployeeClass.Find("ID=" & IIf(clsContract.EmployeeClassID > 0, clsContract.EmployeeClassID, 0))
+        Return clsEmployeeClass
+    End Function
+
+    Private Function GetNoOfDaysPerPeriod(ByVal employeeId As Integer, ByVal transDate As Date, ByVal fiscalPeriodId As Integer) As Integer
+        Dim clsEmployeesLocal As New Clshrs_Employees(Page)
+        Dim fiscalPeriod As New Clssys_FiscalYearsPeriods(Page)
+        Dim fromDate As Date
+        Dim toDate As Date
+
+        fiscalPeriod.Find("ID=" & fiscalPeriodId)
+        fromDate = fiscalPeriod.FromDate
+        toDate = fiscalPeriod.ToDate
+
+        Dim objPreparedData = clsEmployeesLocal.GetPreparedEmployessForSalariesByEmployeeID(fiscalPeriodId, employeeId, fromDate.ToString("dd/MM/yyyy"), toDate.ToString("dd/MM/yyyy"), fromDate.ToString("dd/MM/yyyy"), toDate.ToString("dd/MM/yyyy"))
+
+        Dim intNoOfDays As Integer
+        If objPreparedData Is Nothing Then
+            intNoOfDays = 30
+        ElseIf objPreparedData(9) = 1 Then
+            intNoOfDays = objPreparedData(8)
+        ElseIf objPreparedData(9) > 1 Then
+            intNoOfDays = objPreparedData(9)
+        Else
+            intNoOfDays = objPreparedData(8)
+        End If
+
+        If intNoOfDays <= 0 Then
+            intNoOfDays = 30
+        End If
+
+        Return intNoOfDays
+    End Function
+
+    Private Function SaveLeaveDeductionPayability(ByVal vacationId As Integer, ByVal employeeId As Integer, ByVal transDate As Date, ByVal leaveDays As Double, ByVal employeeClass As Clshrs_EmployeeClasses) As Boolean
+        If employeeClass Is Nothing OrElse employeeClass.ID <= 0 Then
+            Return False
+        End If
+        If String.IsNullOrWhiteSpace(employeeClass.LeaveDeductionFormula) Then
+            Return False
+        End If
+        If employeeClass.LeaveDeductionTrans <= 0 Then
+            Return False
+        End If
+        If leaveDays <= 0 Then
+            Return False
+        End If
+
+        Dim clsEmployeesPayability As New Clshrs_EmployeesPayability(Page)
+        Dim objDataHandler As New Venus.Shared.DataHandler
+        Dim strSerial As String = ""
+
+        Dim clsEmpDates As New Clshrs_Employees(Page)
+        Dim fiscalPeriod As New Clssys_FiscalYearsPeriods(Page)
+        fiscalPeriod.Find("FromDate <= '" & clsEmpDates.SetHigriDate(transDate) & "' and ToDate >='" & clsEmpDates.SetHigriDate(transDate) & "'")
+        Dim fiscalPeriodId As Integer = fiscalPeriod.ID
+        Dim noOfDaysPerPeriod As Integer = GetNoOfDaysPerPeriod(employeeId, transDate, fiscalPeriodId)
+
+        Dim solver As New Clshrs_FormulaSolver(employeeClass.ConnectionString, Me.Page)
+        solver.EmployeeID = employeeId
+        solver.NoOfDaysPerPeriod = noOfDaysPerPeriod
+        solver.NoOfWorkingDays = 30
+        solver.EvaluateExpression(employeeClass.LeaveDeductionFormula, 0)
+        Dim amountPerDay As Double = solver.Output
+        Dim totalAmount As Double = Math.Round(amountPerDay * leaveDays, 2)
+
+        If totalAmount <= 0 Then
+            Return False
+        End If
+
+        Dim commentPrefix As String = "LeaveDeduction (OtherVacationID=" & vacationId & ")"
+        Dim cancelSql As String = "UPDATE p SET CancelDate = GETDATE() " &
+            "FROM hrs_EmployeesPayabilities p " &
+            "WHERE p.CancelDate IS NULL " &
+            "AND p.EmployeeID = @EmployeeID " &
+            "AND p.TransactionComment LIKE @Prefix + '%' " &
+            "AND NOT EXISTS (" &
+            "    SELECT 1 " &
+            "    FROM hrs_EmployeesPayabilitiesSchedules s " &
+            "    INNER JOIN hrs_EmployeesPayabilitiesSchedulesSettlement st ON st.EmployeePayabilityScheduleID = s.ID " &
+            "    WHERE s.EmployeePayabilityId = p.ID" &
+            ")"
+        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(clsEmployeesPayability.ConnectionString, CommandType.Text, cancelSql,
+            New SqlParameter("@EmployeeID", employeeId),
+            New SqlParameter("@Prefix", commentPrefix))
+
+        clsEmployeesPayability.EmployeeID = employeeId
+        objDataHandler.GetLastSerial(clsEmployeesPayability.Table, "Number", strSerial, clsEmployeesPayability.ConnectionString, "00000")
+        clsEmployeesPayability.TransactionTypeID = employeeClass.LeaveDeductionTrans
+        clsEmployeesPayability.Number = strSerial
+        clsEmployeesPayability.TransactionDate = clsEmployeesPayability.SetHigriDate(transDate)
+        clsEmployeesPayability.SalaryLink = "True"
+        clsEmployeesPayability.TransactionComment = commentPrefix & " .. Date=" & clsEmployeesPayability.SetHigriDate(transDate) & " .. Days=" & leaveDays
+
+        Dim payId As Integer = clsEmployeesPayability.Save()
+        If payId <= 0 Then
+            Return False
+        End If
+
+        Dim insertScheduleSql As String = "Insert Into hrs_EmployeesPayabilitiesSchedules(" &
+            "EmployeePayabilityId,DueDate,DueAmount,RegUserID,CompanyId" &
+            ")values(" &
+            payId & ",'" & transDate.ToString("dd/MM/yyyy") & "'," &
+            totalAmount & "," &
+            clsEmployeesPayability.DataBaseUserRelatedID & "," &
+            clsEmployeesPayability.MainCompanyID & ")"
+        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(clsEmployeesPayability.ConnectionString, CommandType.Text, insertScheduleSql)
+
+        Return True
+    End Function
 
 #Region "Protected Sub"
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -1149,6 +1266,21 @@ Partial Class frmEmployeesOthersVacations
                     Exit Function
                 End If
             End If
+            Try
+                Dim clsVacationTypes As New Clshrs_VacationsTypes(Page)
+                clsVacationTypes.Find(" ID=" & DdlVacationType.SelectedItem.Value)
+                If clsVacationTypes.LeaveSubjectToDeduction Then
+                    Dim clsEmp As New Clshrs_Employees(Page)
+                    clsEmp.Find("Code='" & txtEmployee.Text & "'")
+
+                    Dim transDate As Date = CDate(WebDateChooser1.Value)
+                    transDate = clsEmp.SetHigriDate(transDate)
+                    Dim clsEmpClass As Clshrs_EmployeeClasses = GetEmployeeClassForDate(clsEmp.ID, transDate)
+                    SaveLeaveDeductionPayability(recordId, clsEmp.ID, transDate, Val(txtVactiondays.Text), clsEmpClass)
+                End If
+            Catch ex As Exception
+            End Try
+
             clsMainOtherFields.CollectDataAndSave(value.Text, ClsEmployeesVacations.Table, recordId)
             value.Text = ""
             CheckEmpCode()

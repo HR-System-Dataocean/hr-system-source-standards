@@ -476,6 +476,13 @@ Partial Class frmAttendancePreparation
 
                 Dim dat_ACTUALL_RETRUN As Date = CDate(txtEndDate.Text)
                 Dim dat_NEW_RETURN As Date = CDate(txtEndDate.Text)
+                Dim confirmedDays As Double
+                If Double.TryParse(txtConfirmedDays.Text, confirmedDays) AndAlso confirmedDays > 0 Then
+                    Dim calcEnd As Date = CDate(txtStartDate.Text).AddDays(CInt(Math.Truncate(confirmedDays)))
+                    If dat_NEW_RETURN > calcEnd Then
+                        dat_NEW_RETURN = calcEnd
+                    End If
+                End If
                 Dim ClsEmployeeVacation As New Clshrs_EmployeesVacations(Page)
                 ClsEmployeeVacation.Find("EmployeeID=" & ClsEmployees.ID)
 
@@ -885,7 +892,19 @@ Partial Class frmAttendancePreparation
             Dim Cls_Contracts As New Clshrs_Contracts(Page)
             Dim FormCode As String = Request.QueryString.Item("FormCode")
             Dim dat_ACTUALL_RETRUN As Date = CDate(txtEndDate.Text)
-            Dim dat_NEW_RETURN As Date = CDate(txtStartDate.Text).AddDays(CInt(txtConfirmedDays.Text))
+            Dim confirmedDays As Double
+            If Not Double.TryParse(txtConfirmedDays.Text, confirmedDays) Then
+                confirmedDays = 0
+            End If
+            Dim requestedStart As Date = CDate(txtStartDate.Text)
+            Dim requestedEnd As Date = CDate(txtEndDate.Text)
+            Dim dat_NEW_RETURN As Date = requestedEnd
+            If confirmedDays > 0 Then
+                Dim calcEnd As Date = requestedStart.AddDays(CInt(Math.Truncate(confirmedDays)))
+                If requestedEnd > calcEnd Then
+                    dat_NEW_RETURN = calcEnd
+                End If
+            End If
             Dim ClsEmployeeVacation As New Clshrs_EmployeesVacations(Page)
 
             ClsClasses = New Clshrs_EmployeeClasses(Page)
@@ -996,7 +1015,7 @@ Partial Class frmAttendancePreparation
                 End If
                 Dim Diffe As Single = 0
                 Dim OfficialVacations As Integer = 0
-                OfficialVacations = GetOverlappingOfficialVacationDays(CDate(txtStartDate.Text), CDate(txtEndDate.Text).AddDays(-1))
+                OfficialVacations = GetOverlappingOfficialVacationDays(CDate(txtStartDate.Text), dat_NEW_RETURN.AddDays(-1))
 
                 Try
 
@@ -1111,7 +1130,7 @@ Partial Class frmAttendancePreparation
                         Dim vacStart As Date = paidDate
                         Dim vacEnd As Date = paidDate
                         Date.TryParse(txtStartDate.Text, vacStart)
-                        Date.TryParse(txtEndDate.Text, vacEnd)
+                        vacEnd = dat_NEW_RETURN
 
                         Dim didSplit As Boolean = False
                         Dim splitFactor1 As Double = 0
@@ -1158,7 +1177,7 @@ Partial Class frmAttendancePreparation
                                 Return False
                             End If
 
-                            SaveVacationSettlementDetails(employeeTransactionId, settlementDays, salaryResult.DtBenefits, salaryResult.DtDeductions)
+                            SaveVacationSettlementDetails(employeeTransactionId, settlementDays, settlementDays, salaryResult.DtBenefits, salaryResult.DtDeductions)
 
                             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, "Update hrs_EmployeesVacations Set PaymentTrnID =" & employeeTransactionId & ", PaidFromBalance = " & settlementDays & ", RemainingBalance = TotalBalance - " & settlementDays & " where ID=" & recordId)
 
@@ -1223,10 +1242,10 @@ Partial Class frmAttendancePreparation
                             employeeTransactionId = transId1
 
                             If transId1 > 0 Then
-                                SaveVacationSettlementDetails(transId1, settleDays1, salaryResult.DtBenefits, salaryResult.DtDeductions, month1Days)
+                                SaveVacationSettlementDetails(transId1, settleDays1, settlementDays, salaryResult.DtBenefits, salaryResult.DtDeductions, month1Days)
                             End If
                             If transId2 > 0 Then
-                                SaveVacationSettlementDetails(transId2, settleDays2, salaryResult.DtBenefits, salaryResult.DtDeductions, month2Days)
+                                SaveVacationSettlementDetails(transId2, settleDays2, settlementDays, salaryResult.DtBenefits, salaryResult.DtDeductions, month2Days)
                             End If
 
                             If employeeTransactionId > 0 Then
@@ -1323,7 +1342,7 @@ Partial Class frmAttendancePreparation
         Return result
     End Function
 
-    Private Sub SaveVacationSettlementDetails(transactionHeadId As Integer, workingUnits As Double, dtBenefits As DataTable, dtDeductions As DataTable)
+    Private Sub SaveVacationSettlementDetails(transactionHeadId As Integer, workingUnits As Double, totalConfirmedDays As Double, dtBenefits As DataTable, dtDeductions As DataTable)
         Dim clsEmployeesLocal As New Clshrs_Employees(Page)
         Dim clsProjects As New Clshrs_Projects(Page, "hrs_projects")
         If Not clsProjects.Find(" CancelDate Is Null") Then
@@ -1343,11 +1362,15 @@ Partial Class frmAttendancePreparation
                 If sign = "Paid" OrElse sign = "Paid By Days" Then
                     Dim amount As Double = If(IsDBNull(row("Amount")), 0, Convert.ToDouble(Val(row("Amount"))))
                     If amount > 0 Then
+                        Dim amountPerConfirmedDay As Double = amount
+                        If totalConfirmedDays > 0 Then
+                            amountPerConfirmedDay = Math.Round(amount / totalConfirmedDays, 2, MidpointRounding.AwayFromZero)
+                        End If
                         Dim det As New Clshrs_EmployeesTransactionsDetails(Page)
                         det.TransactionTypeID = Convert.ToInt32(row("TransactionTypeID"))
                         det.EmpTransProjID = empTransProjId
                         det.TextValue = If(dtBenefits.Columns.Contains("Description"), Convert.ToString(row("Description")), "")
-                        det.NumericValue = amount
+                        det.NumericValue = amountPerConfirmedDay
                         det.Save()
 
                         If dtBenefits.Columns.Contains("EmpSchID") AndAlso Not IsDBNull(row("EmpSchID")) AndAlso Val(row("EmpSchID")) > 0 Then
@@ -1365,11 +1388,15 @@ Partial Class frmAttendancePreparation
                 If sign = "Paid" OrElse sign = "Paid By Days" Then
                     Dim amount As Double = If(IsDBNull(row("Amount")), 0, Convert.ToDouble(Val(row("Amount"))))
                     If amount > 0 Then
+                        Dim amountPerConfirmedDay As Double = amount
+                        If totalConfirmedDays > 0 Then
+                            amountPerConfirmedDay = Math.Round(amount / totalConfirmedDays, 2, MidpointRounding.AwayFromZero)
+                        End If
                         Dim det As New Clshrs_EmployeesTransactionsDetails(Page)
                         det.TransactionTypeID = Convert.ToInt32(row("TransactionTypeID"))
                         det.EmpTransProjID = empTransProjId
                         det.TextValue = If(dtDeductions.Columns.Contains("Description"), Convert.ToString(row("Description")), "")
-                        det.NumericValue = amount
+                        det.NumericValue = amountPerConfirmedDay
                         det.Save()
                     End If
                 End If
@@ -1377,7 +1404,7 @@ Partial Class frmAttendancePreparation
         Next
     End Sub
 
-    Private Sub SaveVacationSettlementDetails(transactionHeadId As Integer, workingUnits As Double, dtBenefits As DataTable, dtDeductions As DataTable, splitFactor As Double)
+    Private Sub SaveVacationSettlementDetails(transactionHeadId As Integer, workingUnits As Double, totalConfirmedDays As Double, dtBenefits As DataTable, dtDeductions As DataTable, splitFactor As Double)
         Dim clsEmployeesLocal As New Clshrs_Employees(Page)
         Dim clsProjects As New Clshrs_Projects(Page, "hrs_projects")
         If Not clsProjects.Find(" CancelDate Is Null") Then
@@ -1398,11 +1425,15 @@ Partial Class frmAttendancePreparation
                     Dim amount As Double = If(IsDBNull(row("Amount")), 0, Convert.ToDouble(Val(row("Amount"))))
                     amount = Math.Round(amount * splitFactor, 2, MidpointRounding.AwayFromZero)
                     If amount > 0 Then
+                        Dim amountPerConfirmedDay As Double = amount
+                        If totalConfirmedDays > 0 Then
+                            amountPerConfirmedDay = Math.Round(amount / totalConfirmedDays, 2, MidpointRounding.AwayFromZero)
+                        End If
                         Dim det As New Clshrs_EmployeesTransactionsDetails(Page)
                         det.TransactionTypeID = Convert.ToInt32(row("TransactionTypeID"))
                         det.EmpTransProjID = empTransProjId
                         det.TextValue = If(dtBenefits.Columns.Contains("Description"), Convert.ToString(row("Description")), "")
-                        det.NumericValue = amount
+                        det.NumericValue = amountPerConfirmedDay
                         det.Save()
 
                         If dtBenefits.Columns.Contains("EmpSchID") AndAlso Not IsDBNull(row("EmpSchID")) AndAlso Val(row("EmpSchID")) > 0 Then
@@ -1421,11 +1452,15 @@ Partial Class frmAttendancePreparation
                     Dim amount As Double = If(IsDBNull(row("Amount")), 0, Convert.ToDouble(Val(row("Amount"))))
                     amount = Math.Round(amount * splitFactor, 2, MidpointRounding.AwayFromZero)
                     If amount > 0 Then
+                        Dim amountPerConfirmedDay As Double = amount
+                        If totalConfirmedDays > 0 Then
+                            amountPerConfirmedDay = Math.Round(amount / totalConfirmedDays, 2, MidpointRounding.AwayFromZero)
+                        End If
                         Dim det As New Clshrs_EmployeesTransactionsDetails(Page)
                         det.TransactionTypeID = Convert.ToInt32(row("TransactionTypeID"))
                         det.EmpTransProjID = empTransProjId
                         det.TextValue = If(dtDeductions.Columns.Contains("Description"), Convert.ToString(row("Description")), "")
-                        det.NumericValue = amount
+                        det.NumericValue = amountPerConfirmedDay
                         det.Save()
                     End If
                 End If
@@ -1454,7 +1489,7 @@ Partial Class frmAttendancePreparation
         Dim clsEmployees As New Clshrs_Employees(Page)
 
         Dim OfficialVacsSTR As String = "set dateformat  DMY;SELECT FromDate, ToDate FROM Hrs_OfficialVacations WHERE (FromDate <= '" & endDate & "' AND ToDate >= '" & startDate & "')"
-        Dim OfficiaVacationsDS As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, OfficialVacsSTR)
+        Dim OfficiaVacationsDS As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(clsEmployees.ConnectionString, CommandType.Text, OfficialVacsSTR)
         If OfficiaVacationsDS.Tables(0).Rows.Count > 0 Then
             For Each Row In OfficiaVacationsDS.Tables(0).Rows
 
@@ -1471,7 +1506,15 @@ Partial Class frmAttendancePreparation
         Dim previousPeriods As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strpreviousPeriods)
 
         Dim newStart As DateTime = CDate(txtStartDate.Text)
-        Dim newEnd As DateTime = CDate(txtEndDate.Text).AddDays(-1)
+        Dim newEnd As DateTime = CDate(txtEndDate.Text)
+        Dim confirmedDaysLocal As Double
+        If Double.TryParse(txtConfirmedDays.Text, confirmedDaysLocal) AndAlso confirmedDaysLocal > 0 Then
+            Dim calcEnd As Date = newStart.AddDays(CInt(Math.Truncate(confirmedDaysLocal)))
+            If newEnd > calcEnd Then
+                newEnd = calcEnd
+            End If
+        End If
+        newEnd = newEnd.AddDays(-1)
 
         Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
         ClsVacationTypes.Find(" ID=" & DdlVacationType.SelectedItem.Value)
@@ -1534,6 +1577,13 @@ Partial Class frmAttendancePreparation
         If Not Integer.TryParse(txtConfirmedDays.Text, confirmedDays) Then Return False
         Dim ClsEmployees As New Clshrs_Employees(Page)
         ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+
+        If confirmedDays > 0 Then
+            Dim calcEnd As Date = newStart.AddDays(confirmedDays)
+            If newEnd > calcEnd Then
+                newEnd = calcEnd
+            End If
+        End If
 
         newEnd = newEnd.AddDays(-1)
 

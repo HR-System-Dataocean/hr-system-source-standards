@@ -537,6 +537,21 @@
   <data name="VacCostFormulaLabelResource.Text" xml:space="preserve">
     <value> تكلفة بدل الإجازة</value>
   </data>
+  <data name="LeaveDeductionFormulaLabelResource.Text" xml:space="preserve">
+    <value>معادلة استقطاع بدل الإجازة</value>
+  </data>
+  <data name="LeaveDeductionFormulaTextBoxResource.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LeaveDeductionFormulaButtonResource.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LeaveDeductionTransLabelResource.Text" xml:space="preserve">
+    <value>حركة استقطاع الاجازة</value>
+  </data>
+  <data name="ddlLeaveDeductionTransResource1.Text" xml:space="preserve">
+    <value />
+  </data>
   <data name="VacOVFormulaLabelResource.Text" xml:space="preserve">
     <value>معادلة إحتساب الإضافي في أيام العطلة</value>
   </data>
@@ -549,6 +564,7 @@
   <data name="AttendanceFromTimeSheetLabelResource.Text" xml:space="preserve">
     <value>الحضور والإنصراف من سجل الدوام</value>
   </data>
+  ...
   <data name="HasFlexableFingerPrintLabelResource.text" xml:space="preserve">
     <value>له بصمه مرن</value>
   </data>

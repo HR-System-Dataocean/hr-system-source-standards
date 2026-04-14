@@ -450,4 +450,10 @@
   <data name="LblExcludedResource1.Text" xml:space="preserve">
     <value>مستبعد من طلبات الخدمة الذاتية</value>
   </data>
+  <data name="lblLeaveSubjectToDeductionResource1.Text" xml:space="preserve">
+    <value>تطبيق استقطاع على الإجازة</value>
+  </data>
+  <data name="chkLeaveSubjectToDeductionResource1.Text" xml:space="preserve">
+    <value />
+  </data>
 </root>

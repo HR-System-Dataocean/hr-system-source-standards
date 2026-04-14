@@ -27,6 +27,7 @@ Public Class Clshrs_EmployeeClassesBases
           "RegUserID," &
           "RegComputerID," &
           "NonPermiLatTransaction," &
+          "LeaveDeductionTrans," &
           "PerDailyDelaying," &
           "PerMonthlyDelaying," &
           "NonProfitOverTimeH," &
@@ -50,6 +51,7 @@ Public Class Clshrs_EmployeeClassesBases
           "AbsentFormula," &
           "LateFormula," &
           "VacCostFormula," &
+          "LeaveDeductionFormula," &
           "HasFingerPrint," &
           "HasFlexableFingerPrint," &
           "HasOvertimeList," &
@@ -83,6 +85,7 @@ Public Class Clshrs_EmployeeClassesBases
           " @RegUserID," &
           " @RegComputerID," &
           " @NonPermiLatTransaction," &
+          " @LeaveDeductionTrans," &
           " @PerDailyDelaying," &
           " @PerMonthlyDelaying," &
           " @NonProfitOverTimeH," &
@@ -106,6 +109,7 @@ Public Class Clshrs_EmployeeClassesBases
           " @AbsentFormula," &
           " @LateFormula," &
           " @VacCostFormula," &
+          " @LeaveDeductionFormula," &
           " @HasFingerPrint," &
           "@HasFlexableFingerPrint," &
           " @HasOvertimeList," &
@@ -136,6 +140,7 @@ Public Class Clshrs_EmployeeClassesBases
           "DefaultProjectID=@DefaultProjectID," &
           "Remarks=@Remarks," &
           "NonPermiLatTransaction=@NonPermiLatTransaction," &
+          "LeaveDeductionTrans=@LeaveDeductionTrans," &
           "PerDailyDelaying=@PerDailyDelaying," &
           "PerMonthlyDelaying=@PerMonthlyDelaying," &
           "NonProfitOverTimeH=@NonProfitOverTimeH," &
@@ -160,6 +165,7 @@ Public Class Clshrs_EmployeeClassesBases
           "AbsentFormula=@AbsentFormula," &
           "LateFormula=@LateFormula," &
           "VacCostFormula=@VacCostFormula," &
+          "LeaveDeductionFormula=@LeaveDeductionFormula," &
           "HasFingerPrint=@HasFingerPrint," &
           "HasFlexableFingerPrint=@HasFlexableFingerPrint," &
           "HasOvertimeList=@HasOvertimeList," &
@@ -203,6 +209,7 @@ Public Class Clshrs_EmployeeClassesBases
     Private mRegDate As DateTime
     Private mCancelDate As DateTime
     Private mNonPermiLatTransaction As Integer
+    Private mLeaveDeductionTrans As Integer
     Private mPerDailyDelaying As Integer
     Private mPerMonthlyDelaying As Integer
     Private mNonProfitOverTimeH As Integer
@@ -235,6 +242,7 @@ Public Class Clshrs_EmployeeClassesBases
     Private mAbsentFormula As String
     Private mLateFormula As String
     Private mVacCostFormula As String
+    Private mLeaveDeductionFormula As String
     Private mHasFingerPrint As Boolean
     Private mHasFlexableFingerPrint As Boolean
     Private mHasOvertimeList As Boolean
@@ -435,6 +443,14 @@ Public Class Clshrs_EmployeeClassesBases
         End Get
         Set(ByVal Value As Integer)
             mNonPermiLatTransaction = Value
+        End Set
+    End Property
+    Public Property LeaveDeductionTrans() As Integer
+        Get
+            Return mLeaveDeductionTrans
+        End Get
+        Set(ByVal Value As Integer)
+            mLeaveDeductionTrans = Value
         End Set
     End Property
     Public Property PerDailyDelaying() As Integer
@@ -682,6 +698,14 @@ Public Class Clshrs_EmployeeClassesBases
             mVacCostFormula = Value
         End Set
     End Property
+    Public Property LeaveDeductionFormula() As String
+        Get
+            Return mLeaveDeductionFormula
+        End Get
+        Set(ByVal Value As String)
+            mLeaveDeductionFormula = Value
+        End Set
+    End Property
     Public Property HasFingerPrint() As Boolean
         Get
             Return mHasFingerPrint
@@ -922,6 +946,7 @@ Public Class Clshrs_EmployeeClassesBases
             mRegDate = Nothing
             mCancelDate = Nothing
             mNonPermiLatTransaction = 0
+            mLeaveDeductionTrans = 0
             mPerDailyDelaying = 0
             mPerMonthlyDelaying = 0
             mNonProfitOverTimeH = 0
@@ -953,6 +978,8 @@ Public Class Clshrs_EmployeeClassesBases
 
             mAbsentFormula = String.Empty
             mLateFormula = String.Empty
+            mVacCostFormula = String.Empty
+            mLeaveDeductionFormula = String.Empty
         Catch ex As Exception
             mPage.Session.Add("ErrorValue", ex)
             mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, mDataBaseUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_ErrorsLog)
@@ -1106,8 +1133,8 @@ Public Class Clshrs_EmployeeClassesBases
     'End Function
 
     '==================================================================
-    'Created by : [0258]
-    'Date : 15/07/2007
+    'Created by : [0259]
+    'Date : 26/08/2007
     'Description: execute sqlstatement to insert into hrs_EmployeesClassesVacations table (DatawebGrid Control) 
     '       Insert into hrs_EmployeesClassesVacation table RequiredExperience,Duration for all vacationtypes of Current EmployeeClass
     '==================================================================
@@ -1239,6 +1266,7 @@ Public Class Clshrs_EmployeeClassesBases
                 mRegDate = [Shared].DataHandler.DataValue_Out(.Item("RegDate"), SqlDbType.DateTime)
                 mCancelDate = [Shared].DataHandler.DataValue_Out(.Item("CancelDate"), SqlDbType.DateTime)
                 mNonPermiLatTransaction = [Shared].DataHandler.DataValue_Out(.Item("NonPermiLatTransaction"), SqlDbType.Int, True)
+                mLeaveDeductionTrans = [Shared].DataHandler.DataValue_Out(.Item("LeaveDeductionTrans"), SqlDbType.Int, True)
                 mPerDailyDelaying = [Shared].DataHandler.DataValue_Out(.Item("PerDailyDelaying"), SqlDbType.Int, True)
                 mPerMonthlyDelaying = [Shared].DataHandler.DataValue_Out(.Item("PerMonthlyDelaying"), SqlDbType.Int, True)
                 mNonProfitOverTimeH = [Shared].DataHandler.DataValue_Out(.Item("NonProfitOverTimeH"), SqlDbType.Int, True)
@@ -1271,6 +1299,7 @@ Public Class Clshrs_EmployeeClassesBases
                 mAbsentFormula = [Shared].DataHandler.DataValue_Out(.Item("AbsentFormula"), SqlDbType.VarChar)
                 mLateFormula = [Shared].DataHandler.DataValue_Out(.Item("LateFormula"), SqlDbType.VarChar)
                 mVacCostFormula = [Shared].DataHandler.DataValue_Out(.Item("VacCostFormula"), SqlDbType.VarChar)
+                mLeaveDeductionFormula = [Shared].DataHandler.DataValue_Out(.Item("LeaveDeductionFormula"), SqlDbType.VarChar)
                 mHasFingerPrint = [Shared].DataHandler.DataValue_Out(.Item("HasFingerPrint"), SqlDbType.Bit)
                 mHasFlexableFingerPrint = [Shared].DataHandler.DataValue_Out(.Item("HasFlexableFingerPrint"), SqlDbType.Bit)
                 mHasOvertimeList = [Shared].DataHandler.DataValue_Out(.Item("HasOvertimeList"), SqlDbType.Bit)
@@ -1319,6 +1348,7 @@ Public Class Clshrs_EmployeeClassesBases
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@DefaultProjectID", SqlDbType.Int)).Value = [Shared].DataHandler.DataValue_In(mDefaultProjectID, SqlDbType.Int)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Remarks", SqlDbType.VarChar)).Value = [Shared].DataHandler.DataValue_In(mRemarks, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@NonPermiLatTransaction", SqlDbType.Int)).Value = [Shared].DataHandler.DataValue_In(mNonPermiLatTransaction, SqlDbType.Int)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@LeaveDeductionTrans", SqlDbType.Int)).Value = [Shared].DataHandler.DataValue_In(mLeaveDeductionTrans, SqlDbType.Int)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@PerDailyDelaying", SqlDbType.Int)).Value = [Shared].DataHandler.DataValue_In(mPerDailyDelaying, SqlDbType.Int)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@PerMonthlyDelaying", SqlDbType.Int)).Value = [Shared].DataHandler.DataValue_In(mPerMonthlyDelaying, SqlDbType.Int)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@NonProfitOverTimeH", SqlDbType.Int)).Value = [Shared].DataHandler.DataValue_In(mNonProfitOverTimeH, SqlDbType.Int)
@@ -1354,6 +1384,7 @@ Public Class Clshrs_EmployeeClassesBases
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@AbsentFormula", SqlDbType.VarChar)).Value = [Shared].DataHandler.DataValue_In(mAbsentFormula, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@LateFormula", SqlDbType.VarChar)).Value = [Shared].DataHandler.DataValue_In(mLateFormula, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@VacCostFormula", SqlDbType.VarChar)).Value = [Shared].DataHandler.DataValue_In(mVacCostFormula, SqlDbType.VarChar)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@LeaveDeductionFormula", SqlDbType.VarChar)).Value = [Shared].DataHandler.DataValue_In(mLeaveDeductionFormula, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@HasFingerPrint", SqlDbType.Bit)).Value = [Shared].DataHandler.DataValue_In(mHasFingerPrint, SqlDbType.Bit)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@HasFlexableFingerPrint", SqlDbType.Bit)).Value = [Shared].DataHandler.DataValue_In(mHasFlexableFingerPrint, SqlDbType.Bit)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@HasOvertimeList", SqlDbType.Bit)).Value = [Shared].DataHandler.DataValue_In(mHasOvertimeList, SqlDbType.Bit)

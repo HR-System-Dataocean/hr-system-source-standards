@@ -257,6 +257,12 @@ Partial Class frmVacationsTypes
                 Else
                     ClsVacationType.ExcludedFromSSRequests = False
                 End If
+
+                If chkLeaveSubjectToDeduction.Checked = True Then
+                    ClsVacationType.LeaveSubjectToDeduction = True
+                Else
+                    ClsVacationType.LeaveSubjectToDeduction = False
+                End If
                 If chkAnnual.Checked = True Then
                     ClsVacationType.IsAnnual = True
                     If ChkRoundAnnualVacBalance.Checked = True Then
@@ -325,6 +331,12 @@ Partial Class frmVacationsTypes
                     chkExcluded.Checked = True
                 Else
                     chkExcluded.Checked = False
+                End If
+
+                If ClsVacationType.LeaveSubjectToDeduction = True Then
+                    chkLeaveSubjectToDeduction.Checked = True
+                Else
+                    chkLeaveSubjectToDeduction.Checked = False
                 End If
                 If ClsVacationType.IsAnnual = True Then
                     chkAnnual.Checked = True
@@ -644,6 +656,7 @@ Partial Class frmVacationsTypes
         chkSick.Checked = False
         CheckBox_AffectEOS.Checked = False
         ChkHasPayment.Checked = False
+        chkLeaveSubjectToDeduction.Checked = False
         DdlIsPaid.SelectedIndex = 0
         DdlSex.SelectedIndex = 0
         ddlreligion.SelectedValue = "All"

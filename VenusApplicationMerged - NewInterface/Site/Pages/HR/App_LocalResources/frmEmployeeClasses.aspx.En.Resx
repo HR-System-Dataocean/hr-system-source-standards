@@ -525,6 +525,21 @@
   <data name="VacCostFormulaLabelResource.Text" xml:space="preserve">
     <value>Vacation Cost Formula</value>
   </data>
+  <data name="LeaveDeductionFormulaLabelResource.Text" xml:space="preserve">
+    <value>Leave Deduction Formula</value>
+  </data>
+  <data name="LeaveDeductionFormulaTextBoxResource.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LeaveDeductionFormulaButtonResource.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LeaveDeductionTransLabelResource.Text" xml:space="preserve">
+    <value>Leave Deduction Transaction</value>
+  </data>
+  <data name="ddlLeaveDeductionTransResource1.Text" xml:space="preserve">
+    <value />
+  </data>
   <data name="VacOVFormulaLabelResource.Text" xml:space="preserve">
     <value>Vacation Overtime Formula</value>
   </data>
