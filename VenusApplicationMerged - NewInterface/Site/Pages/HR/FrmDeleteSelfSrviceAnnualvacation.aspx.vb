@@ -90,6 +90,21 @@ Partial Class frmAttendancePreparation
                         Dim ClsEmployeesTransactions As New Clshrs_EmployeesTransactions(Page)
                         ClsEmployeesVacations.Find("ID=" & TrnsID & "")
                         ClsEmployeesTransactions.Find("EmployeesVacationsID=" & ClsEmployeesVacations.ID)
+                        If ClsEmployeesVacations.VacationTypeID = 1 Then
+                            Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
+                            Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
+                            Dim STRNoLatervacations As String
+                            STRNoLatervacations = "set dateformat dmy; Select count(id) from hrs_employeesvacations where ActualStartDate > '" & ClsEmployeesVacations.ActualStartDate & "' And CancelDate is null and EmployeeID='" & ClsEmployeesVacations.EmployeeID & "' And VacationTypeID=1"
+                            Dim LaterVacationsCounts As Integer
+                            LaterVacationsCounts = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(CType(HttpContext.Current.Session("ConnectionString"), String), Data.CommandType.Text, STRNoLatervacations)
+                            If LaterVacationsCounts >= 1 Then
+                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry, this leave cannot be deleted because there are other leave requests recorded with later dates ... /عفوا لايمكن حذف هذه الاجازة بسبب وجود اجازات مسجلة بعدها . "))
+                                Return
+                            End If
+                        End If
+
+
+
                         If (ClsEmployeesTransactions.DataSet.Tables(0).Rows.Count < 1) Then
                             ClsEmployeesVacations.Remarks = TxtDeleteReason.Text
                             ClsEmployeesVacations.Update("ID=" & ClsEmployeesVacations.ID)
@@ -100,6 +115,20 @@ Partial Class frmAttendancePreparation
                             If cls_OTHER_VACATION.Find("ParentVacationID = " & TrnsID) Then
                                 cls_OTHER_VACATION.Delete("ParentVacationID = " & TrnsID)
 
+                            End If
+
+
+                            Dim ClsFisicalYearsPeriods As New Clssys_FiscalYearsPeriods(Me)
+                            ClsFisicalYearsPeriods.Find("FromDate <= '" & ClsEmployees.SetHigriDate(ClsEmployeesVacations.ActualStartDate) & "' and ToDate >='" & ClsEmployees.SetHigriDate(ClsEmployeesVacations.ActualStartDate) & "'")
+                            Dim periodSql As String
+                            Dim periodPrepared As Integer
+                            periodSql = "select count(hrs_EmployeesTransactions.ID) from hrs_EmployeesTransactions where hrs_EmployeesTransactions.PrepareType='N' and hrs_EmployeesTransactions.FiscalYearPeriodID=" & ClsFisicalYearsPeriods.ID & " and hrs_EmployeesTransactions.EmployeeID=" & ClsEmployeesVacations.EmployeeID
+                            periodPrepared = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, periodSql)
+
+
+                            If periodPrepared > 0 Then
+                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry...Can't delete a Leave within a Prepared period.!/!لايمكن حذف اجازة داخل فترة مجهزة "))
+                                Return
                             End If
                             If CancelRequest(VacationRequestID, FormCode, ClsEmployeesVacations.EmployeeID) Then
                                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, " Delete Done !/!تم الحذف"))

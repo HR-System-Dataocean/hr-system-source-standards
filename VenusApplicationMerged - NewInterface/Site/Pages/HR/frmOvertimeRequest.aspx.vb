@@ -761,7 +761,14 @@ Partial Class frmOvertimeRequest
                     Exit Function
                 End If
             End If
-
+            Dim STRNoOfRequestPerDay As String
+            STRNoOfRequestPerDay = "set dateformat dmy; Select count(id) from SS_OvertimeRequest where OvertimeDate = '" & OverTimeDate.Text & "' and EmployeeID='" & ClsEmployees.ID & "'"
+            Dim OvaerTimeCounts As Integer
+            OvaerTimeCounts = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(CType(HttpContext.Current.Session("ConnectionString"), String), Data.CommandType.Text, STRNoOfRequestPerDay)
+            If OvaerTimeCounts >= 1 Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry...Only one overtimerequest per day is allowed ... /عفوا لايمكن انشاء اكثر من طلب وقت اضافي في نفس اليوم . "))
+                Exit Function
+            End If
             If ClsEmployees.ManagerID <= 0 Then
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry...Direct manager is not updated in your file please review HR Department /عفوا لايمكن حفظ طلبكم بسبب عدم توافر معلومات المدير المباشر..برجاء مراجعة ادارة الموارد البشرية "))
                 Exit Function
