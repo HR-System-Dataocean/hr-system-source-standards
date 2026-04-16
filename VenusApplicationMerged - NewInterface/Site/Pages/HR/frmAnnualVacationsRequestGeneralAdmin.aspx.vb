@@ -364,6 +364,7 @@ Partial Class frmAnnualVacationsRequestGeneralAdmin
             TxtAlternativeEmpName.Text = ""
             TxtRemarks.Text = ""
             ImageButton_Delete.Enabled = False
+            ImageButton_Save.Enabled = True
         Catch ex As Exception
             mErrorHandler = New Venus.Shared.ErrorsHandler(ClsEmployeesVacations.ConnectionString)
             Page.Session.Add("ErrorValue", ex)
@@ -865,8 +866,9 @@ Partial Class frmAnnualVacationsRequestGeneralAdmin
                 Dim clsEmp As New Clshrs_Employees(Page)
                 clsEmp.Find("Code='" & txtEmployee.Text & "'")
                 If clsEmp.ID > 0 Then
+                    Dim currentVacTypeId As Integer = CInt(DdlVacationType.SelectedValue)
                     Dim strCheck As String = "SELECT COUNT(1) FROM SS_VacationRequest " &
-                        "WHERE EmployeeID=" & clsEmp.ID & " AND VacationType='SS_0011' " &
+                        "WHERE EmployeeID=" & clsEmp.ID & " AND VacationTypeID=" & currentVacTypeId & " " &
                         "AND (RequestStautsTypeID IS NULL OR RequestStautsTypeID IN (3,4))"
                     Dim existingCountObj As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, CommandType.Text, strCheck)
                     Dim existingCount As Integer = 0
@@ -875,6 +877,7 @@ Partial Class frmAnnualVacationsRequestGeneralAdmin
                     End If
                     If existingCount > 0 Then
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, "There is an incomplete annual leave request. Please complete the steps for the current request first./يوجد طلب اجازة سنوى لم يكتمل بعد برجاء اكمال مراحل الطلب السارى اولا")
+                        ImageButton_Save.Enabled = False
                         Return False
                     End If
                 End If

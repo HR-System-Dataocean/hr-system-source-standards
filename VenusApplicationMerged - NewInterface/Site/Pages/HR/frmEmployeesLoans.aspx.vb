@@ -310,6 +310,15 @@ Partial Class frmEmployeesLoans
                 If ClsEmployees.Find("Code = '" & txtCode.Text & "'") Then
                     ClsEmployeesPayability.Find("Number='" & lblDescLoanCode.Text & "'")
 
+                    If Not String.IsNullOrEmpty(ClsEmployeesPayability.Src) AndAlso Not String.IsNullOrEmpty(ClsEmployeesPayability.RequestID) Then
+                        If String.Equals(ClsEmployeesPayability.Src, "frmEmployeesOthersVacations", StringComparison.OrdinalIgnoreCase) Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "This Transaction was generated from Employees Others Vacations / هذه الحركة تم إنشاؤها من إجازات الموظفين الأخرى"))
+                        Else
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "This Transaction was generated from another source/request and cannot be deleted / هذه الحركة مرتبطة بطلب ولا يمكن حذفها"))
+                        End If
+                        Exit Sub
+                    End If
+
                     '// Check if the record is locked
                     Dim ClsForms As New ClsSys_Forms(Page)
                     ClsForms.Find("EngName = 'frmEmployeesLoans.aspx'")

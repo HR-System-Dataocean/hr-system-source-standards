@@ -184,14 +184,14 @@ Partial Class frmEmployeesVacations
                     End If
 
                     If (ClsEmployeesTransactions.DataSet.Tables(0).Rows.Count < 1) Then
-                        If ClsEmployeesVacations.OverDueVacation > 0 Then
-                            ClsEmployeesVacations.Delete("ID=" & ClsEmployeesVacations.OverDueVacation)
-                            ClsEmployeesVacations.Delete("ID=" & lbVactionID.Text)
+                        'If ClsEmployeesVacations.OverDueVacation > 0 Then
+                        '    ClsEmployeesVacations.Delete("ID=" & ClsEmployeesVacations.OverDueVacation)
+                        ClsEmployeesVacations.Delete("ID=" & lbVactionID.Text)
                             Dim cls_OTHER_VACATION = New Clshrs_EmployeesVacations(Page)
                             If cls_OTHER_VACATION.Find("ParentVacationID = " & lbVactionID.Text) Then
                                 cls_OTHER_VACATION.Delete("ParentVacationID = " & lbVactionID.Text)
                             End If
-                        End If
+                        'End If
 
                     Else
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Cannot delete this vacation because it has a transaction  /لا يمكن حذف الاجازة لان لها مستحقات "))

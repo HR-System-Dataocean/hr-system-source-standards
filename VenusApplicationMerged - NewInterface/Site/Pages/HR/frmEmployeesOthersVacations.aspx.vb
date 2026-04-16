@@ -56,14 +56,14 @@ Partial Class frmEmployeesOthersVacations
         Return intNoOfDays
     End Function
 
-    Private Function SaveLeaveDeductionPayability(ByVal vacationId As Integer, ByVal employeeId As Integer, ByVal transDate As Date, ByVal leaveDays As Double, ByVal employeeClass As Clshrs_EmployeeClasses) As Boolean
+    Private Function SaveLeaveDeductionPayability(ByVal vacationId As Integer, ByVal employeeId As Integer, ByVal transDate As Date, ByVal leaveDays As Double, ByVal employeeClass As Clshrs_EmployeeClasses, ByVal deductionTransId As Integer) As Boolean
         If employeeClass Is Nothing OrElse employeeClass.ID <= 0 Then
             Return False
         End If
         If String.IsNullOrWhiteSpace(employeeClass.LeaveDeductionFormula) Then
             Return False
         End If
-        If employeeClass.LeaveDeductionTrans <= 0 Then
+        If deductionTransId <= 0 Then
             Return False
         End If
         If leaveDays <= 0 Then
@@ -73,6 +73,18 @@ Partial Class frmEmployeesOthersVacations
         Dim clsEmployeesPayability As New Clshrs_EmployeesPayability(Page)
         Dim objDataHandler As New Venus.Shared.DataHandler
         Dim strSerial As String = ""
+
+        Dim clsEmployeesVacationsLocal As New Clshrs_EmployeesVacations(Page)
+        clsEmployeesVacationsLocal.Find("ID=" & vacationId)
+
+        Dim dueDate As Date = transDate
+        If clsEmployeesVacationsLocal.ID > 0 Then
+            If clsEmployeesVacationsLocal.ActualStartDate <> Date.MinValue Then
+                dueDate = clsEmployeesVacationsLocal.ActualStartDate
+            ElseIf clsEmployeesVacationsLocal.ExpectedStartDate <> Date.MinValue Then
+                dueDate = clsEmployeesVacationsLocal.ExpectedStartDate
+            End If
+        End If
 
         Dim clsEmpDates As New Clshrs_Employees(Page)
         Dim fiscalPeriod As New Clssys_FiscalYearsPeriods(Page)
@@ -110,11 +122,13 @@ Partial Class frmEmployeesOthersVacations
 
         clsEmployeesPayability.EmployeeID = employeeId
         objDataHandler.GetLastSerial(clsEmployeesPayability.Table, "Number", strSerial, clsEmployeesPayability.ConnectionString, "00000")
-        clsEmployeesPayability.TransactionTypeID = employeeClass.LeaveDeductionTrans
+        clsEmployeesPayability.TransactionTypeID = deductionTransId
         clsEmployeesPayability.Number = strSerial
         clsEmployeesPayability.TransactionDate = clsEmployeesPayability.SetHigriDate(transDate)
         clsEmployeesPayability.SalaryLink = "True"
         clsEmployeesPayability.TransactionComment = commentPrefix & " .. Date=" & clsEmployeesPayability.SetHigriDate(transDate) & " .. Days=" & leaveDays
+        clsEmployeesPayability.Src = "frmEmployeesOthersVacations"
+        clsEmployeesPayability.RequestID = vacationId.ToString()
 
         Dim payId As Integer = clsEmployeesPayability.Save()
         If payId <= 0 Then
@@ -123,12 +137,14 @@ Partial Class frmEmployeesOthersVacations
 
         Dim insertScheduleSql As String = "Insert Into hrs_EmployeesPayabilitiesSchedules(" &
             "EmployeePayabilityId,DueDate,DueAmount,RegUserID,CompanyId" &
-            ")values(" &
-            payId & ",'" & transDate.ToString("dd/MM/yyyy") & "'," &
-            totalAmount & "," &
-            clsEmployeesPayability.DataBaseUserRelatedID & "," &
-            clsEmployeesPayability.MainCompanyID & ")"
-        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(clsEmployeesPayability.ConnectionString, CommandType.Text, insertScheduleSql)
+            ") values (" &
+            "@EmployeePayabilityId,@DueDate,@DueAmount,@RegUserID,@CompanyId)"
+        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(clsEmployeesPayability.ConnectionString, CommandType.Text, insertScheduleSql,
+            New SqlParameter("@EmployeePayabilityId", payId),
+            New SqlParameter("@DueDate", dueDate),
+            New SqlParameter("@DueAmount", totalAmount),
+            New SqlParameter("@RegUserID", clsEmployeesPayability.DataBaseUserRelatedID),
+            New SqlParameter("@CompanyId", clsEmployeesPayability.MainCompanyID))
 
         Return True
     End Function
@@ -282,6 +298,38 @@ Partial Class frmEmployeesOthersVacations
                 If CheckEmployee() And CheckVacation() And CheckPayment() Then
                     ClsEmployeesVacations.Find("ID=" & lbVactionID.Text)
 
+                    Dim delVacationId As Integer = Val(lbVactionID.Text)
+                    Dim delEmployeeId As Integer = ClsEmployeesVacations.EmployeeID
+                    Dim delStartDate As Date = WebDateChooser1.Value
+                    If ClsEmployeesVacations.ActualStartDate <> Date.MinValue Then
+                        delStartDate = ClsEmployeesVacations.ActualStartDate
+                    ElseIf ClsEmployeesVacations.ExpectedStartDate <> Date.MinValue Then
+                        delStartDate = ClsEmployeesVacations.ExpectedStartDate
+                    End If
+
+                    Dim clsEmpForDelete As New Clshrs_Employees(Page)
+                    clsEmpForDelete.Find("ID=" & delEmployeeId)
+                    Dim clsForms As New ClsSys_Forms(Page)
+                    clsForms.Find("EngName = 'frmEmployees.aspx'")
+                    Dim clsFisicalYearsPeriods As New Clssys_FiscalYearsPeriods(Me)
+                    clsFisicalYearsPeriods.Find("FromDate <= '" & clsEmpForDelete.SetHigriDate(delStartDate) & "' and ToDate >='" & clsEmpForDelete.SetHigriDate(delStartDate) & "'")
+
+                    Dim clsFiscalYearsPeriodsModules As New Clssys_FiscalYearsPeriodsModules(Page)
+                    clsFiscalYearsPeriodsModules.Find(" FiscalYearPeriodID=" & clsFisicalYearsPeriods.ID & " and ModuleID=" & clsForms.ModuleID)
+                    If Not String.IsNullOrWhiteSpace(Convert.ToString(clsFiscalYearsPeriodsModules.CloseDate)) Then
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Vacation Start Date in Closed Period !/!تاريخ بداية الإجازة في فترة مغلقة"))
+                        Exit Sub
+                    End If
+
+                    Dim periodSql As String
+                    periodSql = "select count(hrs_EmployeesTransactions.ID) from hrs_EmployeesTransactions where PrepareType='N' and EmployeeID=" & delEmployeeId & " and hrs_EmployeesTransactions.FiscalYearPeriodID=" & clsFisicalYearsPeriods.ID
+                    Dim periodPrepared As Integer
+                    periodPrepared = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, periodSql)
+                    If periodPrepared > 0 Then
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Vacation Start Date in Prepared Period !/!تاريخ بداية الإجازة في فترة مجهزة"))
+                        Exit Sub
+                    End If
+
                     Dim ClsEmployeesVacations1 As New Clshrs_EmployeesVacations(Page)
                     If ClsEmployeesVacations1.Find("OverDueVacation = " & ClsEmployeesVacations.ID) Then
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This vacation Related To Annual Vacation /هذه الإجازة مرتبطة بإجازة سنوية"))
@@ -313,6 +361,24 @@ Partial Class frmEmployeesOthersVacations
                         If ClsEmployeesVacations.VacationTypeID <> 1 Then
                             CheckVacationsOverlappingCancel()
                         End If
+
+                        Dim hasSettlementSql As String = "SELECT COUNT(1) FROM hrs_EmployeesPayabilitiesSchedulesSettlement st " &
+                            "INNER JOIN hrs_EmployeesPayabilitiesSchedules s ON s.ID = st.EmployeePayabilityScheduleID " &
+                            "INNER JOIN hrs_EmployeesPayabilities p ON p.ID = s.EmployeePayabilityId " &
+                            "WHERE ISNULL(p.CancelDate,'')='' AND p.Src = @Src AND p.RequestID = @RequestID"
+                        Dim hasSettlement As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, hasSettlementSql,
+                            New SqlParameter("@Src", "frmEmployeesOthersVacations"),
+                            New SqlParameter("@RequestID", delVacationId.ToString()))
+                        If hasSettlement > 0 Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Cannot delete because there is a settlement for this payability / لا يمكن الحذف لوجود تسوية"))
+                            Exit Sub
+                        End If
+
+                        Dim cancelPayabilitiesSql As String = "UPDATE hrs_EmployeesPayabilities SET CancelDate = GETDATE() " &
+                            "WHERE ISNULL(CancelDate,'')='' AND Src = @Src AND RequestID = @RequestID"
+                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, cancelPayabilitiesSql,
+                            New SqlParameter("@Src", "frmEmployeesOthersVacations"),
+                            New SqlParameter("@RequestID", delVacationId.ToString()))
 
                         ClsEmployeesVacations.Delete("ID=" & lbVactionID.Text)
                     End If
@@ -1277,7 +1343,7 @@ Partial Class frmEmployeesOthersVacations
                     Dim transDate As Date = CDate(WebDateChooser1.Value)
                     transDate = clsEmp.SetHigriDate(transDate)
                     Dim clsEmpClass As Clshrs_EmployeeClasses = GetEmployeeClassForDate(clsEmp.ID, transDate)
-                    SaveLeaveDeductionPayability(recordId, clsEmp.ID, transDate, Val(txtVactiondays.Text), clsEmpClass)
+                    SaveLeaveDeductionPayability(recordId, clsEmp.ID, transDate, Val(txtVactiondays.Text), clsEmpClass, clsVacationTypes.LeaveDeductionTrans)
                 End If
             Catch ex As Exception
             End Try

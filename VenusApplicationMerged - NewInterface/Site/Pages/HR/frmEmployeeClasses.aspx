@@ -694,43 +694,7 @@
                                                                 </table>
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td class="SeparArea"></td>
-                                                            <td>
-                                                                <asp:Label ID="LeaveDeductionFormulaLabel" runat="server" SkinID="Label_DefaultNormal" meta:resourcekey="LeaveDeductionFormulaLabelResource"
-                                                                    Text="Leave Deduction Formula" Width="100px"></asp:Label>
-                                                            </td>
-                                                            <td class="DataArea">
-                                                                <table style="width: 100%;">
-                                                                    <tr>
-                                                                        <td>
-                                                                            <asp:TextBox ID="LeaveDeductionFormulaTextBox" runat="server" MaxLength="255" SkinID="TextBox_LargeNormalC"
-                                                                                meta:resourcekey="LeaveDeductionFormulaTextBoxResource"></asp:TextBox>
-                                                                        </td>
-                                                                        <td style="width: 24px;">
-                                                                            <igtxt:WebImageButton ID="LeaveDeductionFormulaButton" runat="server" AutoSubmit="False" Height="18px"
-                                                                                Overflow="NoWordWrap" UseBrowserDefaults="False" Width="24px" meta:resourcekey="LeaveDeductionFormulaButtonResource">
-                                                                                <Alignments TextImage="ImageBottom" />
-                                                                                <Appearance>
-                                                                                    <Image Url="./Img/rtg_rate.gif" />
-                                                                                </Appearance>
-                                                                            </igtxt:WebImageButton>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="SeparArea"></td>
-                                                            <td>
-                                                                <asp:Label ID="LeaveDeductionTransLabel" runat="server" SkinID="Label_DefaultNormal" meta:resourcekey="LeaveDeductionTransLabelResource"
-                                                                    Text="Leave Deduction Transaction" Width="100px"></asp:Label>
-                                                            </td>
-                                                            <td class="DataArea">
-                                                                <asp:DropDownList ID="ddlLeaveDeductionTrans" runat="server" SkinID="DropDownList_LargNormal" meta:resourcekey="ddlLeaveDeductionTransResource1">
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                        </tr>
+                                                        
                                                     </table>
                                                 </td>
                                                 <td style="width: 6%; height: 16px; vertical-align: top">
@@ -990,10 +954,27 @@
                   <tr>
                       <td class="SeparArea"></td>
                       <td>
-                        
+                        <asp:Label ID="LeaveDeductionFormulaLabel" runat="server" SkinID="Label_DefaultNormal" meta:resourcekey="LeaveDeductionFormulaLabelResource"
+                            Text="Leave Deduction Formula" Width="100px"></asp:Label>
                       </td>
                       <td class="DataArea">
-                          
+                          <table style="width: 100%;">
+                              <tr>
+                                  <td>
+                                      <asp:TextBox ID="LeaveDeductionFormulaTextBox" runat="server" MaxLength="255" SkinID="TextBox_LargeNormalC"
+                                          meta:resourcekey="LeaveDeductionFormulaTextBoxResource"></asp:TextBox>
+                                  </td>
+                                  <td style="width: 24px;">
+                                      <igtxt:WebImageButton ID="LeaveDeductionFormulaButton" runat="server" AutoSubmit="False" Height="18px"
+                                          Overflow="NoWordWrap" UseBrowserDefaults="False" Width="24px" meta:resourcekey="LeaveDeductionFormulaButtonResource">
+                                          <Alignments TextImage="ImageBottom" />
+                                          <Appearance>
+                                              <Image Url="./Img/rtg_rate.gif" />
+                                          </Appearance>
+                                      </igtxt:WebImageButton>
+                                  </td>
+                              </tr>
+                          </table>
                       </td>
                   </tr>
               </table>

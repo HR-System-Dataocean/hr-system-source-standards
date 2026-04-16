@@ -36,7 +36,6 @@ Partial Class frmEmployeeClasses
                 ClsProjects.GetDropDownList(DdlProjects, False)
                 clsTransactionsTypes.GetDropDownList(DropDownList1, True, " CancelDate is null and Sign = -1 and IsPaid = 1")
                 clsTransactionsTypes.GetDropDownList(DropDownList4, True, " CancelDate is null and Sign = -1 and IsPaid = 1")
-                clsTransactionsTypes.GetDropDownList(ddlLeaveDeductionTrans, True, " CancelDate is null and Sign = -1 and IsPaid = 1")
                 clsTransactionsTypes.GetDropDownList(DropDownList6, True, " CancelDate is null and Sign = 1 and IsPaid = 1")
                 clsTransactionsTypes.GetDropDownList(DropDownList7, True, " CancelDate is null and Sign = 1 and IsPaid = 1")
 
@@ -319,11 +318,6 @@ Partial Class frmEmployeeClasses
                     .NonPermiLatTransaction = 0
                 End Try
                 Try
-                    .LeaveDeductionTrans = ddlLeaveDeductionTrans.SelectedValue
-                Catch ex As Exception
-                    .LeaveDeductionTrans = 0
-                End Try
-                Try
                     .RegComputerID = DropDownList4.SelectedValue
                 Catch ex As Exception
                     .RegComputerID = 0
@@ -392,7 +386,6 @@ Partial Class frmEmployeeClasses
                 'End
                 DropDownList1.SelectedValue = .NonPermiLatTransaction
                 DropDownList4.SelectedValue = .RegComputerID
-                ddlLeaveDeductionTrans.SelectedValue = .LeaveDeductionTrans
 
                 DropDownList2.SelectedValue = .PunishementCalc
                 DropDownList3.SelectedValue = .OnNoExit
@@ -703,7 +696,6 @@ Partial Class frmEmployeeClasses
         DdlProjects.SelectedIndex = 0
         DropDownList1.SelectedIndex = 0
         DropDownList4.SelectedIndex = 0
-        ddlLeaveDeductionTrans.SelectedIndex = 0
         txtDDelayingfactor.Text = 0
         txtMDelayingfactor.Text = 0
         txtNonProfitOverTimeH.Text = 0

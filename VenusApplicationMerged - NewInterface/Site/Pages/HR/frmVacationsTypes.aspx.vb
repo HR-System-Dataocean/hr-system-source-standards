@@ -40,6 +40,7 @@ Partial Class frmVacationsTypes
                 ClsTransactions.GetDropDownList(ddlOpenBalanceTrans, True, "Sign= 1 and InputIsNumeric = 1 and IsPaid = 1 and isnull(Formula,'') = '' and IsDistributable = 0")
                 ClsTransactions.GetDropDownList(ddlclearancetransaction, True, "Sign= 1 and InputIsNumeric = 1 and IsPaid = 1 and isnull(Formula,'') = '' and IsDistributable = 0")
                 ClsTransactions.GetDropDownList(ddlDeductTransaction, True, "Sign= -1 and InputIsNumeric = 1 and IsPaid = 1 and isnull(Formula,'') = '' and IsDistributable = 0")
+                ClsTransactions.GetDropDownList(ddlLeaveDeductionTrans, True, "Sign= -1 and IsPaid = 1 ")
                 Venus.Shared.Web.ClientSideActions.SetLanguage(Page, txtArbName, Venus.Shared.Web.ClientSideActions.LANGUAGE_TYPE.ARABIC)
 
             End If
@@ -243,6 +244,7 @@ Partial Class frmVacationsTypes
                 .OverDueVacationID = ddlOverDueVac.SelectedValue
                 .ForSalaryTransaction = ddlclearancetransaction.SelectedValue
                 .ForDeductionTransaction = ddlDeductTransaction.SelectedValue
+                .LeaveDeductionTrans = ddlLeaveDeductionTrans.SelectedValue
                 .ExceededDaysType = Convert.ToInt32(ddlExceededDays.SelectedValue)
                 .TimesNoInYear = Convert.ToInt32(txtTimesNoInYear.Text)
                 .AllowedDaysNo = Convert.ToInt32(txtAllowedDaysNo.Text)
@@ -381,6 +383,7 @@ Partial Class frmVacationsTypes
                 ddlOpenBalanceTrans.SelectedValue = .OBalanceTransactionID
                 ddlclearancetransaction.SelectedValue = .ForSalaryTransaction
                 ddlDeductTransaction.SelectedValue = .ForDeductionTransaction
+                ddlLeaveDeductionTrans.SelectedValue = .LeaveDeductionTrans
                 ddlExceededDays.SelectedValue = .ExceededDaysType
                 If .Sex = " " Then
                     DdlSex.SelectedIndex = 0
@@ -437,11 +440,13 @@ Partial Class frmVacationsTypes
                 txt2ndststage.Enabled = True
                 txt3edststage.Enabled = True
                 ddlDeductTransaction.Enabled = True
+                ddlLeaveDeductionTrans.Enabled = True
             Else
                 txt1ststage.Enabled = False
                 txt2ndststage.Enabled = False
                 txt3edststage.Enabled = False
                 ddlDeductTransaction.Enabled = False
+                ddlLeaveDeductionTrans.Enabled = True
             End If
             If chkAnnual.Checked = False Then
                 ddlOpenBalanceTrans.Enabled = False
@@ -665,6 +670,7 @@ Partial Class frmVacationsTypes
         ddlOverDueVac.SelectedIndex = 0
         ddlclearancetransaction.SelectedIndex = 0
         ddlDeductTransaction.SelectedIndex = 0
+        ddlLeaveDeductionTrans.SelectedIndex = 0
 
         txt1ststage.Value = 100
         txt2ndststage.Value = 75
@@ -683,6 +689,7 @@ Partial Class frmVacationsTypes
         txt2ndststage.Enabled = False
         txt3edststage.Enabled = False
         ddlDeductTransaction.Enabled = False
+        ddlLeaveDeductionTrans.Enabled = True
     End Function
     Private Sub LoadDataUpdateSchedules(ByVal formName As String)
         Dim controlName As String = String.Empty
@@ -809,11 +816,13 @@ Partial Class frmVacationsTypes
             txt2ndststage.Enabled = True
             txt3edststage.Enabled = True
             ddlDeductTransaction.Enabled = True
+            ddlLeaveDeductionTrans.Enabled = True
         Else
             txt1ststage.Enabled = False
             txt2ndststage.Enabled = False
             txt3edststage.Enabled = False
             ddlDeductTransaction.Enabled = False
+            ddlLeaveDeductionTrans.Enabled = True
         End If
     End Sub
 

@@ -1127,6 +1127,20 @@ Partial Class frmAttendancePreparation
                         Dim salaryResult As VacationSalaryResult = GetVacationSalaryForPaidWithSalary(ClsEmployees.ID, fiscalPeriodId, fiscalTo, settlementDays)
                         Dim netAmount As Double = Math.Round(Val(salaryResult.TotalBenefits), 2)
 
+                        Dim totalBalanceDays As Double = 0
+                        Try
+                            totalBalanceDays = Convert.ToDouble(ClsEmployeesVacations.TotalBalance)
+                        Catch ex As Exception
+                            totalBalanceDays = 0
+                        End Try
+
+                        Dim remainDaysAfterSettlement As Double = Math.Max(0, Math.Round(totalBalanceDays - settlementDays, 2))
+                        Dim amountPerDay As Double = 0
+                        If settlementDays > 0 Then
+                            amountPerDay = netAmount / settlementDays
+                        End If
+                        Dim remainAmountAfterSettlement As Double = Math.Round(amountPerDay * remainDaysAfterSettlement, 2, MidpointRounding.AwayFromZero)
+
                         Dim vacStart As Date = paidDate
                         Dim vacEnd As Date = paidDate
                         Date.TryParse(txtStartDate.Text, vacStart)
@@ -1168,9 +1182,9 @@ Partial Class frmAttendancePreparation
                             empTrans.CBranchID = ClsEmployees.BranchID
                             empTrans.EmployeesVacationsID = recordId
                             empTrans.TotalVacDaySettlement = settlementDays
-                            empTrans.RemainVacDaySettlement = 0
+                            empTrans.RemainVacDaySettlement = remainDaysAfterSettlement
                             empTrans.LastPaidDate = paidDate
-                            empTrans.RemainVacSettlement = 0
+                            empTrans.RemainVacSettlement = remainAmountAfterSettlement
 
                             employeeTransactionId = empTrans.Save()
                             If employeeTransactionId <= 0 Then
@@ -1187,10 +1201,12 @@ Partial Class frmAttendancePreparation
                             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, strcommand)
                         Else
                             Dim totalVacDays As Double = month1Days + month2Days
-                            'Dim factor1 As Double = month1Days / totalVacDays
-                            'Dim factor2 As Double = month2Days / totalVacDays
-                            'splitFactor1 = factor1
-                            'splitFactor2 = factor2
+                            If totalVacDays > 0 Then
+                                Dim factor1 As Double = month1Days / totalVacDays
+                                Dim factor2 As Double = month2Days / totalVacDays
+                                splitFactor1 = factor1
+                                splitFactor2 = factor2
+                            End If
 
                             Dim settleDays1 As Double = month1Days
                             Dim settleDays2 As Double = month2Days
@@ -1230,11 +1246,18 @@ Partial Class frmAttendancePreparation
                                     .CBranchID = ClsEmployees.BranchID
                                     .EmployeesVacationsID = recordId
                                     .TotalVacDaySettlement = settleDays2
-                                    .RemainVacDaySettlement = 0
+                                    .RemainVacDaySettlement = remainDaysAfterSettlement
                                     .LastPaidDate = month1Date
-                                    .RemainVacSettlement = 0
+                                    .RemainVacSettlement = remainAmountAfterSettlement
                                     transId2 = .Save()
                                 End With
+                            Else
+                                If transId1 > 0 Then
+                                    Dim empTransUpdate As New Clshrs_EmployeesTransactions(Page)
+                                    empTransUpdate.RemainVacDaySettlement = remainDaysAfterSettlement
+                                    empTransUpdate.RemainVacSettlement = remainAmountAfterSettlement
+                                    empTransUpdate.Update("ID=" & transId1)
+                                End If
                             End If
 
                             splitTransId1 = transId1
@@ -1370,7 +1393,7 @@ Partial Class frmAttendancePreparation
                         det.TransactionTypeID = Convert.ToInt32(row("TransactionTypeID"))
                         det.EmpTransProjID = empTransProjId
                         det.TextValue = If(dtBenefits.Columns.Contains("Description"), Convert.ToString(row("Description")), "")
-                        det.NumericValue = amountPerConfirmedDay
+                        det.NumericValue = amount
                         det.Save()
 
                         If dtBenefits.Columns.Contains("EmpSchID") AndAlso Not IsDBNull(row("EmpSchID")) AndAlso Val(row("EmpSchID")) > 0 Then

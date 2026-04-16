@@ -1563,6 +1563,16 @@
         "
         ExecuteUpdate(SQL)
 
+        SQL = "
+
+        IF COL_LENGTH('hrs_VacationsTypes', 'LeaveDeductionTrans') IS NULL  
+        BEGIN
+            ALTER TABLE hrs_VacationsTypes
+            ADD LeaveDeductionTrans int
+        END
+        "
+        ExecuteUpdate(SQL)
+
         ''		SQL = "
 
         'IF NOT EXISTS

@@ -942,6 +942,25 @@ Partial Class frmEmployeesVacations
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry...Direct manager is not updated in your file please review HR Department /عفوا لايمكن حفظ طلبكم بسبب عدم توافر معلومات المدير المباشر..برجاء مراجعة ادارة الموارد البشرية "))
                 Exit Function
             End If
+
+            Dim clsVacType As New Clshrs_VacationsTypes(Page)
+            If clsVacType.Find("ID=" & DdlVacationType.SelectedItem.Value) Then
+                If Not IsDBNull(clsVacType.ConsiderAllowedDays) AndAlso CBool(clsVacType.ConsiderAllowedDays) Then
+                    Dim strCheckPending As String = "SELECT COUNT(1) FROM SS_VacationRequest " &
+                        "WHERE EmployeeID=" & ClsEmployees.ID & " AND VacationTypeID=" & DdlVacationType.SelectedItem.Value & " " &
+                        "AND (RequestStautsTypeID IS NULL OR RequestStautsTypeID IN (3,4))"
+                    Dim pendingCountObj As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, CommandType.Text, strCheckPending)
+                    Dim pendingCount As Integer = 0
+                    If pendingCountObj IsNot Nothing AndAlso Not IsDBNull(pendingCountObj) Then
+                        pendingCount = Convert.ToInt32(pendingCountObj)
+                    End If
+                    If pendingCount > 0 Then
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry there is another Vacation request stil need action! / عفوا لديك طلب اجازة اخر ينتظر الموافقه"))
+                        Return False
+                        Exit Function
+                    End If
+                End If
+            End If
             ''''''''''''''''''''''''''''''''''''''''''''''
 
 

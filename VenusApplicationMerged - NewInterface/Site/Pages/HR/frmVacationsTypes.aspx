@@ -549,6 +549,21 @@
     </td>
 
 </tr>
+
+                                                    <tr>
+    <td class="SeparArea">
+    </td>
+    <td class="LabelArea">
+        <asp:Label ID="Label_LeaveDeductionTrans" runat="server" 
+            meta:resourcekey="Label_LeaveDeductionTransResource1" SkinID="Label_DefaultNormal" Text="Leave Deduction Transaction"></asp:Label>
+    </td>
+    <td class="DataArea">
+        <asp:DropDownList ID="ddlLeaveDeductionTrans" runat="server" Enabled="True" 
+            SkinID="DropDownList_LargNormal">
+        </asp:DropDownList>
+    </td>
+
+</tr>
                                                 </table>
                                             </td>
                                             <td style="width: 6%; height: 16px; vertical-align: top">

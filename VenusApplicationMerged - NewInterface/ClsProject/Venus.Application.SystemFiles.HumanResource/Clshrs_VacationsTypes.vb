@@ -27,9 +27,9 @@ Public Class Clshrs_VacationsTypesBase
     Public Sub New(ByVal Page As Web.UI.Page)
         MyBase.New(Page)
         mTable = " hrs_VacationsTypes "
-        mInsertParameter = " Code,EngName,ArbName,ArbName4S,IsPaid,Sex,IsAnnual,IsSickVacation,AffectEOS,HasPayment,ForSalaryTransaction,Remarks,RegUserID,RegComputerID,CompanyId,OBalanceTransactionID,OverDueVacationID,Stage1PCT,Stage2PCT,Stage3PCT,ForDeductionTransaction,ExceededDaysType,RoundAnnualVacBalance,Religion,IsOfficial,OverlapWithAnotherVac,ConsiderAllowedDays,TimesNoInYear,AllowedDaysNo,ExcludedFromSSRequests,LeaveSubjectToDeduction "
-        mInsertParameterValues = " @Code,@EngName,@ArbName,@ArbName4S,@IsPaid,@Sex,@IsAnnual,@IsSickVacation,@AffectEOS,@HasPayment,@ForSalaryTransaction,@Remarks,@RegUserID,@RegComputerID,@CompanyId,@OBalanceTransactionID,@OverDueVacationID,@Stage1PCT,@Stage2PCT,@Stage3PCT,@ForDeductionTransaction,@ExceededDaysType,@RoundAnnualVacBalance,@Religion,@IsOfficial,@OverlapWithAnotherVac,@ConsiderAllowedDays,@TimesNoInYear,@AllowedDaysNo,@ExcludedFromSSRequests,@LeaveSubjectToDeduction "
-        mUpdateParameter = " Code=@Code,EngName=@EngName,ArbName=@ArbName,ArbName4S=@ArbName4S,IsPaid=@IsPaid,Sex=@Sex,IsAnnual=@IsAnnual,IsSickVacation=@IsSickVacation,AffectEOS=@AffectEOS,HasPayment=@HasPayment,ForSalaryTransaction=@ForSalaryTransaction,Remarks=@Remarks,OBalanceTransactionID=@OBalanceTransactionID,OverDueVacationID=@OverDueVacationID,Stage1PCT=@Stage1PCT,Stage2PCT=@Stage2PCT,Stage3PCT=@Stage3PCT,ForDeductionTransaction=@ForDeductionTransaction ,ExceededDaysType=@ExceededDaysType,RoundAnnualVacBalance=@RoundAnnualVacBalance,Religion=@Religion,IsOfficial=@IsOfficial,OverlapWithAnotherVac=@OverlapWithAnotherVac,ConsiderAllowedDays=@ConsiderAllowedDays,TimesNoInYear=@TimesNoInYear,AllowedDaysNo=@AllowedDaysNo,ExcludedFromSSRequests=@ExcludedFromSSRequests,LeaveSubjectToDeduction=@LeaveSubjectToDeduction "
+        mInsertParameter = " Code,EngName,ArbName,ArbName4S,IsPaid,Sex,IsAnnual,IsSickVacation,AffectEOS,HasPayment,ForSalaryTransaction,Remarks,RegUserID,RegComputerID,CompanyId,OBalanceTransactionID,OverDueVacationID,Stage1PCT,Stage2PCT,Stage3PCT,ForDeductionTransaction,LeaveDeductionTrans,ExceededDaysType,RoundAnnualVacBalance,Religion,IsOfficial,OverlapWithAnotherVac,ConsiderAllowedDays,TimesNoInYear,AllowedDaysNo,ExcludedFromSSRequests,LeaveSubjectToDeduction "
+        mInsertParameterValues = " @Code,@EngName,@ArbName,@ArbName4S,@IsPaid,@Sex,@IsAnnual,@IsSickVacation,@AffectEOS,@HasPayment,@ForSalaryTransaction,@Remarks,@RegUserID,@RegComputerID,@CompanyId,@OBalanceTransactionID,@OverDueVacationID,@Stage1PCT,@Stage2PCT,@Stage3PCT,@ForDeductionTransaction,@LeaveDeductionTrans,@ExceededDaysType,@RoundAnnualVacBalance,@Religion,@IsOfficial,@OverlapWithAnotherVac,@ConsiderAllowedDays,@TimesNoInYear,@AllowedDaysNo,@ExcludedFromSSRequests,@LeaveSubjectToDeduction "
+        mUpdateParameter = " Code=@Code,EngName=@EngName,ArbName=@ArbName,ArbName4S=@ArbName4S,IsPaid=@IsPaid,Sex=@Sex,IsAnnual=@IsAnnual,IsSickVacation=@IsSickVacation,AffectEOS=@AffectEOS,HasPayment=@HasPayment,ForSalaryTransaction=@ForSalaryTransaction,Remarks=@Remarks,OBalanceTransactionID=@OBalanceTransactionID,OverDueVacationID=@OverDueVacationID,Stage1PCT=@Stage1PCT,Stage2PCT=@Stage2PCT,Stage3PCT=@Stage3PCT,ForDeductionTransaction=@ForDeductionTransaction,LeaveDeductionTrans=@LeaveDeductionTrans ,ExceededDaysType=@ExceededDaysType,RoundAnnualVacBalance=@RoundAnnualVacBalance,Religion=@Religion,IsOfficial=@IsOfficial,OverlapWithAnotherVac=@OverlapWithAnotherVac,ConsiderAllowedDays=@ConsiderAllowedDays,TimesNoInYear=@TimesNoInYear,AllowedDaysNo=@AllowedDaysNo,ExcludedFromSSRequests=@ExcludedFromSSRequests,LeaveSubjectToDeduction=@LeaveSubjectToDeduction "
         mSelectCommand = " Select * From  " & mTable
         mInsertCommand = " insert into " & mTable & "( " & mInsertParameter & ")Values(" & mInsertParameterValues & ")"
         mUpdateCommand = " Update " & mTable & " Set " & mUpdateParameter
@@ -77,6 +77,7 @@ Public Class Clshrs_VacationsTypesBase
     Private mStage2PCT As Object
     Private mStage3PCT As Object
     Private mForDeductionTransaction As Integer
+    Private mLeaveDeductionTrans As Integer
     Private mExceededDaysType As Integer
 
 
@@ -261,6 +262,14 @@ Public Class Clshrs_VacationsTypesBase
         End Get
         Set(ByVal Value As Integer)
             mForDeductionTransaction = Value
+        End Set
+    End Property
+    Public Property LeaveDeductionTrans() As Integer
+        Get
+            Return mLeaveDeductionTrans
+        End Get
+        Set(ByVal Value As Integer)
+            mLeaveDeductionTrans = Value
         End Set
     End Property
     Public Property Remarks() As String
@@ -652,6 +661,7 @@ Public Class Clshrs_VacationsTypesBase
             mOBalanceTransactionID = Nothing
             mOverDueVacationID = Nothing
             mForDeductionTransaction = 0
+            mLeaveDeductionTrans = 0
             mStage1PCT = 0
             mStage2PCT = 0
             mStage3PCT = 0
@@ -829,6 +839,11 @@ Public Class Clshrs_VacationsTypesBase
                 mHasPayment = mDataHandler.DataValue_Out(.Item("HasPayment"), SqlDbType.Bit)
                 mForSalaryTransaction = mDataHandler.DataValue_Out(.Item("ForSalaryTransaction"), SqlDbType.Int)
                 mForDeductionTransaction = mDataHandler.DataValue_Out(.Item("ForDeductionTransaction"), SqlDbType.Int)
+                If Ds.Tables(0).Columns.Contains("LeaveDeductionTrans") Then
+                    mLeaveDeductionTrans = mDataHandler.DataValue_Out(.Item("LeaveDeductionTrans"), SqlDbType.Int)
+                Else
+                    mLeaveDeductionTrans = 0
+                End If
                 mRemarks = mDataHandler.DataValue_Out(.Item("Remarks"), SqlDbType.VarChar)
                 mRegUserID = mDataHandler.DataValue_Out(.Item("RegUserID"), SqlDbType.Int, True)
                 mRegComputerID = mDataHandler.DataValue_Out(.Item("RegComputerID"), SqlDbType.Int, True)
@@ -881,6 +896,7 @@ Public Class Clshrs_VacationsTypesBase
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@HasPayment", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mHasPayment, SqlDbType.Bit)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ForSalaryTransaction", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mForSalaryTransaction, SqlDbType.Int)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ForDeductionTransaction", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mForDeductionTransaction, SqlDbType.Int)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@LeaveDeductionTrans", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mLeaveDeductionTrans, SqlDbType.Int)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Remarks", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mRemarks, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@RegUserID", SqlDbType.Int)).Value = mDataHandler.DataValue_In(Me.mDataBaseUserRelatedID, SqlDbType.Int, True)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@RegComputerID", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mRegComputerID, SqlDbType.Int, True)

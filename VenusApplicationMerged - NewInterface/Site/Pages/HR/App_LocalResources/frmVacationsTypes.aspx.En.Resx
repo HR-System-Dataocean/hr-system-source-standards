@@ -456,4 +456,7 @@
   <data name="chkLeaveSubjectToDeductionResource1.Text" xml:space="preserve">
     <value />
   </data>
+  <data name="Label_LeaveDeductionTransResource1.Text" xml:space="preserve">
+    <value>Leave Deduction Transaction</value>
+  </data>
 </root>
