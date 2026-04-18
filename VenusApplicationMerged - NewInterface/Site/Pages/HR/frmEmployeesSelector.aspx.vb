@@ -2247,6 +2247,7 @@ Partial Class frmEmployeesSelector
                         _sys_User.Find("ID = '" & User & "'")
 
                         Dim strlog As String = "INsert into Hrs_Att_Salary_Log values('Attendance','Prepare/تجهيز','" & txtCode.Text & "'," & _sys_User.ID & ",'" & DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") & "'," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
+
                         Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsFisicalPeriods.ConnectionString, Data.CommandType.Text, strlog)
 
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,

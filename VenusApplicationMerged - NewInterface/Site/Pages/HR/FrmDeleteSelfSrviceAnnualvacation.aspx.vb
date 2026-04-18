@@ -90,9 +90,10 @@ Partial Class frmAttendancePreparation
                         Dim ClsEmployeesTransactions As New Clshrs_EmployeesTransactions(Page)
                         ClsEmployeesVacations.Find("ID=" & TrnsID & "")
                         ClsEmployeesTransactions.Find("EmployeesVacationsID=" & ClsEmployeesVacations.ID)
+                        Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
+                        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
                         If ClsEmployeesVacations.VacationTypeID = 1 Then
-                            Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
-                            Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
+
                             Dim STRNoLatervacations As String
                             STRNoLatervacations = "set dateformat dmy; Select count(id) from hrs_employeesvacations where ActualStartDate > '" & ClsEmployeesVacations.ActualStartDate & "' And CancelDate is null and EmployeeID='" & ClsEmployeesVacations.EmployeeID & "' And VacationTypeID=1"
                             Dim LaterVacationsCounts As Integer
@@ -103,7 +104,20 @@ Partial Class frmAttendancePreparation
                             End If
                         End If
 
+                        Dim ClsFisicalYearsPeriods As New Clssys_FiscalYearsPeriods(Me)
+                        ClsFisicalYearsPeriods.Find("FromDate <= '" & ClsEmployees.SetHigriDate(ClsEmployeesVacations.ActualStartDate) & "' and ToDate >='" & ClsEmployees.SetHigriDate(ClsEmployeesVacations.ActualStartDate) & "'")
+                        Dim periodSql As String
+                        Dim periodPrepared As Integer
+                        periodSql = "select count(hrs_EmployeesTransactions.ID) from hrs_EmployeesTransactions where hrs_EmployeesTransactions.PrepareType='N' and hrs_EmployeesTransactions.FiscalYearPeriodID=" & ClsFisicalYearsPeriods.ID & " and hrs_EmployeesTransactions.EmployeeID=" & ClsEmployeesVacations.EmployeeID
+                        periodPrepared = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, periodSql)
 
+
+                        If periodPrepared > 0 Then
+
+
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry...Can't delete a Leave within a Prepared period.!/!لايمكن حذف اجازة داخل فترة مجهزة "))
+                            Return
+                        End If
 
                         If (ClsEmployeesTransactions.DataSet.Tables(0).Rows.Count < 1) Then
                             ClsEmployeesVacations.Remarks = TxtDeleteReason.Text
@@ -118,18 +132,7 @@ Partial Class frmAttendancePreparation
                             End If
 
 
-                            Dim ClsFisicalYearsPeriods As New Clssys_FiscalYearsPeriods(Me)
-                            ClsFisicalYearsPeriods.Find("FromDate <= '" & ClsEmployees.SetHigriDate(ClsEmployeesVacations.ActualStartDate) & "' and ToDate >='" & ClsEmployees.SetHigriDate(ClsEmployeesVacations.ActualStartDate) & "'")
-                            Dim periodSql As String
-                            Dim periodPrepared As Integer
-                            periodSql = "select count(hrs_EmployeesTransactions.ID) from hrs_EmployeesTransactions where hrs_EmployeesTransactions.PrepareType='N' and hrs_EmployeesTransactions.FiscalYearPeriodID=" & ClsFisicalYearsPeriods.ID & " and hrs_EmployeesTransactions.EmployeeID=" & ClsEmployeesVacations.EmployeeID
-                            periodPrepared = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, periodSql)
 
-
-                            If periodPrepared > 0 Then
-                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry...Can't delete a Leave within a Prepared period.!/!لايمكن حذف اجازة داخل فترة مجهزة "))
-                                Return
-                            End If
                             If CancelRequest(VacationRequestID, FormCode, ClsEmployeesVacations.EmployeeID) Then
                                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, " Delete Done !/!تم الحذف"))
                                 Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
@@ -222,7 +225,7 @@ Partial Class frmAttendancePreparation
         SqlCommand.Connection.Open()
         SqlCommand.ExecuteNonQuery()
         SqlCommand.Connection.Close()
-        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Delete Operation Has been canceled Successfully./تمت عملية الحذف بنجاح "))
+        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Delete Operation Has been Done Successfully./تمت عملية الحذف بنجاح "))
 
 
 

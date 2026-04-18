@@ -7887,7 +7887,7 @@ ALTER TABLE dbo.sys_Documents ADD
 	[TransactionType] [varchar](50) NULL,
 	[EmployeeCode] [varchar](50) NULL,
 	[UserID] [int] NULL,
-	[Transactiondate] [datetime] NULL,
+	[Transactiondate] [varchar](50) NULL,
 	[FisicalPeriod] [int] NULL,
 	[DepartmentID] [int] NULL,
 	[BranchID] [int] NULL,
@@ -7901,6 +7901,9 @@ ALTER TABLE dbo.sys_Documents ADD
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]"
+        ExecuteUpdate(SQL)
+        SQL = "ALTER TABLE [dbo].[Hrs_Att_Salary_Log] ALTER COLUMN [Transactiondate] VARCHAR(50) NULL
+"
         ExecuteUpdate(SQL)
 
     End Function
