@@ -293,10 +293,11 @@ Partial Class frmEmployeesLoansDeductions
                     If Not String.IsNullOrEmpty(ClsEmployeesPayability.Src) AndAlso Not String.IsNullOrEmpty(ClsEmployeesPayability.RequestID) Then
                         If String.Equals(ClsEmployeesPayability.Src, "frmEmployeesOthersVacations", StringComparison.OrdinalIgnoreCase) Then
                             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "This Transaction was generated from Employees Others Vacations / هذه الحركة تم إنشاؤها من إجازات الموظفين الأخرى"))
-                        Else
-                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "This Transaction was generated from another source/request and cannot be deleted / هذه الحركة مرتبطة بطلب ولا يمكن حذفها"))
+                            Exit Sub
+                            'Else
+                            '    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "This Transaction was generated from another source/request and cannot be deleted / هذه الحركة مرتبطة بطلب ولا يمكن حذفها"))
                         End If
-                        Exit Sub
+
                     End If
                     If hrsemployeeTransactions.Find("PostDate is not null and ID = " & ClsEmployeesPayability.RegComputerID) Then
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Locked Record /الملف مغلق"))
@@ -440,6 +441,12 @@ Partial Class frmEmployeesLoansDeductions
                 txtTransactionType.Enabled = False
                 txtTransactionAmount.Enabled = False
                 ImageButton_Delete.Enabled = True
+
+                If String.Equals(ClsEmployeesPayability.Src, "frmEmployeesOthersVacations", StringComparison.OrdinalIgnoreCase) Then
+                    btnOpenSettlements.Visible = False
+                Else
+                    btnOpenSettlements.Visible = True
+                End If
             End If
         End If
     End Sub

@@ -923,13 +923,18 @@ Partial Class frmAttendancePreparation
                     Exit Function
                 End If
 
-                Dim EmployeesVacationBeforeLastOne As Clshrs_EmployeesVacations = ClsEmployeesVacations2
-                Dim LastEmployeesVacationTransactions = New Clshrs_EmployeesTransactions(Me.Page)
-                If EmployeesVacationBeforeLastOne.ID > 0 AndAlso Not LastEmployeesVacationTransactions.Find("EmployeesVacationsID = " & EmployeesVacationBeforeLastOne.ID) Then
-                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " There Is a previous vacation without settlement / يوجد اجازة سابقة من دون مستحق "))
-                    Return False
-                    Exit Function
+                If DdlVacationType.SelectedValue = "1" Then
+
+
+                    Dim EmployeesVacationBeforeLastOne As Clshrs_EmployeesVacations = ClsEmployeesVacations2
+                    Dim LastEmployeesVacationTransactions = New Clshrs_EmployeesTransactions(Me.Page)
+                    If EmployeesVacationBeforeLastOne.ID > 0 AndAlso Not LastEmployeesVacationTransactions.Find("EmployeesVacationsID = " & EmployeesVacationBeforeLastOne.ID) Then
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " There Is a previous vacation without settlement / يوجد اجازة سابقة من دون مستحقات "))
+                        Return False
+                        Exit Function
+                    End If
                 End If
+
             End If
 
             Dim ClsVacations As New Clshrs_VacationsTypes(Page)

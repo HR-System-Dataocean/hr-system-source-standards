@@ -1111,9 +1111,9 @@ Partial Class frmEmployeesVacations
                                 SqlCommand.Connection.Open()
                                 SqlCommand.ExecuteNonQuery()
                                 SqlCommand.Connection.Close()
-                                If CBool(Row("IsHidden")) Then
-                                    Exit For
-                                End If
+                                'If CBool(Row("IsHidden")) Then
+                                '    Exit For
+                                'End If
                             Next
                         Else
                             Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)

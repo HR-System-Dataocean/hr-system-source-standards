@@ -135,16 +135,78 @@ Partial Class frmEmployeesOthersVacations
             Return False
         End If
 
-        Dim insertScheduleSql As String = "Insert Into hrs_EmployeesPayabilitiesSchedules(" &
-            "EmployeePayabilityId,DueDate,DueAmount,RegUserID,CompanyId" &
-            ") values (" &
-            "@EmployeePayabilityId,@DueDate,@DueAmount,@RegUserID,@CompanyId)"
-        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(clsEmployeesPayability.ConnectionString, CommandType.Text, insertScheduleSql,
-            New SqlParameter("@EmployeePayabilityId", payId),
-            New SqlParameter("@DueDate", dueDate),
-            New SqlParameter("@DueAmount", totalAmount),
-            New SqlParameter("@RegUserID", clsEmployeesPayability.DataBaseUserRelatedID),
-            New SqlParameter("@CompanyId", clsEmployeesPayability.MainCompanyID))
+        Dim endDate As Date = dueDate
+        If clsEmployeesVacationsLocal.ID > 0 Then
+            If clsEmployeesVacationsLocal.ActualEndDate <> Date.MinValue Then
+                endDate = clsEmployeesVacationsLocal.ActualEndDate
+            ElseIf clsEmployeesVacationsLocal.ExpectedEndDate <> Date.MinValue Then
+                endDate = clsEmployeesVacationsLocal.ExpectedEndDate
+            End If
+        End If
+        If endDate < dueDate Then
+            endDate = dueDate
+        End If
+
+        If clsEmployeesVacationsLocal.ID <= 0 OrElse endDate = dueDate Then
+            Dim insertScheduleSql As String = "Insert Into hrs_EmployeesPayabilitiesSchedules(" &
+                "EmployeePayabilityId,DueDate,DueAmount,RegUserID,CompanyId" &
+                ") values (" &
+                "@EmployeePayabilityId,@DueDate,@DueAmount,@RegUserID,@CompanyId)"
+            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(clsEmployeesPayability.ConnectionString, CommandType.Text, insertScheduleSql,
+                New SqlParameter("@EmployeePayabilityId", payId),
+                New SqlParameter("@DueDate", dueDate),
+                New SqlParameter("@DueAmount", totalAmount),
+                New SqlParameter("@RegUserID", clsEmployeesPayability.DataBaseUserRelatedID),
+                New SqlParameter("@CompanyId", clsEmployeesPayability.MainCompanyID))
+        Else
+            Dim totalCalendarDays As Integer = CInt(DateDiff(DateInterval.Day, dueDate.Date, endDate.Date)) + 1
+            If totalCalendarDays <= 0 Then
+                totalCalendarDays = 1
+            End If
+
+            Dim insertScheduleSql As String = "Insert Into hrs_EmployeesPayabilitiesSchedules(" &
+                "EmployeePayabilityId,DueDate,DueAmount,RegUserID,CompanyId" &
+                ") values (" &
+                "@EmployeePayabilityId,@DueDate,@DueAmount,@RegUserID,@CompanyId)"
+
+            Dim curStart As Date = dueDate.Date
+            Dim totalInserted As Double = 0
+            While curStart <= endDate.Date
+                Dim lastDayInMonth As Date = New Date(curStart.Year, curStart.Month, Date.DaysInMonth(curStart.Year, curStart.Month))
+                Dim curEnd As Date = If(lastDayInMonth < endDate.Date, lastDayInMonth, endDate.Date)
+
+                Dim curCalendarDays As Integer = CInt(DateDiff(DateInterval.Day, curStart, curEnd)) + 1
+                If curCalendarDays <= 0 Then
+                    curCalendarDays = 0
+                End If
+
+                Dim dueDateForMonth As Date = New Date(curStart.Year, curStart.Month, 1)
+
+                Dim isLastChunk As Boolean = (curEnd >= endDate.Date)
+                Dim chunkAmount As Double
+                If isLastChunk Then
+                    chunkAmount = Math.Round(totalAmount - totalInserted, 2, MidpointRounding.AwayFromZero)
+                Else
+                    Dim ratio As Double = 0
+                    If totalCalendarDays > 0 Then
+                        ratio = curCalendarDays / CDbl(totalCalendarDays)
+                    End If
+                    chunkAmount = Math.Round(totalAmount * ratio, 2, MidpointRounding.AwayFromZero)
+                End If
+
+                If chunkAmount <> 0 Then
+                    Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(clsEmployeesPayability.ConnectionString, CommandType.Text, insertScheduleSql,
+                        New SqlParameter("@EmployeePayabilityId", payId),
+                        New SqlParameter("@DueDate", dueDateForMonth),
+                        New SqlParameter("@DueAmount", chunkAmount),
+                        New SqlParameter("@RegUserID", clsEmployeesPayability.DataBaseUserRelatedID),
+                        New SqlParameter("@CompanyId", clsEmployeesPayability.MainCompanyID))
+                    totalInserted = Math.Round(totalInserted + chunkAmount, 2, MidpointRounding.AwayFromZero)
+                End If
+
+                curStart = curEnd.AddDays(1)
+            End While
+        End If
 
         Return True
     End Function
