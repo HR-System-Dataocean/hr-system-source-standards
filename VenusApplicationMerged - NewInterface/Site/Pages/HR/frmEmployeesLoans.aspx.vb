@@ -65,6 +65,8 @@ Partial Class frmEmployeesLoans
                 txtTransactionDate.Value = Format(currDate, "dd/MM/yyyy")
                 WebDateChooser1.Value = Format(currDate, "dd/MM/yyyy")
 
+
+
                 Dim AllowDelayInstallmentPart As Boolean
                 Dim dt As DataSet
                 Dim struseccenter As String = "select AllowDelayInstallmentPart from sys_SystemConfig"
@@ -312,7 +314,7 @@ Partial Class frmEmployeesLoans
 
                     If Not String.IsNullOrEmpty(ClsEmployeesPayability.Src) AndAlso Not String.IsNullOrEmpty(ClsEmployeesPayability.RequestID) Then
                         If String.Equals(ClsEmployeesPayability.Src, "frmEmployeesOthersVacations", StringComparison.OrdinalIgnoreCase) Then
-                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "This Transaction was generated from Employees Others Vacations / هذه الحركة تم إنشاؤها من إجازات الموظفين الأخرى"))
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "The action cannot be deleted because it was created from another vacation screen. / لايمكن حذف الحركة لانها منشأة من شاشة الاجازات الاخرى"))
                             Exit Sub
                         End If
 
@@ -480,8 +482,20 @@ Partial Class frmEmployeesLoans
                 If String.Equals(ClsEmployeesPayability.Src, "frmEmployeesOthersVacations", StringComparison.OrdinalIgnoreCase) Then
                     btnOpenSettlements.Visible = False
                     btnOpenPartSettlements.Visible = False
+
+                    txtInstalmentAmount.Enabled = False
+                    txtNoofInstalment.Enabled = False
+                    btnRecalculate.Visible = False
+                    btnAmount.Visible = False
+                    txtMaxLoanDeduction.Enabled = False
                 Else
                     btnOpenSettlements.Visible = True
+
+                    txtInstalmentAmount.Enabled = True
+                    txtNoofInstalment.Enabled = True
+                    btnRecalculate.Visible = True
+                    btnAmount.Visible = True
+                    txtMaxLoanDeduction.Enabled = True
                 End If
             End If
         End If
@@ -790,7 +804,9 @@ Partial Class frmEmployeesLoans
                 Dim instDate As Date = .GetInstalmentDate(.ID)
                 Dim mDataHandler As New Venus.Shared.DataHandler
                 WebDateChooser1.Value = .GetHigriDate(instDate)
-
+                If Not String.IsNullOrEmpty(.Src) AndAlso String.Equals(.Src, "frmEmployeesOthersVacations", StringComparison.OrdinalIgnoreCase) Then
+                    WebDateChooser1.Value = IIf(.TransactionDate = Nothing, "", .TransactionDate)
+                End If
                 ddlWithSalary.SelectedValue = .SalaryLink
 
                 'If ClsEmploueesPayabilitySchedules.FindPayments("EmployeePayabilityId=" & IIf(.ID Is Nothing, 0, .ID)) Then

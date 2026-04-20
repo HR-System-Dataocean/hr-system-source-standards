@@ -159,7 +159,7 @@ Partial Class frmEmployeesOthersVacations
                 New SqlParameter("@RegUserID", clsEmployeesPayability.DataBaseUserRelatedID),
                 New SqlParameter("@CompanyId", clsEmployeesPayability.MainCompanyID))
         Else
-            Dim totalCalendarDays As Integer = CInt(DateDiff(DateInterval.Day, dueDate.Date, endDate.Date)) + 1
+            Dim totalCalendarDays As Integer = CInt(DateDiff(DateInterval.Day, dueDate.Date, endDate.Date))
             If totalCalendarDays <= 0 Then
                 totalCalendarDays = 1
             End If
@@ -171,29 +171,33 @@ Partial Class frmEmployeesOthersVacations
 
             Dim curStart As Date = dueDate.Date
             Dim totalInserted As Double = 0
+            totalCalendarDays = CInt(DateDiff(DateInterval.Day, dueDate.Date, endDate.Date))
+            Dim dayCost As Double = amountPerDay
+            Dim briviousAmountTransferred As Double = 0
             While curStart <= endDate.Date
                 Dim lastDayInMonth As Date = New Date(curStart.Year, curStart.Month, Date.DaysInMonth(curStart.Year, curStart.Month))
                 Dim curEnd As Date = If(lastDayInMonth < endDate.Date, lastDayInMonth, endDate.Date)
 
                 Dim curCalendarDays As Integer = CInt(DateDiff(DateInterval.Day, curStart, curEnd)) + 1
+                If endDate.Date = curEnd.Date Then
+                    curCalendarDays = CInt(DateDiff(DateInterval.Day, curStart, curEnd))
+                End If
                 If curCalendarDays <= 0 Then
                     curCalendarDays = 0
                 End If
 
                 Dim dueDateForMonth As Date = New Date(curStart.Year, curStart.Month, 1)
 
-                Dim isLastChunk As Boolean = (curEnd >= endDate.Date)
                 Dim chunkAmount As Double
-                If isLastChunk Then
-                    chunkAmount = Math.Round(totalAmount - totalInserted, 2, MidpointRounding.AwayFromZero)
+                chunkAmount = Math.Round(dayCost * curCalendarDays, 2, MidpointRounding.AwayFromZero)
+                chunkAmount = chunkAmount + briviousAmountTransferred
+                Dim Days30Amount As Double = Math.Round(dayCost * 30, 2, MidpointRounding.AwayFromZero)
+                If chunkAmount >= Days30Amount Then
+                    briviousAmountTransferred = (chunkAmount - Days30Amount) + 1
+                    chunkAmount = chunkAmount - briviousAmountTransferred
                 Else
-                    Dim ratio As Double = 0
-                    If totalCalendarDays > 0 Then
-                        ratio = curCalendarDays / CDbl(totalCalendarDays)
-                    End If
-                    chunkAmount = Math.Round(totalAmount * ratio, 2, MidpointRounding.AwayFromZero)
+                    briviousAmountTransferred = 0
                 End If
-
                 If chunkAmount <> 0 Then
                     Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(clsEmployeesPayability.ConnectionString, CommandType.Text, insertScheduleSql,
                         New SqlParameter("@EmployeePayabilityId", payId),

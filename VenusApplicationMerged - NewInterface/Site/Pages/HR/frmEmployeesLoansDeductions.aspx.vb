@@ -292,7 +292,7 @@ Partial Class frmEmployeesLoansDeductions
 
                     If Not String.IsNullOrEmpty(ClsEmployeesPayability.Src) AndAlso Not String.IsNullOrEmpty(ClsEmployeesPayability.RequestID) Then
                         If String.Equals(ClsEmployeesPayability.Src, "frmEmployeesOthersVacations", StringComparison.OrdinalIgnoreCase) Then
-                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "This Transaction was generated from Employees Others Vacations / هذه الحركة تم إنشاؤها من إجازات الموظفين الأخرى"))
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "The action cannot be deleted because it was created from another vacation screen. / لايمكن حذف الحركة لانها منشأة من شاشة الاجازات الاخرى"))
                             Exit Sub
                             'Else
                             '    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "This Transaction was generated from another source/request and cannot be deleted / هذه الحركة مرتبطة بطلب ولا يمكن حذفها"))
@@ -444,8 +444,20 @@ Partial Class frmEmployeesLoansDeductions
 
                 If String.Equals(ClsEmployeesPayability.Src, "frmEmployeesOthersVacations", StringComparison.OrdinalIgnoreCase) Then
                     btnOpenSettlements.Visible = False
+
+                    txtInstalmentAmount.Enabled = False
+                    txtNoofInstalment.Enabled = False
+                    btnRecalculate.Visible = False
+                    btnAmount.Visible = False
+                    txtMaxLoanDeduction.Enabled = False
                 Else
                     btnOpenSettlements.Visible = True
+
+                    txtInstalmentAmount.Enabled = True
+                    txtNoofInstalment.Enabled = True
+                    btnRecalculate.Visible = True
+                    btnAmount.Visible = True
+                    txtMaxLoanDeduction.Enabled = True
                 End If
             End If
         End If
