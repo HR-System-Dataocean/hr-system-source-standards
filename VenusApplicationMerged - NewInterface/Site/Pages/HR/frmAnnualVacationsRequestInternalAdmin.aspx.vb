@@ -365,6 +365,10 @@ Partial Class frmAnnualVacationsRequestInternalAdmin
             TxtRemarks.Text = ""
             ImageButton_Delete.Enabled = False
             ImageButton_Save.Enabled = True
+
+            If Not String.IsNullOrWhiteSpace(txtEmployee.Text) Then
+                GetEmpContractVac()
+            End If
         Catch ex As Exception
             mErrorHandler = New Venus.Shared.ErrorsHandler(ClsEmployeesVacations.ConnectionString)
             Page.Session.Add("ErrorValue", ex)

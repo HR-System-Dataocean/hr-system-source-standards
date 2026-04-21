@@ -427,6 +427,16 @@ Partial Class frmEmployeesVacations
                 Return
             End If
 
+            Dim hasTransSql As String = "SELECT COUNT(1) FROM hrs_EmployeesTransactions t WHERE t.EmployeesVacationsID = @VacationID"
+            Dim transCount As Integer = Convert.ToInt32(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, CommandType.Text, hasTransSql,
+                New SqlParameter("@VacationID", ClsEmployeesVacations.ID)))
+            If transCount > 0 Then
+                Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
+                Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "This request cannot be canceled because payables were added for it./لا يمكن الغاء الاجازة لانه تم اضافة مستحقات لها"))
+                Return
+            End If
+
         End If
 
         If CancelRequest(FormCode, RequestSerial) Then

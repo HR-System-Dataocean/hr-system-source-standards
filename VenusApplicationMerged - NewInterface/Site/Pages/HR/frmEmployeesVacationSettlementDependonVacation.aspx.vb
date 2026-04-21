@@ -237,6 +237,22 @@ Partial Class frmEmployeesVacationTransactions
                 textLastPaymentDate.Text = ClsEmployeesTransactions.LastPaidDate
                 textLastPaymentDateH.Text = CheckDate(textLastPaymentDate.Text)
                 SetData2(ClsEmployeesTransactions.EmployeeID, ClsEmployeesTransactions.ID, ClsEmployeesTransactions.EmployeesVacationsID)
+
+                Dim selectedVacationId As Integer = Val(ClsEmployeesTransactions.EmployeesVacationsID)
+                If selectedVacationId > 0 Then
+                    Dim hasNvSql As String = "SELECT COUNT(1) FROM hrs_EmployeesTransactions t WHERE t.EmployeesVacationsID = @VacationID AND t.PrepareType = @PrepareType"
+                    Dim nvCount As Integer = Convert.ToInt32(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesTransactions.ConnectionString, Data.CommandType.Text, hasNvSql,
+                        New SqlParameter("@VacationID", selectedVacationId),
+                        New SqlParameter("@PrepareType", "NV")))
+                    If nvCount > 0 Then
+                        chkWithSalary.Checked = False
+                        CheckBox_SalaryPayment.Checked = True
+                    Else
+                        chkWithSalary.Checked = True
+                        CheckBox_SalaryPayment.Checked = False
+                    End If
+                End If
+
                 If Not IsNothing(selectedPaidDays) AndAlso Not (selectedPaidDays Is DBNull.Value) Then
                     SettlementDaysText.Text = selectedPaidDays
                 Else
