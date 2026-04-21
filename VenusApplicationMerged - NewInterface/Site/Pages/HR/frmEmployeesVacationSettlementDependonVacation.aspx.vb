@@ -1,6 +1,7 @@
 ﻿Imports Venus.Application.SystemFiles.System
 Imports Venus.Application.SystemFiles.HumanResource
 Imports System.Data
+Imports System.Data.SqlClient
 Imports Infragistics.WebUI.UltraWebGrid
 Imports Venus.Application.SystemFiles.System.ClsDataAcessLayer
 
