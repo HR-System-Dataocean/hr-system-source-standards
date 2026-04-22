@@ -497,7 +497,7 @@
                                                                                     <asp:ListItem meta:resourcekey="lblEnterResource1" Value="IN">إذن دخول</asp:ListItem>
                                                                                     <asp:ListItem meta:resourcekey="lblExitResource1" Value="Out">إذن خروج</asp:ListItem>
                                                                                     <asp:ListItem meta:resourcekey="lblduringResource1" Value="DUring">خلال / اثناء الدوام</asp:ListItem>
-                                                                                    <asp:ListItem meta:resourcekey="lblFullResource1" Value="Full">كامل الدوام</asp:ListItem>
+                                                                                    <asp:ListItem meta:resourcekey="lblFullResource1" Value="Full">تايم باك</asp:ListItem>
                                                             </asp:DropDownList>
                                                         </td>
                                                     </tr>

@@ -384,6 +384,87 @@ Partial Class frmEmployeesVacations
             Dim FormCode As String = "" & ddlFormCode.SelectedValue & ""
             Dim ConnectionString As String = ConfigurationManager.AppSettings("Connstring").ToString()
 
+            Dim hasEndlessRequests As Integer = 0
+            Try
+                hasEndlessRequests = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnectionString, Data.CommandType.Text, "Select Count(1) From SS_RequestActions Where FormCode=@FormCode And ActionID Is Null", New SqlParameter("@FormCode", FormCode))
+            Catch ex As Exception
+            End Try
+
+            If hasEndlessRequests > 0 Then
+                Dim dsExistingConfig As DataSet = Nothing
+                Dim configById As New System.Collections.Generic.Dictionary(Of Integer, DataRow)()
+                Try
+                    dsExistingConfig = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnectionString, Data.CommandType.Text, "Select ID, UserTypeID, PositionID, EmployeeID, Rank From SS_Configuration Where FormCode=@FormCode", New SqlParameter("@FormCode", FormCode))
+                    If Not IsNothing(dsExistingConfig) AndAlso dsExistingConfig.Tables.Count > 0 Then
+                        For Each row As DataRow In dsExistingConfig.Tables(0).Rows
+                            If Not IsDBNull(row("ID")) Then
+                                Dim id As Integer = Convert.ToInt32(row("ID"))
+                                If Not configById.ContainsKey(id) Then
+                                    configById.Add(id, row)
+                                End If
+                            End If
+                        Next
+                    End If
+                Catch ex As Exception
+                End Try
+
+                Dim hasChangeInKeys As Boolean = False
+                For Each DGRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow In uwgSSConfiguration.Rows
+                    Dim rowId As Integer = 0
+                    Try
+                        rowId = Convert.ToInt32(DGRow.Cells(0).Value)
+                    Catch ex As Exception
+                        rowId = 0
+                    End Try
+
+                    Dim userTypeVal As String = If(IsNothing(DGRow.Cells(1).Value), "", DGRow.Cells(1).Value.ToString().Trim())
+                    Dim positionVal As String = If(IsNothing(DGRow.Cells(2).Value), "", DGRow.Cells(2).Value.ToString().Trim())
+                    Dim employeeVal As String = If(IsNothing(DGRow.Cells(3).Value), "", DGRow.Cells(3).Value.ToString().Trim())
+                    Dim rankVal As String = If(IsNothing(DGRow.Cells(4).Value), "", DGRow.Cells(4).Value.ToString().Trim())
+
+                    If rowId <= 0 Then
+                        If userTypeVal <> "" OrElse positionVal <> "" OrElse employeeVal <> "" OrElse rankVal <> "" Then
+                            hasChangeInKeys = True
+                            Exit For
+                        End If
+                        Continue For
+                    End If
+
+                    If configById.ContainsKey(rowId) Then
+                        Dim dbRow As DataRow = configById(rowId)
+                        Dim dbUserType As String = If(IsDBNull(dbRow("UserTypeID")), "", dbRow("UserTypeID").ToString().Trim())
+                        Dim dbPosition As String = If(IsDBNull(dbRow("PositionID")), "", dbRow("PositionID").ToString().Trim())
+                        Dim dbEmployee As String = If(IsDBNull(dbRow("EmployeeID")), "", dbRow("EmployeeID").ToString().Trim())
+                        Dim dbRank As String = If(IsDBNull(dbRow("Rank")), "", dbRow("Rank").ToString().Trim())
+
+                        If userTypeVal <> dbUserType OrElse positionVal <> dbPosition OrElse employeeVal <> dbEmployee OrElse rankVal <> dbRank Then
+                            hasChangeInKeys = True
+                            Exit For
+                        End If
+                    Else
+                        If userTypeVal <> "" OrElse positionVal <> "" OrElse employeeVal <> "" OrElse rankVal <> "" Then
+                            hasChangeInKeys = True
+                            Exit For
+                        End If
+                    End If
+                Next
+
+                If hasChangeInKeys Then
+                    Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnectionString)
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "cant update rows because this type has endless requests/لا يمكن تعديل الصفوف لان هذا النوع لديه طلبات غير منتهية"))
+                    Return False
+                End If
+            End If
+
+            Dim WebHandler As New Venus.Shared.Web.WebHandler
+            Dim User As String = String.Empty
+            WebHandler.GetCookies(Page, "UserID", User)
+            Dim _sys_User As New Clssys_Users(Page)
+            If Not String.IsNullOrWhiteSpace(User) Then
+                _sys_User.Find("ID = '" & User & "'")
+            End If
+            Dim regUserId As Integer = _sys_User.ID
+
             'Dim Deletecommand As String = "Delete from SS_Configuration where FormCode='" & FormCode & "' "
             'Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ConnectionString, Data.CommandType.Text, Deletecommand)
             Dim CanEdit As Boolean
@@ -411,10 +492,10 @@ Partial Class frmEmployeesVacations
                     CanBeCanceledInThisLevel = CBool(DGRow.Cells("8").Value)
                     If DGRow.Cells(0).Value > 0 Then
 
-                        str = "update SS_Configuration set [UserTypeID]='" & DGRow.Cells(1).Value & "',[PositionID]='" & DGRow.Cells(2).Value & "',[EmployeeID]='" & DGRow.Cells(3).Value & "',[Rank]='" & DGRow.Cells(4).Value & "',[CanEdit]='" & DGRow.Cells(5).Value & "',[IsFinal]='" & DGRow.Cells(6).Value & "',[ApplyForAll]='" & DGRow.Cells(7).Value & "',CanBeCanceledInThisLevel='" & DGRow.Cells(8).Value & "' where ID='" & DGRow.Cells(0).Value & "' "
+                        str = "update SS_Configuration set [UserTypeID]='" & DGRow.Cells(1).Value & "',[PositionID]='" & DGRow.Cells(2).Value & "',[EmployeeID]='" & DGRow.Cells(3).Value & "',[Rank]='" & DGRow.Cells(4).Value & "',[CanEdit]='" & DGRow.Cells(5).Value & "',[IsFinal]='" & DGRow.Cells(6).Value & "',[ApplyForAll]='" & DGRow.Cells(7).Value & "',CanBeCanceledInThisLevel='" & DGRow.Cells(8).Value & "',RegUserID='" & regUserId & "',RegDate=GETDATE() where ID='" & DGRow.Cells(0).Value & "' "
                         Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ConnectionString, Data.CommandType.Text, str)
                     Else
-                        str = "INSERT INTO [dbo].[SS_Configuration] ([FormCode],[UserTypeID],[PositionID],[EmployeeID],[Rank],[CanEdit],[IsFinal],[ApplyForAll],CanBeCanceledInThisLevel) VALUES ('" & FormCode & "','" & DGRow.Cells(1).Value & "','" & DGRow.Cells(2).Value & "','" & DGRow.Cells(3).Value & "','" & DGRow.Cells(4).Value & "','" & DGRow.Cells(5).Value & "','" & DGRow.Cells(6).Value & "','" & DGRow.Cells(7).Value & "','" & CanBeCanceledInThisLevel & "')"
+                        str = "INSERT INTO [dbo].[SS_Configuration] ([FormCode],[UserTypeID],[PositionID],[EmployeeID],[Rank],[CanEdit],[IsFinal],[ApplyForAll],[CanBeCanceledInThisLevel],[RegUserID],[RegDate]) VALUES ('" & FormCode & "','" & DGRow.Cells(1).Value & "','" & DGRow.Cells(2).Value & "','" & DGRow.Cells(3).Value & "','" & DGRow.Cells(4).Value & "','" & DGRow.Cells(5).Value & "','" & DGRow.Cells(6).Value & "','" & DGRow.Cells(7).Value & "','" & CanBeCanceledInThisLevel & "','" & regUserId & "',GETDATE())"
                         Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ConnectionString, Data.CommandType.Text, str)
                     End If
 
@@ -437,7 +518,7 @@ Partial Class frmEmployeesVacations
                     ApplyForAll = CBool(DGRow.Cells("7").Value)
                     CanBeCanceledInThisLevel = CBool(DGRow.Cells("8").Value)
                     'Dim str As String = "INSERT INTO [dbo].[SS_Configuration] ([FormCode],[UserTypeID],[PositionID],[EmployeeID],[Rank],[CanEdit],[IsFinal],[ApplyForAll],CanBeCanceledInThisLevel) VALUES ('" & FormCode & "','" & DGRow.Cells(0).Value & "','" & DGRow.Cells(1).Value & "','" & DGRow.Cells(2).Value & "','" & DGRow.Cells(3).Value & "','" & DGRow.Cells(4).Value & "','" & DGRow.Cells(5).Value & "','" & DGRow.Cells(6).Value & "','" & CanBeCanceledInThisLevel & "')"
-                    Str = "INSERT INTO [dbo].[SS_Configuration] ([FormCode],[UserTypeID],[PositionID],[EmployeeID],[Rank],[CanEdit],[IsFinal],[ApplyForAll],CanBeCanceledInThisLevel) VALUES ('" & FormCode & "','" & DGRow.Cells(1).Value & "','" & DGRow.Cells(2).Value & "','" & DGRow.Cells(3).Value & "','" & DGRow.Cells(4).Value & "','" & DGRow.Cells(5).Value & "','" & DGRow.Cells(6).Value & "','" & DGRow.Cells(7).Value & "','" & CanBeCanceledInThisLevel & "')"
+                    Str = "INSERT INTO [dbo].[SS_Configuration] ([FormCode],[UserTypeID],[PositionID],[EmployeeID],[Rank],[CanEdit],[IsFinal],[ApplyForAll],[CanBeCanceledInThisLevel],[RegUserID],[RegDate]) VALUES ('" & FormCode & "','" & DGRow.Cells(1).Value & "','" & DGRow.Cells(2).Value & "','" & DGRow.Cells(3).Value & "','" & DGRow.Cells(4).Value & "','" & DGRow.Cells(5).Value & "','" & DGRow.Cells(6).Value & "','" & DGRow.Cells(7).Value & "','" & CanBeCanceledInThisLevel & "','" & regUserId & "',GETDATE())"
                     Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ConnectionString, Data.CommandType.Text, str)
                 Next
             End If
@@ -720,6 +801,25 @@ Partial Class frmEmployeesVacations
 
     Private Sub UltraGrid1_BeforeRowsDeleted(sender As Object, e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles uwgSSConfiguration.DeleteRow
         Dim ConnectionString As String = ConfigurationManager.AppSettings("Connstring").ToString()
+        Dim formCode As String = ddlFormCode.SelectedValue.Trim()
+        Dim hasEndlessRequests As Integer = 0
+        Try
+            hasEndlessRequests = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnectionString, Data.CommandType.Text, "Select Count(1) From SS_RequestActions Where FormCode=@FormCode And ActionID Is Null", New SqlParameter("@FormCode", formCode))
+        Catch ex As Exception
+        End Try
+
+        If hasEndlessRequests > 0 Then
+            Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnectionString)
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "cant delete rows because this type has endless requests/لا يمكن حذف الصفوف لان هذا النوع لديه طلبات غير منتهية"))
+            Try
+                Dim cancelProp = e.GetType().GetProperty("Cancel")
+                If Not IsNothing(cancelProp) AndAlso cancelProp.CanWrite Then
+                    cancelProp.SetValue(e, True, Nothing)
+                End If
+            Catch ex As Exception
+            End Try
+            Exit Sub
+        End If
         Dim str = "delete SS_Configuration  where ID='" & e.Row.Cells(0).Value & "'; "
         deletedString = hdDeletedStr.Value.ToString() + str
         hdDeletedStr.Value = deletedString

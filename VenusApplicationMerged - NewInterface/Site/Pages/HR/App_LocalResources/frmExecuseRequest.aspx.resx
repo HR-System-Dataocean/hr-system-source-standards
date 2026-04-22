@@ -346,7 +346,7 @@
     <value>الاولى - لدوام فترتين</value>
   </data>
   <data name="lblFullResource1.Text" xml:space="preserve">
-    <value>كامل الدوام</value>
+    <value>تايم باك</value>
   </data>
   <data name="lblMedicalResource1.Text" xml:space="preserve">
     <value>عذر مرضي</value>

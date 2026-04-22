@@ -9107,6 +9107,26 @@ INSERT [dbo].[SS_ResignationReason] ([Code], [ArbName], [EngName], [Description]
         ExecuteUpdate(SQL)
 
         SQL = "
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+              WHERE Name = N'RegUserID'
+              AND Object_ID = Object_ID(N'dbo.SS_Configuration'))
+BEGIN
+    ALTER TABLE dbo.SS_Configuration ADD RegUserID int NULL
+END
+"
+        ExecuteUpdate(SQL)
+
+        SQL = "
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+              WHERE Name = N'RegDate'
+              AND Object_ID = Object_ID(N'dbo.SS_Configuration'))
+BEGIN
+    ALTER TABLE dbo.SS_Configuration ADD RegDate datetime NULL
+END
+"
+        ExecuteUpdate(SQL)
+
+        SQL = "
 ALTER TABLE dbo.SS_ContactInformationUpdate ADD
 	E_Mail varchar(255) NULL,
 	Phone varchar(100) NULL,

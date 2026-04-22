@@ -346,7 +346,7 @@
     <value>First</value>
   </data>
   <data name="lblFullResource1.Text" xml:space="preserve">
-    <value>Full Shift</value>
+    <value>Time Back</value>
   </data>
   <data name="lblMedicalResource1.Text" xml:space="preserve">
     <value>Medical Excuse</value>

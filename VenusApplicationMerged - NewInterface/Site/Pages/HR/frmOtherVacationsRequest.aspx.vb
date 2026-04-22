@@ -2484,7 +2484,7 @@ Partial Class frmEmployeesVacations
         Dim previousPeriods As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strpreviousPeriods)
 
         Dim newStart As DateTime = Convert.ToDateTime(WebDateChooser1.Value)
-        Dim newEnd As DateTime = Convert.ToDateTime(WebDateChooser2.Value)
+        Dim newEnd As DateTime = Convert.ToDateTime(WebDateChooser2.Value).AddDays(-1)
 
         Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
         ClsVacationTypes.Find(" ID=" & DdlVacationType.SelectedItem.Value)
@@ -2509,7 +2509,7 @@ Partial Class frmEmployeesVacations
         Dim previousPeriods As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strpreviousPeriods)
 
         Dim newStart As DateTime = Convert.ToDateTime(WebDateChooser1.Value)
-        Dim newEnd As DateTime = Convert.ToDateTime(WebDateChooser2.Value)
+        Dim newEnd As DateTime = Convert.ToDateTime(WebDateChooser2.Value).AddDays(-1)
 
         Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
         ClsVacationTypes.Find(" ID=" & DdlVacationType.SelectedItem.Value)

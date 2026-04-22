@@ -127,7 +127,7 @@
     <value>Previous Excuses</value>
   </data>
   <data name="lblAllShiftResource1.Text" xml:space="preserve">
-    <value>Full day</value>
+    <value>Time Back</value>
   </data>
   <data name="lblBackTimeResource1.Text" xml:space="preserve">
     <value>Time back</value>
