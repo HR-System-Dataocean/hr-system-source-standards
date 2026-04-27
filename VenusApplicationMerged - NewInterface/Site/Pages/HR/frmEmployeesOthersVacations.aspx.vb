@@ -1399,20 +1399,20 @@ Partial Class frmEmployeesOthersVacations
                     Exit Function
                 End If
             End If
-            Try
-                Dim clsVacationTypes As New Clshrs_VacationsTypes(Page)
-                clsVacationTypes.Find(" ID=" & DdlVacationType.SelectedItem.Value)
-                If clsVacationTypes.LeaveSubjectToDeduction Then
-                    Dim clsEmp As New Clshrs_Employees(Page)
-                    clsEmp.Find("Code='" & txtEmployee.Text & "'")
+            'Try
+            '    Dim clsVacationTypes As New Clshrs_VacationsTypes(Page)
+            '    clsVacationTypes.Find(" ID=" & DdlVacationType.SelectedItem.Value)
+            '    If clsVacationTypes.LeaveSubjectToDeduction Then
+            '        Dim clsEmp As New Clshrs_Employees(Page)
+            '        clsEmp.Find("Code='" & txtEmployee.Text & "'")
 
-                    Dim transDate As Date = CDate(WebDateChooser1.Value)
-                    transDate = clsEmp.SetHigriDate(transDate)
-                    Dim clsEmpClass As Clshrs_EmployeeClasses = GetEmployeeClassForDate(clsEmp.ID, transDate)
-                    SaveLeaveDeductionPayability(recordId, clsEmp.ID, transDate, Val(txtVactiondays.Text), clsEmpClass, clsVacationTypes.LeaveDeductionTrans)
-                End If
-            Catch ex As Exception
-            End Try
+            '        Dim transDate As Date = CDate(WebDateChooser1.Value)
+            '        transDate = clsEmp.SetHigriDate(transDate)
+            '        Dim clsEmpClass As Clshrs_EmployeeClasses = GetEmployeeClassForDate(clsEmp.ID, transDate)
+            '        SaveLeaveDeductionPayability(recordId, clsEmp.ID, transDate, Val(txtVactiondays.Text), clsEmpClass, clsVacationTypes.LeaveDeductionTrans)
+            '    End If
+            'Catch ex As Exception
+            'End Try
 
             clsMainOtherFields.CollectDataAndSave(value.Text, ClsEmployeesVacations.Table, recordId)
             value.Text = ""

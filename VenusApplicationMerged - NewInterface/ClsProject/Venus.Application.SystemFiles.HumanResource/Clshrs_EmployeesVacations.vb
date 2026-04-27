@@ -1836,6 +1836,63 @@ Public Class Clshrs_EmployeesVacations
     Public Function GetAllEmployeePreviousVacationsForPeriod(ByVal PeriodID As Integer, ByVal EmployeeID As Integer) As Data.DataSet
         Return Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnectionString, "GetAllEmployeePreviousVacationsForPeriod", EmployeeID, PeriodID)
     End Function
+
+    Public Function GetVacationDaysByVacTypeInFisicalMonth(ByVal IntEmployeeId As Integer, ByVal intVacType As Integer, ByVal monthFisicalPeriod As Integer) As Single
+        Dim FisicalStartDate As Date = Nothing
+        Dim FisicalEndDate As Date = Nothing
+        Dim VacationDays As Single
+        Dim StrSelectCommand As String = String.Empty
+        Dim ClsFisicalYearsPeriods As New Clssys_FiscalYearsPeriods(mPage)
+
+        If monthFisicalPeriod = 0 Then Return 0
+
+        If Not ClsFisicalYearsPeriods.Find(" sys_FiscalYearsPeriods.ID = " & monthFisicalPeriod) Then
+            Return 0
+        End If
+
+        FisicalStartDate = ClsFisicalYearsPeriods.FromDate
+        FisicalEndDate = ClsFisicalYearsPeriods.ToDate
+
+        StrSelectCommand = CONFIG_DATEFORMAT & "
+    SELECT 
+    CASE 
+        WHEN DAY(EOMONTH('" & FisicalStartDate & "')) = 31
+             AND MAX(ISNULL(ActualEndDate, '" & FisicalEndDate & "')) >= EOMONTH('" & FisicalStartDate & "')
+        THEN SUM(DaysCalc) - 1
+        ELSE SUM(DaysCalc)
+    END
+    FROM (
+        SELECT 
+            DATEDIFF(DAY,
+                CASE 
+                    WHEN ActualStartDate < '" & FisicalStartDate & "' THEN '" & FisicalStartDate & "' 
+                    ELSE ActualStartDate 
+                END,
+                DATEADD(DAY, 1,
+                    CASE 
+                        WHEN ISNULL(ActualEndDate, '" & FisicalEndDate & "') > '" & FisicalEndDate & "' THEN '" & FisicalEndDate & "' 
+                        ELSE ISNULL(ActualEndDate, '" & FisicalEndDate & "') 
+                    END
+                )
+            ) AS DaysCalc,
+            ActualEndDate
+        FROM hrs_employeesvacations
+        INNER JOIN hrs_vacationsTypes 
+            ON hrs_EmployeesVacations.VacationTypeId = hrs_VacationsTypes.Id
+        WHERE hrs_VacationsTypes.ID = " & intVacType & "
+          AND hrs_employeesvacations.CancelDate IS NULL
+          AND EmployeeID = " & IntEmployeeId & "
+          AND ActualStartDate IS NOT NULL
+          AND ActualStartDate <= '" & FisicalEndDate & "'
+          AND ISNULL(ActualEndDate, '" & FisicalEndDate & "') >= '" & FisicalStartDate & "'
+    ) T"
+
+        VacationDays = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(mConnectionString, CommandType.Text, StrSelectCommand)
+
+        If IsDBNull(VacationDays) Then Return 0
+
+        Return VacationDays
+    End Function
 #End Region
 
 #Region "Class Private Function"

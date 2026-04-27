@@ -1223,4 +1223,8 @@ Public Class Clshrs_VacationsTypes
         Dim strcommand As String = "SELECT * FROM hrs_VacationsTypes WHERE IsSickVacation = 1 "
         Return Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(mConnectionString, CommandType.Text, strcommand)
     End Function
+    Public Function GetIsDeducOtherVacations() As Data.DataSet
+        Dim strcommand As String = "SELECT [ID],[LeaveDeductionTrans] FROM hrs_VacationsTypes WHERE LeaveSubjectToDeduction = 1 order by LeaveDeductionTrans"
+        Return Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(mConnectionString, CommandType.Text, strcommand)
+    End Function
 End Class

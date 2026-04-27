@@ -419,7 +419,7 @@ Partial Class frmEmployeesSelector
                             WebHandler.GetCookies(Page, "UserID", User)
                             Dim _sys_User As New Clssys_Users(Page)
                             _sys_User.Find("ID = '" & User & "'")
-                            Dim strlog As String = "Insert into Hrs_Att_Salary_Log values ('Salary','Refund/استعادة','" & txtCode.Text & "'," & _sys_User.ID & ",'" & DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") & "'," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
+                            Dim strlog As String = "Insert into Hrs_Att_Salary_Log values ('Salary','Refund/استعادة','" & txtCode.Text & "'," & _sys_User.ID & ",'" & DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") & "'," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
                             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsFisicalPeriods.ConnectionString, Data.CommandType.Text, strlog)
 
                             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Operation Done !/!تمت العملية"))
@@ -1571,6 +1571,72 @@ Partial Class frmEmployeesSelector
                                                                                                                 " Values (" & DeducationRow(3) & ",@ProjectTransID," & DeducationRow("Amount") & ",convert(date,'" & FiscToDate.ToString("dd/MM/yyyy") & "',103)); "
                                         End If
                                     Next
+
+                                    '-----Mousa----------- VAC Deduction
+                                    Dim VacDeducDays As Decimal = 0
+                                    'Dim VacationsTypes As New Clshrs_VacationsTypes(Page)
+                                    'Dim VacationDays As Integer = 0
+                                    Dim DeducVAcDays As Integer = 0
+                                    'Dim IsSickVacationsType As DataSet = VacationsTypes.GetIsSickVacations()
+                                    Dim hasVacDeduction As DataSet = VacationsTypes.GetIsDeducOtherVacations()
+                                    Dim transTypeID As String = ""
+                                    Dim EmployeeVacation As New Clshrs_EmployeesVacations(Page)
+                                    ClsFisicalPeriods.Find("ID = " & DdlPeriods.SelectedValue)
+                                    Dim index = 0
+                                    For Each vacation As DataRow In hasVacDeduction.Tables(0).Rows()
+                                        If Convert.ToString(vacation("LeaveDeductionTrans")) <> transTypeID Then
+                                            If transTypeID <> "" And DeducVAcDays > 0 Then
+                                                If ClsEmployeeClass.LeaveDeductionFormula <> "" Then
+
+                                                    Dim ClsSolver = New Clshrs_FormulaSolver(ClsEmployeeClass.ConnectionString, Page)
+                                                    ClsSolver.EmployeeID = ClsEmployees.ID
+                                                    ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
+                                                    ClsSolver.NoOfDaysPerPeriod = ClsEmployeeClass.NoOfDaysPerPeriod
+                                                    ClsSolver.Executedate = ToDate
+                                                    ClsSolver.EvaluateExpression(ClsEmployeeClass.LeaveDeductionFormula)
+                                                    Dim ObjDeducVac As Double = IIf(IsNumeric(ClsSolver.Output), ClsSolver.Output, 0)
+
+                                                    If ObjDeducVac > 0 Then
+                                                        Dim Deducvalue As Decimal = ObjDeducVac * DeducVAcDays
+                                                        cmdString &= " Insert Into hrs_EmployeesTransactionsDetails (EmpTransProjID,TransactionTypeID,NumericValue,TextValue,EmployeePayabilityScheduleID)" &
+                                                                     " Values (@ProjectTransID," & transTypeID & "," & Deducvalue & ",'" & "Piaid" & "',Null); "
+
+                                                    End If
+                                                End If
+
+                                            End If
+                                            transTypeID = vacation("LeaveDeductionTrans")
+                                            DeducVAcDays = 0
+                                        End If
+
+                                        DeducVAcDays += EmployeeVacation.GetVacationDaysByVacTypeInFisicalMonth(EmployeeID, vacation.Item("ID").ToString(), ClsFisicalPeriods.ID)
+                                        index += 1
+                                        If index = hasVacDeduction.Tables(0).Rows().Count Then
+                                            If transTypeID <> "" And DeducVAcDays > 0 Then
+                                                If ClsEmployeeClass.LeaveDeductionFormula <> "" Then
+
+                                                    Dim ClsSolver = New Clshrs_FormulaSolver(ClsEmployeeClass.ConnectionString, Page)
+                                                    ClsSolver.EmployeeID = ClsEmployees.ID
+                                                    ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
+                                                    ClsSolver.NoOfDaysPerPeriod = ClsEmployeeClass.NoOfDaysPerPeriod
+                                                    ClsSolver.Executedate = ToDate
+                                                    ClsSolver.EvaluateExpression(ClsEmployeeClass.LeaveDeductionFormula)
+                                                    Dim ObjDeducVac As Double = IIf(IsNumeric(ClsSolver.Output), ClsSolver.Output, 0)
+
+                                                    If ObjDeducVac > 0 Then
+                                                        Dim Deducvalue As Decimal = ObjDeducVac * DeducVAcDays
+                                                        cmdString &= " Insert Into hrs_EmployeesTransactionsDetails (EmpTransProjID,TransactionTypeID,NumericValue,TextValue,EmployeePayabilityScheduleID)" &
+                                                                     " Values (@ProjectTransID," & transTypeID & "," & Deducvalue & ",'" & "Piaid" & "',Null); "
+
+                                                    End If
+                                                End If
+
+                                            End If
+                                        End If
+                                    Next
+
+                                    '---------------- VAC Deduction
+
                                 End If
                             ElseIf IntNoOfWorkDays > 0 And DTProjects.Rows.Count = 0 Then
                                 IntNoOfWorkDays = IntNoOfWorkDays
@@ -1623,6 +1689,71 @@ Partial Class frmEmployeesSelector
                                         End If
                                     Next
                                 End If
+
+                                '-----Mousa----------- VAC Deduction
+                                Dim VacDeducDays As Decimal = 0
+                                'Dim VacationsTypes As New Clshrs_VacationsTypes(Page)
+                                'Dim VacationDays As Integer = 0
+                                Dim DeducVAcDays As Integer = 0
+                                'Dim IsSickVacationsType As DataSet = VacationsTypes.GetIsSickVacations()
+                                Dim hasVacDeduction As DataSet = VacationsTypes.GetIsDeducOtherVacations()
+                                Dim transTypeID As String = ""
+                                Dim EmployeeVacation As New Clshrs_EmployeesVacations(Page)
+                                ClsFisicalPeriods.Find("ID = " & DdlPeriods.SelectedValue)
+                                Dim index = 0
+                                For Each vacation As DataRow In hasVacDeduction.Tables(0).Rows()
+                                    If Convert.ToString(vacation("LeaveDeductionTrans")) <> transTypeID Then
+                                        If transTypeID <> "" And DeducVAcDays > 0 Then
+                                            If ClsEmployeeClass.LeaveDeductionFormula <> "" Then
+
+                                                Dim ClsSolver = New Clshrs_FormulaSolver(ClsEmployeeClass.ConnectionString, Page)
+                                                ClsSolver.EmployeeID = ClsEmployees.ID
+                                                ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
+                                                ClsSolver.NoOfDaysPerPeriod = ClsEmployeeClass.NoOfDaysPerPeriod
+                                                ClsSolver.Executedate = ToDate
+                                                ClsSolver.EvaluateExpression(ClsEmployeeClass.LeaveDeductionFormula)
+                                                Dim ObjDeducVac As Double = IIf(IsNumeric(ClsSolver.Output), ClsSolver.Output, 0)
+
+                                                If ObjDeducVac > 0 Then
+                                                    Dim Deducvalue As Decimal = ObjDeducVac * DeducVAcDays
+                                                    cmdString &= " Insert Into hrs_EmployeesTransactionsDetails (EmpTransProjID,TransactionTypeID,NumericValue,TextValue,EmployeePayabilityScheduleID)" &
+                                                                     " Values (@ProjectTransID," & transTypeID & "," & Deducvalue & ",'" & "Piaid" & "',Null); "
+
+                                                End If
+                                            End If
+
+                                        End If
+                                        transTypeID = vacation("LeaveDeductionTrans")
+                                        DeducVAcDays = 0
+                                    End If
+
+                                    DeducVAcDays += EmployeeVacation.GetVacationDaysByVacTypeInFisicalMonth(EmployeeID, vacation.Item("ID").ToString(), ClsFisicalPeriods.ID)
+                                    index += 1
+                                    If index = hasVacDeduction.Tables(0).Rows().Count Then
+                                        If transTypeID <> "" And DeducVAcDays > 0 Then
+                                            If ClsEmployeeClass.LeaveDeductionFormula <> "" Then
+
+                                                Dim ClsSolver = New Clshrs_FormulaSolver(ClsEmployeeClass.ConnectionString, Page)
+                                                ClsSolver.EmployeeID = ClsEmployees.ID
+                                                ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
+                                                ClsSolver.NoOfDaysPerPeriod = ClsEmployeeClass.NoOfDaysPerPeriod
+                                                ClsSolver.Executedate = ToDate
+                                                ClsSolver.EvaluateExpression(ClsEmployeeClass.LeaveDeductionFormula)
+                                                Dim ObjDeducVac As Double = IIf(IsNumeric(ClsSolver.Output), ClsSolver.Output, 0)
+
+                                                If ObjDeducVac > 0 Then
+                                                    Dim Deducvalue As Decimal = ObjDeducVac * DeducVAcDays
+                                                    cmdString &= " Insert Into hrs_EmployeesTransactionsDetails (EmpTransProjID,TransactionTypeID,NumericValue,TextValue,EmployeePayabilityScheduleID)" &
+                                                                     " Values (@ProjectTransID," & transTypeID & "," & Deducvalue & ",'" & "Piaid" & "',Null); "
+
+                                                End If
+                                            End If
+
+                                        End If
+                                    End If
+                                Next
+
+                                '---------------- VAC Deduction
                             End If
                             If DTProjects.Rows.Count > 0 Then
                                 cmdString &= "insert into hrs_EmployeesTransactions(EmployeeID,FinancialWorkingUnits,FiscalYearPeriodID,PrepareType,Applyed,CBranchID,CDepartmetnID,CSectorID,CCost1,CCost2,CCost3,CCost4,CMainProjectID)Values(" & EmployeeID & "," & IntNoOfWorkDays & "," & IntFisicalPeriod & ",'N',0," & ClsEmployees.BranchID & "," & ClsEmployees.DepartmentID & "," & ClsEmployees.SectorID & "," & ClsEmployees.Cost1 & "," & ClsEmployees.Cost2 & "," & ClsEmployees.Cost3 & "," & ClsEmployees.Cost4 & "," & ClsEmployeeClass.DefaultProjectID & ");" & vbNewLine
@@ -1826,6 +1957,74 @@ Partial Class frmEmployeesSelector
 
 
                                     End If
+
+
+
+                                    '-----Mousa----------- VAC Deduction
+                                    Dim VacDeducDays As Decimal = 0
+                                    'Dim VacationsTypes As New Clshrs_VacationsTypes(Page)
+                                    'Dim VacationDays As Integer = 0
+                                    Dim DeducVAcDays As Integer = 0
+                                    'Dim IsSickVacationsType As DataSet = VacationsTypes.GetIsSickVacations()
+                                    Dim hasVacDeduction As DataSet = VacationsTypes.GetIsDeducOtherVacations()
+                                    Dim transTypeID As String = ""
+                                    Dim EmployeeVacation As New Clshrs_EmployeesVacations(Page)
+                                    ClsFisicalPeriods.Find("ID = " & DdlPeriods.SelectedValue)
+                                    Dim index = 0
+                                    For Each vacation As DataRow In hasVacDeduction.Tables(0).Rows()
+                                        If Convert.ToString(vacation("LeaveDeductionTrans")) <> transTypeID Then
+                                            If transTypeID <> "" And DeducVAcDays > 0 Then
+                                                If ClsEmployeeClass.LeaveDeductionFormula <> "" Then
+
+                                                    Dim ClsSolver = New Clshrs_FormulaSolver(ClsEmployeeClass.ConnectionString, Page)
+                                                    ClsSolver.EmployeeID = ClsEmployees.ID
+                                                    ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
+                                                    ClsSolver.NoOfDaysPerPeriod = ClsEmployeeClass.NoOfDaysPerPeriod
+                                                    ClsSolver.Executedate = ToDate
+                                                    ClsSolver.EvaluateExpression(ClsEmployeeClass.LeaveDeductionFormula)
+                                                    Dim ObjDeducVac As Double = IIf(IsNumeric(ClsSolver.Output), ClsSolver.Output, 0)
+
+                                                    If ObjDeducVac > 0 Then
+                                                        Dim Deducvalue As Decimal = ObjDeducVac * DeducVAcDays
+                                                        cmdString &= " Insert Into hrs_EmployeesTransactionsDetails (EmpTransProjID,TransactionTypeID,NumericValue,TextValue,EmployeePayabilityScheduleID)" &
+                                                                     " Values (@ProjectTransID," & transTypeID & "," & Deducvalue & ",'" & "Piaid" & "',Null); "
+
+                                                    End If
+                                                End If
+
+                                            End If
+                                            transTypeID = vacation("LeaveDeductionTrans")
+                                            DeducVAcDays = 0
+                                        End If
+
+                                        DeducVAcDays += EmployeeVacation.GetVacationDaysByVacTypeInFisicalMonth(EmployeeID, vacation.Item("ID").ToString(), ClsFisicalPeriods.ID)
+                                        index += 1
+                                        If index = hasVacDeduction.Tables(0).Rows().Count Then
+                                            If transTypeID <> "" And DeducVAcDays > 0 Then
+                                                If ClsEmployeeClass.LeaveDeductionFormula <> "" Then
+
+                                                    Dim ClsSolver = New Clshrs_FormulaSolver(ClsEmployeeClass.ConnectionString, Page)
+                                                    ClsSolver.EmployeeID = ClsEmployees.ID
+                                                    ClsSolver.FiscalPeriodID = ClsFisicalPeriods.ID
+                                                    ClsSolver.NoOfDaysPerPeriod = ClsEmployeeClass.NoOfDaysPerPeriod
+                                                    ClsSolver.Executedate = ToDate
+                                                    ClsSolver.EvaluateExpression(ClsEmployeeClass.LeaveDeductionFormula)
+                                                    Dim ObjDeducVac As Double = IIf(IsNumeric(ClsSolver.Output), ClsSolver.Output, 0)
+
+                                                    If ObjDeducVac > 0 Then
+                                                        Dim Deducvalue As Decimal = ObjDeducVac * DeducVAcDays
+                                                        cmdString &= " Insert Into hrs_EmployeesTransactionsDetails (EmpTransProjID,TransactionTypeID,NumericValue,TextValue,EmployeePayabilityScheduleID)" &
+                                                                     " Values (@ProjectTransID," & transTypeID & "," & Deducvalue & ",'" & "Piaid" & "',Null); "
+
+                                                    End If
+                                                End If
+
+                                            End If
+                                        End If
+                                    Next
+
+                                    '---------------- VAC Deduction
+
                                     cmdString &= "update hrs_EmployeesTransactionsProjects set OvertimeHours = " & OTHrs & ",HoliDayOvertimeHours = " & HOTHrs & ",AbsentDays = " & AbsDys & ",LatHours = " & latHrs & " where ID = @ProjectTransID;"
 
                                     Extrastrcommand = "select (isnull((select top 1 ID from hrs_TransactionsTypes where code = hrs_EmployeeExtraItems.TransactionCode),0)) as RelTransactionID,(isnull((select top 1 Sign from hrs_TransactionsTypes where code = hrs_EmployeeExtraItems.TransactionCode),0)) as Sign,Amount from hrs_EmployeeExtraItems"
@@ -1957,7 +2156,7 @@ Partial Class frmEmployeesSelector
             Dim _sys_User As New Clssys_Users(Page)
             _sys_User.Find("ID = '" & User & "'")
 
-            Dim strlog As String = "INsert into Hrs_Att_Salary_Log values('Salary','Prepare/تجهيز','" & txtCode.Text & "'," & _sys_User.ID & ",'" & DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") & "'," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
+            Dim strlog As String = "INsert into Hrs_Att_Salary_Log values('Salary','Prepare/تجهيز','" & txtCode.Text & "'," & _sys_User.ID & ",'" & DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") & "'," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsFisicalPeriods.ConnectionString, Data.CommandType.Text, strlog)
 
             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Operation Done !/!تمت العملية"))
@@ -2246,7 +2445,7 @@ Partial Class frmEmployeesSelector
                         Dim _sys_User As New Clssys_Users(Page)
                         _sys_User.Find("ID = '" & User & "'")
 
-                        Dim strlog As String = "INsert into Hrs_Att_Salary_Log values('Attendance','Prepare/تجهيز','" & txtCode.Text & "'," & _sys_User.ID & ",'" & DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") & "'," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
+                        Dim strlog As String = "INsert into Hrs_Att_Salary_Log values('Attendance','Prepare/تجهيز','" & txtCode.Text & "'," & _sys_User.ID & ",'" & DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") & "'," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
 
                         Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsFisicalPeriods.ConnectionString, Data.CommandType.Text, strlog)
 
@@ -2261,7 +2460,7 @@ Partial Class frmEmployeesSelector
                     WebHandler.GetCookies(Page, "UserID", User)
                     Dim _sys_User As New Clssys_Users(Page)
                     _sys_User.Find("ID = '" & User & "'")
-                    Dim strlog As String = "INsert into Hrs_Att_Salary_Log values('Attendance','Refund/استعادة','" & txtCode.Text & "'," & _sys_User.ID & ",'" & DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") & "'," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
+                    Dim strlog As String = "INsert into Hrs_Att_Salary_Log values('Attendance','Refund/استعادة','" & txtCode.Text & "'," & _sys_User.ID & ",'" & DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") & "'," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
                     Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsFisicalPeriods.ConnectionString, Data.CommandType.Text, strlog)
 
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
