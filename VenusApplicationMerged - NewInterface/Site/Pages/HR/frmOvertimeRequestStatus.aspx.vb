@@ -513,7 +513,7 @@ Partial Class frmEmployeesVacations
             StrCheckIsFinal = " Select isnull(IsFinal,0) From SS_Configuration where ID=" & ConfigID & ""
 
             Try
-                isFinal = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, StrCheckCanbeCanceled)
+                isFinal = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, StrCheckIsFinal)
 
 
             Catch ex As Exception

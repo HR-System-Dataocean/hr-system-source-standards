@@ -762,7 +762,7 @@ Partial Class frmOvertimeRequest
                 End If
             End If
             Dim STRNoOfRequestPerDay As String
-            STRNoOfRequestPerDay = "set dateformat dmy; Select count(id) from SS_OvertimeRequest where OvertimeDate = '" & OverTimeDate.Text & "' and EmployeeID='" & ClsEmployees.ID & "'"
+            STRNoOfRequestPerDay = "set dateformat dmy; Select count(id) from SS_OvertimeRequest where OvertimeDate = '" & OverTimeDate.Text & "' and RequestStautsTypeID <>2 and RequestStautsTypeID <> 5  and EmployeeID='" & ClsEmployees.ID & "'"
             Dim OvaerTimeCounts As Integer
             OvaerTimeCounts = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(CType(HttpContext.Current.Session("ConnectionString"), String), Data.CommandType.Text, STRNoOfRequestPerDay)
             If OvaerTimeCounts >= 1 Then
