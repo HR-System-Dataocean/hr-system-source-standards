@@ -1870,8 +1870,8 @@ Public Class Clshrs_EmployeesVacations
                 END,
                 DATEADD(DAY, 1,
                     CASE 
-                        WHEN ISNULL(ActualEndDate, '" & FisicalEndDate & "') > '" & FisicalEndDate & "' THEN '" & FisicalEndDate & "' 
-                        ELSE ISNULL(ActualEndDate, '" & FisicalEndDate & "') 
+                        WHEN ActualEndDate is not null and ActualEndDate > '" & FisicalEndDate & "' THEN '" & FisicalEndDate & "' 
+                        ELSE  DATEADD(DAY, -1,ActualEndDate) 
                     END
                 )
             ) AS DaysCalc,
