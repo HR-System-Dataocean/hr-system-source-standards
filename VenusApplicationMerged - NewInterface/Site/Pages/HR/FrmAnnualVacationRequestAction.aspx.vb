@@ -62,8 +62,11 @@ Partial Class frmAttendancePreparation
         If Not (month2Start.Year = endDate.Year AndAlso month2Start.Month = endDate.Month) Then
             Return False
         End If
-
-        month1Days = DateDiff(DateInterval.Day, startDate.Date, month1End.Date) + 1
+        Dim exact1EndDate = month1End.Date
+        If month1End.Date.Day = 31 Then
+            exact1EndDate = month1End.Date.AddDays(-1)
+        End If
+        month1Days = DateDiff(DateInterval.Day, startDate.Date, exact1EndDate.Date) + 1
         month2Days = DateDiff(DateInterval.Day, month2Start.Date, endDate.Date)
         month1Date = startDate.Date
         month2Date = month2Start.Date
@@ -1168,7 +1171,10 @@ Partial Class frmAttendancePreparation
                             Dim totalVacDays As Double = month1Days + month2Days
                             If totalVacDays <= 0 OrElse settlementDays <= 0 Then
                                 didSplit = False
+                            Else
+                                settlementDays = totalVacDays
                             End If
+
                         End If
 
                         Dim clsLocalBranch As New Clssys_Branches(Page)

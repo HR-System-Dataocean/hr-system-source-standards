@@ -509,8 +509,11 @@ Partial Class frmEmployeesVacationTransactions
         If Not (month2Start.Year = endDate.Year AndAlso month2Start.Month = endDate.Month) Then
             Return False
         End If
-
-        month1Days = DateDiff(DateInterval.Day, startDate.Date, month1End.Date) + 1
+        Dim exact1EndDate = month1End.Date
+        If month1End.Date.Day = 31 Then
+            exact1EndDate = month1End.Date.AddDays(-1)
+        End If
+        month1Days = DateDiff(DateInterval.Day, startDate.Date, exact1EndDate.Date) + 1
         month2Days = DateDiff(DateInterval.Day, month2Start.Date, endDate.Date) + 1
         month1Date = startDate.Date
         month2Date = month2Start.Date
@@ -717,9 +720,11 @@ Partial Class frmEmployeesVacationTransactions
                         End If
                     End If
 
+                    Dim exactTotalVacDays = Convert.ToDouble(Val(SettlementDaysText.Text))
                     If didSplit Then
                         Dim totalVacDays As Double = month1Days + month2Days
-                        Dim totalSettlementDays As Double = Convert.ToDouble(Val(SettlementDaysText.Text))
+                        Dim totalSettlementDays As Double = Convert.ToDouble(Val(totalVacDays))
+                        exactTotalVacDays = totalVacDays
                         If totalVacDays <= 0 OrElse totalSettlementDays <= 0 Then
                             didSplit = False
                         End If
@@ -730,12 +735,12 @@ Partial Class frmEmployeesVacationTransactions
                         ClsEmployeesTransactions.EmployeeID = IntEmployeeID
                         ClsEmployeesTransactions.FiscalYearPeriodID = ClsFisicalPeriods.ID
                         ClsEmployeesTransactions.PrepareType = "V"
-                        ClsEmployeesTransactions.FinancialWorkingUnits = Convert.ToDouble(Val(SettlementDaysText.Text))
+                        ClsEmployeesTransactions.FinancialWorkingUnits = exactTotalVacDays
                         ClsEmployeesTransactions.PaidDate = DteVacationDate
                         ClsEmployeesTransactions.CBranchID = ClsEmployees.BranchID
                         ClsEmployeesTransactions.EmployeesVacationsID = EmployeeVacationID
-                        ClsEmployeesTransactions.TotalVacDaySettlement = SettlementDaysText.Text
-                        ClsEmployeesTransactions.RemainVacDaySettlement = Convert.ToDouble(Val(txtPreparedDays.Text)) - Convert.ToDouble(Val(SettlementDaysText.Text))
+                        ClsEmployeesTransactions.TotalVacDaySettlement = exactTotalVacDays
+                        ClsEmployeesTransactions.RemainVacDaySettlement = Convert.ToDouble(Val(txtPreparedDays.Text)) - exactTotalVacDays
                         ClsEmployeesTransactions.LastPaidDate = textLastPaymentDate.Text
                         ClsEmployeesTransactions.RemainVacSettlement = SettlementForTotalDays.Value - SettlementForIsertedDays.Value
 
@@ -746,7 +751,7 @@ Partial Class frmEmployeesVacationTransactions
                         IntEmployeeTransactionID = ClsEmployeesTransactions.Save()
                     Else
                         Dim totalVacDays As Double = month1Days + month2Days
-                        Dim totalSettlementDays As Double = Convert.ToDouble(Val(SettlementDaysText.Text))
+                        Dim totalSettlementDays As Double = exactTotalVacDays
                         Dim factor1 As Double = month1Days / totalVacDays
                         Dim factor2 As Double = month2Days / totalVacDays
                         splitFactor1 = factor1
@@ -773,7 +778,7 @@ Partial Class frmEmployeesVacationTransactions
                             .CBranchID = ClsEmployees.BranchID
                             .EmployeesVacationsID = EmployeeVacationID
                             .TotalVacDaySettlement = settleDays1
-                            .RemainVacDaySettlement = Convert.ToDouble(Val(txtPreparedDays.Text)) - Convert.ToDouble(Val(SettlementDaysText.Text))
+                            .RemainVacDaySettlement = Convert.ToDouble(Val(txtPreparedDays.Text)) - exactTotalVacDays
                             .LastPaidDate = textLastPaymentDate.Text
                             .RemainVacSettlement = SettlementForTotalDays.Value - SettlementForIsertedDays.Value
                             If CurrrentSalTransaction > 0 Then
@@ -793,7 +798,7 @@ Partial Class frmEmployeesVacationTransactions
                                 .CBranchID = ClsEmployees.BranchID
                                 .EmployeesVacationsID = EmployeeVacationID
                                 .TotalVacDaySettlement = settleDays2
-                                .RemainVacDaySettlement = Convert.ToDouble(Val(txtPreparedDays.Text)) - Convert.ToDouble(Val(SettlementDaysText.Text))
+                                .RemainVacDaySettlement = Convert.ToDouble(Val(txtPreparedDays.Text)) - exactTotalVacDays
                                 .LastPaidDate = month1Date
                                 .RemainVacSettlement = SettlementForTotalDays.Value - SettlementForIsertedDays.Value
                                 If CurrrentSalTransaction > 0 Then
