@@ -1844,7 +1844,10 @@ Public Class Clshrs_EmployeesVacations
         Dim StrSelectCommand As String = String.Empty
         Dim ClsFisicalYearsPeriods As New Clssys_FiscalYearsPeriods(mPage)
 
-        If monthFisicalPeriod = 0 Then Return 0
+        If monthFisicalPeriod = 0 Then
+             Return 0
+
+        End If
 
         If Not ClsFisicalYearsPeriods.Find(" sys_FiscalYearsPeriods.ID = " & monthFisicalPeriod) Then
             Return 0
@@ -1887,7 +1890,13 @@ Public Class Clshrs_EmployeesVacations
           AND ISNULL(ActualEndDate, '" & FisicalEndDate & "') >= '" & FisicalStartDate & "'
     ) T"
 
-        VacationDays = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(mConnectionString, CommandType.Text, StrSelectCommand)
+        Dim result = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(mConnectionString, CommandType.Text, StrSelectCommand)
+
+        If result Is DBNull.Value OrElse result Is Nothing Then
+            VacationDays = 0
+        Else
+            VacationDays = Convert.ToSingle(result)
+        End If
 
         If IsDBNull(VacationDays) Then Return 0
 
