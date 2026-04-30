@@ -1276,10 +1276,10 @@ Partial Class frmAttendancePreparation
                             employeeTransactionId = transId1
 
                             If transId1 > 0 Then
-                                SaveVacationSettlementDetails(transId1, settleDays1, settlementDays, salaryResult.DtBenefits, salaryResult.DtDeductions, month1Days)
+                                SaveVacationSettlementDetails(transId1, settleDays1, settlementDays, salaryResult.DtBenefits, amountPerDay, salaryResult.DtDeductions, month1Days)
                             End If
                             If transId2 > 0 Then
-                                SaveVacationSettlementDetails(transId2, settleDays2, settlementDays, salaryResult.DtBenefits, salaryResult.DtDeductions, month2Days)
+                                SaveVacationSettlementDetails(transId2, settleDays2, settlementDays, salaryResult.DtBenefits, amountPerDay, salaryResult.DtDeductions, month2Days)
                             End If
 
                             If employeeTransactionId > 0 Then
@@ -1289,9 +1289,9 @@ Partial Class frmAttendancePreparation
                             Dim transType As New Clshrs_TransactionsTypes(Me)
                             transType.Find("ID = " & annualVacType.ForSalaryTransaction)
                             If splitTransId1 > 0 AndAlso splitTransId2 > 0 AndAlso splitPeriodId1 > 0 AndAlso splitPeriodId2 > 0 Then
-                                Dim totalAmt As Double = Convert.ToDouble(netAmount)
-                                Dim amt1 As Double = Math.Round(totalAmt * splitFactor1, 2, MidpointRounding.AwayFromZero)
-                                Dim amt2 As Double = Math.Round(totalAmt - amt1, 2, MidpointRounding.AwayFromZero)
+                                'Dim dayAmt As Double = Convert.ToDouble(netAmount) / settlementDays
+                                Dim amt1 As Double = Math.Round(amountPerDay * month1Days, 2, MidpointRounding.AwayFromZero)
+                                Dim amt2 As Double = Math.Round(amountPerDay * month2Days, 2, MidpointRounding.AwayFromZero)
                                 Dim strcommand As String = "set dateformat dmy; " &
                                     "insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & ClsEmployees.ID & "),''," & transType.Code & "," & amt1 & "," & splitPeriodId1 & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & splitTransId1 & "','101','');" &
                                     "insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & ClsEmployees.ID & "),''," & transType.Code & "," & amt2 & "," & splitPeriodId2 & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & splitTransId2 & "','101','')"
@@ -1438,7 +1438,7 @@ Partial Class frmAttendancePreparation
         Next
     End Sub
 
-    Private Sub SaveVacationSettlementDetails(transactionHeadId As Integer, workingUnits As Double, totalConfirmedDays As Double, dtBenefits As DataTable, dtDeductions As DataTable, splitFactor As Double)
+    Private Sub SaveVacationSettlementDetails(transactionHeadId As Integer, workingUnits As Double, totalConfirmedDays As Double, dtBenefits As DataTable, amountPerDay As Double, dtDeductions As DataTable, splitFactor As Double)
         Dim clsEmployeesLocal As New Clshrs_Employees(Page)
         Dim clsProjects As New Clshrs_Projects(Page, "hrs_projects")
         If Not clsProjects.Find(" CancelDate Is Null") Then
@@ -1467,13 +1467,14 @@ Partial Class frmAttendancePreparation
                         det.TransactionTypeID = Convert.ToInt32(row("TransactionTypeID"))
                         det.EmpTransProjID = empTransProjId
                         det.TextValue = If(dtBenefits.Columns.Contains("Description"), Convert.ToString(row("Description")), "")
-                        det.NumericValue = amountPerConfirmedDay
+                        det.NumericValue = amountPerDay * splitFactor
                         det.Save()
 
                         If dtBenefits.Columns.Contains("EmpSchID") AndAlso Not IsDBNull(row("EmpSchID")) AndAlso Val(row("EmpSchID")) > 0 Then
                             Dim comstring = "insert into hrs_EmployeeVacationOpenBalanceSettlement (OpenBalanceID,EmployeeTransactionID,Amount,Date,RegDate) values (" & row("EmpSchID") & "," & empTransProjId & "," & amount & ",getdate(),getdate())"
                             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsEmployeesLocal.ConnectionString, Data.CommandType.Text, comstring)
                         End If
+                        Exit For
                     End If
                 End If
             End If

@@ -812,12 +812,12 @@ Partial Class frmEmployeesVacationTransactions
                         splitTransId2 = transId2
 
                         IntEmployeeTransactionID = transId1
-
+                        Dim dayAmt As Double = Convert.ToDouble(lblNetSalary.Value) / Convert.ToDouble(Val(SettlementDaysText.Text))
                         If transId1 > 0 Then
-                            SaveDetails(transId1, IntEmployeeID, periodId1, factor1, settleDays1)
+                            SaveDetails(transId1, IntEmployeeID, periodId1, factor1, month1Days, settleDays1, dayAmt)
                         End If
                         If transId2 > 0 Then
-                            SaveDetails(transId2, IntEmployeeID, periodId2, factor2, settleDays2)
+                            SaveDetails(transId2, IntEmployeeID, periodId2, factor2, month2Days, settleDays2, dayAmt)
                         End If
                     End If
 
@@ -954,9 +954,9 @@ Partial Class frmEmployeesVacationTransactions
                         transactiontype.Find("ID = " & clsVacType.ForSalaryTransaction)
                         Dim strcommand As String
                         If didSplit AndAlso splitTransId1 > 0 AndAlso splitTransId2 > 0 AndAlso splitPeriodId1 > 0 AndAlso splitPeriodId2 > 0 Then
-                            Dim totalAmt As Double = Convert.ToDouble(lblNetSalary.Value)
-                            Dim amt1 As Double = Math.Round(totalAmt * splitFactor1, 2, MidpointRounding.AwayFromZero)
-                            Dim amt2 As Double = Math.Round(totalAmt - amt1, 2, MidpointRounding.AwayFromZero)
+                            Dim dayAmt As Double = Convert.ToDouble(lblNetSalary.Value) / Convert.ToDouble(Val(SettlementDaysText.Text))
+                            Dim amt1 As Double = Math.Round(dayAmt * month1Days, 2, MidpointRounding.AwayFromZero)
+                            Dim amt2 As Double = Math.Round(dayAmt * month2Days, 2, MidpointRounding.AwayFromZero)
                             strcommand = "set dateformat dmy; " &
                                          "insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & amt1 & "," & splitPeriodId1 & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & splitTransId1 & "','101','');" &
                                          "insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & amt2 & "," & splitPeriodId2 & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & splitTransId2 & "','101','')"
@@ -1159,7 +1159,7 @@ Partial Class frmEmployeesVacationTransactions
         End Try
     End Function
 
-    Private Function SaveDetails(ByVal TransactionHeadID As Integer, ByVal EmployeeID As Integer, ByVal FiscalPeriodID As Integer, ByVal splitFactor As Double, ByVal preparedDaysForRow As Double) As Boolean
+    Private Function SaveDetails(ByVal TransactionHeadID As Integer, ByVal EmployeeID As Integer, ByVal FiscalPeriodID As Integer, ByVal splitfactor As Double, ByVal monthDays As Double, ByVal preparedDaysForRow As Double, ByVal dayAmt As Double) As Boolean
         Dim ObjRowDet As New Infragistics.WebUI.UltraWebGrid.UltraGridRow
         Dim ClsEmployeesPayabilityScheduleSttlments As New Clshrs_EmployeesPayabilitySchedulesSettlement(Me.Page)
         Dim ObjErrorHandler As New Venus.Shared.Errors.ErrorsHandler(ClsEmployeesPayabilityScheduleSttlments.ConnectionString)
@@ -1197,14 +1197,15 @@ Partial Class frmEmployeesVacationTransactions
                     ClsEmployeeTransactionsDet.EmpTransProjID = intProjTrans
                     ClsEmployeeTransactionsDet.TextValue = ObjRowDet.Cells(2).Value
                     If Not ObjRowDet.Cells(1).Value Is DBNull.Value AndAlso Val(ObjRowDet.Cells(1).Value) > 0 Then
-                        ClsEmployeeTransactionsDet.NumericValue = Math.Round(Convert.ToDouble(ObjRowDet.Cells(1).Value) * splitFactor, 2, MidpointRounding.AwayFromZero)
+                        ClsEmployeeTransactionsDet.NumericValue = Math.Round(dayAmt * monthDays, 2, MidpointRounding.AwayFromZero)
 
                         ClsEmployeeTransactionsDet.Save()
                         If ObjRowDet.Cells(4).Value > 0 Then
-                            Dim scaledOpenBalAmount As Double = Math.Round(Convert.ToDouble(ObjRowDet.Cells(1).Value) * splitFactor, 2, MidpointRounding.AwayFromZero)
+                            Dim scaledOpenBalAmount As Double = Math.Round(dayAmt * monthDays, 2, MidpointRounding.AwayFromZero)
                             Dim Comstring = "insert into hrs_EmployeeVacationOpenBalanceSettlement (OpenBalanceID,EmployeeTransactionID,Amount,Date,RegDate) values (" & ObjRowDet.Cells(4).Value & "," & intProjTrans & "," & scaledOpenBalAmount & ",getdate(),getdate())"
                             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, Comstring)
                         End If
+                        Exit For
                     End If
                 End If
             Next
@@ -1215,7 +1216,7 @@ Partial Class frmEmployeesVacationTransactions
                         Dim ClsEmpTransDet As New Clshrs_EmployeesTransactionsDetails(Page)
                         With ClsEmpTransDet
                             .EmpTransProjID = intProjTrans
-                            .NumericValue = Math.Round(Convert.ToDouble(ObjLoans.Cells(1).Value) * splitFactor, 2, MidpointRounding.AwayFromZero)
+                            .NumericValue = Math.Round(Convert.ToDouble(ObjLoans.Cells(1).Value) * splitfactor, 2, MidpointRounding.AwayFromZero)
                             .TextValue = ObjLoans.Cells(2).Value
                             .TransactionTypeID = ObjLoans.Cells(0).Value
                             Dim n As Integer = .Save()
@@ -1232,12 +1233,12 @@ Partial Class frmEmployeesVacationTransactions
                         ClsEmployeeTransactionsDet.EmpTransProjID = intProjTrans
                         ClsEmployeeTransactionsDet.TextValue = ObjRowDet.Cells(2).Value
                         If Not ObjRowDet.Cells(1).Value Is DBNull.Value AndAlso Val(ObjRowDet.Cells(1).Value) > 0 Then
-                            ClsEmployeeTransactionsDet.NumericValue = Math.Round(Convert.ToDouble(ObjRowDet.Cells(1).Value) * splitFactor, 2, MidpointRounding.AwayFromZero)
+                            ClsEmployeeTransactionsDet.NumericValue = Math.Round(Convert.ToDouble(ObjRowDet.Cells(1).Value) * splitfactor, 2, MidpointRounding.AwayFromZero)
                             IntTransactionDetailID = ClsEmployeeTransactionsDet.Save()
                             If ObjRowDet.Cells.FromKey("EmpSchID").Value > 0 Then
                                 ClsEmployeesPayabilityScheduleSttlments = New Clshrs_EmployeesPayabilitySchedulesSettlement(Me.Page)
                                 With ClsEmployeesPayabilityScheduleSttlments
-                                    .Amount = Math.Round(Convert.ToDouble(ObjRowDet.Cells(1).Value) * splitFactor, 2, MidpointRounding.AwayFromZero)
+                                    .Amount = Math.Round(Convert.ToDouble(ObjRowDet.Cells(1).Value) * splitfactor, 2, MidpointRounding.AwayFromZero)
                                     .DDate = Now.Date
                                     .EmployeeTransactionID = intProjTrans
                                     .EmployeePayabilityScheduleID = ObjRowDet.Cells.FromKey("EmpSchID").Value
@@ -1255,14 +1256,14 @@ Partial Class frmEmployeesVacationTransactions
                         Dim ClsEmpTransDet As New Clshrs_EmployeesTransactionsDetails(Page)
                         With ClsEmpTransDet
                             .EmpTransProjID = intProjTrans
-                            .NumericValue = Math.Round(Convert.ToDouble(ObjLoans.Cells(1).Value) * splitFactor, 2, MidpointRounding.AwayFromZero)
+                            .NumericValue = Math.Round(Convert.ToDouble(ObjLoans.Cells(1).Value) * splitfactor, 2, MidpointRounding.AwayFromZero)
                             .TextValue = ObjLoans.Cells(2).Value
                             .TransactionTypeID = ObjLoans.Cells(0).Value
 
                             Dim n As Integer = .Save()
                             If ObjLoans.Cells.FromKey("EmpSchID").Value > 0 Then
                                 With ClsEmployeesPayabilityScheduleSttlments
-                                    .Amount = Math.Round(Convert.ToDouble(ObjLoans.Cells(1).Value) * splitFactor, 2, MidpointRounding.AwayFromZero)
+                                    .Amount = Math.Round(Convert.ToDouble(ObjLoans.Cells(1).Value) * splitfactor, 2, MidpointRounding.AwayFromZero)
                                     .DDate = Now.Date
                                     .EmployeeTransactionID = intProjTrans
                                     .EmployeePayabilityScheduleID = ObjLoans.Cells.FromKey("EmpSchID").Value
