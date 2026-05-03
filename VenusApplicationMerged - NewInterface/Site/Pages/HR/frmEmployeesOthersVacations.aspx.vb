@@ -2184,7 +2184,13 @@ Partial Class frmEmployeesOthersVacations
         End If
     End Sub
 
-    Private Sub frmEmployeesOthersVacations_PreLoad(sender As Object, e As EventArgs) Handles Me.PreLoad
+    Protected Sub txtVactiondays_ValueChange(sender As Object, e As System.EventArgs) Handles txtVactiondays.TextChanged
+        If txtVactiondays.Text <> "" Then
 
+
+            Dim vl As DateTime = WebDateChooser1.Value
+            WebDateChooser2.Value = vl.Date.AddDays(IIf(txtVactiondays.Text < 1, 0, txtVactiondays.Text))
+
+        End If
     End Sub
 End Class

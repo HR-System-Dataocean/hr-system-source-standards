@@ -583,7 +583,7 @@
                                                             </td>
                                                             <td class="DataArea">
                                                                 <asp:TextBox ID="txtVactiondays" runat="server" SkinID="TextBox_SmalltNormalc" meta:resourcekey="lbConsumeValResource1"
-                                                                    TabIndex="6" AutoPostBack="True" ReadOnly="true"></asp:TextBox>
+                                                                    TabIndex="6" AutoPostBack="True" ReadOnly="false"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                     </table>

@@ -700,11 +700,12 @@ Partial Class frmEmployeesVacationTransactions
                     Dim month2Days As Double = 0
                     Dim month1Date As Date = DteVacationDate
                     Dim month2Date As Date = DteVacationDate
+                    Dim vacStart As Date
+                    Dim vacReturn As Date
+                    Dim vacEnd As Date
 
                     If chkWithSalary.Checked AndAlso EmployeeVacationID > 0 Then
-                        Dim vacStart As Date
-                        Dim vacReturn As Date
-                        Dim vacEnd As Date
+
                         Dim strSQLVacDates As String = "set dateformat dmy; select ActualStartDate, isnull(ActualEndDate, ActualStartDate) from hrs_EmployeesVacations where ID = " & EmployeeVacationID
                         Dim dtVac As New Data.DataTable
                         dtVac = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, Data.CommandType.Text, strSQLVacDates).Tables(0)
@@ -727,6 +728,14 @@ Partial Class frmEmployeesVacationTransactions
                         exactTotalVacDays = totalVacDays
                         If totalVacDays <= 0 OrElse totalSettlementDays <= 0 Then
                             didSplit = False
+                        End If
+                    Else
+                        'Dim monthEnd As Date = New Date(vacEnd.Year, vacEnd.Month, Date.DaysInMonth(vacEnd.Year, vacEnd.Month))
+
+                        Dim exactEndDate = vacEnd.Date
+                        If vacEnd.Date.Day = 31 Then
+                            exactEndDate = vacEnd.Date.AddDays(-1)
+                            exactTotalVacDays = DateDiff(DateInterval.Day, vacStart.Date, exactEndDate.Date) + 1
                         End If
                     End If
 
@@ -953,15 +962,17 @@ Partial Class frmEmployeesVacationTransactions
                         Dim transactiontype As New Clshrs_TransactionsTypes(Me)
                         transactiontype.Find("ID = " & clsVacType.ForSalaryTransaction)
                         Dim strcommand As String
+                        Dim dayAmt As Double = Convert.ToDouble(lblNetSalary.Value) / Convert.ToDouble(Val(SettlementDaysText.Text))
                         If didSplit AndAlso splitTransId1 > 0 AndAlso splitTransId2 > 0 AndAlso splitPeriodId1 > 0 AndAlso splitPeriodId2 > 0 Then
-                            Dim dayAmt As Double = Convert.ToDouble(lblNetSalary.Value) / Convert.ToDouble(Val(SettlementDaysText.Text))
+
                             Dim amt1 As Double = Math.Round(dayAmt * month1Days, 2, MidpointRounding.AwayFromZero)
                             Dim amt2 As Double = Math.Round(dayAmt * month2Days, 2, MidpointRounding.AwayFromZero)
                             strcommand = "set dateformat dmy; " &
                                          "insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & amt1 & "," & splitPeriodId1 & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & splitTransId1 & "','101','');" &
                                          "insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & amt2 & "," & splitPeriodId2 & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & splitTransId2 & "','101','')"
                         Else
-                            strcommand = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & lblNetSalary.Value & "," & DdlPeriodsForSalary.SelectedValue & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & IntEmployeeTransactionID & "','101','')"
+                            Dim amt As Double = Math.Round(dayAmt * exactTotalVacDays, 2, MidpointRounding.AwayFromZero)
+                            strcommand = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & amt & "," & DdlPeriodsForSalary.SelectedValue & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & IntEmployeeTransactionID & "','101','')"
                         End If
                         'strcommand &= ";update hrs_EmployeesTransactions set ExcludeFromPosting =1 where id=" & IntEmployeeTransactionID
                         Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesTransactions.ConnectionString, Data.CommandType.Text, strcommand)
