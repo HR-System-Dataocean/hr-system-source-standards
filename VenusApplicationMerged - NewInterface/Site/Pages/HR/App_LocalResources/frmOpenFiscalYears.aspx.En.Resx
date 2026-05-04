@@ -402,7 +402,7 @@
   <data name="RadioButton_UnFormalResource1.Text" xml:space="preserve">
     <value>UnFormal Setting</value>
   </data>
-  <data name="PPrepareToDateResource6Header.Caption" xml:space="preserve">
+  <data name="PrepareToDateResource6Header.Caption" xml:space="preserve">
     <value>Prepare To Date</value>
   </data>
   <data name="PrepareFromDateResource6.Header.Caption" xml:space="preserve">

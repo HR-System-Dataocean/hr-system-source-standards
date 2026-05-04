@@ -1778,7 +1778,14 @@ Partial Class frmEmployeesEndofServiceAdvance
                     Dim Consumed As Decimal = DataSet.Tables(0).Rows(i).Item("Consumed")
 
                     Dim dayValue = allBalance / allDays
-                    myBallance = Math.Round((myDays * dayValue) - Consumed, 2)
+                    If DataSet.Tables(0).Rows(i).Item("BalanceTypeID") = 2 Then
+                        myBallance = DataSet.Tables(0).Rows(i).Item("Remaining")
+                    Else
+                        myBallance = Math.Round((myDays * dayValue) - Consumed, 2)
+
+
+                    End If
+
                     If CInt(DataSet.Tables(0).Rows(i).Item("BalanceTypeID")) = 2 Then
                         lblTransferBalance.Text = Math.Round(myBallance, 2).ToString()
 

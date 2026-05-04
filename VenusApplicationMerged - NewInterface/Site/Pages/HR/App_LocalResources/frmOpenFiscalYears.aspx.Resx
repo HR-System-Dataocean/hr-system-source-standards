@@ -402,7 +402,7 @@
   <data name="RadioButton_UnFormalResource1.Text" xml:space="preserve">
     <value>إعدادات مخصصة</value>
   </data>
-  <data name="PPrepareToDateResource6.Header.Caption" xml:space="preserve">
+  <data name="PrepareToDateResource6.Header.Caption" xml:space="preserve">
     <value>التجهيز الي تاريخ</value>
   </data>
   <data name="PrepareFromDateResource6.Header.Caption" xml:space="preserve">

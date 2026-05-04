@@ -515,7 +515,7 @@
                                                                         </Footer>
                                                                     </igtbl:UltraGridColumn>
                                                                         <igtbl:UltraGridColumn BaseColumnName="PrepareToDate" DataType="System.DateTime" EditorControlID="WebDateTimeEdit2"
-                                                                               Key="PrepareToDate" meta:resourcekey="PPrepareToDateResource6" Type="Custom" Width="15%">
+                                                                               Key="PrepareToDate" meta:resourcekey="PrepareToDateResource6" Type="Custom" Width="15%">
                                                                                <Header Caption="Prepare ToDate">
                                                                                    <RowLayoutColumnInfo OriginX="4" />
                                                                                </Header>
