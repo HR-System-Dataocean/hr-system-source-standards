@@ -1,8 +1,9 @@
-﻿Imports Venus.Application.SystemFiles.System
-Imports Venus.Application.SystemFiles.HumanResource
-Imports System.Data
+﻿Imports System.Data
 Imports System.Data.SqlClient
 Imports Infragistics.WebUI.UltraWebGrid
+Imports Stimulsoft.Base.Excel
+Imports Venus.Application.SystemFiles.HumanResource
+Imports Venus.Application.SystemFiles.System
 Imports Venus.Application.SystemFiles.System.ClsDataAcessLayer
 
 Partial Class frmEmployeesVacationTransactions
@@ -854,7 +855,9 @@ Partial Class frmEmployeesVacationTransactions
 
 
                     If didSplit = False Then
-                        SaveDetails(IntEmployeeTransactionID, IntEmployeeID, ClsFisicalPeriods.ID)
+                        'SaveDetails(IntEmployeeTransactionID, IntEmployeeID, ClsFisicalPeriods.ID)
+                        Dim dayAmt As Double = Convert.ToDouble(lblNetSalary.Value) / Convert.ToDouble(Val(SettlementDaysText.Text))
+                        SaveDetails(IntEmployeeTransactionID, IntEmployeeID, ClsFisicalPeriods.ID, 1, exactTotalVacDays, exactTotalVacDays, dayAmt)
                     End If
 
 
@@ -1207,16 +1210,18 @@ Partial Class frmEmployeesVacationTransactions
                     ClsEmployeeTransactionsDet.TransactionTypeID = ObjRowDet.Cells(0).Value
                     ClsEmployeeTransactionsDet.EmpTransProjID = intProjTrans
                     ClsEmployeeTransactionsDet.TextValue = ObjRowDet.Cells(2).Value
+
                     If Not ObjRowDet.Cells(1).Value Is DBNull.Value AndAlso Val(ObjRowDet.Cells(1).Value) > 0 Then
-                        ClsEmployeeTransactionsDet.NumericValue = Math.Round(dayAmt * monthDays, 2, MidpointRounding.AwayFromZero)
+                        Dim RowDayAmount As Double = Math.Round(Convert.ToDouble(ObjRowDet.Cells(1).Value) / Convert.ToDouble(Val(SettlementDaysText.Text)), 2, MidpointRounding.AwayFromZero)
+                        ClsEmployeeTransactionsDet.NumericValue = Math.Round(RowDayAmount * monthDays, 2, MidpointRounding.AwayFromZero)
 
                         ClsEmployeeTransactionsDet.Save()
                         If ObjRowDet.Cells(4).Value > 0 Then
-                            Dim scaledOpenBalAmount As Double = Math.Round(dayAmt * monthDays, 2, MidpointRounding.AwayFromZero)
+                            Dim scaledOpenBalAmount As Double = Math.Round(RowDayAmount * monthDays, 2, MidpointRounding.AwayFromZero)
                             Dim Comstring = "insert into hrs_EmployeeVacationOpenBalanceSettlement (OpenBalanceID,EmployeeTransactionID,Amount,Date,RegDate) values (" & ObjRowDet.Cells(4).Value & "," & intProjTrans & "," & scaledOpenBalAmount & ",getdate(),getdate())"
                             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, Comstring)
                         End If
-                        Exit For
+                        'Exit For
                     End If
                 End If
             Next

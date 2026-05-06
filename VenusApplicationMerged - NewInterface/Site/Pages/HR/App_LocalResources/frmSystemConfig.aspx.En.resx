@@ -357,4 +357,10 @@
   <data name="TabResource3.Text" xml:space="preserve">
     <value>Loans</value>
   </data>
+  <data name="lblShowVacationsNotificationsResource1.Text" xml:space="preserve">
+    <value>Show vacations notifications</value>
+  </data>
+  <data name="TabResource4.Text" xml:space="preserve">
+    <value>Employees Salaries</value>
+  </data>
 </root>

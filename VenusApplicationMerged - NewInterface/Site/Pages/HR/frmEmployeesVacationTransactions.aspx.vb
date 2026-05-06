@@ -1,7 +1,8 @@
-﻿Imports Venus.Application.SystemFiles.System
-Imports Venus.Application.SystemFiles.HumanResource
-Imports System.Data
+﻿Imports System.Data
+Imports System.Data.SqlClient
 Imports Infragistics.WebUI.UltraWebGrid
+Imports Venus.Application.SystemFiles.HumanResource
+Imports Venus.Application.SystemFiles.System
 Imports Venus.Application.SystemFiles.System.ClsDataAcessLayer
 
 Partial Class frmEmployeesVacationTransactions
@@ -222,6 +223,22 @@ Partial Class frmEmployeesVacationTransactions
                 SetData2(ClsEmployeesTransactions.EmployeeID, ClsEmployeesTransactions.ID)
                 hdnEmpTrans.Value = ClsEmployeesTransactions.ID
                 btnSave.Enabled = False
+
+                Dim selectedVacationId As Integer = Val(ClsEmployeesTransactions.EmployeesVacationsID)
+                If selectedVacationId > 0 Then
+                    Dim hasNvSql As String = "SELECT COUNT(1) FROM hrs_EmployeesTransactions t WHERE t.EmployeesVacationsID = @VacationID AND t.PrepareType = @PrepareType"
+                    Dim nvCount As Integer = Convert.ToInt32(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesTransactions.ConnectionString, Data.CommandType.Text, hasNvSql,
+                        New SqlParameter("@VacationID", selectedVacationId),
+                        New SqlParameter("@PrepareType", "NV")))
+                    If nvCount > 0 Then
+                        chkWithSalary.Checked = False
+                        CheckBox_SalaryPayment.Checked = True
+                    Else
+                        chkWithSalary.Checked = True
+                        CheckBox_SalaryPayment.Checked = False
+                    End If
+                End If
+
                 ClsEmployeesTransactions = New Clshrs_EmployeesTransactions(Page)
 
 
@@ -436,6 +453,52 @@ Partial Class frmEmployeesVacationTransactions
     'End Sub
     Dim Isdays As Boolean
     Dim days As Double
+
+    Private Function GetFiscalPeriodIdByDate(ByVal periodDate As Date, ByVal periods As Clssys_FiscalYearsPeriods, ByVal branch As Clssys_Branches) As Integer
+        Dim fiscID As Integer = 0
+        Dim fiscfrom As DateTime
+        Dim fiscto As DateTime
+        If Not IsNothing(branch) AndAlso branch.AffectPeriod Then
+            periods.GetFisicalperiodInfoByPrepareDay(periodDate, fiscID, fiscfrom, fiscto)
+        Else
+            periods.GetFisicalperiodInfo(periodDate, fiscID, fiscfrom, fiscto)
+        End If
+        Return fiscID
+    End Function
+
+    Private Function GetDaysSplitAcrossTwoMonths(ByVal startDate As Date, ByVal endDate As Date, ByRef month1Days As Double, ByRef month2Days As Double, ByRef month1Date As Date, ByRef month2Date As Date) As Boolean
+        month1Days = 0
+        month2Days = 0
+        month1Date = startDate
+        month2Date = endDate
+
+        If startDate.Year = endDate.Year AndAlso startDate.Month = endDate.Month Then
+            Return False
+        End If
+        If startDate > endDate Then
+            Return False
+        End If
+
+        Dim month1End As Date = New Date(startDate.Year, startDate.Month, Date.DaysInMonth(startDate.Year, startDate.Month))
+        If month1End >= endDate Then
+            Return False
+        End If
+
+        Dim month2Start As Date = month1End.AddDays(1)
+        If Not (month2Start.Year = endDate.Year AndAlso month2Start.Month = endDate.Month) Then
+            Return False
+        End If
+        Dim exact1EndDate = month1End.Date
+        If month1End.Date.Day = 31 Then
+            exact1EndDate = month1End.Date.AddDays(-1)
+        End If
+        month1Days = DateDiff(DateInterval.Day, startDate.Date, exact1EndDate.Date) + 1
+        month2Days = DateDiff(DateInterval.Day, month2Start.Date, endDate.Date) + 1
+        month1Date = startDate.Date
+        month2Date = month2Start.Date
+
+        Return (month1Days > 0 AndAlso month2Days > 0)
+    End Function
     Protected Sub btnSave_Command(sender As Object, e As System.Web.UI.WebControls.CommandEventArgs) Handles btnSave.Command, btnDelete.Command
         Dim ClsEmployees As New Clshrs_Employees(Page)
         Dim clsVacType As New Clshrs_VacationsTypes(Page)
@@ -520,6 +583,8 @@ Partial Class frmEmployeesVacationTransactions
                 clscontracts.Find("ID = " & intContractId)
                 clsemployeeclass.Find("ID =" & clscontracts.EmployeeClassID)
                 ClsEmployees.Find("ID= " & IntEmployeeID)
+                Dim clsLocalBranch As New Clssys_Branches(Page)
+                clsLocalBranch.Find("ID=" & ClsEmployees.BranchID)
                 Dim CurrrentSalTransaction As Integer = 0
                 Dim EmployeeVacationID As Integer = 0
 
@@ -616,28 +681,140 @@ Partial Class frmEmployeesVacationTransactions
 
 
                 If Val(txtPreparedDays.Text) > 0 Or uwgEmployeeTransaction.Rows.Count > 0 Or uwgPayabilities.Rows.Count > 0 Then
-                    ClsEmployeesTransactions = New Clshrs_EmployeesTransactions(Me.Page)
-                    ClsEmployeesTransactions.EmployeeID = IntEmployeeID
-                    ClsEmployeesTransactions.FiscalYearPeriodID = ClsFisicalPeriods.ID
-                    ClsEmployeesTransactions.PrepareType = "V"
-                    ClsEmployeesTransactions.FinancialWorkingUnits = Convert.ToDouble(Val(SettlementDaysText.Text))
-                    'If Request.QueryString.Item("TrnsID") <> 0 Then
-                    ClsEmployeesTransactions.PaidDate = DteVacationDate
-                    ClsEmployeesTransactions.CBranchID = ClsEmployees.BranchID
-                    'Else
-                    'ClsEmployeesTransactions.PaidDate = DteVacationDate
-                    'End If
-                    ClsEmployeesTransactions.EmployeesVacationsID = EmployeeVacationID
-                    ClsEmployeesTransactions.TotalVacDaySettlement = SettlementDaysText.Text
-                    ClsEmployeesTransactions.RemainVacDaySettlement = Convert.ToDouble(Val(txtPreparedDays.Text)) - Convert.ToDouble(Val(SettlementDaysText.Text))
-                    ClsEmployeesTransactions.LastPaidDate = textLastPaymentDate.Text
-                    ClsEmployeesTransactions.RemainVacSettlement = SettlementForTotalDays.Value - SettlementForIsertedDays.Value
+                    Dim didSplit As Boolean = False
+                    Dim splitPeriodId1 As Integer = 0
+                    Dim splitPeriodId2 As Integer = 0
+                    Dim splitTransId1 As Integer = 0
+                    Dim splitTransId2 As Integer = 0
+                    Dim month1Days As Double = 0
+                    Dim month2Days As Double = 0
+                    Dim month1Date As Date = DteVacationDate
+                    Dim month2Date As Date = DteVacationDate
+                    Dim vacStart As Date = DteVacationDate
+                    Dim vacReturn As Date = DteVacationDate
+                    Dim vacEnd As Date = DteVacationDate
 
-                    If CurrrentSalTransaction > 0 Then
-                        ClsEmployeesTransactions.RegComputerID = CurrrentSalTransaction
+                    If chkWithSalary.Checked AndAlso EmployeeVacationID > 0 Then
+                        Dim strSQLVacDates As String = "set dateformat dmy; select ActualStartDate, isnull(ActualEndDate, ActualStartDate) from hrs_EmployeesVacations where ID = " & EmployeeVacationID
+                        Dim dtVac As New Data.DataTable
+                        dtVac = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, Data.CommandType.Text, strSQLVacDates).Tables(0)
+                        If dtVac.Rows.Count > 0 Then
+                            If Date.TryParse(dtVac.Rows(0)(0).ToString(), vacStart) Then
+                                If Date.TryParse(dtVac.Rows(0)(1).ToString(), vacReturn) Then
+                                    vacEnd = vacReturn.AddDays(-1)
+                                Else
+                                    vacEnd = vacStart
+                                End If
+                                didSplit = GetDaysSplitAcrossTwoMonths(vacStart, vacEnd, month1Days, month2Days, month1Date, month2Date)
+                            End If
+                        End If
                     End If
 
-                    IntEmployeeTransactionID = ClsEmployeesTransactions.Save()
+                    Dim exactTotalVacDays = Convert.ToDouble(Val(SettlementDaysText.Text))
+                    If didSplit Then
+                        Dim totalVacDays As Double = month1Days + month2Days
+                        Dim totalSettlementDays As Double = Convert.ToDouble(Val(totalVacDays))
+                        exactTotalVacDays = totalVacDays
+                        If totalVacDays <= 0 OrElse totalSettlementDays <= 0 Then
+                            didSplit = False
+                        End If
+                    Else
+                        Dim exactEndDate = vacEnd.Date
+                        If vacEnd.Date.Day = 31 Then
+                            exactEndDate = vacEnd.Date.AddDays(-1)
+                            exactTotalVacDays = DateDiff(DateInterval.Day, vacStart.Date, exactEndDate.Date) + 1
+                        End If
+                    End If
+
+                    If Not didSplit Then
+                        ClsEmployeesTransactions = New Clshrs_EmployeesTransactions(Me.Page)
+                        ClsEmployeesTransactions.EmployeeID = IntEmployeeID
+                        ClsEmployeesTransactions.FiscalYearPeriodID = ClsFisicalPeriods.ID
+                        ClsEmployeesTransactions.PrepareType = "V"
+                        ClsEmployeesTransactions.FinancialWorkingUnits = exactTotalVacDays
+                        ClsEmployeesTransactions.PaidDate = DteVacationDate
+                        ClsEmployeesTransactions.CBranchID = ClsEmployees.BranchID
+                        ClsEmployeesTransactions.EmployeesVacationsID = EmployeeVacationID
+                        ClsEmployeesTransactions.TotalVacDaySettlement = exactTotalVacDays
+                        ClsEmployeesTransactions.RemainVacDaySettlement = Convert.ToDouble(Val(txtPreparedDays.Text)) - exactTotalVacDays
+                        ClsEmployeesTransactions.LastPaidDate = textLastPaymentDate.Text
+                        ClsEmployeesTransactions.RemainVacSettlement = SettlementForTotalDays.Value - SettlementForIsertedDays.Value
+
+                        If CurrrentSalTransaction > 0 Then
+                            ClsEmployeesTransactions.RegComputerID = CurrrentSalTransaction
+                        End If
+
+                        IntEmployeeTransactionID = ClsEmployeesTransactions.Save()
+                    Else
+                        Dim totalVacDays As Double = month1Days + month2Days
+                        Dim totalSettlementDays As Double = exactTotalVacDays
+                        Dim factor1 As Double = month1Days / totalVacDays
+                        Dim factor2 As Double = month2Days / totalVacDays
+
+                        Dim settleDays1 As Double = Math.Round(totalSettlementDays * factor1, 2, MidpointRounding.AwayFromZero)
+                        Dim settleDays2 As Double = Math.Round(totalSettlementDays - settleDays1, 2, MidpointRounding.AwayFromZero)
+
+                        Dim periodId1 As Integer = GetFiscalPeriodIdByDate(month1Date, ClsFisicalPeriods, clsLocalBranch)
+                        Dim periodId2 As Integer = GetFiscalPeriodIdByDate(month2Date, ClsFisicalPeriods, clsLocalBranch)
+                        splitPeriodId1 = periodId1
+                        splitPeriodId2 = periodId2
+
+                        Dim transId1 As Integer = 0
+                        Dim transId2 As Integer = 0
+
+                        ClsEmployeesTransactions = New Clshrs_EmployeesTransactions(Me.Page)
+                        With ClsEmployeesTransactions
+                            .EmployeeID = IntEmployeeID
+                            .FiscalYearPeriodID = periodId1
+                            .PrepareType = "V"
+                            .FinancialWorkingUnits = settleDays1
+                            .PaidDate = month1Date
+                            .CBranchID = ClsEmployees.BranchID
+                            .EmployeesVacationsID = EmployeeVacationID
+                            .TotalVacDaySettlement = settleDays1
+                            .RemainVacDaySettlement = Convert.ToDouble(Val(txtPreparedDays.Text)) - exactTotalVacDays
+                            .LastPaidDate = textLastPaymentDate.Text
+                            .RemainVacSettlement = SettlementForTotalDays.Value - SettlementForIsertedDays.Value
+                            If CurrrentSalTransaction > 0 Then
+                                .RegComputerID = CurrrentSalTransaction
+                            End If
+                            transId1 = .Save()
+                        End With
+
+                        If settleDays2 > 0 Then
+                            ClsEmployeesTransactions = New Clshrs_EmployeesTransactions(Me.Page)
+                            With ClsEmployeesTransactions
+                                .EmployeeID = IntEmployeeID
+                                .FiscalYearPeriodID = periodId2
+                                .PrepareType = "V"
+                                .FinancialWorkingUnits = settleDays2
+                                .PaidDate = month2Date
+                                .CBranchID = ClsEmployees.BranchID
+                                .EmployeesVacationsID = EmployeeVacationID
+                                .TotalVacDaySettlement = settleDays2
+                                .RemainVacDaySettlement = Convert.ToDouble(Val(txtPreparedDays.Text)) - exactTotalVacDays
+                                .LastPaidDate = month1Date
+                                .RemainVacSettlement = SettlementForTotalDays.Value - SettlementForIsertedDays.Value
+                                If CurrrentSalTransaction > 0 Then
+                                    .RegComputerID = CurrrentSalTransaction
+                                End If
+                                transId2 = .Save()
+                            End With
+                        End If
+
+                        splitTransId1 = transId1
+                        splitTransId2 = transId2
+
+                        IntEmployeeTransactionID = transId1
+                        If transId1 > 0 Then
+                            Dim dayAmt As Double = Convert.ToDouble(lblNetSalary.Value) / Convert.ToDouble(Val(SettlementDaysText.Text))
+                            SaveDetails(transId1, IntEmployeeID, periodId1, factor1, month1Days, settleDays1, dayAmt)
+                        End If
+                        If transId2 > 0 Then
+                            Dim dayAmt As Double = Convert.ToDouble(lblNetSalary.Value) / Convert.ToDouble(Val(SettlementDaysText.Text))
+                            SaveDetails(transId2, IntEmployeeID, periodId2, factor2, month2Days, settleDays2, dayAmt)
+                        End If
+                    End If
 
                     If IntEmployeeTransactionID > 0 And Request.QueryString.Item("TrnsID") <> 0 Then
                         Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesTransactions.ConnectionString, Data.CommandType.Text, "Update hrs_EmployeesVacations set PaymentTrnID =" & IntEmployeeTransactionID & ",PaidFromBalance=" & txtPreparedDays.Text & ",RemainingBalance=TotalBalance-" & txtPreparedDays.Text & " where id=" & Convert.ToInt32(Request.QueryString.Item("TrnsID")))
@@ -662,7 +839,10 @@ Partial Class frmEmployeesVacationTransactions
 
 
 
-                    SaveDetails(IntEmployeeTransactionID, IntEmployeeID, ClsFisicalPeriods.ID)
+                    If didSplit = False Then
+                        Dim dayAmt As Double = Convert.ToDouble(lblNetSalary.Value) / Convert.ToDouble(Val(SettlementDaysText.Text))
+                        SaveDetails(IntEmployeeTransactionID, IntEmployeeID, ClsFisicalPeriods.ID, 1, exactTotalVacDays, exactTotalVacDays, dayAmt)
+                    End If
 
 
                     '------------------------------=============-----------------------------------------
@@ -768,7 +948,18 @@ Partial Class frmEmployeesVacationTransactions
                     If chkWithSalary.Checked Then
                         Dim transactiontype As New Clshrs_TransactionsTypes(Me)
                         transactiontype.Find("ID = " & clsVacType.ForSalaryTransaction)
-                        Dim strcommand As String = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & lblNetSalary.Value & "," & DdlPeriodsForSalary.SelectedValue & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & IntEmployeeTransactionID & "','101','')"
+                        Dim strcommand As String
+                        Dim dayAmt As Double = Convert.ToDouble(lblNetSalary.Value) / Convert.ToDouble(Val(SettlementDaysText.Text))
+                        If didSplit AndAlso splitTransId1 > 0 AndAlso splitTransId2 > 0 AndAlso splitPeriodId1 > 0 AndAlso splitPeriodId2 > 0 Then
+                            Dim amt1 As Double = Math.Round(dayAmt * month1Days, 2, MidpointRounding.AwayFromZero)
+                            Dim amt2 As Double = Math.Round(dayAmt * month2Days, 2, MidpointRounding.AwayFromZero)
+                            strcommand = "set dateformat dmy; " &
+                                         "insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & amt1 & "," & splitPeriodId1 & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & splitTransId1 & "','101','');" &
+                                         "insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & amt2 & "," & splitPeriodId2 & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & splitTransId2 & "','101','')"
+                        Else
+                            Dim amt As Double = Math.Round(dayAmt * exactTotalVacDays, 2, MidpointRounding.AwayFromZero)
+                            strcommand = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & amt & "," & DdlPeriodsForSalary.SelectedValue & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & IntEmployeeTransactionID & "','101','')"
+                        End If
                         'strcommand &= ";update hrs_EmployeesTransactions set ExcludeFromPosting =1 where id=" & IntEmployeeTransactionID
                         Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesTransactions.ConnectionString, Data.CommandType.Text, strcommand)
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " The Vacation Amount Will Be Paied With Salary / قيمة الإجازة ستصرف مع الراتب"))
@@ -960,6 +1151,129 @@ Partial Class frmEmployeesVacationTransactions
 
 
 
+
+        Catch ex As Exception
+            Page.Session.Add("ErrorValue", ex)
+            ObjErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, ClsEmployeesPayabilityScheduleSttlments.DataBaseUserRelatedID, Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
+            Page.Response.Redirect("ErrorPage.aspx")
+        End Try
+    End Function
+
+    Private Function SaveDetails(ByVal TransactionHeadID As Integer, ByVal EmployeeID As Integer, ByVal FiscalPeriodID As Integer, ByVal splitfactor As Double, ByVal monthDays As Double, ByVal preparedDaysForRow As Double, ByVal dayAmt As Double) As Boolean
+        Dim ObjRowDet As New Infragistics.WebUI.UltraWebGrid.UltraGridRow
+        Dim ClsEmployeesPayabilityScheduleSttlments As New Clshrs_EmployeesPayabilitySchedulesSettlement(Me.Page)
+        Dim ObjErrorHandler As New Venus.Shared.Errors.ErrorsHandler(ClsEmployeesPayabilityScheduleSttlments.ConnectionString)
+        Dim ClsEmployeeTransactionsDet As New Clshrs_EmployeesTransactionsDetails(Page)
+        Dim ClsEmployeesTransactionsProjects As New Clshrs_EmployeesTransactionsProjects(Page)
+        Dim ClsEmployees As New Clshrs_Employees(Page)
+        Dim ClsEmployeeesPayablitySetelment As New Clshrs_EmployeesPayabilitySchedulesSettlement(Page)
+        Dim IntTransactionDetailID As Integer = 0
+        Dim ClsProjects As New Clshrs_Projects(Page, "hrs_projects")
+        Dim intprojectID As Integer
+        Try
+            ClsEmployeeesPayablitySetelment.Delete(TransactionHeadID)
+            ClsEmployeeTransactionsDet.DeleteAll("EmployeeTransactionID=" & TransactionHeadID)
+            ClsEmployeesTransactionsProjects.DeleteAll("EmployeeTransactionID=" & TransactionHeadID)
+            ClsEmployees.DeleteEmployeesPenalties(TransactionHeadID)
+
+            Dim StrSaveCommand As String = "Declare @ProjectTransID Int; "
+            If ClsProjects.Find(" CancelDate Is Null") Then
+                intprojectID = ClsProjects.ID
+            Else
+                Exit Function
+            End If
+            StrSaveCommand &= " Insert Into hrs_EmployeesTransactionsProjects([EmployeeTransactionID],[ProjectID],[WorkingUnits],[RegUserID]) " &
+                                          " Select " &
+                                          TransactionHeadID &
+                                          "," & intprojectID &
+                                          "," & Convert.ToDouble(preparedDaysForRow) &
+                                          "," & ClsEmployees.DataBaseUserRelatedID & ";" & "  Select IDENT_CURRENT('hrs_EmployeesTransactionsProjects'); "
+            Dim intProjTrans As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, StrSaveCommand)
+
+            For Each ObjRowDet In uwgEmployeeTransaction.Rows
+                If ObjRowDet.Cells.FromKey("Description").Value = "Vac" And (ObjRowDet.Cells.FromKey("DescriptionSign").Value = "Paid" Or ObjRowDet.Cells.FromKey("DescriptionSign").Value = "Paid By Days") Then
+                    ClsEmployeeTransactionsDet = New Clshrs_EmployeesTransactionsDetails(Page)
+                    ClsEmployeeTransactionsDet.TransactionTypeID = ObjRowDet.Cells(0).Value
+                    ClsEmployeeTransactionsDet.EmpTransProjID = intProjTrans
+                    ClsEmployeeTransactionsDet.TextValue = ObjRowDet.Cells(2).Value
+                    If Not ObjRowDet.Cells(1).Value Is DBNull.Value AndAlso Val(ObjRowDet.Cells(1).Value) > 0 Then
+                        Dim RowDayAmount As Double = Math.Round(Convert.ToDouble(ObjRowDet.Cells(1).Value) / Convert.ToDouble(Val(SettlementDaysText.Text)), 2, MidpointRounding.AwayFromZero)
+                        ClsEmployeeTransactionsDet.NumericValue = Math.Round(RowDayAmount * monthDays, 2, MidpointRounding.AwayFromZero)
+                        ClsEmployeeTransactionsDet.Save()
+                        If ObjRowDet.Cells(4).Value > 0 Then
+                            Dim scaledOpenBalAmount As Double = Math.Round(RowDayAmount * monthDays, 2, MidpointRounding.AwayFromZero)
+                            Dim Comstring = "insert into hrs_EmployeeVacationOpenBalanceSettlement (OpenBalanceID,EmployeeTransactionID,Amount,Date,RegDate) values (" & ObjRowDet.Cells(4).Value & "," & intProjTrans & "," & scaledOpenBalAmount & ",getdate(),getdate())"
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, Comstring)
+                        End If
+                        'Exit For
+                    End If
+                End If
+            Next
+
+            If CheckBox_SalaryPayment.Checked = False Then
+                For Each ObjLoans In uwgPayabilities.Rows
+                    If ObjLoans.Cells.FromKey("Description").Value = "Vac" And ObjLoans.Cells.FromKey("EmpSchID").Value <= 0 Then
+                        Dim ClsEmpTransDet As New Clshrs_EmployeesTransactionsDetails(Page)
+                        With ClsEmpTransDet
+                            .EmpTransProjID = intProjTrans
+                            .NumericValue = Math.Round(Convert.ToDouble(ObjLoans.Cells(1).Value) * splitfactor, 2, MidpointRounding.AwayFromZero)
+                            .TextValue = ObjLoans.Cells(2).Value
+                            .TransactionTypeID = ObjLoans.Cells(0).Value
+                            Dim n As Integer = .Save()
+                        End With
+                    End If
+                Next
+            End If
+
+            If CheckBox_SalaryPayment.Checked = True Then
+                For Each ObjRowDet In uwgPayabilities.Rows
+                    If ObjRowDet.Cells.FromKey("Description").Value = "Vac" And (ObjRowDet.Cells.FromKey("DescriptionSign").Value = "Paid" Or ObjRowDet.Cells.FromKey("DescriptionSign").Value = "Paid By Days") Then
+                        ClsEmployeeTransactionsDet = New Clshrs_EmployeesTransactionsDetails(Page)
+                        ClsEmployeeTransactionsDet.TransactionTypeID = ObjRowDet.Cells(0).Value
+                        ClsEmployeeTransactionsDet.EmpTransProjID = intProjTrans
+                        ClsEmployeeTransactionsDet.TextValue = ObjRowDet.Cells(2).Value
+                        If Not ObjRowDet.Cells(1).Value Is DBNull.Value AndAlso Val(ObjRowDet.Cells(1).Value) > 0 Then
+                            ClsEmployeeTransactionsDet.NumericValue = Math.Round(Convert.ToDouble(ObjRowDet.Cells(1).Value) * splitfactor, 2, MidpointRounding.AwayFromZero)
+                            IntTransactionDetailID = ClsEmployeeTransactionsDet.Save()
+                            If ObjRowDet.Cells.FromKey("EmpSchID").Value > 0 Then
+                                ClsEmployeesPayabilityScheduleSttlments = New Clshrs_EmployeesPayabilitySchedulesSettlement(Me.Page)
+                                With ClsEmployeesPayabilityScheduleSttlments
+                                    .Amount = Math.Round(Convert.ToDouble(ObjRowDet.Cells(1).Value) * splitfactor, 2, MidpointRounding.AwayFromZero)
+                                    .DDate = Now.Date
+                                    .EmployeeTransactionID = intProjTrans
+                                    .EmployeePayabilityScheduleID = ObjRowDet.Cells.FromKey("EmpSchID").Value
+                                    .Save()
+                                End With
+                            End If
+                        End If
+                    End If
+                Next
+            End If
+
+            If CheckVactionLaon.Checked = True Then
+                For Each ObjLoans In uwgPayabilities.Rows
+                    If ObjLoans.Cells.FromKey("Description").Value = "Vac" And ObjLoans.Cells.FromKey("EmpSchID").Value > 0 Then
+                        Dim ClsEmpTransDet As New Clshrs_EmployeesTransactionsDetails(Page)
+                        With ClsEmpTransDet
+                            .EmpTransProjID = intProjTrans
+                            .NumericValue = Math.Round(Convert.ToDouble(ObjLoans.Cells(1).Value) * splitfactor, 2, MidpointRounding.AwayFromZero)
+                            .TextValue = ObjLoans.Cells(2).Value
+                            .TransactionTypeID = ObjLoans.Cells(0).Value
+
+                            Dim n As Integer = .Save()
+                            If ObjLoans.Cells.FromKey("EmpSchID").Value > 0 Then
+                                With ClsEmployeesPayabilityScheduleSttlments
+                                    .Amount = Math.Round(Convert.ToDouble(ObjLoans.Cells(1).Value) * splitfactor, 2, MidpointRounding.AwayFromZero)
+                                    .DDate = Now.Date
+                                    .EmployeeTransactionID = intProjTrans
+                                    .EmployeePayabilityScheduleID = ObjLoans.Cells.FromKey("EmpSchID").Value
+                                    .Save()
+                                End With
+                            End If
+                        End With
+                    End If
+                Next
+            End If
 
         Catch ex As Exception
             Page.Session.Add("ErrorValue", ex)

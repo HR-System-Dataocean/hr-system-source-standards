@@ -357,4 +357,10 @@
   <data name="TabResource3.Text" xml:space="preserve">
     <value>السلف والمكافأت</value>
   </data>
+  <data name="lblShowVacationsNotificationsResource1.Text" xml:space="preserve">
+    <value>عرض إشعارات الإجازات</value>
+  </data>
+  <data name="TabResource4.Text" xml:space="preserve">
+    <value>رواتب الموظفين</value>
+  </data>
 </root>

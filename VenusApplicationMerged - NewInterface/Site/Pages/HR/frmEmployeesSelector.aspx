@@ -169,6 +169,7 @@
         <asp:Label ID="TargetControl" runat="server" ForeColor="White" TabIndex="-1" Width="99px"
             meta:resourcekey="TargetControlResource1"></asp:Label>
         <asp:Label ID="lblLage" runat="server" meta:resourcekey="lblLageResource1"></asp:Label>
+        <asp:LinkButton ID="LinkButton_VacNotifyConfirm" runat="server" Style="display: none" />
     </div>
     <div class="Div_MasterContainer" runat="server" id="DIV">
         <table align="center" style="width: 100%;">

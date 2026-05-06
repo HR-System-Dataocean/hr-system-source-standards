@@ -67,7 +67,7 @@ Partial Class frmAttendancePreparation
             exact1EndDate = month1End.Date.AddDays(-1)
         End If
         month1Days = DateDiff(DateInterval.Day, startDate.Date, exact1EndDate.Date) + 1
-        month2Days = DateDiff(DateInterval.Day, month2Start.Date, endDate.Date)
+        month2Days = DateDiff(DateInterval.Day, month2Start.Date, endDate.Date) + 1
         month1Date = startDate.Date
         month2Date = month2Start.Date
 
@@ -1144,15 +1144,15 @@ Partial Class frmAttendancePreparation
 
                         Dim remainDaysAfterSettlement As Double = Math.Max(0, Math.Round(totalBalanceDays - settlementDays, 2))
                         Dim amountPerDay As Double = 0
-                        If settlementDays > 0 Then
-                            amountPerDay = netAmount / settlementDays
+                        If Convert.ToDouble(txtConfirmedDays.Text) > 0 Then
+                            amountPerDay = netAmount / Convert.ToDouble(txtConfirmedDays.Text)
                         End If
                         Dim remainAmountAfterSettlement As Double = Math.Round(amountPerDay * remainDaysAfterSettlement, 2, MidpointRounding.AwayFromZero)
 
                         Dim vacStart As Date = paidDate
                         Dim vacEnd As Date = paidDate
                         Date.TryParse(txtStartDate.Text, vacStart)
-                        vacEnd = dat_NEW_RETURN
+                        vacEnd = dat_NEW_RETURN.AddDays(-1)
 
                         Dim didSplit As Boolean = False
                         Dim splitFactor1 As Double = 0
@@ -1177,6 +1177,22 @@ Partial Class frmAttendancePreparation
 
                         End If
 
+                        Dim exactTotalVacDays As Double = settlementDays
+                        If didSplit = False Then
+                            Dim exactEndDate As Date = vacEnd.Date
+                            If vacEnd.Date.Day = 31 Then
+                                exactEndDate = vacEnd.Date.AddDays(-1)
+                                exactTotalVacDays = DateDiff(DateInterval.Day, vacStart.Date, exactEndDate.Date) + 1
+                            End If
+                            'settlementDays = exactTotalVacDays
+                        End If
+
+                        If Convert.ToDouble(txtConfirmedDays.Text) > 0 Then
+                            amountPerDay = netAmount / Convert.ToDouble(txtConfirmedDays.Text)
+                        Else
+                            amountPerDay = 0
+                        End If
+
                         Dim clsLocalBranch As New Clssys_Branches(Page)
                         If ClsEmployees.BranchID > 0 Then
                             clsLocalBranch.Find("ID=" & ClsEmployees.BranchID)
@@ -1188,11 +1204,11 @@ Partial Class frmAttendancePreparation
                             empTrans.EmployeeID = ClsEmployees.ID
                             empTrans.FiscalYearPeriodID = fiscalPeriodId
                             empTrans.PrepareType = "V"
-                            empTrans.FinancialWorkingUnits = settlementDays
+                            empTrans.FinancialWorkingUnits = exactTotalVacDays
                             empTrans.PaidDate = paidDate
                             empTrans.CBranchID = ClsEmployees.BranchID
                             empTrans.EmployeesVacationsID = recordId
-                            empTrans.TotalVacDaySettlement = settlementDays
+                            empTrans.TotalVacDaySettlement = exactTotalVacDays
                             empTrans.RemainVacDaySettlement = remainDaysAfterSettlement
                             empTrans.LastPaidDate = paidDate
                             empTrans.RemainVacSettlement = remainAmountAfterSettlement
@@ -1202,13 +1218,14 @@ Partial Class frmAttendancePreparation
                                 Return False
                             End If
 
-                            SaveVacationSettlementDetails(employeeTransactionId, settlementDays, settlementDays, salaryResult.DtBenefits, salaryResult.DtDeductions)
+                            SaveVacationSettlementDetails(employeeTransactionId, exactTotalVacDays, settlementDays, salaryResult.DtBenefits, amountPerDay, salaryResult.DtDeductions, exactTotalVacDays)
 
                             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, "Update hrs_EmployeesVacations Set PaymentTrnID =" & employeeTransactionId & ", PaidFromBalance = " & settlementDays & ", RemainingBalance = TotalBalance - " & settlementDays & " where ID=" & recordId)
 
                             Dim transType As New Clshrs_TransactionsTypes(Me)
                             transType.Find("ID = " & annualVacType.ForSalaryTransaction)
-                            Dim strcommand As String = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & ClsEmployees.ID & "),''," & transType.Code & "," & netAmount & "," & fiscalPeriodId & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & employeeTransactionId & "','101','')"
+                            Dim amt As Double = Math.Round(amountPerDay * exactTotalVacDays, 2, MidpointRounding.AwayFromZero)
+                            Dim strcommand As String = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & ClsEmployees.ID & "),''," & transType.Code & "," & amt & "," & fiscalPeriodId & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & employeeTransactionId & "','101','')"
                             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, strcommand)
                         Else
                             Dim totalVacDays As Double = month1Days + month2Days
@@ -1297,7 +1314,8 @@ Partial Class frmAttendancePreparation
                                     "insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & ClsEmployees.ID & "),''," & transType.Code & "," & amt2 & "," & splitPeriodId2 & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & splitTransId2 & "','101','')"
                                 Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, strcommand)
                             Else
-                                Dim strcommand As String = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & ClsEmployees.ID & "),''," & transType.Code & "," & netAmount & "," & fiscalPeriodId & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & employeeTransactionId & "','101','')"
+                                Dim amt As Double = Math.Round(amountPerDay * settlementDays, 2, MidpointRounding.AwayFromZero)
+                                Dim strcommand As String = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & ClsEmployees.ID & "),''," & transType.Code & "," & amt & "," & fiscalPeriodId & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & employeeTransactionId & "','101','')"
                                 Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, strcommand)
                             End If
                         End If
@@ -1438,7 +1456,7 @@ Partial Class frmAttendancePreparation
         Next
     End Sub
 
-    Private Sub SaveVacationSettlementDetails(transactionHeadId As Integer, workingUnits As Double, totalConfirmedDays As Double, dtBenefits As DataTable, amountPerDay As Double, dtDeductions As DataTable, splitFactor As Double)
+    Private Sub SaveVacationSettlementDetails(transactionHeadId As Integer, workingUnits As Double, totalConfirmedDays As Double, dtBenefits As DataTable, amountPerDay As Double, dtDeductions As DataTable, monthDays As Double)
         Dim clsEmployeesLocal As New Clshrs_Employees(Page)
         Dim clsProjects As New Clshrs_Projects(Page, "hrs_projects")
         If Not clsProjects.Find(" CancelDate Is Null") Then
@@ -1452,12 +1470,16 @@ Partial Class frmAttendancePreparation
             " Select IDENT_CURRENT('hrs_EmployeesTransactionsProjects'); "
         Dim empTransProjId As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsEmployeesLocal.ConnectionString, Data.CommandType.Text, strSaveCommand)
 
+        Dim splitfactor As Double = 1
+        If totalConfirmedDays > 0 Then
+            splitfactor = monthDays / totalConfirmedDays
+        End If
+
         For Each row As DataRow In dtBenefits.Rows
             If Convert.ToString(row("Description")) = "Vac" Then
                 Dim sign As String = If(dtBenefits.Columns.Contains("DescriptionSign"), Convert.ToString(row("DescriptionSign")), "")
                 If sign = "Paid" OrElse sign = "Paid By Days" Then
                     Dim amount As Double = If(IsDBNull(row("Amount")), 0, Convert.ToDouble(Val(row("Amount"))))
-                    amount = Math.Round(amount * splitFactor, 2, MidpointRounding.AwayFromZero)
                     If amount > 0 Then
                         Dim amountPerConfirmedDay As Double = amount
                         If totalConfirmedDays > 0 Then
@@ -1467,14 +1489,15 @@ Partial Class frmAttendancePreparation
                         det.TransactionTypeID = Convert.ToInt32(row("TransactionTypeID"))
                         det.EmpTransProjID = empTransProjId
                         det.TextValue = If(dtBenefits.Columns.Contains("Description"), Convert.ToString(row("Description")), "")
-                        det.NumericValue = amountPerDay * splitFactor
+                        det.NumericValue = Math.Round(amountPerConfirmedDay * monthDays, 2, MidpointRounding.AwayFromZero)
                         det.Save()
 
                         If dtBenefits.Columns.Contains("EmpSchID") AndAlso Not IsDBNull(row("EmpSchID")) AndAlso Val(row("EmpSchID")) > 0 Then
-                            Dim comstring = "insert into hrs_EmployeeVacationOpenBalanceSettlement (OpenBalanceID,EmployeeTransactionID,Amount,Date,RegDate) values (" & row("EmpSchID") & "," & empTransProjId & "," & amount & ",getdate(),getdate())"
+                            Dim scaledOpenBalAmount As Double = Math.Round(amountPerConfirmedDay * monthDays, 2, MidpointRounding.AwayFromZero)
+                            Dim comstring = "insert into hrs_EmployeeVacationOpenBalanceSettlement (OpenBalanceID,EmployeeTransactionID,Amount,Date,RegDate) values (" & row("EmpSchID") & "," & empTransProjId & "," & scaledOpenBalAmount & ",getdate(),getdate())"
                             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsEmployeesLocal.ConnectionString, Data.CommandType.Text, comstring)
                         End If
-                        Exit For
+                        'Exit For
                     End If
                 End If
             End If
@@ -1485,7 +1508,7 @@ Partial Class frmAttendancePreparation
                 Dim sign As String = If(dtDeductions.Columns.Contains("DescriptionSign"), Convert.ToString(row("DescriptionSign")), "")
                 If sign = "Paid" OrElse sign = "Paid By Days" Then
                     Dim amount As Double = If(IsDBNull(row("Amount")), 0, Convert.ToDouble(Val(row("Amount"))))
-                    amount = Math.Round(amount * splitFactor, 2, MidpointRounding.AwayFromZero)
+                    amount = Math.Round(amount * splitfactor, 2, MidpointRounding.AwayFromZero)
                     If amount > 0 Then
                         Dim amountPerConfirmedDay As Double = amount
                         If totalConfirmedDays > 0 Then

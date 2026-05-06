@@ -355,6 +355,49 @@
                                                 </div>
 
                         <h3>
+                        <asp:Label ID="Label4" runat="server" Text="Employees Salaries" SkinID="Label_DefaultBold"
+                            meta:resourcekey="TabResource4"></asp:Label>
+                    </h3>
+                    <div>
+                        <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                            <ContentTemplate>
+                                <table style="width: 100%;">
+                                     <tr>
+                    <td style="width: 47%; height: 16px; vertical-align: top">
+                        <table style="width: 100%; vertical-align: top" cellspacing="0">
+                            <tr>
+                                <td class="SeparArea">
+                                </td>
+                                <td class="LabelArea">
+                                    <asp:Label ID="lblShowVacationsNotifications" runat="server" Text="Show vacations notifications" SkinID="Label_DefaultNormal"
+                                        meta:resourcekey="lblShowVacationsNotificationsResource1"></asp:Label>
+                                </td>
+                                <td class="DataArea">
+                                    <asp:CheckBox ID="chkShowVacationsNotifications" runat="server" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 6%; height: 16px; vertical-align: top">
+                    </td>
+                    <td style="width: 47%; height: 16px; vertical-align: top">
+                        <table style="width: 100%; vertical-align: top" cellspacing="0">
+                            <tr>
+                                <td class="SeparArea">
+                                </td>
+                                <td class="LabelArea">
+                                </td>
+                                <td class="DataArea">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+               
+                                    </table>
+                                </ContentTemplate></asp:UpdatePanel></div>
+
+                        <h3>
                                                 <asp:Label ID="Label3" runat="server" Text="Organization information" SkinID="Label_DefaultBold"
                                                     meta:resourcekey="TabResource1"></asp:Label>
                                             </h3>

@@ -120,6 +120,149 @@ Partial Class frmEmployeesSelector
         DropDownList_Project.Items.Insert(0, New System.Web.UI.WebControls.ListItem(ClsNavigationHandler.SetLanguage(Page, "[All Employee Has Attendance Transactions]/ [ جميع الموظفين مع إدخالات حضور وانصراف]"), -1))
         DropDownList_Project.Items.Insert(0, New System.Web.UI.WebControls.ListItem(ClsNavigationHandler.SetLanguage(Page, "[All Employees]/ [ جميع الموظفين]"), -2))
         GetData(True)
+        HandleShowVacationsNotifications()
+    End Sub
+
+    Private Sub HandleShowVacationsNotifications()
+        Try
+            If DdlPeriods.SelectedValue Is Nothing OrElse Val(DdlPeriods.SelectedValue) = 0 Then
+                SetPrepareButtonsEnabled(True)
+                Return
+            End If
+
+            Dim connStr As String = CType(Page.Session("ConnectionString"), String)
+            If String.IsNullOrEmpty(connStr) Then
+                Dim ClsEmployee As New Clshrs_Employees(Page)
+                connStr = ClsEmployee.ConnectionString
+            End If
+
+            Dim fp As New Clssys_FiscalYearsPeriods(Page)
+            fp.Find("ID=" & DdlPeriods.SelectedValue)
+            Dim companyId As Integer = fp.MainCompanyID
+
+            Dim showSettingObj As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(connStr, CommandType.Text, "select top 1 isnull(ShowVacationsNotifications,0) from sys_SystemConfig where CompanyId=" & companyId)
+            Dim showSetting As Boolean = False
+            If showSettingObj IsNot Nothing AndAlso Not IsDBNull(showSettingObj) Then
+                showSetting = CBool(showSettingObj)
+            End If
+
+            If Not showSetting Then
+                SetPrepareButtonsEnabled(True)
+                Return
+            End If
+
+            Dim sql As String = "set dateformat dmy " &
+                "select distinct v.id from SS_VacationRequest v " &
+                "join SS_RequestActions r on v.ID=r.RequestSerial and v.VacationType=r.FormCode " &
+                "where ((v.StartDate between @PeriodStartDate and @PeriodEndDate) or (dateadd(day,-1,v.EndDate) between @PeriodStartDate and @PeriodStartDate)) " &
+                "and (v.RequestStautsTypeID in (3,4)) " &
+                "and v.VacationTypeID=1"
+
+            Dim p1 As New SqlParameter("@PeriodStartDate", fp.FromDate)
+            Dim p2 As New SqlParameter("@PeriodEndDate", fp.ToDate)
+            Dim ds As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(connStr, CommandType.Text, sql, p1, p2)
+            Dim hasRows As Boolean = (ds IsNot Nothing AndAlso ds.Tables.Count > 0 AndAlso ds.Tables(0).Rows.Count > 0)
+
+            If hasRows Then
+                SetPrepareButtonsEnabled(False)
+                Dim nav As New Venus.Shared.Web.NavigationHandler(connStr)
+                Dim msg As String = nav.SetLanguage(Page, "Warning: There are self-service requests with incomplete approval chain... do you want to continue?/تنبيه: يوجود طلبات فى الخدمة الذاتية لم تكتمل سلسلة الموافقات....هل تريد الاستمرار؟")
+                msg = msg.Replace("\\", "\\\\").Replace("'", "\\'").Replace(vbCr, "").Replace(vbLf, "")
+
+                Dim script As String = "if(confirm('" & msg & "')){" &
+                    "__doPostBack('" & LinkButton_VacNotifyConfirm.UniqueID & "','STEP1_YES');" &
+                    "}else{" &
+                    "__doPostBack('" & LinkButton_VacNotifyConfirm.UniqueID & "','STEP1_NO');" &
+                    "}"
+                ClientScript.RegisterStartupScript(Me.GetType(), "VacNotifyConfirm", script, True)
+            Else
+                HandleAnnualVacationsWithoutEntitlements()
+            End If
+
+        Catch ex As Exception
+            SetPrepareButtonsEnabled(True)
+        End Try
+    End Sub
+
+    Private Sub HandleAnnualVacationsWithoutEntitlements()
+        Try
+            SetPrepareButtonsEnabled(True)
+
+            If DdlPeriods.SelectedValue Is Nothing OrElse Val(DdlPeriods.SelectedValue) = 0 Then
+                Return
+            End If
+
+            Dim connStr As String = CType(Page.Session("ConnectionString"), String)
+            If String.IsNullOrEmpty(connStr) Then
+                Dim ClsEmployee As New Clshrs_Employees(Page)
+                connStr = ClsEmployee.ConnectionString
+            End If
+
+            Dim fp As New Clssys_FiscalYearsPeriods(Page)
+            fp.Find("ID=" & DdlPeriods.SelectedValue)
+
+            Dim sql As String = "set dateformat dmy " &
+                "select * from  hrs_EmployeesVacations ev " &
+                "left join hrs_EmployeesTransactions mt on ev.id=mt.EmployeesVacationsID " &
+                "where ev.VacationTypeID=1 " &
+                "and ((ev.ActualStartDate between @PeriodStartDate and @PeriodEndDate) or (dateadd(day,-1,ev.ActualEndDate) between @PeriodStartDate and @PeriodEndDate)) " &
+                "and mt.id is null"
+
+            Dim p1 As New SqlParameter("@PeriodStartDate", fp.FromDate)
+            Dim p2 As New SqlParameter("@PeriodEndDate", fp.ToDate)
+            Dim ds As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(connStr, CommandType.Text, sql, p1, p2)
+            Dim hasRows As Boolean = (ds IsNot Nothing AndAlso ds.Tables.Count > 0 AndAlso ds.Tables(0).Rows.Count > 0)
+
+            If Not hasRows Then
+                SetPrepareButtonsEnabled(True)
+                Return
+            End If
+
+            SetPrepareButtonsEnabled(False)
+            Dim nav As New Venus.Shared.Web.NavigationHandler(connStr)
+            Dim msg As String = nav.SetLanguage(Page, "Warning: There are annual vacations without added entitlements... do you want to continue?/تنبيه: يوجود اجازات سنوية لم يتم اضافة مستحقات لها....هل تريد الاستمرار؟")
+            msg = msg.Replace("\\", "\\\\").Replace("'", "\\'").Replace(vbCr, "").Replace(vbLf, "")
+
+            Dim script As String = "if(confirm('" & msg & "')){" &
+                "__doPostBack('" & LinkButton_VacNotifyConfirm.UniqueID & "','STEP2_YES');" &
+                "}else{" &
+                "__doPostBack('" & LinkButton_VacNotifyConfirm.UniqueID & "','STEP2_NO');" &
+                "}"
+            ClientScript.RegisterStartupScript(Me.GetType(), "VacNotifyConfirm2", script, True)
+
+        Catch ex As Exception
+            SetPrepareButtonsEnabled(True)
+        End Try
+    End Sub
+
+    Private Sub SetPrepareButtonsEnabled(ByVal enabled As Boolean)
+        ImageButton_Prepare.Enabled = enabled
+        LinkButton_Prepare.Enabled = enabled
+    End Sub
+
+    Protected Sub LinkButton_VacNotifyConfirm_Click(sender As Object, e As System.EventArgs) Handles LinkButton_VacNotifyConfirm.Click
+        Dim arg As String = Convert.ToString(Request("__EVENTARGUMENT"))
+        If String.Equals(arg, "STEP1_NO", StringComparison.OrdinalIgnoreCase) Then
+            SetPrepareButtonsEnabled(False)
+            Return
+        End If
+
+        If String.Equals(arg, "STEP1_YES", StringComparison.OrdinalIgnoreCase) Then
+            HandleAnnualVacationsWithoutEntitlements()
+            Return
+        End If
+
+        If String.Equals(arg, "STEP2_NO", StringComparison.OrdinalIgnoreCase) Then
+            SetPrepareButtonsEnabled(False)
+            Return
+        End If
+
+        If String.Equals(arg, "STEP2_YES", StringComparison.OrdinalIgnoreCase) Then
+            SetPrepareButtonsEnabled(True)
+            Return
+        End If
+
+        SetPrepareButtonsEnabled(True)
     End Sub
 
     Protected Sub btnSearch_Click(sender As Object, e As Infragistics.WebUI.WebDataInput.ButtonEventArgs) Handles btnFind.Click

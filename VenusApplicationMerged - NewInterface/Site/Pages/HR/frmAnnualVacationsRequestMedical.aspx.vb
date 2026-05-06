@@ -911,6 +911,8 @@ Partial Class frmEmployeesVacations
 
             Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployeeVacation.ConnectionString)
             Dim ClsEmployeesVacations2 = New Clshrs_EmployeesVacations(Page)
+            Dim ClsEmployees As New Clshrs_Employees(Page)
+            ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
             If CInt(lbRemainVal.Text) < 0 Then
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Vaction return date must be greater than start date /تاريخ الرجوع من الاجازة يجب أن يكون اكبر من تاريخ البداية "))
                 Exit Function
@@ -922,14 +924,57 @@ Partial Class frmEmployeesVacations
                 End If
             End If
 
-            If ClsEmployeesVacations2.GetEmployeeLastVacation(ClsEmployeesVacations.EmployeeID) Then
-                If IsDBNull(ClsEmployeesVacations2.ActualEndDate) Then
-                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "There is a vacation without return date /يوجد اجازة سابقة من غير تاريخ رجوع  "))
-                    Exit Function
-                End If
+            Dim SDate As Date
+            Dim EDate As Date
+            Dim ASDate As Date
+            Dim AEDate As Date
+            Dim strErrorMsg As String = String.Empty
+            Dim bErorr As Boolean = False
+            ASDate = CDate(CDate(WebDateChooser1.Value).ToShortDateString() & " " & "00:00")
+            AEDate = CDate(CDate(WebDateChooser2.Value).ToShortDateString() & " " & "00:00")
+            If AEDate.Year = 1 Then
+                AEDate = Date.Now
             End If
-            If ClsEmployeesVacations2.ActualEndDate > WebDateChooser1.Value Then
-                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "There is a vacation with end date greater than the inserted date /يوجد اجازة سابقة بتاريخ رجوع أكبر من التاريخ المدخل  "))
+            If AEDate < ASDate Then
+                AEDate = ASDate
+            End If
+            Try
+                If (ClsEmployeeVacation.FindEmployeeVacations("hrs_EmployeesVacations.EmployeeID=" & ClsEmployees.ID & IIf(lbVactionID.Text.Trim <> "", " AND hrs_EmployeesVacations.ID <>" & lbVactionID.Text, ""))) Then
+                    Dim tab As DataTable = ClsEmployeeVacation.DataSet.Tables(0).Copy()
+                    For Each row As DataRow In tab.Rows
+                        SDate = row("ActualStartDate")
+                        EDate = IIf(IsDBNull(row("ActualEndDate")), Date.Now, row("ActualEndDate"))
+                        If (EDate < SDate) Then
+                            EDate = SDate
+                        End If
+                        If (CheckDateBetween2DatesNew(ASDate, SDate, EDate)) Then
+                            strErrorMsg += ObjNavigationHandler.SetLanguage(Page, "This Employee is already in vacation \n /  الموظف موجود فى أجازة بالفعل \n ")
+                            bErorr = True
+                            Exit For
+                        End If
+                        If (CheckDateBetween2Dates(AEDate, SDate, EDate)) Then
+                            strErrorMsg += ObjNavigationHandler.SetLanguage(Page, "This Employee is already in vacation \n /  الموظف موجود فى أجازة بالفعل \n ")
+                            bErorr = True
+                            Exit For
+                        End If
+                        If (CheckDateBetween2Dates(SDate, ASDate, AEDate)) Then
+                            strErrorMsg += ObjNavigationHandler.SetLanguage(Page, "This Employee is already in vacation \n /  الموظف موجود فى أجازة بالفعل \n ")
+                            bErorr = True
+                            Exit For
+                        End If
+                        If (CheckDateBetween2DatesNew2(EDate, ASDate, AEDate)) Then
+                            strErrorMsg += ObjNavigationHandler.SetLanguage(Page, "This Employee is already in vacation \n /  الموظف موجود فى أجازة بالفعل \n ")
+                            bErorr = True
+                            Exit For
+                        End If
+                    Next
+                End If
+            Catch ex As Exception
+                Page.Session.Add("ErrorValue", ex)
+                Page.Response.Redirect("ErrorPage.aspx")
+            End Try
+            If bErorr Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, strErrorMsg)
                 Exit Function
             End If
             Dim VBalance As Decimal = Decimal.Parse(lbTotalVal.Text)
@@ -938,10 +983,6 @@ Partial Class frmEmployeesVacations
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Vacation Balance Should be More Than or Equal Required Vacation Days! / عفوا لابد ان يكون رصيد الاجازة اكبر من او يساوي عدد الايام المطلوبة"))
                 Exit Function
             End If
-
-
-            Dim ClsEmployees As New Clshrs_Employees(Page)
-            ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
 
 
             '''''''''''''''''''''''''''''عدد المرات

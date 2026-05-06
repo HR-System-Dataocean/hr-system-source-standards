@@ -7876,6 +7876,12 @@ ALTER TABLE dbo.sys_Documents ADD
 	CompanyId int NULL "
         ExecuteUpdate(SQL)
 
+        SQL = "IF COL_LENGTH('sys_SystemConfig', 'ShowVacationsNotifications') IS NULL  
+BEGIN
+    ALTER TABLE dbo.sys_SystemConfig ADD ShowVacationsNotifications bit NULL
+END"
+        ExecuteUpdate(SQL)
+
         SQL = " alter table hrs_EmployeesClasses add RamadanWorkHoursPerDay real null "
         ExecuteUpdate(SQL)
         SQL = " alter table Hrs_OfficialVacations add IsRamadan Bit null"

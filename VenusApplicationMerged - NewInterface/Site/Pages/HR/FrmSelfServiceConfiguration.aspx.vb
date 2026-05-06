@@ -386,7 +386,7 @@ Partial Class frmEmployeesVacations
 
             Dim hasEndlessRequests As Integer = 0
             Try
-                hasEndlessRequests = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnectionString, Data.CommandType.Text, "Select Count(1) From SS_RequestActions Where FormCode=@FormCode And ActionID Is Null", New SqlParameter("@FormCode", FormCode))
+                hasEndlessRequests = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnectionString, Data.CommandType.Text, "Select Count(1) From SS_VFollowup Where FormCode=@FormCode And RequestStautsTypeID in(3,4)", New SqlParameter("@FormCode", FormCode))
             Catch ex As Exception
             End Try
 
@@ -804,7 +804,7 @@ Partial Class frmEmployeesVacations
         Dim formCode As String = ddlFormCode.SelectedValue.Trim()
         Dim hasEndlessRequests As Integer = 0
         Try
-            hasEndlessRequests = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnectionString, Data.CommandType.Text, "Select Count(1) From SS_RequestActions Where FormCode=@FormCode And ActionID Is Null", New SqlParameter("@FormCode", formCode))
+            hasEndlessRequests = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnectionString, Data.CommandType.Text, "Select Count(1) From SS_VFollowup Where FormCode=@FormCode And RequestStautsTypeID in(3,4)", New SqlParameter("@FormCode", formCode))
         Catch ex As Exception
         End Try
 

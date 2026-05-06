@@ -93,7 +93,7 @@ Partial Class frmSystemConfig
 
             Dim count As Integer = CInt(txtMinimumCostCentersCount.Text)
             Dim Str = "delete from sys_SystemConfig where CompanyId=" & DdlCompany.SelectedValue & "; "
-            Str &= " INSERT INTO [dbo].[sys_SystemConfig] ([UseCostCenter],[MinimumCostCentersCount],PreventChangeContractEndDate,RegUserID,MultiBranchedPosition,CompanyId,AllowDelayInstallmentPart) VALUES(" & If(chkUseCostCenter.Checked, "1", "0") & "," & count & "," & If(ChkPreventChangeEndDate.Checked, "1", "0") & ",'" & User & "'," & If(chkMultiBranchedPosition.Checked, "1", "0") & "," & DdlCompany.SelectedValue & "," & If(chkAllowDelayInstallmentPart.Checked, "1", "0") & ")"
+            Str &= " INSERT INTO [dbo].[sys_SystemConfig] ([UseCostCenter],[MinimumCostCentersCount],PreventChangeContractEndDate,RegUserID,MultiBranchedPosition,CompanyId,AllowDelayInstallmentPart,ShowVacationsNotifications) VALUES(" & If(chkUseCostCenter.Checked, "1", "0") & "," & count & "," & If(ChkPreventChangeEndDate.Checked, "1", "0") & ",'" & User & "'," & If(chkMultiBranchedPosition.Checked, "1", "0") & "," & DdlCompany.SelectedValue & "," & If(chkAllowDelayInstallmentPart.Checked, "1", "0") & "," & If(chkShowVacationsNotifications.Checked, "1", "0") & ")"
             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsTicketsAgencies.ConnectionString, System.Data.CommandType.Text, Str)
             Return True
         Catch ex As Exception
@@ -122,6 +122,10 @@ Partial Class frmSystemConfig
 
                 If Not IsDBNull(dr("AllowDelayInstallmentPart")) Then
                     chkAllowDelayInstallmentPart.Checked = CBool(dr("AllowDelayInstallmentPart"))
+                End If
+
+                If Not IsDBNull(dr("ShowVacationsNotifications")) Then
+                    chkShowVacationsNotifications.Checked = CBool(dr("ShowVacationsNotifications"))
                 End If
 
                 If Not IsDBNull(dr("PreventChangeContractEndDate")) Then
