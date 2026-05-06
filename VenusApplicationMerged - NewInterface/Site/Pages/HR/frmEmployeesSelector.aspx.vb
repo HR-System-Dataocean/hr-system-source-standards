@@ -10,6 +10,12 @@ Imports System.IO
 Partial Class frmEmployeesSelector
     Inherits MainPage
 
+    Private ReadOnly Property VacNotifyConfirmButton As System.Web.UI.WebControls.LinkButton
+        Get
+            Return TryCast(Me.FindControl("LinkButton_VacNotifyConfirm"), System.Web.UI.WebControls.LinkButton)
+        End Get
+    End Property
+
 #Region "Protected Sub"
 
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
@@ -18,6 +24,7 @@ Partial Class frmEmployeesSelector
         Dim ClsFisicalYearsPeriods As New Clssys_FiscalYearsPeriods(Page)
         Dim ClsWebHandler As New Venus.Shared.Web.WebHandler
         Dim ClsNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployee.ConnectionString)
+
         Dim IntSelectedPeriod As Integer = 0
         Dim IntModuleId As Integer = GetModuleID("frmPrepareSalaries")
         Dim clsBranch As New Clssys_Branches(Page)
@@ -49,6 +56,10 @@ Partial Class frmEmployeesSelector
                 Dim UrlString = "' frmModalSearchScreen.aspx?TargetControl=" & TextBox_Sponsor.ID & "&SearchID=" & ClsSearchs.ID & "&'," & IntDimension & ",720,false,'" & TextBox_Sponsor.ClientID & "'"
                 WebImageButton_Sponsor.ClientSideEvents.Click = "OpenModal1(" & UrlString & ")"
             End If
+        End If
+
+        If VacNotifyConfirmButton IsNot Nothing Then
+            AddHandler VacNotifyConfirmButton.Click, AddressOf LinkButton_VacNotifyConfirm_Click
         End If
 
         If Not IsPostBack Then
@@ -169,10 +180,15 @@ Partial Class frmEmployeesSelector
                 Dim msg As String = nav.SetLanguage(Page, "Warning: There are self-service requests with incomplete approval chain... do you want to continue?/تنبيه: يوجود طلبات فى الخدمة الذاتية لم تكتمل سلسلة الموافقات....هل تريد الاستمرار؟")
                 msg = msg.Replace("\\", "\\\\").Replace("'", "\\'").Replace(vbCr, "").Replace(vbLf, "")
 
+                If VacNotifyConfirmButton Is Nothing Then
+                    SetPrepareButtonsEnabled(True)
+                    Return
+                End If
+
                 Dim script As String = "if(confirm('" & msg & "')){" &
-                    "__doPostBack('" & LinkButton_VacNotifyConfirm.UniqueID & "','STEP1_YES');" &
+                    "__doPostBack('" & VacNotifyConfirmButton.UniqueID & "','STEP1_YES');" &
                     "}else{" &
-                    "__doPostBack('" & LinkButton_VacNotifyConfirm.UniqueID & "','STEP1_NO');" &
+                    "__doPostBack('" & VacNotifyConfirmButton.UniqueID & "','STEP1_NO');" &
                     "}"
                 ClientScript.RegisterStartupScript(Me.GetType(), "VacNotifyConfirm", script, True)
             Else
@@ -223,10 +239,15 @@ Partial Class frmEmployeesSelector
             Dim msg As String = nav.SetLanguage(Page, "Warning: There are annual vacations without added entitlements... do you want to continue?/تنبيه: يوجود اجازات سنوية لم يتم اضافة مستحقات لها....هل تريد الاستمرار؟")
             msg = msg.Replace("\\", "\\\\").Replace("'", "\\'").Replace(vbCr, "").Replace(vbLf, "")
 
+            If VacNotifyConfirmButton Is Nothing Then
+                SetPrepareButtonsEnabled(True)
+                Return
+            End If
+
             Dim script As String = "if(confirm('" & msg & "')){" &
-                "__doPostBack('" & LinkButton_VacNotifyConfirm.UniqueID & "','STEP2_YES');" &
+                "__doPostBack('" & VacNotifyConfirmButton.UniqueID & "','STEP2_YES');" &
                 "}else{" &
-                "__doPostBack('" & LinkButton_VacNotifyConfirm.UniqueID & "','STEP2_NO');" &
+                "__doPostBack('" & VacNotifyConfirmButton.UniqueID & "','STEP2_NO');" &
                 "}"
             ClientScript.RegisterStartupScript(Me.GetType(), "VacNotifyConfirm2", script, True)
 
@@ -240,7 +261,7 @@ Partial Class frmEmployeesSelector
         LinkButton_Prepare.Enabled = enabled
     End Sub
 
-    Protected Sub LinkButton_VacNotifyConfirm_Click(sender As Object, e As System.EventArgs) Handles LinkButton_VacNotifyConfirm.Click
+    Protected Sub LinkButton_VacNotifyConfirm_Click(sender As Object, e As System.EventArgs)
         Dim arg As String = Convert.ToString(Request("__EVENTARGUMENT"))
         If String.Equals(arg, "STEP1_NO", StringComparison.OrdinalIgnoreCase) Then
             SetPrepareButtonsEnabled(False)
