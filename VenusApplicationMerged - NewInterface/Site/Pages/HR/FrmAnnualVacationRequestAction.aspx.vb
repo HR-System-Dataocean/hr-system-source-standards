@@ -1167,17 +1167,18 @@ Partial Class frmAttendancePreparation
                         Dim month2Date As Date = paidDate
 
                         didSplit = GetDaysSplitAcrossTwoMonths(vacStart, vacEnd, month1Days, month2Days, month1Date, month2Date)
+                        Dim exactTotalVacDays As Double = settlementDays
                         If didSplit Then
                             Dim totalVacDays As Double = month1Days + month2Days
                             If totalVacDays <= 0 OrElse settlementDays <= 0 Then
                                 didSplit = False
                             Else
-                                settlementDays = totalVacDays
+                                exactTotalVacDays = totalVacDays
                             End If
 
                         End If
 
-                        Dim exactTotalVacDays As Double = settlementDays
+
                         If didSplit = False Then
                             Dim exactEndDate As Date = vacEnd.Date
                             If vacEnd.Date.Day = 31 Then
