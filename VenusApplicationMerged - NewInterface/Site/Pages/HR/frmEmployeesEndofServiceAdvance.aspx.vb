@@ -1737,6 +1737,8 @@ Partial Class frmEmployeesEndofServiceAdvance
 
             'OpenBalanceId.Value =Cls_EmployeeVacationOpenBalance.ID 
         End If
+        Dim MyTotalBalance As Decimal = 0
+
         If ClsEmployeeClass.AdvanceBalance Then
             'Dim strAdv = "SELECT    Balance FROM hrs_VacationsBalance where hrs_VacationsBalance.EndServiceDate IS NULL and BalanceTypeID=2 and EmployeeID=" & ClsEmployees.ID & " and ExpireDate >='" & CDate(wdcEndOfServiceDate.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & CDate(wdcEndOfServiceDate.Value).ToString("yyyy-MM-dd") & "'"
             'Dim remain As Decimal
@@ -1758,7 +1760,6 @@ Partial Class frmEmployeesEndofServiceAdvance
             lblTransferBalance.Text = "0"
             lblNewBalance.Text = "0"
             lblCompData.Text = "0"
-
             If DataSet.Tables(0).Rows.Count > 0 Then
                 For i = 0 To DataSet.Tables(0).Rows.Count - 1
 
@@ -1802,7 +1803,7 @@ Partial Class frmEmployeesEndofServiceAdvance
 
 
                     End If
-
+                    MyTotalBalance += myBallance
                 Next
                 lblVacationDue.Text = (CDec(lblTransferBalance.Text) + CDec(lblNewBalance.Text) + CDec(lblCompData.Text)).ToString()
             End If
@@ -1836,7 +1837,8 @@ Partial Class frmEmployeesEndofServiceAdvance
             lblCompLbl.Text = "Comp" & " :"
         End If
         'dblVacationDays = dblVacationDays '+ RemaningOPenBalanceDays
-        dblVacationDays = myBallance
+        'dblVacationDays = myBallance
+        dblVacationDays = MyTotalBalance
         ClsEmployees.CollectEmployeesTransactions("", ToDate, IntEmployeeId, IntFisicalPeriod, DtBenefits, DtDeductions, dblBenefits, dblDeduct, dblVacationDays, 0, dblVacationDays, 0, 0, 0, 0, 0, 0, Clshrs_EmployeesBase.ePrepareType.EndOfContract, Clshrs_EmployeesBase.ePrepareStage.Vacation)
         'lblVacationDue.Text = dblVacationDays
 

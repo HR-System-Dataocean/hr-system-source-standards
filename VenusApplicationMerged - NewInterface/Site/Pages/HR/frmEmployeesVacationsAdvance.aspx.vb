@@ -2311,7 +2311,7 @@ Partial Class frmEmployeesVacationsAdvance
                 If Convert.ToDateTime(clsContr.RegDate).Date = Nothing Then
                     lblRegDateValue.Text = ""
                 Else
-                    lblRegDateValue.Text = clsContr.RegDate
+                    ' lblRegDateValue.Text = clsContr.RegDate
                 End If
 
             End If
