@@ -20,6 +20,42 @@
     <script src="../../Common/Script/JQuery/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script src="../../Common/Script/JQuery/jquery.blockUI.js" type="text/javascript"></script>
     <script type="text/javascript" id="igClientScript">
+        function VacYesNoConfirm(msg, yesText, noText, postBackTarget, yesArg, noArg) {
+            var $dlg = $('#VacNotifyDialog');
+            if ($dlg.length === 0) {
+                if (window.confirm(msg)) {
+                    __doPostBack(postBackTarget, yesArg);
+                } else {
+                    __doPostBack(postBackTarget, noArg);
+                }
+                return;
+            }
+
+            $dlg.html(msg);
+            $dlg.dialog({
+                modal: true,
+                resizable: false,
+                draggable: true,
+                width: 520,
+                closeOnEscape: false,
+                buttons: [
+                    {
+                        text: yesText,
+                        click: function () {
+                            $(this).dialog('close');
+                            __doPostBack(postBackTarget, yesArg);
+                        }
+                    },
+                    {
+                        text: noText,
+                        click: function () {
+                            $(this).dialog('close');
+                            __doPostBack(postBackTarget, noArg);
+                        }
+                    }
+                ]
+            });
+        }
         var IsEdit = true;
         function UwgSearchEmployees_AfterCellUpdateHandler(gridName, cellId) {
             var grid = igtbl_getGridById(gridName);
@@ -135,10 +171,11 @@
 </head>
 <body style="height: 100%; margin: 0; padding: 0;">
     <form id="frmEmployeesSelector" runat="server" defaultbutton="ImageButton1">
+        <div id="VacNotifyDialog" style="display: none"></div>
     <script type="text/javascript" id="Script1">
         $(function () {
             $('#<%= ImageButton_Prepare.ClientID%>').click(function () {
-                $.blockUI({ message: '' });
+                $.blockUI({ message: '<h1>... </h1>' });
             });
             $('#<%= LinkButton_Prepare.ClientID%>').click(function () {
                 $.blockUI({ message: '' });
