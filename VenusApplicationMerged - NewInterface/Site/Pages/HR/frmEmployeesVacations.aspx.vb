@@ -408,7 +408,7 @@ Partial Class frmEmployeesVacations
                         txtVactiondays.Text = Math.Round(Convert.ToDecimal(clsEmpVac.vactiondays), 2)
                         chk_ZeroingBalance.Checked = clsEmpVac.ZeroingBalance
                         Dim vl As DateTime = WebDateChooser1.Value
-                        WebDateChooser3.Value = vl.Date.AddDays(IIf(txtVactiondays.Text < 1, 0, txtVactiondays.Text))
+                        WebDateChooser3.Value = vl.Date.AddDays(If(txtVactiondays.Text < 1, 0, txtVactiondays.Text))
                         If clsEmpVac.OverDueVacation <> Nothing Then
                             clsEmpVac.Find("ID=" & clsEmpVac.OverDueVacation)
                             Dim days As Integer = (DateDiff(DateInterval.Day, clsEmpVac.ActualStartDate, clsEmpVac.ActualEndDate)) + 1
@@ -501,9 +501,9 @@ Partial Class frmEmployeesVacations
     Protected Sub uwgEmployeeVacations_InitializeRow(ByVal sender As Object, ByVal e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles uwgEmployeeVacations.InitializeRow
         Dim clsCompanies As New Clssys_Companies(Page)
         With clsCompanies
-            e.Row.Cells.FromKey("actualstartdate").Value = .GetHigriDate(e.Row.Cells.FromKey("actualstartdate").Value) & IIf(Not IsNothing(e.Row.Cells.FromKey("actualstartdate").Value), " " & e.Row.Cells.FromKey("actualstartdate").Value.ToString().Split(" ")(1) & " " & e.Row.Cells.FromKey("actualstartdate").Value.ToString().Split(" ")(2), "")
+            e.Row.Cells.FromKey("actualstartdate").Value = .GetHigriDate(e.Row.Cells.FromKey("actualstartdate").Value) & If(Not IsNothing(e.Row.Cells.FromKey("actualstartdate").Value), " " & e.Row.Cells.FromKey("actualstartdate").Value.ToString().Split(" ")(1) & " " & e.Row.Cells.FromKey("actualstartdate").Value.ToString().Split(" ")(2), "")
             If Not IsNothing(e.Row.Cells.FromKey("actualenddate").Value) Then
-                e.Row.Cells.FromKey("actualenddate").Value = .GetHigriDate(e.Row.Cells.FromKey("actualenddate").Value) & IIf(Not IsNothing(e.Row.Cells.FromKey("actualenddate").Value), " " & e.Row.Cells.FromKey("actualenddate").Value.ToString().Split(" ")(1) & " " & e.Row.Cells.FromKey("actualenddate").Value.ToString().Split(" ")(2), "")
+                e.Row.Cells.FromKey("actualenddate").Value = .GetHigriDate(e.Row.Cells.FromKey("actualenddate").Value) & If(Not IsNothing(e.Row.Cells.FromKey("actualenddate").Value), " " & e.Row.Cells.FromKey("actualenddate").Value.ToString().Split(" ")(1) & " " & e.Row.Cells.FromKey("actualenddate").Value.ToString().Split(" ")(2), "")
             End If
         End With
     End Sub
@@ -565,7 +565,7 @@ Partial Class frmEmployeesVacations
                         txtVactiondays.Text = Math.Round(Convert.ToDecimal(clsEmpVac.vactiondays), 2)
                         chk_ZeroingBalance.Checked = clsEmpVac.ZeroingBalance
                         Dim vl As DateTime = WebDateChooser1.Value
-                        WebDateChooser3.Value = vl.Date.AddDays(IIf(txtVactiondays.Text < 1, 0, txtVactiondays.Text))
+                        WebDateChooser3.Value = vl.Date.AddDays(If(txtVactiondays.Text < 1, 0, txtVactiondays.Text))
                         If clsEmpVac.OverDueVacation <> Nothing Then
                             clsEmpVac.Find("ID=" & clsEmpVac.OverDueVacation)
                             Dim days As Integer = (DateDiff(DateInterval.Day, clsEmpVac.ActualStartDate, clsEmpVac.ActualEndDate)) + 1
@@ -618,7 +618,7 @@ Partial Class frmEmployeesVacations
 
             'lbRemainVal.Text = Math.Round(lbRemainVal.Text - txtVactiondays.Text, 2)
             Dim vl As DateTime = WebDateChooser1.Value
-            WebDateChooser3.Value = vl.Date.AddDays(IIf(txtVactiondays.Text < 1, 0, txtVactiondays.Text))
+            WebDateChooser3.Value = vl.Date.AddDays(If(txtVactiondays.Text < 1, 0, txtVactiondays.Text))
             'WebDateChooser2.Value = vl.Date.AddDays(IIf(txtVactiondays.Text < 1, 0, txtVactiondays.Text))
             'TxtEndDate.Text = (CDate(WebDateChooser2.Value).AddDays(-1)).ToString("dd/MM/yyyy")
             WebDateChooser2.Value = Nothing
@@ -881,7 +881,7 @@ Partial Class frmEmployeesVacations
                 lbRemainVal.CssClass = "noramlRemain"
             End If
             Dim vl As DateTime = WebDateChooser1.Value
-            WebDateChooser3.Value = vl.Date.AddDays(IIf(txtVactiondays.Text < 1, 0, txtVactiondays.Text))
+            WebDateChooser3.Value = vl.Date.AddDays(If(txtVactiondays.Text < 1, 0, txtVactiondays.Text))
             Return True
         Else
             lblTotalDays.Text = 0
@@ -1475,7 +1475,7 @@ Partial Class frmEmployeesVacations
             Dim endDate As Date
             If clsContract.ID > 0 Then
                 startDate = clsContract.StartDate
-                endDate = IIf(IsNothing(clsContract.EndDate), Date.Now, clsContract.EndDate)
+                endDate = If(IsNothing(clsContract.EndDate), Date.Now, clsContract.EndDate)
             End If
             Dim vacStartDate As Date
             Dim vacEndDate As Date
@@ -1568,7 +1568,7 @@ Partial Class frmEmployeesVacations
                     Dim tab As DataTable = ClsEmployeesVacations.DataSet.Tables(0).Copy()
                     For Each row As DataRow In tab.Rows
                         SDate = row("ActualStartDate")
-                        EDate = IIf(IsDBNull(row("ActualEndDate")), Date.Now, CDate(row("ActualEndDate")).AddDays(-1))
+                        EDate = If(IsDBNull(row("ActualEndDate")), Date.Now, CDate(row("ActualEndDate")).AddDays(-1))
                         If (EDate < SDate) Then
                             EDate = SDate
                         End If
@@ -1702,7 +1702,7 @@ Partial Class frmEmployeesVacations
             Dim endDate As Date
             If clsContract.ID > 0 Then
                 startDate = clsContract.StartDate
-                endDate = IIf(IsNothing(clsContract.EndDate), Date.Now, clsContract.EndDate)
+                endDate = If(IsNothing(clsContract.EndDate), Date.Now, clsContract.EndDate)
             End If
             Dim vacStartDate As Date
             Dim vacEndDate As Date
@@ -1788,7 +1788,7 @@ Partial Class frmEmployeesVacations
                     Dim tab As DataTable = ClsEmployeesVacations.DataSet.Tables(0).Copy()
                     For Each row As DataRow In tab.Rows
                         SDate = row("ActualStartDate")
-                        EDate = IIf(IsDBNull(row("ActualEndDate")), Date.Now, CDate(row("ActualEndDate")).AddDays(-1))
+                        EDate = If(IsDBNull(row("ActualEndDate")), Date.Now, CDate(row("ActualEndDate")).AddDays(-1))
                         If (EDate < SDate) Then
                             EDate = SDate
                         End If
@@ -2116,7 +2116,7 @@ Partial Class frmEmployeesVacations
                     Continue For
                 End If
                 Dim currCtrl As Control = Me.FindControl(row("Name"))
-                Dim bIsArabic As Boolean = IIf(IsDBNull(row("IsArabic")), False, row("IsArabic"))
+                Dim bIsArabic As Boolean = If(IsDBNull(row("IsArabic")), False, row("IsArabic"))
                 If (bIsArabic Or row("Name").ToString.ToLower.IndexOf("arb") > -1) And (TypeOf (currCtrl) Is TextBox) Then
                     CType(currCtrl, TextBox).Attributes.Add("onKeyPress", "LoadDataUpdateSchedulesForArabicText(e,'" & formName & "','" & row("Name") & "'," & recordID & ")")
                 ElseIf (TypeOf (currCtrl) Is TextBox) Then
@@ -2294,9 +2294,9 @@ Partial Class frmEmployeesVacations
                 If IsDBNull(row("ActualStartDate")) Then
                     row("ActualStartDate") = CDate(Nothing)
                 End If
-                dteActualStartDate = IIf(CDate(row("ActualStartDate")) < dateStartDate, dateStartDate, row("ActualStartDate"))
-                dteactualEndDate = GetNDate_Shared(row("ActualEndDate"), IIf(Date.Now > dateEndDate, dateEndDate, Date.Now))
-                dteactualEndDate = IIf(dteactualEndDate > dateEndDate, dateEndDate, dteactualEndDate)
+                dteActualStartDate = If(CDate(row("ActualStartDate")) < dateStartDate, dateStartDate, row("ActualStartDate"))
+                dteactualEndDate = GetNDate_Shared(row("ActualEndDate"), If(Date.Now > dateEndDate, dateEndDate, Date.Now))
+                dteactualEndDate = If(dteactualEndDate > dateEndDate, dateEndDate, dteactualEndDate)
                 If dteactualEndDate < dteActualStartDate Then
                     Continue For
                 End If

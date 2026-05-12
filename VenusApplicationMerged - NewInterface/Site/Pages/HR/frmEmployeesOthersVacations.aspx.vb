@@ -708,7 +708,7 @@ Partial Class frmEmployeesOthersVacations
                 If hdnAnnualVacId.Value <> 0 And DdlVacationType.SelectedValue = hdnAnnualVacId.Value And ClsEmployees.ID > 0 Then
                     dateExStartDate = Date.Now
                     If (hdnDurationDays.Value = "") Then hdnDurationDays.Value = 0
-                    dateExEndDate = dateExStartDate.AddDays(IIf(hdnDurationDays.Value = 0, 1, hdnDurationDays.Value) - 1)
+                    dateExEndDate = dateExStartDate.AddDays(If(hdnDurationDays.Value = 0, 1, hdnDurationDays.Value) - 1)
                     With ClsEmployeesVacations
                         WebDateChooser1.Value = .GetHigriDate(dateExStartDate)
                     End With
@@ -724,13 +724,13 @@ Partial Class frmEmployeesOthersVacations
     Protected Sub uwgEmployeeVacations_InitializeRow(ByVal sender As Object, ByVal e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles uwgEmployeeVacations.InitializeRow
         Dim clsCompanies As New Clssys_Companies(Page)
         With clsCompanies
-            e.Row.Cells.FromKey("expectedstartdate").Value = .GetHigriDate(e.Row.Cells.FromKey("expectedstartdate").Value) & IIf(Not IsNothing(e.Row.Cells.FromKey("expectedstartdate").Value), " " & e.Row.Cells.FromKey("expectedstartdate").Value.ToString().Split(" ")(1) & " " & e.Row.Cells.FromKey("expectedstartdate").Value.ToString().Split(" ")(2), "")
+            e.Row.Cells.FromKey("expectedstartdate").Value = .GetHigriDate(e.Row.Cells.FromKey("expectedstartdate").Value) & If(Not IsNothing(e.Row.Cells.FromKey("expectedstartdate").Value), " " & e.Row.Cells.FromKey("expectedstartdate").Value.ToString().Split(" ")(1) & " " & e.Row.Cells.FromKey("expectedstartdate").Value.ToString().Split(" ")(2), "")
             If Not IsNothing(e.Row.Cells.FromKey("expectedenddate").Value) Then
-                e.Row.Cells.FromKey("expectedenddate").Value = .GetHigriDate(e.Row.Cells.FromKey("expectedenddate").Value) & IIf(Not IsNothing(e.Row.Cells.FromKey("expectedenddate").Value), " " & e.Row.Cells.FromKey("expectedenddate").Value.ToString().Split(" ")(1) & " " & e.Row.Cells.FromKey("expectedenddate").Value.ToString().Split(" ")(2), "")
+                e.Row.Cells.FromKey("expectedenddate").Value = .GetHigriDate(e.Row.Cells.FromKey("expectedenddate").Value) & If(Not IsNothing(e.Row.Cells.FromKey("expectedenddate").Value), " " & e.Row.Cells.FromKey("expectedenddate").Value.ToString().Split(" ")(1) & " " & e.Row.Cells.FromKey("expectedenddate").Value.ToString().Split(" ")(2), "")
             End If
-            e.Row.Cells.FromKey("actualstartdate").Value = .GetHigriDate(e.Row.Cells.FromKey("actualstartdate").Value) & IIf(Not IsNothing(e.Row.Cells.FromKey("actualstartdate").Value), " " & e.Row.Cells.FromKey("actualstartdate").Value.ToString().Split(" ")(1) & " " & e.Row.Cells.FromKey("actualstartdate").Value.ToString().Split(" ")(2), "")
+            e.Row.Cells.FromKey("actualstartdate").Value = .GetHigriDate(e.Row.Cells.FromKey("actualstartdate").Value) & If(Not IsNothing(e.Row.Cells.FromKey("actualstartdate").Value), " " & e.Row.Cells.FromKey("actualstartdate").Value.ToString().Split(" ")(1) & " " & e.Row.Cells.FromKey("actualstartdate").Value.ToString().Split(" ")(2), "")
             If Not IsNothing(e.Row.Cells.FromKey("actualenddate").Value) Then
-                e.Row.Cells.FromKey("actualenddate").Value = .GetHigriDate(e.Row.Cells.FromKey("actualenddate").Value) & IIf(Not IsNothing(e.Row.Cells.FromKey("actualenddate").Value), " " & e.Row.Cells.FromKey("actualenddate").Value.ToString().Split(" ")(1) & " " & e.Row.Cells.FromKey("actualenddate").Value.ToString().Split(" ")(2), "")
+                e.Row.Cells.FromKey("actualenddate").Value = .GetHigriDate(e.Row.Cells.FromKey("actualenddate").Value) & If(Not IsNothing(e.Row.Cells.FromKey("actualenddate").Value), " " & e.Row.Cells.FromKey("actualenddate").Value.ToString().Split(" ")(1) & " " & e.Row.Cells.FromKey("actualenddate").Value.ToString().Split(" ")(2), "")
             End If
         End With
     End Sub
@@ -756,7 +756,7 @@ Partial Class frmEmployeesOthersVacations
                     WebDateChooser2.Enabled = False
                 End If
 
-                txtVactiondays.Text = IIf(WebDateChooser2.Value <> Nothing, Math.Round(DateDiff(DateInterval.Day, WebDateChooser1.Value, WebDateChooser2.Value), 0), 0)
+                txtVactiondays.Text = If(WebDateChooser2.Value <> Nothing, Math.Round(DateDiff(DateInterval.Day, WebDateChooser1.Value, WebDateChooser2.Value), 0), 0)
 
                 lbVactionID.Text = e.SelectedRows.Item(0).Cells.FromKey("ID").Value
                 Dim clsEmp As New Clshrs_Employees(Page)
@@ -887,7 +887,7 @@ Partial Class frmEmployeesOthersVacations
                 If hdnAnnualVacId.Value <> 0 And DdlVacationType.SelectedValue = hdnAnnualVacId.Value And ClsEmployees.ID > 0 Then
                     dateExStartDate = Date.Now
                     If (hdnDurationDays.Value = "") Then hdnDurationDays.Value = 0
-                    dateExEndDate = dateExStartDate.AddDays(IIf(hdnDurationDays.Value = 0, 1, hdnDurationDays.Value) - 1)
+                    dateExEndDate = dateExStartDate.AddDays(If(hdnDurationDays.Value = 0, 1, hdnDurationDays.Value) - 1)
                     With ClsEmployeesVacations
                         WebDateChooser1.Value = .GetHigriDate(dateExStartDate)
                     End With
@@ -1208,8 +1208,8 @@ Partial Class frmEmployeesOthersVacations
 
         ' Check each previous vacation for overlap
         For Each row As DataRow In previousPeriods.Tables(0).Rows
-            Dim periodStart As DateTime = Convert.ToDateTime(row("ActualStartDate"))
-            Dim periodEnd As DateTime = Convert.ToDateTime(row("ActualEndDate")).AddDays(-1)
+            Dim periodStart As DateTime = If(IsDBNull(row("ActualStartDate")), DateTime.MinValue, Convert.ToDateTime(row("ActualStartDate")))
+            Dim periodEnd As DateTime = If(IsDBNull(row("ActualEndDate")), DateTime.MinValue, Convert.ToDateTime(row("ActualEndDate")).AddDays(-1))
 
             If (newStart <= periodEnd AndAlso newEnd >= periodStart) Then
                 If ClsVacationTypes.OverlapWithAnotherVac Then
@@ -1299,8 +1299,8 @@ Partial Class frmEmployeesOthersVacations
 
         ' Check each previous vacation for overlap
         For Each row As DataRow In previousPeriods.Tables(0).Rows
-            Dim periodStart As DateTime = Convert.ToDateTime(row("ActualStartDate"))
-            Dim periodEnd As DateTime = Convert.ToDateTime(row("ActualEndDate")).AddDays(-1)
+            Dim periodStart As DateTime = If(IsDBNull(row("ActualStartDate")), DateTime.MinValue, Convert.ToDateTime(row("ActualStartDate")))
+            Dim periodEnd As DateTime = If(IsDBNull(row("ActualEndDate")), DateTime.MinValue, Convert.ToDateTime(row("ActualEndDate")).AddDays(-1))
 
             If (newStart <= periodEnd AndAlso newEnd >= periodStart) Then
                 If ClsVacationTypes.OverlapWithAnotherVac Then
@@ -1469,7 +1469,7 @@ Partial Class frmEmployeesOthersVacations
             Dim endDate As Date
             If clsContract.ID > 0 Then
                 startDate = clsContract.StartDate
-                endDate = IIf(IsNothing(clsContract.EndDate), Date.Now, clsContract.EndDate)
+                endDate = If(IsNothing(clsContract.EndDate), Date.Now, clsContract.EndDate)
             End If
             Dim vacStartDate As Date
             Dim vacEndDate As Date
@@ -1556,7 +1556,7 @@ Partial Class frmEmployeesOthersVacations
                     Dim tab As DataTable = ClsEmployeesVacations.DataSet.Tables(0).Copy()
                     For Each row As DataRow In tab.Rows
                         SDate = row("ActualStartDate")
-                        EDate = IIf(IsDBNull(row("ActualEndDate")), Date.Now, CDate(row("ActualEndDate")).AddDays(-1))
+                        EDate = If(IsDBNull(row("ActualEndDate")), Date.Now, CDate(row("ActualEndDate")).AddDays(-1))
                         If (EDate < SDate) Then
                             EDate = SDate
                         End If
@@ -1885,7 +1885,7 @@ Partial Class frmEmployeesOthersVacations
                     Continue For
                 End If
                 Dim currCtrl As Control = Me.FindControl(row("Name"))
-                Dim bIsArabic As Boolean = IIf(IsDBNull(row("IsArabic")), False, row("IsArabic"))
+                Dim bIsArabic As Boolean = If(IsDBNull(row("IsArabic")), False, row("IsArabic"))
                 If (bIsArabic Or row("Name").ToString.ToLower.IndexOf("arb") > -1) And (TypeOf (currCtrl) Is TextBox) Then
                     CType(currCtrl, TextBox).Attributes.Add("onKeyPress", "LoadDataUpdateSchedulesForArabicText(e,'" & formName & "','" & row("Name") & "'," & recordID & ")")
                 ElseIf (TypeOf (currCtrl) Is TextBox) Then
@@ -2055,9 +2055,9 @@ Partial Class frmEmployeesOthersVacations
                 If IsDBNull(row("ActualStartDate")) Then
                     row("ActualStartDate") = CDate(Nothing)
                 End If
-                dteActualStartDate = IIf(CDate(row("ActualStartDate")) < dateStartDate, dateStartDate, row("ActualStartDate"))
-                dteactualEndDate = GetNDate_Shared(row("ActualEndDate"), IIf(Date.Now > dateEndDate, dateEndDate, Date.Now))
-                dteactualEndDate = IIf(dteactualEndDate > dateEndDate, dateEndDate, dteactualEndDate)
+                dteActualStartDate = If(CDate(row("ActualStartDate")) < dateStartDate, dateStartDate, row("ActualStartDate"))
+                dteactualEndDate = GetNDate_Shared(row("ActualEndDate"), If(Date.Now > dateEndDate, dateEndDate, Date.Now))
+                dteactualEndDate = If(dteactualEndDate > dateEndDate, dateEndDate, dteactualEndDate)
                 If dteactualEndDate < dteActualStartDate Then
                     Continue For
                 End If
