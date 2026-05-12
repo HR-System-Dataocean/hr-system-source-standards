@@ -230,7 +230,7 @@ Partial Class frmEmployeesSelector
                 "left join hrs_EmployeesTransactions mt on ev.id=mt.EmployeesVacationsID " &
                 "where ev.VacationTypeID=1 " &
                 "and ((ev.ActualStartDate between @PeriodStartDate and @PeriodEndDate) or (dateadd(day,-1,ev.ActualEndDate) between @PeriodStartDate and @PeriodEndDate)) " &
-                "and mt.id is null"
+                "and mt.id is null and ev.canceldate is null"
 
             Dim p1 As New SqlParameter("@PeriodStartDate", fp.FromDate)
             Dim p2 As New SqlParameter("@PeriodEndDate", fp.ToDate)

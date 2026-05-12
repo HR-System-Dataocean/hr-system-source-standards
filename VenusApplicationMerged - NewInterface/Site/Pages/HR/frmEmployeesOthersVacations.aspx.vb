@@ -1549,25 +1549,26 @@ Partial Class frmEmployeesOthersVacations
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, "Expected Return date must greater than Expected start date")
                 Return False
             End If
+            AEDate = AEDate.AddDays(-1)
             Try
                 ClsVacationTypes.Find(" ID=" & DdlVacationType.SelectedItem.Value)
                 If (ClsEmployeesVacations.FindEmployeeVacations("hrs_EmployeesVacations.EmployeeID=" & ClsEmployees.ID & IIf(lbVactionID.Text.Trim <> "", " AND hrs_EmployeesVacations.ID <>" & lbVactionID.Text, ""))) Then
                     Dim tab As DataTable = ClsEmployeesVacations.DataSet.Tables(0).Copy()
                     For Each row As DataRow In tab.Rows
                         SDate = row("ActualStartDate")
-                        EDate = IIf(IsDBNull(row("ActualEndDate")), Date.Now, row("ActualEndDate"))
+                        EDate = IIf(IsDBNull(row("ActualEndDate")), Date.Now, CDate(row("ActualEndDate")).AddDays(-1))
                         If (EDate < SDate) Then
                             EDate = SDate
                         End If
 
 
                         If Not ClsVacationTypes.OverlapWithAnotherVac Then
-                            If (CheckDateBetween2Dates(ASDate, SDate, EDate.AddDays(-1))) Then
+                            If (CheckDateBetween2Dates(ASDate, SDate, EDate)) Then
                                 strErrorMsg += ObjNavigationHandler.SetLanguage(Page, "This Employee is already in vacation \n / هذه الموظف موجود فى أجازة بالفعل \n ")
                                 bErorr = True
                                 Exit For
                             End If
-                            If (CheckDateBetween2Dates(AEDate, SDate, EDate.AddDays(-1))) Then
+                            If (CheckDateBetween2Dates(AEDate, SDate, EDate)) Then
                                 strErrorMsg += ObjNavigationHandler.SetLanguage(Page, "This Employee is already in vacation \n / هذه الموظف موجود فى أجازة بالفعل \n ")
                                 bErorr = True
                                 Exit For
@@ -1577,7 +1578,7 @@ Partial Class frmEmployeesOthersVacations
                                 bErorr = True
                                 Exit For
                             End If
-                            If (CheckDateBetween2Dates(EDate.AddDays(-1), ASDate, AEDate)) Then
+                            If (CheckDateBetween2Dates(EDate, ASDate, AEDate)) Then
                                 strErrorMsg += ObjNavigationHandler.SetLanguage(Page, "This Employee is already in vacation \n / هذه الموظف موجود فى أجازة بالفعل \n ")
                                 bErorr = True
                                 Exit For
