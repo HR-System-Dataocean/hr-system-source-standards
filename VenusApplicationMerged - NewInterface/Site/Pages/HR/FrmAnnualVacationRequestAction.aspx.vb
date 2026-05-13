@@ -1168,6 +1168,9 @@ Partial Class frmAttendancePreparation
 
                         didSplit = GetDaysSplitAcrossTwoMonths(vacStart, vacEnd, month1Days, month2Days, month1Date, month2Date)
                         Dim exactTotalVacDays As Double = settlementDays
+                        If month1Days > 0 Or month2Days > 0 Then
+                            exactTotalVacDays = month1Days + month2Days
+                        End If
                         If didSplit Then
                             Dim totalVacDays As Double = month1Days + month2Days
                             If totalVacDays <= 0 OrElse settlementDays <= 0 Then
@@ -1316,6 +1319,11 @@ Partial Class frmAttendancePreparation
                                 Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, strcommand)
                             Else
                                 Dim amt As Double = Math.Round(amountPerDay * settlementDays, 2, MidpointRounding.AwayFromZero)
+                                Dim perioudId = fiscalPeriodId
+                                splitPeriodId2 = GetFiscalPeriodIdByDate(month2Date, fiscalPeriods, clsLocalBranch)
+                                If splitPeriodId2 > 0 Then
+                                    perioudId = splitPeriodId2
+                                End If
                                 Dim strcommand As String = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & ClsEmployees.ID & "),''," & transType.Code & "," & amt & "," & fiscalPeriodId & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & employeeTransactionId & "','101','')"
                                 Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, strcommand)
                             End If

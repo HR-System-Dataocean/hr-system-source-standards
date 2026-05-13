@@ -711,6 +711,9 @@ Partial Class frmEmployeesVacationTransactions
                     End If
 
                     Dim exactTotalVacDays = Convert.ToDouble(Val(SettlementDaysText.Text))
+                    If month1Days > 0 Or month2Days > 0 Then
+                        exactTotalVacDays = month1Days + month2Days
+                    End If
                     If didSplit Then
                         Dim totalVacDays As Double = month1Days + month2Days
                         Dim totalSettlementDays As Double = Convert.ToDouble(Val(totalVacDays))
@@ -958,7 +961,12 @@ Partial Class frmEmployeesVacationTransactions
                                          "insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & amt2 & "," & splitPeriodId2 & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & splitTransId2 & "','101','')"
                         Else
                             Dim amt As Double = Math.Round(dayAmt * exactTotalVacDays, 2, MidpointRounding.AwayFromZero)
-                            strcommand = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & amt & "," & DdlPeriodsForSalary.SelectedValue & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & IntEmployeeTransactionID & "','101','')"
+                            Dim perioudId = DdlPeriodsForSalary.SelectedValue
+                            splitPeriodId2 = GetFiscalPeriodIdByDate(month2Date, ClsFisicalPeriods, clsLocalBranch)
+                            If splitPeriodId2 > 0 Then
+                                perioudId = splitPeriodId2
+                            End If
+                            strcommand = "set dateformat dmy; insert into hrs_EmployeeExtraItems values ((select Code from hrs_Employees where ID = " & IntEmployeeID & "),''," & transactiontype.Code & "," & amt & "," & perioudId & ",1,'" & DateTime.Now.ToString("dd/MM/yyyy") & "',5,'" & IntEmployeeTransactionID & "','101','')"
                         End If
                         'strcommand &= ";update hrs_EmployeesTransactions set ExcludeFromPosting =1 where id=" & IntEmployeeTransactionID
                         Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesTransactions.ConnectionString, Data.CommandType.Text, strcommand)
