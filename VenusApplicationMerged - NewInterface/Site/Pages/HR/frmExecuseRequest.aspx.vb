@@ -772,7 +772,7 @@ Partial Class frmEmployeesVacations
             End If
 
             Dim strCOuntNoOfimesPerday As String
-            strCOuntNoOfimesPerday = "Select count(id) from SS_ExecuseRequest where execusedate = convert(datetime, '" & WebDateChooser1.Value & "',103)  and EmployeeID='" & ClsEmployees.ID & "'  "
+            strCOuntNoOfimesPerday = "Select count(id) from SS_ExecuseRequest where execusedate = convert(datetime, '" & WebDateChooser1.Value & "',103)  and EmployeeID='" & ClsEmployees.ID & "'  and RequestStautsTypeID not in(2,5)"
             Dim COuntNoOfimesPerDay As Integer
             COuntNoOfimesPerDay = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(CType(HttpContext.Current.Session("ConnectionString"), String), Data.CommandType.Text, strCOuntNoOfimesPerday)
             If COuntNoOfimesPerDay > 0 Then

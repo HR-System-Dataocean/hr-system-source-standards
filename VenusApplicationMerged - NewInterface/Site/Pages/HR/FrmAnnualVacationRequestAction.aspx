@@ -444,7 +444,7 @@
              </td>
              <td class="DataArea">
                  <asp:TextBox ID="TxtJoinDate" runat="server" SkinID="TextBox_LargeNormalC" 
-                     ReadOnly="True" MaxLength="255"  meta:resourcekey="TxtJoinDateResource1">
+                     ReadOnly="True"   meta:resourcekey="TxtJoinDateResource1">
                 </asp:TextBox>
              </td>
           
@@ -702,7 +702,7 @@
 </td>
  
 <td>
- <asp:TextBox ID="TxtAlternativeEmpName" Width="160px" runat="server"  MaxLength="100"
+ <asp:TextBox ID="TxtAlternativeEmpName" Width="320px" runat="server" 
         AutoPostBack="false"  meta:resourcekey="txtEmployeeResource1">
    </asp:TextBox>
     </td>

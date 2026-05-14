@@ -142,6 +142,7 @@ Partial Class frmAttendancePreparation
             txtRemainVal.Enabled = False
             TxtPosition.Enabled = False
             TxtDepartment.Enabled = False
+            TxtJoinDate.Enabled = False
             TxtAlternativeEmpName.Enabled = False
             TxtRemarks.Enabled = False
             txtRequestType.Enabled = False
@@ -265,7 +266,7 @@ Partial Class frmAttendancePreparation
             connetionString2 = ClsEmployees.ConnectionString
             connection2 = New Data.SqlClient.SqlConnection(connetionString2)
             Dim strselect As String
-            strselect = "select SS_VacationRequest.ID as RequestSerial,SS_VacationRequest.EmployeeID ,hrs_Employees.Code as EmployeeCode ," & EmpName & " as EmployeeName,alt.Code as alternativecode,alt.arbname+' '+alt.FatherArbName+' '+alt.GrandArbName+' '+alt.FamilyArbName as AlternativeEmployeeName ,hrs_VacationsTypes.ID as VacationID,hrs_VacationsTypes.EngName as VacationEngName , hrs_VacationsTypes.ArbName as VacationArabName,Convert(date,RequestDate) as RequestDate,Convert(date,SS_VacationRequest.StartDate) as StartDate,Convert(date,SS_VacationRequest.EndDate) as EndDate,TotalBalance,NoOfDays,ContactNo,AlternativeUser,SS_VacationRequest.Remarks , " & Position & " As Position ,  " & Department & " As Department FROM            dbo.SS_VacationRequest INNER JOIN dbo.hrs_VacationsTypes ON dbo.SS_VacationRequest.VacationTypeID = dbo.hrs_VacationsTypes.ID LEFT OUTER JOIN dbo.hrs_Employees AS alt ON dbo.SS_VacationRequest.AlternativeUser = alt.ID INNER JOIN dbo.hrs_Employees ON dbo.hrs_Employees.ID = dbo.SS_VacationRequest.EmployeeID INNER JOIN  dbo.hrs_Contracts ON dbo.hrs_Employees.ID = dbo.hrs_Contracts.EmployeeID and( hrs_Contracts.EndDate>=getdate() or hrs_Contracts.EndDate is null) INNER JOIN dbo.hrs_Positions ON dbo.hrs_Contracts.PositionID = dbo.hrs_Positions.ID INNER JOIN dbo.sys_Departments ON dbo.hrs_Employees.DepartmentID = dbo.sys_Departments.ID  where SS_VacationRequest.ID=" & RequestSerial & ""
+            strselect = "select SS_VacationRequest.ID as RequestSerial,SS_VacationRequest.EmployeeID ,hrs_Employees.Code as EmployeeCode ," & EmpName & " as EmployeeName,hrs_Employees.JoinDate,alt.Code as alternativecode,alt.arbname+' '+alt.FatherArbName+' '+alt.GrandArbName+' '+alt.FamilyArbName as AlternativeEmployeeName ,hrs_VacationsTypes.ID as VacationID,hrs_VacationsTypes.EngName as VacationEngName , hrs_VacationsTypes.ArbName as VacationArabName,Convert(date,RequestDate) as RequestDate,Convert(date,SS_VacationRequest.StartDate) as StartDate,Convert(date,SS_VacationRequest.EndDate) as EndDate,TotalBalance,NoOfDays,ContactNo,AlternativeUser,SS_VacationRequest.Remarks , " & Position & " As Position ,  " & Department & " As Department FROM            dbo.SS_VacationRequest INNER JOIN dbo.hrs_VacationsTypes ON dbo.SS_VacationRequest.VacationTypeID = dbo.hrs_VacationsTypes.ID LEFT OUTER JOIN dbo.hrs_Employees AS alt ON dbo.SS_VacationRequest.AlternativeUser = alt.ID INNER JOIN dbo.hrs_Employees ON dbo.hrs_Employees.ID = dbo.SS_VacationRequest.EmployeeID INNER JOIN  dbo.hrs_Contracts ON dbo.hrs_Employees.ID = dbo.hrs_Contracts.EmployeeID and( hrs_Contracts.EndDate>=getdate() or hrs_Contracts.EndDate is null) INNER JOIN dbo.hrs_Positions ON dbo.hrs_Contracts.PositionID = dbo.hrs_Positions.ID INNER JOIN dbo.sys_Departments ON dbo.hrs_Employees.DepartmentID = dbo.sys_Departments.ID  where SS_VacationRequest.ID=" & RequestSerial & ""
             command2 = New Data.SqlClient.SqlCommand(strselect, connection2)
             adapter2.SelectCommand = command2
             adapter2.Fill(DS2, "Table1")
@@ -303,6 +304,7 @@ Partial Class frmAttendancePreparation
                 txtDescEnglishName.Text = DS2.Tables(0).Rows(0)("EmployeeName").ToString()
                 TxtPosition.Text = DS2.Tables(0).Rows(0)("Position").ToString()
                 TxtDepartment.Text = DS2.Tables(0).Rows(0)("Department").ToString()
+                TxtJoinDate.Text = CDate(DS2.Tables(0).Rows(0)("JoinDate").ToString()).ToShortDateString()
                 txtAlternativeUser.Text = DS2.Tables(0).Rows(0)("alternativecode").ToString()
                 txtContactNo.Text = DS2.Tables(0).Rows(0)("ContactNo").ToString()
                 txtRequestDate.Text = CDate(DS2.Tables(0).Rows(0)("RequestDate").ToString()).ToShortDateString()
