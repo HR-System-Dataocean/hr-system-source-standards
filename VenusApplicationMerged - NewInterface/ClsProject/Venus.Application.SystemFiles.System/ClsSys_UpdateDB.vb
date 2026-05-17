@@ -12247,6 +12247,8 @@ FROM     SS_ChangeWorkHoursRequest JOIN
 
         SQL = " ALTER TABLE dbo.SS_RequestTypes ADD IsPaidWithSalary bit NULL "
         ExecuteUpdate(SQL)
+        SQL = "alter table ss_requesttypes add HaveSettelment bit null"
+        ExecuteUpdate(SQL)
 
     End Function
 	Public Function ExecuteUpdate(ByVal mySQLQuery As String) As Boolean

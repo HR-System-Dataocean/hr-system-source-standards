@@ -930,13 +930,24 @@ Partial Class frmAttendancePreparation
 
                 If DdlVacationType.SelectedValue = "1" Then
 
+                    Dim strHaveSettelment As String = "select HaveSettelment from ss_requesttypes where requestcode='SS_0011'"
+                    Dim result As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, strHaveSettelment)
 
-                    Dim EmployeesVacationBeforeLastOne As Clshrs_EmployeesVacations = ClsEmployeesVacations2
-                    Dim LastEmployeesVacationTransactions = New Clshrs_EmployeesTransactions(Me.Page)
-                    If EmployeesVacationBeforeLastOne.ID > 0 AndAlso Not LastEmployeesVacationTransactions.Find("EmployeesVacationsID = " & EmployeesVacationBeforeLastOne.ID) Then
-                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " There Is a previous vacation without settlement / يوجد اجازة سابقة من دون مستحقات "))
-                        Return False
-                        Exit Function
+                    Dim HaveSettelment As Boolean = False
+                    If result IsNot Nothing AndAlso Not Convert.IsDBNull(result) Then
+                        HaveSettelment = Convert.ToBoolean(result)
+                    End If
+                    If HaveSettelment Then
+
+
+                        Dim EmployeesVacationBeforeLastOne As Clshrs_EmployeesVacations = ClsEmployeesVacations2
+
+                        Dim LastEmployeesVacationTransactions = New Clshrs_EmployeesTransactions(Me.Page)
+                        If EmployeesVacationBeforeLastOne.ID > 0 AndAlso Not LastEmployeesVacationTransactions.Find("EmployeesVacationsID = " & EmployeesVacationBeforeLastOne.ID) Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " There Is a previous vacation without settlement / يوجد اجازة سابقة من دون مستحقات "))
+                            Return False
+                            Exit Function
+                        End If
                     End If
                 End If
 
