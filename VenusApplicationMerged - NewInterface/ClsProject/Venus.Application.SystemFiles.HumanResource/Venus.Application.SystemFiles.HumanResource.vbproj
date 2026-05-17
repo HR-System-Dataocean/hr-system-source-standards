@@ -202,6 +202,7 @@
     <Compile Include="Clshrs_Intervals.vb" />
     <Compile Include="Clshrs_Items.vb" />
     <Compile Include="Clshrs_LevelTypes.vb" />
+    <Compile Include="Clshrs_LocationGeoPoints.vb" />
     <Compile Include="Clshrs_MaritalStatus.vb" />
     <Compile Include="Clshrs_NewEmployee.vb" />
     <Compile Include="Clshrs_OfficialVacations.vb" />

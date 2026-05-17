@@ -7912,6 +7912,32 @@ END"
 "
         ExecuteUpdate(SQL)
 
+        SQL = "
+CREATE TABLE [dbo].[hrs_LocationGeoPoints](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[LocationID] [int] NOT NULL,
+	[EmployeeID] [int] NOT NULL,
+	[LineNum] [int] NOT NULL,
+	[Code] [nvarchar](50) NULL,
+	[EngName] [nvarchar](100) NULL,
+	[ArbName] [nvarchar](100) NULL,
+	[Latitude] [decimal](18, 8) NULL,
+	[Longitude] [decimal](18, 8) NULL,
+	[AllowedRadius] [decimal](18, 4) NULL,
+	[Address] [nvarchar](500) NULL,
+	[Active] [bit] NULL,
+	[RegUserID] [int] NULL,
+	[RegDate] [datetime] NULL,
+	[CancelDate] [datetime] NULL,
+ CONSTRAINT [PK_hrs_LocationGeoPoints] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+"
+        ExecuteUpdate(SQL)
+
     End Function
 
     Public Function UpdateSS() As Boolean
