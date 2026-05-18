@@ -548,7 +548,7 @@ Partial Class frmAttendancePreparation
                         SqlCommandU.ExecuteNonQuery()
                         SqlCommandU.Connection.Close()
                     End If
-                    If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) And Not CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
+                    If Not CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) And Not CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
                         Dim NeededactionIdSql As String
                         NeededactionIdSql = "SELECT count(ActionSerial) as myCount FROM [dbo].[SS_RequestActions]  where ConfigID=" & ConfigID & " And FormCode='" & dsconfig.Tables(0).Rows(0)("FormCode") & "' and RequestSerial=" & RequestSerial & " and ActionID is null and SS_EmployeeID<>" & ClsEmployees.ID & ""
                         Dim NeededactionSerial As String
@@ -741,6 +741,8 @@ Partial Class frmAttendancePreparation
 
 
             End If
+
+
             If ddlAction.SelectedValue = 3 Then
                 If txtDelegated.Text = "" Then
 
