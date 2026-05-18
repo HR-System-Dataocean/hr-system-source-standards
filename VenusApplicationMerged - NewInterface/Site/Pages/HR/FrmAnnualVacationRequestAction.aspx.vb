@@ -1147,7 +1147,9 @@ Partial Class frmAttendancePreparation
                         If Not Date.TryParse(txtStartDate.Text, paidDate) Then
                             paidDate = Date.Now
                         End If
-
+                        If paidDate.Day = 31 Then
+                            paidDate=paidDate.AddDays(1)
+                        End If
                         Dim fiscalPeriodId As Integer = 0
                         Dim fiscalFrom As Date = Nothing
                         Dim fiscalTo As Date = Nothing
