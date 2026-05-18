@@ -546,6 +546,14 @@ Partial Class frmEmployeesVacationTransactions
 
         If DdlPeriodsForSalary.SelectedValue > 0 Then
             ClsFisicalPeriods.Find("ID=" & DdlPeriodsForSalary.SelectedValue)
+
+            'Dim perioudId = DdlPeriodsForSalary.SelectedValue
+            'splitPeriodId2 = GetFiscalPeriodIdByDate(month2Date, ClsFisicalPeriods, clsLocalBranch)
+
+            'If chkWithSalary.Checked AndAlso Then
+            '    perioudId = splitPeriodId2
+            'End If
+
             IntPeriodId = ClsFisicalPeriods.ID
             DteFromDate = ClsFisicalPeriods.FromDate
             DteToDate = ClsFisicalPeriods.ToDate
@@ -3453,6 +3461,28 @@ Partial Class frmEmployeesVacationTransactions
             Dim TrnsID As Integer
             TrnsID = Request.QueryString.Item("TrnsID")
             SetData2(ClsEmployees.ID, 0, TrnsID)
+        End If
+
+        Dim ClsFisicalYearsPeriods As New Clssys_FiscalYearsPeriods(Page)
+        Dim fiscID As Integer = 0
+        Dim fiscfrom As DateTime
+        Dim fiscto As DateTime
+        Dim paymentDate As DateTime
+
+        If wdtPaymentDate.Value IsNot Nothing AndAlso DateTime.TryParse(wdtPaymentDate.Value, paymentDate) Then
+            If chkWithSalary.Checked Then
+                If paymentDate.Day = 31 Then
+                    Dim nextMonthDate As DateTime = paymentDate.AddDays(1)
+                    ClsFisicalYearsPeriods.GetFisicalperiodInfo(nextMonthDate, fiscID, fiscfrom, fiscto)
+                    DdlPeriodsForSalary.SelectedValue = fiscID
+                Else
+                    ClsFisicalYearsPeriods.GetFisicalperiodInfo(paymentDate, fiscID, fiscfrom, fiscto)
+                    DdlPeriodsForSalary.SelectedValue = fiscID
+                End If
+            Else
+                ClsFisicalYearsPeriods.GetFisicalperiodInfo(paymentDate, fiscID, fiscfrom, fiscto)
+                DdlPeriodsForSalary.SelectedValue = fiscID
+            End If
         End If
     End Sub
     Protected Sub CheckBox_SalaryPayment_CheckedChanged(sender As Object, e As System.EventArgs) Handles CheckBox_SalaryPayment.CheckedChanged
