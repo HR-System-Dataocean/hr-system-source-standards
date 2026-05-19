@@ -538,7 +538,7 @@ Partial Class frmEmployees
                         End If
                     End If
                     If txtIdentity.Text <> "" Then
-                        Dim checkCnt = "select top 1 Code from hrs_employees where SSnNo = '" & txtIdentity.Text & "' and Code <> '" & txtCode.Text & "' and branchID = '" & ddlBranch.SelectedValue & "'"
+                        Dim checkCnt = "select top 1 Code from hrs_employees where SSnNo = '" & txtIdentity.Text & "' and Code <> '" & txtCode.Text & "' "
                         Dim cnt As String = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, CommandType.Text, checkCnt)
                         If cnt <> "" Then
                             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " ID NO Used Before Employee No. /رقم الهوية مستخدم سابقا للموظف رقم") & cnt)
@@ -774,6 +774,10 @@ Partial Class frmEmployees
                         Dim dayValue = allVacDays / allDays
                         Dim currentYear As Integer = SetDate(txtStartDate.Text, txtStartDate.Text).Year
                         Dim endOfYear As DateTime = New DateTime(currentYear, 12, 31)
+                        If Not String.IsNullOrWhiteSpace(txtEndDate.Text) Then
+                            endOfYear = SetDate(txtEndDate.Text, txtEndDate.Text)
+                        End If
+
                         Dim myDays As Integer = DateDiff(DateInterval.Day, SetDate(txtStartDate.Text, txtStartDate.Text), endOfYear.Date)
                         Dim myBalance = myDays * dayValue
                         Dim expireDate As Date = endOfYear
@@ -1830,13 +1834,6 @@ Partial Class frmEmployees
             If Page.IsPostBack Then
                 CreateOtherFields(ClsEmployees.ID)
             End If
-
-            If Not ClsEmployees.UpdateUserID = Nothing Then
-                ClsUser.Find("ID=" & ClsEmployees.UpdateUserID)
-            End If
-
-            LblLastUpdateByValue.Text = ClsUser.EngName
-            lblLastUpdateDate.Text = ClsEmployees.UpdateDate
             Return True
         Catch ex As Exception
             Dim x As String = ex.Message

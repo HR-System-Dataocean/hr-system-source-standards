@@ -3600,7 +3600,7 @@ Partial Class frmEmployeesSelector
                             ElseIf (hrsofficialvacations.DataSet.Tables(0).Rows.Count > 0) Then
                                 ClsAttendancePreparationProjects = New ClsAtt_AttendancePreparationProjects(Page)
                                 '========Add VacationType
-                                ClsVacationsTypes.Find("IsOfficial =1 ")
+                                ClsVacationsTypes.Find("IsOfficial =1 and ID=" & hrsofficialvacations.DataSet.Tables(0).Rows(0)("VacationTypeID") & " ")
                                 '==========
                                 ClsAttendancePreparationDetails.LeavingType = ClsVacationsTypes.ID
                                 ClsAttendancePreparationDetails.FiscalYearPeriodID = IntFisicalPeriod
