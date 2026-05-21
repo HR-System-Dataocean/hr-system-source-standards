@@ -582,14 +582,31 @@ Partial Class frmAttendancePreparation
                             '===Insert Vacation Tranaction
 
                             If SaveVacation() Then
-
-
+                                Dim SqlCommandRank1 As Data.SqlClient.SqlCommand
+                                Dim UpdateCommandRank1 As String = ""
+                                UpdateCommandRank1 = "UPDATE SS_VacationRequest SET [RequestStautsTypeID] = 1 WHERE ID=" & RequestSerial & ""
+                                SqlCommandRank1 = New SqlClient.SqlCommand
+                                SqlCommandRank1.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+                                SqlCommandRank1.CommandType = CommandType.Text
+                                SqlCommandRank1.CommandText = UpdateCommandRank1
+                                SqlCommandRank1.Connection.Open()
+                                SqlCommandRank1.ExecuteNonQuery()
+                                SqlCommandRank1.Connection.Close()
                                 Dim SqlCommand2 As Data.SqlClient.SqlCommand
                                 Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>" & ClsEmployees2.ID & ""
                                 SqlCommand2 = New SqlClient.SqlCommand
                                 SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                                 SqlCommand2.CommandType = CommandType.Text
                                 SqlCommand2.CommandText = UpdateCommand2
+                                SqlCommand2.Connection.Open()
+                                SqlCommand2.ExecuteNonQuery()
+
+                                Dim SqlCommand222 As Data.SqlClient.SqlCommand
+                                Dim UpdateCommand222 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>" & ClsEmployees2.ID & ""
+                                SqlCommand2 = New SqlClient.SqlCommand
+                                SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+                                SqlCommand2.CommandType = CommandType.Text
+                                SqlCommand2.CommandText = UpdateCommand222
                                 SqlCommand2.Connection.Open()
                                 SqlCommand2.ExecuteNonQuery()
                                 SqlCommand2.Connection.Close()
@@ -614,7 +631,7 @@ Partial Class frmAttendancePreparation
                             '1- هنجيب كل الناس اللي المفروض ياخد اكشن بناء علي ال CofigID و لسه مأخدوش اكشن و يكون اليوزر الحالي مش من ضمنهم
 
                             Dim NeededactionIdSql As String
-                            NeededactionIdSql = "SELECT count(ActionSerial) as myCount FROM [dbo].[SS_RequestActions]  where ConfigID=" & ConfigID & " And FormCode='" & dsconfig.Tables(0).Rows(0)("FormCode") & "' and RequestSerial=" & RequestSerial & " and ActionID is null and SS_EmployeeID<>" & ClsEmployees.ID & ""
+                            NeededactionIdSql = "SELECT count(ActionSerial) as myCount FROM [dbo].[SS_RequestActions]  where ConfigID=" & ConfigID & " And FormCode='" & dsconfig.Tables(0).Rows(0)("FormCode") & "' and RequestSerial=" & RequestSerial & " and ActionID is null and SS_EmployeeID<>" & ClsEmployees2.ID & ""
                             Dim NeededactionSerial As String
                             NeededactionSerial = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, NeededactionIdSql)
                             '2-  في حالة انه متبقي حد لسه معملش Action
@@ -633,7 +650,7 @@ Partial Class frmAttendancePreparation
 
 
                                 Dim Rejectstr As String
-                                Rejectstr = "SELECT count(ActionSerial) as myCount FROM [dbo].[SS_RequestActions]  where ConfigID=" & ConfigID & " And FormCode='" & dsconfig.Tables(0).Rows(0)("FormCode") & "' and RequestSerial=" & RequestSerial & " and ActionID =2 and SS_EmployeeID<>" & ClsEmployees.ID & ""
+                                Rejectstr = "SELECT count(ActionSerial) as myCount FROM [dbo].[SS_RequestActions]  where ConfigID=" & ConfigID & " And FormCode='" & dsconfig.Tables(0).Rows(0)("FormCode") & "' and RequestSerial=" & RequestSerial & " and ActionID =2 and SS_EmployeeID<>" & ClsEmployees2.ID & ""
                                 Dim NoOfrejection As Integer
                                 NoOfrejection = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, Rejectstr)
                                 If NoOfrejection > 0 Then 'في حالة ان في اكشن رفض   'يتم تسجيل الاكشن الحالي فقط دون تسجيل الاجازة
@@ -649,6 +666,18 @@ Partial Class frmAttendancePreparation
                                 Else
                                     '===Insert Vacation Tranaction
                                     If SaveVacation() Then
+
+                                        Dim SqlCommandRank1 As Data.SqlClient.SqlCommand
+                                        Dim UpdateCommandRank1 As String = ""
+                                        UpdateCommandRank1 = "UPDATE SS_VacationRequest SET [RequestStautsTypeID] = 1 WHERE ID=" & RequestSerial & ""
+                                        SqlCommandRank1 = New SqlClient.SqlCommand
+                                        SqlCommandRank1.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+                                        SqlCommandRank1.CommandType = CommandType.Text
+                                        SqlCommandRank1.CommandText = UpdateCommandRank1
+                                        SqlCommandRank1.Connection.Open()
+                                        SqlCommandRank1.ExecuteNonQuery()
+                                        SqlCommandRank1.Connection.Close()
+
                                         Dim SqlCommand5 As Data.SqlClient.SqlCommand
                                         Dim UpdateCommand5 As String = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " , ConfirmedNoOfDays=" & txtConfirmedDays.Text & ",ActionDate= GETDATE() , ActionRemarks='" & txtActionRemarks.Text & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " And ActionID is null"
                                         SqlCommand5 = New SqlClient.SqlCommand
