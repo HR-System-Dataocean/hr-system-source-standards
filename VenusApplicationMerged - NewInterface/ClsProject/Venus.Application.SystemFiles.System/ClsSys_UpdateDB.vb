@@ -7937,8 +7937,7 @@ CREATE TABLE [dbo].[hrs_LocationGeoPoints](
 
 "
         ExecuteUpdate(SQL)
-        SQL = "alter table sys_Companies add UseUnitPermission bit null"
-        ExecuteUpdate(SQL)
+
 
     End Function
 

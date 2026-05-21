@@ -43,6 +43,10 @@ Partial Class Login
         If Me.OfficePopup_SignUp.Visible = True Then
             Return
         End If
+        Dim clsUpdate As ClsSys_UpdateLoginScript
+        clsUpdate = New ClsSys_UpdateLoginScript(Me)
+        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsUpdate.ConnectionString)
+        clsUpdate.UpdateLogin()
         Me.OfficePopup_Companies.Hide()
         Me.OfficePopup_SignUp.Hide()
         Me.OfficePopup_Help.Hide()
