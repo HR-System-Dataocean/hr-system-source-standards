@@ -300,6 +300,9 @@
   <data name="lblMachineCodeResource1.Text" xml:space="preserve">
     <value>كود الدوام</value>
   </data>
+  <data name="lblMacAddressResource1.Text" xml:space="preserve">
+    <value>عنوان MAC</value>
+  </data>
   <data name="lblJoinDateResource1.Text" xml:space="preserve">
     <value>تاريخ المباشرة</value>
   </data>

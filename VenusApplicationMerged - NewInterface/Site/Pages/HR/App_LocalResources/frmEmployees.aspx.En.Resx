@@ -372,6 +372,9 @@
   <data name="lblMachineCodeResource1.Text" xml:space="preserve">
     <value>Machine Code</value>
   </data>
+  <data name="lblMacAddressResource1.Text" xml:space="preserve">
+    <value>MAC Address</value>
+  </data>
   <data name="lblJoinDateResource1.Text" xml:space="preserve">
     <value>Join Date</value>
   </data>

@@ -7938,6 +7938,15 @@ CREATE TABLE [dbo].[hrs_LocationGeoPoints](
 "
         ExecuteUpdate(SQL)
 
+        SQL = "
+IF COL_LENGTH('hrs_Employees', 'MacAddress') IS NULL  
+BEGIN
+    ALTER TABLE hrs_Employees
+    ADD MacAddress nvarchar(50) NULL
+END
+"
+        ExecuteUpdate(SQL)
+
     End Function
 
     Public Function UpdateSS() As Boolean

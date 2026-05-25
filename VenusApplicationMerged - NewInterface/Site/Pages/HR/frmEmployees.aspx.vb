@@ -1583,6 +1583,7 @@ Partial Class frmEmployees
                 .Phone = txtPhone.Text
                 .Mobile = txtMobile.Text
                 .MachineCode = TextBox_MachineCode.Text
+                .MacAddress = txtMacAddress.Text.Trim()
 
                 .BirthDate = SetDate(txtBirthDate.Text, txtBirthDateH.Text)
 
@@ -1682,6 +1683,7 @@ Partial Class frmEmployees
                 txtPhone.Text = .Phone
                 txtMobile.Text = .Mobile
                 TextBox_MachineCode.Text = .MachineCode
+                txtMacAddress.Text = .MacAddress
                 txtLedgerCode.Text = .LedgerCode
                 txtBirthDate.Value = Nothing
                 txtBirthDateH.Value = Nothing
@@ -2164,6 +2166,7 @@ Partial Class frmEmployees
         txtWorkE_Mail.Text = String.Empty
         txtMobile.Text = String.Empty
         TextBox_MachineCode.Text = String.Empty
+        txtMacAddress.Text = String.Empty
         txtBankAccount.Text = String.Empty
         txtBirthDate.Value = Nothing
         txtBirthDateH.Value = Nothing
