@@ -932,6 +932,17 @@
                                                             <asp:CheckBox ID="chkUserDepartmentsPermissions" runat="server" meta:resourcekey="chkUserDepartmentsPermissionsResource" />
                                                         </td>
                                                     </tr>
+                                                      <tr>
+      <td class="SeparArea">
+      </td>
+      <td class="LabelArea">
+          <asp:Label ID="lblUserUnitPermissions" runat="server" meta:resourcekey="lblUserUnitPermissionsResource"
+              SkinID="Label_DefaultNormal" Text="UserDepartmentsPermissions"></asp:Label>
+      </td>
+      <td class="DataArea">
+          <asp:CheckBox ID="chkUserUnitPermissions" runat="server" meta:resourcekey="chkUserUnitPermissionsResource" />
+      </td>
+  </tr>
                                                 </table>
                                             </td>
                                             <td style="width: 47%; height: 16px; vertical-align: top">

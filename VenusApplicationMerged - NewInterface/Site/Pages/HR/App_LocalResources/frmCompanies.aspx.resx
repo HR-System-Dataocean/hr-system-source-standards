@@ -636,4 +636,7 @@
   <data name="lblUserDepartmentsPermissionsResource.Text" xml:space="preserve">
     <value>مراعاة صلاحيات الإدارات للمستخدم</value>
   </data>
+  <data name="lblUserUnitPermissionsResource.Text" xml:space="preserve">
+    <value>مراعاة صلاحيات الوحدات للمستخدم</value>
+  </data>
 </root>

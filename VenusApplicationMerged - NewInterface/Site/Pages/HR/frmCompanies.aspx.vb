@@ -182,6 +182,7 @@ Partial Class frmCompanies
                 .AllowOverVacation = AllowOverVacationCheckBox.Checked
                 .VacationFromPrepareDay = ChkVacationFromPrepareDay.Checked
                 .UserDepartmentsPermissions = chkUserDepartmentsPermissions.Checked
+                .UseUnitPermission = chkUserUnitPermissions.Checked
 
 
             End With
@@ -255,6 +256,7 @@ Partial Class frmCompanies
                 AllowOverVacationCheckBox.Checked = .AllowOverVacation
                 ChkVacationFromPrepareDay.Checked = .VacationFromPrepareDay
                 chkUserDepartmentsPermissions.Checked = .UserDepartmentsPermissions
+                chkUserUnitPermissions.Checked = .UseUnitPermission
 
             End With
             'E#001 [0261][27-05-2008]
@@ -526,6 +528,7 @@ Partial Class frmCompanies
         AllowOverVacationCheckBox.Checked = False
         ChkVacationFromPrepareDay.Checked = False
         chkUserDepartmentsPermissions.Checked = False
+        chkUserUnitPermissions.Checked = False
 
         txtExecuseRequestHoursallowed.Text = ""
         ChKEmployeeDocumentsAutoSerial.Checked = False

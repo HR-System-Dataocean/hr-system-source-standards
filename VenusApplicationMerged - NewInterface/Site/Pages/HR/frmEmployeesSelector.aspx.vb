@@ -3551,7 +3551,7 @@ Partial Class frmEmployeesSelector
                             Dim hrsEmployeesVacations As New Clshrs_EmployeesVacations(Page)
                             Dim hrsofficialvacations As New Clshrs_OfficialVacations(Page)
                             hrsEmployeesVacations.Find("EmployeeID = " & ClsEmployees.ID & " and CONVERT(date,'" & OperDate.ToString("dd/MM/yyyy") & "',103) >= CONVERT(date,ActualStartDate,103) and CONVERT(date,'" & OperDate.ToString("dd/MM/yyyy") & "',103) < CONVERT(date,isnull(ActualEndDate,'01/01/2050'),103)")
-                            hrsofficialvacations.Find(" CONVERT(date,'" & OperDate.ToString("dd/MM/yyyy") & "',103)  between fromdate and todate And isRamadan <> 1")
+                            hrsofficialvacations.Find(" CONVERT(date,'" & OperDate.ToString("dd/MM/yyyy") & "',103)  between fromdate and todate And (isRamadan <> 1 OR isRamadan Is null)")
 
                             If (hrsEmployeesVacations.DataSet.Tables(0).Rows.Count > 0) Then
                                 Dim ClsVacationsTypes As New Clshrs_VacationsTypes(Me.Page)
@@ -3600,7 +3600,7 @@ Partial Class frmEmployeesSelector
                             ElseIf (hrsofficialvacations.DataSet.Tables(0).Rows.Count > 0) Then
                                 ClsAttendancePreparationProjects = New ClsAtt_AttendancePreparationProjects(Page)
                                 '========Add VacationType
-                                ClsVacationsTypes.Find("IsOfficial =1 ")
+                                ClsVacationsTypes.Find("IsOfficial =1 and ID=" & hrsofficialvacations.DataSet.Tables(0).Rows(0)("VacationTypeID") & " ")
                                 '==========
                                 ClsAttendancePreparationDetails.LeavingType = ClsVacationsTypes.ID
                                 ClsAttendancePreparationDetails.FiscalYearPeriodID = IntFisicalPeriod

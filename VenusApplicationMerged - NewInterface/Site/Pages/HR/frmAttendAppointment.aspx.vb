@@ -564,7 +564,7 @@ Partial Class frmAttendAppointment
                 '    Deptfilter = " and e.DepartmentID=" & ddlDepartment.SelectedValue
                 'End If
                 Dim LocsPermission = ""
-                If clsCompanies.UserDepartmentsPermissions Then
+                If clsCompanies.UseUnitPermission Then
                     Dim dsLocPermission As DataSet
                     Dim strLoc As String = "SELECT [LocationId] FROM [dbo].[hrs_EmployeeLocations] where [EmpId]='" & ClsEmployees.ID & "'"
                     dsLocPermission = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strLoc)
@@ -574,9 +574,23 @@ Partial Class frmAttendAppointment
                     Next
                     LocsPermission = LocsPermission & ")"
                 End If
+                Dim DepartmentPermissions = ""
+                If clsCompanies.UserDepartmentsPermissions Then
+                    Dim dsDepPermission As DataSet
+                    Dim strDep As String = "SELECT [DepartmentID] FROM [dbo].[hrs_EmployeeDepartments] where [EmpId]='" & ClsEmployees.ID & "'"
+                    dsDepPermission = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strDep)
+                    DepartmentPermissions = "(-1"
+                    For h As Integer = 0 To dsDepPermission.Tables(0).Rows.Count - 1
+                        DepartmentPermissions = DepartmentPermissions & "," & Convert.ToString(dsDepPermission.Tables(0).Rows(h)("DepartmentID"))
+                    Next
+                    DepartmentPermissions = DepartmentPermissions & ")"
+                End If
                 Dim locFilter = ""
                 If LocsPermission <> "" Then
                     locFilter = " and e.LocationId in " & LocsPermission
+                End If
+                If DepartmentPermissions <> "" Then
+                    DepartmentPermissions = " and e.DepartmentID in " & DepartmentPermissions
                 End If
                 Dim empName = "dbo.fn_GetEmpName (e.code,1)"
                 If ProfileCls.CurrentLanguage = "Ar" Then
@@ -1206,24 +1220,28 @@ Partial Class frmAttendAppointment
             Dim departsPermission = ""
             Dim LocsPermission = ""
             If clsCompanies.UserDepartmentsPermissions Then
-                Dim dsDepPermission As DataSet
-                Dim str As String = "SELECT [DepartmentId] FROM [dbo].[hrs_EmployeeDepartments] where [EmpId]='" & Cls_Employees.ID & "'"
-                dsDepPermission = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(Cls_Employees.ConnectionString, CommandType.Text, str)
-                departsPermission = "(-1"
-                For i As Integer = 0 To dsDepPermission.Tables(0).Rows.Count - 1
-                    departsPermission = departsPermission & "," & Convert.ToString(dsDepPermission.Tables(0).Rows(i)("DepartmentId"))
-                Next
-                departsPermission = departsPermission & ")"
 
-                Dim dsLocPermission As DataSet
-                Dim strLoc As String = "SELECT [LocationId] FROM [dbo].[hrs_EmployeeLocations] where [EmpId]='" & Cls_Employees.ID & "'"
-                dsLocPermission = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(Cls_Employees.ConnectionString, CommandType.Text, strLoc)
-                LocsPermission = "(-1"
-                For i As Integer = 0 To dsLocPermission.Tables(0).Rows.Count - 1
-                    LocsPermission = LocsPermission & "," & Convert.ToString(dsLocPermission.Tables(0).Rows(i)("LocationId"))
-                Next
-                LocsPermission = LocsPermission & ")"
-            End If
+
+                Dim dsDepPermission As DataSet
+                    Dim str As String = "SELECT [DepartmentId] FROM [dbo].[hrs_EmployeeDepartments] where [EmpId]='" & Cls_Employees.ID & "'"
+                    dsDepPermission = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(Cls_Employees.ConnectionString, CommandType.Text, str)
+                    departsPermission = "(-1"
+                    For i As Integer = 0 To dsDepPermission.Tables(0).Rows.Count - 1
+                        departsPermission = departsPermission & "," & Convert.ToString(dsDepPermission.Tables(0).Rows(i)("DepartmentId"))
+                    Next
+                    departsPermission = departsPermission & ")"
+
+                    Dim dsLocPermission As DataSet
+                    Dim strLoc As String = "SELECT [LocationId] FROM [dbo].[hrs_EmployeeLocations] where [EmpId]='" & Cls_Employees.ID & "'"
+                    dsLocPermission = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(Cls_Employees.ConnectionString, CommandType.Text, strLoc)
+                    LocsPermission = "(-1"
+                    For i As Integer = 0 To dsLocPermission.Tables(0).Rows.Count - 1
+                        LocsPermission = LocsPermission & "," & Convert.ToString(dsLocPermission.Tables(0).Rows(i)("LocationId"))
+                    Next
+                    LocsPermission = LocsPermission & ")"
+
+
+                End If
             Dim deprtPermFilter = ""
             If departsPermission <> "" Then
                 deprtPermFilter = " and ID in " & departsPermission

@@ -253,9 +253,23 @@ Where
 Order By
 	EmpCode
 "
-        ExecuteUpdate(SQL)
+		ExecuteUpdate(SQL)
 
-        Return True
+
+
+
+		SQL = "
+       IF COL_LENGTH('sys_Companies', 'UseUnitPermission') IS NULL
+BEGIN
+   alter table sys_Companies
+add UseUnitPermission bit null
+END
+        "
+		ExecuteUpdate(SQL)
+
+
+
+		Return True
 
 
     End Function

@@ -639,4 +639,7 @@
   <data name="lblVacationFromPrepare.Text" xml:space="preserve">
     <value>Vacation From Prepare Date</value>
   </data>
+  <data name="lblUserUnitPermissionsResource.Text" xml:space="preserve">
+    <value>Use Unit Permissions</value>
+  </data>
 </root>

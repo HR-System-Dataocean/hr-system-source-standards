@@ -19,9 +19,9 @@ Public Class Clssys_Companies
     Public Sub New(ByVal Page As Web.UI.Page)
         MyBase.New(Page)
         mTable = " sys_Companies "
-        mInsertParameter = " Code,EngName,ArbName,ArbName4S,IsHigry,VacationFromPrepareDay,IncludeAbsencDays,PrepareDay,Remarks,HasSequence,SequenceLength,RegUserID,RegComputerID,EmpFirstName,EmpSecondName,EmpThirdName,EmpFourthName,EmpNameSeparator,DefaultAttend,SalaryCalculation,Prefix,Separator,CountEmployeeVacationDaysTotal,ZeroBalAfterVac,VacSettlement,AllowOverVacation,ExecuseRequestHoursallowed,EmployeeDocumentsAutoSerial,UserDepartmentsPermissions "
-        mInsertParameterValues = " @Code,@EngName,@ArbName,@ArbName4S,@IsHigry,@VacationFromPrepareDay,@IncludeAbsencDays,@PrepareDay,@Remarks,@HasSequence,@SequenceLength,@RegUserID,@RegComputerID ,@EmpFirstName,@EmpSecondName,@EmpThirdName,@EmpFourthName,@EmpNameSeparator,@DefaultAttend,@SalaryCalculation,@Prefix,@Separator,@CountEmployeeVacationDaysTotal,@ZeroBalAfterVac,@VacSettlement,@AllowOverVacation,@ExecuseRequestHoursallowed,@EmployeeDocumentsAutoSerial,@UserDepartmentsPermissions"
-        mUpdateParameter = " Code=@Code,EngName=@EngName,ArbName=@ArbName,ArbName4S=@ArbName4S,IsHigry=@IsHigry,VacationFromPrepareDay=@VacationFromPrepareDay,IncludeAbsencDays=@IncludeAbsencDays,PrepareDay=@PrepareDay,Remarks=@Remarks ,HasSequence=@HasSequence,SequenceLength=@SequenceLength,EmpFirstName=@EmpFirstName,EmpSecondName=@EmpSecondName,EmpThirdName=@EmpThirdName,EmpFourthName=@EmpFourthName,EmpNameSeparator=@EmpNameSeparator,DefaultAttend=@DefaultAttend,SalaryCalculation=@SalaryCalculation,Prefix = @Prefix,Separator = @Separator,CountEmployeeVacationDaysTotal=@CountEmployeeVacationDaysTotal,ZeroBalAfterVac=@ZeroBalAfterVac,VacSettlement=@VacSettlement,AllowOverVacation=@AllowOverVacation,ExecuseRequestHoursallowed=@ExecuseRequestHoursallowed,EmployeeDocumentsAutoSerial=@EmployeeDocumentsAutoSerial,UserDepartmentsPermissions=@UserDepartmentsPermissions"
+        mInsertParameter = " Code,EngName,ArbName,ArbName4S,IsHigry,VacationFromPrepareDay,IncludeAbsencDays,PrepareDay,Remarks,HasSequence,SequenceLength,RegUserID,RegComputerID,EmpFirstName,EmpSecondName,EmpThirdName,EmpFourthName,EmpNameSeparator,DefaultAttend,SalaryCalculation,Prefix,Separator,CountEmployeeVacationDaysTotal,ZeroBalAfterVac,VacSettlement,AllowOverVacation,ExecuseRequestHoursallowed,EmployeeDocumentsAutoSerial,UserDepartmentsPermissions,UseUnitPermission "
+        mInsertParameterValues = " @Code,@EngName,@ArbName,@ArbName4S,@IsHigry,@VacationFromPrepareDay,@IncludeAbsencDays,@PrepareDay,@Remarks,@HasSequence,@SequenceLength,@RegUserID,@RegComputerID ,@EmpFirstName,@EmpSecondName,@EmpThirdName,@EmpFourthName,@EmpNameSeparator,@DefaultAttend,@SalaryCalculation,@Prefix,@Separator,@CountEmployeeVacationDaysTotal,@ZeroBalAfterVac,@VacSettlement,@AllowOverVacation,@ExecuseRequestHoursallowed,@EmployeeDocumentsAutoSerial,@UserDepartmentsPermissions,@UseUnitPermission"
+        mUpdateParameter = " Code=@Code,EngName=@EngName,ArbName=@ArbName,ArbName4S=@ArbName4S,IsHigry=@IsHigry,VacationFromPrepareDay=@VacationFromPrepareDay,IncludeAbsencDays=@IncludeAbsencDays,PrepareDay=@PrepareDay,Remarks=@Remarks ,HasSequence=@HasSequence,SequenceLength=@SequenceLength,EmpFirstName=@EmpFirstName,EmpSecondName=@EmpSecondName,EmpThirdName=@EmpThirdName,EmpFourthName=@EmpFourthName,EmpNameSeparator=@EmpNameSeparator,DefaultAttend=@DefaultAttend,SalaryCalculation=@SalaryCalculation,Prefix = @Prefix,Separator = @Separator,CountEmployeeVacationDaysTotal=@CountEmployeeVacationDaysTotal,ZeroBalAfterVac=@ZeroBalAfterVac,VacSettlement=@VacSettlement,AllowOverVacation=@AllowOverVacation,ExecuseRequestHoursallowed=@ExecuseRequestHoursallowed,EmployeeDocumentsAutoSerial=@EmployeeDocumentsAutoSerial,UserDepartmentsPermissions=@UserDepartmentsPermissions,UseUnitPermission=@UseUnitPermission"
         mSelectCommand = " Select * From  " & mTable
         mInsertCommand = " insert into " & mTable & "( " & mInsertParameter & ")Values(" & mInsertParameterValues & ")"
         mUpdateCommand = " Update " & mTable & " Set " & mUpdateParameter
@@ -69,6 +69,7 @@ Public Class Clssys_Companies
     Private mExecuseRequestHoursallowed As Integer
     Private mEmployeeDocumentsAutoSerial As Boolean
     Private mUserDepartmentsPermissions As Boolean
+    Private mUseUnitPermission As Boolean
 
 #End Region
 
@@ -353,6 +354,14 @@ Public Class Clssys_Companies
             mUserDepartmentsPermissions = value
         End Set
     End Property
+    Public Property UseUnitPermission() As Boolean
+        Get
+            Return mUseUnitPermission
+        End Get
+        Set(ByVal value As Boolean)
+            mUseUnitPermission = value
+        End Set
+    End Property
 
 #End Region
 
@@ -497,6 +506,7 @@ Public Class Clssys_Companies
             mExecuseRequestHoursallowed = 0
             mEmployeeDocumentsAutoSerial = False
             mUserDepartmentsPermissions = False
+            mUseUnitPermission = False
         Catch ex As Exception
             mPage.Session.Add("ErrorValue", ex)
             mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, mDataBaseUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
@@ -697,6 +707,7 @@ Public Class Clssys_Companies
                 mExecuseRequestHoursallowed = mDataHandler.DataValue_Out(.Item("ExecuseRequestHoursallowed"), SqlDbType.Int)
                 mEmployeeDocumentsAutoSerial = mDataHandler.DataValue_Out(.Item("EmployeeDocumentsAutoSerial"), SqlDbType.Bit)
                 mUserDepartmentsPermissions = mDataHandler.DataValue_Out(.Item("UserDepartmentsPermissions"), SqlDbType.Bit)
+                mUseUnitPermission = mDataHandler.DataValue_Out(.Item("UseUnitPermission"), SqlDbType.Bit)
 
             End With
             Return True
@@ -742,6 +753,7 @@ Public Class Clssys_Companies
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ExecuseRequestHoursallowed", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mExecuseRequestHoursallowed, SqlDbType.Int)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@EmployeeDocumentsAutoSerial", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mEmployeeDocumentsAutoSerial, SqlDbType.Bit)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@UserDepartmentsPermissions", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mUserDepartmentsPermissions, SqlDbType.Bit)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@UseUnitPermission", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mUseUnitPermission, SqlDbType.Bit)
         Catch ex As Exception
             mPage.Session.Add("ErrorValue", ex)
             mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, mDataBaseUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
