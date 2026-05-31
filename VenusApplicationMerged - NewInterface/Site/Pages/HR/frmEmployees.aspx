@@ -1208,6 +1208,20 @@
                                                         </td>
                                                         <td></td>
                                                         <td>
+                                                            <asp:Label ID="lblMacAddress" runat="server" meta:resourcekey="lblMacAddressResource1"
+                                                                SkinID="Label_DefaultNormal" Text="MAC Address" Width="80px"></asp:Label>
+                                                        </td>
+                                                        <td>
+                                                            <asp:TextBox ID="txtMacAddress" runat="server" meta:resourcekey="txtMacAddressResource1"
+                                                                SkinID="TextBox_LargeNormalC" MaxLength="50"></asp:TextBox>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;
+                                                        </td>
+                                                        <td>
                                                             <asp:Label ID="lblGosiNumber" runat="server" meta:resourcekey="lblGosiNumberResource1"
                                                                 SkinID="Label_DefaultNormal" Text="GOSI Number" Width="80px"></asp:Label>
                                                         </td>

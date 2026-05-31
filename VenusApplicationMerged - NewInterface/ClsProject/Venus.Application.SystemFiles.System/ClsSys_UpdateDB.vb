@@ -7,8 +7,8 @@
     End Sub
 #End Region
 #Region "Public Methods"
-	Public Function UpdateHR() As Boolean
-		Dim SQL As String
+    Public Function UpdateHR() As Boolean
+        Dim SQL As String
 
 #Region "Scripts Before 01-12-2024"
         '		SQL = "
@@ -7938,11 +7938,19 @@ CREATE TABLE [dbo].[hrs_LocationGeoPoints](
 "
         ExecuteUpdate(SQL)
 
+        SQL = "
+IF COL_LENGTH('hrs_Employees', 'MacAddress') IS NULL  
+BEGIN
+    ALTER TABLE hrs_Employees
+    ADD MacAddress nvarchar(50) NULL
+END
+"
+        ExecuteUpdate(SQL)
 
     End Function
 
     Public Function UpdateSS() As Boolean
-		Dim SQL As String
+        Dim SQL As String
 
 #Region "SS Scripts Before 01-12-2024"
         '		SQL = "
@@ -9202,12 +9210,12 @@ ALTER TABLE SS_AnnualTicketRelatedRequests ADD
 ALTER TABLE SS_AnnualTicketRelatedRequests ADD
 	Direction int NULL
 	        "
-        ExecuteUpdate(SQL)   
+        ExecuteUpdate(SQL)
         SQL = "
 ALTER TABLE SS_AnnualTicketRelatedRequests ADD
 	NoOfAdults int NULL
 	        "
-        ExecuteUpdate(SQL)  
+        ExecuteUpdate(SQL)
         SQL = "
 ALTER TABLE SS_AnnualTicketRelatedRequests ADD
 	NoOfChildren int NULL
@@ -9822,7 +9830,7 @@ FROM     dbo.SS_RequestActions AS SS INNER JOIN
         SQL = "ALTER TABLE dbo.SS_RequestActions ADD CONSTRAINT DF_SS_RequestActions_MinutsCount DEFAULT 0 FOR MinutsCount"
         ExecuteUpdate(SQL)
 
-        SQL ="
+        SQL = "
 ALTER VIEW [dbo].[SS_VNotification]
 AS
 /*1 ============================الاجازة ==============================================*/ SELECT RequestSerial AS ID, FormCode, ConfigID, SS_VacationRequest.Code AS RequestSerial, hrs_Employees.ID AS EmployeeID, 
@@ -10126,7 +10134,7 @@ WHERE  (Seen IS NULL OR
 "
         ExecuteUpdate(SQL)
 
-        SQL="
+        SQL = "
 ALTER VIEW [dbo].[SS_VFollowup]
 AS
 /*-1==============================الاجازة==================*/ SELECT SS_VacationRequest.ID, SS_VacationRequest.VacationType, SS_VacationRequest.Code AS RequestSerial, SS_VacationRequest.EmployeeID, 
@@ -12252,7 +12260,7 @@ FROM     SS_ChangeWorkHoursRequest JOIN
         ExecuteUpdate(SQL)
 
     End Function
-	Public Function ExecuteUpdate(ByVal mySQLQuery As String) As Boolean
+    Public Function ExecuteUpdate(ByVal mySQLQuery As String) As Boolean
 
         Try
             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(mConnectionString, CommandType.Text, mySQLQuery)

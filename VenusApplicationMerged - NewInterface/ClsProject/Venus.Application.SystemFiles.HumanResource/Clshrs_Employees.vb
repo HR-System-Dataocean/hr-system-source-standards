@@ -7,9 +7,9 @@ Public Class Clshrs_EmployeesBase
     Public Sub New(ByVal Page As Web.UI.Page)
         MyBase.New(Page)
         mTable = " hrs_Employees "
-        mInsertParameter = " Code,EngName,ArbName,ArbName4S,FamilyEngName,FamilyArbName,FamilyArbName4S,FatherEngName,FatherArbName,FatherArbName4S,GrandEngName,GrandArbName,GrandArbName4S,BirthDate,DepartmentID,BirthCityID,ReligionID,MaritalStatusID,Sex,BloodGroupID,BankID,NationalityID,BankAccountNumber,CompanyID,Remarks,RegUserID,RegComputerID,GosiNumber,GOSIJoinDate,GOSIExcludeDate,BranchID,SponsorID,E_Mail,WorkE_Mail,Phone,Mobile,ManagerID,MachineCode,JoinDate,SectorID,Cost1,Cost2,Cost3,Cost4,SSnNo,PassPortNo,PassportIssueDate,PassportExpireDate,SSNOIssueDate,SSNOExpireDate,AddressAsPerContract,EntryNo,LocationID,WHours,IsProjectRelated,IsSpecialForce,MaxLoanDedution ,LedgerCode,HasTaqat,BankAccountType,Hasflexiblesalarydist,InsertRequestsForAnotherEmployee,paymenttype,IsSocialInsuranceIncluded"
-        mInsertParameterValues = " @Code,@EngName,@ArbName,@ArbName4S,@FamilyEngName,@FamilyArbName,@FamilyArbName4S,@FatherEngName,@FatherArbName,@FatherArbName4S,@GrandEngName,@GrandArbName,@GrandArbName4S,@BirthDate,@DepartmentID,@BirthCityID,@ReligionID,@MaritalStatusID,@Sex,@BloodGroupID,@BankID,@NationalityID,@BankAccountNumber,@CompanyID,@Remarks,@RegUserID,@RegComputerID,@GosiNumber,@GOSIJoinDate,@GOSIExcludeDate,@BranchID,@SponsorID,@E_Mail,@WorkE_Mail,@Phone,@Mobile,@ManagerID,@MachineCode,@JoinDate,@SectorID,@Cost1,@Cost2,@Cost3,@Cost4,@SSnNo,@PassPortNo,@PassportIssueDate,@PassportExpireDate,@SSNOIssueDate,@SSNOExpireDate,@AddressAsPerContract,@EntryNo,@LocationID,@WHours,@IsProjectRelated,@IsSpecialForce,@MaxLoanDedution ,@LedgerCode,@HasTaqat,@BankAccountType,@Hasflexiblesalarydist,@InsertRequestsForAnotherEmployee,@paymenttype,@IsSocialInsuranceIncluded "
-        mUpdateParameter = " Code=@Code,EngName=@EngName,ArbName=@ArbName,ArbName4S=@ArbName4S,FamilyEngName=@FamilyEngName,FamilyArbName=@FamilyArbName,FamilyArbName4S=@FamilyArbName4S,FatherEngName=@FatherEngName,FatherArbName=@FatherArbName,FatherArbName4S=@FatherArbName4S,GrandEngName=@GrandEngName,GrandArbName=@GrandArbName,GrandArbName4S=@GrandArbName4S,BirthDate=@BirthDate,DepartmentID=@DepartmentID,BirthCityID=@BirthCityID,ReligionID=@ReligionID,MaritalStatusID=@MaritalStatusID,Sex=@Sex,BloodGroupID=@BloodGroupID,BankID=@BankID,NationalityID=@NationalityID,BankAccountNumber=@BankAccountNumber,GosiNumber=@GosiNumber,GOSIJoinDate=@GOSIJoinDate,GOSIExcludeDate=@GOSIExcludeDate,BranchID=@BranchID,SponsorID=@SponsorID,E_Mail=@E_Mail,WorkE_Mail=@WorkE_Mail,Phone=@Phone,Mobile=@Mobile,ManagerID=@ManagerID,MachineCode=@MachineCode,JoinDate=@JoinDate,SectorID=@SectorID,Cost1=@Cost1,Cost2=@Cost2,Cost3=@Cost3,Cost4=@Cost4,SSnNo=@SSnNo,PassPortNo=@PassPortNo,PassportIssueDate=@PassportIssueDate,PassportExpireDate=@PassportExpireDate,SSNOIssueDate=@SSNOIssueDate,SSNOExpireDate=@SSNOExpireDate,AddressAsPerContract=@AddressAsPerContract,EntryNo=@EntryNo,LocationID=@LocationID,RegComputerID=@RegComputerID,WHours=@WHours,IsProjectRelated=@IsProjectRelated,IsSpecialForce=@IsSpecialForce,MaxLoanDedution = @MaxLoanDedution,LedgerCode=@LedgerCode,HasTaqat=@HasTaqat,BankAccountType=@BankAccountType,Hasflexiblesalarydist=@Hasflexiblesalarydist,InsertRequestsForAnotherEmployee=@InsertRequestsForAnotherEmployee,paymenttype=@paymenttype,IsSocialInsuranceIncluded=@IsSocialInsuranceIncluded ,UpdateUserID=@UpdateUserID,UpdateDate=@UpdateDate"
+        mInsertParameter = " Code,EngName,ArbName,ArbName4S,FamilyEngName,FamilyArbName,FamilyArbName4S,FatherEngName,FatherArbName,FatherArbName4S,GrandEngName,GrandArbName,GrandArbName4S,BirthDate,DepartmentID,BirthCityID,ReligionID,MaritalStatusID,Sex,BloodGroupID,BankID,NationalityID,BankAccountNumber,CompanyID,Remarks,RegUserID,RegComputerID,GosiNumber,GOSIJoinDate,GOSIExcludeDate,BranchID,SponsorID,E_Mail,WorkE_Mail,Phone,Mobile,ManagerID,MachineCode,MacAddress,JoinDate,SectorID,Cost1,Cost2,Cost3,Cost4,SSnNo,PassPortNo,PassportIssueDate,PassportExpireDate,SSNOIssueDate,SSNOExpireDate,AddressAsPerContract,EntryNo,LocationID,WHours,IsProjectRelated,IsSpecialForce,MaxLoanDedution ,LedgerCode,HasTaqat,BankAccountType,Hasflexiblesalarydist,InsertRequestsForAnotherEmployee,paymenttype,IsSocialInsuranceIncluded"
+        mInsertParameterValues = " @Code,@EngName,@ArbName,@ArbName4S,@FamilyEngName,@FamilyArbName,@FamilyArbName4S,@FatherEngName,@FatherArbName,@FatherArbName4S,@GrandEngName,@GrandArbName,@GrandArbName4S,@BirthDate,@DepartmentID,@BirthCityID,@ReligionID,@MaritalStatusID,@Sex,@BloodGroupID,@BankID,@NationalityID,@BankAccountNumber,@CompanyID,@Remarks,@RegUserID,@RegComputerID,@GosiNumber,@GOSIJoinDate,@GOSIExcludeDate,@BranchID,@SponsorID,@E_Mail,@WorkE_Mail,@Phone,@Mobile,@ManagerID,@MachineCode,@MacAddress,@JoinDate,@SectorID,@Cost1,@Cost2,@Cost3,@Cost4,@SSnNo,@PassPortNo,@PassportIssueDate,@PassportExpireDate,@SSNOIssueDate,@SSNOExpireDate,@AddressAsPerContract,@EntryNo,@LocationID,@WHours,@IsProjectRelated,@IsSpecialForce,@MaxLoanDedution ,@LedgerCode,@HasTaqat,@BankAccountType,@Hasflexiblesalarydist,@InsertRequestsForAnotherEmployee,@paymenttype,@IsSocialInsuranceIncluded "
+        mUpdateParameter = " Code=@Code,EngName=@EngName,ArbName=@ArbName,ArbName4S=@ArbName4S,FamilyEngName=@FamilyEngName,FamilyArbName=@FamilyArbName,FamilyArbName4S=@FamilyArbName4S,FatherEngName=@FatherEngName,FatherArbName=@FatherArbName,FatherArbName4S=@FatherArbName4S,GrandEngName=@GrandEngName,GrandArbName=@GrandArbName,GrandArbName4S=@GrandArbName4S,BirthDate=@BirthDate,DepartmentID=@DepartmentID,BirthCityID=@BirthCityID,ReligionID=@ReligionID,MaritalStatusID=@MaritalStatusID,Sex=@Sex,BloodGroupID=@BloodGroupID,BankID=@BankID,NationalityID=@NationalityID,BankAccountNumber=@BankAccountNumber,GosiNumber=@GosiNumber,GOSIJoinDate=@GOSIJoinDate,GOSIExcludeDate=@GOSIExcludeDate,BranchID=@BranchID,SponsorID=@SponsorID,E_Mail=@E_Mail,WorkE_Mail=@WorkE_Mail,Phone=@Phone,Mobile=@Mobile,ManagerID=@ManagerID,MachineCode=@MachineCode,MacAddress=@MacAddress,JoinDate=@JoinDate,SectorID=@SectorID,Cost1=@Cost1,Cost2=@Cost2,Cost3=@Cost3,Cost4=@Cost4,SSnNo=@SSnNo,PassPortNo=@PassPortNo,PassportIssueDate=@PassportIssueDate,PassportExpireDate=@PassportExpireDate,SSNOIssueDate=@SSNOIssueDate,SSNOExpireDate=@SSNOExpireDate,AddressAsPerContract=@AddressAsPerContract,EntryNo=@EntryNo,LocationID=@LocationID,RegComputerID=@RegComputerID,WHours=@WHours,IsProjectRelated=@IsProjectRelated,IsSpecialForce=@IsSpecialForce,MaxLoanDedution = @MaxLoanDedution,LedgerCode=@LedgerCode,HasTaqat=@HasTaqat,BankAccountType=@BankAccountType,Hasflexiblesalarydist=@Hasflexiblesalarydist,InsertRequestsForAnotherEmployee=@InsertRequestsForAnotherEmployee,paymenttype=@paymenttype,IsSocialInsuranceIncluded=@IsSocialInsuranceIncluded ,UpdateUserID=@UpdateUserID,UpdateDate=@UpdateDate"
         mSelectCommand = " Select *," & ArrangeIncomingName(Me.mLangauge) & " As FullName From  " & mTable
         mInsertCommand = " insert into " & mTable & "( " & mInsertParameter & ")Values(" & mInsertParameterValues & ")"
         mUpdateCommand = " Update " & mTable & " Set " & mUpdateParameter
@@ -104,6 +104,7 @@ Public Class Clshrs_EmployeesBase
     Private mMobile As String
     Private mManagerID As Integer
     Private mMachineCode As String
+    Private mMacAddress As String
     Private mSectorID As Integer
     Private mCost1 As Integer
     Private mCost2 As Integer
@@ -516,6 +517,14 @@ Public Class Clshrs_EmployeesBase
         End Get
         Set(ByVal value As String)
             mMachineCode = value
+        End Set
+    End Property
+    Public Property MacAddress() As String
+        Get
+            Return mMacAddress
+        End Get
+        Set(ByVal value As String)
+            mMacAddress = value
         End Set
     End Property
     Public Property SectorID() As Integer
@@ -1034,6 +1043,7 @@ Public Class Clshrs_EmployeesBase
             mMobile = String.Empty
             mManagerID = 0
             mMachineCode = String.Empty
+            mMacAddress = String.Empty
             mSectorID = 0
             mCost1 = 0
             mCost2 = 0
@@ -1538,6 +1548,7 @@ Public Class Clshrs_EmployeesBase
                 mMobile = mDataHandler.DataValue_Out(.Item("Mobile"), SqlDbType.VarChar)
                 mManagerID = mDataHandler.DataValue_Out(.Item("ManagerID"), SqlDbType.Int, True)
                 mMachineCode = mDataHandler.DataValue_Out(.Item("MachineCode"), SqlDbType.VarChar)
+                mMacAddress = mDataHandler.DataValue_Out(.Item("MacAddress"), SqlDbType.VarChar)
                 mSectorID = mDataHandler.DataValue_Out(.Item("SectorID"), SqlDbType.Int, True)
                 mCost1 = mDataHandler.DataValue_Out(.Item("Cost1"), SqlDbType.Int, True)
                 mCost2 = mDataHandler.DataValue_Out(.Item("Cost2"), SqlDbType.Int, True)
@@ -1623,6 +1634,7 @@ Public Class Clshrs_EmployeesBase
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Mobile", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mMobile, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ManagerID", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mManagerID, SqlDbType.Int, True)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@MachineCode", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mMachineCode, SqlDbType.VarChar)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@MacAddress", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mMacAddress, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@SponsorID", SqlDbType.Int)).Value = mDataHandler.DataValue_In(Me.mSponsorID, SqlDbType.Int, True)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@SectorID", SqlDbType.Int)).Value = mDataHandler.DataValue_In(Me.mSectorID, SqlDbType.Int, True)
 
