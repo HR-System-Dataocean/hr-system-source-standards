@@ -985,6 +985,15 @@ Partial Class frmEmployeesVacations
                 Exit Function
             End If
 
+            If CheckRequestsOverlapping() Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "You cannot submit this vacation request because it overlaps with a previous Request  /عفوا لايمكن تسجيل طلبك لانه متداخل مع طلب اجازة اخري "))
+                Exit Function
+            End If
+            If CheckVacationsOverlapping() Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "You cannot submit this vacation request because it overlaps with a previous vacation  /عفوا لايمكن تسجيل طلبك لانه متداخل مع  اجازة اخري "))
+                Exit Function
+            End If
+
             Dim clsVacType As New Clshrs_VacationsTypes(Page)
             If clsVacType.Find("ID=" & DdlVacationType.SelectedItem.Value) Then
                 If Not IsDBNull(clsVacType.ConsiderAllowedDays) AndAlso CBool(clsVacType.ConsiderAllowedDays) Then
@@ -2221,7 +2230,59 @@ Partial Class frmEmployeesVacations
     '    ' Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "You must select vacation/يجب أن تختار أجازة"))
     '    '  End If
     'End Sub
+    Public Function CheckRequestsOverlapping() As Boolean
+        ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+        'Dim strpreviousPeriods As String = "SELECT * FROM     SS_VacationRequest where EmployeeID= " & ClsEmployees.ID & " and id not in (select RequestSerial from SS_RequestActions where (FormCode='SS_0011' OR FormCode='SS_0013' OR FormCode='SS_0012' OR FormCode='SS_0018' OR FormCode='SS_0030' OR FormCode='SS_0031' OR FormCode='SS_0032' OR FormCode='SS_0033'    OR FormCode='SS_0034'  OR FormCode='SS_0035' OR FormCode='SS_0036' OR FormCode='SS_0037' )and (ActionID=4 or ActionID=2) And IsHidden Is Null) "
+        Dim strpreviousPeriods As String = "SELECT * FROM     SS_VacationRequest where EmployeeID= " & ClsEmployees.ID & "  and( SS_VacationRequest.RequestStautsTypeID=1 or SS_VacationRequest.RequestStautsTypeID=3 or SS_VacationRequest.RequestStautsTypeID=4)"
+        Dim previousPeriods As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strpreviousPeriods)
 
+        Dim newStart As DateTime = Convert.ToDateTime(WebDateChooser1.Value)
+        Dim newEnd As DateTime = Convert.ToDateTime(WebDateChooser2.Value).AddDays(-1)
+
+        Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
+        ClsVacationTypes.Find(" ID=" & DdlVacationType.SelectedItem.Value)
+
+        For Each row As DataRow In previousPeriods.Tables(0).Rows
+            Dim periodStart As DateTime = Convert.ToDateTime(row("StartDate"))
+            Dim periodEnd As DateTime = Convert.ToDateTime(row("EndDate")).AddDays(-1)
+
+            If (newStart <= periodEnd AndAlso newEnd >= periodStart) Then
+                If ClsVacationTypes.OverlapWithAnotherVac Then
+                    Return False
+                Else
+                    Return True
+                End If
+            End If
+        Next
+
+        Return False
+    End Function
+    Public Function CheckVacationsOverlapping() As Boolean
+        Dim strpreviousPeriods As String = "select * from hrs_EmployeesVacations where canceldate is null And EmployeeID= " & ClsEmployees.ID & " "
+        Dim previousPeriods As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strpreviousPeriods)
+
+        Dim newStart As DateTime = Convert.ToDateTime(WebDateChooser1.Value)
+        Dim newEnd As DateTime = Convert.ToDateTime(WebDateChooser2.Value).AddDays(-1)
+
+        Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
+        ClsVacationTypes.Find(" ID=" & DdlVacationType.SelectedItem.Value)
+
+        For Each row As DataRow In previousPeriods.Tables(0).Rows
+            Dim periodStart As DateTime = Convert.ToDateTime(row("ActualStartDate"))
+            Dim periodEnd As DateTime = Convert.ToDateTime(row("ActualEndDate")).AddDays(-1)
+
+            ' التحقق من وجود أي تداخل
+            If (newStart <= periodEnd AndAlso newEnd >= periodStart) Then
+                If ClsVacationTypes.OverlapWithAnotherVac Then
+                    Return False ' 
+                Else
+                    Return True ' يوجد تداخل
+                End If
+            End If
+        Next
+
+        Return False ' لا يوجد تداخل
+    End Function
     Private Sub LinkButton_Remarks_Load(sender As Object, e As EventArgs) Handles LinkButton_Remarks.Load
 
     End Sub

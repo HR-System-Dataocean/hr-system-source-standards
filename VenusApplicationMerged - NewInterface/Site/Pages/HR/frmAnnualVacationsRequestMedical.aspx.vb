@@ -1012,7 +1012,14 @@ Partial Class frmEmployeesVacations
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry...Direct manager is not updated in your file please review HR Department /عفوا لايمكن حفظ طلبكم بسبب عدم توافر معلومات المدير المباشر..برجاء مراجعة ادارة الموارد البشرية "))
                 Exit Function
             End If
-
+            If CheckRequestsOverlapping() Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "You cannot submit this vacation request because it overlaps with a previous Request  /عفوا لايمكن تسجيل طلبك لانه متداخل مع طلب اجازة اخري "))
+                Return False
+            End If
+            If CheckVacationsOverlapping() Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "You cannot submit this vacation request because it overlaps with a previous vacation  /عفوا لايمكن تسجيل طلبك لانه متداخل مع  اجازة اخري "))
+                Return False
+            End If
 
             ''''''''''''''''''''''''''''''''''''''''''''''
 
@@ -2229,7 +2236,48 @@ Partial Class frmEmployeesVacations
         OldBalance = IntBalance + DecimalBalance
         Return OldBalance.ToString()
     End Function
+    Public Function CheckRequestsOverlapping() As Boolean
+        ClsEmployees = New Clshrs_Employees(Page)
+        ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
 
+
+        'Dim strpreviousPeriods As String = "SELECT * FROM     SS_VacationRequest where EmployeeID= " & ClsEmployees.ID & " and id not in (select RequestSerial from SS_RequestActions where (FormCode='SS_0011' OR FormCode='SS_0013' OR FormCode='SS_0012' OR FormCode='SS_0018'  OR FormCode='SS_0030'  OR FormCode='SS_0031' OR FormCode='SS_0032' OR FormCode='SS_0033' OR FormCode='SS_0034' OR FormCode='SS_0035' OR FormCode='SS_0036' OR FormCode='SS_0037' )and (ActionID=4 or ActionID=2)And IsHidden Is null) "
+        Dim strpreviousPeriods As String = "SELECT * FROM     SS_VacationRequest where EmployeeID= " & ClsEmployees.ID & "  and( SS_VacationRequest.RequestStautsTypeID=1 or SS_VacationRequest.RequestStautsTypeID=3 or SS_VacationRequest.RequestStautsTypeID=4)"
+
+        Dim previousPeriods As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strpreviousPeriods)
+
+        Dim newStart As DateTime = Convert.ToDateTime(WebDateChooser1.Value)
+        Dim newEnd As DateTime = Convert.ToDateTime(WebDateChooser2.Value)
+        For Each row As DataRow In previousPeriods.Tables(0).Rows
+            Dim periodStart As DateTime = Convert.ToDateTime(row("StartDate"))
+            Dim periodEnd As DateTime = Convert.ToDateTime(row("EndDate"))
+
+            ' التحقق من وجود أي تداخل
+            If (newStart <= periodEnd.AddDays(-1) AndAlso newEnd.AddDays(-1) >= periodStart) Then
+                Return True ' يوجد تداخل
+            End If
+        Next
+
+        Return False ' لا يوجد تداخل
+    End Function
+    Public Function CheckVacationsOverlapping() As Boolean
+        Dim strpreviousPeriods As String = "select * from hrs_EmployeesVacations where canceldate is null And EmployeeID= " & ClsEmployees.ID & " "
+        Dim previousPeriods As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strpreviousPeriods)
+
+        Dim newStart As DateTime = Convert.ToDateTime(WebDateChooser1.Value)
+        Dim newEnd As DateTime = Convert.ToDateTime(WebDateChooser2.Value)
+        For Each row As DataRow In previousPeriods.Tables(0).Rows
+            Dim periodStart As DateTime = Convert.ToDateTime(row("ActualStartDate"))
+            Dim periodEnd As DateTime = Convert.ToDateTime(row("ActualEndDate"))
+
+            ' التحقق من وجود أي تداخل
+            If (newStart <= periodEnd.AddDays(-1) AndAlso newEnd.AddDays(-1) >= periodStart) Then
+                Return True ' يوجد تداخل
+            End If
+        Next
+
+        Return False ' لا يوجد تداخل
+    End Function
 
     Private Sub LinkButton_Remarks_Load(sender As Object, e As EventArgs) Handles LinkButton_Remarks.Load
 
