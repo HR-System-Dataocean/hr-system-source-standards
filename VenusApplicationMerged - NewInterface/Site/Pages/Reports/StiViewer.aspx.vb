@@ -1,6 +1,7 @@
 Imports System
 Imports System.Data
 Imports System.Data.SqlClient
+Imports System.IO
 Imports System.Web.Script.Serialization
 Imports Venus.Application.SystemFiles.System
 Imports Stimulsoft.Report
@@ -12,20 +13,65 @@ Imports Stimulsoft.Base.Drawing
 Partial Class Pages_Reports_StiViewer
     Inherits System.Web.UI.Page
 
+    Private mHasReportError As Boolean = False
+    Private mReportErrorText As String = String.Empty
+    Private mPreferArabic As Nullable(Of Boolean) = Nothing
+
     ' Usage examples:
-    ' /Pages/Reports/StiViewer.aspx?report=SSReport/LoanLetterTemplate.mrt&EmployeesCode=1001&ToDate=14/10/2025
+    ' /Pages/Reports/StiViewer.aspx?report=SSReport/Emp.mrt&EmployeesCode=1001&ToDate=14/10/2025
     ' /Pages/Reports/StiViewer.aspx?report=SSReport/Emp.mrt&params={"EmpID":"123","Lang":"ar"}
+    ' Report path is resolved to SSReport/AR/ or SSReport/EN/ based on current system language.
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+        mPreferArabic = GetArabicViewFromParams()
+
+        Dim rpt As String = Request("report")
+        If String.IsNullOrEmpty(rpt) Then
+            ShowUiError(GetLocalizedText("لم يتم تحديد اسم التقرير.", "Missing report name."))
+            Return
+        End If
+
+        rpt = StiReportPathHelper.ResolveReportPath(rpt, Server, mPreferArabic)
+        If Not File.Exists(Server.MapPath(rpt)) Then
+            Dim fileName As String = Path.GetFileName(Server.MapPath(rpt))
+            ShowUiError(GetLocalizedText("الملف غير موجود: " & fileName, "Report file not found: " & fileName))
+            Return
+        End If
+    End Sub
 
     Protected Sub viewer_GetReport(ByVal sender As Object, ByVal e As StiReportDataEventArgs)
+        mPreferArabic = GetArabicViewFromParams()
+        If mHasReportError Then
+            e.Report = New StiReport()
+            Return
+        End If
+
         Dim report As New StiReport()
 
         ' Resolve report path
         Dim rpt As String = Request("report")
         If String.IsNullOrEmpty(rpt) Then
-            Throw New ApplicationException("Missing 'report' query parameter.")
+            ShowUiError(GetLocalizedText("لم يتم تحديد اسم التقرير.", "Missing report name."))
+            e.Report = New StiReport()
+            Return
         End If
-        If Not rpt.StartsWith("~/") Then rpt = "~/" & rpt
-        report.Load(Server.MapPath(rpt))
+        rpt = StiReportPathHelper.ResolveReportPath(rpt, Server, mPreferArabic)
+        Dim reportPhysicalPath As String = Server.MapPath(rpt)
+        If Not File.Exists(reportPhysicalPath) Then
+            Dim msgAr As String = "الملف غير موجود: " & Path.GetFileName(reportPhysicalPath)
+            Dim msgEn As String = "Report file not found: " & Path.GetFileName(reportPhysicalPath)
+            ShowUiError(GetLocalizedText(msgAr, msgEn))
+            e.Report = New StiReport()
+            Return
+        End If
+
+        Try
+            report.Load(reportPhysicalPath)
+        Catch
+            ShowUiError(GetLocalizedText("تعذر تحميل ملف التقرير.", "Unable to load report file."))
+            e.Report = New StiReport()
+            Return
+        End Try
 
         ' Apply DB connection string to any SQL sources
         Dim conn As String = System.Configuration.ConfigurationManager.AppSettings("Connstring")
@@ -151,4 +197,43 @@ Partial Class Pages_Reports_StiViewer
             v.Value = value
         End If
     End Sub
+
+    Private Function GetLocalizedText(ByVal arText As String, ByVal enText As String) As String
+        If String.Equals(ProfileCls.CurrentLanguage(), "Ar", StringComparison.OrdinalIgnoreCase) Then
+            Return arText
+        End If
+        Return enText
+    End Function
+
+    Private Sub ShowUiError(ByVal message As String)
+        mHasReportError = True
+        mReportErrorText = message
+        pnlReportError.Visible = True
+        lblReportError.Text = Server.HtmlEncode(message)
+        viewer.Visible = False
+    End Sub
+
+    Private Function GetArabicViewFromParams() As Nullable(Of Boolean)
+        Dim json As String = Request("params")
+        If String.IsNullOrEmpty(json) Then Return Nothing
+
+        Try
+            Dim dict = New JavaScriptSerializer().Deserialize(Of Dictionary(Of String, Object))(json)
+            If dict Is Nothing OrElse Not dict.ContainsKey("ArabicView") Then Return Nothing
+
+            Dim raw As String = Convert.ToString(dict("ArabicView"))
+            If String.IsNullOrEmpty(raw) Then Return Nothing
+
+            If String.Equals(raw, "true", StringComparison.OrdinalIgnoreCase) OrElse raw = "1" Then
+                Return True
+            End If
+            If String.Equals(raw, "false", StringComparison.OrdinalIgnoreCase) OrElse raw = "0" Then
+                Return False
+            End If
+        Catch
+            ' ignore params parsing errors and fallback to system language
+        End Try
+
+        Return Nothing
+    End Function
 End Class

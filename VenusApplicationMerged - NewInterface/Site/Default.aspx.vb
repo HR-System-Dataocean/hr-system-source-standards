@@ -119,11 +119,14 @@ Partial Class _Default
                 _WSItem = New Workspace.Item
                 _WSItem.ID = _WSArea.ID
 
-                If ObjDataRow("Code") <> "Rep" Then
-                    _WSItem.TV = MenuHandler.LoadMenu(Me, ObjDataRow("ID"), Cls_DataAcessLayer.DataBaseUserRelatedID, Cls_DataAcessLayer.GroupID, False)
-                Else
-                    _WSItem.TV = MenuHandler.LoadMenu(Me, ObjDataRow("ID"), Cls_DataAcessLayer.DataBaseUserRelatedID, Cls_DataAcessLayer.GroupID, True)
-                End If
+                Select Case Convert.ToString(ObjDataRow("Code"))
+                    Case "Rep"
+                        _WSItem.TV = MenuHandler.LoadMenu(Me, ObjDataRow("ID"), Cls_DataAcessLayer.DataBaseUserRelatedID, Cls_DataAcessLayer.GroupID, True, "C1")
+                    Case "STI"
+                        _WSItem.TV = MenuHandler.LoadMenu(Me, ObjDataRow("ID"), Cls_DataAcessLayer.DataBaseUserRelatedID, Cls_DataAcessLayer.GroupID, True, "STI")
+                    Case Else
+                        _WSItem.TV = MenuHandler.LoadMenu(Me, ObjDataRow("ID"), Cls_DataAcessLayer.DataBaseUserRelatedID, Cls_DataAcessLayer.GroupID, False)
+                End Select
 
                 _WSSection.Items.Add(_WSItem)
             Next
