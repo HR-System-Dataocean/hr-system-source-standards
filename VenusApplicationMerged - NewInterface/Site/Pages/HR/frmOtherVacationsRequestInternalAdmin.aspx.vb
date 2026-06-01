@@ -2306,7 +2306,8 @@ Partial Class frmOtherVacationsRequestInternalAdmin
         ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
 
 
-        Dim strpreviousPeriods As String = "SELECT * FROM     SS_VacationRequest where EmployeeID= " & ClsEmployees.ID & " and id not in (select RequestSerial from SS_RequestActions where (FormCode='SS_0011' OR FormCode='SS_0013' OR FormCode='SS_0012' OR FormCode='SS_0018'  OR FormCode='SS_0030'  OR FormCode='SS_0031' OR FormCode='SS_0032' OR FormCode='SS_0033' OR FormCode='SS_0034' OR FormCode='SS_0035' OR FormCode='SS_0036' OR FormCode='SS_0037' )and (ActionID=4 or ActionID=2)And IsHidden Is null) "
+        'Dim strpreviousPeriods As String = "SELECT * FROM     SS_VacationRequest where EmployeeID= " & ClsEmployees.ID & " and id not in (select RequestSerial from SS_RequestActions where (FormCode='SS_0011' OR FormCode='SS_0013' OR FormCode='SS_0012' OR FormCode='SS_0018'  OR FormCode='SS_0030'  OR FormCode='SS_0031' OR FormCode='SS_0032' OR FormCode='SS_0033' OR FormCode='SS_0034' OR FormCode='SS_0035' OR FormCode='SS_0036' OR FormCode='SS_0037' )and (ActionID=4 or ActionID=2)And IsHidden Is null) "
+        Dim strpreviousPeriods As String = "SELECT * FROM     SS_VacationRequest where EmployeeID= " & ClsEmployees.ID & "  and( SS_VacationRequest.RequestStautsTypeID=1 or SS_VacationRequest.RequestStautsTypeID=3 or SS_VacationRequest.RequestStautsTypeID=4)"
         Dim previousPeriods As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strpreviousPeriods)
 
         Dim newStart As DateTime = Convert.ToDateTime(WebDateChooser1.Value)
