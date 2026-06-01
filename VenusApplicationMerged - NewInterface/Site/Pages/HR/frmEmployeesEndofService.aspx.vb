@@ -134,6 +134,7 @@ Partial Class frmEmployeesEndofService
             Clshrs_EmployeesJoins = New Clshrs_EmployeesJoins(Me.Page)
             ClsEndOfService = New Clshrs_EndOfServices(Page)
             clsBranch = New Clssys_Branches(Page)
+            ClsEmployeesTrancations = New Clshrs_EmployeesTransactions(Page)
 
             IntContractId = ClsEmpContracts.ContractValidatoinId(IntEmployeeId, DteEndOfServiceDate)
             ClsEmpContracts.Find("ID = " & IntContractId)
@@ -161,10 +162,42 @@ Partial Class frmEmployeesEndofService
                 Return
             End If
 
+            Get_FromToDate(DteEndOfServiceDate)
+            Load_ClsLayers(DteEndOfServiceDate)
+            dtNowDate = wdcEndOfServiceDate.Value
+            If clsBranch.AffectPeriod Then
+                ClsFisicalPeriod.GetFisicalperiodInfoByPrepareDay(ClsEmployees.SetHigriDate(wdcEndOfServiceDate.Value), IntFisicalPeriod, FromDate, ToDate)
+            Else
+                ClsFisicalPeriod.GetFisicalperiodInfo(ClsEmployees.SetHigriDate(wdcEndOfServiceDate.Value), IntFisicalPeriod, FromDate, ToDate)
+
+
+            End If
+            ClsEmployeesTrancations.Find("EmployeeID = " & IntEmployeeId & " And FiscalYearPeriodID >" & IntFisicalPeriod & " And PrepareType='N'")
+            If ClsEmployeesTrancations.ID > 0 Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ClsObjNav.SetLanguage(Page, " Sorry Can't End Service at this date for this emplyee ...Please check prepared salary periods !/ عفوا لا يمكن انهاء الخدمة في هذا التاريخ لهذا الموظف...برجاء مراجعة فترات الرواتب المجهزة"))
+                Exit Sub
+
+            End If
+
+
             '==========================================================================
             '4- Update Employees Joins by the endofservce Date and reson
             '5- Update the contract by the End date of the Endof service date 
             '==========================================================================
+
+
+
+
+            Get_FromToDate(DteEndOfServiceDate)
+            Load_ClsLayers(DteEndOfServiceDate)
+            dtNowDate = wdcEndOfServiceDate.Value
+            If clsBranch.AffectPeriod Then
+                ClsFisicalPeriod.GetFisicalperiodInfoByPrepareDay(ClsEmployees.SetHigriDate(wdcEndOfServiceDate.Value), IntFisicalPeriod, FromDate, ToDate)
+            Else
+                ClsFisicalPeriod.GetFisicalperiodInfo(ClsEmployees.SetHigriDate(wdcEndOfServiceDate.Value), IntFisicalPeriod, FromDate, ToDate)
+
+
+            End If
             Clshrs_EmployeesJoins.Find("EndofServiceDate is null and EmployeeID  = " & IntEmployeeId)
             With Clshrs_EmployeesJoins
                 .EmployeeId = IntEmployeeId
@@ -206,17 +239,6 @@ Partial Class frmEmployeesEndofService
             '7- Save the Head of the Employee Transaction 
             '==========================================================================
 
-            Get_FromToDate(DteEndOfServiceDate)
-            Load_ClsLayers(DteEndOfServiceDate)
-
-            dtNowDate = wdcEndOfServiceDate.Value
-            If clsBranch.AffectPeriod Then
-                ClsFisicalPeriod.GetFisicalperiodInfoByPrepareDay(ClsEmployees.SetHigriDate(wdcEndOfServiceDate.Value), IntFisicalPeriod, FromDate, ToDate)
-            Else
-                ClsFisicalPeriod.GetFisicalperiodInfo(ClsEmployees.SetHigriDate(wdcEndOfServiceDate.Value), IntFisicalPeriod, FromDate, ToDate)
-
-
-            End If
             'Rabie 3-12-2025
             ' ClsFisicalPeriod.GetFisicalperiodInfo(dtNowDate, IntPeriodId, DtePeriodFrom, DtePeriodTo)
             '------------------------------=============-----------------------------------------
@@ -251,7 +273,6 @@ Partial Class frmEmployeesEndofService
             '------------------------------=============-----------------------------------------
             ' Saving Transaction Head Details For Normal Transaction
             '------------------------------=============-----------------------------------------
-            ClsEmployeesTrancations = New Clshrs_EmployeesTransactions(Page)
             With ClsEmployeesTrancations
                 .EmployeeID = IntEmployeeId
                 .FiscalYearPeriodID = IntPeriodId
