@@ -352,7 +352,7 @@ Public Class NavigationHandler
             ObjDataSetMinItems.Dispose()
         End Try
     End Function
-    Public Function LoadMenu(ByVal page As System.Web.UI.Page, ByVal ModuleID As Integer, ByVal UserID As Integer, ByVal GroupID As Integer, ByVal Rpt As Boolean) As System.Web.UI.WebControls.TreeView
+    Public Function LoadMenu(ByVal page As System.Web.UI.Page, ByVal ModuleID As Integer, ByVal UserID As Integer, ByVal GroupID As Integer, ByVal Rpt As Boolean, Optional ByVal ReportTypeFilter As String = "") As System.Web.UI.WebControls.TreeView
         Dim ObjDataRow As DataRow
         Dim ObjDataSetMinItems As New DataSet
         Dim ObjTreeNode As System.Web.UI.WebControls.TreeNode
@@ -395,7 +395,10 @@ Public Class NavigationHandler
                 Return ObjTree
             Else
                 LoadGroupsTree(page, ObjTree, UserID, GroupID)
-                LoadReportTree(page, ObjTree, UserID, GroupID)
+                LoadReportTree(page, ObjTree, UserID, GroupID, ReportTypeFilter)
+                If Not String.IsNullOrEmpty(ReportTypeFilter) Then
+                    PruneEmptyReportGroupNodes(ObjTree)
+                End If
                 Return ObjTree
             End If
         Catch ex As Exception
@@ -406,7 +409,7 @@ Public Class NavigationHandler
             ObjDataSetMinItems.Dispose()
         End Try
     End Function
-    Public Function LoadReportTree(ByVal page As System.Web.UI.Page, ByRef Tree As System.Web.UI.WebControls.TreeView, ByVal UserID As Integer, ByVal GroupID As Integer) As Boolean
+    Public Function LoadReportTree(ByVal page As System.Web.UI.Page, ByRef Tree As System.Web.UI.WebControls.TreeView, ByVal UserID As Integer, ByVal GroupID As Integer, Optional ByVal ReportTypeFilter As String = "") As Boolean
         Dim ObjDataRow As DataRow
         Dim ObjDataSetMinItems As New DataSet
         Dim ObjMenuNode As System.Web.UI.WebControls.TreeNode
@@ -419,9 +422,16 @@ Public Class NavigationHandler
             ObjWebHandler.GetCookies(page, "Lang", strLang)
             StrSQLCommand = "hrs_GetReportPermissions"
             ObjDataSetMinItems = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(mstrConnectionString, StrSQLCommand, UserID, GroupID)
+            Dim allowedReportCodes As System.Collections.Generic.HashSet(Of String) = Nothing
+            If mObjDataHandler.CheckValidDataObject(ObjDataSetMinItems) AndAlso Not String.IsNullOrEmpty(ReportTypeFilter) AndAlso Not ObjDataSetMinItems.Tables(CD_INTINITIALVALUE).Columns.Contains("ReportType") Then
+                allowedReportCodes = GetReportCodesByType(ReportTypeFilter)
+            End If
             If mObjDataHandler.CheckValidDataObject(ObjDataSetMinItems) Then
                 For Each ObjDataRow In ObjDataSetMinItems.Tables(CD_INTINITIALVALUE).Rows
                     Try
+                        If Not ReportMatchesType(ObjDataRow, ObjDataSetMinItems.Tables(CD_INTINITIALVALUE), ReportTypeFilter, allowedReportCodes) Then
+                            Continue For
+                        End If
 
                         GroupNode = New System.Web.UI.WebControls.TreeNode
                         ObjMenuNode = New System.Web.UI.WebControls.TreeNode
@@ -631,7 +641,7 @@ Public Class NavigationHandler
         End Try
     End Function
 
-    Public Function LoadReportTree(ByVal page As System.Web.UI.Page, ByRef Tree As Infragistics.WebUI.UltraWebNavigator.UltraWebTree, ByVal UserID As Integer, ByVal GroupID As Integer) As Boolean
+    Public Function LoadReportTree(ByVal page As System.Web.UI.Page, ByRef Tree As Infragistics.WebUI.UltraWebNavigator.UltraWebTree, ByVal UserID As Integer, ByVal GroupID As Integer, Optional ByVal ReportTypeFilter As String = "") As Boolean
         Dim ObjDataRow As DataRow
         Dim ObjDataSetMinItems As New DataSet
         Dim ObjMenuNode As Infragistics.WebUI.UltraWebNavigator.Node
@@ -644,9 +654,17 @@ Public Class NavigationHandler
             ObjWebHandler.GetCookies(page, "Lang", strLang)
             StrSQLCommand = "hrs_GetReportPermissions"
             ObjDataSetMinItems = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(mstrConnectionString, StrSQLCommand, UserID, GroupID)
+            Dim allowedReportCodes As System.Collections.Generic.HashSet(Of String) = Nothing
+            If mObjDataHandler.CheckValidDataObject(ObjDataSetMinItems) AndAlso Not String.IsNullOrEmpty(ReportTypeFilter) AndAlso Not ObjDataSetMinItems.Tables(CD_INTINITIALVALUE).Columns.Contains("ReportType") Then
+                allowedReportCodes = GetReportCodesByType(ReportTypeFilter)
+            End If
 
             If mObjDataHandler.CheckValidDataObject(ObjDataSetMinItems) Then
                 For Each ObjDataRow In ObjDataSetMinItems.Tables(CD_INTINITIALVALUE).Rows
+                    If Not ReportMatchesType(ObjDataRow, ObjDataSetMinItems.Tables(CD_INTINITIALVALUE), ReportTypeFilter, allowedReportCodes) Then
+                        Continue For
+                    End If
+
                     GroupNode = New Infragistics.WebUI.UltraWebNavigator.Node
                     ObjMenuNode = New Infragistics.WebUI.UltraWebNavigator.Node
                     ObjMenuNode.Text = DataValue_Out(ObjDataRow.Item(IIf(strLang = "en-US", CD_ENGNAME, CD_ARBNAME)), SqlDbType.VarChar)
@@ -665,6 +683,63 @@ Public Class NavigationHandler
             ObjDataRow = Nothing
             ObjDataSetMinItems.Dispose()
         End Try
+    End Function
+
+    Private Function GetReportCodesByType(ByVal reportTypeFilter As String) As System.Collections.Generic.HashSet(Of String)
+        Dim codes As New System.Collections.Generic.HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+        Dim strSQL As String = "SELECT Code FROM sys_Reports WHERE ISNULL(ReportType, N'C1') = N'" & reportTypeFilter.Replace("'", "''") & "' AND CancelDate IS NULL"
+        Dim dsReports As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(mstrConnectionString, CommandType.Text, strSQL)
+        If DataHandler.CheckValidDataObject(dsReports) Then
+            For Each reportRow As DataRow In dsReports.Tables(CD_INTINITIALVALUE).Rows
+                codes.Add(Convert.ToString(reportRow("Code")))
+            Next
+        End If
+        Return codes
+    End Function
+
+    Private Function ReportMatchesType(ByVal reportRow As DataRow, ByVal reportData As DataTable, ByVal reportTypeFilter As String, ByVal allowedReportCodes As System.Collections.Generic.HashSet(Of String)) As Boolean
+        If String.IsNullOrEmpty(reportTypeFilter) Then
+            Return True
+        End If
+
+        If reportData.Columns.Contains("ReportType") Then
+            Dim rowReportType As String = "C1"
+            If Not IsDBNull(reportRow("ReportType")) Then
+                rowReportType = Convert.ToString(reportRow("ReportType")).Trim()
+            End If
+            Return String.Equals(rowReportType, reportTypeFilter, StringComparison.OrdinalIgnoreCase)
+        End If
+
+        Dim reportCode As String = DataValue_Out(reportRow.Item("Code"), SqlDbType.VarChar)
+        Return allowedReportCodes IsNot Nothing AndAlso allowedReportCodes.Contains(reportCode)
+    End Function
+
+    Private Sub PruneEmptyReportGroupNodes(ByRef tree As System.Web.UI.WebControls.TreeView)
+        Dim index As Integer = tree.Nodes.Count - 1
+        While index >= 0
+            If Not PruneEmptyReportGroupNode(tree.Nodes(index)) Then
+                tree.Nodes.RemoveAt(index)
+            End If
+            index -= 1
+        End While
+    End Sub
+
+    Private Function PruneEmptyReportGroupNode(ByVal node As System.Web.UI.WebControls.TreeNode) As Boolean
+        If Not String.IsNullOrEmpty(node.Value) AndAlso node.Value.StartsWith("r=", StringComparison.OrdinalIgnoreCase) Then
+            Return True
+        End If
+
+        Dim hasReports As Boolean = False
+        Dim index As Integer = node.ChildNodes.Count - 1
+        While index >= 0
+            If PruneEmptyReportGroupNode(node.ChildNodes(index)) Then
+                hasReports = True
+            Else
+                node.ChildNodes.RemoveAt(index)
+            End If
+            index -= 1
+        End While
+        Return hasReports
     End Function
 
     Public Function LoadTree(ByVal Tree As Infragistics.WebUI.UltraWebNavigator.UltraWebTree, ByVal UserID As Integer) As Boolean
