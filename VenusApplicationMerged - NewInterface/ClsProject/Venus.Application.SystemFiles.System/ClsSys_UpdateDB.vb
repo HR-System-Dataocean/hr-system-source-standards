@@ -7947,6 +7947,181 @@ END
 "
         ExecuteUpdate(SQL)
 
+        SQL = "
+CREATE PROCEDURE [dbo].[hrs_PostJournalPreview_GetProjects]
+    @TransactionIDs NVARCHAR(MAX),
+    @PeriodDate DATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    ;WITH BaseData AS (
+        SELECT
+            HRT.Amount,
+            HRT.TransactionID,
+            HRT.PrepareType,
+            TT.Sign,
+            TT.Code AS TTCode,
+            TT.IsPaid,
+            HC1.Code AS HCostCenter1Code,
+            HC1.ArbName AS HCostCenter1Name,
+            HC2.Code AS HCostCenter2Code,
+            HC2.ArbName AS HCostCenter2Name,
+            HC3.Code AS HCostCenter3Code,
+            HC3.ArbName AS HCostCenter3Name,
+            EC1.Code AS ECostCenter1Code,
+            EC1.ArbName AS ECostCenter1Name,
+            EC2.Code AS ECostCenter2Code,
+            EC2.ArbName AS ECostCenter2Name,
+            EC3.Code AS ECostCenter3Code,
+            EC3.ArbName AS ECostCenter3Name,
+            PR.Code AS ProjectCode,
+            PR.CostCenterCode1 AS ProjectCostCenterCode1
+        FROM hrs_HrsTrans HRT
+            INNER JOIN hrs_TransactionsTypes TT ON TT.ID = HRT.TransactionTypeID
+            INNER JOIN hrs_Employees E ON E.ID = HRT.EmployeeID
+            LEFT JOIN fcs_CostCenters1 HC1 ON HC1.ID = HRT.Cost1
+            LEFT JOIN fcs_CostCenters2 HC2 ON HC2.ID = HRT.Cost2
+            LEFT JOIN fcs_CostCenters3 HC3 ON HC3.ID = HRT.Cost3
+            LEFT JOIN fcs_CostCenters1 EC1 ON EC1.ID = E.Cost1
+            LEFT JOIN fcs_CostCenters2 EC2 ON EC2.ID = E.Cost2
+            LEFT JOIN fcs_CostCenters3 EC3 ON EC3.ID = E.Cost3
+            LEFT JOIN hrs_Projects PR ON PR.ID = HRT.ProjectID
+        WHERE HRT.PrepareType = 'N'
+          AND CHARINDEX(',' + CAST(HRT.TransactionID AS VARCHAR(20)) + ',', ',' + ISNULL(@TransactionIDs, '') + ',') > 0
+    )
+    SELECT
+        '2124100' AS LedgerCode,
+        '010100' COLLATE Arabic_CI_AS AS CostCenter1Code,
+        '' AS CostCenter1Name,
+        '0' COLLATE Arabic_CI_AS AS CostCenter2Code,
+        '' AS CostCenter2Name,
+        '0' COLLATE Arabic_CI_AS AS CostCenter3Code,
+        '' AS CostCenter3Name,
+        ' رواتب شهر ' + CAST(MONTH(@PeriodDate) AS VARCHAR(50)) + ' لعام ' + CAST(YEAR(@PeriodDate) AS VARCHAR(50)) + '   ' COLLATE Arabic_CI_AS AS ArbDesc,
+        0 AS Debit,
+        SUM(Amount * Sign) AS Credit
+    FROM BaseData
+    WHERE IsPaid = 1 AND TTCode NOT IN ('176', '201')
+    GROUP BY ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT
+        '2125001', '010100' COLLATE Arabic_CI_AS, '', '0' COLLATE Arabic_CI_AS, '', '0' COLLATE Arabic_CI_AS, '',
+        'حوافز رواتب شهر' + CAST(MONTH(@PeriodDate) AS VARCHAR(50)) + ' لعام ' + CAST(YEAR(@PeriodDate) AS VARCHAR(50)) + '   ' COLLATE Arabic_CI_AS,
+        0, SUM(Amount * Sign)
+    FROM BaseData
+    WHERE IsPaid = 1 AND TTCode IN ('176')
+    GROUP BY ECostCenter1Code, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name
+
+    UNION ALL
+    SELECT
+        '2124200', '010100' COLLATE Arabic_CI_AS, '', '0' COLLATE Arabic_CI_AS, '', '0' COLLATE Arabic_CI_AS, '',
+        'اضافي رواتب شهر' + CAST(MONTH(@PeriodDate) AS VARCHAR(50)) + ' لعام ' + CAST(YEAR(@PeriodDate) AS VARCHAR(50)) + '   ' COLLATE Arabic_CI_AS,
+        0, SUM(Amount * Sign)
+    FROM BaseData
+    WHERE IsPaid = 1 AND TTCode IN ('201')
+    GROUP BY ECostCenter1Code, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name
+
+    UNION ALL
+    SELECT '3111001', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'راتب اساسى & Basic Salaries' COLLATE Arabic_CI_AS, SUM(Amount), 0
+    FROM BaseData WHERE TTCode IN ('11')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT '3111002', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'بدل سكن شهري & Housing Allowance' COLLATE Arabic_CI_AS, SUM(Amount), 0
+    FROM BaseData WHERE TTCode IN ('13')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT '3111003', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'بدل مواصلات & Transportation Allowance' COLLATE Arabic_CI_AS, SUM(Amount), 0
+    FROM BaseData WHERE TTCode IN ('14')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT '3111004', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'بدل طعام & Food Allowance' COLLATE Arabic_CI_AS, SUM(Amount), 0
+    FROM BaseData WHERE TTCode IN ('15')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT '3112006', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'بدلات اخري & Other Allowance' COLLATE Arabic_CI_AS, SUM(Amount), 0
+    FROM BaseData WHERE TTCode IN ('17')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT '', '', '', '', '', ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'بدل تليفون & Tel  Allowance' COLLATE Arabic_CI_AS, SUM(Amount), 0
+    FROM BaseData WHERE TTCode IN ('175')
+    GROUP BY ECostCenter1Code, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT '', '', '', '', '', ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'بدل غسيل سيارة & Car Wash  Allowance' COLLATE Arabic_CI_AS, SUM(Amount), 0
+    FROM BaseData WHERE TTCode IN ('171')
+    GROUP BY ECostCenter1Code, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT '3112003', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'حوافز  & Incentives Bonuses' COLLATE Arabic_CI_AS, SUM(Amount), 0
+    FROM BaseData WHERE TTCode IN ('176')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT '3112001', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'الاضافي& Overtime' COLLATE Arabic_CI_AS, SUM(Amount), 0
+    FROM BaseData WHERE TTCode IN ('201')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT '', '', '', '', '', ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'Incentives Bonuses' COLLATE Arabic_CI_AS, SUM(Amount), 0
+    FROM BaseData WHERE TTCode IN ('99999')
+    GROUP BY ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name
+
+    UNION ALL
+    SELECT '1144000', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'Staff Loans' COLLATE Arabic_CI_AS, 0, SUM(Amount)
+    FROM BaseData WHERE TTCode IN ('22')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name
+
+    UNION ALL
+    SELECT '2124903', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'Accrued GOSI Insurance 9.75 % Staff ' COLLATE Arabic_CI_AS, 0, SUM(Amount)
+    FROM BaseData WHERE TTCode IN ('231')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name
+
+    UNION ALL
+    SELECT '3111001', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'Late' COLLATE Arabic_CI_AS, 0, SUM(Amount)
+    FROM BaseData WHERE TTCode IN ('26')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT '3111001', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'ABSENT' COLLATE Arabic_CI_AS, 0, SUM(Amount)
+    FROM BaseData WHERE TTCode IN ('27')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT '3111001', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'Other Deductions' COLLATE Arabic_CI_AS, 0, SUM(Amount)
+    FROM BaseData WHERE TTCode IN ('24')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1
+
+    UNION ALL
+    SELECT '3111001', ECostCenter1Code COLLATE Arabic_CI_AS, ECostCenter1Name, ECostCenter2Code COLLATE Arabic_CI_AS, ECostCenter2Name, ECostCenter3Code COLLATE Arabic_CI_AS, ECostCenter3Name,
+           'Punishment' COLLATE Arabic_CI_AS, 0, SUM(Amount)
+    FROM BaseData WHERE TTCode IN ('242')
+    GROUP BY ECostCenter1Code, ECostCenter1Name, ECostCenter2Code, ECostCenter2Name, ECostCenter3Code, ECostCenter3Name, ProjectCode, ProjectCostCenterCode1;
+END
+"
+        ExecuteUpdate(SQL)
+
     End Function
 
     Public Function UpdateSS() As Boolean
@@ -12258,6 +12433,10 @@ FROM     SS_ChangeWorkHoursRequest JOIN
         ExecuteUpdate(SQL)
         SQL = "alter table ss_requesttypes add HaveSettelment bit null"
         ExecuteUpdate(SQL)
+
+
+
+
 
     End Function
     Public Function ExecuteUpdate(ByVal mySQLQuery As String) As Boolean
