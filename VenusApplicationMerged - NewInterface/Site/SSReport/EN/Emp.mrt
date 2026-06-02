@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <MS_x0020_SQL Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>MS SQL</Alias>
+        <ConnectionStringEncrypted>9EbBC08IAe3iX9U0S9glXtFWyaHGGNPNaVvorfkpoPuC0GUJW0urzWlR0ZhjdOg/xW7NiU5fctXLeGn0Zw32coJWUwlNBZL1QBq5jXFxYXvWEvfjRlkx8GFppVhnTG17w2r1aMUWkvlFGax8YQDhRuMwZSxe</ConnectionStringEncrypted>
+        <Key>49eb69d30b7a49e8bf1344346f5ff242</Key>
+        <Name>MS SQL</Name>
+      </MS_x0020_SQL>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <employee Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>employee</Alias>
+        <Columns isList="true" count="71">
+          <value>ID,System.Int32</value>
+          <value>Code,System.String</value>
+          <value>OldCode,System.String</value>
+          <value>EngName,System.String</value>
+          <value>ArbName,System.String</value>
+          <value>ArbName4S,System.String</value>
+          <value>FamilyEngName,System.String</value>
+          <value>FamilyArbName,System.String</value>
+          <value>FamilyArbName4S,System.String</value>
+          <value>FatherEngName,System.String</value>
+          <value>FatherArbName,System.String</value>
+          <value>FatherArbName4S,System.String</value>
+          <value>GrandEngName,System.String</value>
+          <value>GrandArbName,System.String</value>
+          <value>GrandArbName4S,System.String</value>
+          <value>BirthDate,System.DateTime</value>
+          <value>BirthCityID,System.Int32</value>
+          <value>ReligionID,System.Int32</value>
+          <value>MaritalStatusID,System.Int32</value>
+          <value>Sex,System.String</value>
+          <value>BloodGroupID,System.Int32</value>
+          <value>BankID,System.Int32</value>
+          <value>NationalityID,System.Int32</value>
+          <value>BankAccountNumber,System.String</value>
+          <value>BankAccNumber,System.String</value>
+          <value>DepartmentID,System.Int32</value>
+          <value>GOSINumber,System.String</value>
+          <value>GOSIJoinDate,System.DateTime</value>
+          <value>GOSIExcludeDate,System.DateTime</value>
+          <value>JoinDate,System.DateTime</value>
+          <value>ExcludeDate,System.DateTime</value>
+          <value>CompanyID,System.Int32</value>
+          <value>Remarks,System.String</value>
+          <value>RegUserID,System.Int32</value>
+          <value>RegComputerID,System.Int32</value>
+          <value>RegDate,System.DateTime</value>
+          <value>CancelDate,System.DateTime</value>
+          <value>BranchID,System.Int32</value>
+          <value>SponsorID,System.Int32</value>
+          <value>E_Mail,System.String</value>
+          <value>Phone,System.String</value>
+          <value>ORIGINAL,Mobile,Mobile1,Mobile1,System.String</value>
+          <value>ORIGINAL,ManagerID,ManagerID1,ManagerID1,System.Int32</value>
+          <value>MachineCode,System.String</value>
+          <value>SectorID,System.Int32</value>
+          <value>SSnNo,System.String</value>
+          <value>PassPortNo,System.String</value>
+          <value>EntryNo,System.String</value>
+          <value>Cost1,System.Int32</value>
+          <value>Cost2,System.Int32</value>
+          <value>Cost3,System.Int32</value>
+          <value>Cost4,System.Int32</value>
+          <value>LaborOfficeNo,System.String</value>
+          <value>LocationID,System.Int32</value>
+          <value>WHours,System.Single</value>
+          <value>IsProjectRelated,System.Boolean</value>
+          <value>IsSpecialForce,System.Boolean</value>
+          <value>MaxLoanDedution,System.Double</value>
+          <value>LedgerCode,System.String</value>
+          <value>HasTaqat,System.Boolean</value>
+          <value>BankAccountType,System.String</value>
+          <value>Hasflexiblesalarydist,System.Boolean</value>
+          <value>paymenttype,System.Int32</value>
+          <value>WorkE_Mail,System.String</value>
+          <value>SSNOIssueDate,System.String</value>
+          <value>SSNOExpireDate,System.String</value>
+          <value>PassportIssueDate,System.String</value>
+          <value>PassportExpireDate,System.String</value>
+          <value>AddressAsPerContract,System.String</value>
+          <value>InsertRequestsForAnotherEmployee,System.Boolean</value>
+          <value>IsSocialInsuranceIncluded,System.Boolean</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>6752a917c3f6483a84938e96822f22d3</Key>
+        <Name>employee</Name>
+        <NameInSource>MS SQL</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>SELECT hrs_Employees.*
+FROM hrs_Employees</SqlCommand>
+      </employee>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>3748ef6500ac45aca34cb55dfe956314</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="5">
+        <DataItems Ref="5" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.2,7.72,2.5</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <DataSourceName>Items</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>DataItems</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </DataItems>
+        <Headeremployee Ref="6" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,3.1,7.72,0.3</ClientRectangle>
+          <Components isList="true" count="3">
+            <Headeremployee_ar_EG_empname Ref="7" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.57,0,2.57,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,12,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headeremployee_ar_EG_empname</Name>
+              <Page isRef="4" />
+              <Parent isRef="6" />
+              <Text>الاسم عربي</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headeremployee_ar_EG_empname>
+            <Headeremployee_en_emplatname Ref="8" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.15,0,2.57,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,12,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Headeremployee_en_emplatname</Name>
+              <Page isRef="4" />
+              <Parent isRef="6" />
+              <Text>الاسم انجليزي</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Headeremployee_en_emplatname>
+            <Text1 Ref="9" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,0.9,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,12,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4" />
+              <Parent isRef="6" />
+              <Text>كود الموظف</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>Headeremployee</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </Headeremployee>
+        <Dataemployee Ref="10" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,3.8,7.72,0.3</ClientRectangle>
+          <Components isList="true" count="3">
+            <Dataemployee_empcode Ref="11" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,2.57,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataemployee_empcode</Name>
+              <Page isRef="4" />
+              <Parent isRef="10" />
+              <Text>{employee.Code}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Dataemployee_empcode>
+            <Dataemployee_ar_EG_empname Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.57,0,2.57,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataemployee_ar_EG_empname</Name>
+              <Page isRef="4" />
+              <Parent isRef="10" />
+              <Text>{employee.ArbName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Dataemployee_ar_EG_empname>
+            <Dataemployee_en_emplatname Ref="13" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5.15,0,2.57,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Dataemployee_en_emplatname</Name>
+              <Page isRef="4" />
+              <Parent isRef="10" />
+              <Text>{employee.EngName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Dataemployee_en_emplatname>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataSourceName>employee</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>Dataemployee</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </Dataemployee>
+        <Footeremployee Ref="14" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,4.5,7.72,0.3</ClientRectangle>
+          <Components isList="true" count="3">
+            <Footeremployee_empcode Ref="15" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,2.57,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Footeremployee_empcode</Name>
+              <Page isRef="4" />
+              <Parent isRef="14" />
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Footeremployee_empcode>
+            <Footeremployee_ar_EG_empname Ref="16" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.57,0,2.57,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Footeremployee_ar_EG_empname</Name>
+              <Page isRef="4" />
+              <Parent isRef="14" />
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Footeremployee_ar_EG_empname>
+            <Footeremployee_en_emplatname Ref="17" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.15,0,2.57,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Footeremployee_en_emplatname</Name>
+              <Page isRef="4" />
+              <Parent isRef="14" />
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Footeremployee_en_emplatname>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>Footeremployee</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </Footeremployee>
+        <HeaderItems Ref="18" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,5.2,7.72,3.2</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>HeaderItems</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </HeaderItems>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>65cf125b587f4584b6a5f847d4984989</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <PageHeight>11</PageHeight>
+      <PageWidth>8.5</PageWidth>
+      <PaperSize>Letter</PaperSize>
+      <Report isRef="0" />
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>10/2/2025 7:29:54 AM</ReportChanged>
+  <ReportCreated>10/3/2022 11:24:22 AM</ReportCreated>
+  <ReportFile>C:\Users\mousa.ragab\Desktop\Report SS\Emp.mrt</ReportFile>
+  <ReportGuid>9b670b1c02cb4298af4dc7419be56977</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2022.2.5.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

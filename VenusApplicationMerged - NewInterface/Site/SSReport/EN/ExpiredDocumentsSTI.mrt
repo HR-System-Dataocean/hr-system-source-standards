@@ -1,0 +1,946 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <eid Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>eid</Alias>
+        <ConnectionStringEncrypted>9FaBSN0J2d1GW+2Yw5xlP9Fqz+9FTNL1YhXoRGls4OvVatHJxVa7NWtc/aVnhODnjXjRLcZZe4Fid42l6mwlZ+Bw1U5GVzHZRlFN8fk96jvEcHfDyEy6ne1rob1oSSw31XCPidt+4zV5Ydn0</ConnectionStringEncrypted>
+        <Name>eid</Name>
+      </eid>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <comp Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>comp</Alias>
+        <Columns isList="true" count="3">
+          <value>ArbName,System.String</value>
+          <value>EngName,System.String</value>
+          <value>logo,System.Byte[]</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>comp</Name>
+        <NameInSource>eid</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select EngName,ArbName,logo
+from sys_Companies</SqlCommand>
+      </comp>
+      <hrs Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>hrs</Alias>
+        <Columns isList="true" count="26">
+          <value>DependantArbName,System.String</value>
+          <value>DependantEngName,System.String</value>
+          <value>DependantID,System.Int32</value>
+          <value>DependantName,System.String</value>
+          <value>DepenID,System.Int32</value>
+          <value>DocumentNumber,System.String</value>
+          <value>DocumentType,System.String</value>
+          <value>DocumentTypeArbName,System.String</value>
+          <value>DocumentTypeEngName,System.String</value>
+          <value>EmpArbName,System.String</value>
+          <value>EmpCode,System.String</value>
+          <value>EmpEngName,System.String</value>
+          <value>EmpID,System.Int32</value>
+          <value>EmployeeName,System.String</value>
+          <value>ExpiryDate,System.DateTime</value>
+          <value>ExpiryDate_D,System.String</value>
+          <value>ExpiryDateH,System.String</value>
+          <value>ID,System.Int32</value>
+          <value>IssueCity,System.String</value>
+          <value>IssueCityArbName,System.String</value>
+          <value>IssueCityEngName,System.String</value>
+          <value>IssueDate,System.DateTime</value>
+          <value>IssueDate_D,System.String</value>
+          <value>IssueDateH,System.String</value>
+          <value>ProjectArb,System.String</value>
+          <value>ProjectEng,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>hrs</Name>
+        <NameInSource>eid</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>exec hrs_GetAllExpiredDocuments
+
+
+@EmpCode,@ExpireFromDate,@ExpireToDate,@DeptCode,@BranchCode,@DocumentTypeID,@FilterType</SqlCommand>
+      </hrs>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="8">
+      <value>,BranchCode,BranchCode,,System.String,,True,False,False,False,,,True</value>
+      <value>,DeptCode,DeptCode,,System.DateTime,_x0031__x002F_27_x002F_2026_x0020_3:12:00_x0020_PM,True,False,False,False,,,True</value>
+      <value>,DocumentTypeID,DocumentTypeID,,System.String,,True,False,False,False,,,True</value>
+      <value>,EmpCode,EmpCode,,System.String,,True,False,False,False,,,True</value>
+      <value>,ExpireFromDate,ExpireFromDate,,System.DateTime,_x0031__x002F_27_x002F_2026_x0020_3:12:00_x0020_PM,True,False,False,False,,,True</value>
+      <value>,ExpireToDate,ExpireToDate,,System.DateTime,_x0031__x002F_27_x002F_2026_x0020_3:12:00_x0020_PM,True,False,False,False,,,True</value>
+      <value>,FilterType,FilterType,,System.String,,True,False,False,False,,,True</value>
+      <value>,PrintedBy,PrintedBy,,System.String,,True,False,False,False,,,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="5" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>[255:255:255]</Brush>
+      <Components isList="true" count="6">
+        <PageFooterBand1 Ref="6" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,27.1,19,0.6</ClientRectangle>
+          <Components isList="true" count="8">
+            <Text3 Ref="7" type="Text" isKey="true">
+              <Border>None;[204:204:204];1;Solid;False;4;Black;True</Border>
+              <Brush>[0:255:255:255]</Brush>
+              <ClientRectangle>0.2,0.1,3.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Segoe UI,8</Font>
+              <Guid>5c9345da75e04e03a6a835ad140accbb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>https://www.dataocean.com</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text2 Ref="8" type="Text" isKey="true">
+              <Border>None;[204:204:204];1;Solid;False;4;Black;True</Border>
+              <Brush>[0:255:255:255]</Brush>
+              <ClientRectangle>9.4,0.1,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Segoe UI,8</Font>
+              <Guid>77ce95afba29428fa8ab2d2bda1e4c54</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>Print Date :</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <FooterTable_MilestoneName Ref="9" type="Text" isKey="true">
+              <Border>None;[204:204:204];1;Solid;False;4;Black;True</Border>
+              <Brush>[0:255:255:255]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>14.8,0.1,4.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Segoe UI,8</Font>
+              <Guid>87b27725eb3f43259d514393a6194080</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>2,2,0,0</Margins>
+              <Name>FooterTable_MilestoneName</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{PageNofMThrough}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>SystemVariables</Type>
+              <VertAlignment>Center</VertAlignment>
+            </FooterTable_MilestoneName>
+            <Text4 Ref="10" type="Text" isKey="true">
+              <Border>None;[204:204:204];1;Solid;False;4;Black;True</Border>
+              <Brush>[0:255:255:255]</Brush>
+              <ClientRectangle>13.2,0.1,1.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Segoe UI,8</Font>
+              <Guid>3c071c230a624e57946997a5c337265f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{Time}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextFormat Ref="11" type="TimeFormat" isKey="true" />
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text18 Ref="12" type="Text" isKey="true">
+              <Border>None;[204:204:204];1;Solid;False;4;Black;True</Border>
+              <Brush>[0:255:255:255]</Brush>
+              <ClientRectangle>4.4,0.1,1.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Segoe UI,8</Font>
+              <Guid>0087176700e048eb8df610fd925bf2d7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>Printed By:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Text19 Ref="13" type="Text" isKey="true">
+              <Border>None;[204:204:204];1;Solid;False;4;Black;True</Border>
+              <Brush>[0:255:255:255]</Brush>
+              <ClientRectangle>5.8,0.1,4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Segoe UI,8</Font>
+              <Guid>33784ba9374e44989ecf6a37824c231f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{PrintedBy}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text5 Ref="14" type="Text" isKey="true">
+              <Border>None;[204:204:204];1;Solid;False;4;Black;True</Border>
+              <Brush>[0:255:255:255]</Brush>
+              <ClientRectangle>11.4,0.1,1.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Segoe UI,8</Font>
+              <Guid>c443284b94704fcebb5616e6f06a6d96</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{Today}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <HorizontalLinePrimitive1 Ref="15" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,0,19,0.0254</ClientRectangle>
+              <Color>204, 204, 204</Color>
+              <EndCap Ref="16" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>295be33f3e464d0d9e5ac665100e212d</Guid>
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <StartCap Ref="17" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageFooterBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageFooterBand1>
+        <HeaderBand1 Ref="18" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,4.2</ClientRectangle>
+          <Components isList="true" count="6">
+            <Text12 Ref="19" type="Text" isKey="true">
+              <Border>None;[255:0:0];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,0,6.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,12,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="5" />
+              <Parent isRef="18" />
+              <Text>{comp.EngName}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Image1 Ref="20" type="Image" isKey="true">
+              <Border>None;[255:0:0];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.6,0.6,4.6,2.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <DataColumn>comp.logo</DataColumn>
+              <Margins>0,0,0,0</Margins>
+              <Name>Image1</Name>
+              <Page isRef="5" />
+              <Parent isRef="18" />
+              <VertAlignment>Center</VertAlignment>
+            </Image1>
+            <Text6 Ref="21" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.6,3.2,5,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,12,Bold</Font>
+              <Guid>576165c95f55435e84a28cc0a43b34f2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="5" />
+              <Parent isRef="18" />
+              <Text>Expired Documents</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text11 Ref="22" type="Text" isKey="true">
+              <Border>None;[255:0:0];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.4,0,7.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,12,Bold</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="5" />
+              <Parent isRef="18" />
+              <Text>{comp.ArbName}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <StartPointPrimitive1 Ref="23" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>6.6,3.2,0,0</ClientRectangle>
+              <Name>StartPointPrimitive1</Name>
+              <Page isRef="5" />
+              <Parent isRef="18" />
+              <ReferenceToGuid>a3e359e81522437089c3f86500c05f81</ReferenceToGuid>
+            </StartPointPrimitive1>
+            <EndPointPrimitive1 Ref="24" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>11.6,4,0,0</ClientRectangle>
+              <Name>EndPointPrimitive1</Name>
+              <Page isRef="5" />
+              <Parent isRef="18" />
+              <ReferenceToGuid>a3e359e81522437089c3f86500c05f81</ReferenceToGuid>
+            </EndPointPrimitive1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>HeaderBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </HeaderBand1>
+        <Headerhrs Ref="25" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,5.4,19,0.8</ClientRectangle>
+          <Components isList="true" count="8">
+            <HeaderAA_EmpCode Ref="26" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[219:229:241]</Brush>
+              <ClientRectangle>0,0.2,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <Guid>fdad370a4ec54c05b33fbf3c069b7f5c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderAA_EmpCode</Name>
+              <Page isRef="5" />
+              <Parent isRef="25" />
+              <Text>Emp Code</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderAA_EmpCode>
+            <HeaderAA_EmpEngName Ref="27" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[219:229:241]</Brush>
+              <ClientRectangle>1.6,0.2,4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <Guid>6989a2113b3e4e11a46de869028dd5ed</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderAA_EmpEngName</Name>
+              <Page isRef="5" />
+              <Parent isRef="25" />
+              <Text>Employee Name</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderAA_EmpEngName>
+            <HeaderAA_DocumentNumber Ref="28" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[219:229:241]</Brush>
+              <ClientRectangle>5.6,0.2,2.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <Guid>f18af398144a4a3ab330e9ae68ab67ca</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderAA_DocumentNumber</Name>
+              <Page isRef="5" />
+              <Parent isRef="25" />
+              <Text>Document No.</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderAA_DocumentNumber>
+            <HeaderAA_DocumentTypeEngName Ref="29" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[219:229:241]</Brush>
+              <ClientRectangle>7.8,0.2,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <Guid>549ae68180cd41ada53c97844a35cbfe</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderAA_DocumentTypeEngName</Name>
+              <Page isRef="5" />
+              <Parent isRef="25" />
+              <Text>Document Type</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderAA_DocumentTypeEngName>
+            <HeaderAA_IssueDate Ref="30" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[219:229:241]</Brush>
+              <ClientRectangle>11,0.2,2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <Guid>38d32f487b3049148607f7e535abbb34</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderAA_IssueDate</Name>
+              <Page isRef="5" />
+              <Parent isRef="25" />
+              <Text>Issue Date</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderAA_IssueDate>
+            <HeaderAA_ExpiryDate Ref="31" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[219:229:241]</Brush>
+              <ClientRectangle>13,0.2,2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <Guid>6ee5311ec92747c3aa2edd330d2062d0</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderAA_ExpiryDate</Name>
+              <Page isRef="5" />
+              <Parent isRef="25" />
+              <Text>Expiry Date</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderAA_ExpiryDate>
+            <HeaderAA_IssueDateH Ref="32" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[219:229:241]</Brush>
+              <ClientRectangle>15,0.2,2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <Guid>6c064dce104b468182afc459e796b413</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderAA_IssueDateH</Name>
+              <Page isRef="5" />
+              <Parent isRef="25" />
+              <Text>Issue DateH</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderAA_IssueDateH>
+            <HeaderAA_ExpiryDateH Ref="33" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[219:229:241]</Brush>
+              <ClientRectangle>17,0.2,2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <Guid>d9e6a9a89c5246bc8ec465a81f5c2192</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderAA_ExpiryDateH</Name>
+              <Page isRef="5" />
+              <Parent isRef="25" />
+              <Text>Expiry DateH</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderAA_ExpiryDateH>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>Headerhrs</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </Headerhrs>
+        <Datahrs Ref="34" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,7,19,0.8</ClientRectangle>
+          <Components isList="true" count="8">
+            <DataAA_EmpCode Ref="35" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,1.6,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Guid>44f1dd7427a849ec8111809e7dded548</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataAA_EmpCode</Name>
+              <Page isRef="5" />
+              <Parent isRef="34" />
+              <Text>{hrs.EmpCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </DataAA_EmpCode>
+            <DataAA_EmpEngName Ref="36" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.6,0,4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Guid>3c5ecbd797474ec7bf58845f548e9840</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataAA_EmpEngName</Name>
+              <Page isRef="5" />
+              <Parent isRef="34" />
+              <Text>    {hrs.EmpEngName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </DataAA_EmpEngName>
+            <DataAA_DocumentTypeEngName Ref="37" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.8,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Guid>13eda40e0e9d4c36b09b6c0bb6b97a13</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataAA_DocumentTypeEngName</Name>
+              <Page isRef="5" />
+              <Parent isRef="34" />
+              <Text>  {hrs.DocumentTypeEngName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </DataAA_DocumentTypeEngName>
+            <DataAA_IssueDate Ref="38" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11,0,2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Guid>699b67731bc94688975904f79a3a100f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataAA_IssueDate</Name>
+              <Page isRef="5" />
+              <Parent isRef="34" />
+              <Text>{hrs.IssueDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="39" type="CustomFormat" isKey="true">
+                <StringFormat>yyyy/MM/dd</StringFormat>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </DataAA_IssueDate>
+            <DataAA_ExpiryDate Ref="40" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13,0,2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Guid>72659a7305714a3dbff529833af31ebf</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataAA_ExpiryDate</Name>
+              <Page isRef="5" />
+              <Parent isRef="34" />
+              <Text>{hrs.ExpiryDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="41" type="CustomFormat" isKey="true">
+                <StringFormat>yyyy/MM/dd</StringFormat>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </DataAA_ExpiryDate>
+            <DataAA_IssueDateH Ref="42" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15,0,2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Guid>e7bfcb21880b46c0ae80a065242bb465</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataAA_IssueDateH</Name>
+              <Page isRef="5" />
+              <Parent isRef="34" />
+              <Text>{hrs.IssueDateH}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="43" type="CustomFormat" isKey="true">
+                <StringFormat>yyyy/MM/dd</StringFormat>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </DataAA_IssueDateH>
+            <DataAA_ExpiryDateH Ref="44" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,0,2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Guid>c6d3b655900341c7a7461686a04d83f5</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataAA_ExpiryDateH</Name>
+              <Page isRef="5" />
+              <Parent isRef="34" />
+              <Text>{hrs.ExpiryDateH}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="45" type="CustomFormat" isKey="true">
+                <StringFormat>yyyy/MM/dd</StringFormat>
+              </TextFormat>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </DataAA_ExpiryDateH>
+            <DataAA_DocumentNumber Ref="46" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,0,2.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Guid>1e6ed50cd7864db99be8d78895f9f86f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataAA_DocumentNumber</Name>
+              <Page isRef="5" />
+              <Parent isRef="34" />
+              <Text>{hrs.DocumentNumber}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </DataAA_DocumentNumber>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>hrs</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>Datahrs</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>Code</value>
+          </Sort>
+        </Datahrs>
+        <FooterBand1 Ref="47" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,8.6,19,1</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text1 Ref="48" type="Text" isKey="true">
+              <Border>All;[0:255:255:255];1;Solid;False;4;Black;True</Border>
+              <Brush>[0:255:255:255]</Brush>
+              <ClientRectangle>0,0.2,1.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Segoe UI,8,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="5" />
+              <Parent isRef="47" />
+              <Text>Count:</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text7 Ref="49" type="Text" isKey="true">
+              <Border>All;[0:255:255:255];1;Solid;False;4;Black;True</Border>
+              <Brush>[0:255:255:255]</Brush>
+              <ClientRectangle>1.2,0.2,3.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Segoe UI,8,Bold</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="5" />
+              <Parent isRef="47" />
+              <Text>{Count(Datahrs)}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <Type>Totals</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>FooterBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </FooterBand1>
+        <RoundedRectanglePrimitive1 Ref="50" type="Stimulsoft.Report.Components.StiRoundedRectanglePrimitive" isKey="true">
+          <ClientRectangle>6.6,3.6,5,0.8</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>a3e359e81522437089c3f86500c05f81</Guid>
+          <Name>RoundedRectanglePrimitive1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Round>0.2</Round>
+        </RoundedRectanglePrimitive1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>aa09c8534162418abf5cc56235df313b</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="51" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="52" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>1/27/2026 3:23:56 PM</ReportChanged>
+  <ReportCreated>12/31/2025 1:29:09 PM</ReportCreated>
+  <ReportFile>D:\data oceans\HR_OLIYAN_Publish 31-12-2025\SSReport\ExpiredDocuments.mrt</ReportFile>
+  <ReportGuid>7bd51b3478fc4798a87410e32432fd5a</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2018.2.3.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="13">
+    <HD_Report_Title1 Ref="53" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>All;[210:210:210];1;Solid;False;4;Black</Border>
+      <Brush>[255:255:255]</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item44 Ref="54" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>ReportTitle</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item44>
+      </Conditions>
+      <Font>Segoe UI,16,Bold</Font>
+      <Name>HD_Report_Title1</Name>
+      <TextBrush>[0:174:239]</TextBrush>
+    </HD_Report_Title1>
+    <HD_Report_Title2 Ref="55" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[210:210:210];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item46 Ref="56" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>ReportTitle</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item46>
+      </Conditions>
+      <Font>Arial,10,Bold</Font>
+      <Name>HD_Report_Title2</Name>
+      <TextBrush>[102:102:102]</TextBrush>
+    </HD_Report_Title2>
+    <HD_Report_Summary1 Ref="57" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[204:204:204];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item48 Ref="58" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>ReportSummary</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item48>
+      </Conditions>
+      <Font>Segoe UI,10</Font>
+      <Name>HD_Report_Summary1</Name>
+      <TextBrush>[102:102:102]</TextBrush>
+    </HD_Report_Summary1>
+    <HD_Report_Summary2 Ref="59" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[0:74:139];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item50 Ref="60" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>ReportSummary</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item50>
+      </Conditions>
+      <Font>Arial,10,Bold</Font>
+      <Name>HD_Report_Summary2</Name>
+      <TextBrush>[0:174:239]</TextBrush>
+    </HD_Report_Summary2>
+    <HD_Page_Header Ref="61" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>All;[210:210:210];1;Solid;False;4;Black</Border>
+      <Brush>[245:245:245]</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item52 Ref="62" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>PageHeader</Placement>
+          <Type>ComponentType, Placement</Type>
+        </Item52>
+      </Conditions>
+      <Font>Segoe UI,10,Bold</Font>
+      <Name>HD_Page_Header</Name>
+      <TextBrush>[102:102:102]</TextBrush>
+    </HD_Page_Header>
+    <HD_Page_Footer Ref="63" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[204:204:204];1;Solid;False;4;Black</Border>
+      <Brush>[250:250:250]</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item54 Ref="64" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>PageFooter</Placement>
+          <Type>ComponentType, Placement</Type>
+        </Item54>
+      </Conditions>
+      <Font>Segoe UI,9</Font>
+      <Name>HD_Page_Footer</Name>
+      <TextBrush>[153:153:153]</TextBrush>
+    </HD_Page_Footer>
+    <HD_Group_Header1 Ref="65" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[245:245:245];1;Solid;False;4;Black</Border>
+      <Brush>[204:204:204]</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item56 Ref="66" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>GroupHeader</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item56>
+      </Conditions>
+      <Font>Segoe UI,11,Bold</Font>
+      <Name>HD_Group_Header1</Name>
+      <TextBrush>[0:174:239]</TextBrush>
+    </HD_Group_Header1>
+    <HD_Group_Footer1 Ref="67" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[204:204:204];1;Solid;False;4;Black</Border>
+      <Brush>[250:250:250]</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item58 Ref="68" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>GroupFooter</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item58>
+      </Conditions>
+      <Font>Segoe UI,10,Bold</Font>
+      <Name>HD_Group_Footer1</Name>
+      <TextBrush>[0:174:239]</TextBrush>
+    </HD_Group_Footer1>
+    <HD_Header1 Ref="69" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[204:204:204];1;Solid;False;4;Black;True</Border>
+      <Brush>[0:174:239]</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item60 Ref="70" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>Header</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item60>
+      </Conditions>
+      <Font>Segoe UI,10,Bold</Font>
+      <Name>HD_Header1</Name>
+      <TextBrush>[255:255:255]</TextBrush>
+    </HD_Header1>
+    <HD_Data1 Ref="71" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[238:238:238];1;Solid;False;4;Black;True</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item62 Ref="72" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>Data</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item62>
+      </Conditions>
+      <Font>Segoe UI,10</Font>
+      <Name>HD_Data1</Name>
+      <TextBrush>[102:102:102]</TextBrush>
+    </HD_Data1>
+    <HD_Data1_Odd_x0020_Style Ref="73" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[238:238:238];1;Solid;False;4;Black;True</Border>
+      <Brush>[245:250:255]</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item64 Ref="74" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>DataOddStyle</Placement>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item64>
+      </Conditions>
+      <Font>Segoe UI,10</Font>
+      <Name>HD_Data1_Odd Style</Name>
+      <TextBrush>[102:102:102]</TextBrush>
+    </HD_Data1_Odd_x0020_Style>
+    <HD_Data1_Even_x0020_Style Ref="75" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[238:238:238];1;Solid;False;4;Black;True</Border>
+      <Brush>[255:255:255]</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item66 Ref="76" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>DataEvenStyle</Placement>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item66>
+      </Conditions>
+      <Font>Segoe UI,10</Font>
+      <Name>HD_Data1_Even Style</Name>
+      <TextBrush>[102:102:102]</TextBrush>
+    </HD_Data1_Even_x0020_Style>
+    <HD_Footer1 Ref="77" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <AllowUseBorderSidesFromLocation>True</AllowUseBorderSidesFromLocation>
+      <Border>None;[204:204:204];1;Solid;False;4;Black;True</Border>
+      <Brush>[255:245:235]</Brush>
+      <CollectionName>HD</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item68 Ref="78" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <Placement>Footer</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item68>
+      </Conditions>
+      <Font>Segoe UI,8</Font>
+      <Name>HD_Footer1</Name>
+      <TextBrush>[248:104:41]</TextBrush>
+    </HD_Footer1>
+  </Styles>
+</StiSerializer>
