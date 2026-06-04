@@ -2240,13 +2240,14 @@ Partial Class frmOtherVacationsRequestNursing
         ' Check if the new vacation request is within 3 days of the last return date
         If DateDiff(DateInterval.Day, LastReturnDate, NewStartDate) <= 3 Then
             ' Retrieve employee's day-off schedule
-            Dim strSelectDayOff As String = "SELECT DayNo FROM dbo.Att_AttendShiftDays " &
-                                        "WHERE AttendShiftID IN (" &
-                                        "    SELECT sh.ID FROM dbo.Att_AttendShifts AS sh " &
-                                        "    INNER JOIN dbo.Att_AttendAppointment AS P ON sh.ID = P.AttendaceShiftID " &
-                                        "    INNER JOIN dbo.Att_AttendAppointmentMembers AS M ON P.ID = M.AppointID " &
-                                        "    WHERE M.EmployeeID = " & ClsEmployees.ID & " ) " &
-                                        "AND IsDayOff = 1 And CancelDate is null"
+            'Dim strSelectDayOff As String = "SELECT DayNo FROM dbo.Att_AttendShiftDays " &
+            '                            "WHERE AttendShiftID IN (" &
+            '                            "    SELECT sh.ID FROM dbo.Att_AttendShifts AS sh " &
+            '                            "    INNER JOIN dbo.Att_AttendAppointment AS P ON sh.ID = P.AttendaceShiftID " &
+            '                            "    INNER JOIN dbo.Att_AttendAppointmentMembers AS M ON P.ID = M.AppointID " &
+            '                            "    WHERE M.EmployeeID = " & ClsEmployees.ID & " ) " &
+            '                            "AND IsDayOff = 1 And CancelDate is null"
+            Dim strSelectDayOff As String = "SELECT DISTINCT D.DayNo FROM dbo.Att_AttendShiftDays D INNER JOIN dbo.Att_AttendShifts SH ON D.AttendShiftID = SH.ID INNER JOIN dbo.Att_AttendAppointment P ON SH.ID = P.AttendaceShiftID INNER JOIN dbo.Att_AttendAppointmentMembers M ON P.ID = M.AppointID WHERE M.EmployeeID =  " & ClsEmployees.ID & "  AND D.IsDayOff = 1   AND D.CancelDate IS NULL OPTION (HASH JOIN, MERGE JOIN);"
 
             Dim ds As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strSelectDayOff)
 
