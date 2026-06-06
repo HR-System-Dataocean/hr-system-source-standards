@@ -60,10 +60,62 @@
            _onloadFlag = false;
            // process onresize events
            ig_shared.addEventListener(window, 'resize', adjustHeight);
+           InitEventTypeVacationTypeRules();
        }
 
        var Row;
        var IsEdit = true;
+
+       function ApplyEventTypeVacationTypeRule(row) {
+           if (!row || !row.getCellFromKey) return;
+
+           var eventTypeCell = row.getCellFromKey("eventType");
+           var vacationTypeCell = row.getCellFromKey("VacationTypeID");
+           var isRamadanCell = row.getCellFromKey("IsRamadan");
+           if (!eventTypeCell) return;
+
+           var eventTypeVal = eventTypeCell.getValue();
+           var isEvent = (eventTypeVal == 2 || eventTypeVal == "2");
+           var isVacation = (eventTypeVal == 1 || eventTypeVal == "1");
+
+           if (isEvent && vacationTypeCell) {
+               vacationTypeCell.setValue("");
+               if (vacationTypeCell.Element) {
+                   vacationTypeCell.Element.innerText = "";
+                   vacationTypeCell.Element.style.backgroundColor = "#e8e8e8";
+               }
+               if (typeof vacationTypeCell.setAllowEdit === "function") {
+                   vacationTypeCell.setAllowEdit(false);
+               }
+               if (isRamadanCell && typeof isRamadanCell.setAllowEdit === "function") {
+                   isRamadanCell.setAllowEdit(true);
+               }
+           } else if (isVacation) {
+               if (vacationTypeCell) {
+                   if (vacationTypeCell.Element) {
+                       vacationTypeCell.Element.style.backgroundColor = "";
+                   }
+                   if (typeof vacationTypeCell.setAllowEdit === "function") {
+                       vacationTypeCell.setAllowEdit(true);
+                   }
+               }
+               if (isRamadanCell) {
+                   isRamadanCell.setValue(false);
+                   if (typeof isRamadanCell.setAllowEdit === "function") {
+                       isRamadanCell.setAllowEdit(false);
+                   }
+               }
+           }
+       }
+
+       function InitEventTypeVacationTypeRules() {
+           var grid = igtbl_getGridById("UwgSearchEmployees");
+           if (!grid || !grid.Rows) return;
+           for (var i = 0; i < grid.Rows.length; i++) {
+               ApplyEventTypeVacationTypeRule(grid.Rows.getRow(i));
+           }
+       }
+
        function uwg_AfterCellUpdateHandler(gridName, cellId) {
            if (IsEdit == true) {
                var cell = igtbl_getCellById(cellId);
@@ -74,6 +126,10 @@
 
                var value = cell.innerText;
                var columnKey = cell.columnKey;
+
+               if (columnKey === "eventType") {
+                   ApplyEventTypeVacationTypeRule(Row);
+               }
 
                // اقرأ ClientID من HiddenField
                var txtDateID = document.getElementById('hfTxtDateID').value;
@@ -112,7 +168,26 @@
        var cell;
        function uwgEnterCellEdit(gridName, cellId) {
            cell = cellId;
-
+           var editCell = igtbl_getCellById(cellId);
+           var editRow = igtbl_getRowById(cellId);
+           if (editCell && editRow && editCell.columnKey === "VacationTypeID") {
+               var eventTypeCell = editRow.getCellFromKey("eventType");
+               if (eventTypeCell) {
+                   var eventTypeVal = eventTypeCell.getValue();
+                   if (eventTypeVal == 2 || eventTypeVal == "2") {
+                       igtbl_cancelEdit(cellId);
+                   }
+               }
+           }
+           if (editCell && editRow && editCell.columnKey === "IsRamadan") {
+               var eventTypeCell2 = editRow.getCellFromKey("eventType");
+               if (eventTypeCell2) {
+                   var eventTypeVal2 = eventTypeCell2.getValue();
+                   if (eventTypeVal2 == 1 || eventTypeVal2 == "1") {
+                       igtbl_cancelEdit(cellId);
+                   }
+               }
+           }
        }
 
        var ODialoge;
@@ -352,7 +427,7 @@
                                             </tr>
                                              <tr>
                                             <td style="height: 16px; vertical-align: top" colspan="3">
-                                                <table style="width: 47%; vertical-align: top" cellspacing="0">
+                                                <table style="width: 100%; vertical-align: top" cellspacing="0">
                                                     <tr>
                                                         <td>
                                                             <igtbl:UltraWebGrid  Browser="UpLevel"   ID="UwgSearchEmployees" runat="server" EnableAppStyling="False"
@@ -440,16 +515,15 @@
                                                                                 <Header Caption="">
                                                                                 </Header>
                                                                             </igtbl:UltraGridColumn>
-                                                                            <igtbl:UltraGridColumn BaseColumnName="LineNum" Key="LineNum" AllowUpdate="No" Hidden="True" meta:resourcekey="UltraGridColumnLine" Width="0px">
-                                                                                <Header Caption="Line">
+                                                                            <igtbl:UltraGridColumn BaseColumnName="LineNum" Key="LineNumber" AllowUpdate="No" meta:resourcekey="UltraGridColumnLineNumber" Width="4%">
+                                                                                <Header Caption="LineNumber">
                                                                                 </Header>
+                                                                                <CellStyle HorizontalAlign="Center">
+                                                                                </CellStyle>
                                                                             </igtbl:UltraGridColumn>
-                                                                            
-                                                                           <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="VacationTypeID" Key="VacationTypeID"
-                                                                                meta:resourcekey="UltraGridColumnArbName" Width="25%" Type="DropDownList">
-                                                                                
-                                                                                <Header Caption="VacationTypeID">
-
+                                                                            <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="eventType" Key="eventType"
+                                                                                meta:resourcekey="UltraGridColumnEventType" Width="10%" Type="DropDownList">
+                                                                                <Header Caption="eventType">
                                                                                     <RowLayoutColumnInfo OriginX="2" />
                                                                                 </Header>
                                                                                 <CellStyle HorizontalAlign="Center">
@@ -458,39 +532,67 @@
                                                                                     <RowLayoutColumnInfo OriginX="2" />
                                                                                 </Footer>
                                                                             </igtbl:UltraGridColumn>
-
-                                                                           <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="FromDate"  Key="FromDate" Type="Custom" EditorControlID="txtDate"
-                                                                     meta:resourcekey="UltraGridColumnFromDate" Width="25%">
-                                                                                <Header Caption="FromDate">
-                                                                                    <RowLayoutColumnInfo OriginX="2" />
+                                                                           <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="VacationTypeID" Key="VacationTypeID"
+                                                                                meta:resourcekey="UltraGridColumnVacationTypeID" Width="14%" Type="DropDownList">
+                                                                                <Header Caption="VacationTypeID">
+                                                                                    <RowLayoutColumnInfo OriginX="3" />
                                                                                 </Header>
                                                                                 <CellStyle HorizontalAlign="Center">
                                                                                 </CellStyle>
                                                                                 <Footer>
-                                                                                    <RowLayoutColumnInfo OriginX="2" />
+                                                                                    <RowLayoutColumnInfo OriginX="3" />
+                                                                                </Footer>
+                                                                            </igtbl:UltraGridColumn>
+                                                                            <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="ArbName" Key="ArbName"
+                                                                                meta:resourcekey="UltraGridColumnArbName" Width="14%" Type="NotSet">
+                                                                                <Header Caption="ArbName">
+                                                                                    <RowLayoutColumnInfo OriginX="4" />
+                                                                                </Header>
+                                                                                <Footer>
+                                                                                    <RowLayoutColumnInfo OriginX="4" />
+                                                                                </Footer>
+                                                                            </igtbl:UltraGridColumn>
+                                                                            <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="EngName" Key="EngName"
+                                                                                meta:resourcekey="UltraGridColumnEngName" Width="14%" Type="NotSet">
+                                                                                <Header Caption="EngName">
+                                                                                    <RowLayoutColumnInfo OriginX="5" />
+                                                                                </Header>
+                                                                                <Footer>
+                                                                                    <RowLayoutColumnInfo OriginX="5" />
+                                                                                </Footer>
+                                                                            </igtbl:UltraGridColumn>
+                                                                           <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="FromDate"  Key="FromDate" Type="Custom" EditorControlID="txtDate"
+                                                                     meta:resourcekey="UltraGridColumnFromDate" Width="12%">
+                                                                                <Header Caption="FromDate">
+                                                                                    <RowLayoutColumnInfo OriginX="6" />
+                                                                                </Header>
+                                                                                <CellStyle HorizontalAlign="Center">
+                                                                                </CellStyle>
+                                                                                <Footer>
+                                                                                    <RowLayoutColumnInfo OriginX="6" />
                                                                                 </Footer>
                                                                             </igtbl:UltraGridColumn>
                                                                            <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="ToDate"  Key="ToDate" Type="Custom"  EditorControlID="txtToDate"
-                                                                      meta:resourcekey="UltraGridColumnToDate"  Width="25%">
+                                                                      meta:resourcekey="UltraGridColumnToDate"  Width="12%">
                                                                                 <Header Caption="ToDate">
-                                                                                    <RowLayoutColumnInfo OriginX="2" />
+                                                                                    <RowLayoutColumnInfo OriginX="7" />
                                                                                 </Header>
                                                                                 <CellStyle HorizontalAlign="Center">
                                                                                 </CellStyle>
                                                                                 <Footer>
-                                                                                    <RowLayoutColumnInfo OriginX="2" />
+                                                                                    <RowLayoutColumnInfo OriginX="7" />
                                                                                 </Footer>
                                                                             </igtbl:UltraGridColumn>
                                                                           
                                                                            <igtbl:UltraGridColumn AllowUpdate="Yes" Type="CheckBox" BaseColumnName="IsRamadan" Key="IsRamadan"
-                                                                                meta:resourcekey="UltraGridColumnIsRamadan" Width="25%">
+                                                                                meta:resourcekey="UltraGridColumnIsRamadan" Width="8%">
                                                                                 <Header Caption="Is Ramadan">
-                                                                                    <RowLayoutColumnInfo OriginX="2" />
+                                                                                    <RowLayoutColumnInfo OriginX="8" />
                                                                                 </Header>
                                                                                 <CellStyle HorizontalAlign="Center">
                                                                                 </CellStyle>
                                                                                 <Footer>
-                                                                                    <RowLayoutColumnInfo OriginX="2" />
+                                                                                    <RowLayoutColumnInfo OriginX="8" />
                                                                                 </Footer>
                                                                             </igtbl:UltraGridColumn>
                                                                         </Columns>

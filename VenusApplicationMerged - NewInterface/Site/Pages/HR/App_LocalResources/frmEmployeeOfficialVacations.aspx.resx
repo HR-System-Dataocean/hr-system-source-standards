@@ -336,11 +336,14 @@
   <data name="lblFiscalYearResource1.Text" xml:space="preserve">
     <value>السنة</value>
   </data>
-  <data name="UltraGridColumnArbName.Header.Caption" xml:space="preserve">
+  <data name="UltraGridColumnVacationTypeID.Header.Caption" xml:space="preserve">
     <value>اسم الاجازة</value>
   </data>
+  <data name="UltraGridColumnArbName.Header.Caption" xml:space="preserve">
+    <value>الاسم عربى</value>
+  </data>
   <data name="UltraGridColumnEngName.Header.Caption" xml:space="preserve">
-    <value>الاسم بالانجليزي</value>
+    <value>الاسم انجليزى</value>
   </data>
   <data name="UltraGridColumnFromDate.Header.Caption" xml:space="preserve">
     <value>من تاريخ</value>
@@ -350,5 +353,11 @@
   </data>
   <data name="UltraGridColumnIsRamadan.Header.Caption" xml:space="preserve">
     <value>شهر رمضان</value>
+  </data>
+  <data name="UltraGridColumnLineNumber.Header.Caption" xml:space="preserve">
+    <value>م</value>
+  </data>
+  <data name="UltraGridColumnEventType.Header.Caption" xml:space="preserve">
+    <value>نوع المناسبة</value>
   </data>
 </root>

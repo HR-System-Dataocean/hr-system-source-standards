@@ -336,8 +336,11 @@
   <data name="lblFiscalYearResource1.Text" xml:space="preserve">
     <value>Year</value>
   </data>
-  <data name="UltraGridColumnArbName.Header.Caption" xml:space="preserve">
+  <data name="UltraGridColumnVacationTypeID.Header.Caption" xml:space="preserve">
     <value>Holiday Name</value>
+  </data>
+  <data name="UltraGridColumnArbName.Header.Caption" xml:space="preserve">
+    <value>Arabic Name</value>
   </data>
   <data name="UltraGridColumnEngName.Header.Caption" xml:space="preserve">
     <value>English Name</value>
@@ -350,5 +353,11 @@
   </data>
   <data name="UltraGridColumnIsRamadan.Header.Caption" xml:space="preserve">
     <value>Is Ramadan</value>
+  </data>
+  <data name="UltraGridColumnLineNumber.Header.Caption" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="UltraGridColumnEventType.Header.Caption" xml:space="preserve">
+    <value>Event Type</value>
   </data>
 </root>

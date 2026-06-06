@@ -1,4 +1,5 @@
 ﻿Imports System.Activities.Statements
+Imports System.Collections.Generic
 Imports System.Data
 Imports Venus.Application.SystemFiles.HumanResource
 Imports Venus.Application.SystemFiles.System
@@ -41,8 +42,8 @@ Partial Class frmEmployeeOfficialVacations
                     SetScreenInformation("N")
                 End If
             End If
-            Dim IntrecordID As Integer
             GetDropDownListGrid()
+            Dim IntrecordID As Integer
 
             CreateOtherFields(IntrecordID)
             If Not IsPostBack Then UltraWebTab1.SelectedTab = 0
@@ -66,14 +67,20 @@ Partial Class frmEmployeeOfficialVacations
 
     End Sub
     Protected Sub UltraWebGrid1_InitializeRow(sender As Object, e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles UwgSearchEmployees.InitializeRow
+        If e.Row.Cells.FromKey("LineNumber") IsNot Nothing Then
+            e.Row.Cells.FromKey("LineNumber").Value = e.Row.Index + 1
+        End If
+        If e.Row.Cells.FromKey("IsRamadan") IsNot Nothing Then
+            NormalizeIsRamadanCell(e.Row.Cells.FromKey("IsRamadan"))
+        End If
+        ApplyEventTypeRules(e.Row)
+        LockPreparedPeriodRow(e.Row)
+    End Sub
 
-        'If Not IsDBNull(e.Row.Cells(4).Value) Then
-        '    txtDate.Value = e.Row.Cells(4).Value
-        'End If
-        'If Not IsDBNull(e.Row.Cells(5).Value) Then
-        '    txtToDate.Value = e.Row.Cells(5).Value
-        'End If
-
+    Protected Sub UwgSearchEmployees_UpdateCell(sender As Object, e As Infragistics.WebUI.UltraWebGrid.CellEventArgs) Handles UwgSearchEmployees.UpdateCell
+        If e.Cell.Column.Key = "eventType" Then
+            ApplyEventTypeRules(e.Cell.Row)
+        End If
     End Sub
     Protected Sub ImageButton_Command(sender As Object, e As System.Web.UI.WebControls.CommandEventArgs) Handles ImageButton_Save.Command, ImageButton_SaveN.Command, LinkButton_SaveN.Command, ImageButton_New.Command, ImageButton_Print.Command, ImageButton_Properties.Command, LinkButton_Properties.Command, ImageButton_Remarks.Command, LinkButton_Remarks.Command, ImageButton_Last.Command, ImageButton_Next.Command, ImageButton_Back.Command, ImageButton_First.Command, ImageButton_Delete.Command
         clsHrsEmployeeOfficialVacations = New Clshrs_OfficialVacations(Me)
@@ -87,8 +94,7 @@ Partial Class frmEmployeeOfficialVacations
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please Enter Year /برجاء إدخال العام"))
                     Exit Sub
                 End If
-                If Not ValidateFromToDateValues() Then
-                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " FromDate and ToDate are required. /يجب ادخال من تاريخ و الى تاريخ بكل المناسبات"))
+                If Not ValidateGridBeforeSave() Then
                     Exit Sub
                 End If
                 Dim Deletecommand As String = "Delete from hrs_OfficialVacations where Year='" & ddlFiscalYear.SelectedItem.Text & "' "
@@ -96,24 +102,26 @@ Partial Class frmEmployeeOfficialVacations
                 'clsHrsEmployeeOfficialVacations.Find("Year='" & ddlFiscalYear.SelectedItem.Text & "'")
                 Dim LineNumber = 0
                 For Each DGRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
-                    If Not IsNothing(DGRow.Cells("3").Value) Then
+                    If ShouldSaveGridRow(DGRow) Then
                         LineNumber = LineNumber + 1
-                        Dim isRamadanValue As Integer = If(CBool(DGRow.Cells("6").Text), 1, 0)
+                        Dim isRamadanValue As Integer = GetGridIsRamadanSqlValue(DGRow)
+                        Dim eventTypeValue As String = GetGridEventTypeSqlValue(DGRow)
+                        Dim vacationTypeValue As String = GetGridVacationTypeSqlValue(DGRow, eventTypeValue)
+                        Dim arbName As String = DGRow.Cells.FromKey("ArbName").Text.Replace("'", "''")
+                        Dim engName As String = DGRow.Cells.FromKey("EngName").Text.Replace("'", "''")
 
                         SqlCommand &= " Set DateFormat DMY Insert Into hrs_OfficialVacations " &
- "(LineNum, VacationTypeID , FromDate, ToDate,isramadan, Year)Values(" &
- LineNumber & ", " &
- DGRow.Cells("3").Value & ", " &
- "'" & CDate(DGRow.Cells("4").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
- "'" & CDate(DGRow.Cells("5").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
- isRamadanValue & ", " &
- "'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
+"(LineNum, eventType, VacationTypeID, ArbName, EngName, FromDate, ToDate, isramadan, Year)Values(" &
+LineNumber & ", " &
+eventTypeValue & ", " &
+vacationTypeValue & ", " &
+"'" & arbName & "', " &
+"'" & engName & "', " &
+"'" & CDate(DGRow.Cells.FromKey("FromDate").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
+"'" & CDate(DGRow.Cells.FromKey("ToDate").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
+isRamadanValue & ", " &
+"'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
                     End If
-
-
-
-
-
                 Next
                 If SqlCommand <> "" Then
                     Dim cmd As New SqlClient.SqlCommand
@@ -130,33 +138,34 @@ Partial Class frmEmployeeOfficialVacations
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please Enter Year /برجاء إدخال العام"))
                     Exit Sub
                 End If
-                'If Not ValidateFromToDateValues() Then
-                '    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " FromDate and ToDate are required. /يجب ادخال من تاريخ و الى تاريخ بكل المناسبات"))
-                '    Exit Sub
-                'End If
+                If Not ValidateGridBeforeSave() Then
+                    Exit Sub
+                End If
                 Dim Deletecommand As String = "Delete from hrs_OfficialVacations where Year='" & ddlFiscalYear.SelectedItem.Text & "' "
                 Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(clsHrsEmployeeOfficialVacations.ConnectionString, Data.CommandType.Text, Deletecommand)
                 'clsHrsEmployeeOfficialVacations.Find("Year='" & ddlFiscalYear.SelectedItem.Text & "'")
                 Dim LineNumber = 0
                 For Each DGRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
-                    If Not IsNothing(DGRow.Cells("3").Value) Then
+                    If ShouldSaveGridRow(DGRow) Then
                         LineNumber = LineNumber + 1
-                        Dim isRamadanValue As Integer = If(CBool(DGRow.Cells("6").Text), 1, 0)
+                        Dim isRamadanValue As Integer = GetGridIsRamadanSqlValue(DGRow)
+                        Dim eventTypeValue As String = GetGridEventTypeSqlValue(DGRow)
+                        Dim vacationTypeValue As String = GetGridVacationTypeSqlValue(DGRow, eventTypeValue)
+                        Dim arbName As String = DGRow.Cells.FromKey("ArbName").Text.Replace("'", "''")
+                        Dim engName As String = DGRow.Cells.FromKey("EngName").Text.Replace("'", "''")
 
                         SqlCommand &= " Set DateFormat DMY Insert Into hrs_OfficialVacations " &
- "(LineNum, VacationTypeID , FromDate, ToDate,isramadan, Year)Values(" &
- LineNumber & ", " &
- DGRow.Cells("3").Value & ", " &
- "'" & CDate(DGRow.Cells("4").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
- "'" & CDate(DGRow.Cells("5").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
- isRamadanValue & ", " &
- "'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
+"(LineNum, eventType, VacationTypeID, ArbName, EngName, FromDate, ToDate, isramadan, Year)Values(" &
+LineNumber & ", " &
+eventTypeValue & ", " &
+vacationTypeValue & ", " &
+"'" & arbName & "', " &
+"'" & engName & "', " &
+"'" & CDate(DGRow.Cells.FromKey("FromDate").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
+"'" & CDate(DGRow.Cells.FromKey("ToDate").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
+isRamadanValue & ", " &
+"'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
                     End If
-
-
-
-
-
                 Next
                 If SqlCommand <> "" Then
                     Dim cmd As New SqlClient.SqlCommand
@@ -170,6 +179,9 @@ Partial Class frmEmployeeOfficialVacations
             Case "New"
                 AfterOperation()
             Case "Delete"
+                If Not ValidateYearCanBeDeleted() Then
+                    Exit Sub
+                End If
                 clsHrsEmployeeOfficialVacations.Delete("Year='" & ddlFiscalYear.SelectedItem.Text & "'")
                 AfterOperation()
             Case "Property"
@@ -252,55 +264,87 @@ Partial Class frmEmployeeOfficialVacations
         End Try
     End Function
 
-    Private Function ValidateFromToDateValues() As Boolean
+    Private Function ValidateGridBeforeSave() As Boolean
         Try
+            Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsHrsEmployeeOfficialVacations.ConnectionString)
             Dim rowNumber As Integer = 0
+            Dim rowDataList As New List(Of OfficialVacationRowData)
+            Dim yearFromDate As Date = Date.MinValue
+            Dim yearToDate As Date = Date.MinValue
+            Dim hasYearRange As Boolean = TryGetSelectedFiscalYearDateRange(yearFromDate, yearToDate)
 
             For Each DGRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
-                rowNumber = rowNumber + 1
-
-                ' لو في بيانات في الخلية بتاعة نوع الإجازة
-                If DGRow.Cells("3").Value IsNot Nothing Then
-
-                    ' ===== التحقق من FromDate (الخلية 4) =====
-                    Try
-                        ' مجرد محاولة تحويل التاريخ - لو نجح يبقى تمام
-                        Dim fromDate As Date = CDate(DGRow.Cells("4").Text)
-
-                        ' من غير أي شرط على اليوم - نقبل أي يوم
-
-                    Catch ex As Exception
-                        ' لو حصل خطأ في التحويل، يبقى التاريخ غلط
-                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
-                        "من فضلك أدخل تاريخ صحيح في 'من تاريخ' بالصف " & rowNumber)
-                        Return False
-                    End Try
-
-                    ' ===== التحقق من ToDate (الخلية 5) =====
-                    Try
-                        Dim toDate As Date = CDate(DGRow.Cells("5").Text)
-
-                        ' من غير أي شرط على اليوم - نقبل أي يوم
-
-                    Catch ex As Exception
-                        ' لو حصل خطأ في التحويل، يبقى التاريخ غلط
-                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
-                        "من فضلك أدخل تاريخ صحيح في 'إلى تاريخ' بالصف " & rowNumber)
-                        Return False
-                    End Try
-
+                rowNumber += 1
+                If Not ShouldSaveGridRow(DGRow) Then
+                    Continue For
                 End If
+
+                Dim rowData As OfficialVacationRowData
+                If Not TryGetOfficialVacationRowData(DGRow, rowNumber, rowData) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
+                        ObjNavigationHandler.SetLanguage(Page, " Please enter valid dates in row / برجاء إدخال تواريخ صحيحة بالصف ") & rowNumber)
+                    Return False
+                End If
+
+                If rowData.ToDate <= rowData.FromDate Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
+                        ObjNavigationHandler.SetLanguage(Page, " To date must be greater than from date / تاريخ الى تاريخ يكون اكبر من من تاريخ ") & " - " & rowNumber)
+                    Return False
+                End If
+
+                If hasYearRange AndAlso (rowData.FromDate < yearFromDate OrElse rowData.ToDate > yearToDate) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
+                        ObjNavigationHandler.SetLanguage(Page, " Dates must be within the selected year / ادخال تواريخ فى سنه غير المختارة ") & " - " & rowNumber)
+                    Return False
+                End If
+
+                Dim lockMessage As String = String.Empty
+                If Not CanModifyGridRow(DGRow, lockMessage) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, lockMessage))
+                    Return False
+                End If
+
+                rowDataList.Add(rowData)
+            Next
+
+            For i As Integer = 0 To rowDataList.Count - 1
+                For j As Integer = i + 1 To rowDataList.Count - 1
+                    If IsDuplicateOfficialVacationName(rowDataList(i), rowDataList(j)) Then
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
+                            ObjNavigationHandler.SetLanguage(Page, " Duplicate official holiday name within the same year / تكرار العيد الرسمى - نفس الاسم داخل السنة "))
+                        Return False
+                    End If
+
+                    If DatesOverlap(rowDataList(i).FromDate, rowDataList(i).ToDate, rowDataList(j).FromDate, rowDataList(j).ToDate) Then
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
+                            ObjNavigationHandler.SetLanguage(Page, " There is another event that overlaps with the specified period / توجد مناسبة أخرى تتداخل مع الفترة المحددة "))
+                        Return False
+                    End If
+                Next
             Next
 
             Return True
-
         Catch ex As Exception
             Return False
         End Try
     End Function
-    Private Function GetValues() As Boolean
-        GetDropDownListGrid()
 
+    Private Function ValidateYearCanBeDeleted() As Boolean
+        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsHrsEmployeeOfficialVacations.ConnectionString)
+        For Each DGRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
+            If IsNothing(DGRow.Cells.FromKey("ID").Value) OrElse DGRow.Cells.FromKey("ID").Value.ToString() = "" Then
+                Continue For
+            End If
+
+            Dim lockMessage As String = String.Empty
+            If Not CanModifyGridRow(DGRow, lockMessage) Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, lockMessage))
+                Return False
+            End If
+        Next
+        Return True
+    End Function
+    Private Function GetValues() As Boolean
         Dim ClsUser As New Clshrs_OfficialVacations(Page)
         Dim StrMode As String = Request.QueryString.Item("Mode")
         Dim IntId As Integer = Request.QueryString.Item("ID")
@@ -315,17 +359,21 @@ Partial Class frmEmployeeOfficialVacations
             UwgSearchEmployees.DataSource = mFindDataset.Tables(0)
             UwgSearchEmployees.DataBind()
             UwgSearchEmployees.Rows.Add()
-            Dim item As New System.Web.UI.WebControls.ListItem()
+            Dim lineNum As Integer = 0
             For Each DGRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
                 If IsNothing(DGRow.Cells(1).Value) Then
                     Continue For
                 End If
-                If DGRow.Cells(3).Value <> "" Then
-                    DGRow.Cells(3).Value = Convert.ToInt32(DGRow.Cells(3).Value)
+                lineNum += 1
+                DGRow.Cells.FromKey("LineNumber").Value = lineNum
+                If Not IsNothing(DGRow.Cells.FromKey("VacationTypeID").Value) AndAlso DGRow.Cells.FromKey("VacationTypeID").Value.ToString() <> "" Then
+                    DGRow.Cells.FromKey("VacationTypeID").Value = Convert.ToInt32(DGRow.Cells.FromKey("VacationTypeID").Value)
                 End If
-
-
-
+                If Not IsNothing(DGRow.Cells.FromKey("eventType").Value) AndAlso DGRow.Cells.FromKey("eventType").Value.ToString() <> "" Then
+                    DGRow.Cells.FromKey("eventType").Value = Convert.ToInt32(DGRow.Cells.FromKey("eventType").Value)
+                End If
+                ApplyEventTypeRules(DGRow)
+                LockPreparedPeriodRow(DGRow)
             Next
             Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsHrsEmployeeOfficialVacations.ConnectionString)
             If (UwgSearchEmployees.Rows.Count > 0) Then
@@ -580,9 +628,16 @@ Partial Class frmEmployeeOfficialVacations
     End Function
 
     Protected Sub UwgSearchEmployees_DeleteRow(sender As Object, e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles UwgSearchEmployees.DeleteRow
+        clsHrsEmployeeOfficialVacations = New Clshrs_OfficialVacations(Me)
         If e.Row.Cells.FromKey("ID").Value <> Nothing Then
-            clsHrsEmployeeOfficialVacations = New Clshrs_OfficialVacations(Me)
             Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsHrsEmployeeOfficialVacations.ConnectionString)
+            Dim validationMessage As String = String.Empty
+            If Not CanModifyGridRow(e.Row, validationMessage) Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, validationMessage))
+                Exit Sub
+            End If
+
+            clsHrsEmployeeOfficialVacations = New Clshrs_OfficialVacations(Me)
             Dim SqlCommand As String = String.Empty
 
             SqlCommand = "DELETE FROM [dbo].[hrs_OfficialVacations] WHERE ID=" & e.Row.Cells.FromKey("ID").Value
@@ -597,26 +652,259 @@ Partial Class frmEmployeeOfficialVacations
     End Sub
 
     Public Function GetDropDownListGrid() As Boolean
+        Try
+            If UwgSearchEmployees Is Nothing OrElse UwgSearchEmployees.DisplayLayout.Bands.Count = 0 Then
+                Return False
+            End If
 
-        Dim Item As Global.System.Web.UI.WebControls.ListItem
-        Dim ConnectionString As String
-        ConnectionString = ConfigurationManager.AppSettings("Connstring").ToString()
-        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnectionString)
+            Dim ConnectionString As String = ConfigurationManager.AppSettings("Connstring").ToString()
+            Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnectionString)
 
-        Dim strselect2 As String
-        strselect2 = "select ID, Code,EngName,ArbName from hrs_VacationsTypes where IsOfficial=1"
-        Dim DSOfficialvacations As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnectionString, CommandType.Text, strselect2)
-        If DSOfficialvacations.Tables(0).Rows.Count > 0 Then
-            UwgSearchEmployees.DisplayLayout.Bands(0).Columns(3).ValueList.ValueListItems.Clear()
-            For Each Row As Data.DataRow In DSOfficialvacations.Tables(0).Rows
-                UwgSearchEmployees.DisplayLayout.Bands(0).Columns(3).ValueList.ValueListItems.Add(Row("ID"), Row("Code") & " - " & ObjNavigationHandler.SetLanguage(Page, "" & Row("EngName") & "/ " & Row("ArbName") & ""))
-            Next
+            Dim eventTypeCol = UwgSearchEmployees.DisplayLayout.Bands(0).Columns.FromKey("eventType")
+            If eventTypeCol IsNot Nothing Then
+                If eventTypeCol.ValueList Is Nothing Then
+                    eventTypeCol.ValueList = New Infragistics.WebUI.UltraWebGrid.ValueList()
+                End If
+                eventTypeCol.ValueList.ValueListItems.Clear()
+                eventTypeCol.ValueList.ValueListItems.Add(1, ObjNavigationHandler.SetLanguage(Page, "1-Vacation/1-إجازة"))
+                eventTypeCol.ValueList.ValueListItems.Add(2, ObjNavigationHandler.SetLanguage(Page, "2-Event/2-مناسبة"))
+            End If
 
+            Dim vacationTypeCol = UwgSearchEmployees.DisplayLayout.Bands(0).Columns.FromKey("VacationTypeID")
+            If vacationTypeCol IsNot Nothing Then
+                If vacationTypeCol.ValueList Is Nothing Then
+                    vacationTypeCol.ValueList = New Infragistics.WebUI.UltraWebGrid.ValueList()
+                End If
+                vacationTypeCol.ValueList.ValueListItems.Clear()
+                Dim strselect2 As String = "select ID, Code,EngName,ArbName from hrs_VacationsTypes where IsOfficial=1"
+                Dim DSOfficialvacations As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnectionString, CommandType.Text, strselect2)
+                For Each Row As Data.DataRow In DSOfficialvacations.Tables(0).Rows
+                    vacationTypeCol.ValueList.ValueListItems.Add(Row("ID"), Row("Code") & " - " & ObjNavigationHandler.SetLanguage(Page, "" & Row("EngName") & "/ " & Row("ArbName") & ""))
+                Next
+            End If
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Private Sub ApplyEventTypeRules(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow)
+        If row Is Nothing Then Exit Sub
+        If row.Cells.FromKey("eventType") Is Nothing Then Exit Sub
+
+        Dim eventTypeVal As String = String.Empty
+        If Not IsNothing(row.Cells.FromKey("eventType").Value) Then
+            eventTypeVal = row.Cells.FromKey("eventType").Value.ToString()
         End If
 
+        If row.Cells.FromKey("VacationTypeID") IsNot Nothing Then
+            If eventTypeVal = "2" Then
+                row.Cells.FromKey("VacationTypeID").AllowEditing = Infragistics.WebUI.UltraWebGrid.AllowEditing.No
+                row.Cells.FromKey("VacationTypeID").Value = Nothing
+                row.Cells.FromKey("VacationTypeID").Text = String.Empty
+            ElseIf eventTypeVal = "1" Then
+                row.Cells.FromKey("VacationTypeID").AllowEditing = Infragistics.WebUI.UltraWebGrid.AllowEditing.Yes
+            End If
+        End If
 
+        If row.Cells.FromKey("IsRamadan") IsNot Nothing Then
+            NormalizeIsRamadanCell(row.Cells.FromKey("IsRamadan"))
+            If eventTypeVal = "1" Then
+                row.Cells.FromKey("IsRamadan").AllowEditing = Infragistics.WebUI.UltraWebGrid.AllowEditing.No
+                row.Cells.FromKey("IsRamadan").Value = False
+            ElseIf eventTypeVal = "2" Then
+                row.Cells.FromKey("IsRamadan").AllowEditing = Infragistics.WebUI.UltraWebGrid.AllowEditing.Yes
+            End If
+        End If
+    End Sub
 
+    Private Function GetGridEventTypeValue(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow) As String
+        If row Is Nothing OrElse row.Cells.FromKey("eventType") Is Nothing OrElse IsNothing(row.Cells.FromKey("eventType").Value) Then
+            Return String.Empty
+        End If
+        Return row.Cells.FromKey("eventType").Value.ToString()
     End Function
+
+    Private Function GetGridEventTypeSqlValue(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow) As String
+        Dim eventTypeVal As String = GetGridEventTypeValue(row)
+        If eventTypeVal = String.Empty Then
+            Return "NULL"
+        End If
+        Return eventTypeVal
+    End Function
+
+    Private Function GetGridVacationTypeSqlValue(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow, ByVal eventTypeValue As String) As String
+        If eventTypeValue = "2" Then
+            Return "NULL"
+        End If
+        If row.Cells.FromKey("VacationTypeID") Is Nothing OrElse IsNothing(row.Cells.FromKey("VacationTypeID").Value) OrElse row.Cells.FromKey("VacationTypeID").Value.ToString() = "" Then
+            Return "NULL"
+        End If
+        Return row.Cells.FromKey("VacationTypeID").Value.ToString()
+    End Function
+
+    Private Function ShouldSaveGridRow(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow) As Boolean
+        Dim eventTypeVal As String = GetGridEventTypeValue(row)
+        If eventTypeVal = "2" Then
+            Return row.Cells.FromKey("FromDate").Text.Trim() <> String.Empty
+        End If
+        If eventTypeVal = "1" Then
+            Return Not IsNothing(row.Cells.FromKey("VacationTypeID").Value) AndAlso row.Cells.FromKey("VacationTypeID").Value.ToString() <> ""
+        End If
+        Return Not IsNothing(row.Cells.FromKey("VacationTypeID").Value) AndAlso row.Cells.FromKey("VacationTypeID").Value.ToString() <> ""
+    End Function
+
+    Private Function GetGridIsRamadanSqlValue(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow) As Integer
+        If GetGridEventTypeValue(row) = "1" Then
+            Return 0
+        End If
+        If row.Cells.FromKey("IsRamadan") Is Nothing Then
+            Return 0
+        End If
+        Return If(GetGridIsRamadanBooleanValue(row), 1, 0)
+    End Function
+
+    Private Function GetGridIsRamadanBooleanValue(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow) As Boolean
+        If row Is Nothing OrElse row.Cells.FromKey("IsRamadan") Is Nothing Then
+            Return False
+        End If
+        Return GetIsRamadanBooleanValue(row.Cells.FromKey("IsRamadan").Value)
+    End Function
+
+    Private Function GetIsRamadanBooleanValue(ByVal cellValue As Object) As Boolean
+        If IsNothing(cellValue) OrElse cellValue.ToString().Trim() = "" Then
+            Return False
+        End If
+        If TypeOf cellValue Is Boolean Then
+            Return CBool(cellValue)
+        End If
+        Dim parsed As Boolean
+        If Boolean.TryParse(cellValue.ToString(), parsed) Then
+            Return parsed
+        End If
+        If cellValue.ToString() = "1" Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    Private Sub NormalizeIsRamadanCell(ByVal cell As Infragistics.WebUI.UltraWebGrid.UltraGridCell)
+        If cell Is Nothing Then Exit Sub
+        cell.Value = GetIsRamadanBooleanValue(cell.Value)
+    End Sub
+
+    Private Structure OfficialVacationRowData
+        Public RowNumber As Integer
+        Public EventType As String
+        Public VacationTypeID As String
+        Public ArbName As String
+        Public FromDate As Date
+        Public ToDate As Date
+    End Structure
+
+    Private Function TryGetOfficialVacationRowData(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow, ByVal rowNumber As Integer, ByRef rowData As OfficialVacationRowData) As Boolean
+        Try
+            rowData = New OfficialVacationRowData()
+            rowData.RowNumber = rowNumber
+            rowData.EventType = GetGridEventTypeValue(row)
+            rowData.VacationTypeID = String.Empty
+            If row.Cells.FromKey("VacationTypeID") IsNot Nothing AndAlso Not IsNothing(row.Cells.FromKey("VacationTypeID").Value) Then
+                rowData.VacationTypeID = row.Cells.FromKey("VacationTypeID").Value.ToString()
+            End If
+            rowData.ArbName = row.Cells.FromKey("ArbName").Text.Trim()
+            rowData.FromDate = CDate(row.Cells.FromKey("FromDate").Text)
+            rowData.ToDate = CDate(row.Cells.FromKey("ToDate").Text)
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Private Function TryGetSelectedFiscalYearDateRange(ByRef yearFromDate As Date, ByRef yearToDate As Date) As Boolean
+        Try
+            If ddlFiscalYear.SelectedValue = "" OrElse ddlFiscalYear.SelectedValue = "0" Then
+                Return False
+            End If
+
+            Dim sql As String = "SELECT MIN(FromDate) AS YearFromDate, MAX(ToDate) AS YearToDate " &
+                                "FROM sys_FiscalYearsPeriods " &
+                                "WHERE ISNULL(CancelDate,'')='' AND FiscalYearID=" & ddlFiscalYear.SelectedValue
+            Dim ds As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(clsHrsEmployeeOfficialVacations.ConnectionString, CommandType.Text, sql)
+            If ds Is Nothing OrElse ds.Tables(0).Rows.Count = 0 OrElse IsDBNull(ds.Tables(0).Rows(0)("YearFromDate")) Then
+                Return False
+            End If
+
+            yearFromDate = CDate(ds.Tables(0).Rows(0)("YearFromDate"))
+            yearToDate = CDate(ds.Tables(0).Rows(0)("YearToDate"))
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Private Function IsDuplicateOfficialVacationName(ByVal firstRow As OfficialVacationRowData, ByVal secondRow As OfficialVacationRowData) As Boolean
+        If firstRow.EventType = "1" AndAlso secondRow.EventType = "1" Then
+            Return firstRow.VacationTypeID <> "" AndAlso firstRow.VacationTypeID = secondRow.VacationTypeID
+        End If
+
+        If firstRow.EventType = "2" AndAlso secondRow.EventType = "2" Then
+            Return firstRow.ArbName <> "" AndAlso String.Equals(firstRow.ArbName, secondRow.ArbName, StringComparison.OrdinalIgnoreCase)
+        End If
+
+        Return False
+    End Function
+
+    Private Function DatesOverlap(ByVal firstFromDate As Date, ByVal firstToDate As Date, ByVal secondFromDate As Date, ByVal secondToDate As Date) As Boolean
+        Return firstFromDate <= secondToDate AndAlso secondFromDate <= firstToDate
+    End Function
+
+    Private Function CanModifyGridRow(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow, ByRef message As String) As Boolean
+        message = "The event cannot be deleted because there are associated transactions / لا يمكن حذف المناسبة لوجود حركات مرتبطة بها"
+        Try
+            If row.Cells.FromKey("FromDate") Is Nothing OrElse row.Cells.FromKey("ToDate") Is Nothing Then
+                Return True
+            End If
+            If row.Cells.FromKey("FromDate").Text.Trim() = "" OrElse row.Cells.FromKey("ToDate").Text.Trim() = "" Then
+                Return True
+            End If
+
+            Dim fromDate As Date = CDate(row.Cells.FromKey("FromDate").Text)
+            Dim toDate As Date = CDate(row.Cells.FromKey("ToDate").Text)
+            Return Not IsDateRangeInPreparedPeriod(fromDate, toDate)
+        Catch ex As Exception
+            Return True
+        End Try
+    End Function
+
+    Private Function IsDateRangeInPreparedPeriod(ByVal fromDate As Date, ByVal toDate As Date) As Boolean
+        Try
+            Dim sql As String = "SET DATEFORMAT DMY; SELECT COUNT(1) " &
+                                "FROM sys_FiscalYearsPeriods FYP " &
+                                "WHERE ISNULL(FYP.CancelDate,'')='' " &
+                                "AND FYP.FromDate <= '" & toDate.ToString("dd/MM/yyyy") & "' " &
+                                "AND FYP.ToDate >= '" & fromDate.ToString("dd/MM/yyyy") & "' " &
+                                "AND EXISTS (SELECT 1 FROM hrs_EmployeesTransactions ET " &
+                                "WHERE ET.FiscalYearPeriodID = FYP.ID " &
+                                "AND ISNULL(ET.CancelDate,'')='' " &
+                                "AND ET.PostDate IS NOT NULL)"
+            Dim count As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsHrsEmployeeOfficialVacations.ConnectionString, CommandType.Text, sql)
+            Return Convert.ToInt32(count) > 0
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Private Sub LockPreparedPeriodRow(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow)
+        Dim lockMessage As String = String.Empty
+        If Not CanModifyGridRow(row, lockMessage) Then
+            For Each cell As Infragistics.WebUI.UltraWebGrid.UltraGridCell In row.Cells
+                If cell.Column.Key <> "LineNumber" Then
+                    cell.AllowEditing = Infragistics.WebUI.UltraWebGrid.AllowEditing.No
+                End If
+            Next
+        End If
+    End Sub
 
 #End Region
 End Class

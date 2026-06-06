@@ -12434,6 +12434,18 @@ FROM     SS_ChangeWorkHoursRequest JOIN
         SQL = "alter table ss_requesttypes add HaveSettelment bit null"
         ExecuteUpdate(SQL)
 
+        SQL = "IF COL_LENGTH('hrs_OfficialVacations', 'eventType') IS NULL BEGIN ALTER TABLE hrs_OfficialVacations ADD eventType int NULL END"
+        ExecuteUpdate(SQL)
+
+        SQL = "IF COL_LENGTH('hrs_OfficialVacations', 'VacationTypeID') IS NULL BEGIN ALTER TABLE hrs_OfficialVacations ADD VacationTypeID int NULL END"
+        ExecuteUpdate(SQL)
+
+        SQL = "IF COL_LENGTH('hrs_OfficialVacations', 'ArbName') IS NULL BEGIN ALTER TABLE hrs_OfficialVacations ADD ArbName nvarchar(100) NULL END"
+        ExecuteUpdate(SQL)
+
+        SQL = "IF COL_LENGTH('hrs_OfficialVacations', 'EngName') IS NULL BEGIN ALTER TABLE hrs_OfficialVacations ADD EngName nvarchar(100) NULL END"
+        ExecuteUpdate(SQL)
+
 
 
 
