@@ -363,4 +363,10 @@
   <data name="TabResource4.Text" xml:space="preserve">
     <value>Employees Salaries</value>
   </data>
+  <data name="lblShowPostingNotificationResource1.Text" xml:space="preserve">
+    <value>Show posting notification</value>
+  </data>
+  <data name="lblJournalEmployeeFieldsResource1.Text" xml:space="preserve">
+    <value>Journal employee fields</value>
+  </data>
 </root>

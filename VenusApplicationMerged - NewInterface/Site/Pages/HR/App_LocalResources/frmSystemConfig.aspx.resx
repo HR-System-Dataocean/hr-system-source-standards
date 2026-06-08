@@ -363,4 +363,10 @@
   <data name="TabResource4.Text" xml:space="preserve">
     <value>رواتب الموظفين</value>
   </data>
+  <data name="lblShowPostingNotificationResource1.Text" xml:space="preserve">
+    <value>إظهار إشعار الترحيل</value>
+  </data>
+  <data name="lblJournalEmployeeFieldsResource1.Text" xml:space="preserve">
+    <value>حقول الموظف في اليومية</value>
+  </data>
 </root>

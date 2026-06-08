@@ -107,8 +107,8 @@ Partial Class frmEmployeeOfficialVacations
                         Dim isRamadanValue As Integer = GetGridIsRamadanSqlValue(DGRow)
                         Dim eventTypeValue As String = GetGridEventTypeSqlValue(DGRow)
                         Dim vacationTypeValue As String = GetGridVacationTypeSqlValue(DGRow, eventTypeValue)
-                        Dim arbName As String = DGRow.Cells.FromKey("ArbName").Text.Replace("'", "''")
-                        Dim engName As String = DGRow.Cells.FromKey("EngName").Text.Replace("'", "''")
+                        Dim arbName As String = GetGridCellText(DGRow, "ArbName").Replace("'", "''")
+                        Dim engName As String = GetGridCellText(DGRow, "EngName").Replace("'", "''")
 
                         SqlCommand &= " Set DateFormat DMY Insert Into hrs_OfficialVacations " &
 "(LineNum, eventType, VacationTypeID, ArbName, EngName, FromDate, ToDate, isramadan, Year)Values(" &
@@ -131,6 +131,7 @@ isRamadanValue & ", " &
                     cmd.Connection.Open()
                     cmd.ExecuteNonQuery()
                     cmd.Connection.Close()
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Save Done/تم الحفظ"))
                     AfterOperation()
                 End If
             Case "Save"
@@ -151,8 +152,8 @@ isRamadanValue & ", " &
                         Dim isRamadanValue As Integer = GetGridIsRamadanSqlValue(DGRow)
                         Dim eventTypeValue As String = GetGridEventTypeSqlValue(DGRow)
                         Dim vacationTypeValue As String = GetGridVacationTypeSqlValue(DGRow, eventTypeValue)
-                        Dim arbName As String = DGRow.Cells.FromKey("ArbName").Text.Replace("'", "''")
-                        Dim engName As String = DGRow.Cells.FromKey("EngName").Text.Replace("'", "''")
+                        Dim arbName As String = GetGridCellText(DGRow, "ArbName").Replace("'", "''")
+                        Dim engName As String = GetGridCellText(DGRow, "EngName").Replace("'", "''")
 
                         SqlCommand &= " Set DateFormat DMY Insert Into hrs_OfficialVacations " &
 "(LineNum, eventType, VacationTypeID, ArbName, EngName, FromDate, ToDate, isramadan, Year)Values(" &
@@ -175,15 +176,14 @@ isRamadanValue & ", " &
                     cmd.Connection.Open()
                     cmd.ExecuteNonQuery()
                     cmd.Connection.Close()
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Save Done/تم الحفظ"))
                 End If
             Case "New"
                 AfterOperation()
             Case "Delete"
-                If Not ValidateYearCanBeDeleted() Then
+                If Not DeleteSelectedOfficialVacationRow() Then
                     Exit Sub
                 End If
-                clsHrsEmployeeOfficialVacations.Delete("Year='" & ddlFiscalYear.SelectedItem.Text & "'")
-                AfterOperation()
             Case "Property"
                 clsHrsEmployeeOfficialVacations.Find("Year='" & ddlFiscalYear.SelectedItem.Text & "'")
                 Venus.Shared.Web.ClientSideActions.OpenWindowAdv(Page, "frmPropertyScreen.aspx?ID=" & clsHrsEmployeeOfficialVacations.ID & "&TableName=" & clsHrsEmployeeOfficialVacations.Table, 477, 313, False, Venus.Shared.Web.ClientSideActions.WINDOW_TARGET._Blank, "Property", False)
@@ -279,6 +279,14 @@ isRamadanValue & ", " &
                     Continue For
                 End If
 
+                Dim arbName As String = GetGridCellText(DGRow, "ArbName")
+                Dim engName As String = GetGridCellText(DGRow, "EngName")
+                If arbName = "" OrElse engName = "" Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
+                        ObjNavigationHandler.SetLanguage(Page, " Please enter Arabic and English names / برجاء إدخال الاسم العربي والاسم الانجليزي ") & " - " & rowNumber)
+                    Return False
+                End If
+
                 Dim rowData As OfficialVacationRowData
                 If Not TryGetOfficialVacationRowData(DGRow, rowNumber, rowData) Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
@@ -328,6 +336,67 @@ isRamadanValue & ", " &
             Return False
         End Try
     End Function
+
+    Private Function DeleteSelectedOfficialVacationRow() As Boolean
+        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsHrsEmployeeOfficialVacations.ConnectionString)
+
+        If hfSelectedRowIndex.Value = "" OrElse hfSelectedRowIndex.Value = "-1" Then
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please select a row to delete / برجاء اختيار السجل المراد حذفه"))
+            Return False
+        End If
+
+        Dim rowIndex As Integer
+        If Not Integer.TryParse(hfSelectedRowIndex.Value, rowIndex) OrElse rowIndex < 0 OrElse rowIndex >= UwgSearchEmployees.Rows.Count Then
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please select a row to delete / برجاء اختيار السجل المراد حذفه"))
+            Return False
+        End If
+
+        Dim selectedRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow = UwgSearchEmployees.Rows(rowIndex)
+        Dim lockMessage As String = String.Empty
+        If Not CanModifyGridRow(selectedRow, lockMessage) Then
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, lockMessage))
+            Return False
+        End If
+
+        If Not IsNothing(selectedRow.Cells.FromKey("ID").Value) AndAlso selectedRow.Cells.FromKey("ID").Value.ToString() <> "" Then
+            Dim rowId As Integer = CInt(selectedRow.Cells.FromKey("ID").Value)
+            Dim sqlCommand As String = "DELETE FROM [dbo].[hrs_OfficialVacations] WHERE ID=" & rowId
+            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(clsHrsEmployeeOfficialVacations.ConnectionString, CommandType.Text, sqlCommand)
+        End If
+
+        UwgSearchEmployees.Rows.Remove(selectedRow)
+        RenumberOfficialVacationGridLines()
+        EnsureOfficialVacationAddNewRow()
+
+        hfSelectedRowIndex.Value = "-1"
+        hfSelectedRowID.Value = ""
+        Return True
+    End Function
+
+    Private Sub RenumberOfficialVacationGridLines()
+        Dim lineNum As Integer = 0
+        For Each dgRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
+            If IsNothing(dgRow.Cells.FromKey("Year").Value) Then
+                Continue For
+            End If
+            lineNum += 1
+            If dgRow.Cells.FromKey("LineNumber") IsNot Nothing Then
+                dgRow.Cells.FromKey("LineNumber").Value = lineNum
+            End If
+        Next
+    End Sub
+
+    Private Sub EnsureOfficialVacationAddNewRow()
+        If UwgSearchEmployees.Rows.Count = 0 Then
+            UwgSearchEmployees.Rows.Add()
+            Return
+        End If
+
+        Dim lastRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow = UwgSearchEmployees.Rows(UwgSearchEmployees.Rows.Count - 1)
+        If Not IsNothing(lastRow.Cells.FromKey("Year").Value) OrElse ShouldSaveGridRow(lastRow) Then
+            UwgSearchEmployees.Rows.Add()
+        End If
+    End Sub
 
     Private Function ValidateYearCanBeDeleted() As Boolean
         Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsHrsEmployeeOfficialVacations.ConnectionString)
@@ -666,7 +735,7 @@ isRamadanValue & ", " &
                     eventTypeCol.ValueList = New Infragistics.WebUI.UltraWebGrid.ValueList()
                 End If
                 eventTypeCol.ValueList.ValueListItems.Clear()
-                eventTypeCol.ValueList.ValueListItems.Add(1, ObjNavigationHandler.SetLanguage(Page, "1-Vacation/1-إجازة"))
+                eventTypeCol.ValueList.ValueListItems.Add(1, ObjNavigationHandler.SetLanguage(Page, "1-Vacation/1-إجازة رسمية"))
                 eventTypeCol.ValueList.ValueListItems.Add(2, ObjNavigationHandler.SetLanguage(Page, "2-Event/2-مناسبة"))
             End If
 
@@ -718,6 +787,16 @@ isRamadanValue & ", " &
             End If
         End If
     End Sub
+
+    Private Function GetGridCellText(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow, ByVal columnKey As String) As String
+        If row Is Nothing OrElse row.Cells.FromKey(columnKey) Is Nothing Then
+            Return String.Empty
+        End If
+        If row.Cells.FromKey(columnKey).Text Is Nothing Then
+            Return String.Empty
+        End If
+        Return row.Cells.FromKey(columnKey).Text.Trim()
+    End Function
 
     Private Function GetGridEventTypeValue(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow) As String
         If row Is Nothing OrElse row.Cells.FromKey("eventType") Is Nothing OrElse IsNothing(row.Cells.FromKey("eventType").Value) Then
@@ -812,7 +891,7 @@ isRamadanValue & ", " &
             If row.Cells.FromKey("VacationTypeID") IsNot Nothing AndAlso Not IsNothing(row.Cells.FromKey("VacationTypeID").Value) Then
                 rowData.VacationTypeID = row.Cells.FromKey("VacationTypeID").Value.ToString()
             End If
-            rowData.ArbName = row.Cells.FromKey("ArbName").Text.Trim()
+            rowData.ArbName = GetGridCellText(row, "ArbName")
             rowData.FromDate = CDate(row.Cells.FromKey("FromDate").Text)
             rowData.ToDate = CDate(row.Cells.FromKey("ToDate").Text)
             Return True

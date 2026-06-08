@@ -65,6 +65,156 @@
 
        var Row;
        var IsEdit = true;
+       var _officialVacationsSelectedRow = null;
+       var _officialVacationsSelectedRowTr = null;
+       var OFFICIAL_VACATION_ROW_SELECTED_COLOR = "#D6EAF8";
+       var OFFICIAL_VACATION_LINE_NUMBER_COLOR = "#E8E8E8";
+
+       function getOfficialVacationColumnKey(cell) {
+           if (!cell) return "";
+           if (cell.Column && cell.Column.Key) return cell.Column.Key;
+           if (cell.columnKey) return cell.columnKey;
+           return "";
+       }
+
+       function getOfficialVacationCellElement(cell, cellId) {
+           if (cell) {
+               if (cell.Element) return cell.Element;
+               if (typeof cell.getElement === "function") {
+                   var cellElement = cell.getElement();
+                   if (cellElement) return cellElement;
+               }
+           }
+           if (cellId) return document.getElementById(cellId);
+           return null;
+       }
+
+       function getOfficialVacationRowColumnKeys() {
+           return ["LineNumber", "eventType", "VacationTypeID", "ArbName", "EngName", "FromDate", "ToDate", "IsRamadan"];
+       }
+
+       function getOfficialVacationRowTableRow(cellId) {
+           var td = document.getElementById(cellId);
+           if (td && td.parentNode && td.parentNode.tagName === "TR") return td.parentNode;
+           return null;
+       }
+
+       function paintOfficialVacationRow(tr, color) {
+           if (!tr || !tr.cells) return;
+           for (var i = 0; i < tr.cells.length; i++) {
+               tr.cells[i].style.backgroundColor = color;
+           }
+       }
+
+       function resetOfficialVacationRowAppearance(row) {
+           if (!row || !row.getCellFromKey) return;
+           if (_officialVacationsSelectedRowTr) {
+               paintOfficialVacationRow(_officialVacationsSelectedRowTr, "");
+               _officialVacationsSelectedRowTr = null;
+           } else {
+               var keys = getOfficialVacationRowColumnKeys();
+               for (var i = 0; i < keys.length; i++) {
+                   var rowCell = row.getCellFromKey(keys[i]);
+                   var el = getOfficialVacationCellElement(rowCell, null);
+                   if (el) el.style.backgroundColor = "";
+               }
+           }
+           var lineCell = row.getCellFromKey("LineNumber");
+           var lineEl = getOfficialVacationCellElement(lineCell, null);
+           if (lineEl) lineEl.style.backgroundColor = OFFICIAL_VACATION_LINE_NUMBER_COLOR;
+           ApplyEventTypeVacationTypeRule(row);
+       }
+
+       function applyOfficialVacationRowSelection(row, cellId) {
+           if (!row) return;
+           var tr = getOfficialVacationRowTableRow(cellId);
+           if (tr) {
+               paintOfficialVacationRow(tr, OFFICIAL_VACATION_ROW_SELECTED_COLOR);
+               _officialVacationsSelectedRowTr = tr;
+               return;
+           }
+           if (!row.getCellFromKey) return;
+           var keys = getOfficialVacationRowColumnKeys();
+           for (var i = 0; i < keys.length; i++) {
+               var rowCell = row.getCellFromKey(keys[i]);
+               var el = getOfficialVacationCellElement(rowCell, null);
+               if (el) el.style.backgroundColor = OFFICIAL_VACATION_ROW_SELECTED_COLOR;
+           }
+       }
+
+       function updateOfficialVacationSelectedRowHiddenFields(row) {
+           var hfIndex = document.getElementById("hfSelectedRowIndex");
+           var hfId = document.getElementById("hfSelectedRowID");
+           if (!row) {
+               if (hfIndex) hfIndex.value = "-1";
+               if (hfId) hfId.value = "";
+               return;
+           }
+           if (hfIndex) {
+               if (typeof row.getIndex === "function") {
+                   hfIndex.value = row.getIndex();
+               } else if (row.Id) {
+                   hfIndex.value = row.Id.split("_")[2];
+               }
+           }
+           if (hfId) {
+               var idCell = row.getCellFromKey("ID");
+               var idVal = (idCell && typeof idCell.getValue === "function") ? idCell.getValue() : null;
+               hfId.value = (idVal !== null && idVal !== undefined && idVal !== "") ? idVal : "";
+           }
+       }
+
+       function selectOfficialVacationRow(row, cellId) {
+           if (!row) return;
+           if (_officialVacationsSelectedRow && _officialVacationsSelectedRow !== row) {
+               if (typeof _officialVacationsSelectedRow.setSelected === "function") {
+                   _officialVacationsSelectedRow.setSelected(false);
+               }
+               resetOfficialVacationRowAppearance(_officialVacationsSelectedRow);
+           }
+           if (typeof row.setSelected === "function") {
+               row.setSelected(true);
+           }
+           applyOfficialVacationRowSelection(row, cellId);
+           _officialVacationsSelectedRow = row;
+           Row = row;
+           updateOfficialVacationSelectedRowHiddenFields(row);
+           if (typeof row.activate === "function") {
+               row.activate();
+           }
+       }
+
+       function confirmDeleteOfficialVacationRow() {
+           if (!_officialVacationsSelectedRow) {
+               alert("Please select a row first / برجاء اختيار السجل أولاً");
+               return false;
+           }
+           return confirm("Are you sure you want to delete this row? / هل أنت متأكد من حذف هذا السجل؟");
+       }
+
+       function handleOfficialVacationLineNumberClick(cellId) {
+           var cell = igtbl_getCellById(cellId);
+           if (!cell) return;
+           if (getOfficialVacationColumnKey(cell) !== "LineNumber") return;
+           var row = igtbl_getRowById(cellId);
+           if (!row) return;
+           selectOfficialVacationRow(row, cellId);
+       }
+
+       function initOfficialVacationLineNumberClick() {
+           var grid = igtbl_getGridById("UwgSearchEmployees");
+           var gridEl = (grid && grid.Element) ? grid.Element : document.getElementById("UwgSearchEmployees");
+           if (!gridEl) {
+               setTimeout(initOfficialVacationLineNumberClick, 200);
+               return;
+           }
+           if (gridEl._lineNumberClickBound || typeof $ === "undefined") return;
+           gridEl._lineNumberClickBound = true;
+           $(gridEl).delegate("td", "click", function () {
+               if (!this.id) return;
+               handleOfficialVacationLineNumberClick(this.id);
+           });
+       }
 
        function ApplyEventTypeVacationTypeRule(row) {
            if (!row || !row.getCellFromKey) return;
@@ -80,9 +230,12 @@
 
            if (isEvent && vacationTypeCell) {
                vacationTypeCell.setValue("");
-               if (vacationTypeCell.Element) {
-                   vacationTypeCell.Element.innerText = "";
-                   vacationTypeCell.Element.style.backgroundColor = "#e8e8e8";
+               var vacationTypeEl = getOfficialVacationCellElement(vacationTypeCell, null);
+               if (vacationTypeEl) {
+                   vacationTypeEl.innerText = "";
+                   if (_officialVacationsSelectedRow !== row) {
+                       vacationTypeEl.style.backgroundColor = "#e8e8e8";
+                   }
                }
                if (typeof vacationTypeCell.setAllowEdit === "function") {
                    vacationTypeCell.setAllowEdit(false);
@@ -92,8 +245,9 @@
                }
            } else if (isVacation) {
                if (vacationTypeCell) {
-                   if (vacationTypeCell.Element) {
-                       vacationTypeCell.Element.style.backgroundColor = "";
+                   var vacationTypeEl2 = getOfficialVacationCellElement(vacationTypeCell, null);
+                   if (vacationTypeEl2 && _officialVacationsSelectedRow !== row) {
+                       vacationTypeEl2.style.backgroundColor = "";
                    }
                    if (typeof vacationTypeCell.setAllowEdit === "function") {
                        vacationTypeCell.setAllowEdit(true);
@@ -114,6 +268,7 @@
            for (var i = 0; i < grid.Rows.length; i++) {
                ApplyEventTypeVacationTypeRule(grid.Rows.getRow(i));
            }
+           initOfficialVacationLineNumberClick();
        }
 
        function uwg_AfterCellUpdateHandler(gridName, cellId) {
@@ -125,16 +280,19 @@
                var rowIndex = igtbl_getRowById(cellId).Id.split("_")[2];
 
                var value = cell.innerText;
-               var columnKey = cell.columnKey;
+               var columnKey = getOfficialVacationColumnKey(cell);
 
                if (columnKey === "eventType") {
                    ApplyEventTypeVacationTypeRule(Row);
+                   if (_officialVacationsSelectedRow === Row) {
+                       applyOfficialVacationRowSelection(Row, cellId);
+                   }
                }
 
                // اقرأ ClientID من HiddenField
                var txtDateID = document.getElementById('hfTxtDateID').value;
                var txtToDateID = document.getElementById('hfTxtToDateID').value;
-               if (cell.columnKey === "FromDate") {
+               if (columnKey === "FromDate") {
                    var editor = igedit_getById(txtDateID);
                    editor.setValue(value);
                    txtDateID.value = value
@@ -145,7 +303,7 @@
                    txtToDateID.value = value
                }
 
-               if (cell.columnKey === "ToDate") {
+               if (columnKey === "ToDate") {
                    var editor2 = igedit_getById(txtToDateID);
                    editor2.setValue(value);
                }
@@ -166,11 +324,20 @@
        }
 
        var cell;
+       function uwgOfficialVacations_CellClickHandler(gridName, cellId, button) {
+           handleOfficialVacationLineNumberClick(cellId);
+       }
+
        function uwgEnterCellEdit(gridName, cellId) {
            cell = cellId;
            var editCell = igtbl_getCellById(cellId);
            var editRow = igtbl_getRowById(cellId);
-           if (editCell && editRow && editCell.columnKey === "VacationTypeID") {
+           if (editCell && editRow && getOfficialVacationColumnKey(editCell) === "LineNumber") {
+               igtbl_cancelEdit(cellId);
+               selectOfficialVacationRow(editRow, cellId);
+               return;
+           }
+           if (editCell && editRow && getOfficialVacationColumnKey(editCell) === "VacationTypeID") {
                var eventTypeCell = editRow.getCellFromKey("eventType");
                if (eventTypeCell) {
                    var eventTypeVal = eventTypeCell.getValue();
@@ -179,7 +346,7 @@
                    }
                }
            }
-           if (editCell && editRow && editCell.columnKey === "IsRamadan") {
+           if (editCell && editRow && getOfficialVacationColumnKey(editCell) === "IsRamadan") {
                var eventTypeCell2 = editRow.getCellFromKey("eventType");
                if (eventTypeCell2) {
                    var eventTypeVal2 = eventTypeCell2.getValue();
@@ -231,6 +398,8 @@
             <!-- HiddenFields لتخزين ClientID -->
         <asp:HiddenField ID="hfTxtDateID" runat="server"  OnValueChanged="txthdDate_TextChanged" />
         <asp:HiddenField ID="hfTxtToDateID" runat="server" OnValueChanged="txthdToDate_TextChanged" />
+        <asp:HiddenField ID="hfSelectedRowIndex" runat="server" Value="-1" />
+        <asp:HiddenField ID="hfSelectedRowID" runat="server" Value="" />
 
              <igtxt:WebDateTimeEdit ID="txtDate" runat="server" meta:resourcekey="txtDateResource1">
         </igtxt:WebDateTimeEdit>
@@ -264,7 +433,8 @@
                                 </td>
                                 <td style="width: 24px">
                                     <asp:ImageButton ID="ImageButton_Delete" Width="16px" Height="16px" runat="server"
-                                        SkinID="HrDelete_Command" CommandArgument="Delete" meta:resourcekey="ImageButton_DeleteResource1" />
+                                        SkinID="HrDelete_Command" CommandArgument="Delete" meta:resourcekey="ImageButton_DeleteResource1"
+                                        OnClientClick="return confirmDeleteOfficialVacationRow();" />
                                 </td>
                                 <td style="width: 40px">
                                     <asp:Label ID="Label_TSP1" runat="server" Text="|" meta:resourcekey="Label_TSP1Resource1"></asp:Label>
@@ -436,14 +606,14 @@
                                                                 <DisplayLayout AllowColSizingDefault="Free" AllowColumnMovingDefault="OnServer" AllowDeleteDefault="Yes"
                                                                     AllowSortingDefault="OnClient" AllowUpdateDefault="Yes" AutoGenerateColumns="False"
                                                                     BorderCollapseDefault="Separate" HeaderClickActionDefault="SortSingle" Name="uwgForNationality"
-                                                                    RowHeightDefault="18px" RowSelectorsDefault="No" SelectTypeRowDefault="Extended"
+                                                                    RowHeightDefault="18px" RowSelectorsDefault="No" SelectTypeRowDefault="Single"
                                                                     StationaryMargins="Header" StationaryMarginsOutlookGroupBy="True" TableLayout="Fixed"
                                                                     Version="4.00" ViewType="OutlookGroupBy">
                                                                     <FrameStyle BackColor="Window" BorderColor="InactiveCaption" BorderStyle="Solid"
                                                                         BorderWidth="1px" Font-Names="Microsoft Sans Serif" Font-Size="8.25pt" Height="250px"
                                                                         Width="100%">
                                                                     </FrameStyle>
-                                                                    <ClientSideEvents AfterCellUpdateHandler="uwg_AfterCellUpdateHandler" AfterEnterEditModeHandler="uwgEnterCellEdit" />
+                                                                    <ClientSideEvents AfterCellUpdateHandler="uwg_AfterCellUpdateHandler" AfterEnterEditModeHandler="uwgEnterCellEdit" CellClickHandler="uwgOfficialVacations_CellClickHandler" />
                                                                     <Pager MinimumPagesForDisplay="2">
                                                                         <PagerStyle BackColor="LightGray" BorderStyle="Solid" BorderWidth="1px">
                                                                             <BorderDetails ColorLeft="White" ColorTop="White" WidthLeft="1px" WidthTop="1px" />
@@ -463,6 +633,8 @@
                                                                         <Padding Left="3px" />
                                                                         <BorderDetails ColorLeft="Window" ColorTop="Window" />
                                                                     </RowStyleDefault>
+                                                                    <SelectedRowStyleDefault BackColor="#D6EAF8" ForeColor="Black">
+                                                                    </SelectedRowStyleDefault>
                                                                     <GroupByRowStyleDefault BackColor="Control" BorderColor="Window">
                                                                     </GroupByRowStyleDefault>
                                                                     <GroupByBox Hidden="True">
@@ -518,7 +690,7 @@
                                                                             <igtbl:UltraGridColumn BaseColumnName="LineNum" Key="LineNumber" AllowUpdate="No" meta:resourcekey="UltraGridColumnLineNumber" Width="4%">
                                                                                 <Header Caption="LineNumber">
                                                                                 </Header>
-                                                                                <CellStyle HorizontalAlign="Center">
+                                                                                <CellStyle HorizontalAlign="Center" ForeColor="Gray" BackColor="#E8E8E8" CustomRules="cursor:pointer;">
                                                                                 </CellStyle>
                                                                             </igtbl:UltraGridColumn>
                                                                             <igtbl:UltraGridColumn AllowUpdate="Yes" BaseColumnName="eventType" Key="eventType"

@@ -474,6 +474,69 @@
                                                 </table>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td style="width: 47%; height: 16px; vertical-align: top">
+                                                <table style="width: 100%; vertical-align: top" cellspacing="0">
+                                                    <tr>
+                                                        <td class="SeparArea">
+                                                        </td>
+                                                        <td class="LabelArea">
+                                                            <asp:Label ID="lblShowPostingNotification" runat="server" Text="Show posting notification" SkinID="Label_DefaultNormal"
+                                                                meta:resourcekey="lblShowPostingNotificationResource1"></asp:Label>
+                                                        </td>
+                                                        <td class="DataArea">
+                                                            <asp:CheckBox ID="chkShowPostingNotification" runat="server" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="width: 6%; height: 16px; vertical-align: top">
+                                            </td>
+                                            <td style="width: 47%; height: 16px; vertical-align: top">
+                                                <table style="width: 100%; vertical-align: top" cellspacing="0">
+                                                    <tr>
+                                                        <td class="SeparArea">
+                                                        </td>
+                                                        <td class="LabelArea">
+                                                        </td>
+                                                        <td class="DataArea">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 47%; height: 16px; vertical-align: top">
+                                                <table style="width: 100%; vertical-align: top" cellspacing="0">
+                                                    <tr>
+                                                        <td class="SeparArea">
+                                                        </td>
+                                                        <td class="LabelArea">
+                                                            <asp:Label ID="lblJournalEmployeeFields" runat="server" Text="Journal employee fields" SkinID="Label_DefaultNormal"
+                                                                meta:resourcekey="lblJournalEmployeeFieldsResource1"></asp:Label>
+                                                        </td>
+                                                        <td class="DataArea">
+                                                            <asp:TextBox ID="txtJournalEmployeeFields" runat="server" SkinID="TextBox_SmallNormalrtl" MaxLength="500"
+                                                                meta:resourcekey="txtJournalEmployeeFieldsResource1"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="width: 6%; height: 16px; vertical-align: top">
+                                            </td>
+                                            <td style="width: 47%; height: 16px; vertical-align: top">
+                                                <table style="width: 100%; vertical-align: top" cellspacing="0">
+                                                    <tr>
+                                                        <td class="SeparArea">
+                                                        </td>
+                                                        <td class="LabelArea">
+                                                        </td>
+                                                        <td class="DataArea">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
                                                             </table>
                                                         </ContentTemplate></asp:UpdatePanel></div>
 

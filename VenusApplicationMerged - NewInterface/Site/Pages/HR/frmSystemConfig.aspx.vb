@@ -92,8 +92,9 @@ Partial Class frmSystemConfig
         Try
 
             Dim count As Integer = CInt(txtMinimumCostCentersCount.Text)
+            Dim journalEmployeeFields As String = txtJournalEmployeeFields.Text.Replace("'", "''")
             Dim Str = "delete from sys_SystemConfig where CompanyId=" & DdlCompany.SelectedValue & "; "
-            Str &= " INSERT INTO [dbo].[sys_SystemConfig] ([UseCostCenter],[MinimumCostCentersCount],PreventChangeContractEndDate,RegUserID,MultiBranchedPosition,CompanyId,AllowDelayInstallmentPart,ShowVacationsNotifications) VALUES(" & If(chkUseCostCenter.Checked, "1", "0") & "," & count & "," & If(ChkPreventChangeEndDate.Checked, "1", "0") & ",'" & User & "'," & If(chkMultiBranchedPosition.Checked, "1", "0") & "," & DdlCompany.SelectedValue & "," & If(chkAllowDelayInstallmentPart.Checked, "1", "0") & "," & If(chkShowVacationsNotifications.Checked, "1", "0") & ")"
+            Str &= " INSERT INTO [dbo].[sys_SystemConfig] ([UseCostCenter],[MinimumCostCentersCount],PreventChangeContractEndDate,RegUserID,MultiBranchedPosition,CompanyId,AllowDelayInstallmentPart,ShowVacationsNotifications,ShowPostingNotification,JournalEmployeeFields) VALUES(" & If(chkUseCostCenter.Checked, "1", "0") & "," & count & "," & If(ChkPreventChangeEndDate.Checked, "1", "0") & ",'" & User & "'," & If(chkMultiBranchedPosition.Checked, "1", "0") & "," & DdlCompany.SelectedValue & "," & If(chkAllowDelayInstallmentPart.Checked, "1", "0") & "," & If(chkShowVacationsNotifications.Checked, "1", "0") & "," & If(chkShowPostingNotification.Checked, "1", "0") & ",'" & journalEmployeeFields & "')"
             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsTicketsAgencies.ConnectionString, System.Data.CommandType.Text, Str)
             Return True
         Catch ex As Exception
@@ -136,6 +137,16 @@ Partial Class frmSystemConfig
                     txtMinimumCostCentersCount.Text = dr("MinimumCostCentersCount").ToString()
                 Else
                     txtMinimumCostCentersCount.Text = ""
+                End If
+
+                If Not IsDBNull(dr("ShowPostingNotification")) Then
+                    chkShowPostingNotification.Checked = CBool(dr("ShowPostingNotification"))
+                End If
+
+                If Not IsDBNull(dr("JournalEmployeeFields")) Then
+                    txtJournalEmployeeFields.Text = dr("JournalEmployeeFields").ToString()
+                Else
+                    txtJournalEmployeeFields.Text = ""
                 End If
 
             Next

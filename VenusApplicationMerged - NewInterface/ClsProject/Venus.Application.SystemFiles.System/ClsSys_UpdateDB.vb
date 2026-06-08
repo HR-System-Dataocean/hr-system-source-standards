@@ -12446,9 +12446,11 @@ FROM     SS_ChangeWorkHoursRequest JOIN
         SQL = "IF COL_LENGTH('hrs_OfficialVacations', 'EngName') IS NULL BEGIN ALTER TABLE hrs_OfficialVacations ADD EngName nvarchar(100) NULL END"
         ExecuteUpdate(SQL)
 
+        SQL = "IF COL_LENGTH('sys_SystemConfig', 'ShowPostingNotification') IS NULL BEGIN ALTER TABLE dbo.sys_SystemConfig ADD ShowPostingNotification bit NULL END"
+        ExecuteUpdate(SQL)
 
-
-
+        SQL = "IF COL_LENGTH('sys_SystemConfig', 'JournalEmployeeFields') IS NULL BEGIN ALTER TABLE dbo.sys_SystemConfig ADD JournalEmployeeFields nvarchar(500) NULL END"
+        ExecuteUpdate(SQL)
 
     End Function
     Public Function ExecuteUpdate(ByVal mySQLQuery As String) As Boolean
