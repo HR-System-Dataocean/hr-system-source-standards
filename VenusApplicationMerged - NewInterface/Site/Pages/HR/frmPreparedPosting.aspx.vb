@@ -1,6 +1,7 @@
 ﻿Imports Venus.Application.SystemFiles.System
 Imports Venus.Application.SystemFiles.HumanResource
 Imports System.Data
+Imports System.Text.RegularExpressions
 
 Partial Class frmPreparedPosting
     Inherits MainPage
@@ -95,6 +96,10 @@ Partial Class frmPreparedPosting
                     Dim ClsEmployeeTransactions As New Clshrs_EmployeesTransactions(Page)
                     Dim ClsNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployeeTransactions.ConnectionString)
                     Dim objNav As New Venus.Shared.Web.NavigationHandler(ClsEmployeeTransactions.ConnectionString)
+
+                    If Not ValidateJournalEmployeeFields(ClsEmployeeTransactions.ConnectionString, ClsEmployeeTransactions.MainCompanyID, objNav) Then
+                        Return
+                    End If
 
                     Dim StrSelectCommand As String = "Select isnull(Max(TransactionID),0) + 1 from hrs_HrsTrans"
                     Dim str As String = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeeTransactions.ConnectionString, Data.CommandType.Text, StrSelectCommand)
@@ -361,6 +366,86 @@ Partial Class frmPreparedPosting
             IntModuleID = ClsForms.ModuleID
         End If
         Return IntModuleID
+    End Function
+
+    Private Function GetValidJournalEmployeeFields(ByVal journalFields As String) As List(Of String)
+        Dim fields As New List(Of String)
+        If String.IsNullOrWhiteSpace(journalFields) Then
+            Return fields
+        End If
+
+        For Each part As String In journalFields.Split(","c)
+            Dim fieldName As String = part.Trim()
+            If Not String.IsNullOrEmpty(fieldName) AndAlso Regex.IsMatch(fieldName, "^[a-zA-Z_][a-zA-Z0-9_]*$") Then
+                fields.Add(fieldName)
+            End If
+        Next
+
+        Return fields
+    End Function
+
+    Private Function ValidateJournalEmployeeFields(ByVal connectionString As String, ByVal companyId As Integer, ByVal objNav As Venus.Shared.Web.NavigationHandler) As Boolean
+        Try
+            Dim strSystem As String = "Select ShowPostingNotification, JournalEmployeeFields from sys_SystemConfig where CompanyId=" & companyId
+            Dim dsConfig As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(connectionString, CommandType.Text, strSystem)
+            If dsConfig.Tables(0).Rows.Count = 0 Then
+                Return True
+            End If
+
+            Dim configRow As DataRow = dsConfig.Tables(0).Rows(0)
+            If IsDBNull(configRow("ShowPostingNotification")) OrElse Not CBool(configRow("ShowPostingNotification")) Then
+                Return True
+            End If
+
+            Dim journalFields As String = String.Empty
+            If Not IsDBNull(configRow("JournalEmployeeFields")) Then
+                journalFields = configRow("JournalEmployeeFields").ToString().Trim()
+            End If
+            If String.IsNullOrWhiteSpace(journalFields) Then
+                Return True
+            End If
+
+            Dim fields As List(Of String) = GetValidJournalEmployeeFields(journalFields)
+            If fields.Count = 0 Then
+                Return True
+            End If
+
+            Dim emptyFieldCriteria As New System.Text.StringBuilder()
+            Dim emptyFieldList As New System.Text.StringBuilder()
+            For Each fieldName As String In fields
+                emptyFieldCriteria.Append(" (ISNULL(LTRIM(RTRIM(CAST(e.[" & fieldName & "] AS nvarchar(max)))), '') = '') OR")
+                emptyFieldList.Append(" CASE WHEN ISNULL(LTRIM(RTRIM(CAST(e.[" & fieldName & "] AS nvarchar(max)))), '') = '' THEN ', " & fieldName & "' ELSE '' END +")
+            Next
+
+            Dim criteria As String = emptyFieldCriteria.ToString().Remove(emptyFieldCriteria.Length - 2)
+            Dim fieldListSql As String = emptyFieldList.ToString().Remove(emptyFieldList.Length - 1)
+            Dim strEmployees As String = "Select e.Code, STUFF(" & fieldListSql & ", 1, 2, '') AS EmptyFields " &
+                "from hrs_Employees e where e.CancelDate is null and (" & criteria & ") order by e.Code"
+
+            Dim dsEmps As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(connectionString, CommandType.Text, strEmployees)
+            If dsEmps.Tables(0).Rows.Count = 0 Then
+                Return True
+            End If
+
+            Dim reportLines As New List(Of String)
+            reportLines.Add("Code" & vbTab & "Empty Fields")
+            For Each dr As DataRow In dsEmps.Tables(0).Rows
+                reportLines.Add(dr("Code").ToString() & vbTab & dr("EmptyFields").ToString())
+            Next
+
+            Dim fileName As String = "MissingJournalEmployeeFields_" & Now.Ticks.ToString() & ".txt"
+            Dim filePath As String = Server.MapPath("~/tempReports/" & fileName)
+            System.IO.File.WriteAllLines(filePath, reportLines, New System.Text.UTF8Encoding(True))
+
+            Dim downloadUrl As String = ResolveUrl("/tempReports/" & fileName)
+            Dim message As String = objNav.SetLanguage(Page, "There are employees with empty journal employee fields/يوجد موظفين لديهم حقول يومية فارغة")
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, message)
+            Venus.Shared.Web.ClientSideActions.OpenWindowAdv(Page, downloadUrl, 800, 600, False,
+                Venus.Shared.Web.ClientSideActions.WINDOW_TARGET._Blank, "DownloadWindow", False, True, False, False, False, False, False, False, False)
+            Return False
+        Catch ex As Exception
+            Return True
+        End Try
     End Function
 
 #End Region
