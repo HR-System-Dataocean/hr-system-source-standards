@@ -239,8 +239,7 @@ Partial Class frmEmployeesEndofService
             '7- Save the Head of the Employee Transaction 
             '==========================================================================
 
-            'Rabie 3-12-2025
-            ' ClsFisicalPeriod.GetFisicalperiodInfo(dtNowDate, IntPeriodId, DtePeriodFrom, DtePeriodTo)
+            ClsFisicalPeriod.GetFisicalperiodInfo(dtNowDate, IntPeriodId, DtePeriodFrom, DtePeriodTo)
             '------------------------------=============-----------------------------------------
             With ClsEmployeesTrancations
                 .EmployeeID = IntEmployeeId
@@ -1047,7 +1046,7 @@ Partial Class frmEmployeesEndofService
     Private Function Get_FromToDate(ByVal Basedate As Date) As Boolean
         Try
             ClsEmployees = New Clshrs_Employees(Page)
-
+            ClsFisicalPeriod = New Clssys_FiscalYearsPeriods(Page)
 
             If clsBranch.AffectPeriod Then
                 ClsFisicalPeriod.GetFisicalperiodInfoByPrepareDay(ClsEmployees.SetHigriDate(wdcEndOfServiceDate.Value), IntFisicalPeriod, FromDate, ToDate)
