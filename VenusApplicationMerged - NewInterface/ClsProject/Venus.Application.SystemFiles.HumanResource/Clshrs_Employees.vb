@@ -2335,6 +2335,16 @@ Public Class Clshrs_Employees
                     If FormulaExpression = String.Empty Then
                         DblAmount = ObjDatahandler.DataValue_Out(row.Item(3), Data.SqlDbType.Money)
                     Else
+                        If FormulaExpression.Contains("<$23$>") And ClsTransactionsTypes.MaxGosiAmount > 0 Then
+                            Dim sTSql1 = "SELECT  id FROM     hrs_TransactionsTypes WHERE  code=23"
+                            Dim TrnTypeID = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsTransactionsTypes.ConnectionString, CommandType.Text, sTSql1)
+                            'ContractGosiAmount
+                            Dim strContractGosiAmount = "SELECT  top(1) amount FROM     hrs_ContractsTransactions WHERE ContractID=" & IntContractID & " And TransactionTypeID=" & TrnTypeID & ""
+                            Dim ContractGosiAmount = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsTransactionsTypes.ConnectionString, CommandType.Text, strContractGosiAmount)
+                            If ContractGosiAmount > ClsTransactionsTypes.MaxGosiAmount Then
+                                FormulaExpression = FormulaExpression.Replace("<$23$>", ClsTransactionsTypes.MaxGosiAmount.ToString())
+                            End If
+                        End If
                         ClsSolver = New Clshrs_FormulaSolver(ClsTransactionsTypes.ConnectionString, mPage)
                         ClsSolver.EmployeeID = IntEmployeeId
                         ClsSolver.FiscalPeriodID = IntFiscalYearPeriod

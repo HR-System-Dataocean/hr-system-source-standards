@@ -477,4 +477,7 @@
   <data name="UltraGridColumnSerial.Header.Caption" xml:space="preserve">
     <value>Serial</value>
   </data>
+  <data name="lblMaxGosiAmountResource1.Text" xml:space="preserve">
+    <value>Maximum GOSI Salary</value>
+  </data>
 </root>

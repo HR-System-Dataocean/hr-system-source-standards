@@ -994,6 +994,16 @@ Public Class Clshrs_ContractsTransactions
                                     clsFormula.NoOfWorkingDays = 30
                                     clsFormula.NoOfDaysPerPeriod = 30
                                     clsFormula.FiscalPeriodID = fisPeriodID
+                                    If FormulaExpression.Contains("<$23$>") And clsTransType.MaxGosiAmount > 0 Then
+                                        Dim sTSql1 = "SELECT  id FROM     hrs_TransactionsTypes WHERE  code=23"
+                                        Dim TrnTypeID = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsTransType.ConnectionString, CommandType.Text, sTSql1)
+                                        'ContractGosiAmount
+                                        Dim strContractGosiAmount = "SELECT  top(1) amount FROM     hrs_ContractsTransactions WHERE ContractID=" & intContractID & " And TransactionTypeID=" & TrnTypeID & ""
+                                        Dim ContractGosiAmount = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsTransType.ConnectionString, CommandType.Text, strContractGosiAmount)
+                                        If ContractGosiAmount > clsTransType.MaxGosiAmount Then
+                                            FormulaExpression = FormulaExpression.Replace("<$23$>", clsTransType.MaxGosiAmount.ToString())
+                                        End If
+                                    End If
                                     clsFormula.EvaluateExpression(FormulaExpression, 0)
                                     Amount = clsFormula.Output
                                     Amount = IIf(Amount < 0, 0, Amount)
