@@ -103,6 +103,7 @@ Partial Class frmPreparedPosting
 
                     Dim StrSelectCommand As String = "Select isnull(Max(TransactionID),0) + 1 from hrs_HrsTrans"
                     Dim str As String = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeeTransactions.ConnectionString, Data.CommandType.Text, StrSelectCommand)
+                    Dim FilterID As String = ddlFilter.SelectedValue
 
                     For Each row As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
                         If row.Cells.FromKey("PrepareType").Value = ClsNavigationHandler.SetLanguage(Me, "Select All/تحديد الكل") Then
@@ -134,6 +135,15 @@ Partial Class frmPreparedPosting
                                                                                        ClsEmployeeTransactions.ID & ",GetDate(),NULL,'',hrs_Employees.NationalityID,(select top 1 ContractTypeID from hrs_Contracts where EmployeeID = hrs_Employees.ID order by StartDate DESC) as ContractTypeID from hrs_EmployeesTransactions as hrs_EmployeesTransactions left outer join hrs_EmployeesTransactionsProjects as hrs_EmployeesTransactionsProjects on hrs_EmployeesTransactions.ID = hrs_EmployeesTransactionsProjects.EmployeeTransactionID" &
                                                                                        " left outer join hrs_EmployeesTransactionsDetails as hrs_EmployeesTransactionsDetails on  hrs_EmployeesTransactionsProjects.ID = hrs_EmployeesTransactionsDetails.EmpTransProjID" &
                                                                                        " left outer join hrs_Employees on hrs_EmployeesTransactions.EmployeeID =  hrs_Employees.ID left outer join hrs_TransactionsTypes AS hrs_TransactionsTypes on hrs_EmployeesTransactionsDetails.TransactionTypeID = hrs_TransactionsTypes.ID where isnull(hrs_TransactionsTypes.IsAllowPosting,0) <> 1 and hrs_EmployeesTransactions.ID = " & ClsEmployeeTransactions.ID
+                                    If FilterID <> "N" Then
+                                        StrCommand = "insert into hrs_HrsTrans select '" & str & "',hrs_EmployeesTransactions.RegDate,hrs_EmployeesTransactions.EmployeeID,hrs_EmployeesTransactions.FiscalYearPeriodID,hrs_EmployeesTransactionsProjects.ProjectID,hrs_EmployeesTransactionsProjects.WorkingUnits,hrs_Employees.BranchID,hrs_Employees.LocationID,hrs_Employees.DepartmentID," &
+                                                                                       "hrs_Employees.SectorID,ISNULL(hrs_Employees.Cost1,0),ISNULL(hrs_Employees.Cost2,0),ISNULL(hrs_Employees.Cost3,0),ISNULL(hrs_Employees.Cost4,0),ISNULL(hrs_EmployeesTransactionsDetails.TransactionTypeID,0),ISNULL(hrs_EmployeesTransactionsDetails.NumericValue,0),ISNULL(hrs_EmployeesTransactionsDetails.NumericValue,0) * " & clsCurrency.Amount & "," &
+                                                                                       clsCurrency.ID & "," & clsCurrency.Amount & ",hrs_EmployeesTransactions.PrepareType,NULL,NULL,'" & IIf(String.IsNullOrEmpty(clsemployee.BankID), "Cash", "Exchange") & "'," & clsemployee.BankID & "," & ClsEmployeeTransactions.MainCompanyID & "," & ClsEmployeeTransactions.DataBaseUserRelatedID & "," &
+                                                                                       ClsEmployeeTransactions.ID & ",GetDate(),NULL,'',hrs_Employees.NationalityID,(select top 1 ContractTypeID from hrs_Contracts where EmployeeID = hrs_Employees.ID order by StartDate DESC) as ContractTypeID from hrs_EmployeesTransactions as hrs_EmployeesTransactions left outer join hrs_EmployeesTransactionsProjects as hrs_EmployeesTransactionsProjects on hrs_EmployeesTransactions.ID = hrs_EmployeesTransactionsProjects.EmployeeTransactionID" &
+                                                                                       " left outer join hrs_EmployeesTransactionsDetails as hrs_EmployeesTransactionsDetails on  hrs_EmployeesTransactionsProjects.ID = hrs_EmployeesTransactionsDetails.EmpTransProjID" &
+                                                                                       " left outer join hrs_Employees on hrs_EmployeesTransactions.EmployeeID =  hrs_Employees.ID left outer join hrs_TransactionsTypes AS hrs_TransactionsTypes on hrs_EmployeesTransactionsDetails.TransactionTypeID = hrs_TransactionsTypes.ID where isnull(hrs_TransactionsTypes.IsAllowPosting,0) <> 1 and hrs_EmployeesTransactions.ID = " & ClsEmployeeTransactions.ID
+
+                                    End If
                                     Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeeTransactions.ConnectionString, Data.CommandType.Text, StrCommand)
                                     ClsEmployeeTransactions.Update("ID=" & row.Cells.FromKey("ID").Value)
                                 End If
@@ -228,23 +238,84 @@ Partial Class frmPreparedPosting
                     Dim StrCommand As String = "Select distinct TransactionID from hrs_HrsTrans where RegComputerID in (" & StrIDArray & ")"
                     Dim dsPatches As New Data.DataSet
                     dsPatches = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployeeTransactions.ConnectionString, Data.CommandType.Text, StrCommand)
-                    For I As Integer = 0 To dsPatches.Tables(0).Rows.Count - 1
-                        Dim ExecProfile As String = ""
-                        If ConfigurationManager.AppSettings("PostingStatus") = "0" Then
-                            ExecProfile = " Exec SPhrs_Posting " & dsPatches.Tables(0).Rows(I)(0) & "," & ddlFilter.SelectedValue
-                        Else
 
-                            'ExecProfile = "Declare @Err	varchar(max)" & _
-                            '              " Declare @ExecStatus	bit = 0" & _
-                            '              " Exec fcs_InsertProfile 'Site\Pages\Hr',0,0, 0," & dsPatches.Tables(0).Rows(I)(0) & ",@Err output , @ExecStatus output" & _
-                            '              " Select @Err ,@ExecStatus"
+                    Dim FilterID As String = ddlFilter.SelectedValue
 
-                            ExecProfile = "Declare @Err	varchar(max)" &
+
+
+                    If FilterID <> "A" Then
+                        If FilterID = "N" Then
+                            For I As Integer = 0 To dsPatches.Tables(0).Rows.Count - 1
+                                Dim ExecProfile As String = ""
+                                If ConfigurationManager.AppSettings("PostingStatus") = "0" Then
+                                    ExecProfile = " Exec SPhrs_Posting " & dsPatches.Tables(0).Rows(I)(0) & "," & ddlFilter.SelectedValue
+                                Else
+
+                                    ExecProfile = "Declare @Err	varchar(max)" &
                                          " Declare @ExecStatus	bit = 0" &
                                          " Exec fcs_InsertProfile " & dsPatches.Tables(0).Rows(I)(0)
+                                End If
+                                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeeTransactions.ConnectionString, Data.CommandType.Text, ExecProfile)
+                            Next
                         End If
-                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeeTransactions.ConnectionString, Data.CommandType.Text, ExecProfile)
-                    Next
+                        If FilterID = "V" Then
+                            For I As Integer = 0 To dsPatches.Tables(0).Rows.Count - 1
+                                Dim ExecProfile As String = ""
+                                If ConfigurationManager.AppSettings("PostingStatus") = "0" Then
+                                    ExecProfile = " Exec SPhrs_Posting_V " & dsPatches.Tables(0).Rows(I)(0) & "," & ddlFilter.SelectedValue
+                                Else
+                                    ExecProfile = "Declare @Err	varchar(max)" &
+                                         " Declare @ExecStatus	bit = 0" &
+                                         " Exec fcs_InsertProfile_V " & dsPatches.Tables(0).Rows(I)(0)
+                                End If
+                                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeeTransactions.ConnectionString, Data.CommandType.Text, ExecProfile)
+                            Next
+                        End If
+                        If FilterID = "E" Then
+                            For I As Integer = 0 To dsPatches.Tables(0).Rows.Count - 1
+                                Dim ExecProfile As String = ""
+                                If ConfigurationManager.AppSettings("PostingStatus") = "0" Then
+                                    ExecProfile = " Exec SPhrs_Posting_E " & dsPatches.Tables(0).Rows(I)(0) & "," & ddlFilter.SelectedValue
+                                Else
+                                    ExecProfile = "Declare @Err	varchar(max)" &
+                                         " Declare @ExecStatus	bit = 0" &
+                                         " Exec fcs_InsertProfile_E " & dsPatches.Tables(0).Rows(I)(0)
+                                End If
+                                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeeTransactions.ConnectionString, Data.CommandType.Text, ExecProfile)
+                            Next
+                        End If
+                        If FilterID = "L" Then
+                            For I As Integer = 0 To dsPatches.Tables(0).Rows.Count - 1
+                                Dim ExecProfile As String = ""
+                                If ConfigurationManager.AppSettings("PostingStatus") = "0" Then
+                                    ExecProfile = " Exec SPhrs_Posting_L " & dsPatches.Tables(0).Rows(I)(0) & "," & ddlFilter.SelectedValue
+                                Else
+                                    ExecProfile = "Declare @Err	varchar(max)" &
+                                         " Declare @ExecStatus	bit = 0" &
+                                         " Exec fcs_InsertProfile_L " & dsPatches.Tables(0).Rows(I)(0)
+                                End If
+                                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeeTransactions.ConnectionString, Data.CommandType.Text, ExecProfile)
+                            Next
+                        End If
+                    Else
+                        For I As Integer = 0 To dsPatches.Tables(0).Rows.Count - 1
+                            Dim ExecProfile As String = ""
+                            If ConfigurationManager.AppSettings("PostingStatus") = "0" Then
+                                ExecProfile = " Exec SPhrs_Posting " & dsPatches.Tables(0).Rows(I)(0) & "," & ddlFilter.SelectedValue
+                            Else
+
+                                'ExecProfile = "Declare @Err	varchar(max)" & _
+                                '              " Declare @ExecStatus	bit = 0" & _
+                                '              " Exec fcs_InsertProfile 'Site\Pages\Hr',0,0, 0," & dsPatches.Tables(0).Rows(I)(0) & ",@Err output , @ExecStatus output" & _
+                                '              " Select @Err ,@ExecStatus"
+
+                                ExecProfile = "Declare @Err	varchar(max)" &
+                                             " Declare @ExecStatus	bit = 0" &
+                                             " Exec fcs_InsertProfile " & dsPatches.Tables(0).Rows(I)(0)
+                            End If
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeeTransactions.ConnectionString, Data.CommandType.Text, ExecProfile)
+                        Next
+                    End If
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Post Done!/تم الترحيل"))
             End Select
             GetData()
@@ -302,13 +373,15 @@ Partial Class frmPreparedPosting
             End If
             If FilterID <> "A" Then
                 If FilterID = "N" Then
-                    strFilter &= " And  et.PrepareType ='N'"
+                    strFilter &= " And  et.PrepareType ='N' "
                 End If
                 If FilterID = "V" Then
-                    strFilter &= " And  (et.PrepareType ='V' or et.PrepareType ='NV')"
+                    strFilter &= " AND ( ( et.PrepareType = 'V' AND et.EmployeesVacationsID IS NULL ) OR ( et.PrepareType = 'ET' AND EXISTS ( SELECT 1 FROM hrs_EmployeesTransactions t WHERE t.ID = et.REGCOMPUTERID AND t.PrepareType = 'V' AND t.EmployeesVacationsID IS NULL ) ) "
+                    strFilter &= " OR ( et.PrepareType IN ('V','NV') AND et.EmployeesVacationsID IS NOT NULL AND EXISTS ( SELECT 1 FROM hrs_EmployeesTransactions t WHERE t.PrepareType = 'NV' AND t.EmployeesVacationsID = et.EmployeesVacationsID ) ) "
+                    strFilter &= " OR ( et.PrepareType = 'ET'  AND EXISTS ( SELECT 1 FROM hrs_EmployeesTransactions emt WHERE emt.ID = et.REGCOMPUTERID AND emt.PrepareType = 'V' AND emt.EmployeesVacationsID IS NOT NULL AND EXISTS ( SELECT 1 FROM hrs_EmployeesTransactions nv WHERE nv.PrepareType = 'NV' AND nv.EmployeesVacationsID = emt.EmployeesVacationsID )))) "
                 End If
                 If FilterID = "E" Then
-                    strFilter &= " And  et.PrepareType in('E','EN','EV','EL')"
+                    strFilter &= " And  (et.PrepareType in('E','EN','EV','EL') or ( et.PrepareType = 'ET' AND EXISTS ( SELECT 1 FROM hrs_EmployeesTransactions t WHERE t.ID = et.REGCOMPUTERID AND t.PrepareType = 'E'  ) ) ) "
                 End If
                 If FilterID = "L" Then
                     strFilter &= " And  et.PrepareType in('L','LP')"

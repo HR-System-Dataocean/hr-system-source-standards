@@ -354,7 +354,7 @@
                                                         <td class="DataArea">
                                                             <asp:DropDownList ID="ddlFilter" runat="server" SkinID="DropDownList_LargNormal"
                                                                 meta:resourcekey="ddlFilterResource1" AutoPostBack="True">
-                                                                <asp:ListItem Value="A" Text="All Transactions" meta:resourcekey="AllDataRes"></asp:ListItem>
+                                                                <%--<asp:ListItem Value="A"  Text="All Transactions" meta:resourcekey="AllDataRes"></asp:ListItem>--%>
                                                                 <asp:ListItem Value="N" Text="Salaries" meta:resourcekey="SalariesRes"></asp:ListItem>
                                                                 <asp:ListItem Value="V" Text="Vacations" meta:resourcekey="VacationsRes"></asp:ListItem>
                                                                 <asp:ListItem Value="E" Text="End Of Services" meta:resourcekey="EOSRes"></asp:ListItem>

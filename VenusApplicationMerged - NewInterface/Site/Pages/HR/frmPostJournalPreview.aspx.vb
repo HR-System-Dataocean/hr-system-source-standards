@@ -153,6 +153,7 @@ Partial Class frmDistributedSalary
 
             grdProjects.DataSource = dsProjects.Tables(0)
             grdProjects.DataBind()
+            SetTotals(dsProjects.Tables(0))
         End If
     End Sub
 
@@ -167,13 +168,49 @@ Partial Class frmDistributedSalary
     End Function
 
     Private Function GetPostJournalPreviewProjects(ByVal connectionString As String, ByVal transactionIds As String, ByVal periodDate As DateTime) As DataSet
+        Dim filterValue As String = ddlFilter.SelectedValue
+        Dim storedProcedureName As String = "dbo.hrs_PostJournalPreview_GetProjects"
+
+        Select Case filterValue
+            Case "N"
+                storedProcedureName = "dbo.hrs_PostJournalPreview_GetProjects_N"
+            Case "V"
+                storedProcedureName = "dbo.hrs_PostJournalPreview_GetProjects_V"
+            Case "E"
+                storedProcedureName = "dbo.hrs_PostJournalPreview_GetProjects_E"
+            Case "L"
+                storedProcedureName = "dbo.hrs_PostJournalPreview_GetProjects_L"
+        End Select
+
+        Dim normalizedTransactionIds As String = transactionIds
+        If filterValue <> "A" Then
+            Dim resetIdsQuery As String =
+                "SELECT @TransactionIDs = " &
+                "STRING_AGG(CAST(TransactionID AS VARCHAR(20)), ',') " &
+                "FROM hrs_HrsTrans " &
+                "WHERE PrepareType = @PrepareType " &
+                "AND CHARINDEX(',' + CAST(TransactionID AS VARCHAR(20)) + ',', ',' + ISNULL(@TransactionIDs, '') + ',') > 0; " &
+                "SELECT ISNULL(@TransactionIDs, '0');"
+
+            Dim resetIdsParameters(1) As SqlParameter
+            resetIdsParameters(0) = New SqlParameter("@PrepareType", SqlDbType.VarChar, 10)
+            resetIdsParameters(0).Value = filterValue
+            resetIdsParameters(1) = New SqlParameter("@TransactionIDs", SqlDbType.NVarChar)
+            resetIdsParameters(1).Value = transactionIds
+
+            normalizedTransactionIds = Convert.ToString(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(connectionString, Data.CommandType.Text, resetIdsQuery, resetIdsParameters))
+            If String.IsNullOrWhiteSpace(normalizedTransactionIds) Then
+                normalizedTransactionIds = "0"
+            End If
+        End If
+
         Dim parameters(1) As SqlParameter
         parameters(0) = New SqlParameter("@TransactionIDs", SqlDbType.NVarChar)
-        parameters(0).Value = transactionIds
+        parameters(0).Value = normalizedTransactionIds
         parameters(1) = New SqlParameter("@PeriodDate", SqlDbType.Date)
         parameters(1).Value = periodDate.Date
 
-        Return Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(connectionString, Data.CommandType.StoredProcedure, "dbo.hrs_PostJournalPreview_GetProjects", parameters)
+        Return Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(connectionString, Data.CommandType.StoredProcedure, storedProcedureName, parameters)
     End Function
 
 #End Region
@@ -194,17 +231,8 @@ Partial Class frmDistributedSalary
 
     End Sub
 
-    Private totalDebit As Decimal = 0
-    Private totalCredit As Decimal = 0
-
     Protected Sub grdProjects_InitializeRow(ByVal sender As Object, ByVal e As Infragistics.WebUI.UltraWebGrid.RowEventArgs) Handles grdProjects.InitializeRow
-        ' Sum values
-        totalDebit += Convert.ToDecimal(e.Row.Cells.FromKey("Debit").Value)
-        totalCredit += Convert.ToDecimal(e.Row.Cells.FromKey("Credit").Value)
-
-        txtCredit.Text = totalCredit
-        txtDebitCode.Text = totalDebit
-
+        ' Totals are calculated from the full bound DataTable after each DataBind.
     End Sub
 
     Protected Sub DdlPeriods_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DdlPeriods.SelectedIndexChanged, ddlsector.SelectedIndexChanged, ddlsector.SelectedIndexChanged
@@ -329,20 +357,20 @@ Partial Class frmDistributedSalary
             rows = rows.Where(Function(r) Convert.ToString(r("CostCenter3Code")).Replace("EM", "") = code).ToArray()
         End If
 
-        If ddlFilter.SelectedIndex > 0 Then
-            If ddlFilter.SelectedValue = "N" Then
-                rows = rows.Where(Function(r) Convert.ToString(r("ArbDesc")) = "راتب اساسى & Basic Salaries").ToArray()
-            End If
-            If ddlFilter.SelectedValue = "V" Then
-                rows = rows.Where(Function(r) Convert.ToString(r("ArbDesc")) = "الاضافي& Overtime").ToArray()
-            End If
-            If ddlFilter.SelectedValue = "E" Then
-                rows = rows.Where(Function(r) Convert.ToString(r("ArbDesc")) = "بدلات اخري & Other Allowance").ToArray()
-            End If
-            If ddlFilter.SelectedValue = "L" Then
-                rows = rows.Where(Function(r) Convert.ToString(r("ArbDesc")) = "Staff Loans").ToArray()
-            End If
-        End If
+        'If ddlFilter.SelectedIndex > 0 Then
+        '    If ddlFilter.SelectedValue = "N" Then
+        '        rows = rows.Where(Function(r) Convert.ToString(r("ArbDesc")) = "راتب اساسى & Basic Salaries").ToArray()
+        '    End If
+        '    If ddlFilter.SelectedValue = "V" Then
+        '        rows = rows.Where(Function(r) Convert.ToString(r("ArbDesc")) = "الاضافي& Overtime").ToArray()
+        '    End If
+        '    If ddlFilter.SelectedValue = "E" Then
+        '        rows = rows.Where(Function(r) Convert.ToString(r("ArbDesc")) = "بدلات اخري & Other Allowance").ToArray()
+        '    End If
+        '    If ddlFilter.SelectedValue = "L" Then
+        '        rows = rows.Where(Function(r) Convert.ToString(r("ArbDesc")) = "Staff Loans").ToArray()
+        '    End If
+        'End If
 
 
         Dim filteredDt As DataTable = dt.Clone() ' Copy the structure
@@ -392,14 +420,37 @@ Partial Class frmDistributedSalary
 
             grdProjects.DataSource = dt
             grdProjects.DataBind()
+            SetTotals(dt)
         Else
             grdProjects.DataSource = filteredDt
             grdProjects.DataBind()
+            SetTotals(filteredDt)
         End If
 
 
 
 
+    End Sub
+
+    Private Sub SetTotals(ByVal source As DataTable)
+        Dim totalDebit As Decimal = 0D
+        Dim totalCredit As Decimal = 0D
+
+        If source IsNot Nothing Then
+            For Each dr As DataRow In source.Rows
+                Dim debitValue As Decimal = 0D
+                Dim creditValue As Decimal = 0D
+
+                Decimal.TryParse(Convert.ToString(dr("Debit")), debitValue)
+                Decimal.TryParse(Convert.ToString(dr("Credit")), creditValue)
+
+                totalDebit += debitValue
+                totalCredit += creditValue
+            Next
+        End If
+
+        txtCredit.Text = totalCredit.ToString()
+        txtDebitCode.Text = totalDebit.ToString()
     End Sub
 #End Region
 
