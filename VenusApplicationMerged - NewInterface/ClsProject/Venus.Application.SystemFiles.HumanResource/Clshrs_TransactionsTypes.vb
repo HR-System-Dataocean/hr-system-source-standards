@@ -21,9 +21,9 @@ Public Class Clshrs_TransactionsTypesBase
 
         MyBase.New(Page)
         mTable = " hrs_TransactionsTypes "
-        mInsertParameter = " Code,EngName,ShortEngName,ArbName,ShortArbName,ArbName4S,ShortArbName4S,TransactionGroupID,Sign,DebitAccountCode,CreditAccountCode,IsPaid,Formula,BeginContractFormula,EndContractFormula,InputIsNumeric,Remarks,RegUserID,RegComputerID,CompanyID ,IsEndOfService,IsBasicSalary,IsSalaryEOSExeclude,IsProjectRelatedItem,IsDistributable,IsAllowPosting,HasInsuranceTiers "
-        mInsertParameterValues = " @Code,@EngName,@ShortEngName,@ArbName,@ShortArbName,@ArbName4S,@ShortArbName4S,@TransactionGroupID,@Sign,@DebitAccountCode,@CreditAccountCode,@IsPaid,@Formula,@BeginContractFormula,@EndContractFormula,@InputIsNumeric,@Remarks,@RegUserID,@RegComputerID,@CompanyID,@IsEndOfService,@IsBasicSalary,@IsSalaryEOSExeclude,@IsProjectRelatedItem,@IsDistributable,@IsAllowPosting,@HasInsuranceTiers"
-        mUpdateParameter = " Code=@Code,EngName=@EngName,ShortEngName=@ShortEngName,ArbName=@ArbName,ShortArbName=@ShortArbName,ArbName4S=@ArbName4S,ShortArbName4S=@ShortArbName4S,TransactionGroupID=@TransactionGroupID,Sign=@Sign,DebitAccountCode=@DebitAccountCode,CreditAccountCode=@CreditAccountCode,IsPaid=@IsPaid,Formula=@Formula,BeginContractFormula=@BeginContractFormula,EndContractFormula=@EndContractFormula,InputIsNumeric=@InputIsNumeric,IsEndOfService=@IsEndOfService,IsBasicSalary=@IsBasicSalary,IsSalaryEOSExeclude=@IsSalaryEOSExeclude,IsProjectRelatedItem=@IsProjectRelatedItem,Remarks=@Remarks,IsDistributable=@IsDistributable,IsAllowPosting=@IsAllowPosting,HasInsuranceTiers=@HasInsuranceTiers "
+        mInsertParameter = " Code,EngName,ShortEngName,ArbName,ShortArbName,ArbName4S,ShortArbName4S,TransactionGroupID,Sign,DebitAccountCode,CreditAccountCode,IsPaid,Formula,BeginContractFormula,EndContractFormula,InputIsNumeric,Remarks,RegUserID,RegComputerID,CompanyID ,IsEndOfService,IsBasicSalary,IsSalaryEOSExeclude,IsProjectRelatedItem,IsDistributable,IsAllowPosting,HasInsuranceTiers,MaxGosiAmount "
+        mInsertParameterValues = " @Code,@EngName,@ShortEngName,@ArbName,@ShortArbName,@ArbName4S,@ShortArbName4S,@TransactionGroupID,@Sign,@DebitAccountCode,@CreditAccountCode,@IsPaid,@Formula,@BeginContractFormula,@EndContractFormula,@InputIsNumeric,@Remarks,@RegUserID,@RegComputerID,@CompanyID,@IsEndOfService,@IsBasicSalary,@IsSalaryEOSExeclude,@IsProjectRelatedItem,@IsDistributable,@IsAllowPosting,@HasInsuranceTiers,@MaxGosiAmount"
+        mUpdateParameter = " Code=@Code,EngName=@EngName,ShortEngName=@ShortEngName,ArbName=@ArbName,ShortArbName=@ShortArbName,ArbName4S=@ArbName4S,ShortArbName4S=@ShortArbName4S,TransactionGroupID=@TransactionGroupID,Sign=@Sign,DebitAccountCode=@DebitAccountCode,CreditAccountCode=@CreditAccountCode,IsPaid=@IsPaid,Formula=@Formula,BeginContractFormula=@BeginContractFormula,EndContractFormula=@EndContractFormula,InputIsNumeric=@InputIsNumeric,IsEndOfService=@IsEndOfService,IsBasicSalary=@IsBasicSalary,IsSalaryEOSExeclude=@IsSalaryEOSExeclude,IsProjectRelatedItem=@IsProjectRelatedItem,Remarks=@Remarks,IsDistributable=@IsDistributable,IsAllowPosting=@IsAllowPosting,HasInsuranceTiers=@HasInsuranceTiers,MaxGosiAmount=@MaxGosiAmount "
         mSelectCommand = " Select * From  " & mTable
         mInsertCommand = " insert into " & mTable & "( " & mInsertParameter & ")Values(" & mInsertParameterValues & ")"
         mUpdateCommand = " Update " & mTable & " Set " & mUpdateParameter
@@ -65,6 +65,8 @@ Public Class Clshrs_TransactionsTypesBase
     Private mIsProjectRelatedItem As Boolean
     Private mIsDistributable As Boolean
     Private mHasInsuranceTiers As Boolean
+    Private mMaxGosiAmount As Double
+
 #End Region
 
 #Region "Public property"
@@ -314,6 +316,14 @@ Public Class Clshrs_TransactionsTypesBase
         End Get
         Set(ByVal value As Boolean)
             mIsAllowPosting = value
+        End Set
+    End Property
+    Public Property MaxGosiAmount() As Double
+        Get
+            Return mMaxGosiAmount
+        End Get
+        Set(ByVal value As Double)
+            mMaxGosiAmount = value
         End Set
     End Property
 
@@ -602,7 +612,7 @@ Public Class Clshrs_TransactionsTypesBase
             mRegDate = Nothing
             mCancelDate = Nothing
             mCompanyID = 0
-
+            mMaxGosiAmount = 0
         Catch ex As Exception
             mPage.Session.Add("ErrorValue", ex)
             mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, mDataBaseUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
@@ -758,6 +768,7 @@ Public Class Clshrs_TransactionsTypesBase
                 mIsSalaryEOSExeclude = mDataHandler.DataValue_Out(.Item("IsSalaryEOSExeclude"), SqlDbType.Bit)
                 mIsProjectRelatedItem = mDataHandler.DataValue_Out(.Item("IsProjectRelatedItem"), SqlDbType.Bit)
                 mHasInsuranceTiers = mDataHandler.DataValue_Out(.Item("HasInsuranceTiers"), SqlDbType.Bit)
+                mMaxGosiAmount = mDataHandler.DataValue_Out(.Item("MaxGosiAmount"), SqlDbType.Decimal)
                 mRemarks = mDataHandler.DataValue_Out(.Item("Remarks"), SqlDbType.VarChar)
                 mRegUserID = mDataHandler.DataValue_Out(.Item("RegUserID"), SqlDbType.Int, True)
                 mRegComputerID = mDataHandler.DataValue_Out(.Item("RegComputerID"), SqlDbType.Int, True)
@@ -801,6 +812,7 @@ Public Class Clshrs_TransactionsTypesBase
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@IsProjectRelatedItem", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mIsProjectRelatedItem, SqlDbType.Bit)
 
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@HasInsuranceTiers", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mHasInsuranceTiers, SqlDbType.Bit)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@MaxGosiAmount", SqlDbType.Decimal)).Value = mDataHandler.DataValue_In(mMaxGosiAmount, SqlDbType.Decimal)
 
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Formula", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mFormula, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@BeginContractFormula", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mBeginContractFormula, SqlDbType.VarChar)

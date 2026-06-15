@@ -1707,6 +1707,9 @@ Partial Class frmEmployeesEndofServiceAdvance
         If lastDays > 0 Then
             ' dblVacationDays = lastDays
         End If
+        VactotalDays = VactotalDays + 1
+        VacNetDays = VacNetDays + 1
+
         txtVactionTotalDays.Text = VactotalDays
         txtVactionExceededDays.Text = VacunpaidDays
         txtVactionNetDays.Text = VacNetDays
@@ -1765,9 +1768,11 @@ Partial Class frmEmployeesEndofServiceAdvance
 
                     Dim dueDate As DateTime = CDate(DataSet.Tables(0).Rows(i).Item("DueDate"))
                     Dim lastDayOfYear As DateTime = New DateTime(dueDate.Year, 12, 31)
+                    Dim FirstDayOfYear As DateTime = New DateTime(dueDate.Year, 1, 1)
+
 
                     Dim allDays As Decimal
-                    If DataSet.Tables(0).Rows(i).Item("BalanceTypeID") = 1 Then
+                    If DataSet.Tables(0).Rows(i).Item("BalanceTypeID") = 1 And CDate(DataSet.Tables(0).Rows(i).Item("DueDate")) = FirstDayOfYear Then
                         allDays = 360 ' DateDiff(DateInterval.Day, CDate(DataSet.Tables(0).Rows(i).Item("DueDate")), lastDayOfYear)
                     Else
                         allDays = DateDiff(DateInterval.Day, CDate(DataSet.Tables(0).Rows(i).Item("DueDate")), CDate(DataSet.Tables(0).Rows(i).Item("ExpireDate")))

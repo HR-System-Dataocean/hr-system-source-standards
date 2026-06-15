@@ -827,6 +827,24 @@
                                     </tr>
                                     <tr>
                                         <td style="width: 47%; height: 16px; vertical-align: top">
+                                              <table style="width: 100%; vertical-align: top" cellspacing="0">
+      <tr>
+          <td class="SeparArea">
+          </td>
+          <td class="LabelArea">
+              <asp:Label ID="lblMaxGosiAmount" runat="server" Text="الحد الاقصي للتأمينات الاجتماعية" SkinID="Label_DefaultNormal"
+                  meta:resourcekey="lblMaxGosiAmountResource1"></asp:Label>
+          </td>
+          <td class="DataArea">
+              <asp:TextBox ID="TxtMaxGosiAmount" runat="server" SkinID="TextBox_LargeNormalltr" MaxLength="255"
+                  meta:resourcekey="txtEndFormulaResource1"></asp:TextBox>
+  
+          </td>
+          <td class="search">
+         
+          </td>
+      </tr>
+  </table>
                                         </td>
                                         <td style="width: 6%; height: 16px; vertical-align: top">
                                         </td>

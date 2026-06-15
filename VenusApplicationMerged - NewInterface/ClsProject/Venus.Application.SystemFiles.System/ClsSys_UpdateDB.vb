@@ -8121,6 +8121,10 @@ BEGIN
 END
 "
         ExecuteUpdate(SQL)
+        SQL = "alter table hrs_TransactionsTypes add MaxGosiAmount decimal(18,2) null"
+        ExecuteUpdate(SQL)
+        SQL = "update hrs_TransactionsTypes set MaxGosiAmount=0 where MaxGosiAmount is null"
+        ExecuteUpdate(SQL)
 
         Dim postJournalPreviewSqlTemplate As String = "
 CREATE PROCEDURE [dbo].[{0}]

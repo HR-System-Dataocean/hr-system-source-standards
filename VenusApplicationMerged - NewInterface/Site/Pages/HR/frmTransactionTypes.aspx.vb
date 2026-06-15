@@ -352,6 +352,7 @@ Partial Class frmTransactionTypes
                 .IsSalaryEOSExeclude = CheckBox_IsSalaryEOSExeclude.Checked
                 .IsProjectRelatedItem = CheckBox_IsProjectRelatedItem.Checked
                 .HasInsuranceTiers = chkHasInsuranceTiers.Checked
+                .MaxGosiAmount = TxtMaxGosiAmount.Text
             End With
             Return True
         Catch ex As Exception
@@ -388,7 +389,7 @@ Partial Class frmTransactionTypes
                 CheckBox_IsProjectRelatedItem.Checked = .IsProjectRelatedItem
                 chkHasInsuranceTiers.Checked = .HasInsuranceTiers
                 ddlSign.SelectedValue = .Sign
-
+                TxtMaxGosiAmount.Text = .MaxGosiAmount
                 lblFormulaDesc.Text = GetFormulaValue(txtFormula.Text, objNavigation.SetLanguage(Page, "Eng/Arb"))
                 If (lblFormulaDesc.Text <> "") Then
                     lblFormulaDesc.BorderStyle = BorderStyle.Solid
@@ -703,7 +704,7 @@ Partial Class frmTransactionTypes
         chkHasInsuranceTiers.Checked = False
         lblFormulaDesc.Text = ""
         lblFormulaDesc.BorderWidth = 0
-
+        TxtMaxGosiAmount.Text = 0
         lblFormulaDesc.Text = ""
         lblFormulaDesc.BorderWidth = 0
 

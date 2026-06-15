@@ -477,4 +477,7 @@
   <data name="UltraGridColumnSerial.Header.Caption" xml:space="preserve">
     <value>مسلسل</value>
   </data>
+  <data name="lblMaxGosiAmountResource1.Text" xml:space="preserve">
+    <value>الحد الاقصي للراتب التأميني</value>
+  </data>
 </root>
