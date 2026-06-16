@@ -384,7 +384,7 @@ Partial Class frmPreparedPosting
                     strFilter &= " And  (et.PrepareType in('E','EN','EV','EL') or ( et.PrepareType = 'ET' AND EXISTS ( SELECT 1 FROM hrs_EmployeesTransactions t WHERE t.ID = et.REGCOMPUTERID AND t.PrepareType = 'E'  ) ) ) "
                 End If
                 If FilterID = "L" Then
-                    strFilter &= " And  et.PrepareType in('L','LP')"
+                    strFilter &= " And  et.PrepareType in('L','LP') AND EXISTS (SELECT 1 FROM hrs_EmployeesTransactionsProjects etp INNER JOIN hrs_EmployeesTransactionsDetails etd ON etd.EmpTransProjID = etp.ID WHERE etp.EmployeeTransactionID = et.ID AND etd.TransactionTypeID = 185 )"
                 End If
             End If
 
