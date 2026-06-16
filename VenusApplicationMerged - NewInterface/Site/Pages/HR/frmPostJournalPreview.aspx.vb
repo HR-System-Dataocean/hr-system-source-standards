@@ -186,10 +186,13 @@ Partial Class frmDistributedSalary
         If filterValue <> "A" Then
             Dim resetIdsQuery As String =
                 "SELECT @TransactionIDs = " &
-                "STRING_AGG(CAST(TransactionID AS VARCHAR(20)), ',') " &
-                "FROM hrs_HrsTrans " &
-                "WHERE PrepareType = @PrepareType " &
-                "AND CHARINDEX(',' + CAST(TransactionID AS VARCHAR(20)) + ',', ',' + ISNULL(@TransactionIDs, '') + ',') > 0; " &
+                "STUFF((SELECT ',' + CAST(x.TransactionID AS VARCHAR(20)) " &
+                "FROM (SELECT DISTINCT h.TransactionID " &
+                "FROM hrs_HrsTrans h " &
+                "WHERE h.PrepareType = @PrepareType " &
+                "AND CHARINDEX(',' + CAST(h.TransactionID AS VARCHAR(20)) + ',', ',' + ISNULL(@TransactionIDs, '') + ',') > 0) x " &
+                "ORDER BY x.TransactionID " &
+                "FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, ''); " &
                 "SELECT ISNULL(@TransactionIDs, '0');"
 
             Dim resetIdsParameters(1) As SqlParameter
