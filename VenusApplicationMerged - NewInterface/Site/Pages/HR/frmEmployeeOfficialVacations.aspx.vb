@@ -80,6 +80,12 @@ Partial Class frmEmployeeOfficialVacations
     Protected Sub UwgSearchEmployees_UpdateCell(sender As Object, e As Infragistics.WebUI.UltraWebGrid.CellEventArgs) Handles UwgSearchEmployees.UpdateCell
         If e.Cell.Column.Key = "eventType" Then
             ApplyEventTypeRules(e.Cell.Row)
+        ElseIf e.Cell.Column.Key = "IsRamadan" Then
+            NormalizeIsRamadanCell(e.Cell)
+            If GetIsRamadanBooleanValue(e.Cell.Value) AndAlso HasAnotherRamadanMarked(e.Cell.Row) Then
+                e.Cell.Value = False
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, "Only one row can be marked as Ramadan / لا يمكن اختيار شهر رمضان لاكثر من سطر")
+            End If
         End If
     End Sub
     Protected Sub ImageButton_Command(sender As Object, e As System.Web.UI.WebControls.CommandEventArgs) Handles ImageButton_Save.Command, ImageButton_SaveN.Command, LinkButton_SaveN.Command, ImageButton_New.Command, ImageButton_Print.Command, ImageButton_Properties.Command, LinkButton_Properties.Command, ImageButton_Remarks.Command, LinkButton_Remarks.Command, ImageButton_Last.Command, ImageButton_Next.Command, ImageButton_Back.Command, ImageButton_First.Command, ImageButton_Delete.Command
@@ -88,6 +94,12 @@ Partial Class frmEmployeeOfficialVacations
         Dim IntId As Integer = Request.QueryString("ID")
         Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsHrsEmployeeOfficialVacations.ConnectionString)
         Dim SqlCommand As String = String.Empty
+        Dim currentRegUserId As Integer = 0
+        If clsHrsEmployeeOfficialVacations.DataBaseUserRelatedID > 0 Then
+            currentRegUserId = clsHrsEmployeeOfficialVacations.DataBaseUserRelatedID
+        ElseIf clsHrsEmployeeOfficialVacations.RegUserID > 0 Then
+            currentRegUserId = clsHrsEmployeeOfficialVacations.RegUserID
+        End If
         Select Case e.CommandArgument
             Case "SaveNew"
                 If ddlFiscalYear.SelectedItem.Text = "" Then
@@ -111,7 +123,7 @@ Partial Class frmEmployeeOfficialVacations
                         Dim engName As String = GetGridCellText(DGRow, "EngName").Replace("'", "''")
 
                         SqlCommand &= " Set DateFormat DMY Insert Into hrs_OfficialVacations " &
-"(LineNum, eventType, VacationTypeID, ArbName, EngName, FromDate, ToDate, isramadan, Year)Values(" &
+"(LineNum, eventType, VacationTypeID, ArbName, EngName, FromDate, ToDate, isramadan, Year, RegUserID, RegDate)Values(" &
 LineNumber & ", " &
 eventTypeValue & ", " &
 vacationTypeValue & ", " &
@@ -120,7 +132,8 @@ vacationTypeValue & ", " &
 "'" & CDate(DGRow.Cells.FromKey("FromDate").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
 "'" & CDate(DGRow.Cells.FromKey("ToDate").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
 isRamadanValue & ", " &
-"'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
+"'" & ddlFiscalYear.SelectedItem.Text & "', " &
+currentRegUserId & ", GETDATE()) ; " & vbNewLine
                     End If
                 Next
                 If SqlCommand <> "" Then
@@ -156,7 +169,7 @@ isRamadanValue & ", " &
                         Dim engName As String = GetGridCellText(DGRow, "EngName").Replace("'", "''")
 
                         SqlCommand &= " Set DateFormat DMY Insert Into hrs_OfficialVacations " &
-"(LineNum, eventType, VacationTypeID, ArbName, EngName, FromDate, ToDate, isramadan, Year)Values(" &
+"(LineNum, eventType, VacationTypeID, ArbName, EngName, FromDate, ToDate, isramadan, Year, RegUserID, RegDate)Values(" &
 LineNumber & ", " &
 eventTypeValue & ", " &
 vacationTypeValue & ", " &
@@ -165,7 +178,8 @@ vacationTypeValue & ", " &
 "'" & CDate(DGRow.Cells.FromKey("FromDate").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
 "'" & CDate(DGRow.Cells.FromKey("ToDate").Text).ToString("yyyy-MM-dd HH:mm") & "', " &
 isRamadanValue & ", " &
-"'" & ddlFiscalYear.SelectedItem.Text & "') ; " & vbNewLine
+"'" & ddlFiscalYear.SelectedItem.Text & "', " &
+currentRegUserId & ", GETDATE()) ; " & vbNewLine
                     End If
                 Next
                 If SqlCommand <> "" Then
@@ -269,6 +283,7 @@ isRamadanValue & ", " &
             Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsHrsEmployeeOfficialVacations.ConnectionString)
             Dim rowNumber As Integer = 0
             Dim rowDataList As New List(Of OfficialVacationRowData)
+            Dim isRamadanRowsCount As Integer = 0
             Dim yearFromDate As Date = Date.MinValue
             Dim yearToDate As Date = Date.MinValue
             Dim hasYearRange As Boolean = TryGetSelectedFiscalYearDateRange(yearFromDate, yearToDate)
@@ -296,7 +311,7 @@ isRamadanValue & ", " &
 
                 If rowData.ToDate <= rowData.FromDate Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
-                        ObjNavigationHandler.SetLanguage(Page, " To date must be greater than from date / تاريخ الى تاريخ يكون اكبر من من تاريخ ") & " - " & rowNumber)
+                        ObjNavigationHandler.SetLanguage(Page, " Please review and adjust dates / برجاء مراجعة واعادة ضبط التواريخ ") & " - " & rowNumber)
                     Return False
                 End If
 
@@ -310,6 +325,15 @@ isRamadanValue & ", " &
                 If Not CanModifyGridRow(DGRow, lockMessage) Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, lockMessage))
                     Return False
+                End If
+
+                If GetGridIsRamadanBooleanValue(DGRow) Then
+                    isRamadanRowsCount += 1
+                    If isRamadanRowsCount > 1 Then
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
+                            ObjNavigationHandler.SetLanguage(Page, "Only one row can be marked as Ramadan / لا يمكن اختيار شهر رمضان لاكثر من سطر"))
+                        Return False
+                    End If
                 End If
 
                 rowDataList.Add(rowData)
@@ -844,6 +868,21 @@ isRamadanValue & ", " &
         Return If(GetGridIsRamadanBooleanValue(row), 1, 0)
     End Function
 
+    Private Function HasAnotherRamadanMarked(ByVal excludedRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow) As Boolean
+        For Each dgRow As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
+            If Object.ReferenceEquals(dgRow, excludedRow) Then
+                Continue For
+            End If
+            If Not ShouldSaveGridRow(dgRow) Then
+                Continue For
+            End If
+            If GetGridIsRamadanBooleanValue(dgRow) Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
+
     Private Function GetGridIsRamadanBooleanValue(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow) As Boolean
         If row Is Nothing OrElse row.Cells.FromKey("IsRamadan") Is Nothing Then
             Return False
@@ -939,7 +978,7 @@ isRamadanValue & ", " &
     End Function
 
     Private Function CanModifyGridRow(ByVal row As Infragistics.WebUI.UltraWebGrid.UltraGridRow, ByRef message As String) As Boolean
-        message = "The event cannot be deleted because there are associated transactions / لا يمكن حذف المناسبة لوجود حركات مرتبطة بها"
+        message = "The event cannot be deleted because the period is prepared / لا يمكن حذف المناسبة لان الفترة مجهزة"
         Try
             If row.Cells.FromKey("FromDate") Is Nothing OrElse row.Cells.FromKey("ToDate") Is Nothing Then
                 Return True
@@ -965,8 +1004,7 @@ isRamadanValue & ", " &
                                 "AND FYP.ToDate >= '" & fromDate.ToString("dd/MM/yyyy") & "' " &
                                 "AND EXISTS (SELECT 1 FROM hrs_EmployeesTransactions ET " &
                                 "WHERE ET.FiscalYearPeriodID = FYP.ID " &
-                                "AND ISNULL(ET.CancelDate,'')='' " &
-                                "AND ET.PostDate IS NOT NULL)"
+                                "AND ISNULL(ET.CancelDate,'')='')"
             Dim count As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsHrsEmployeeOfficialVacations.ConnectionString, CommandType.Text, sql)
             Return Convert.ToInt32(count) > 0
         Catch ex As Exception
