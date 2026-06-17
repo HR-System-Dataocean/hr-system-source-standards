@@ -50,7 +50,7 @@ Partial Class frmDelegationSChedule
                     txtDelegatorEmployeeID_TextChanged(Nothing, Nothing)
 
                 End If
-                ClsObjects.Find(" Code='" & clsEmployees.Table.Trim & "'")
+                ClsObjects.Find(" Code='V_ActiveEmployees'")
                 ClsSearchs.Find(" ObjectID=" & ClsObjects.ID)
                 Dim csSearchID As Integer
                 csSearchID = ClsSearchs.ID
@@ -87,6 +87,7 @@ Partial Class frmDelegationSChedule
 
                 ' Ensure it's an integer and assign to txtCode.Text
                 txtCode.Text = If(IsDBNull(MaxAppointCode), "1", MaxAppointCode.ToString())
+                txtCode.Enabled = False
                 FillEmployeeVacations()
                 ' Store the ClientID and UniqueID in hidden fields
 
@@ -127,6 +128,31 @@ Partial Class frmDelegationSChedule
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please Enter Code /برجاء إدخال الكود"))
                     Exit Sub
                 End If
+                If String.IsNullOrEmpty(txtFromDate.Text) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry ...  from date Field Can't be empty! /عفوا ... لا يمكن ان يكون حقل من تاريخ فارغ!"))
+                    Exit Sub
+                End If
+                If String.IsNullOrEmpty(txtTodate.Text) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry ... To  date Field Can't be empty! /عفوا ... لا يمكن ان يكون حقل الي تاريخ فارغ!"))
+                    Exit Sub
+                End If
+                If CDate(txtFromDate.Text) > CDate(txtTodate.Text) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry ... To date should be greater than from date! /عفوا ... لابد ان يكون حقل الي تاريخ لاحق ل حقل من تاريخ!"))
+                    Exit Sub
+                End If
+                If String.IsNullOrEmpty(txtDelegatorEmployeeID.Text) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry ...  Delegator should be selected ! /عفوا ... لابد من تحديد المفوض!"))
+                    Exit Sub
+
+                End If
+                If String.IsNullOrEmpty(txtDelegatorEmployeeID.Text) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry ...  Delegated should be selected ! /عفوا ... لابد من تحديد المفوض اليه!"))
+                    Exit Sub
+
+                End If
+                Dim clsEmployees As New Clshrs_Employees(Page)
+                clsEmployees.Find("Code= '" & txtDelegatorEmployeeID.Text & "'")
+
                 SavePart()
                 AfterOperation()
                 Clear()
@@ -134,6 +160,33 @@ Partial Class frmDelegationSChedule
                 If txtCode.Text = "" Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please Enter Code /برجاء إدخال الكود"))
                     Exit Sub
+                End If
+                If String.IsNullOrEmpty(txtFromDate.Text) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry ...  from date Field Can't be empty! /عفوا ... لا يمكن ان يكون حقل من تاريخ فارغ!"))
+                Exit Sub
+                End If
+                If String.IsNullOrEmpty(txtTodate.Text) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry ... To  date Field Can't be empty! /عفوا ... لا يمكن ان يكون حقل الي تاريخ فارغ!"))
+                    Exit Sub
+                End If
+                If CDate(txtFromDate.Text) > CDate(txtTodate.Text) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry ... To date should be greater than from date! /عفوا ... لابد ان يكون حقل الي تاريخ لاحق ل حقل من تاريخ!"))
+                    Exit Sub
+                End If
+                If String.IsNullOrEmpty(txtDelegatorEmployeeID.Text) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry ...  Delegator Employee should be selected ! /عفوا ... لابد من تحديد الموظف المفوض!"))
+                    Exit Sub
+
+                End If
+                If String.IsNullOrEmpty(txtDelegatorEmployeeID.Text) Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry ...  Delegated  Employee should be selected ! /عفوا ... لابد من تحديد الموظف المفوض اليه!"))
+                    Exit Sub
+
+                End If
+                If txtDelegatorEmployeeID.Text = txtDelegated.Text Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry ...  Employee Can't Delegate Himself ! /عفوا ... لا يمكن ان يفوض الموظف نفسه!"))
+                    Exit Sub
+
                 End If
                 If SavePart() Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Save Done/تم الحفظ"))

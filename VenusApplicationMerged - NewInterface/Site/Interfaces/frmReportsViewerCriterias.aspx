@@ -126,7 +126,7 @@
             <ClientSideEvents Click="btnExportExcel_Click" />
         </igtxt:WebImageButton>
         <igtxt:WebImageButton ID="btnPreview" runat="server" meta:resourcekey="btnPreviewResource1"
-            Style="z-index: 100; left: 488px; position: absolute; top: 466px" Text="Privew"
+            Style="z-index: 100; left: 488px; position: absolute; top: 466px" Text="preview"
             UseBrowserDefaults="False" Width="96px" AutoSubmit="False">
             <Appearance>
                 <style font-bold="True"></style>

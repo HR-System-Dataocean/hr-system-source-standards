@@ -399,8 +399,8 @@ Public Class ClsSS_DelegationSChedule
                 'mToFixedCondition = mDataHandler.DataValue_Out(.Item("ToFixedCondition"), SqlDbType.VarChar)
                 'mToFormCondition = mDataHandler.DataValue_Out(.Item("ToFormCondition"), SqlDbType.VarChar)
                 mRemarks = mDataHandler.DataValue_Out(.Item("Remarks"), SqlDbType.VarChar)
-                mIsCanceled = mDataHandler.DataValue_Out(.Item("IsCanceled"), SqlDbType.Bit, True)
-                mCancelDate = mDataHandler.DataValue_Out(.Item("CancelDate"), SqlDbType.Date)
+                'mIsCanceled = mDataHandler.DataValue_Out(.Item("IsCanceled"), SqlDbType.Bit, True)
+                'mCancelDate = mDataHandler.DataValue_Out(.Item("CancelDate"), SqlDbType.Date)
                 mRegUserID = mDataHandler.DataValue_Out(.Item("RegUserID"), SqlDbType.Int, True)
                 mRegDate = mDataHandler.DataValue_Out(.Item("RegDate"), SqlDbType.DateTime)
             End With
