@@ -321,10 +321,15 @@ currentRegUserId & ", GETDATE()) ; " & vbNewLine
                     Return False
                 End If
 
-                Dim lockMessage As String = String.Empty
-                If Not CanModifyGridRow(DGRow, lockMessage) Then
-                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, lockMessage))
-                    Return False
+                ' During save, do not block because of already-existing prepared rows.
+                ' Apply this check only for newly-added rows.
+                Dim isNewRow As Boolean = IsNothing(DGRow.Cells.FromKey("ID").Value) OrElse DGRow.Cells.FromKey("ID").Value.ToString().Trim() = ""
+                If isNewRow Then
+                    Dim lockMessage As String = String.Empty
+                    If Not CanModifyGridRow(DGRow, lockMessage) Then
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, lockMessage))
+                        Return False
+                    End If
                 End If
 
                 If GetGridIsRamadanBooleanValue(DGRow) Then
