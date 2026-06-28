@@ -24,7 +24,74 @@
     <script src="../../Common/Script/JQuery/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
     <script type="text/javascript" id="igClientScript">
 
+        // **الدالة الأساسية للتحقق من صلاحية الفرع**
+        function checkUserBranchAccess(employeeBranchID, userBranches) {
+            // إذا كان المستخدم عنده صلاحية على كل الفروع (Admin)
+            if (userBranches == "0" || userBranches == "-1" || userBranches == "All") {
+                return true; // السماح بفتح كل الطلبات
+            }
 
+            // إذا كان فرع الموظف فارغ أو 0 (يعني الموظف مش مربوط بفرع)
+            if (!employeeBranchID || employeeBranchID == "0" || employeeBranchID == "null" || employeeBranchID == "") {
+                // بناءً على سياسة الشركة: يمكنك إما السماح أو المنع
+                return false; // **نمنع الفتح إذا الموظف مش مربوط بفرع**
+                // أو return true; // لو عايز تسمح
+            }
+
+            // تحويل قائمة الفروع إلى Array
+            var branchesArray = userBranches.split(',');
+
+            // التحقق من وجود فرع الموظف في القائمة
+            var empBranchStr = employeeBranchID.toString().trim();
+            for (var i = 0; i < branchesArray.length; i++) {
+                if (branchesArray[i].trim() == empBranchStr) {
+                    return true; // الفرع موجود في الصلاحيات - يسمح بالفتح
+                }
+            }
+
+            return false; // الفرع غير مصرح به - يمنع الفتح
+        }
+
+        // **دالة عرض رسالة الخطأ - ثنائية اللغة**
+        function showBranchAccessError() {
+            var currentLang = document.getElementById('hdnCurrentLanguage').value;
+
+            var title, message1, message2, message3, buttonText;
+
+            if (currentLang == "Ar") {
+                title = "🚫 صلاحية ممنوعة";
+                message1 = "⚠️ عذراً، لا يمكنك الوصول لهذا الطلب";
+                message2 = "الموظف يتبع فرعاً ليس لديك صلاحية للتعامل معه.";
+                message3 = "     لا يمكنك اتخاذ أي إجراء عليه.<br>يرجى التواصل مع مدير النظام للحصول على الصلاحيات المطلوبة.";
+                buttonText = "موافق";
+            } else {
+                title = "🚫 Access Denied";
+                message1 = "⚠️ Sorry, you cannot access this request";
+                message2 = "The employee belongs to a branch you are not authorized to handle.";
+                message3 = "You cannot take any action on it.<br>Please contact the system administrator to get the required permissions.";
+                buttonText = "OK";
+            }
+
+            // ✅ استخدام المتغير بشكل صحيح
+            var dialogButtons = {};
+            dialogButtons[buttonText] = function () {
+                $(this).dialog("close");
+            };
+
+            $('<div title="' + title + '"></div>')
+                .html('<div style="padding: 20px;">' +
+                    '<p style="color: #d32f2f; font-weight: bold; font-size: 15px;">' + message1 + '</p>' +
+                    '<p style="color: #555; font-size: 13px; margin-top: 10px;">' + message2 + '</p>' +
+                    '<p style="color: #777; font-size: 12px; margin-top: 15px;">' + message3 + '</p>' +
+                    '</div>')
+                .dialog({
+                    modal: true,
+                    width: 450,
+                    resizable: false,
+                    draggable: true,
+                    buttons: dialogButtons
+                });
+        }
       
         function TlbMainToolbar_Click(oToolbar, oButton, oEvent) {
             var tlbControl = igtbar_getToolbarById("TlbMainToolbar");
@@ -88,7 +155,13 @@
             var RequestType = window.document.getElementById("DdlRequestType")
             var FormCode = Row.getCellFromKey("FormCode").getValue();
             var EmployeeID = Row.getCellFromKey("EmployeeID").getValue();//
-            debugger
+            var EmployeeBranchID = Row.getCellFromKey("BranchID").getValue();
+            var UserBranches = document.getElementById('hdnUserBranches').value;
+
+            if (!checkUserBranchAccess(EmployeeBranchID, UserBranches)) {
+                 showBranchAccessError();
+                return false;  
+            }
             if (cell.Column.Index == 7) {
 
                 if (FormCode == "SS_0011" || FormCode == "SS_0012" || FormCode == "SS_0013" || FormCode == "SS_0018" || FormCode == "SS_0030" || FormCode == "SS_0031" || FormCode == "SS_0032" || FormCode == "SS_0033" || FormCode == "SS_0034" || FormCode == "SS_0035" || FormCode == "SS_0036" || FormCode == "SS_0037") {
@@ -405,6 +478,10 @@
         <asp:HiddenField ID="hdnDurationDays" runat="server" />
         <asp:HiddenField ID="RemaningOPenBalanceDays" runat="server" Value="0" />
         <asp:HiddenField ID="OpenBalanceId" runat="server" Value="0" />
+  <asp:HiddenField ID="hdnUserBranches" runat="server" ClientIDMode="Static" />
+        <asp:HiddenField ID="hdnCurrentLanguage" runat="server" ClientIDMode="Static" />
+
+
         <asp:LinkButton ID="LinkButton_OverDueMessage" runat="server" Visible="False" meta:resourcekey="LinkButton_OverDueMessageResource1">LinkButton</asp:LinkButton>
         <asp:TextBox ID="lbVactionID" runat="server" meta:resourcekey="lbVactionIDResource1"></asp:TextBox>
          <asp:Label ID="lblLage" runat="server" meta:resourcekey="lblLageResource1"></asp:Label>
@@ -784,6 +861,12 @@
                                                                                 </Header>
   
                                                                      </igtbl:UltraGridColumn>
+
+                                                                        <igtbl:UltraGridColumn BaseColumnName="BranchID" DataType="System.Int32" Hidden="True"
+                Key="BranchID" meta:resourcekey="UltraGridColumnResource1" Type="DropDownList">
+                <Header Caption="BranchID">
+                </Header>
+            </igtbl:UltraGridColumn>
                                                                                                                              
                                                                 </Columns>
                                                             </igtbl:UltraGridBand>

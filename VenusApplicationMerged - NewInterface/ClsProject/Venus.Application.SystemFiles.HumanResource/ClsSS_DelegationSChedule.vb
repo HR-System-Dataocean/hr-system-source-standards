@@ -15,7 +15,8 @@ Public Class ClsSS_DelegationSChedule
           "Remarks," &
           "IsCanceled," &
           "CancelDate," &
-         "RegUserID"
+         "RegUserID, " &
+         "Reg"
         mInsertParameterValues = "" &
           " @Code," &
           " @DelegatorEmployeeID," &

@@ -651,6 +651,39 @@
                                             </td>
                                         </tr>
                                         <tr>
+    <td style="width: 47%; height: 16px; vertical-align: top">
+        <table cellspacing="0" style="width: 100%; vertical-align: top">
+            <tr>
+                <td class="SeparArea"></td>
+                <td class="LabelArea">
+                    <asp:Label ID="lblLinkjoinDateToSalary" runat="server" meta:resourcekey="lblLinkjoinDateToSalaryResource1"
+                        SkinID="Label_DefaultNormal" 
+                        Text="ربط تاريخ المباشرة بالرواتب"></asp:Label>
+                </td>
+                <td class="DataArea">
+                    <asp:CheckBox ID="chkLinkjoinDateToSalary" runat="server" />
+                </td>
+            </tr>
+        </table>
+    </td>
+    <td style="width: 6%; height: 16px; vertical-align: top"></td>
+    <td style="width: 47%; height: 16px; vertical-align: top">
+        <table cellspacing="0" style="width: 100%; vertical-align: top">
+            <tr>
+                <td class="SeparArea"></td>
+                <td class="LabelArea">
+                    <asp:Label ID="lblLinkClassToAnnualVac" runat="server"  meta:resourcekey="lblLinkClassToAnnualVacResource1"
+                        SkinID="Label_DefaultNormal" 
+                        Text="ربط الفئة بالاجازة السنوية"></asp:Label>
+                </td>
+                <td class="DataArea">
+                    <asp:CheckBox ID="chkLinkClassToAnnualVac" runat="server" />
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+                                        <tr>
                                             <td style="width: 47%; height: 16px; vertical-align: top">
                                                 <table cellspacing="0" style="width: 100%; vertical-align: top">
                                                     <tr>

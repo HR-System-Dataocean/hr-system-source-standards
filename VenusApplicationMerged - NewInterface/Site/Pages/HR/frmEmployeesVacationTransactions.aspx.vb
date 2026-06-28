@@ -691,8 +691,10 @@ Partial Class frmEmployeesVacationTransactions
                     Dim month1Date As Date = DteVacationDate
                     Dim month2Date As Date = DteVacationDate
                     Dim vacStart As Date = DteVacationDate
-                    Dim vacReturn As Date = DteVacationDate
-                    Dim vacEnd As Date = DteVacationDate
+                    ' Dim vacReturn As Date = DteVacationDate
+                    Dim vacReturn As Date
+                    ' Dim vacEnd As Date = DteVacationDate
+                    Dim vacEnd As Date
 
                     If chkWithSalary.Checked AndAlso EmployeeVacationID > 0 Then
                         Dim strSQLVacDates As String = "set dateformat dmy; select ActualStartDate, isnull(ActualEndDate, ActualStartDate) from hrs_EmployeesVacations where ID = " & EmployeeVacationID

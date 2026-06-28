@@ -123,7 +123,7 @@ Partial Class Login
         ObjWebHandler.SetCookies(Page, "Lang", CurLanguage, True)
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-        Response.Redirect(FormsAuthentication.GetRedirectUrl(_Sys_User.Code, False))
+        Response.Redirect(FormsAuthentication.GetRedirectUrl(_Sys_User.Code, False), False)
     End Sub
 
     Protected Sub LinkButtonUpdate_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LinkButtonUpdate.Click
