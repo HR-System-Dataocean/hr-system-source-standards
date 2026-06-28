@@ -972,6 +972,26 @@ Partial Class frmEmployeesSelector
                     End If
                 End If
 
+                'Rabie 26-06-2026
+                Dim mCompanyID As Integer = CType(HttpContext.Current.Session("CompanyID"), Integer)
+                Dim mUserID As Integer = CType(HttpContext.Current.Session("UserID"), Integer)
+                Dim UserBranches As String = ""
+                Dim struserBranches As String = "select BrancheID from sys_CompaniesBranches  where UserID=" & mUserID & " and CompanyID=" & mCompanyID & " and CanView=1"
+                Dim dsBranches As DataSet
+                dsBranches = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployee.ConnectionString, Data.CommandType.Text, struserBranches)
+                If dsBranches.Tables(0).Rows.Count > 0 Then
+                    For Each row As DataRow In dsBranches.Tables(0).Rows()
+                        UserBranches += " " & row("BrancheID") & ","
+
+                    Next
+                    UserBranches = UserBranches.TrimEnd(","c)
+
+                End If
+                If Not String.IsNullOrEmpty(UserBranches) Then
+                    strFilter += "And  hrs_Employees.BranchID in(" & UserBranches & ")"
+                End If
+
+
                 strCommand &= strFilter & " order by Case When IsNumeric(Code) = 1 then Right(Replicate('0',51) + Code, 50) When IsNumeric(Code) = 0 then Left(Code + Replicate('',51), 50) Else Code End"
 
             Else

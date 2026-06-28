@@ -448,6 +448,7 @@ Partial Class frmEmployeesVacations
 
 
             ClsEmployeesVacations.Find(" Src = '" & FormCode & "' and VacationRequestID=" & RequestSerial)
+            Dim Diffe As Single = 0
             If ClsEmployeesVacations.ID > 0 Then
 
                 If ClsEmployeesVacations.VacationTypeID = 1 Then
@@ -455,7 +456,7 @@ Partial Class frmEmployeesVacations
                         ClsEmployeesVacations.CancelDate = DateTime.Now.Date
 
 
-                        Dim Diffe As Single = 0
+
 
                         Try
                             If ClsEmployeesVacations.ExpectedEndDate <> Nothing Then
@@ -505,6 +506,20 @@ Partial Class frmEmployeesVacations
 
 
                 End If
+
+                'ضبط الارصدة في الاجازات التالية
+                Dim strAdjustQuery As String = "select ID from hrs_EmployeesVacations where EmployeeID=" & ClsEmployees.ID & " and id > " & ClsEmployeesVacations.ID & ""
+                Dim ds As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strAdjustQuery)
+                If ds.Tables(0).Rows.Count > 0 Then
+
+                    For Each row As DataRow In ds.Tables(0).Rows
+                        Dim strAdustUpdate As String = "Update hrs_EmployeesVacations set TotalDays=TotalDays + " & Diffe & " , RemainingDays=RemainingDays + " & Diffe & " , TotalBalance=TotalBalance+" & Diffe & " , RemainingBalance=RemainingBalance+" & Diffe & " where ID= " & row("ID") & ""
+                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strAdustUpdate)
+
+                    Next
+
+                End If
+
 
 
                 Dim strUpdateVB As String = "UPDATE [dbo].[hrs_EmployeesVacations]  SET CancelDate = '" & DateTime.Now.Date.ToString("yyyy-MM-dd") & "' where ID=" & ClsEmployeesVacations.ID
@@ -699,9 +714,14 @@ Partial Class frmEmployeesVacations
             SqlCommand.Connection.Open()
             SqlCommand.ExecuteNonQuery()
             SqlCommand.Connection.Close()
+
+
+
+
             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Your request Has been canceled Successfully./تم الغاء الطلب بنجاح "))
 
-            'If isFullyApproved Then
+
+            'Rabie
             ClsEmployees.SendEmail("V_CancelAnnualVacationsReqouestToEmail", Me.Page, 1, "V_CancelAnnualVacationsReqouestToEmail", RequestSerial)
 
             'End If

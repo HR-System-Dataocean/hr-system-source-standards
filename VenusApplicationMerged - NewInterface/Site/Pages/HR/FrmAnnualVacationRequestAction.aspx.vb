@@ -256,7 +256,6 @@ Partial Class frmAttendancePreparation
             uwgEmployeeVacations.DataSource = DS1
             uwgEmployeeVacations.DataBind()
 
-            'lll
 
             Dim DS2 As New Data.DataSet()
             Dim connetionString2 As String
@@ -285,15 +284,9 @@ Partial Class frmAttendancePreparation
 
                     Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
 
-
-
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Can not proceed your Action because this Employee contract has been ended / عفوا لايمكن تسجيل الاجراء بسبب انتهاء عقد الموظف   "))
 
                     Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
-
-
-
-
 
                 End If
 
@@ -332,23 +325,7 @@ Partial Class frmAttendancePreparation
         End Try
     End Sub
 
-    'Protected Sub btnShowAttachment_Click(sender As Object, e As Infragistics.WebUI.WebDataInput.ButtonEventArgs) Handles BtnShowAttachment.Click
-    '    'Dim ClsObjects As New Clssys_Objects(Page)
-    '    'Dim ClsSearchs As New Clssys_Searchs(Page)
-    '    'Dim clsSearchsColumns = New Clssys_SearchsColumns(Page)
-    '    'ClientScript.RegisterClientScriptBlock(ClientScript.GetType, "Load", "<script language = ""javascript"">IntializeDataChanged()</script>")
-    '    'ClsObjects.Find(" Code='" & ClsEmployees.Table.Trim & "'")
-    '    'ClsSearchs.Find(" ObjectID=" & ClsObjects.ID)
-    '    'Dim csSearchID As Integer
-    '    'csSearchID = ClsSearchs.ID
-    '    'Dim IntDimension As Integer = 510
-    '    Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
-    '    Dim UrlString As String = "frmAnnualVacationDocuments.aspx?TB=hrs_EmployeesVacations&SV=" & RequestSerial & " , 495, 800"
 
-    '    BtnShowAttachment.ClientSideEvents.Click = "OpenModal(" & UrlString & ")"
-    '    btnDelete.Visible = False
-
-    'End Sub
     Protected Sub btnSave_Click(sender As Object, e As Infragistics.WebUI.WebDataInput.ButtonEventArgs) Handles btnSave.Click
 
         Dim ClsEmployees As New Clshrs_Employees(Page)
@@ -418,7 +395,7 @@ Partial Class frmAttendancePreparation
                         _sys_User.Find("ID = '" & User & "'")
                         ClsEmployees.Find("Code='" & _sys_User.Code & "'")
                         Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " And ActionID <> 3 and SS_EmployeeID <>" & ClsEmployees.ID & ""
+                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " And ActionID <> 3 and SS_EmployeeID <>" & ClsEmployees.ID & ""
                         SqlCommand2 = New SqlClient.SqlCommand
                         SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                         SqlCommand2.CommandType = CommandType.Text
@@ -513,6 +490,12 @@ Partial Class frmAttendancePreparation
 
                 If dsconfig.Tables(0).Rows.Count > 0 Then
                     If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) And Not CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
+
+                        ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+                        If ClsEmployees.ID = 0 Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry, you do not have permission for the applicant's branch...Please contact system admin  / عفوا ليس لديك صلاحية على فرع مقدم الطلب ... يرجي مراجعة مدير النظام"))
+                            Return
+                        End If
                         Dim SqlCommandRank1 As Data.SqlClient.SqlCommand
                         Dim UpdateCommandRank1 As String = ""
                         UpdateCommandRank1 = "UPDATE SS_VacationRequest SET [RequestStautsTypeID] = 4 WHERE ID=" & RequestSerial & ""
@@ -524,7 +507,7 @@ Partial Class frmAttendancePreparation
                         SqlCommandRank1.ExecuteNonQuery()
                         SqlCommandRank1.Connection.Close()
                         Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>" & ClsEmployees2.ID & ""
+                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>" & ClsEmployees2.ID & ""
                         SqlCommand2 = New SqlClient.SqlCommand
                         SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                         SqlCommand2.CommandType = CommandType.Text
@@ -544,6 +527,12 @@ Partial Class frmAttendancePreparation
                     End If
 
                     If Not CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) And Not CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
+
+                        ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+                        If ClsEmployees.ID = 0 Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry, you do not have permission for the applicant's branch...Please contact system admin  / عفوا ليس لديك صلاحية على فرع مقدم الطلب ... يرجي مراجعة مدير النظام"))
+                            Return
+                        End If
                         Dim SqlCommandRank1 As Data.SqlClient.SqlCommand
                         Dim UpdateCommandRank1 As String = ""
                         UpdateCommandRank1 = "UPDATE SS_VacationRequest SET [RequestStautsTypeID] = 4 WHERE ID=" & RequestSerial & ""
@@ -593,7 +582,7 @@ Partial Class frmAttendancePreparation
                                 SqlCommandRank1.ExecuteNonQuery()
                                 SqlCommandRank1.Connection.Close()
                                 Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                                Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>" & ClsEmployees2.ID & ""
+                                Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>" & ClsEmployees2.ID & ""
                                 SqlCommand2 = New SqlClient.SqlCommand
                                 SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                                 SqlCommand2.CommandType = CommandType.Text
@@ -602,7 +591,7 @@ Partial Class frmAttendancePreparation
                                 SqlCommand2.ExecuteNonQuery()
 
                                 Dim SqlCommand222 As Data.SqlClient.SqlCommand
-                                Dim UpdateCommand222 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>" & ClsEmployees2.ID & ""
+                                Dim UpdateCommand222 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>" & ClsEmployees2.ID & ""
                                 SqlCommand2 = New SqlClient.SqlCommand
                                 SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                                 SqlCommand2.CommandType = CommandType.Text
@@ -622,6 +611,7 @@ Partial Class frmAttendancePreparation
                             Else
                                 Return
                             End If
+
 
 
 
@@ -880,7 +870,7 @@ Partial Class frmAttendancePreparation
                         _sys_User.Find("ID = '" & User & "'")
                         ClsEmployees2.Find("Code='" & _sys_User.Code & "'")
                         Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID <> " & ClsEmployees2.ID & " "
+                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and seen is null and SS_EmployeeID <> " & ClsEmployees2.ID & "  "
                         SqlCommand2 = New SqlClient.SqlCommand
                         SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                         SqlCommand2.CommandType = CommandType.Text

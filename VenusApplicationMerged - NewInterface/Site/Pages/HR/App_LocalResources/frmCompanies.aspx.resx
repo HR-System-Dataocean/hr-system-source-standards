@@ -639,4 +639,10 @@
   <data name="lblUserUnitPermissionsResource.Text" xml:space="preserve">
     <value>مراعاة صلاحيات الوحدات للمستخدم</value>
   </data>
+  <data name="lblLinkClassToAnnualVacResource1.Text" xml:space="preserve">
+    <value>ربط الفئات بالاجازة السنوي</value>
+  </data>
+  <data name="lblLinkjoinDateToSalaryResource1.Text" xml:space="preserve">
+    <value>ربط تاريخ المباشرة بالرواتب</value>
+  </data>
 </root>

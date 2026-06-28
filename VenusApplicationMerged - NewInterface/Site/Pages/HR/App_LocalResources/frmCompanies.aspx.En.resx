@@ -642,4 +642,10 @@
   <data name="lblUserUnitPermissionsResource.Text" xml:space="preserve">
     <value>Use Unit Permissions</value>
   </data>
+  <data name="lblLinkClassToAnnualVacResource1.Text" xml:space="preserve">
+    <value>Link Class To Annual Vacations</value>
+  </data>
+  <data name="lblLinkjoinDateToSalaryResource1.Text" xml:space="preserve">
+    <value>Link Join Date to Salary</value>
+  </data>
 </root>

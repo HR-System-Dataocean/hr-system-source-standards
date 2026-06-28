@@ -1,10 +1,11 @@
-﻿Imports Venus.Application.SystemFiles.System
-Imports Venus.Application.SystemFiles.HumanResource
-Imports System.Data
+﻿Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-Imports Venus.Shared.Web
 Imports C1.Web.Wijmo.Controls
+Imports Microsoft.VisualBasic.ApplicationServices
+Imports Venus.Application.SystemFiles.HumanResource
+Imports Venus.Application.SystemFiles.System
+Imports Venus.Shared.Web
 
 Partial Class frmEmployeesVacations
     Inherits MainPage
@@ -32,6 +33,13 @@ Partial Class frmEmployeesVacations
                 WebHandler.GetCookies(Page, "UserID", User)
                 Dim _sys_User As New Clssys_Users(Page)
                 _sys_User.Find("ID = '" & User & "'")
+
+                Dim UserBranches As String = GetUserBranchesFromDB(_sys_User.ID)
+                hdnUserBranches.Value = UserBranches
+
+                hdnCurrentLanguage.Value = ProfileCls.CurrentLanguage
+
+
                 FillDdlRequestTypes()
                 FillDdlYear()
                 FillMonth()
@@ -207,7 +215,7 @@ Partial Class frmEmployeesVacations
 
             End If
             Dim str1 As String
-            str1 = "set dateformat dmy ; Select ID,FormCode,ConfigID,RequestSerial,EmployeeID," & EmpName & " as EmployeeName,RequestDate,VacationType," & RequestType & ",SS_EmployeeID From SS_VNotification "
+            str1 = "set dateformat dmy ; Select ID,FormCode,ConfigID,RequestSerial,EmployeeID," & EmpName & " as EmployeeName,RequestDate,VacationType," & RequestType & ",SS_EmployeeID,BranchID From SS_VNotification "
             Dim Criteria As String = " where SS_EmployeeID=" & ClsEmployees.ID & " "
 
             If DdlRequestType.SelectedValue > 0 Then
@@ -305,8 +313,8 @@ Partial Class frmEmployeesVacations
 
             Dim str1 As String = ""
 
-            str1 = "Select ID,FormCode,ConfigID,RequestSerial,EmployeeID," & EmpName & ",RequestDate,VacationType," & RequestType & ",SS_EmployeeID From SS_VNotification where SS_EmployeeID=" & ClsEmployees.ID & " Order By RequestDate desc"
-
+            str1 = "Select ID,FormCode,ConfigID,RequestSerial,EmployeeID," & EmpName & ",RequestDate,VacationType," & RequestType & ",SS_EmployeeID,BranchID  From SS_VNotification where SS_EmployeeID=" & ClsEmployees.ID & " Order By RequestDate desc"
+            hdnUserBranches.Value = ClsEmployees.BranchID
 
             command = New Data.SqlClient.SqlCommand(str1, connection)
             adapter.SelectCommand = command
@@ -697,4 +705,36 @@ Partial Class frmEmployeesVacations
     Private Sub LinkButton_Remarks_Load(sender As Object, e As EventArgs) Handles LinkButton_Remarks.Load
 
     End Sub
+
+
+    Private Function GetUserBranchesFromDB(ByVal UserID As String) As String
+        Try
+            Dim BranchIDs As New List(Of String)
+
+            ' استعلام لجلب الفروع المسموح بها للمستخدم
+            Dim Query As String = "SELECT BrancheID FROM sys_CompaniesBranches WHERE UserID = " & UserID & " AND CanView = 1 AND CancelDate IS NULL"
+
+            Dim dt As DataTable = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(
+                ClsEmployees.ConnectionString,
+                CommandType.Text,
+                Query
+            ).Tables(0)
+
+            ' إضافة كل فرع إلى القائمة
+            For Each row As DataRow In dt.Rows
+                BranchIDs.Add(row("BrancheID").ToString())
+            Next
+
+            ' لو مفيش فروع للمستخدم، يرجع 0
+            If BranchIDs.Count = 0 Then
+                Return "0"
+            End If
+
+            ' تحويل القائمة إلى نص مفصول بفواصل
+            Return String.Join(",", BranchIDs)
+
+        Catch ex As Exception
+            Return "0"
+        End Try
+    End Function
 End Class

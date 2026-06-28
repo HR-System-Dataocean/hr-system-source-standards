@@ -425,7 +425,7 @@ Partial Class frmEmployeesVacations
                     If rowId <= 0 Then
                         If userTypeVal <> "" OrElse positionVal <> "" OrElse employeeVal <> "" OrElse rankVal <> "" Then
                             hasChangeInKeys = True
-                            Exit For
+                            ' Exit For
                         End If
                         Continue For
                     End If
@@ -439,21 +439,21 @@ Partial Class frmEmployeesVacations
 
                         If userTypeVal <> dbUserType OrElse positionVal <> dbPosition OrElse employeeVal <> dbEmployee OrElse rankVal <> dbRank Then
                             hasChangeInKeys = True
-                            Exit For
+                            '  Exit For
                         End If
                     Else
                         If userTypeVal <> "" OrElse positionVal <> "" OrElse employeeVal <> "" OrElse rankVal <> "" Then
                             hasChangeInKeys = True
-                            Exit For
+                            ' Exit For
                         End If
                     End If
                 Next
 
-                If hasChangeInKeys Then
-                    Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnectionString)
-                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "cant update rows because this type has endless requests/لا يمكن تعديل الصفوف لان هذا النوع لديه طلبات غير منتهية"))
-                    Return False
-                End If
+                'If hasChangeInKeys Then
+                '    Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnectionString)
+                '    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "cant update rows because this type has endless requests/لا يمكن تعديل الصفوف لان هذا النوع لديه طلبات غير منتهية"))
+                '    Return False
+                'End If
             End If
 
             Dim WebHandler As New Venus.Shared.Web.WebHandler

@@ -316,7 +316,7 @@ Partial Class frmAttendancePreparation
                         _sys_User.Find("ID = '" & User & "'")
                         ClsEmployees.Find("Code='" & _sys_User.Code & "'")
                         Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>" & ClsEmployees.ID & ""
+                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & "  and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>" & ClsEmployees.ID & ""
                         SqlCommand2 = New SqlClient.SqlCommand
                         SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                         SqlCommand2.CommandType = CommandType.Text
@@ -449,7 +449,7 @@ Partial Class frmAttendancePreparation
                         _sys_User.Find("ID = '" & User & "'")
                         ClsEmployees.Find("Code='" & _sys_User.Code & "'")
                         Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID <> " & ClsEmployees.ID & " "
+                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <> " & ClsEmployees.ID & " "
                         SqlCommand2 = New SqlClient.SqlCommand
                         SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                         SqlCommand2.CommandType = CommandType.Text
@@ -665,7 +665,7 @@ Partial Class frmAttendancePreparation
                         ClsEmployees.Find("Code='" & _sys_User.Code & "'")
 
                         Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID <> " & ClsEmployees.ID & " "
+                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <> " & ClsEmployees.ID & " "
                         SqlCommand2 = New SqlClient.SqlCommand
                         SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                         SqlCommand2.CommandType = CommandType.Text
