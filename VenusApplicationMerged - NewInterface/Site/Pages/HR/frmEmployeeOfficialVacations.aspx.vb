@@ -1009,7 +1009,7 @@ currentRegUserId & ", GETDATE()) ; " & vbNewLine
                                 "AND FYP.ToDate >= '" & fromDate.ToString("dd/MM/yyyy") & "' " &
                                 "AND EXISTS (SELECT 1 FROM hrs_EmployeesTransactions ET " &
                                 "WHERE ET.FiscalYearPeriodID = FYP.ID " &
-                                "AND ISNULL(ET.CancelDate,'')='')"
+                                "AND ISNULL(ET.CancelDate,'')='' and PrepareType='n' )"
             Dim count As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsHrsEmployeeOfficialVacations.ConnectionString, CommandType.Text, sql)
             Return Convert.ToInt32(count) > 0
         Catch ex As Exception
