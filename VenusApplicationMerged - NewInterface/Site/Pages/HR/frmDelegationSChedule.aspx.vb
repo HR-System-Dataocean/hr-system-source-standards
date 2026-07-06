@@ -342,15 +342,33 @@ Partial Class frmDelegationSChedule
     Private Function SavePart() As Boolean
         Dim StrMode As String = Request.QueryString.Item("Mode")
         ClsDelegationSChedule = New ClsSS_DelegationSChedule(Page)
+        Dim objNav As New Venus.Shared.Web.NavigationHandler(ClsDelegationSChedule.ConnectionString)
 
         Try
+            Dim Selectedrequests As Integer = 0
+            For Each row As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
+                If row.Cells.FromKey("Select").Value <> Nothing Then
+                    Selectedrequests += 1
+                End If
+            Next
+            If Selectedrequests = 0 Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Sorry Can't Save Delegation Tranaction...Please select one or all requests to be delegated !/!عفوا لايمكن حفظ حركة التفويض بدون تحديد طلب او جميع الطلبات للتفويض"))
+
+            End If
+
+
+
+
             ClsDelegationSChedule.Find("Code='" & txtCode.Text & "'")
 
             If ClsDelegationSChedule.ID > 0 Then
-                If Not AssignValues(ClsDelegationSChedule) Then
-                    Exit Function
-                End If
-                ClsDelegationSChedule.Update("Code='" & txtCode.Text & "'")
+
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Sorry... Can't Edit saved delegation transaction !/!عفوا... لا يمكن تعديل حركة تفويض تم حفظها من قبل"))
+                Exit Function
+
+                'If Not AssignValues(ClsDelegationSChedule) Then
+                'End If
+                'ClsDelegationSChedule.Update("Code='" & txtCode.Text & "'")
 
             Else
                 If Not AssignValues(ClsDelegationSChedule) Then
@@ -391,7 +409,7 @@ Partial Class frmDelegationSChedule
                 'If Convert.ToString(txtCancelDate.Value) <> "" Then
                 '    .CancelDate = Convert.ToDateTime(txtCancelDate.Value).Date
                 'End If
-
+                .RegDate = DateTime.Now
 
 
             End With

@@ -16,7 +16,7 @@ Public Class ClsSS_DelegationSChedule
           "IsCanceled," &
           "CancelDate," &
          "RegUserID, " &
-         "Reg"
+         "RegDate"
         mInsertParameterValues = "" &
           " @Code," &
           " @DelegatorEmployeeID," &
@@ -26,7 +26,8 @@ Public Class ClsSS_DelegationSChedule
           " @Remarks," &
           " @IsCanceled," &
           " @CancelDate," &
-          " @RegUserID"
+          " @RegUserID," &
+          "@RegDate"
         mUpdateParameter = "" &
           "Code=@Code," &
           "DelegatorEmployeeID=@DelegatorEmployeeID," &
@@ -35,7 +36,8 @@ Public Class ClsSS_DelegationSChedule
           "Todate=@Todate," &
           "Remarks=@Remarks," &
           "IsCanceled=@IsCanceled," &
-          "CancelDate=@CancelDate"
+          "CancelDate=@CancelDate," &
+          "RegDate=@RegDate"
         mSelectCommand = CONFIG_DATEFORMAT & " Select * From  " & mTable
         mInsertCommand = CONFIG_DATEFORMAT & " insert into " & mTable & "( " & mInsertParameter & ")Values(" & mInsertParameterValues & ")"
         mUpdateCommand = CONFIG_DATEFORMAT & " Update " & mTable & " Set " & mUpdateParameter
@@ -56,7 +58,7 @@ Public Class ClsSS_DelegationSChedule
     Private mRegDate As DateTime
 
 #End Region
-#Region "Public property"
+#Region "Public Property"
     Public Property ID() As Integer
         Get
             Return mID
@@ -438,6 +440,7 @@ Public Class ClsSS_DelegationSChedule
             'Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ToFixedCondition", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mToFixedCondition, SqlDbType.VarChar)
             'Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ToFormCondition", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mToFormCondition, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Remarks", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mRemarks, SqlDbType.VarChar)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@RegDate", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mRegDate, SqlDbType.VarChar)
 
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@IsCanceled", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mIsCanceled, SqlDbType.Bit, True)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@CancelDate", SqlDbType.Date)).Value = mDataHandler.DataValue_In(mCancelDate, SqlDbType.Date, True)

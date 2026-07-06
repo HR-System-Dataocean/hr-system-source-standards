@@ -350,8 +350,8 @@ Partial Class _Default
 
                 End If
                 'Appraisal Notifications
-                'NotificationEngine()
-                'EscalationEngine(clshrs.ID)
+                NotificationEngine()
+                EscalationEngine(clshrs.ID)
                 Dim DS2 As New Data.DataSet()
                 connetionString = clshrs.ConnectionString
                 connection = New Data.SqlClient.SqlConnection(connetionString)
@@ -636,7 +636,7 @@ Partial Class _Default
                                     Dim InsertSQL As String = "set dateformat dmy INSERT INTO APP_Appraisals (Code,ArabName, EngName, AppraisalTypeID, FromDate, ToDate, EmployeeID, NotificationSent, AppraisalStatusID) VALUES ('" & AppraisalTypeID & "-" & EmployeeCode & "','" & ArabName & "', '" & EngName & "', " & AppraisalTypeID & ", '" & BaseDate.ToString("dd/MM/yyyy") & "', '" & DueDate.ToString("dd/MM/yyyy") & "', " & EmployeeID & ", 1, 1); SELECT SCOPE_IDENTITY();"
                                     Dim AppraisalID As Integer = Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, CommandType.Text, InsertSQL))
                                     SaveAppraisalFirstLeveNotification(AppraisalTypeID, AppraisalID, EmpID, EmployeeID)
-                                    Cls_DataAcessLayer.SendEmail("FrmDefaultNotification", Me.Page, 1, "V_AppraisalDueNotification", EmployeeID)
+                                    '  Cls_DataAcessLayer.SendEmail("FrmDefaultNotification", Me.Page, 1, "V_AppraisalDueNotification", EmployeeID)
 
                                     NotificationDue = True
                                 End If
@@ -658,7 +658,7 @@ Partial Class _Default
         Dim dsDue As DataSet = SqlHelper.ExecuteDataset(ConnectionString, CommandType.Text, Str)
         If dsDue.Tables(0).Rows.Count > 0 Then
             For Each row In dsDue.Tables(0).Rows
-                Cls_DataAcessLayer.SendEmail("FrmDefault", Me.Page, 1, "V_AppraisalDueEscalation", EmpID)
+                ' Cls_DataAcessLayer.SendEmail("FrmDefault", Me.Page, 1, "V_AppraisalDueEscalation", EmpID)
                 Dim strUpdate As String = "update APP_Appraisals set EscalationSent =1 where id=" & row("AppraisalID") & " "
                 SqlHelper.ExecuteDataset(ConnectionString, CommandType.Text, strUpdate)
             Next

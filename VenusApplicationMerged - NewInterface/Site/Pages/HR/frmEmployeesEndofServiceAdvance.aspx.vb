@@ -289,7 +289,7 @@ Partial Class frmEmployeesEndofServiceAdvance
                         .TransactionTypeID = ObjLoans.Cells(0).Value
                         Dim n As Integer = .Save()
                         Dim strcommand As String = "insert into hrs_EmployeesPayabilitiesSchedulesSettlement (EmployeePayabilityScheduleID,EmployeeTransactionID,Amount,[Date],RegDate,RegUserID)"
-                        strcommand = strcommand & " select ID," & IntProjectHeadID & ",DueAmount, " & DteEndOfServiceDate & ",GETDATE()," & ClsEmpTransDet.DataBaseUserRelatedID & " from hrs_EmployeesPayabilitiesSchedules where EmployeePayabilityID in (select ID from hrs_EmployeesPayabilities where EmployeeID = " & IntEmployeeId & " and TransactionTypeID = " & ObjLoans.Cells(0).Value & ")"
+                        strcommand = strcommand & " select ID," & IntProjectHeadID & ",DueAmount, '" & DteEndOfServiceDate & "',GETDATE()," & ClsEmpTransDet.DataBaseUserRelatedID & " from hrs_EmployeesPayabilitiesSchedules where EmployeePayabilityID in (select ID from hrs_EmployeesPayabilities where EmployeeID = " & IntEmployeeId & " and TransactionTypeID = " & ObjLoans.Cells(0).Value & ")"
                         strcommand = strcommand & " and ID not in(select EmployeePayabilityScheduleID from hrs_EmployeesPayabilitiesSchedulesSettlement where hrs_EmployeesPayabilitiesSchedulesSettlement.Amount = hrs_EmployeesPayabilitiesSchedules.DueAmount)"
                         Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmpTransDet.ConnectionString, CommandType.Text, strcommand)
                     End With

@@ -8312,6 +8312,52 @@ END
         SQL = String.Format(postJournalPreviewSqlTemplate, "hrs_PostJournalPreview_GetProjects_L")
         ExecuteUpdate(SQL)
 
+        SQL = "CREATE TABLE [dbo].[hrs_ChangeJoinDate](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[EmployeeID] [int] NOT NULL,
+	[OldJoinDate] [datetime] NOT NULL,
+	[NewJoinDate] [datetime] NOT NULL,
+	[OldClassID] [int] NULL,
+	[NewClassID] [int] NULL,
+	[AnnualVacationBalance] [decimal](10, 2) NULL,
+	[AnnualVacationExpireDate] [datetime] NULL,
+	[TransferredVacationBalance] [decimal](10, 2) NULL,
+	[TransferredVacationExpireDate] [datetime] NULL,
+	[TotalVacationBalance] [decimal](10, 2) NULL,
+	[DueBalance] [decimal](18, 0) NULL,
+	[IsBalanceTransfered] [bit] NULL,
+	[ChangeReason] [nvarchar](500) NOT NULL,
+	[LastSalary] [decimal](12, 2) NULL,
+	[RegDate] [datetime] NOT NULL,
+	[RegUserID] [int] NOT NULL,
+	[CancelDate] [datetime] NULL,
+	[CancelUserID] [int] NULL,
+	[CancelReason] [nvarchar](500) NULL,
+	[Remarks] [nvarchar](1000) NULL,
+ CONSTRAINT [PK_hrs_ChangeJoinDate] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[hrs_ChangeJoinDate] ADD  CONSTRAINT [DF__hrs_Chang__Annua__14888976]  DEFAULT ((0)) FOR [AnnualVacationBalance]
+GO
+
+ALTER TABLE [dbo].[hrs_ChangeJoinDate] ADD  CONSTRAINT [DF__hrs_Chang__Trans__157CADAF]  DEFAULT ((0)) FOR [TransferredVacationBalance]
+GO
+
+ALTER TABLE [dbo].[hrs_ChangeJoinDate] ADD  CONSTRAINT [DF__hrs_Chang__Total__1670D1E8]  DEFAULT ((0)) FOR [TotalVacationBalance]
+GO
+
+ALTER TABLE [dbo].[hrs_ChangeJoinDate] ADD  CONSTRAINT [DF__hrs_Chang__LastS__1764F621]  DEFAULT ((0)) FOR [LastSalary]
+GO
+
+ALTER TABLE [dbo].[hrs_ChangeJoinDate] ADD  CONSTRAINT [DF__hrs_Chang__RegDa__18591A5A]  DEFAULT (getdate()) FOR [RegDate]
+GO
+"
+        ExecuteUpdate(SQL)
+
     End Function
 
     Public Function UpdateSS() As Boolean

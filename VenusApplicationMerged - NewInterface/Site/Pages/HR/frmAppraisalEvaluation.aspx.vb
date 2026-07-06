@@ -292,10 +292,9 @@ Partial Class frmAppraisalEvaluation
 
             ' Pick criteria name based on language
             Dim CriteriaName As String = If(ProfileCls.CurrentLanguage = "Ar", "CriteriaArbName", "CriteriaEngName")
-            Dim CriteriaGroupName As String = If(ProfileCls.CurrentLanguage = "Ar", "CritriaGroupArbName", "CritriaGroupEngName")
+            Dim CriteriaGroupName As String = If(ProfileCls.CurrentLanguage = "Ar", "CriteriaGroupArbName", "CriteriaGroupEngName")
 
             ' SQL query (use StringBuilder to avoid multiline string literal issues)
-
 
             Dim sb As New System.Text.StringBuilder()
             sb.AppendLine("SELECT AppraisalID, App_EmployeeID,CriteriaGroupID," & CriteriaGroupName & " as CriteriaGroupName ,CriteriaID," & CriteriaName & " CriteriaName,MinimumScore,MaximumScore,AppraisalScore,HasObjection,ObjectionDetails from V_PreviousAppraisalEvaluation  ")

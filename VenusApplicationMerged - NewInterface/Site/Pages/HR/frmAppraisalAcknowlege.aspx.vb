@@ -580,7 +580,7 @@ Partial Class frmAppraisalEvaluation
 
 
 
-        Dim strOrgObj As String = "select isnull(App_AppraisalConfigurations.NoOfObjections,0) from App_AppraisalConfigurations where App_AppraisalConfigurations.UserTypeID=4 and App_AppraisalConfigurations.AppraisalTypeID= " & Appraisaltypeid & " "
+        Dim strOrgObj As String = "select isnull(App_AppraisalConfigurations.NoOfObjections,0) from App_AppraisalConfigurations where App_AppraisalConfigurations.UserTypeID=4 and App_AppraisalConfigurations.AppraisalTypeID= " & Appraisaltypeid & " and rank<>1 "
 
         Dim OriginaObjections As Integer = SqlHelper.ExecuteScalar(connectionString, CommandType.Text, strOrgObj)
 

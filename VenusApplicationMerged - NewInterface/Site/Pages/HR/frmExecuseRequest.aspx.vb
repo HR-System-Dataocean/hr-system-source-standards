@@ -739,7 +739,7 @@ Partial Class frmEmployeesVacations
 
                 Dim lastDayOfCurrentMonth As Date = New Date(Today.Year, Today.Month, Date.DaysInMonth(Today.Year, Today.Month))
                 'strCOuntNoOfimes = "Select count(id) from SS_ExecuseRequest where RequestDate >= GETDATE() and RequestDate>= DATEADD(month, -" & TimesPeriodPerMonth & ", getdate()) and EmployeeID='" & ClsEmployees.ID & "'"
-                strCOuntNoOfimes = " set dateformat dmy; Select count(id) from SS_ExecuseRequest where RequestDate >= '" & firstDayOfCurrentMonth & "' and RequestDate <='" & lastDayOfCurrentMonth & "' and EmployeeID='" & ClsEmployees.ID & "'"
+                strCOuntNoOfimes = " set dateformat dmy; Select count(id) from SS_ExecuseRequest where RequestDate >= '" & firstDayOfCurrentMonth & "' and RequestDate <='" & lastDayOfCurrentMonth & "' and EmployeeID='" & ClsEmployees.ID & "' and RequestStautsTypeID not in (2,5) "
                 Dim COuntNoOfimes As Integer
                 COuntNoOfimes = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(CType(HttpContext.Current.Session("ConnectionString"), String), Data.CommandType.Text, strCOuntNoOfimes)
                 If COuntNoOfimes >= NoOfTimes Then

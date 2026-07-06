@@ -314,7 +314,7 @@ Partial Class frmEmployeesVacations
             Dim str1 As String = ""
 
             str1 = "Select ID,FormCode,ConfigID,RequestSerial,EmployeeID," & EmpName & ",RequestDate,VacationType," & RequestType & ",SS_EmployeeID,BranchID  From SS_VNotification where SS_EmployeeID=" & ClsEmployees.ID & " Order By RequestDate desc"
-            hdnUserBranches.Value = ClsEmployees.BranchID
+            '  hdnUserBranches.Value = ClsEmployees.BranchID
 
             command = New Data.SqlClient.SqlCommand(str1, connection)
             adapter.SelectCommand = command

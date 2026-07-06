@@ -449,11 +449,11 @@ Partial Class frmEmployeesVacations
                     End If
                 Next
 
-                'If hasChangeInKeys Then
-                '    Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnectionString)
-                '    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "cant update rows because this type has endless requests/لا يمكن تعديل الصفوف لان هذا النوع لديه طلبات غير منتهية"))
-                '    Return False
-                'End If
+                If hasChangeInKeys Then
+                    Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnectionString)
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "cant update rows because this type has endless requests/لا يمكن تعديل الصفوف لان هذا النوع لديه طلبات غير منتهية"))
+                    Return False
+                End If
             End If
 
             Dim WebHandler As New Venus.Shared.Web.WebHandler
