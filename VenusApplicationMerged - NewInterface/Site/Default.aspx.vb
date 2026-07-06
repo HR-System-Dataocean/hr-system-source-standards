@@ -224,7 +224,7 @@ Partial Class _Default
                         'jScript = jScript & " generateQueue('error', '<div style=""text-align:right;""> <font size=""1""> تذكر أن هناك عدد " & Count & " تنبيه للخدمة الذاتية </br><a href=""#"" onclick=""javascript:parent.ShowSelfServiceNotificationScreen();"">للإطلاع عليها إضغط هنا</a></font></div>');"
                     End If
                     'Appraisal Notifications
-                    NotificationEngine()
+                    '  NotificationEngine()
 
                     Dim DS2 As New Data.DataSet()
 
@@ -350,8 +350,8 @@ Partial Class _Default
 
                 End If
                 'Appraisal Notifications
-                NotificationEngine()
-                EscalationEngine(clshrs.ID)
+                'NotificationEngine()
+                'EscalationEngine(clshrs.ID)
                 Dim DS2 As New Data.DataSet()
                 connetionString = clshrs.ConnectionString
                 connection = New Data.SqlClient.SqlConnection(connetionString)

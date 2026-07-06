@@ -504,11 +504,28 @@ Partial Class frmChangeJoinDate
                 ' ========== 2. تحديث تاريخ المباشرة ==========
                 If joinDateChanged Then
                     UpdateEmployeeJoinDate(conn, trans, employeeID, newJoinDate)
+
+                    ' تسجيل تغيير JoinDate في sys_History
+                    ' FieldID=3927, RecordID = employeeID (ريكرد الموظف في hrs_Employees)
+                    InsertHistory(conn, trans,
+                                  fieldID:=3927,
+                                  recordID:=employeeID,
+                                  oldValue:=oldJoinDate.ToString("dd/MM/yyyy"),
+                                  regUserID:=regUserID)
                 End If
 
                 ' ========== 3. تحديث الفئة في العقد ==========
                 If classChanged AndAlso Not IsDBNull(newClassID) AndAlso validContractID > 0 Then
                     UpdateContractClass(conn, trans, validContractID, newClassID)
+
+                    ' تسجيل تغيير EmployeeClassID في sys_History
+                    ' FieldID=344, RecordID = validContractID (ريكرد العقد في hrs_Contracts)
+                    Dim oldClassIDStr As String = If(IsDBNull(oldClassID), "", Convert.ToString(oldClassID))
+                    InsertHistory(conn, trans,
+                                  fieldID:=344,
+                                  recordID:=validContractID,
+                                  oldValue:=oldClassIDStr,
+                                  regUserID:=regUserID)
                 End If
 
                 ' ========== 4. معالجة الرصيد عند تغيير الفئة ==========
@@ -816,6 +833,43 @@ Partial Class frmChangeJoinDate
             Return 0
         End Try
     End Function
+
+    ' =============================================
+    ' تسجيل التغيير في sys_History
+    ' FieldID = 3927 لـ JoinDate في hrs_Employees
+    ' FieldID = 344  لـ EmployeeClassID في hrs_Contracts
+    ' RecordID = ID الريكرد اللي اتغير (employeeID أو contractID)
+    ' OldValue = القيمة القديمة قبل التغيير
+    ' =============================================
+    Private Sub InsertHistory(ByVal conn As SqlConnection,
+                               ByVal trans As SqlTransaction,
+                               ByVal fieldID As Integer,
+                               ByVal recordID As Integer,
+                               ByVal oldValue As String,
+                               ByVal regUserID As Integer)
+        Try
+            Dim sql As String =
+                "INSERT INTO sys_History (FieldID, RecordID, OldValue, RegUserID, RegDate) " &
+                "VALUES (@FieldID, @RecordID, @OldValue, @RegUserID, GETDATE())"
+
+            Using cmd As New SqlCommand(sql, conn, trans)
+                cmd.CommandTimeout = 60
+                cmd.Parameters.AddWithValue("@FieldID", fieldID)
+                cmd.Parameters.AddWithValue("@RecordID", recordID)
+                cmd.Parameters.AddWithValue("@OldValue", If(String.IsNullOrEmpty(oldValue), CObj(DBNull.Value), CObj(oldValue)))
+                cmd.Parameters.AddWithValue("@RegUserID", regUserID)
+                cmd.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            ' مش هنوقف الـ Transaction لو فشل تسجيل الـ History
+            ' بس هنسجل الخطأ
+            Try
+                mErrorHandler.RecordExceptions_DataBase("InsertHistory", ex, 0, 0,
+                    Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
+            Catch
+            End Try
+        End Try
+    End Sub
 
     ' =============================================
     ' 6. إدراج سجل التغيير في hrs_ChangeJoinDate
