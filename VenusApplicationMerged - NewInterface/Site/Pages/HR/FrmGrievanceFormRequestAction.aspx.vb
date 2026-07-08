@@ -265,7 +265,6 @@ Partial Class frmAttendancePreparation
             actionIdSql = "SELECT [ActionSerial] FROM [dbo].[SS_RequestActions]  where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & clsEmp.ID & ""
             Dim actionSerial As String
             actionSerial = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, actionIdSql)
-
             '============Get ConfigData======================
             If ddlAction.SelectedValue = 2 Then   'رفض
 
@@ -307,7 +306,7 @@ Partial Class frmAttendancePreparation
                         _sys_User.Find("ID = '" & User & "'")
                         ClsEmployees.Find("Code='" & _sys_User.Code & "'")
                         Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <> & ClsEmployees.ID & ""
+                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <> " & ClsEmployees.ID & ""
                         SqlCommand2 = New SqlClient.SqlCommand
                         SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                         SqlCommand2.CommandType = CommandType.Text
@@ -374,7 +373,7 @@ Partial Class frmAttendancePreparation
                         _sys_User.Find("ID = '" & User & "'")
                         ClsEmployees.Find("Code='" & _sys_User.Code & "'")
                         Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>  & ClsEmployees.ID & " "
+                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>  " & ClsEmployees.ID & " "
                         SqlCommand2 = New SqlClient.SqlCommand
                         SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                         SqlCommand2.CommandType = CommandType.Text
@@ -635,7 +634,7 @@ Partial Class frmAttendancePreparation
                         ClsEmployees.Find("Code='" & _sys_User.Code & "'")
 
                         Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>  & ClsEmployees.ID & " "
+                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>  " & ClsEmployees.ID & " "
                         SqlCommand2 = New SqlClient.SqlCommand
                         SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                         SqlCommand2.CommandType = CommandType.Text
@@ -650,36 +649,35 @@ Partial Class frmAttendancePreparation
                     ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
 
                     Dim strinsert As String
-                    Dim clsDelegatedEmp As New Clshrs_Employees(Page)
-                    clsDelegatedEmp.Find("Code='" & txtDelegated.Text & "'")
-                    strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & clsDelegatedEmp.ID & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & dsconfig.Tables(0).Rows(0)("ID") & ")"
-                    SqlCommand = New SqlClient.SqlCommand
-                    SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                    SqlCommand.CommandType = CommandType.Text
-                    SqlCommand.CommandText = strinsert
-                    SqlCommand.Connection.Open()
-                    SqlCommand.ExecuteNonQuery()
-                    SqlCommand.Connection.Close()
+                        Dim clsDelegatedEmp As New Clshrs_Employees(Page)
+                        clsDelegatedEmp.Find("Code='" & txtDelegated.Text & "'")
+                        strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & clsDelegatedEmp.ID & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & dsconfig.Tables(0).Rows(0)("ID") & ")"
+                        SqlCommand = New SqlClient.SqlCommand
+                        SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+                        SqlCommand.CommandType = CommandType.Text
+                        SqlCommand.CommandText = strinsert
+                        SqlCommand.Connection.Open()
+                        SqlCommand.ExecuteNonQuery()
+                        SqlCommand.Connection.Close()
+
+
+                    End If
+
+                    ClsEmployees.SendEmail("FrmGrievanceFormRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
+                    ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+                    Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                    'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
+
 
 
                 End If
-
-                ClsEmployees.SendEmail("FrmGrievanceFormRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
-                ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
                 Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
-                'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
-
-
+            Else
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Sorry...You Have to Select Action Or Close Window  !/!عفوا لابد من اختيار اجراء او اغلاق النافذة"))
 
             End If
-            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
-            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
-        Else
-            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Sorry...You Have to Select Action Or Close Window  !/!عفوا لابد من اختيار اجراء او اغلاق النافذة"))
-
-        End If
-
 
 
     End Sub

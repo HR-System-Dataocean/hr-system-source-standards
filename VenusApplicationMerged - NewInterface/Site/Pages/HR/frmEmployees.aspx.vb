@@ -1978,7 +1978,7 @@ Partial Class frmEmployees
             If ClsEmployees.ID > 0 Then
                 Clear_Contracts()
                 Clear()
-
+                JoinDate.Enabled = False
                 GetValues_Employees(ClsEmployees)
                 GetContractsData(IntId)
                 StrMode = "E"
