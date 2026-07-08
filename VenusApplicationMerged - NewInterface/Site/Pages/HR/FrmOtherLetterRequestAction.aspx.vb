@@ -238,6 +238,7 @@ Partial Class frmAttendancePreparation
     Protected Sub btnSave_Click(sender As Object, e As Infragistics.WebUI.WebDataInput.ButtonEventArgs) Handles btnSave.Click
 
         Dim ClsEmployees As New Clshrs_Employees(Page)
+        Dim ClsEmployees_SS As New Clshrs_Employees(Page)
 
         Dim objNav As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
         If ddlAction.SelectedValue > 0 Then
@@ -252,17 +253,11 @@ Partial Class frmAttendancePreparation
             Dim _sys_User As New Clssys_Users(Page)
             _sys_User.Find("ID = '" & User & "'")
             ClsEmployees.Find("Code='" & _sys_User.Code & "'")
+            ClsEmployees_SS.Find("Code='" & _sys_User.Code & "'")
             WebHandler.GetCookies(Page, "UserID", User)
             Dim SqlCommand As Data.SqlClient.SqlCommand
             Dim UpdateCommand As String = ""
-            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00194' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees.ID & ""
-            SqlCommand = New SqlClient.SqlCommand
-            SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-            SqlCommand.CommandType = CommandType.Text
-            SqlCommand.CommandText = UpdateCommand
-            SqlCommand.Connection.Open()
-            SqlCommand.ExecuteNonQuery()
-            SqlCommand.Connection.Close()
+
             Dim clsEmp As New Clshrs_Employees(Page)
             clsEmp.Find("Code='" & _sys_User.Code & "'")
             Dim actionIdSql As String
@@ -273,6 +268,15 @@ Partial Class frmAttendancePreparation
 
             '============Get ConfigData======================
             If ddlAction.SelectedValue = 2 Then   'رفض
+
+                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00194' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                SqlCommand = New SqlClient.SqlCommand
+                SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+                SqlCommand.CommandType = CommandType.Text
+                SqlCommand.CommandText = UpdateCommand
+                SqlCommand.Connection.Open()
+                SqlCommand.ExecuteNonQuery()
+                SqlCommand.Connection.Close()
 
                 Dim SqlCommandRank As Data.SqlClient.SqlCommand
                 Dim UpdateCommandRank As String = ""
@@ -329,6 +333,7 @@ Partial Class frmAttendancePreparation
 
 
                 End If
+
                 ClsEmployees.SendEmail("FrmOtherLetterRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
                 ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
@@ -385,6 +390,16 @@ Partial Class frmAttendancePreparation
                         NeededactionSerial = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, NeededactionIdSql)
 
                         If Not String.IsNullOrWhiteSpace(NeededactionSerial) Then
+
+                            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00194' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                            SqlCommand = New SqlClient.SqlCommand
+                            SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+                            SqlCommand.CommandType = CommandType.Text
+                            SqlCommand.CommandText = UpdateCommand
+                            SqlCommand.Connection.Open()
+                            SqlCommand.ExecuteNonQuery()
+                            SqlCommand.Connection.Close()
+
                             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
                             Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
                             Return
@@ -392,6 +407,15 @@ Partial Class frmAttendancePreparation
 
                     End If
                     If CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
+
+                        UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00194' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                        SqlCommand = New SqlClient.SqlCommand
+                        SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+                        SqlCommand.CommandType = CommandType.Text
+                        SqlCommand.CommandText = UpdateCommand
+                        SqlCommand.Connection.Open()
+                        SqlCommand.ExecuteNonQuery()
+                        SqlCommand.Connection.Close()
 
                         Dim SqlCommandRank As Data.SqlClient.SqlCommand
                         Dim UpdateCommandRank As String = ""
@@ -435,6 +459,15 @@ Partial Class frmAttendancePreparation
                                         DirectManagerID = DelegatedEmpID
 
                                     End If
+                                    UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00194' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                                    SqlCommand = New SqlClient.SqlCommand
+                                    SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+                                    SqlCommand.CommandType = CommandType.Text
+                                    SqlCommand.CommandText = UpdateCommand
+                                    SqlCommand.Connection.Open()
+                                    SqlCommand.ExecuteNonQuery()
+                                    SqlCommand.Connection.Close()
+
                                     Dim strinsert As String
                                     strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & DirectManagerID & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
                                     SqlCommand = New SqlClient.SqlCommand
@@ -468,6 +501,15 @@ Partial Class frmAttendancePreparation
                                                 RW("EmployeeID") = DelegatedEmpID
 
                                             End If
+                                            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00194' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                                            SqlCommand = New SqlClient.SqlCommand
+                                            SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+                                            SqlCommand.CommandType = CommandType.Text
+                                            SqlCommand.CommandText = UpdateCommand
+                                            SqlCommand.Connection.Open()
+                                            SqlCommand.ExecuteNonQuery()
+                                            SqlCommand.Connection.Close()
+
                                             Dim strinsert As String
                                             strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & RW("EmployeeID") & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
                                             SqlCommand = New SqlClient.SqlCommand
@@ -482,6 +524,8 @@ Partial Class frmAttendancePreparation
                                     Else
                                         Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
                                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Can not proceed your request because there are no employees in the next level ...Please contact system admin  / عفوا لايمكن تسجيل الطلب لعدم وجود موظفين في المرحلة التالية ... يرجي مراجعة مدير النظام"))
+                                        Return
+
                                     End If
                                 End If
                                 'Employee
@@ -493,6 +537,16 @@ Partial Class frmAttendancePreparation
                                         Row("EmployeeID") = DelegatedEmpID
 
                                     End If
+
+                                    UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00194' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                                    SqlCommand = New SqlClient.SqlCommand
+                                    SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+                                    SqlCommand.CommandType = CommandType.Text
+                                    SqlCommand.CommandText = UpdateCommand
+                                    SqlCommand.Connection.Open()
+                                    SqlCommand.ExecuteNonQuery()
+                                    SqlCommand.Connection.Close()
+
                                     Dim strinsert As String
                                     strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & Row("EmployeeID") & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
                                     SqlCommand = New SqlClient.SqlCommand
@@ -505,6 +559,15 @@ Partial Class frmAttendancePreparation
                                 End If
                             Next
                         Else
+
+                            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00194' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                            SqlCommand = New SqlClient.SqlCommand
+                            SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+                            SqlCommand.CommandType = CommandType.Text
+                            SqlCommand.CommandText = UpdateCommand
+                            SqlCommand.Connection.Open()
+                            SqlCommand.ExecuteNonQuery()
+                            SqlCommand.Connection.Close()
 
                             Dim SqlCommandRank As Data.SqlClient.SqlCommand
                             Dim UpdateCommandRank As String = ""
@@ -521,6 +584,7 @@ Partial Class frmAttendancePreparation
 
 
                 End If
+
                 ClsEmployees.SendEmail("FrmOtherLetterRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
                 ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
@@ -588,6 +652,7 @@ Partial Class frmAttendancePreparation
                     Dim strinsert As String
                     Dim clsDelegatedEmp As New Clshrs_Employees(Page)
                     clsDelegatedEmp.Find("Code='" & txtDelegated.Text & "'")
+
                     strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & clsDelegatedEmp.ID & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & dsconfig.Tables(0).Rows(0)("ID") & ")"
                     SqlCommand = New SqlClient.SqlCommand
                     SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
