@@ -2,6 +2,7 @@ Imports System
 Imports System.Data
 Imports System.Data.SqlClient
 Imports System.IO
+Imports System.Text.RegularExpressions
 Imports System.Web.Script.Serialization
 Imports Venus.Application.SystemFiles.System
 Imports Stimulsoft.Report
@@ -72,6 +73,9 @@ Partial Class Pages_Reports_StiViewer
             e.Report = New StiReport()
             Return
         End Try
+
+        ' Global normalization for nullable DateTime fields in all STI reports.
+        NormalizeReportDateTimeFields(report)
 
         ' Apply DB connection string to any SQL sources
         Dim conn As String = System.Configuration.ConfigurationManager.AppSettings("Connstring")
@@ -189,14 +193,108 @@ Partial Class Pages_Reports_StiViewer
     Private Sub SetVar(ByVal report As StiReport, ByVal name As String, ByVal value As String)
         Dim v = report.Dictionary.Variables(name)
         If v Is Nothing Then Return
-        ' Try to coerce dates to dd/MM/yyyy
+
+        If v.Type Is GetType(DateTime) Then
+            v.Type = GetType(String)
+        End If
+
+        ' Coerce date values to yyyy/MM/dd for report parameters.
         Dim dt As DateTime
         If DateTime.TryParse(value, dt) Then
-            v.Value = dt.ToString("dd/MM/yyyy")
+            v.Value = dt.ToString("yyyy/MM/dd")
         Else
             v.Value = value
         End If
     End Sub
+
+    Private Sub NormalizeReportDateTimeFields(ByVal report As StiReport)
+        Try
+            Dim convertedFields As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
+
+            ' 1) Convert all nullable-prone DateTime SQL columns to String.
+            For Each ds In report.Dictionary.DataSources
+                Dim sqlSrc As StiSqlSource = TryCast(ds, StiSqlSource)
+                If sqlSrc Is Nothing OrElse sqlSrc.Columns Is Nothing Then Continue For
+
+                For Each col As StiDataColumn In sqlSrc.Columns
+                    If col Is Nothing OrElse String.IsNullOrEmpty(col.Name) Then Continue For
+                    If col.Type IsNot GetType(DateTime) Then Continue For
+
+                    col.Type = GetType(String)
+                    Dim fieldKind As String = If(IsTimeLikeField(col.Name), "time", "date")
+                    convertedFields(sqlSrc.Name & "|" & col.Name) = fieldKind
+                Next
+            Next
+
+            ' 2) Convert DateTime report variables to String and format existing values.
+            For Each v As StiVariable In report.Dictionary.Variables
+                If v Is Nothing OrElse v.Type IsNot GetType(DateTime) Then Continue For
+
+                v.Type = GetType(String)
+                If v.Value Is Nothing OrElse v.Value Is DBNull.Value Then
+                    v.Value = String.Empty
+                    Continue For
+                End If
+
+                Dim dt As DateTime
+                If DateTime.TryParse(Convert.ToString(v.Value), dt) Then
+                    v.Value = dt.ToString("yyyy/MM/dd")
+                Else
+                    v.Value = Convert.ToString(v.Value)
+                End If
+            Next
+
+            ' 3) Replace direct bindings with null-safe expressions for converted fields.
+            For Each p As StiPage In report.Pages
+                For Each c As StiComponent In p.GetComponents()
+                    Dim txt As StiText = TryCast(c, StiText)
+                    If txt Is Nothing OrElse String.IsNullOrEmpty(txt.Text) Then Continue For
+
+                    Dim newExpr As String = MakeDateTimeBindingsNullSafe(txt.Text, convertedFields)
+                    If Not String.Equals(newExpr, txt.Text, StringComparison.Ordinal) Then
+                        txt.Text = newExpr
+                        txt.TextFormat = Nothing
+                    End If
+                Next
+            Next
+        Catch
+            ' Never fail report rendering because of normalization.
+        End Try
+    End Sub
+
+    Private Function IsTimeLikeField(ByVal fieldName As String) As Boolean
+        If String.IsNullOrEmpty(fieldName) Then Return False
+        Dim n As String = fieldName.ToLowerInvariant()
+        Return n.Contains("timein") OrElse n.Contains("timeout") OrElse
+               (n.Contains("time") AndAlso Not n.Contains("datetime") AndAlso Not n.Contains("date"))
+    End Function
+
+    Private Function MakeDateTimeBindingsNullSafe(ByVal expr As String, ByVal convertedFields As Dictionary(Of String, String)) As String
+        If String.IsNullOrEmpty(expr) Then Return expr
+        If expr.IndexOf("== null", StringComparison.OrdinalIgnoreCase) >= 0 Then Return expr
+
+        Dim pattern As String = "\{([A-Za-z_][\w]*)\.([A-Za-z_][\w]*)\}"
+        Return Regex.Replace(expr, pattern, Function(m As Match)
+                                                Dim ds As String = m.Groups(1).Value
+                                                Dim field As String = m.Groups(2).Value
+                                                Dim key As String = ds & "|" & field
+                                                Dim fieldKind As String = Nothing
+
+                                                If Not convertedFields.TryGetValue(key, fieldKind) Then Return m.Value
+                                                Return BuildNullSafeBinding(ds, field, fieldKind)
+                                            End Function)
+    End Function
+
+    Private Function BuildNullSafeBinding(ByVal dataSourceName As String, ByVal fieldName As String, ByVal fieldKind As String) As String
+        Dim fieldRef As String = dataSourceName & "." & fieldName
+        Dim emptyCheck As String = fieldRef & " == null || " & fieldRef & " == """""
+
+        If String.Equals(fieldKind, "time", StringComparison.OrdinalIgnoreCase) Then
+            Return "{IIF(" & emptyCheck & ", ""00:00"", " & fieldRef & ")}"
+        End If
+
+        Return "{IIF(" & emptyCheck & ", """", Format(""{0:yyyy/MM/dd}"", " & fieldRef & "))}"
+    End Function
 
     Private Function GetLocalizedText(ByVal arText As String, ByVal enText As String) As String
         If String.Equals(ProfileCls.CurrentLanguage(), "Ar", StringComparison.OrdinalIgnoreCase) Then
