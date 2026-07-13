@@ -1,11 +1,12 @@
-﻿Imports Venus.Application.SystemFiles.System
-Imports Venus.Application.SystemFiles.HumanResource
-Imports System.Data
+﻿Imports System.Data
 Imports System.Data.SqlClient
+Imports System.Diagnostics
+Imports System.Globalization
+Imports System.IO
 Imports System.Windows.Forms
 Imports OfficeOpenXml
-Imports System.Diagnostics
-Imports System.IO
+Imports Venus.Application.SystemFiles.HumanResource
+Imports Venus.Application.SystemFiles.System
 
 Partial Class frmEmployeesSelector
     Inherits MainPage
@@ -1669,10 +1670,17 @@ Partial Class frmEmployeesSelector
 
                             End If
 
+                            'Rabie 12-07-2026
+                            'fp.FromDate = DateTime.ParseExact(fp.FromDate, "dd-MM-yyyy", CultureInfo.InvariantCulture)
+
 
                             'Dim dat_FPS As Date = fp.FromDate.AddDays(-(NoOfDaysToDeduct))
                             'Dim dat_FPE = dat_FPS.AddDays(29)
                             Dim dat_FPS As Date = fp.FromDate
+
+
+
+
                             Dim dat_FPE = dat_FPS
                             If System.DateTime.DaysInMonth(FromDate.Year, fp.FromDate.Month) = 31 Then
                                 dat_FPE = dat_FPS.AddDays(30)
@@ -2377,7 +2385,9 @@ Partial Class frmEmployeesSelector
                 dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_TT_DAYS) - ((P_DAY_SALARY * dec_TT_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage3PCT")) / 100))
             End If
         Else
-            If dec_PRE_SICK_LEAVE + P_SICK_DAYS <= 30 Then
+            'Rabie 12-07-2026
+            'If dec_PRE_SICK_LEAVE + P_SICK_DAYS <= 30 Then
+            If P_SICK_DAYS <= 30 Then
                 dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * P_SICK_DAYS) - ((P_DAY_SALARY * P_SICK_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage1PCT")) / 100))
             Else
                 Dim dec_ST_DAYS As Decimal = dec_PRE_SICK_LEAVE + P_SICK_DAYS - 30

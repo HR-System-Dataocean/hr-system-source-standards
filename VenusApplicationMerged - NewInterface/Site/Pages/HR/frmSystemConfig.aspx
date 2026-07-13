@@ -333,6 +333,17 @@
                                 <asp:CheckBox ID="chkMultiBranchedPosition" runat="server" />
                             </td>
                         </tr>
+                                   <tr>
+               <td class="SeparArea">
+               </td>
+               <td class="LabelArea">
+                   <asp:Label ID="LblLockJoinDate" runat="server" Text="Lock Join Date" SkinID="Label_DefaultNormal"
+                       meta:resourcekey="LockJoinDateResource1"></asp:Label>
+               </td>
+               <td class="DataArea">
+                   <asp:CheckBox ID="ChkLockJoinDate" runat="server" />
+               </td>
+           </tr>
                     </table>
                 </td>
                 <td style="width: 6%; height: 16px; vertical-align: top">

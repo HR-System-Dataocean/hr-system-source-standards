@@ -1978,7 +1978,15 @@ Partial Class frmEmployees
             If ClsEmployees.ID > 0 Then
                 Clear_Contracts()
                 Clear()
-                JoinDate.Enabled = False
+                Dim LockJoinDate As Object = False
+                Dim LockJoinDateStr As String = "SELECT isnull(LockJoinDate,0) FROM sys_SystemConfig"
+                LockJoinDate = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, LockJoinDateStr)
+                If LockJoinDate Then
+                    JoinDate.Enabled = False
+                Else
+                    JoinDate.Enabled = True
+                End If
+
                 GetValues_Employees(ClsEmployees)
                 GetContractsData(IntId)
                 StrMode = "E"

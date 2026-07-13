@@ -8339,25 +8339,15 @@ END
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-
-ALTER TABLE [dbo].[hrs_ChangeJoinDate] ADD  CONSTRAINT [DF__hrs_Chang__Annua__14888976]  DEFAULT ((0)) FOR [AnnualVacationBalance]
-GO
-
-ALTER TABLE [dbo].[hrs_ChangeJoinDate] ADD  CONSTRAINT [DF__hrs_Chang__Trans__157CADAF]  DEFAULT ((0)) FOR [TransferredVacationBalance]
-GO
-
-ALTER TABLE [dbo].[hrs_ChangeJoinDate] ADD  CONSTRAINT [DF__hrs_Chang__Total__1670D1E8]  DEFAULT ((0)) FOR [TotalVacationBalance]
-GO
-
-ALTER TABLE [dbo].[hrs_ChangeJoinDate] ADD  CONSTRAINT [DF__hrs_Chang__LastS__1764F621]  DEFAULT ((0)) FOR [LastSalary]
-GO
-
-ALTER TABLE [dbo].[hrs_ChangeJoinDate] ADD  CONSTRAINT [DF__hrs_Chang__RegDa__18591A5A]  DEFAULT (getdate()) FOR [RegDate]
-GO
 "
+
+
         ExecuteUpdate(SQL)
 
+
+
+        SQL = " ALTER TABLE dbo.sys_SystemConfig ADD LockJoinDate bit NULL "
+        ExecuteUpdate(SQL)
     End Function
 
     Public Function UpdateSS() As Boolean

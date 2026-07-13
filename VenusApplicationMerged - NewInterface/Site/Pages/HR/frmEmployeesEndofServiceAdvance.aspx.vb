@@ -1,7 +1,8 @@
-﻿Imports Venus.Application.SystemFiles.System
-Imports Venus.Application.SystemFiles.HumanResource
-Imports System.Data
+﻿Imports System.Data
+Imports System.Data.SqlClient
 Imports Infragistics.WebUI.UltraWebGrid
+Imports Venus.Application.SystemFiles.HumanResource
+Imports Venus.Application.SystemFiles.System
 
 Partial Class frmEmployeesEndofServiceAdvance
     Inherits MainPage
@@ -166,7 +167,22 @@ Partial Class frmEmployeesEndofServiceAdvance
                 cs.RegisterStartupScript(Me.GetType(), "PopupScript", "OpenModal12('frmEmployeesItemsClearance.aspx?EmpCode=" & ClsEmployee.Code & "',400,700);", True)
                 Return
             End If
+            ' =============================================
+            ' التحقق من طلبات الخدمة الذاتية (COUNT فقط)
+            ' =============================================
+            If HasSelfServiceRequests(IntEmployeeId) Then
+                ' فتح Popup وتمرير EmployeeID
+                Dim script As String = "window.open('frmSelfServiceRequestsPopup.aspx?EmployeeID=" & IntEmployeeId &
+                                   "&EmpCode=" & Server.UrlEncode(lblDescEmployeeCode.Text) &
+                                   "&EmpName=" & Server.UrlEncode(lblDescEnglishName.Text) &
+                                   "', '_blank', 'width=900,height=600,scrollbars=yes,resizable=yes,menubar=no,status=no');"
 
+                ClientScript.RegisterStartupScript(Me.GetType(), "OpenPopup",
+                "<script language='javascript'>" & script & "</script>", False)
+
+                ' نوقف عملية الحفظ مؤقتاً
+                Exit Sub
+            End If
             '==========================================================================
             '4- Update Employees Joins by the endofservce Date and reson
             '5- Update the contract by the End date of the Endof service date 
@@ -2196,4 +2212,28 @@ Partial Class frmEmployeesEndofServiceAdvance
             uwgExtraDeduction.Rows.Add()
         End If
     End Sub
+
+    ' =============================================
+    ' التحقق من وجود طلبات خدمة ذاتية (COUNT فقط)
+    ' =============================================
+    Private Function HasSelfServiceRequests(ByVal EmployeeID As Integer) As Boolean
+        Try
+            Dim sql As String = "SELECT COUNT(*) FROM SS_RequestActions " &
+                            "WHERE ActionID IS NULL " &
+                            "AND IsHidden IS NULL " &
+                            "AND (SS_EmployeeID = @EmployeeID OR EmployeeID = @EmployeeID)"
+
+            Using conn As New SqlConnection(ClsEmployees.ConnectionString)
+                Using cmd As New SqlCommand(sql, conn)
+                    cmd.Parameters.AddWithValue("@EmployeeID", EmployeeID)
+                    conn.Open()
+                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                    Return count > 0
+                End Using
+            End Using
+
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 End Class

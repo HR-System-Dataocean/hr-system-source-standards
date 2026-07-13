@@ -369,4 +369,7 @@
   <data name="lblJournalEmployeeFieldsResource1.Text" xml:space="preserve">
     <value>حقول الموظف في اليومية</value>
   </data>
+  <data name="LockJoinDateResource1.Text" xml:space="preserve">
+    <value>اغلاق تاريخ المباشرة</value>
+  </data>
 </root>

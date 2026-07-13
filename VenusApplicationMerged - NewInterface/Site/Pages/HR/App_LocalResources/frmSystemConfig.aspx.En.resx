@@ -369,4 +369,7 @@
   <data name="lblJournalEmployeeFieldsResource1.Text" xml:space="preserve">
     <value>Journal employee fields</value>
   </data>
+  <data name="LockJoinDateResource1.Text" xml:space="preserve">
+    <value>Lock Join Date</value>
+  </data>
 </root>

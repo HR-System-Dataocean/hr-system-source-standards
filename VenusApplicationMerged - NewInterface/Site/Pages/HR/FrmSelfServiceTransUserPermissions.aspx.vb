@@ -244,14 +244,21 @@ Partial Class frmUsers
                 txtCode.Text = .Code
                 txtEngName.Text = .EngName
                 txtArbName.Text = .ArbName
-
                 If .RelEmployee <> Nothing Then
                     Dim clsEmp As New Clshrs_Employees(Page)
                     clsEmp.Find("ID=" & .RelEmployee)
                 Else
 
                 End If
-
+                Dim _sys_User As New Clssys_Users(Page)
+                '1- Check if user has permission to delete or not
+                Dim strCheckPermission As String = " select CanDeleteSelfServiceTransactions from SS_SelfServiceTransactionUserPermissions where UserID=" & _sys_User.ID & ""
+                Dim HasDeletePermission As Boolean = CBool(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsUser.ConnectionString, Data.CommandType.Text, strCheckPermission))
+                If HasDeletePermission Then
+                    ChkCanDeleteSelfServiceTransactions.Checked = True
+                Else
+                    ChkCanDeleteSelfServiceTransactions.Checked = False
+                End If
 
             End With
 
