@@ -855,7 +855,7 @@ Partial Class FrmAdvanceHousingRequest
                         SqlCommand.Connection.Open()
                         MaxSerial = CInt(SqlCommand.ExecuteScalar())
                         SqlCommand.Connection.Close()
-                        strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID,OvertimeDate,HoursCount)  values(" & MaxSerial & " , " & DirectManagerID & ",'SS_001913'," & ClsEmployees.ID & ",0," & Row("ID") & ",convert(datetime, '" & InstallmentDate.Value & "',103))"
+                        strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID,OvertimeDate,HoursCount)  values(" & MaxSerial & " , " & DirectManagerID & ",'SS_001913'," & ClsEmployees.ID & ",0," & Row("ID") & ",convert(datetime, '" & InstallmentDate.Value & "',103),'" & txtInstallmentsNo.Text & "')"
                         SqlCommand = New SqlClient.SqlCommand
                         SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)
                         SqlCommand.CommandType = CommandType.Text

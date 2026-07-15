@@ -139,6 +139,12 @@ Partial Class frmEmployees
                 Page.Session.Add("Lage", objNav.SetLanguage(Page, "0/1"))
                 hdnLang.Value = objNav.SetLanguage(Page, "0/1")
                 New_Part()
+
+                RegisterJoinDateChangeCallback()
+            Else
+                CheckPendingSave()
+
+
             End If
 
 
@@ -164,6 +170,57 @@ Partial Class frmEmployees
             Page.Response.Redirect("ErrorPage.aspx")
         End Try
 
+    End Sub
+
+    Private Sub CheckPendingSave()
+        Try
+            ' إذا كانت هناك عملية حفظ معلقة
+            If Session("IsWaitingForPopup") IsNot Nothing AndAlso Session("IsWaitingForPopup") = True Then
+                ' إعادة تعيين الحالة
+                Session("IsWaitingForPopup") = False
+
+                ' التأكد من أن Session("JoinDateChanged") = True
+                If Session("JoinDateChanged") IsNot Nothing AndAlso Session("JoinDateChanged") = True Then
+                    ' إعادة تعيين Session بعد إكمال الحفظ
+                    Session("JoinDateChanged") = False
+
+                    ' =============================================
+                    ' إعادة تنفيذ منطق الحفظ مباشرة
+                    ' =============================================
+                    Dim empCode As String = Session("EmployeeCode").ToString()
+                    If Not String.IsNullOrEmpty(empCode) Then
+                        ' تحميل بيانات الموظف
+                        txtCode.Text = empCode
+                        ClsEmployees.Find("Code='" & empCode & "'")
+
+                        ' تعيين القيم من الـ Hidden Fields
+                        If Not String.IsNullOrEmpty(TxtHDJoinDate.Value) Then
+                            JoinDate.Text = TxtHDJoinDate.Value
+                        End If
+                        If Not String.IsNullOrEmpty(TxtHDClassID.Value) Then
+                            ddlEmployeeClass.SelectedValue = TxtHDClassID.Value
+                        End If
+
+                        ' إعادة تعيين ClsEmployees بالقيم الجديدة
+                        AssignValues_Employees()
+
+                        ' حفظ الموظف
+                        If ClsEmployees.ID > 0 Then
+                            ClsEmployees.Update("code='" & txtCode.Text & "'")
+                        End If
+
+                        ' عرض رسالة نجاح
+                        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Me.Page,
+                        ObjNavigationHandler.SetLanguage(Me.Page, " This Employee Saved With Code No : / هذا الموظف تم حفظه برقم كود : ") & ClsEmployees.Code)
+
+                        CheckCode()
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            ' تجاهل الأخطاء
+        End Try
     End Sub
     Protected Sub ImageButton_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles ImageButton1_Save.Command, ImageButton_SaveN.Command, LinkButton_SaveN.Command, ImageButton_New.Command, ImageButton_Print.Command, ImageButton_Properties.Command, LinkButton_Properties.Command, ImageButton_Remarks.Command, LinkButton_Remarks.Command, ImageButton_Last.Command, ImageButton_Next.Command, ImageButton_Back.Command, ImageButton_First.Command, ImageButton_Delete.Command, ImageButton_History.Command, LinkButton_History.Command ', btnDelete.Command, btnNew.Command, btnSave.Command
         ClsEmployees = New Clshrs_Employees(Me)
@@ -208,7 +265,7 @@ Partial Class frmEmployees
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... you have to select Grade step   /عفوا...لابد من تحديد الرتبة "))
                     Exit Sub
                 End If
-                If String.IsNullOrEmpty(txtPositionCode.Text) Then
+                If String.IsNullOrEmpty(TxtPositionCode.Text) Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... you have to select  Position   /عفوا...لابد من تحديد الوظيفة "))
                     Exit Sub
                 End If
@@ -356,6 +413,53 @@ Partial Class frmEmployees
                         Exit Sub
                     End If
 
+
+
+
+                    'Rabie 14-07-2026
+                    'JoinDate and ClassID Change
+                    Dim LockJoinDate As Object = False
+                    Dim LockJoinDateStr As String = "SELECT isnull(LockJoinDate,0) FROM sys_SystemConfig"
+                    LockJoinDate = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, LockJoinDateStr)
+
+                    If LockJoinDate Then
+                        If JoinDate.Text <> TxtHDJoinDate.Value Or ddlEmployeeClass.SelectedValue <> TxtHDClassID.Value Then
+                            ' نحفظ الزرار اللي عمل الحفظ
+                            Dim pendingID As String = CType(sender, Control).UniqueID
+                            hdnPendingSaveControlID.Value = pendingID
+
+                            ' حفظ حالة أننا في انتظار الـ Popup
+                            Session("IsWaitingForPopup") = True
+                            Session("PendingSaveControlID") = pendingID
+                            Session("EmployeeCode") = txtCode.Text
+
+                            ' تمرير معرف الزرار للـ Popup
+                            Dim url As String = "frmChangeJoinDate.aspx?EmpCode=" & Server.UrlEncode(txtCode.Text) &
+            "&JoinDate=" & Server.UrlEncode(JoinDate.Text) &
+            "&ClassID=" & ddlEmployeeClass.SelectedValue &
+            "&OldJoinDate=" & Server.UrlEncode(TxtHDJoinDate.Value) &
+            "&OldClassID=" & TxtHDClassID.Value
+
+                            Dim script As String = "OpenModal11('" & url & "', 650, 950, false, false, '');"
+                            ClientScript.RegisterStartupScript(Me.GetType(), "OpenChangeJoinDate",
+            "<script language='javascript'>" & script & "</script>", False)
+
+                            ' ✅ استخدم Return بدلاً من Exit Sub
+                            Return
+                        End If
+                    End If
+
+                    ' =============================================
+                    ' التحقق من Session (تم تعيينه من الـ Popup)
+                    ' =============================================
+                    If Session("JoinDateChanged") Is Nothing OrElse Session("JoinDateChanged") = False Then
+                        Return
+                    Else
+                        ' إعادة تعيين Session بعد إكمال الحفظ
+                        Session("JoinDateChanged") = False
+                    End If
+
+
                     'Get Next Code
                     Dim Cls_Companies As New Clssys_Companies(Page)
                     Dim IntSeqLength As Integer = 0
@@ -453,7 +557,7 @@ Partial Class frmEmployees
                     End If
 
 
-                        txtEmpId.Value = ClsEmployees.ID
+                    txtEmpId.Value = ClsEmployees.ID
                     lblEmpID.Text = ClsEmployees.ID
                     Dim clsEmp As New Clshrs_Employees(Page)
                     clsEmp.Find(" Code='" & txtManager.Text & "'")
@@ -597,6 +701,58 @@ Partial Class frmEmployees
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... you have to Enter Start Date   /عفوا...لابد من ادخال تاريخ البدء  "))
                         Exit Sub
                     End If
+
+
+                    'Rabie 14-07-2026
+                    'JoinDate and ClassID Change
+                    Dim LockJoinDate As Object = False
+                    Dim LockJoinDateStr As String = "SELECT isnull(LockJoinDate,0) FROM sys_SystemConfig"
+                    LockJoinDate = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, LockJoinDateStr)
+
+                    If LockJoinDate Then
+                        If JoinDate.Text <> TxtHDJoinDate.Value Or ddlEmployeeClass.SelectedValue <> TxtHDClassID.Value Then
+                            ' نحفظ الزرار اللي عمل الحفظ
+                            Dim pendingID As String = CType(sender, Control).UniqueID
+                            hdnPendingSaveControlID.Value = pendingID
+
+                            ' حفظ حالة أننا في انتظار الـ Popup
+                            Session("IsWaitingForPopup") = True
+                            Session("PendingSaveControlID") = pendingID
+                            Session("EmployeeCode") = txtCode.Text
+
+                            ' تمرير معرف الزرار للـ Popup
+                            Dim url As String = "frmChangeJoinDate.aspx?EmpCode=" & Server.UrlEncode(txtCode.Text) &
+            "&JoinDate=" & Server.UrlEncode(JoinDate.Text) &
+            "&ClassID=" & ddlEmployeeClass.SelectedValue &
+            "&OldJoinDate=" & Server.UrlEncode(TxtHDJoinDate.Value) &
+            "&OldClassID=" & TxtHDClassID.Value
+
+                            Dim script As String = "OpenModal11('" & url & "', 650, 950, false, false, '');"
+                            ClientScript.RegisterStartupScript(Me.GetType(), "OpenChangeJoinDate",
+            "<script language='javascript'>" & script & "</script>", False)
+
+                            ' ✅ استخدم Return بدلاً من Exit Sub
+                            Return
+                        End If
+                    End If
+
+                    ' =============================================
+                    ' التحقق من Session (تم تعيينه من الـ Popup)
+                    ' =============================================
+                    If Session("JoinDateChanged") Is Nothing OrElse Session("JoinDateChanged") = False Then
+                        Return
+                    Else
+                        ' إعادة تعيين Session بعد إكمال الحفظ
+                        Session("JoinDateChanged") = False
+                    End If
+
+
+
+
+
+
+
+
                     ClsEmployees.Update("code='" & txtCode.Text & "'")
 
                     'Dim clsEmp As New Clshrs_Employees(Page)
@@ -938,6 +1094,50 @@ Partial Class frmEmployees
     '    End If
 
     'End Sub
+
+
+    Private Sub RegisterJoinDateChangeCallback()
+        Dim script As New System.Text.StringBuilder()
+        script.AppendLine("<script type='text/javascript'>")
+        script.AppendLine("// =============================================")
+        script.AppendLine("// دالة استقبال النتيجة من Popup تغيير تاريخ المباشرة")
+        script.AppendLine("// =============================================")
+        script.AppendLine("window.OnJoinDateChangePopupResult = function(success) {")
+        script.AppendLine("    debugger;")
+        script.AppendLine("    // إغلاق الـ Dialog")
+        script.AppendLine("    if (typeof ODialoge !== 'undefined' && ODialoge) {")
+        script.AppendLine("        try { ODialoge.dialog('close'); } catch(e) {}")
+        script.AppendLine("    }")
+        script.AppendLine("    ")
+        script.AppendLine("    if (success) {")
+        script.AppendLine("        // تحديث الـ Hidden Fields بالقيم الجديدة")
+        script.AppendLine("        var hdJoin = document.getElementById('" & TxtHDJoinDate.ClientID & "');")
+        script.AppendLine("        var hdClass = document.getElementById('" & TxtHDClassID.ClientID & "');")
+        script.AppendLine("        var joinCtrl = document.getElementById('" & JoinDate.ClientID & "');")
+        script.AppendLine("        var classCtrl = document.getElementById('" & ddlEmployeeClass.ClientID & "');")
+        script.AppendLine("        ")
+        script.AppendLine("        if (hdJoin && joinCtrl) {")
+        script.AppendLine("            hdJoin.value = joinCtrl.value;")
+        script.AppendLine("        }")
+        script.AppendLine("        if (hdClass && classCtrl) {")
+        script.AppendLine("            hdClass.value = classCtrl.value;")
+        script.AppendLine("        }")
+        script.AppendLine("        ")
+        script.AppendLine("        // تنفيذ PostBack لإكمال الحفظ")
+        script.AppendLine("        var pendingID = document.getElementById('" & hdnPendingSaveControlID.ClientID & "').value;")
+        script.AppendLine("        if (pendingID) {")
+        script.AppendLine("            __doPostBack(pendingID, '');")
+        script.AppendLine("        }")
+        script.AppendLine("    }")
+        script.AppendLine("}")
+        script.AppendLine("</script>")
+
+        ClientScript.RegisterClientScriptBlock(Me.GetType(), "JoinDateChangeCallback", script.ToString())
+    End Sub
+
+
+
+
     Private Sub CheckGeneralSetup()
         Dim PreventChangeContractEndDate As Boolean
         Dim dt As DataSet
@@ -1387,7 +1587,7 @@ Partial Class frmEmployees
                 txtContractId.Value = .ID
                 txtCId.Text = .ID
                 lblContractNo.Text = .Number
-
+                TxtHDClassID.Value = .EmployeeClassID
                 If .StartDate <> Nothing Then
                     txtStartDate.Value = CDate(.GetHigriDate(.StartDate)).ToString("ddMMyyyy")
                 End If
@@ -1978,17 +2178,19 @@ Partial Class frmEmployees
             If ClsEmployees.ID > 0 Then
                 Clear_Contracts()
                 Clear()
-                Dim LockJoinDate As Object = False
-                Dim LockJoinDateStr As String = "SELECT isnull(LockJoinDate,0) FROM sys_SystemConfig"
-                LockJoinDate = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, LockJoinDateStr)
-                If LockJoinDate Then
-                    JoinDate.Enabled = False
-                Else
-                    JoinDate.Enabled = True
-                End If
+                'TxtHDJoinDate.Value = ClsEmployees.JoinDate
+                'Dim LockJoinDate As Object = False
+                'Dim LockJoinDateStr As String = "SELECT isnull(LockJoinDate,0) FROM sys_SystemConfig"
+                'LockJoinDate = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, LockJoinDateStr)
+                'If LockJoinDate Then
+                '    JoinDate.Enabled = False
+                'Else
+                '    JoinDate.Enabled = True
+                'End If
 
                 GetValues_Employees(ClsEmployees)
                 GetContractsData(IntId)
+
                 StrMode = "E"
             Else
                 If ClsEmployees.CheckRecordExistance(" Code='" & txtCode.Text & "'") Then
