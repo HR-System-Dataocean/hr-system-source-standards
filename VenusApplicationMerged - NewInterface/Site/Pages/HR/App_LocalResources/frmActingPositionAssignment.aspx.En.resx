@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="PageResource1.Title" xml:space="preserve"><value>Position Acting Assignment</value></data>
+  <data name="Label_HeaderResource1.Text" xml:space="preserve"><value>Position Acting Assignment</value></data>
+  <data name="ImageButton_SaveResource1.ToolTip" xml:space="preserve"><value>Save</value></data>
+  <data name="ImageButton_SaveNResource1.ToolTip" xml:space="preserve"><value>Save With New</value></data>
+  <data name="ImageButton_NewResource1.ToolTip" xml:space="preserve"><value>New</value></data>
+  <data name="ImageButton_DeleteResource1.ToolTip" xml:space="preserve"><value>Cancel</value></data>
+  <data name="ImageButton_PrintResource1.ToolTip" xml:space="preserve"><value>Print</value></data>
+  <data name="ImageButton_PropertiesResource1.ToolTip" xml:space="preserve"><value>Properties</value></data>
+  <data name="ImageButton_RemarksResource1.ToolTip" xml:space="preserve"><value>Remarks</value></data>
+  <data name="LinkButton_SaveNResource1.Text" xml:space="preserve"><value>Save With New</value></data>
+  <data name="LinkButton_DeleteResource1.Text" xml:space="preserve"><value>Cancel</value></data>
+  <data name="LinkButton_PropertiesResource1.Text" xml:space="preserve"><value>Properties</value></data>
+  <data name="LinkButton_RemarksResource1.Text" xml:space="preserve"><value>Remarks</value></data>
+  <data name="lblRegDateResource1.Text" xml:space="preserve"><value>Registered In</value></data>
+  <data name="lblRegUserResource1.Text" xml:space="preserve"><value>Registered By</value></data>
+  <data name="lblCancelDateResource1.Text" xml:space="preserve"><value>Cancel Date</value></data>
+  <data name="TabResource1.Text" xml:space="preserve"><value>General</value></data>
+  <data name="lblCodeResource1.Text" xml:space="preserve"><value>Code</value></data>
+  <data name="lblOriginalPositionResource1.Text" xml:space="preserve"><value>Assigned Position</value></data>
+  <data name="lblActingEmployeeResource1.Text" xml:space="preserve"><value>Acting Employee</value></data>
+  <data name="lblEffectiveFromResource1.Text" xml:space="preserve"><value>Acting Start Date</value></data>
+  <data name="lblEffectiveToResource1.Text" xml:space="preserve"><value>Acting End Date</value></data>
+  <data name="lblReasonResource1.Text" xml:space="preserve"><value>Acting Reason</value></data>
+  <data name="lblRemarksResource1.Text" xml:space="preserve"><value>Remarks</value></data>
+  <data name="GridCodeResource1.Header.Caption" xml:space="preserve"><value>Transaction No.</value></data>
+  <data name="GridOriginalPositionResource1.Header.Caption" xml:space="preserve"><value>Assigned Position</value></data>
+  <data name="GridActingEmployeeResource1.Header.Caption" xml:space="preserve"><value>Acting Employee</value></data>
+  <data name="GridEffectiveFromResource1.Header.Caption" xml:space="preserve"><value>Acting Start Date</value></data>
+  <data name="GridEffectiveToResource1.Header.Caption" xml:space="preserve"><value>Acting End Date</value></data>
+</root>

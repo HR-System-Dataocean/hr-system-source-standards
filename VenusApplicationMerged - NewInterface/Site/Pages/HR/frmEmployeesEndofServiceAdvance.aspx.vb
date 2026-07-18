@@ -2214,21 +2214,42 @@ Partial Class frmEmployeesEndofServiceAdvance
     End Sub
 
     ' =============================================
-    ' التحقق من وجود طلبات خدمة ذاتية (COUNT فقط)
+    ' التحقق من وجود طلبات خدمة ذاتية مفتوحة
+    ' أو وجود الموظف / منصبه في إعدادات الاعتماد SS_Configuration
     ' =============================================
     Private Function HasSelfServiceRequests(ByVal EmployeeID As Integer) As Boolean
         Try
-            Dim sql As String = "SELECT COUNT(*) FROM SS_RequestActions " &
-                            "WHERE ActionID IS NULL " &
-                            "AND IsHidden IS NULL " &
-                            "AND (SS_EmployeeID = @EmployeeID OR EmployeeID = @EmployeeID)"
+            Dim clsEmployee As New Clshrs_Employees(Page)
 
-            Using conn As New SqlConnection(ClsEmployees.ConnectionString)
+            Dim sql As String =
+                "SELECT CASE WHEN EXISTS (" &
+                "    SELECT 1 FROM SS_RequestActions " &
+                "    WHERE ActionID IS NULL " &
+                "    AND IsHidden IS NULL " &
+                "    AND (SS_EmployeeID = @EmployeeID OR EmployeeID = @EmployeeID)" &
+                ") OR EXISTS (" &
+                "    SELECT 1 FROM SS_Configuration " &
+                "    WHERE EmployeeID = @EmployeeID " &
+                "       OR (ISNULL(PositionID, 0) > 0 AND PositionID IN (" &
+                "           SELECT PositionID FROM hrs_Contracts " &
+                "           WHERE EmployeeID = @EmployeeID " &
+                "           AND CancelDate IS NULL " &
+                "           AND (EndDate IS NULL OR EndDate >= GETDATE())" &
+                "       ))" &
+                "       OR (UserTypeID = 1 AND EXISTS (" &
+                "           SELECT 1 FROM hrs_Employees " &
+                "           WHERE ManagerID = @EmployeeID " &
+                "           AND CancelDate IS NULL " &
+                "           AND ExcludeDate IS NULL" &
+                "       ))" &
+                ") THEN 1 ELSE 0 END"
+
+            Using conn As New SqlConnection(clsEmployee.ConnectionString)
                 Using cmd As New SqlCommand(sql, conn)
                     cmd.Parameters.AddWithValue("@EmployeeID", EmployeeID)
                     conn.Open()
-                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-                    Return count > 0
+                    Dim result As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                    Return result > 0
                 End Using
             End Using
 

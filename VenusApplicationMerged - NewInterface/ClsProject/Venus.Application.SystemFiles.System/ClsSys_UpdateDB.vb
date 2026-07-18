@@ -8348,6 +8348,209 @@ END
 
         SQL = " ALTER TABLE dbo.sys_SystemConfig ADD LockJoinDate bit NULL "
         ExecuteUpdate(SQL)
+
+        SQL = "
+IF OBJECT_ID(N'dbo.hrs_ActingPositionAssignments', N'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.hrs_ActingPositionAssignments
+    (
+        ID int IDENTITY(1,1) NOT NULL,
+        Code varchar(30) NOT NULL,
+        OriginalPositionID int NOT NULL,
+        ActingEmployeeID int NOT NULL,
+        EffectiveFrom datetime NOT NULL,
+        EffectiveTo datetime NOT NULL,
+        Reason nvarchar(500) NULL,
+        Remarks nvarchar(1000) NULL,
+        RegUserID int NULL,
+        RegComputerID int NULL,
+        RegDate datetime NOT NULL CONSTRAINT DF_hrs_ActingPositionAssignments_RegDate DEFAULT(GETDATE()),
+        CancelUserID int NULL,
+        CancelDate datetime NULL,
+        CancelReason nvarchar(500) NULL,
+        CONSTRAINT PK_hrs_ActingPositionAssignments PRIMARY KEY CLUSTERED (ID),
+        CONSTRAINT UQ_hrs_ActingPositionAssignments_Code UNIQUE (Code),
+        CONSTRAINT CK_hrs_ActingPositionAssignments_Dates CHECK (EffectiveTo >= EffectiveFrom),
+        CONSTRAINT FK_hrs_ActingPositionAssignments_Position FOREIGN KEY (OriginalPositionID) REFERENCES dbo.hrs_Positions(ID),
+        CONSTRAINT FK_hrs_ActingPositionAssignments_Employee FOREIGN KEY (ActingEmployeeID) REFERENCES dbo.hrs_Employees(ID)
+    );
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id=OBJECT_ID(N'dbo.hrs_ActingPositionAssignments') AND name=N'IX_hrs_ActingPositionAssignments_EmployeeDates')
+    CREATE INDEX IX_hrs_ActingPositionAssignments_EmployeeDates
+        ON dbo.hrs_ActingPositionAssignments(ActingEmployeeID, EffectiveFrom, EffectiveTo)
+        INCLUDE (CancelDate, OriginalPositionID);
+"
+        ExecuteUpdate(SQL)
+
+        SQL = "
+IF NOT EXISTS (SELECT 1 FROM sys_Objects WHERE Code='hrs_ActingPositionAssignments')
+    INSERT INTO sys_Objects(Code,EngName,ArbName)
+    VALUES('hrs_ActingPositionAssignments','Position Acting Assignments',N'التكليف بالإنابة على وظيفة');
+
+UPDATE sys_Objects
+SET EngName='Position Acting Assignments', ArbName=N'التكليف بالإنابة على وظيفة'
+WHERE Code='hrs_ActingPositionAssignments';
+
+DECLARE @ObjectID int=(SELECT ID FROM sys_Objects WHERE Code='hrs_ActingPositionAssignments');
+
+IF NOT EXISTS (SELECT 1 FROM sys_Fields WHERE ObjectID=@ObjectID AND FieldName='ID')
+    INSERT INTO sys_Fields(ObjectID,FieldName,FieldType,FieldLength,SysColumns_OrderID)
+    VALUES(@ObjectID,'ID',56,4,1);
+IF NOT EXISTS (SELECT 1 FROM sys_Fields WHERE ObjectID=@ObjectID AND FieldName='Code')
+    INSERT INTO sys_Fields(ObjectID,FieldName,FieldType,FieldLength,SysColumns_OrderID)
+    VALUES(@ObjectID,'Code',167,30,2);
+
+IF NOT EXISTS (SELECT 1 FROM sys_Searchs WHERE Code='hrs_ActingPositionAssignments')
+    INSERT INTO sys_Searchs(Code,EngName,ArbName,ObjectID)
+    VALUES('hrs_ActingPositionAssignments','Position Acting Assignments',N'التكليف بالإنابة على وظيفة',@ObjectID);
+
+UPDATE sys_Searchs
+SET EngName='Position Acting Assignments', ArbName=N'التكليف بالإنابة على وظيفة'
+WHERE Code='hrs_ActingPositionAssignments';
+
+DECLARE @SearchID int=(SELECT ID FROM sys_Searchs WHERE Code='hrs_ActingPositionAssignments');
+IF NOT EXISTS (SELECT 1 FROM sys_SearchsColumns WHERE SearchID=@SearchID AND FieldID=(SELECT ID FROM sys_Fields WHERE ObjectID=@ObjectID AND FieldName='ID'))
+    INSERT INTO sys_SearchsColumns(SearchID,FieldID,EngName,ArbName,IsCriteria,IsView,Rank)
+    VALUES(@SearchID,(SELECT ID FROM sys_Fields WHERE ObjectID=@ObjectID AND FieldName='ID'),'ID',N'المعرف',0,0,0);
+IF NOT EXISTS (SELECT 1 FROM sys_SearchsColumns WHERE SearchID=@SearchID AND FieldID=(SELECT ID FROM sys_Fields WHERE ObjectID=@ObjectID AND FieldName='Code'))
+    INSERT INTO sys_SearchsColumns(SearchID,FieldID,EngName,ArbName,IsCriteria,IsView,Rank)
+    VALUES(@SearchID,(SELECT ID FROM sys_Fields WHERE ObjectID=@ObjectID AND FieldName='Code'),'Transaction No.',N'رقم الحركة',1,1,1);
+
+UPDATE sys_SearchsColumns
+SET EngName='Transaction No.', ArbName=N'رقم الحركة'
+WHERE SearchID=@SearchID AND FieldID=(SELECT ID FROM sys_Fields WHERE ObjectID=@ObjectID AND FieldName='Code');
+
+IF NOT EXISTS (SELECT 1 FROM sys_Forms WHERE Code='frmActingPositionAssignment')
+    INSERT INTO sys_Forms(Code,EngName,ArbName,ArbName4S,EngDescription,ArbDescription,Rank,ModuleID,Height,Width,RegDate)
+    VALUES('frmActingPositionAssignment','frmActingPositionAssignment.aspx',N'التكليف بالإنابة على وظيفة',N'التكليف بالإنابة على وظيفة',
+           'Position Acting Assignment',N'التكليف بالإنابة على وظيفة',0,2,650,1100,GETDATE());
+
+UPDATE sys_Forms
+SET ArbName=N'التكليف بالإنابة على وظيفة', ArbName4S=N'التكليف بالإنابة على وظيفة',
+    EngDescription='Position Acting Assignment', ArbDescription=N'التكليف بالإنابة على وظيفة'
+WHERE Code='frmActingPositionAssignment';
+
+DECLARE @FormID int=(SELECT ID FROM sys_Forms WHERE Code='frmActingPositionAssignment');
+IF NOT EXISTS (SELECT 1 FROM sys_Menus WHERE Code='frmActingPositionAssignment')
+    INSERT INTO sys_Menus(Code,EngName,ArbName,ArbName4S,ParentID,Rank,FormID,ObjectID,IsHide,ViewType,RegDate)
+    SELECT 'frmActingPositionAssignment','Position Acting Assignment',N'التكليف بالإنابة على وظيفة',N'التكليف بالإنابة على وظيفة',
+           COALESCE((SELECT TOP 1 ParentID FROM sys_Menus WHERE Code='frmDelegationSChedule'),240),
+           COALESCE((SELECT MAX(Rank)+1 FROM sys_Menus WHERE ParentID=COALESCE((SELECT TOP 1 ParentID FROM sys_Menus WHERE Code='frmDelegationSChedule'),240)),1),
+           @FormID,@ObjectID,0,1,GETDATE();
+
+UPDATE sys_Menus
+SET EngName='Position Acting Assignment', ArbName=N'التكليف بالإنابة على وظيفة', ArbName4S=N'التكليف بالإنابة على وظيفة'
+WHERE Code='frmActingPositionAssignment';
+
+IF NOT EXISTS (SELECT 1 FROM sys_FormsPermissions WHERE UserID=1 AND FormID=@FormID)
+    INSERT INTO sys_FormsPermissions(FormID,UserID,AllowView,AllowAdd,AllowEdit,AllowDelete,AllowPrint,RegUserID,RegDate)
+    VALUES(@FormID,1,1,1,1,1,1,1,GETDATE());
+"
+        ExecuteUpdate(SQL)
+
+        SQL = "
+IF OBJECT_ID(N'dbo.hrs_ActingEmployeeAssignments', N'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.hrs_ActingEmployeeAssignments
+    (
+        ID int IDENTITY(1,1) NOT NULL,
+        Code varchar(30) NOT NULL,
+        OriginalEmployeeID int NOT NULL,
+        ActingEmployeeID int NOT NULL,
+        EffectiveFrom datetime NOT NULL,
+        EffectiveTo datetime NOT NULL,
+        Reason nvarchar(500) NULL,
+        Remarks nvarchar(1000) NULL,
+        RegUserID int NULL,
+        RegComputerID int NULL,
+        RegDate datetime NOT NULL CONSTRAINT DF_hrs_ActingEmployeeAssignments_RegDate DEFAULT(GETDATE()),
+        CancelUserID int NULL,
+        CancelDate datetime NULL,
+        CancelReason nvarchar(500) NULL,
+        CONSTRAINT PK_hrs_ActingEmployeeAssignments PRIMARY KEY CLUSTERED (ID),
+        CONSTRAINT UQ_hrs_ActingEmployeeAssignments_Code UNIQUE (Code),
+        CONSTRAINT CK_hrs_ActingEmployeeAssignments_Dates CHECK (EffectiveTo >= EffectiveFrom),
+        CONSTRAINT FK_hrs_ActingEmployeeAssignments_OriginalEmployee FOREIGN KEY (OriginalEmployeeID) REFERENCES dbo.hrs_Employees(ID),
+        CONSTRAINT FK_hrs_ActingEmployeeAssignments_ActingEmployee FOREIGN KEY (ActingEmployeeID) REFERENCES dbo.hrs_Employees(ID)
+    );
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id=OBJECT_ID(N'dbo.hrs_ActingEmployeeAssignments') AND name=N'IX_hrs_ActingEmployeeAssignments_EmployeeDates')
+    CREATE INDEX IX_hrs_ActingEmployeeAssignments_EmployeeDates
+        ON dbo.hrs_ActingEmployeeAssignments(ActingEmployeeID, EffectiveFrom, EffectiveTo)
+        INCLUDE (CancelDate, OriginalEmployeeID);
+"
+        ExecuteUpdate(SQL)
+
+        SQL = "
+IF NOT EXISTS (SELECT 1 FROM sys_Objects WHERE Code='hrs_ActingEmployeeAssignments')
+    INSERT INTO sys_Objects(Code,EngName,ArbName)
+    VALUES('hrs_ActingEmployeeAssignments','Employee Acting Assignments',N'التكليف بالإنابة عن موظف');
+
+UPDATE sys_Objects
+SET EngName='Employee Acting Assignments', ArbName=N'التكليف بالإنابة عن موظف'
+WHERE Code='hrs_ActingEmployeeAssignments';
+
+DECLARE @ObjectID2 int=(SELECT ID FROM sys_Objects WHERE Code='hrs_ActingEmployeeAssignments');
+
+IF NOT EXISTS (SELECT 1 FROM sys_Fields WHERE ObjectID=@ObjectID2 AND FieldName='ID')
+    INSERT INTO sys_Fields(ObjectID,FieldName,FieldType,FieldLength,SysColumns_OrderID)
+    VALUES(@ObjectID2,'ID',56,4,1);
+IF NOT EXISTS (SELECT 1 FROM sys_Fields WHERE ObjectID=@ObjectID2 AND FieldName='Code')
+    INSERT INTO sys_Fields(ObjectID,FieldName,FieldType,FieldLength,SysColumns_OrderID)
+    VALUES(@ObjectID2,'Code',167,30,2);
+
+IF NOT EXISTS (SELECT 1 FROM sys_Searchs WHERE Code='hrs_ActingEmployeeAssignments')
+    INSERT INTO sys_Searchs(Code,EngName,ArbName,ObjectID)
+    VALUES('hrs_ActingEmployeeAssignments','Employee Acting Assignments',N'التكليف بالإنابة عن موظف',@ObjectID2);
+
+UPDATE sys_Searchs
+SET EngName='Employee Acting Assignments', ArbName=N'التكليف بالإنابة عن موظف'
+WHERE Code='hrs_ActingEmployeeAssignments';
+
+DECLARE @SearchID2 int=(SELECT ID FROM sys_Searchs WHERE Code='hrs_ActingEmployeeAssignments');
+IF NOT EXISTS (SELECT 1 FROM sys_SearchsColumns WHERE SearchID=@SearchID2 AND FieldID=(SELECT ID FROM sys_Fields WHERE ObjectID=@ObjectID2 AND FieldName='ID'))
+    INSERT INTO sys_SearchsColumns(SearchID,FieldID,EngName,ArbName,IsCriteria,IsView,Rank)
+    VALUES(@SearchID2,(SELECT ID FROM sys_Fields WHERE ObjectID=@ObjectID2 AND FieldName='ID'),'ID',N'المعرف',0,0,0);
+IF NOT EXISTS (SELECT 1 FROM sys_SearchsColumns WHERE SearchID=@SearchID2 AND FieldID=(SELECT ID FROM sys_Fields WHERE ObjectID=@ObjectID2 AND FieldName='Code'))
+    INSERT INTO sys_SearchsColumns(SearchID,FieldID,EngName,ArbName,IsCriteria,IsView,Rank)
+    VALUES(@SearchID2,(SELECT ID FROM sys_Fields WHERE ObjectID=@ObjectID2 AND FieldName='Code'),'Transaction No.',N'رقم الحركة',1,1,1);
+
+UPDATE sys_SearchsColumns
+SET EngName='Transaction No.', ArbName=N'رقم الحركة'
+WHERE SearchID=@SearchID2 AND FieldID=(SELECT ID FROM sys_Fields WHERE ObjectID=@ObjectID2 AND FieldName='Code');
+
+IF NOT EXISTS (SELECT 1 FROM sys_Forms WHERE Code='frmActingEmployeeAssignment')
+    INSERT INTO sys_Forms(Code,EngName,ArbName,ArbName4S,EngDescription,ArbDescription,Rank,ModuleID,Height,Width,RegDate)
+    VALUES('frmActingEmployeeAssignment','frmActingEmployeeAssignment.aspx',N'التكليف بالإنابة عن موظف',N'التكليف بالإنابة عن موظف',
+           'Employee Acting Assignment',N'التكليف بالإنابة عن موظف',0,2,650,1100,GETDATE());
+
+UPDATE sys_Forms
+SET ArbName=N'التكليف بالإنابة عن موظف', ArbName4S=N'التكليف بالإنابة عن موظف',
+    EngDescription='Employee Acting Assignment', ArbDescription=N'التكليف بالإنابة عن موظف'
+WHERE Code='frmActingEmployeeAssignment';
+
+DECLARE @FormID2 int=(SELECT ID FROM sys_Forms WHERE Code='frmActingEmployeeAssignment');
+IF NOT EXISTS (SELECT 1 FROM sys_Menus WHERE Code='frmActingEmployeeAssignment')
+    INSERT INTO sys_Menus(Code,EngName,ArbName,ArbName4S,ParentID,Rank,FormID,ObjectID,IsHide,ViewType,RegDate)
+    SELECT 'frmActingEmployeeAssignment','Employee Acting Assignment',N'التكليف بالإنابة عن موظف',N'التكليف بالإنابة عن موظف',
+           COALESCE((SELECT TOP 1 ParentID FROM sys_Menus WHERE Code='frmActingPositionAssignment'),
+                    (SELECT TOP 1 ParentID FROM sys_Menus WHERE Code='frmDelegationSChedule'),240),
+           COALESCE((SELECT MAX(Rank)+1 FROM sys_Menus WHERE ParentID=COALESCE(
+                (SELECT TOP 1 ParentID FROM sys_Menus WHERE Code='frmActingPositionAssignment'),
+                (SELECT TOP 1 ParentID FROM sys_Menus WHERE Code='frmDelegationSChedule'),240)),1),
+           @FormID2,@ObjectID2,0,1,GETDATE();
+
+UPDATE sys_Menus
+SET EngName='Employee Acting Assignment', ArbName=N'التكليف بالإنابة عن موظف', ArbName4S=N'التكليف بالإنابة عن موظف'
+WHERE Code='frmActingEmployeeAssignment';
+
+IF NOT EXISTS (SELECT 1 FROM sys_FormsPermissions WHERE UserID=1 AND FormID=@FormID2)
+    INSERT INTO sys_FormsPermissions(FormID,UserID,AllowView,AllowAdd,AllowEdit,AllowDelete,AllowPrint,RegUserID,RegDate)
+    VALUES(@FormID2,1,1,1,1,1,1,1,GETDATE());
+"
+        ExecuteUpdate(SQL)
     End Function
 
     Public Function UpdateSS() As Boolean

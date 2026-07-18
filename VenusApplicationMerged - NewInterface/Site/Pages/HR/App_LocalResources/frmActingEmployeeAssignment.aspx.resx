@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="PageResource1.Title" xml:space="preserve"><value>التكليف بالإنابة عن موظف</value></data>
+  <data name="Label_HeaderResource1.Text" xml:space="preserve"><value>التكليف بالإنابة عن موظف</value></data>
+  <data name="ImageButton_SaveResource1.ToolTip" xml:space="preserve"><value>حفظ</value></data>
+  <data name="ImageButton_SaveNResource1.ToolTip" xml:space="preserve"><value>حفظ مع جديد</value></data>
+  <data name="ImageButton_NewResource1.ToolTip" xml:space="preserve"><value>جديد</value></data>
+  <data name="ImageButton_DeleteResource1.ToolTip" xml:space="preserve"><value>إلغاء</value></data>
+  <data name="ImageButton_PrintResource1.ToolTip" xml:space="preserve"><value>طباعة</value></data>
+  <data name="ImageButton_PropertiesResource1.ToolTip" xml:space="preserve"><value>خصائص</value></data>
+  <data name="ImageButton_RemarksResource1.ToolTip" xml:space="preserve"><value>ملاحظات</value></data>
+  <data name="LinkButton_SaveNResource1.Text" xml:space="preserve"><value>حفظ مع جديد</value></data>
+  <data name="LinkButton_DeleteResource1.Text" xml:space="preserve"><value>إلغاء</value></data>
+  <data name="LinkButton_PropertiesResource1.Text" xml:space="preserve"><value>خصائص</value></data>
+  <data name="LinkButton_RemarksResource1.Text" xml:space="preserve"><value>ملاحظات</value></data>
+  <data name="lblRegDateResource1.Text" xml:space="preserve"><value>سجل في</value></data>
+  <data name="lblRegUserResource1.Text" xml:space="preserve"><value>سجل بواسطة</value></data>
+  <data name="lblCancelDateResource1.Text" xml:space="preserve"><value>تاريخ الإلغاء</value></data>
+  <data name="TabResource1.Text" xml:space="preserve"><value>عام</value></data>
+  <data name="lblCodeResource1.Text" xml:space="preserve"><value>الكود</value></data>
+  <data name="lblOriginalEmployeeResource1.Text" xml:space="preserve"><value>الموظف المُناب عنه</value></data>
+  <data name="lblActingEmployeeResource1.Text" xml:space="preserve"><value>الموظف القائم بالإنابة</value></data>
+  <data name="lblEffectiveFromResource1.Text" xml:space="preserve"><value>تاريخ بداية الإنابة</value></data>
+  <data name="lblEffectiveToResource1.Text" xml:space="preserve"><value>تاريخ نهاية الإنابة</value></data>
+  <data name="lblReasonResource1.Text" xml:space="preserve"><value>سبب الإنابة</value></data>
+  <data name="lblRemarksResource1.Text" xml:space="preserve"><value>ملاحظات</value></data>
+  <data name="GridCodeResource1.Header.Caption" xml:space="preserve"><value>رقم الحركة</value></data>
+  <data name="GridOriginalEmployeeResource1.Header.Caption" xml:space="preserve"><value>الموظف المُناب عنه</value></data>
+  <data name="GridActingEmployeeResource1.Header.Caption" xml:space="preserve"><value>الموظف القائم بالإنابة</value></data>
+  <data name="GridEffectiveFromResource1.Header.Caption" xml:space="preserve"><value>تاريخ بداية الإنابة</value></data>
+  <data name="GridEffectiveToResource1.Header.Caption" xml:space="preserve"><value>تاريخ نهاية الإنابة</value></data>
+</root>

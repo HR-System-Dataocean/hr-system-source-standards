@@ -516,14 +516,14 @@ Partial Class frmAttendancePreparation
                         SqlCommand2.ExecuteNonQuery()
                         SqlCommand2.Connection.Close()
                         Dim SqlCommandU As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand As String = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " , ConfirmedNoOfDays=" & txtConfirmedDays.Text & ",ActionDate= GETDATE() , ActionRemarks='" & txtActionRemarks.Text & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " And ActionID is null"
-                        SqlCommandU = New SqlClient.SqlCommand
-                        SqlCommandU.Connection = New SqlClient.SqlConnection(ClsEmployees2.ConnectionString)
-                        SqlCommandU.CommandType = CommandType.Text
-                        SqlCommandU.CommandText = UpdateCommand
-                        SqlCommandU.Connection.Open()
-                        SqlCommandU.ExecuteNonQuery()
-                        SqlCommandU.Connection.Close()
+                        'Dim UpdateCommand As String = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " , ConfirmedNoOfDays=" & txtConfirmedDays.Text & ",ActionDate= GETDATE() , ActionRemarks='" & txtActionRemarks.Text & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " And ActionID is null"
+                        'SqlCommandU = New SqlClient.SqlCommand
+                        'SqlCommandU.Connection = New SqlClient.SqlConnection(ClsEmployees2.ConnectionString)
+                        'SqlCommandU.CommandType = CommandType.Text
+                        'SqlCommandU.CommandText = UpdateCommand
+                        'SqlCommandU.Connection.Open()
+                        'SqlCommandU.ExecuteNonQuery()
+                        'SqlCommandU.Connection.Close()
                     End If
 
                     If Not CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) And Not CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
@@ -548,15 +548,17 @@ Partial Class frmAttendancePreparation
                         Dim NeededactionSerial As String
                         NeededactionSerial = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, NeededactionIdSql)
                         Dim SqlCommandU As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand As String = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " , ConfirmedNoOfDays=" & txtConfirmedDays.Text & ",ActionDate= GETDATE() , ActionRemarks='" & txtActionRemarks.Text & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " And ActionID is null"
-                        SqlCommandU = New SqlClient.SqlCommand
-                        SqlCommandU.Connection = New SqlClient.SqlConnection(ClsEmployees2.ConnectionString)
-                        SqlCommandU.CommandType = CommandType.Text
-                        SqlCommandU.CommandText = UpdateCommand
-                        SqlCommandU.Connection.Open()
-                        SqlCommandU.ExecuteNonQuery()
-                        SqlCommandU.Connection.Close()
+
                         If Not String.IsNullOrWhiteSpace(NeededactionSerial) And NeededactionSerial > 1 Then
+
+                            Dim UpdateCommand As String = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " , ConfirmedNoOfDays=" & txtConfirmedDays.Text & ",ActionDate= GETDATE() , ActionRemarks='" & txtActionRemarks.Text & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " And ActionID is null"
+                            SqlCommandU = New SqlClient.SqlCommand
+                            SqlCommandU.Connection = New SqlClient.SqlConnection(ClsEmployees2.ConnectionString)
+                            SqlCommandU.CommandType = CommandType.Text
+                            SqlCommandU.CommandText = UpdateCommand
+                            SqlCommandU.Connection.Open()
+                            SqlCommandU.ExecuteNonQuery()
+                            SqlCommandU.Connection.Close()
 
                             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
                             Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
