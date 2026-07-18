@@ -1694,15 +1694,32 @@ Partial Class frmEmployeesSelector
                                     For Each row As DataRow In ds_PERIOD_VACATIONS.Tables(0).Select("VTID = " & vacation.Item("ID")).ToList()
                                         Dim vsd As Date = CDate(row.Item("VS").ToString())
                                         Dim ved As Date = row.Item("VE").ToString()
-                                        For i As Integer = 1 To 31
-                                            If vsd >= dat_FPS And vsd <= dat_FPE And vsd <= ved.AddDays(-1) Then
-                                                dec_SICK_DAYS = dec_SICK_DAYS + 1
-                                                vsd = vsd.AddDays(1)
-                                            Else
-                                                vsd = vsd.AddDays(1)
-                                                Continue For
-                                            End If
-                                        Next
+                                        'Rabie 14-07-2026
+
+
+                                        If vsd.Month = ved.Month Then
+                                            For i As Integer = 1 To 31
+                                                If vsd >= dat_FPS And vsd <= dat_FPE And vsd <= ved.AddDays(-1) Then
+                                                    dec_SICK_DAYS = dec_SICK_DAYS + 1
+                                                    vsd = vsd.AddDays(1)
+                                                Else
+                                                    vsd = vsd.AddDays(1)
+                                                    Continue For
+                                                End If
+                                            Next
+                                        Else
+                                            For i As Integer = 1 To row.Item("VD")
+                                                If vsd >= dat_FPS And vsd <= dat_FPE And vsd <= ved.AddDays(-1) Then
+                                                    dec_SICK_DAYS = dec_SICK_DAYS + 1
+                                                    vsd = vsd.AddDays(1)
+                                                Else
+                                                    vsd = vsd.AddDays(1)
+                                                    Continue For
+                                                End If
+                                            Next
+                                        End If
+
+
                                     Next
                                 End If
                             Next
@@ -2385,9 +2402,7 @@ Partial Class frmEmployeesSelector
                 dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_TT_DAYS) - ((P_DAY_SALARY * dec_TT_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage3PCT")) / 100))
             End If
         Else
-            'Rabie 12-07-2026
-            'If dec_PRE_SICK_LEAVE + P_SICK_DAYS <= 30 Then
-            If P_SICK_DAYS <= 30 Then
+            If dec_PRE_SICK_LEAVE + P_SICK_DAYS <= 30 Then
                 dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * P_SICK_DAYS) - ((P_DAY_SALARY * P_SICK_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage1PCT")) / 100))
             Else
                 Dim dec_ST_DAYS As Decimal = dec_PRE_SICK_LEAVE + P_SICK_DAYS - 30

@@ -426,26 +426,76 @@ Partial Class frmAttEmployeeTransfer
         Dim _sys_User As New Clssys_Users(Page)
         _sys_User.Find("ID = '" & User & "'")
         Cls_Employees.Find("Code='" & _sys_User.Code & "'")
-        If clsCompanies.UserDepartmentsPermissions And _sys_User.Code.ToLower() <> "sa" Then
+        Dim LocsPermission As String = ""
+        If clsCompanies.UseUnitPermission And _sys_User.Code.ToLower() <> "sa" Then
 
             Dim dsLocPermission As DataSet
-            Dim LocsPermission = ""
+
 
             Dim strLoc As String = "SELECT [LocationId] FROM [dbo].[hrs_EmployeeLocations] where [EmpId]='" & Cls_Employees.ID & "'"
             dsLocPermission = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strLoc)
+
             LocsPermission = "(-1"
-            For h As Integer = 0 To dsLocPermission.Tables(0).Rows.Count - 1
-                LocsPermission = LocsPermission & "," & Convert.ToString(dsLocPermission.Tables(0).Rows(h)("LocationId"))
-            Next
-            LocsPermission = LocsPermission & ")"
-            Dim strchecklocationEMP As String
+                For h As Integer = 0 To dsLocPermission.Tables(0).Rows.Count - 1
+                    LocsPermission = LocsPermission & "," & Convert.ToString(dsLocPermission.Tables(0).Rows(h)("LocationId"))
+                Next
+                LocsPermission = LocsPermission & ")"
+
+
+        End If
+        Dim strchecklocationEMP As String
             Dim DSAuthEmployees As DataSet
-            strchecklocationEMP = "select * from hrs_Employees where code='" & txtCode.Text & "' and hrs_Employees.LocationID in " & LocsPermission & ""
+
+
+            Dim DepartmentPermissions As String = ""
+            If clsCompanies.UserDepartmentsPermissions Then
+                Dim dsDepPermission As DataSet
+            Dim strDep As String = "SELECT [DepartmentID] FROM [dbo].[hrs_EmployeeDepartments] where [EmpId]='" & Cls_Employees.ID & "'"
+            dsDepPermission = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strDep)
+
+
+
+            DepartmentPermissions = "(-1"
+                For h As Integer = 0 To dsDepPermission.Tables(0).Rows.Count - 1
+                        DepartmentPermissions = DepartmentPermissions & "," & Convert.ToString(dsDepPermission.Tables(0).Rows(h)("DepartmentID"))
+                    Next
+                    DepartmentPermissions = DepartmentPermissions & ")"
+
+
+            End If
+            If clsCompanies.UserDepartmentsPermissions And clsCompanies.UseUnitPermission Then
+            If DepartmentPermissions = "(-1)" And LocsPermission = "(-1)" Then
+                Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsCompanies.ConnectionString)
+
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Soory you don't have a permission for this employee   / عفوا ليس لديك صلاحية علي هذا الموظف"))
+                txtArbName.Text = ""
+                txtEngName.Text = ""
+                uwgWorkPlans.DataSource = Nothing
+                uwgWorkPlans.DataBind()
+                Exit Sub
+            End If
+        End If
+            strchecklocationEMP = "select * from hrs_Employees where code='" & txtCode.Text & "'"
             DSAuthEmployees = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strchecklocationEMP)
-            If DSAuthEmployees.Tables(0).Rows.Count > 0 Then
+            Dim locFilter As String
+        If clsCompanies.UseUnitPermission Then
+            locFilter = "and hrs_Employees.LocationID in " & LocsPermission & ""
+            strchecklocationEMP += locFilter
+        End If
+        If clsCompanies.UserDepartmentsPermissions Then
+            DepartmentPermissions = " and hrs_Employees.DepartmentID in " & DepartmentPermissions
+            strchecklocationEMP += DepartmentPermissions
+        End If
 
+        DSAuthEmployees = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strchecklocationEMP)
+
+        If DSAuthEmployees.Tables(0).Rows.Count > 0 Then
+
+            CheckCode()
+
+        Else
+            If Not clsCompanies.UserDepartmentsPermissions And Not clsCompanies.UseUnitPermission Then
                 CheckCode()
-
             Else
                 Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsCompanies.ConnectionString)
 
@@ -454,11 +504,18 @@ Partial Class frmAttEmployeeTransfer
                 txtEngName.Text = ""
                 uwgWorkPlans.DataSource = Nothing
                 uwgWorkPlans.DataBind()
-
             End If
-        Else
-            CheckCode()
+
+
         End If
+
+
+        'Else
+        '    CheckCode()
+        'End If
+
+
+
     End Sub
 
 

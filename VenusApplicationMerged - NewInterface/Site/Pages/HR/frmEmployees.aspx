@@ -62,6 +62,9 @@
             // process onresize events
             ig_shared.addEventListener(window, 'resize', adjustHeight);
         }
+    
+
+     
 
 
         function OpenPrintedScreen(v) {
@@ -119,7 +122,36 @@
                 $dialog.dialog('open');
             }
         }
+        function OpenModal11(pageurl, height, width, CheckID, CheckContract, SenderCtrl) {
+            debugger
+            var ctrId = window.document.getElementById("txtEmpId");
+            var ContraId = window.document.getElementById("txtContractId");
 
+            if (CheckContract == true) {
+                if (ContraId.value == "" || ContraId.value == null || ContraId.value == "0") {
+                    return;
+                }
+            }
+
+            if (CheckID == false || (ctrId.value != "" && ctrId.value != null && ctrId.value != "0")) {
+                var page = pageurl + "EmpID=" + ctrId.value + "&ContID=" + ContraId.value;
+                var $dialog = $('<div></div>')
+                    .html('<iframe style="border: 0px; " src="' + page + '" width="100%" height="100%"></iframe>')
+                    .dialog({
+                        autoOpen: false,
+                        modal: true,
+                        height: height,
+                        width: width,
+                        close: function () {
+                            // عند إغلاق الـ Dialog، تحقق من Session
+                            // سيتم تنفيذ PostBack من الـ Popup نفسه
+                        }
+                    });
+                ODialoge = $dialog;
+                OSender = SenderCtrl;
+                $dialog.dialog('open');
+            }
+        }
         function CloseIt(retvalue) {
             if (retvalue != "") {
                 var Sender = window.document.getElementById(OSender);
@@ -254,6 +286,9 @@
             <asp:HiddenField ID="txtActivatedRowIndex" runat="server" />
             <asp:HiddenField ID="txtContractId" runat="server" />
             <asp:HiddenField ID="TxtPositionID" runat="server" />
+            <asp:HiddenField ID="TxtHDJoinDate" runat="server" />
+            <asp:HiddenField ID="TxtHDClassID" runat="server" />
+            <asp:HiddenField ID="hdnPendingSaveControlID" runat="server" />
 
             <asp:Label ID="name" runat="server" ForeColor="White" TabIndex="-1" Width="99px"
                 meta:resourcekey="nameResource1"></asp:Label>

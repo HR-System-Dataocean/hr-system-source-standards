@@ -3,12 +3,91 @@
   "WorkspaceRootPath": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|d:\\data ocean\\sourcecode\\standard_new\\venusapplicationmerged - newinterface\\site\\pages\\hr\\frmattemployeetransfer.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmattemployeetransfer.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5687F571-E48B-4158-81BB-21801599A8B7}|ClsProject\\Venus.Application.SystemFiles.System\\Venus.Application.SystemFiles.System.vbproj|d:\\data ocean\\sourcecode\\standard_new\\venusapplicationmerged - newinterface\\clsproject\\venus.application.systemfiles.system\\clssys_companies.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{5687F571-E48B-4158-81BB-21801599A8B7}|ClsProject\\Venus.Application.SystemFiles.System\\Venus.Application.SystemFiles.System.vbproj|solutionrelative:clsproject\\venus.application.systemfiles.system\\clssys_companies.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|d:\\data ocean\\sourcecode\\standard_new\\venusapplicationmerged - newinterface\\site\\pages\\hr\\frmcompanies.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmcompanies.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|d:\\data ocean\\sourcecode\\standard_new\\venusapplicationmerged - newinterface\\site\\pages\\hr\\frmattendappointmentbyemployee.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmattendappointmentbyemployee.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\default.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\default.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\4d6c7d96f1dbb72e096f390b3519c056f7f042b92975b4c5c3de4cc465c6f831\\Page.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmattendappointment.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmattendappointment.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmchangejoindate.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmchangejoindate.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmchangejoindate.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmchangejoindate.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmemployees.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmemployees.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|d:\\data ocean\\sourcecode\\standard_new\\venusapplicationmerged - newinterface\\clsproject\\venus.application.systemfiles.humanresource\\clshrs_employeeclasses.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|solutionrelative:clsproject\\venus.application.systemfiles.humanresource\\clshrs_employeeclasses.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5687F571-E48B-4158-81BB-21801599A8B7}|ClsProject\\Venus.Application.SystemFiles.System\\Venus.Application.SystemFiles.System.vbproj|d:\\data ocean\\sourcecode\\standard_new\\venusapplicationmerged - newinterface\\clsproject\\venus.application.systemfiles.system\\clssys_updatedb.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{5687F571-E48B-4158-81BB-21801599A8B7}|ClsProject\\Venus.Application.SystemFiles.System\\Venus.Application.SystemFiles.System.vbproj|solutionrelative:clsproject\\venus.application.systemfiles.system\\clssys_updatedb.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\clsproject\\venus.application.systemfiles.humanresource\\clshrs_contracts.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|solutionrelative:clsproject\\venus.application.systemfiles.humanresource\\clshrs_contracts.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|d:\\data ocean\\sourcecode\\standard_new\\venusapplicationmerged - newinterface\\site\\pages\\hr\\app_localresources\\frmchangejoindate.aspx.en.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\app_localresources\\frmchangejoindate.aspx.en.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmemployees.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmemployees.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\default.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\default.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\general\\app_localresources\\newdefault.aspx.en.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\general\\app_localresources\\newdefault.aspx.en.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|d:\\data ocean\\sourcecode\\standard_new\\venusapplicationmerged - newinterface\\site\\pages\\hr\\frmemployeesselector.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmemployeesselector.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\clsproject\\venus.application.systemfiles.humanresource\\clshrs_employeesvacations.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|solutionrelative:clsproject\\venus.application.systemfiles.humanresource\\clshrs_employeesvacations.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmselfservicerequestspopup.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmselfservicerequestspopup.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmemployeesendofserviceadvance.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmemployeesendofserviceadvance.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\clsproject\\venus.application.systemfiles.humanresource\\clshrs_employees.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|solutionrelative:clsproject\\venus.application.systemfiles.humanresource\\clshrs_employees.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Ahmed\\Desktop\\frmEmployeesSelector.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
@@ -16,22 +95,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|d:\\data ocean\\sourcecode\\standard_new\\venusapplicationmerged - newinterface\\site\\pages\\hr\\frmemployeesselector.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmemployeesselector.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\clsproject\\venus.application.systemfiles.humanresource\\clshrs_employees.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|solutionrelative:clsproject\\venus.application.systemfiles.humanresource\\clshrs_employees.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmemployeesendofserviceadvance.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmemployeesendofserviceadvance.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmselfservicerequestspopup.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmselfservicerequestspopup.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmselfservicerequestspopup.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
@@ -44,22 +107,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmadvancehousingrequestaction.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmadvancehousingrequestaction.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\clsproject\\venus.application.systemfiles.humanresource\\clshrs_employeesvacations.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|solutionrelative:clsproject\\venus.application.systemfiles.humanresource\\clshrs_employeesvacations.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\default.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\default.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\general\\app_localresources\\newdefault.aspx.en.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\general\\app_localresources\\newdefault.aspx.en.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\default.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\default.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7651331C-9D05-4F7F-B28A-09EDCF403698}|ClsProject\\Venus.Shared.Web\\Venus.Shared.Web.vbproj|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\clsproject\\venus.shared.web\\webhandler.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
@@ -86,31 +133,8 @@
       "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frminterviewevaluationformrequestaction.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmchangejoindate.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmchangejoindate.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmchangejoindate.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmchangejoindate.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmemployees.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmemployees.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\app_localresources\\frmchangejoindate.aspx.en.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\app_localresources\\frmchangejoindate.aspx.en.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\app_localresources\\frmchangejoindate.aspx.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
       "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\app_localresources\\frmchangejoindate.aspx.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\4d6c7d96f1dbb72e096f390b3519c056f7f042b92975b4c5c3de4cc465c6f831\\Page.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\clsproject\\venus.application.systemfiles.humanresource\\clshrs_contracts.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|solutionrelative:clsproject\\venus.application.systemfiles.humanresource\\clshrs_contracts.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmappraisalevaluation.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
@@ -281,10 +305,6 @@
       "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmcompanies.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmcompanies.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmcompanies.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmannualvacationsrequeststatus.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmannualvacationsrequeststatus.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
@@ -325,14 +345,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmemployeedecisionshistorypopup.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmemployeedecisionshistorypopup.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmemployeeperiodicaltransactions.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmemployeeperiodicaltransactions.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\clsproject\\venus.application.systemfiles.humanresource\\clshrs_contractstransactions.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{3A5A8CDD-70BF-4E8C-8755-3B327864C623}|ClsProject\\Venus.Application.SystemFiles.HumanResource\\Venus.Application.SystemFiles.HumanResource.vbproj|solutionrelative:clsproject\\venus.application.systemfiles.humanresource\\clshrs_contractstransactions.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\interfaces\\app_localresources\\frmreportsviewercriteriassti.aspx.en.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -463,10 +475,6 @@
       "RelativeMoniker": "D:0:0:{5687F571-E48B-4158-81BB-21801599A8B7}|ClsProject\\Venus.Application.SystemFiles.System\\Venus.Application.SystemFiles.System.vbproj|solutionrelative:clsproject\\venus.application.systemfiles.system\\clssys_updateloginscript.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmattendappointment.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmattendappointment.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\site\\pages\\hr\\frmemployeeofficialvacations.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{E0DE262A-EF7F-4970-B31D-F18C3CE7CBC1}|D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site|solutionrelative:site\\pages\\hr\\frmemployeeofficialvacations.aspx.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     }
@@ -478,7 +486,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 577,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -487,341 +495,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "frmEmployeesSelector.aspx",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesSelector.aspx",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesSelector.aspx",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesSelector.aspx",
-              "RelativeToolTip": "Site\\Pages\\HR\\frmEmployeesSelector.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-07-13T13:54:41.472Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmEmployeesSelector.aspx.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesSelector.aspx.vb",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesSelector.aspx.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesSelector.aspx.vb",
-              "RelativeToolTip": "Site\\Pages\\HR\\frmEmployeesSelector.aspx.vb",
-              "ViewState": "AgIAAHoGAAAAAAAAAAAIwI0GAAA+AAAAAAAAAA==",
+              "Title": "frmAttendAppointmentByEmployee.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAttendAppointmentByEmployee.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAttendAppointmentByEmployee.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAttendAppointmentByEmployee.aspx.vb",
+              "RelativeToolTip": "Site\\Pages\\HR\\frmAttendAppointmentByEmployee.aspx.vb",
+              "ViewState": "AgIAAHsCAAAAAAAAAIAwwJUCAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-07-13T12:27:43.961Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "frmSelfServiceRequestsPopup.aspx.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx.vb",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx.vb",
-              "RelativeToolTip": "Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx.vb",
-              "ViewState": "AgIAACIAAAAAAAAAAAAcwGUAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-07-13T12:24:32.686Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "frmEmployeesEndofServiceAdvance.aspx.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesEndofServiceAdvance.aspx.vb",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesEndofServiceAdvance.aspx.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesEndofServiceAdvance.aspx.vb",
-              "RelativeToolTip": "Site\\Pages\\HR\\frmEmployeesEndofServiceAdvance.aspx.vb",
-              "ViewState": "AgIAABYAAAAAAAAAAADwvyIAAABpAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-05-04T08:18:09.657Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "FrmAdvanceHousingRequestAction.aspx.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmAdvanceHousingRequestAction.aspx.vb",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmAdvanceHousingRequestAction.aspx.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmAdvanceHousingRequestAction.aspx.vb",
-              "RelativeToolTip": "Site\\Pages\\HR\\FrmAdvanceHousingRequestAction.aspx.vb",
-              "ViewState": "AgIAAHQAAAAAAAAAAAASwIUAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-06-28T11:32:23.372Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "web.config",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\web.config",
-              "RelativeDocumentMoniker": "Site\\web.config",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\web.config",
-              "RelativeToolTip": "Site\\web.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2026-06-22T07:20:41.085Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "frmEmployees.aspx.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployees.aspx.vb",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployees.aspx.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployees.aspx.vb*",
-              "RelativeToolTip": "Site\\Pages\\HR\\frmEmployees.aspx.vb*",
-              "ViewState": "AgIAALAHAAAAAAAAAADwv70HAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-04-29T06:20:36.602Z",
+              "WhenOpened": "2026-07-15T12:39:36.652Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "frmEmployeesSelector.aspx.vb",
-              "DocumentMoniker": "C:\\Users\\Ahmed\\Desktop\\frmEmployeesSelector.aspx.vb",
-              "ToolTip": "C:\\Users\\Ahmed\\Desktop\\frmEmployeesSelector.aspx.vb",
-              "ViewState": "AgIAAI0RAAAAAAAAAAAYwKkRAAAJAAAAAAAAAA==",
+              "Title": "frmCompanies.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmCompanies.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmCompanies.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmCompanies.aspx.vb",
+              "RelativeToolTip": "Site\\Pages\\HR\\frmCompanies.aspx.vb",
+              "ViewState": "AgIAAKkAAAAAAAAAAIAwwLYAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-07-13T14:31:15.085Z",
+              "WhenOpened": "2026-07-15T13:07:53.288Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Default.aspx.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Default.aspx.vb",
-              "RelativeDocumentMoniker": "Site\\Default.aspx.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Default.aspx.vb",
-              "RelativeToolTip": "Site\\Default.aspx.vb",
-              "ViewState": "AgIAANsAAAAAAAAAAAAYwOEAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "frmAttEmployeeTransfer.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAttEmployeeTransfer.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAttEmployeeTransfer.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAttEmployeeTransfer.aspx.vb",
+              "RelativeToolTip": "Site\\Pages\\HR\\frmAttEmployeeTransfer.aspx.vb",
+              "ViewState": "AgIAAOQBAAAAAAAAAIAwwPMBAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-06-22T07:46:40.074Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Clshrs_Employees.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Employees.vb",
-              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Employees.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Employees.vb",
-              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Employees.vb",
-              "ViewState": "AgIAABQJAAAAAAAAAAAIwCIJAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-06-10T08:59:37.28Z",
+              "WhenOpened": "2026-07-15T12:40:19.345Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "frmSelfServiceRequestsPopup.aspx",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx",
-              "RelativeToolTip": "Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-07-13T12:24:32.417Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 79,
-              "Title": "FormsAuthentication.cs",
-              "DocumentMoniker": "C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\501aad6d4c4de93cb6c459210d06ff31839d313186042ce012e360dfd64bf6d3\\FormsAuthentication.cs",
-              "ToolTip": "C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\501aad6d4c4de93cb6c459210d06ff31839d313186042ce012e360dfd64bf6d3\\FormsAuthentication.cs [Read Only]",
-              "ViewState": "AgIAALcCAAAAAAAAAAAIwMUCAAACAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-22T07:42:36.277Z",
-              "EditorCaption": " [Read Only]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "WebHandler.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Shared.Web\\WebHandler.vb",
-              "RelativeDocumentMoniker": "ClsProject\\Venus.Shared.Web\\WebHandler.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Shared.Web\\WebHandler.vb",
-              "RelativeToolTip": "ClsProject\\Venus.Shared.Web\\WebHandler.vb",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAIwF4AAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-03-31T07:28:10.956Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Clshrs_Projects.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Projects.vb",
-              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Projects.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Projects.vb",
-              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Projects.vb",
-              "ViewState": "AgIAAPYDAAAAAAAAAAAIwPgDAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-04-16T10:29:17.314Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Default.aspx",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Default.aspx",
-              "RelativeDocumentMoniker": "Site\\Default.aspx",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Default.aspx",
-              "RelativeToolTip": "Site\\Default.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-07-02T09:51:43.839Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Clssys_FiscalYearsPeriods.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.System\\Clssys_FiscalYearsPeriods.vb",
-              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.System\\Clssys_FiscalYearsPeriods.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.System\\Clssys_FiscalYearsPeriods.vb",
-              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.System\\Clssys_FiscalYearsPeriods.vb",
-              "ViewState": "AgIAAI8FAAAAAAAAAAAIwKQFAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-07-12T07:37:50.919Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Clshrs_EmployeesVacations.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeesVacations.vb",
-              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeesVacations.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeesVacations.vb",
-              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeesVacations.vb",
-              "ViewState": "AgIAAPwGAAAAAAAAAAAwwAkHAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-07-04T09:35:31.742Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "NewDefault.aspx.En.resx",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\General\\App_LocalResources\\NewDefault.aspx.En.resx",
-              "RelativeDocumentMoniker": "Site\\Pages\\General\\App_LocalResources\\NewDefault.aspx.En.resx",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\General\\App_LocalResources\\NewDefault.aspx.En.resx",
-              "RelativeToolTip": "Site\\Pages\\General\\App_LocalResources\\NewDefault.aspx.En.resx",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2026-07-12T08:28:14.468Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 78,
-              "Title": "frmOvertimeRequestAction.cs",
-              "DocumentMoniker": "C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\1048035f81fd9d52f1d9e5fc354d958efe0799c23801135959135695f3408494\\frmOvertimeRequestAction.cs",
-              "ToolTip": "C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\1048035f81fd9d52f1d9e5fc354d958efe0799c23801135959135695f3408494\\frmOvertimeRequestAction.cs [Read Only]",
-              "ViewState": "AgIAAH4GAAAAAAAAAAAowIsGAAAGAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-22T11:47:18.76Z",
-              "EditorCaption": " [Read Only]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "frmSystemConfig.aspx.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSystemConfig.aspx.vb",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmSystemConfig.aspx.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSystemConfig.aspx.vb",
-              "RelativeToolTip": "Site\\Pages\\HR\\frmSystemConfig.aspx.vb",
-              "ViewState": "AgIAAAoAAAAAAAAAAABRwFMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-07-09T08:09:18.445Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 49,
-              "Title": "frmChangeJoinDate_11.aspx",
-              "DocumentMoniker": "C:\\Users\\Ahmed\\Downloads\\frmChangeJoinDate_11.aspx",
-              "ToolTip": "C:\\Users\\Ahmed\\Downloads\\frmChangeJoinDate_11.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-06-30T13:16:33.386Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "frmSystemConfig.aspx",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSystemConfig.aspx",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmSystemConfig.aspx",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSystemConfig.aspx",
-              "RelativeToolTip": "Site\\Pages\\HR\\frmSystemConfig.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-07-09T08:05:30.066Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "Page.cs",
-              "DocumentMoniker": "C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\4d6c7d96f1dbb72e096f390b3519c056f7f042b92975b4c5c3de4cc465c6f831\\Page.cs",
-              "ToolTip": "C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\4d6c7d96f1dbb72e096f390b3519c056f7f042b92975b4c5c3de4cc465c6f831\\Page.cs",
-              "ViewState": "AgIAAMkTAAAAAAAAAAAIwNcTAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-09T13:22:37.416Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "FrmGrievanceFormRequestAction.aspx.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmGrievanceFormRequestAction.aspx.vb",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmGrievanceFormRequestAction.aspx.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmGrievanceFormRequestAction.aspx.vb",
-              "RelativeToolTip": "Site\\Pages\\HR\\FrmGrievanceFormRequestAction.aspx.vb",
-              "ViewState": "AgIAAIYBAAAAAAAAAAAAAJUBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-06-28T12:46:28.635Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 69,
-              "Title": "frmChangeJoinDate_2.aspx",
-              "DocumentMoniker": "C:\\Users\\Ahmed\\Downloads\\frmChangeJoinDate_2.aspx",
-              "ToolTip": "C:\\Users\\Ahmed\\Downloads\\frmChangeJoinDate_2.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-06-25T11:53:46.146Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 68,
-              "Title": "frmChangeJoinDate_3.aspx",
-              "DocumentMoniker": "C:\\Users\\Ahmed\\Downloads\\frmChangeJoinDate_3.aspx",
-              "ToolTip": "C:\\Users\\Ahmed\\Downloads\\frmChangeJoinDate_3.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-06-25T12:30:41.767Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "web.config",
-              "DocumentMoniker": "D:\\Data Ocean\\Publish\\WamPublish\\web.config",
-              "RelativeDocumentMoniker": "..\\..\\..\\Publish\\WamPublish\\web.config",
-              "ToolTip": "D:\\Data Ocean\\Publish\\WamPublish\\web.config",
-              "RelativeToolTip": "..\\..\\..\\Publish\\WamPublish\\web.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2026-07-02T08:22:17.754Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "FrmInterviewEvaluationFormRequestAction.aspx.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmInterviewEvaluationFormRequestAction.aspx.vb",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmInterviewEvaluationFormRequestAction.aspx.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmInterviewEvaluationFormRequestAction.aspx.vb",
-              "RelativeToolTip": "Site\\Pages\\HR\\FrmInterviewEvaluationFormRequestAction.aspx.vb",
-              "ViewState": "AgIAAGkBAAAAAAAAAAAqwHkBAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-06-28T12:46:51.76Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
               "Title": "frmChangeJoinDate.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmChangeJoinDate.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmChangeJoinDate.aspx",
@@ -834,33 +546,134 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "Clshrs_Contracts.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Contracts.vb",
-              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Contracts.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Contracts.vb",
-              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Contracts.vb",
-              "ViewState": "AgIAAAsFAAAAAAAAAAAIwBkFAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-06-25T08:01:03.128Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 7,
               "Title": "frmChangeJoinDate.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmChangeJoinDate.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmChangeJoinDate.aspx.vb",
               "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmChangeJoinDate.aspx.vb",
               "RelativeToolTip": "Site\\Pages\\HR\\frmChangeJoinDate.aspx.vb",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAlwCMAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAACAAAAAAAAAIAwwA4CAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2026-06-25T08:01:03.551Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 12,
+              "Title": "Clshrs_Contracts.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Contracts.vb",
+              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Contracts.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Contracts.vb",
+              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Contracts.vb",
+              "ViewState": "AgIAAHEHAAAAAAAAAAAcwIYHAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-06-25T08:01:03.128Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ClsSys_Companies.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.System\\ClsSys_Companies.vb",
+              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.System\\ClsSys_Companies.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.System\\ClsSys_Companies.vb",
+              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.System\\ClsSys_Companies.vb",
+              "ViewState": "AgIAAOUCAAAAAAAAAIAwwPICAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-07-13T14:00:10.948Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "frmEmployees.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployees.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployees.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployees.aspx.vb",
+              "RelativeToolTip": "Site\\Pages\\HR\\frmEmployees.aspx.vb",
+              "ViewState": "AgIAACkGAAAAAAAAAAAtwDUGAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-29T06:20:36.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Default.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Default.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Default.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Default.aspx.vb",
+              "RelativeToolTip": "Site\\Default.aspx.vb",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAnwBAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-06-22T07:46:40.074Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "frmAttendAppointment.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAttendAppointment.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAttendAppointment.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAttendAppointment.aspx.vb",
+              "RelativeToolTip": "Site\\Pages\\HR\\frmAttendAppointment.aspx.vb",
+              "ViewState": "AgIAAEECAAAAAAAAAAAAAFACAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-05-21T07:58:36.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Page.cs",
+              "DocumentMoniker": "C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\4d6c7d96f1dbb72e096f390b3519c056f7f042b92975b4c5c3de4cc465c6f831\\Page.cs",
+              "ToolTip": "C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\4d6c7d96f1dbb72e096f390b3519c056f7f042b92975b4c5c3de4cc465c6f831\\Page.cs",
+              "ViewState": "AgIAAMoTAAAAAAAAAIAwwNcTAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T13:22:37.416Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Clshrs_EmployeeClasses.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeeClasses.vb",
+              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeeClasses.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeeClasses.vb",
+              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeeClasses.vb",
+              "ViewState": "AgIAACIGAAAAAAAAAAAEwC4GAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-07-15T09:05:29.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ClsSys_UpdateDB.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.System\\ClsSys_UpdateDB.vb",
+              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.System\\ClsSys_UpdateDB.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.System\\ClsSys_UpdateDB.vb",
+              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.System\\ClsSys_UpdateDB.vb",
+              "ViewState": "AgIAAKcYAAAAAAAAAAAvwLsYAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-07-15T08:14:25.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "frmChangeJoinDate.aspx.en.resx",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\App_LocalResources\\frmChangeJoinDate.aspx.en.resx",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\App_LocalResources\\frmChangeJoinDate.aspx.en.resx",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\App_LocalResources\\frmChangeJoinDate.aspx.en.resx",
+              "RelativeToolTip": "Site\\Pages\\HR\\App_LocalResources\\frmChangeJoinDate.aspx.en.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2026-07-15T10:27:24.116Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "frmEmployees.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployees.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployees.aspx",
@@ -873,18 +686,296 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "frmChangeJoinDate.aspx.en.resx",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\App_LocalResources\\frmChangeJoinDate.aspx.en.resx",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\App_LocalResources\\frmChangeJoinDate.aspx.en.resx",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\App_LocalResources\\frmChangeJoinDate.aspx.en.resx",
-              "RelativeToolTip": "Site\\Pages\\HR\\App_LocalResources\\frmChangeJoinDate.aspx.en.resx",
+              "DocumentIndex": 15,
+              "Title": "Default.aspx",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Default.aspx",
+              "RelativeDocumentMoniker": "Site\\Default.aspx",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Default.aspx",
+              "RelativeToolTip": "Site\\Default.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-07-02T09:51:43.839Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Clshrs_EmployeesVacations.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeesVacations.vb",
+              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeesVacations.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeesVacations.vb",
+              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeesVacations.vb",
+              "ViewState": "AgIAAB8HAAAAAAAAAAAwwCwHAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-07-04T09:35:31.742Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "frmEmployeesSelector.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesSelector.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesSelector.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesSelector.aspx.vb",
+              "RelativeToolTip": "Site\\Pages\\HR\\frmEmployeesSelector.aspx.vb",
+              "ViewState": "AgIAANUDAAAAAAAAAAAIwN8DAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-07-13T12:27:43.961Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "NewDefault.aspx.En.resx",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\General\\App_LocalResources\\NewDefault.aspx.En.resx",
+              "RelativeDocumentMoniker": "Site\\Pages\\General\\App_LocalResources\\NewDefault.aspx.En.resx",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\General\\App_LocalResources\\NewDefault.aspx.En.resx",
+              "RelativeToolTip": "Site\\Pages\\General\\App_LocalResources\\NewDefault.aspx.En.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2026-07-06T15:08:34.752Z"
+              "WhenOpened": "2026-07-12T08:28:14.468Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Clshrs_Employees.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Employees.vb",
+              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Employees.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Employees.vb",
+              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Employees.vb",
+              "ViewState": "AgIAABQJAAAAAAAAAAAIwCIJAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-06-10T08:59:37.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "frmSelfServiceRequestsPopup.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx.vb",
+              "RelativeToolTip": "Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-07-13T12:24:32.686Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "FrmAdvanceHousingRequestAction.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmAdvanceHousingRequestAction.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmAdvanceHousingRequestAction.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmAdvanceHousingRequestAction.aspx.vb",
+              "RelativeToolTip": "Site\\Pages\\HR\\FrmAdvanceHousingRequestAction.aspx.vb",
+              "ViewState": "AgIAAHQAAAAAAAAAAAASwIUAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-06-28T11:32:23.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "frmEmployeesEndofServiceAdvance.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesEndofServiceAdvance.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesEndofServiceAdvance.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesEndofServiceAdvance.aspx.vb",
+              "RelativeToolTip": "Site\\Pages\\HR\\frmEmployeesEndofServiceAdvance.aspx.vb",
+              "ViewState": "AgIAAFoHAAAAAAAAAAAIwF8HAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-05-04T08:18:09.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "frmEmployeesSelector.aspx",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesSelector.aspx",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesSelector.aspx",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesSelector.aspx",
+              "RelativeToolTip": "Site\\Pages\\HR\\frmEmployeesSelector.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-07-13T13:54:41.472Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "frmEmployeesSelector.aspx.vb",
+              "DocumentMoniker": "C:\\Users\\Ahmed\\Desktop\\frmEmployeesSelector.aspx.vb",
+              "ToolTip": "C:\\Users\\Ahmed\\Desktop\\frmEmployeesSelector.aspx.vb",
+              "ViewState": "AgIAAI0RAAAAAAAAAAAYwKkRAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-07-13T14:31:15.085Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "frmSelfServiceRequestsPopup.aspx",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx",
+              "RelativeToolTip": "Site\\Pages\\HR\\frmSelfServiceRequestsPopup.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-07-13T12:24:32.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 84,
+              "Title": "FormsAuthentication.cs",
+              "DocumentMoniker": "C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\501aad6d4c4de93cb6c459210d06ff31839d313186042ce012e360dfd64bf6d3\\FormsAuthentication.cs",
+              "ToolTip": "C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\501aad6d4c4de93cb6c459210d06ff31839d313186042ce012e360dfd64bf6d3\\FormsAuthentication.cs [Read Only]",
+              "ViewState": "AgIAALcCAAAAAAAAAAAIwMUCAAACAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-22T07:42:36.277Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "WebHandler.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Shared.Web\\WebHandler.vb",
+              "RelativeDocumentMoniker": "ClsProject\\Venus.Shared.Web\\WebHandler.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Shared.Web\\WebHandler.vb",
+              "RelativeToolTip": "ClsProject\\Venus.Shared.Web\\WebHandler.vb",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAIwF4AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-03-31T07:28:10.956Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 25,
+              "Title": "Clshrs_Projects.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Projects.vb",
+              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Projects.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Projects.vb",
+              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_Projects.vb",
+              "ViewState": "AgIAAPYDAAAAAAAAAAAIwPgDAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-04-16T10:29:17.314Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Clssys_FiscalYearsPeriods.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.System\\Clssys_FiscalYearsPeriods.vb",
+              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.System\\Clssys_FiscalYearsPeriods.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.System\\Clssys_FiscalYearsPeriods.vb",
+              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.System\\Clssys_FiscalYearsPeriods.vb",
+              "ViewState": "AgIAAI8FAAAAAAAAAAAIwKQFAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-07-12T07:37:50.919Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "frmOvertimeRequestAction.cs",
+              "DocumentMoniker": "C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\1048035f81fd9d52f1d9e5fc354d958efe0799c23801135959135695f3408494\\frmOvertimeRequestAction.cs",
+              "ToolTip": "C:\\Users\\Ahmed\\AppData\\Local\\Temp\\.vsdbgsrc\\1048035f81fd9d52f1d9e5fc354d958efe0799c23801135959135695f3408494\\frmOvertimeRequestAction.cs [Read Only]",
+              "ViewState": "AgIAAH4GAAAAAAAAAAAowIsGAAAGAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-22T11:47:18.76Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "frmSystemConfig.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSystemConfig.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmSystemConfig.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSystemConfig.aspx.vb",
+              "RelativeToolTip": "Site\\Pages\\HR\\frmSystemConfig.aspx.vb",
+              "ViewState": "AgIAAAoAAAAAAAAAAABRwFMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-07-09T08:09:18.445Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "frmChangeJoinDate_11.aspx",
+              "DocumentMoniker": "C:\\Users\\Ahmed\\Downloads\\frmChangeJoinDate_11.aspx",
+              "ToolTip": "C:\\Users\\Ahmed\\Downloads\\frmChangeJoinDate_11.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-06-30T13:16:33.386Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "frmSystemConfig.aspx",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSystemConfig.aspx",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmSystemConfig.aspx",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmSystemConfig.aspx",
+              "RelativeToolTip": "Site\\Pages\\HR\\frmSystemConfig.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-07-09T08:05:30.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "FrmGrievanceFormRequestAction.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmGrievanceFormRequestAction.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmGrievanceFormRequestAction.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmGrievanceFormRequestAction.aspx.vb",
+              "RelativeToolTip": "Site\\Pages\\HR\\FrmGrievanceFormRequestAction.aspx.vb",
+              "ViewState": "AgIAAIYBAAAAAAAAAAAAAJUBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-06-28T12:46:28.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "frmChangeJoinDate_2.aspx",
+              "DocumentMoniker": "C:\\Users\\Ahmed\\Downloads\\frmChangeJoinDate_2.aspx",
+              "ToolTip": "C:\\Users\\Ahmed\\Downloads\\frmChangeJoinDate_2.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-06-25T11:53:46.146Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "frmChangeJoinDate_3.aspx",
+              "DocumentMoniker": "C:\\Users\\Ahmed\\Downloads\\frmChangeJoinDate_3.aspx",
+              "ToolTip": "C:\\Users\\Ahmed\\Downloads\\frmChangeJoinDate_3.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-06-25T12:30:41.767Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "web.config",
+              "DocumentMoniker": "D:\\Data Ocean\\Publish\\WamPublish\\web.config",
+              "RelativeDocumentMoniker": "..\\..\\..\\Publish\\WamPublish\\web.config",
+              "ToolTip": "D:\\Data Ocean\\Publish\\WamPublish\\web.config",
+              "RelativeToolTip": "..\\..\\..\\Publish\\WamPublish\\web.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-07-02T08:22:17.754Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "FrmInterviewEvaluationFormRequestAction.aspx.vb",
+              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmInterviewEvaluationFormRequestAction.aspx.vb",
+              "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmInterviewEvaluationFormRequestAction.aspx.vb",
+              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmInterviewEvaluationFormRequestAction.aspx.vb",
+              "RelativeToolTip": "Site\\Pages\\HR\\FrmInterviewEvaluationFormRequestAction.aspx.vb",
+              "ViewState": "AgIAAGkBAAAAAAAAAAAqwHkBAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-06-28T12:46:51.76Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
               "Title": "frmChangeJoinDate.aspx.resx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\App_LocalResources\\frmChangeJoinDate.aspx.resx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\App_LocalResources\\frmChangeJoinDate.aspx.resx",
@@ -895,7 +986,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 34,
               "Title": "frmAppraisalEvaluation.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAppraisalEvaluation.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAppraisalEvaluation.aspx.vb",
@@ -908,7 +999,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 36,
               "Title": "Login.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\Login.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\Login.aspx.vb",
@@ -921,7 +1012,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 39,
               "Title": "frmAppraisalAcknowlege.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAppraisalAcknowlege.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAppraisalAcknowlege.aspx",
@@ -934,7 +1025,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 37,
               "Title": "FrmappraislaNotifications.Aspx.En.resx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\App_LocalResources\\FrmappraislaNotifications.Aspx.En.resx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\App_LocalResources\\FrmappraislaNotifications.Aspx.En.resx",
@@ -945,7 +1036,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 35,
               "Title": "frmAppraisalAcknowlege.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAppraisalAcknowlege.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAppraisalAcknowlege.aspx.vb",
@@ -958,7 +1049,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 38,
               "Title": "FrmappraislaNotifications.Aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmappraislaNotifications.Aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmappraislaNotifications.Aspx",
@@ -970,7 +1061,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 40,
               "Title": "FrmAppraisalPositionCriteria.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmAppraisalPositionCriteria.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmAppraisalPositionCriteria.aspx.vb",
@@ -983,7 +1074,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 42,
               "Title": "frmAppraisalEvaluation.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAppraisalEvaluation.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAppraisalEvaluation.aspx",
@@ -996,7 +1087,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 43,
               "Title": "frmAnnualVacationsNotification.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAnnualVacationsNotification.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAnnualVacationsNotification.aspx.vb",
@@ -1009,7 +1100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 44,
               "Title": "FrmSelfServiceConfiguration.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmSelfServiceConfiguration.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmSelfServiceConfiguration.aspx.vb",
@@ -1022,7 +1113,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 45,
               "Title": "FrmAppraisalPositionCriteria.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmAppraisalPositionCriteria.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmAppraisalPositionCriteria.aspx",
@@ -1035,7 +1126,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 50,
               "Title": "frmEmployeesEndofService.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesEndofService.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesEndofService.aspx",
@@ -1048,7 +1139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 49,
               "Title": "frmEmployeesEndofService.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesEndofService.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesEndofService.aspx.vb",
@@ -1061,7 +1152,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 47,
               "Title": "frmPositions.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmPositions.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmPositions.aspx",
@@ -1073,7 +1164,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 46,
               "Title": "frmPositions.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmPositions.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmPositions.aspx.vb",
@@ -1085,7 +1176,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 48,
               "Title": "frmEmployeesEndofServiceAdvance.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesEndofServiceAdvance.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesEndofServiceAdvance.aspx",
@@ -1098,7 +1189,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 54,
               "Title": "frmDelegationSChedule.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmDelegationSChedule.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmDelegationSChedule.aspx",
@@ -1111,7 +1202,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 51,
               "Title": "frmAnnualVacationsNotification.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAnnualVacationsNotification.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAnnualVacationsNotification.aspx",
@@ -1124,7 +1215,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 52,
               "Title": "frmDelegationSChedule.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmDelegationSChedule.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmDelegationSChedule.aspx.vb",
@@ -1137,7 +1228,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 53,
               "Title": "ClsSS_DelegationSChedule.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\ClsSS_DelegationSChedule.vb",
               "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\ClsSS_DelegationSChedule.vb",
@@ -1150,7 +1241,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 58,
               "Title": "frmVisaRequestAction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmVisaRequestAction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmVisaRequestAction.aspx.vb",
@@ -1162,7 +1253,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 57,
               "Title": "Login.aspx.resx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\App_LocalResources\\Login.aspx.resx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\App_LocalResources\\Login.aspx.resx",
@@ -1173,7 +1264,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 56,
               "Title": "Login.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\Login.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\Login.aspx",
@@ -1186,7 +1277,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 60,
               "Title": "FrmOtherLetterRequestAction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmOtherLetterRequestAction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmOtherLetterRequestAction.aspx.vb",
@@ -1198,7 +1289,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 62,
               "Title": "FrmGrievanceFormRequestAction.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmGrievanceFormRequestAction.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmGrievanceFormRequestAction.aspx",
@@ -1210,7 +1301,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 61,
               "Title": "FrmLoanLetterRequestAction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmLoanLetterRequestAction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmLoanLetterRequestAction.aspx.vb",
@@ -1222,7 +1313,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 59,
               "Title": "frmOvertimeRequestAction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmOvertimeRequestAction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmOvertimeRequestAction.aspx.vb",
@@ -1235,7 +1326,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 64,
               "Title": "FrmExceuseRequestAction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmExceuseRequestAction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmExceuseRequestAction.aspx.vb",
@@ -1247,7 +1338,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 65,
               "Title": "FrmEndOfServiceRequestAction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmEndOfServiceRequestAction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmEndOfServiceRequestAction.aspx.vb",
@@ -1260,7 +1351,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 66,
               "Title": "FrmEducationSupportRequestAction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmEducationSupportRequestAction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmEducationSupportRequestAction.aspx.vb",
@@ -1272,7 +1363,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 67,
               "Title": "FrmConflictofInterestFormRequestAction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmConflictofInterestFormRequestAction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmConflictofInterestFormRequestAction.aspx.vb",
@@ -1284,7 +1375,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 68,
               "Title": "frmChangeWorkHoursRequestAction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmChangeWorkHoursRequestAction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmChangeWorkHoursRequestAction.aspx.vb",
@@ -1296,7 +1387,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 63,
               "Title": "frmExitEntryRequestAction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmExitEntryRequestAction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmExitEntryRequestAction.aspx.vb",
@@ -1309,7 +1400,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 69,
               "Title": "FrmChamberofCommerceLetterRequestAction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmChamberofCommerceLetterRequestAction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmChamberofCommerceLetterRequestAction.aspx.vb",
@@ -1321,7 +1412,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 70,
               "Title": "FrmAssaultEscalationFormRequestAction.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmAssaultEscalationFormRequestAction.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmAssaultEscalationFormRequestAction.aspx.vb",
@@ -1333,7 +1424,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 72,
               "Title": "frmAnnualVacationsRequestAdvance.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAnnualVacationsRequestAdvance.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAnnualVacationsRequestAdvance.aspx.vb",
@@ -1346,7 +1437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 71,
               "Title": "frmEmployeesLoans.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesLoans.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesLoans.aspx.vb",
@@ -1359,7 +1450,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 73,
               "Title": "frmEmployeesVacationsAdvanceSettlementDependonVacation.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesVacationsAdvanceSettlementDependonVacation.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesVacationsAdvanceSettlementDependonVacation.aspx.vb",
@@ -1371,7 +1462,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 76,
               "Title": "frmCompanies.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmCompanies.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmCompanies.aspx",
@@ -1384,20 +1475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
-              "Title": "frmCompanies.aspx.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmCompanies.aspx.vb",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmCompanies.aspx.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmCompanies.aspx.vb",
-              "RelativeToolTip": "Site\\Pages\\HR\\frmCompanies.aspx.vb",
-              "ViewState": "AgIAABkAAAAAAAAAAAAvwC4AAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-06-21T09:08:35.242Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 77,
               "Title": "frmAnnualVacationsRequestStatus.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAnnualVacationsRequestStatus.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAnnualVacationsRequestStatus.aspx.vb",
@@ -1410,7 +1488,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 79,
               "Title": "frmPostJournalPreview.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmPostJournalPreview.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmPostJournalPreview.aspx.vb",
@@ -1422,7 +1500,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 78,
               "Title": "frmPostJournalPreview.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmPostJournalPreview.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmPostJournalPreview.aspx",
@@ -1434,7 +1512,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 90,
+              "DocumentIndex": 93,
               "Title": "ClsSys_Search_Main.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.System\\ClsSys_Search_Main.vb",
               "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.System\\ClsSys_Search_Main.vb",
@@ -1446,7 +1524,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 80,
               "Title": "Login.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\General\\Login.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\General\\Login.aspx.vb",
@@ -1459,7 +1537,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
+              "DocumentIndex": 81,
               "Title": "FrmExtendTransfereLeaveBalance.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\FrmExtendTransfereLeaveBalance.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\FrmExtendTransfereLeaveBalance.aspx.vb",
@@ -1472,7 +1550,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 77,
+              "DocumentIndex": 82,
               "Title": "frmEmployeesVacationsAdvance.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesVacationsAdvance.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesVacationsAdvance.aspx.vb",
@@ -1485,7 +1563,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 86,
               "Title": "frmEmployeesVacations.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesVacations.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesVacations.aspx.vb",
@@ -1498,7 +1576,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 80,
+              "DocumentIndex": 85,
               "Title": "frmEmployeesVacations.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesVacations.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesVacations.aspx",
@@ -1511,7 +1589,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
+              "DocumentIndex": 87,
               "Title": "frmEmployeeDecisionsHistoryPopUp.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeeDecisionsHistoryPopUp.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeeDecisionsHistoryPopUp.aspx.vb",
@@ -1523,33 +1601,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
-              "Title": "frmEmployeePeriodicalTransactions.aspx.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeePeriodicalTransactions.aspx.vb",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeePeriodicalTransactions.aspx.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeePeriodicalTransactions.aspx.vb",
-              "RelativeToolTip": "Site\\Pages\\HR\\frmEmployeePeriodicalTransactions.aspx.vb",
-              "ViewState": "AgIAALMAAAAAAAAAAADwv8AAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-06-10T07:55:44.9Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 84,
-              "Title": "Clshrs_ContractsTransactions.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_ContractsTransactions.vb",
-              "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_ContractsTransactions.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_ContractsTransactions.vb",
-              "RelativeToolTip": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_ContractsTransactions.vb",
-              "ViewState": "AgIAADoDAAAAAAAAAMBUwD0DAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-06-11T14:11:29.016Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 87,
+              "DocumentIndex": 90,
               "Title": "frmReportsViewerCriteriasSti.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Interfaces\\frmReportsViewerCriteriasSti.aspx",
               "RelativeDocumentMoniker": "Site\\Interfaces\\frmReportsViewerCriteriasSti.aspx",
@@ -1561,7 +1613,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 88,
+              "DocumentIndex": 91,
               "Title": "frmReportsViewerCriterias.aspx.En.resx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Interfaces\\App_LocalResources\\frmReportsViewerCriterias.aspx.En.resx",
               "RelativeDocumentMoniker": "Site\\Interfaces\\App_LocalResources\\frmReportsViewerCriterias.aspx.En.resx",
@@ -1573,7 +1625,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 85,
+              "DocumentIndex": 88,
               "Title": "frmReportsViewerCriteriasSti.aspx.En.resx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Interfaces\\App_LocalResources\\frmReportsViewerCriteriasSti.aspx.En.resx",
               "RelativeDocumentMoniker": "Site\\Interfaces\\App_LocalResources\\frmReportsViewerCriteriasSti.aspx.En.resx",
@@ -1585,7 +1637,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 86,
+              "DocumentIndex": 89,
               "Title": "frmReportsViewerCriterias.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Interfaces\\frmReportsViewerCriterias.aspx",
               "RelativeDocumentMoniker": "Site\\Interfaces\\frmReportsViewerCriterias.aspx",
@@ -1597,7 +1649,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 91,
+              "DocumentIndex": 94,
               "Title": "frmModalSearchScreen.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmModalSearchScreen.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmModalSearchScreen.aspx.vb",
@@ -1609,7 +1661,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 89,
+              "DocumentIndex": 92,
               "Title": "frmModalSearchScreen.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmModalSearchScreen.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmModalSearchScreen.aspx",
@@ -1621,7 +1673,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 92,
+              "DocumentIndex": 95,
               "Title": "frmHIPolicy.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmHIPolicy.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmHIPolicy.aspx.vb",
@@ -1633,7 +1685,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 93,
+              "DocumentIndex": 96,
               "Title": "frmEmployeeClasses.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeeClasses.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeeClasses.aspx.vb",
@@ -1646,7 +1698,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 94,
+              "DocumentIndex": 97,
               "Title": "Clshrs_FormulaEditor.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_FormulaEditor.vb",
               "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_FormulaEditor.vb",
@@ -1659,7 +1711,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 95,
+              "DocumentIndex": 98,
               "Title": "frmVacationsBalanceTransferring.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmVacationsBalanceTransferring.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmVacationsBalanceTransferring.aspx.vb",
@@ -1671,7 +1723,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 98,
+              "DocumentIndex": 101,
               "Title": "frmTransactionTypes.aspx.En.Resx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\App_LocalResources\\frmTransactionTypes.aspx.En.Resx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\App_LocalResources\\frmTransactionTypes.aspx.En.Resx",
@@ -1682,7 +1734,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 96,
+              "DocumentIndex": 99,
               "Title": "frmVacationsBalanceTransferring.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmVacationsBalanceTransferring.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmVacationsBalanceTransferring.aspx",
@@ -1694,7 +1746,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 100,
+              "DocumentIndex": 103,
               "Title": "frmTransactionTypes.aspx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmTransactionTypes.aspx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmTransactionTypes.aspx",
@@ -1707,7 +1759,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 97,
+              "DocumentIndex": 100,
               "Title": "frmTransactionTypes.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmTransactionTypes.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmTransactionTypes.aspx.vb",
@@ -1720,7 +1772,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 99,
+              "DocumentIndex": 102,
               "Title": "frmTransactionTypes.aspx.Resx",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\App_LocalResources\\frmTransactionTypes.aspx.Resx",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\App_LocalResources\\frmTransactionTypes.aspx.Resx",
@@ -1731,7 +1783,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 101,
+              "DocumentIndex": 104,
               "Title": "Clshrs_EmployeesTransactions.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeesTransactions.vb",
               "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.HumanResource\\Clshrs_EmployeesTransactions.vb",
@@ -1743,7 +1795,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 103,
+              "DocumentIndex": 106,
               "Title": "frmEndOfServices.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEndOfServices.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEndOfServices.aspx.vb",
@@ -1755,7 +1807,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 102,
+              "DocumentIndex": 105,
               "Title": "frmOtherVacationsRequestNursing.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmOtherVacationsRequestNursing.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmOtherVacationsRequestNursing.aspx.vb",
@@ -1768,7 +1820,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 105,
+              "DocumentIndex": 108,
               "Title": "frmOtherVacationsRequestMedical.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmOtherVacationsRequestMedical.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmOtherVacationsRequestMedical.aspx.vb",
@@ -1781,7 +1833,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 109,
+              "DocumentIndex": 112,
               "Title": "frmAnnualVacationsRequestInternalAdmin.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAnnualVacationsRequestInternalAdmin.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAnnualVacationsRequestInternalAdmin.aspx.vb",
@@ -1793,7 +1845,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 104,
+              "DocumentIndex": 107,
               "Title": "frmAnnualVacationsRequest.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAnnualVacationsRequest.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAnnualVacationsRequest.aspx.vb",
@@ -1805,7 +1857,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 110,
+              "DocumentIndex": 113,
               "Title": "frmAnnualVacationsRequestGeneralAdmin.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAnnualVacationsRequestGeneralAdmin.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAnnualVacationsRequestGeneralAdmin.aspx.vb",
@@ -1817,7 +1869,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 108,
+              "DocumentIndex": 111,
               "Title": "frmAnnualVacationsRequestMedical.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAnnualVacationsRequestMedical.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAnnualVacationsRequestMedical.aspx.vb",
@@ -1829,7 +1881,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 106,
+              "DocumentIndex": 109,
               "Title": "frmAnnualVacationsRequestOperational.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAnnualVacationsRequestOperational.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAnnualVacationsRequestOperational.aspx.vb",
@@ -1841,7 +1893,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 107,
+              "DocumentIndex": 110,
               "Title": "frmAnnualVacationsRequestNursing.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAnnualVacationsRequestNursing.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAnnualVacationsRequestNursing.aspx.vb",
@@ -1853,7 +1905,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 111,
+              "DocumentIndex": 114,
               "Title": "frmOtherVacationsRequestOperational.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmOtherVacationsRequestOperational.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmOtherVacationsRequestOperational.aspx.vb",
@@ -1865,7 +1917,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 112,
+              "DocumentIndex": 115,
               "Title": "frmOtherVacationsRequestInternalAdmin.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmOtherVacationsRequestInternalAdmin.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmOtherVacationsRequestInternalAdmin.aspx.vb",
@@ -1877,7 +1929,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 114,
+              "DocumentIndex": 117,
               "Title": "frmOtherVacationsRequestGeneralAdmin.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmOtherVacationsRequestGeneralAdmin.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmOtherVacationsRequestGeneralAdmin.aspx.vb",
@@ -1889,7 +1941,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 113,
+              "DocumentIndex": 116,
               "Title": "frmOtherVacationsRequest.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmOtherVacationsRequest.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmOtherVacationsRequest.aspx.vb",
@@ -1902,7 +1954,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 115,
+              "DocumentIndex": 118,
               "Title": "frmEmployeesOthersVacations.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeesOthersVacations.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeesOthersVacations.aspx.vb",
@@ -1914,7 +1966,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 116,
+              "DocumentIndex": 119,
               "Title": "ClsSys_UpdateLoginScript.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\ClsProject\\Venus.Application.SystemFiles.System\\ClsSys_UpdateLoginScript.vb",
               "RelativeDocumentMoniker": "ClsProject\\Venus.Application.SystemFiles.System\\ClsSys_UpdateLoginScript.vb",
@@ -1926,20 +1978,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 117,
-              "Title": "frmAttendAppointment.aspx.vb",
-              "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAttendAppointment.aspx.vb",
-              "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmAttendAppointment.aspx.vb",
-              "ToolTip": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmAttendAppointment.aspx.vb",
-              "RelativeToolTip": "Site\\Pages\\HR\\frmAttendAppointment.aspx.vb",
-              "ViewState": "AgIAAEwCAAAAAAAAAABRwE8CAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-05-21T07:58:36.35Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 118,
+              "DocumentIndex": 120,
               "Title": "frmEmployeeOfficialVacations.aspx.vb",
               "DocumentMoniker": "D:\\Data Ocean\\SourceCode\\Standard_New\\VenusApplicationMerged - NewInterface\\Site\\Pages\\HR\\frmEmployeeOfficialVacations.aspx.vb",
               "RelativeDocumentMoniker": "Site\\Pages\\HR\\frmEmployeeOfficialVacations.aspx.vb",

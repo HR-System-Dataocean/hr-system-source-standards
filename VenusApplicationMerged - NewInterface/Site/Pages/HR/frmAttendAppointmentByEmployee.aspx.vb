@@ -655,22 +655,27 @@ Partial Class frmEmployeesVacations
         End Try
     End Function
     Protected Sub TxtEmpCode_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtEmpCode.TextChanged
-        If Not String.IsNullOrEmpty(TxtEmpCode.Text) Then
-            Dim ClsEmployees = New Clshrs_Employees(Me)
-            ClsEmployees.Find("Code='" & TxtEmpCode.Text & "'")
-            If Not String.IsNullOrEmpty(ClsEmployees.ArabicName.ToString()) Then
-                If ProfileCls.CurrentLanguage = "Ar" Then
+        Try
+            If Not String.IsNullOrEmpty(TxtEmpCode.Text) Then
+                Dim ClsEmployees = New Clshrs_Employees(Me)
+                ClsEmployees.Find("Code='" & TxtEmpCode.Text & "'")
+                If Not String.IsNullOrEmpty(ClsEmployees.ArabicName.ToString()) Then
+                    If ProfileCls.CurrentLanguage = "Ar" Then
 
-                    TxtEmpName.Text = ClsEmployees.ArabicName
+                        TxtEmpName.Text = ClsEmployees.ArabicName
+                    Else
+                        TxtEmpName.Text = ClsEmployees.EnglishName
+                    End If
+
+
                 Else
-                    TxtEmpName.Text = ClsEmployees.EnglishName
+                    TxtEmpName.Text = ""
                 End If
-
-
-            Else
-                TxtEmpName.Text = ""
             End If
-        End If
+        Catch ex As Exception
+
+        End Try
+
 
     End Sub
     Protected Sub TxtAttendShifts_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TxtAttendShifts.TextChanged
