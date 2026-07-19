@@ -428,12 +428,10 @@ Partial Class frmEmployees
                             Dim pendingID As String = CType(sender, Control).UniqueID
                             hdnPendingSaveControlID.Value = pendingID
 
-                            ' حفظ حالة أننا في انتظار الـ Popup
                             Session("IsWaitingForPopup") = True
                             Session("PendingSaveControlID") = pendingID
                             Session("EmployeeCode") = txtCode.Text
 
-                            ' تمرير معرف الزرار للـ Popup
                             Dim url As String = "frmChangeJoinDate.aspx?EmpCode=" & Server.UrlEncode(txtCode.Text) &
             "&JoinDate=" & Server.UrlEncode(JoinDate.Text) &
             "&ClassID=" & ddlEmployeeClass.SelectedValue &
@@ -449,128 +447,130 @@ Partial Class frmEmployees
                         End If
                     End If
 
-                    ' =============================================
-                    ' التحقق من Session (تم تعيينه من الـ Popup)
-                    ' =============================================
-                    If Session("JoinDateChanged") Is Nothing OrElse Session("JoinDateChanged") = False Then
-                        Return
-                    Else
-                        ' إعادة تعيين Session بعد إكمال الحفظ
-                        Session("JoinDateChanged") = False
+                    If LockJoinDate Then
+                        ' =============================================
+                        ' التحقق من Session (تم تعيينه من الـ Popup)
+                        ' =============================================
+                        If Session("JoinDateChanged") Is Nothing OrElse Session("JoinDateChanged") = False Then
+                            Return
+                        Else
+                            ' إعادة تعيين Session بعد إكمال الحفظ
+                            Session("JoinDateChanged") = False
+                        End If
                     End If
 
 
                     'Get Next Code
                     Dim Cls_Companies As New Clssys_Companies(Page)
-                    Dim IntSeqLength As Integer = 0
-                    Dim Retcode As String = ""
-                    If Cls_Companies.Find("ID=" & Cls_Companies.MainCompanyID) = True Then
-                        If Cls_Companies.HasSequence = True Then
-                            'If txtCode.Text = "" Or txtCode.Text = "Auto" Or txtCode.Text = "تلقائى" Then
-                            IntSeqLength = Cls_Companies.SequenceLength
-                            Dim strcommand As String = "select Max(isnull(convert(int,Substring(Code,CHARINDEX('" & Cls_Companies.Separator & "',Code)+1,LEN(Code))),0)) + 1 from Hrs_Employees where Substring(Code,CHARINDEX('" & Cls_Companies.Separator & "',Code)+1,LEN(Code)) NOT LIKE '%[a-z]%' and CompanyID = " & Cls_Companies.MainCompanyID
-                            Dim strnextcode As String = ""
-                            Try
-                                strnextcode = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(Cls_Companies.ConnectionString, Data.CommandType.Text, strcommand)
-                            Catch ex As Exception
-                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Error Get Code /خطأ توليد الكود"))
-                                Exit Sub
-                            End Try
-                            Retcode = strnextcode
-                            For I As Integer = 0 To IntSeqLength - strnextcode.Length - 1
-                                Retcode = "0" + Retcode
-                            Next
-                            '' Prefix
-                            Dim prfx As String = ""
-                            If (Cls_Companies.Prefix = 0) Then
-                                prfx = ""
-                            ElseIf (Cls_Companies.Prefix = 1) Then
-                                Dim cls As New Clssys_Branches(Me)
-                                If cls.Find("ID = " & ddlBranch.SelectedValue) Then
-                                    prfx = cls.Code
+                        Dim IntSeqLength As Integer = 0
+                        Dim Retcode As String = ""
+                        If Cls_Companies.Find("ID=" & Cls_Companies.MainCompanyID) = True Then
+                            If Cls_Companies.HasSequence = True Then
+                                'If txtCode.Text = "" Or txtCode.Text = "Auto" Or txtCode.Text = "تلقائى" Then
+                                IntSeqLength = Cls_Companies.SequenceLength
+                                Dim strcommand As String = "select Max(isnull(convert(int,Substring(Code,CHARINDEX('" & Cls_Companies.Separator & "',Code)+1,LEN(Code))),0)) + 1 from Hrs_Employees where Substring(Code,CHARINDEX('" & Cls_Companies.Separator & "',Code)+1,LEN(Code)) NOT LIKE '%[a-z]%' and CompanyID = " & Cls_Companies.MainCompanyID
+                                Dim strnextcode As String = ""
+                                Try
+                                    strnextcode = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(Cls_Companies.ConnectionString, Data.CommandType.Text, strcommand)
+                                Catch ex As Exception
+                                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Error Get Code /خطأ توليد الكود"))
+                                    Exit Sub
+                                End Try
+                                Retcode = strnextcode
+                                For I As Integer = 0 To IntSeqLength - strnextcode.Length - 1
+                                    Retcode = "0" + Retcode
+                                Next
+                                '' Prefix
+                                Dim prfx As String = ""
+                                If (Cls_Companies.Prefix = 0) Then
+                                    prfx = ""
+                                ElseIf (Cls_Companies.Prefix = 1) Then
+                                    Dim cls As New Clssys_Branches(Me)
+                                    If cls.Find("ID = " & ddlBranch.SelectedValue) Then
+                                        prfx = cls.Code
+                                    End If
+                                ElseIf (Cls_Companies.Prefix = 2) Then
+                                    Dim cls As New Clssys_Departments(Me)
+                                    If cls.Find("ID = " & TxtPositionID.Value) Then
+                                        prfx = cls.Code
+                                    End If
+                                ElseIf (Cls_Companies.Prefix = 3) Then
+                                    Dim cls As New Clshrs_Positions(Me)
+                                    If cls.Find("ID = " & TxtPositionID.Value) Then
+                                        prfx = cls.Code
+                                    End If
+                                ElseIf (Cls_Companies.Prefix = 4) Then
+                                    Dim cls As New Clshrs_ContractTypes(Me)
+                                    If cls.Find("ID = " & ddlContractType.SelectedValue) Then
+                                        prfx = cls.Code
+                                    End If
                                 End If
-                            ElseIf (Cls_Companies.Prefix = 2) Then
-                                Dim cls As New Clssys_Departments(Me)
-                                If cls.Find("ID = " & TxtPositionID.Value) Then
-                                    prfx = cls.Code
+
+                                txtCode.Text = prfx & IIf(prfx = "", "", Cls_Companies.Separator) & Retcode
+                                TextBox_MachineCode.Text = txtCode.Text
+                                ClsEmployees.Code = txtCode.Text
+                                ClsEmployees.MachineCode = TextBox_MachineCode.Text
+                                If txtCode.Text = "" Then
+                                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please Enter Code /برجاء إدخال الكود"))
+                                    Exit Sub
                                 End If
-                            ElseIf (Cls_Companies.Prefix = 3) Then
-                                Dim cls As New Clshrs_Positions(Me)
-                                If cls.Find("ID = " & TxtPositionID.Value) Then
-                                    prfx = cls.Code
-                                End If
-                            ElseIf (Cls_Companies.Prefix = 4) Then
-                                Dim cls As New Clshrs_ContractTypes(Me)
-                                If cls.Find("ID = " & ddlContractType.SelectedValue) Then
-                                    prfx = cls.Code
-                                End If
+                                ' End If
                             End If
+                        End If
+                        'End Get Code
 
-                            txtCode.Text = prfx & IIf(prfx = "", "", Cls_Companies.Separator) & Retcode
-                            TextBox_MachineCode.Text = txtCode.Text
-                            ClsEmployees.Code = txtCode.Text
-                            ClsEmployees.MachineCode = TextBox_MachineCode.Text
-                            If txtCode.Text = "" Then
-                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please Enter Code /برجاء إدخال الكود"))
-                                Exit Sub
+                        AssignValues_Employees()
+                        ClsEmployees.Save()
+                        ClsEmployees.Find("Code='" & txtCode.Text & "'")
+
+                        'New Vacation Balance
+                        Dim ClsEmployeeClasses As New Clshrs_EmployeeClasses(Me)
+                        ClsEmployeeClasses.Find("ID=" & ddlEmployeeClass.SelectedValue)
+                        If ClsEmployeeClasses.AdvanceBalance And ClsEmployeeClasses.AddBalanceInAddEmp Then
+                            Dim ds As DataSet = ClsEmployeeClasses.GetEmployeeClassAnnualVacations(ClsEmployeeClasses.ID)
+                            Dim allDays As Decimal = 1
+                            Dim allVacDays As Decimal = 0
+                            Dim moreOneYear As Boolean = False
+                            If ds.Tables(0).Rows.Count > 0 Then
+                                With ds.Tables(0).Rows(0)
+                                    allDays = .Item("RequiredWorkingMonths")
+                                    allVacDays = .Item("DurationDays")
+
+                                End With
                             End If
-                            ' End If
+                            moreOneYear = ClsEmployeeClasses.AccumulatedBalance
+
+                            Dim dayValue = allVacDays / allDays
+                            Dim currentYear As Integer = SetDate(txtStartDate.Text, txtStartDate.Text).Year
+                            Dim endOfYear As DateTime = New DateTime(currentYear, 12, 31)
+                            Dim myDays As Integer = DateDiff(DateInterval.Day, SetDate(txtStartDate.Text, txtStartDate.Text), endOfYear.Date)
+                            Dim myBalance = myDays * dayValue
+                            Dim expireDate As Date = endOfYear
+                            If moreOneYear Then
+                                myDays = DateDiff(DateInterval.Day, SetDate(txtStartDate.Text, txtStartDate.Text), SetDate(txtStartDate.Text, txtStartDate.Text).AddDays(allDays))
+                                myBalance = myDays * dayValue
+                                expireDate = SetDate(txtStartDate.Text, txtStartDate.Text).AddDays(allDays)
+                            End If
+                            Dim checkCnt = "INSERT INTO [dbo].[hrs_VacationsBalance] ([EmployeeID],[Year],[Balance],[Consumed],[Remaining],[BalanceTypeID],[ExpireDate],[Src],[Remarks],[Reguser],[RegDate],DueDate) VALUES (" & ClsEmployees.ID & "," & currentYear & "," & myBalance & ",0," & myBalance & ",1,'" & expireDate.ToString("yyyy-MM-dd") & "'," & "'frmEmployees'" & "," & "''" & ",'" & ClsEmployees.RegUserID & "',getdate(),'" & SetDate(txtStartDate.Text, txtStartDate.Text).ToString("yyyy-MM-dd") & "')"
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, CommandType.Text, checkCnt)
+
+                        End If
+
+
+                        txtEmpId.Value = ClsEmployees.ID
+                        lblEmpID.Text = ClsEmployees.ID
+                        Dim clsEmp As New Clshrs_Employees(Page)
+                        clsEmp.Find(" Code='" & txtManager.Text & "'")
+                        If clsEmp.ID > 0 Then
+                            Dim Mangcommand As String = "update hrs_employees set ManagerID = " & clsEmp.ID & " where ID = " & txtEmpId.Value
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, Mangcommand)
+                        Else
+                            Dim Mangcommand As String = "update hrs_employees set ManagerID = null where ID = " & txtEmpId.Value
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, Mangcommand)
                         End If
                     End If
-                    'End Get Code
 
-                    AssignValues_Employees()
-                    ClsEmployees.Save()
-                    ClsEmployees.Find("Code='" & txtCode.Text & "'")
-
-                    'New Vacation Balance
-                    Dim ClsEmployeeClasses As New Clshrs_EmployeeClasses(Me)
-                    ClsEmployeeClasses.Find("ID=" & ddlEmployeeClass.SelectedValue)
-                    If ClsEmployeeClasses.AdvanceBalance And ClsEmployeeClasses.AddBalanceInAddEmp Then
-                        Dim ds As DataSet = ClsEmployeeClasses.GetEmployeeClassAnnualVacations(ClsEmployeeClasses.ID)
-                        Dim allDays As Decimal = 1
-                        Dim allVacDays As Decimal = 0
-                        Dim moreOneYear As Boolean = False
-                        If ds.Tables(0).Rows.Count > 0 Then
-                            With ds.Tables(0).Rows(0)
-                                allDays = .Item("RequiredWorkingMonths")
-                                allVacDays = .Item("DurationDays")
-
-                            End With
-                        End If
-                        moreOneYear = ClsEmployeeClasses.AccumulatedBalance
-
-                        Dim dayValue = allVacDays / allDays
-                        Dim currentYear As Integer = SetDate(txtStartDate.Text, txtStartDate.Text).Year
-                        Dim endOfYear As DateTime = New DateTime(currentYear, 12, 31)
-                        Dim myDays As Integer = DateDiff(DateInterval.Day, SetDate(txtStartDate.Text, txtStartDate.Text), endOfYear.Date)
-                        Dim myBalance = myDays * dayValue
-                        Dim expireDate As Date = endOfYear
-                        If moreOneYear Then
-                            myDays = DateDiff(DateInterval.Day, SetDate(txtStartDate.Text, txtStartDate.Text), SetDate(txtStartDate.Text, txtStartDate.Text).AddDays(allDays))
-                            myBalance = myDays * dayValue
-                            expireDate = SetDate(txtStartDate.Text, txtStartDate.Text).AddDays(allDays)
-                        End If
-                        Dim checkCnt = "INSERT INTO [dbo].[hrs_VacationsBalance] ([EmployeeID],[Year],[Balance],[Consumed],[Remaining],[BalanceTypeID],[ExpireDate],[Src],[Remarks],[Reguser],[RegDate],DueDate) VALUES (" & ClsEmployees.ID & "," & currentYear & "," & myBalance & ",0," & myBalance & ",1,'" & expireDate.ToString("yyyy-MM-dd") & "'," & "'frmEmployees'" & "," & "''" & ",'" & ClsEmployees.RegUserID & "',getdate(),'" & SetDate(txtStartDate.Text, txtStartDate.Text).ToString("yyyy-MM-dd") & "')"
-                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, CommandType.Text, checkCnt)
-
-                    End If
-
-
-                    txtEmpId.Value = ClsEmployees.ID
-                    lblEmpID.Text = ClsEmployees.ID
-                    Dim clsEmp As New Clshrs_Employees(Page)
-                    clsEmp.Find(" Code='" & txtManager.Text & "'")
-                    If clsEmp.ID > 0 Then
-                        Dim Mangcommand As String = "update hrs_employees set ManagerID = " & clsEmp.ID & " where ID = " & txtEmpId.Value
-                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, Mangcommand)
-                    Else
-                        Dim Mangcommand As String = "update hrs_employees set ManagerID = null where ID = " & txtEmpId.Value
-                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, Mangcommand)
-                    End If
-                End If
-
-                If ddlLastEducations.SelectedIndex > 0 Then
+                    If ddlLastEducations.SelectedIndex > 0 Then
                     Dim clsEmpEducations As New Clshrs_EmployeesEducations(Me)
                     If clsEmpEducations.Find("EmployeeID=" & ClsEmployees.ID) Then
                         clsEmpEducations.EducationTypeID = ddlLastEducations.SelectedValue
@@ -710,7 +710,7 @@ Partial Class frmEmployees
                     LockJoinDate = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, LockJoinDateStr)
 
                     If LockJoinDate Then
-                        If JoinDate.Text <> TxtHDJoinDate.Value Or ddlEmployeeClass.SelectedValue <> TxtHDClassID.Value Then
+                        If CDate(JoinDate.Text) <> CDate(TxtHDJoinDate.Value) Or ddlEmployeeClass.SelectedValue <> TxtHDClassID.Value Then
                             ' نحفظ الزرار اللي عمل الحفظ
                             Dim pendingID As String = CType(sender, Control).UniqueID
                             hdnPendingSaveControlID.Value = pendingID
@@ -736,16 +736,20 @@ Partial Class frmEmployees
                         End If
                     End If
 
-                    ' =============================================
-                    ' التحقق من Session (تم تعيينه من الـ Popup)
-                    ' =============================================
-                    If Session("JoinDateChanged") Is Nothing OrElse Session("JoinDateChanged") = False Then
-                        Return
-                    Else
-                        ' إعادة تعيين Session بعد إكمال الحفظ
-                        Session("JoinDateChanged") = False
-                    End If
+                    If LockJoinDate Then
 
+                        If CDate(JoinDate.Text) <> CDate(TxtHDJoinDate.Value) Or ddlEmployeeClass.SelectedValue <> TxtHDClassID.Value Then
+                            ' =============================================
+                            ' التحقق من Session (تم تعيينه من الـ Popup)
+                            ' =============================================
+                            If Session("JoinDateChanged") Is Nothing OrElse Session("JoinDateChanged") = False Then
+                                Return
+                            Else
+                                ' إعادة تعيين Session بعد إكمال الحفظ
+                                Session("JoinDateChanged") = False
+                            End If
+                        End If
+                    End If
 
 
 
@@ -2178,15 +2182,8 @@ Partial Class frmEmployees
             If ClsEmployees.ID > 0 Then
                 Clear_Contracts()
                 Clear()
-                'TxtHDJoinDate.Value = ClsEmployees.JoinDate
-                'Dim LockJoinDate As Object = False
-                'Dim LockJoinDateStr As String = "SELECT isnull(LockJoinDate,0) FROM sys_SystemConfig"
-                'LockJoinDate = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, LockJoinDateStr)
-                'If LockJoinDate Then
-                '    JoinDate.Enabled = False
-                'Else
-                '    JoinDate.Enabled = True
-                'End If
+                TxtHDJoinDate.Value = ClsEmployees.JoinDate
+
 
                 GetValues_Employees(ClsEmployees)
                 GetContractsData(IntId)

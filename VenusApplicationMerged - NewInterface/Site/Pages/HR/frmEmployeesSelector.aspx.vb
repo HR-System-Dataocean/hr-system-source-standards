@@ -1627,11 +1627,11 @@ Partial Class frmEmployeesSelector
                             'Purpose: Get Vacation Days Per Year And Deduction Percentage
                             Dim VacationsTypes As New Clshrs_VacationsTypes(Page)
                             Dim VacationDays As Integer = 0
-
                             Dim IsSickVacationsType As DataSet = VacationsTypes.GetIsSickVacations()
 
                             For Each vacation As DataRow In IsSickVacationsType.Tables(0).Rows()
                                 VacationDays += CountVacationDaysPerYear(FromDate.Year, EmployeeID, vacation.Item("ID").ToString())
+
                             Next
 
                             'Dim DeductionPercentage As Integer = GetDeductionPercentage(VacationDays)
@@ -1687,19 +1687,22 @@ Partial Class frmEmployeesSelector
                             Else
                                 dat_FPE = dat_FPS.AddDays(29)
                             End If
-
+                            'Rabie 18-07-2026
+                            Dim UpcomingSickVacDays As Decimal = 0
+                            ''
                             Dim dec_SICK_DAYS As Decimal = 0
                             For Each vacation As DataRow In IsSickVacationsType.Tables(0).Rows()
                                 If ds_PERIOD_VACATIONS.Tables(0).Select("VTID = " & vacation.Item("ID")).ToList().Count > 0 Then
+                                    Dim VacationTypeId As Integer = vacation.Item("ID")
                                     For Each row As DataRow In ds_PERIOD_VACATIONS.Tables(0).Select("VTID = " & vacation.Item("ID")).ToList()
                                         Dim vsd As Date = CDate(row.Item("VS").ToString())
                                         Dim ved As Date = row.Item("VE").ToString()
                                         'Rabie 14-07-2026
-
+                                        Dim FED As Date = row.Item("FED").ToString()
 
                                         If vsd.Month = ved.Month Then
                                             For i As Integer = 1 To 31
-                                                If vsd >= dat_FPS And vsd <= dat_FPE And vsd <= ved.AddDays(-1) Then
+                                                If vsd >= dat_FPS And vsd <= dat_FPE And vsd <= ved.AddDays(-1) And ved.Month = FED.Month Then
                                                     dec_SICK_DAYS = dec_SICK_DAYS + 1
                                                     vsd = vsd.AddDays(1)
                                                 Else
@@ -1707,12 +1710,23 @@ Partial Class frmEmployeesSelector
                                                     Continue For
                                                 End If
                                             Next
+                                            Dim EmployeeVacation As New Clshrs_EmployeesVacations(Page)
+
+                                            Dim VacationDaysUpToCurrentMonth As Integer = EmployeeVacation.GetEmployeeVacationUptoCurrentMonth(ved.Year, EmployeeID, VacationTypeId, ved.Month)
+                                            UpcomingSickVacDays = VacationDays - VacationDaysUpToCurrentMonth
+
                                         Else
                                             For i As Integer = 1 To row.Item("VD")
+
                                                 If vsd >= dat_FPS And vsd <= dat_FPE And vsd <= ved.AddDays(-1) Then
                                                     dec_SICK_DAYS = dec_SICK_DAYS + 1
                                                     vsd = vsd.AddDays(1)
                                                 Else
+
+
+                                                    If vsd >= dat_FPS Then
+                                                        UpcomingSickVacDays = UpcomingSickVacDays + 1
+                                                    End If
                                                     vsd = vsd.AddDays(1)
                                                     Continue For
                                                 End If
@@ -1758,7 +1772,7 @@ Partial Class frmEmployeesSelector
                                         If cls_ContractTransaction.Find("ContractID=" & dec_Contract & " And TransactionTypeID=" & decTransTypeID) Then
                                             If dec_SICK_DAYS > 0 Then
                                                 Dim dec_BENIFET_PER_DAY = dec_BENIFT_AMOUNT / 30
-                                                Dim dec_SICK_DEDUCTION = CALCULATE_SICK_DEDUCTIONS(dec_BENIFET_PER_DAY, dec_SICK_DAYS, VacationDays)
+                                                Dim dec_SICK_DEDUCTION = CALCULATE_SICK_DEDUCTIONS(dec_BENIFET_PER_DAY, dec_SICK_DAYS, VacationDays, UpcomingSickVacDays)
                                                 dec_BENIFT_AMOUNT = dec_BENIFT_AMOUNT - dec_SICK_DEDUCTION
                                                 totalBenefitssum = totalBenefitssum + dec_BENIFT_AMOUNT
                                             Else
@@ -1874,7 +1888,7 @@ Partial Class frmEmployeesSelector
                                         If cls_ContractTransaction.Find("ContractID=" & dec_Contract & " And TransactionTypeID=" & decTransTypeID) Then
                                             If dec_SICK_DAYS > 0 Then
                                                 Dim dec_BENIFET_PER_DAY = dec_BENIFT_AMOUNT / 30
-                                                Dim dec_SICK_DEDUCTION = CALCULATE_SICK_DEDUCTIONS(dec_BENIFET_PER_DAY, dec_SICK_DAYS, VacationDays)
+                                                Dim dec_SICK_DEDUCTION = CALCULATE_SICK_DEDUCTIONS(dec_BENIFET_PER_DAY, dec_SICK_DAYS, VacationDays, UpcomingSickVacDays)
                                                 dec_BENIFT_AMOUNT = dec_BENIFT_AMOUNT - dec_SICK_DEDUCTION
                                                 totalBenefitssum = totalBenefitssum + dec_BENIFT_AMOUNT
                                             Else
@@ -2011,7 +2025,7 @@ Partial Class frmEmployeesSelector
                                                 End If
                                                 Dim dec_BENIFET_PER_DAY = dec_BENIFT_AMOUNT / 30
 
-                                                Dim dec_SICK_DEDUCTION = CALCULATE_SICK_DEDUCTIONS(dec_BENIFET_PER_DAY, dec_SICK_DAYS, VacationDays)
+                                                Dim dec_SICK_DEDUCTION = CALCULATE_SICK_DEDUCTIONS(dec_BENIFET_PER_DAY, dec_SICK_DAYS, VacationDays, UpcomingSickVacDays)
                                                 'Rabie 7-1-2024
                                                 dec_BENIFT_AMOUNT = dec_BENIFT_AMOUNT - dec_SICK_DEDUCTION - (dec_BENIFT_AMOUNT - CDec(BenfitRow("Amount")))
                                                 'dec_BENIFT_AMOUNT = dec_BENIFT_AMOUNT - dec_SICK_DEDUCTION 
@@ -2383,13 +2397,14 @@ Partial Class frmEmployeesSelector
             Return False
         End Try
     End Function
-    Private Function CALCULATE_SICK_DEDUCTIONS(ByVal P_DAY_SALARY As Decimal, ByVal P_SICK_DAYS As Decimal, ByVal P_ALL_SICK_DAYS As Decimal) As Decimal
+    Private Function CALCULATE_SICK_DEDUCTIONS(ByVal P_DAY_SALARY As Decimal, ByVal P_SICK_DAYS As Decimal, ByVal P_ALL_SICK_DAYS As Decimal, ByVal UpComingDays As Decimal) As Decimal
         Dim dec_SICK_DAYS As Decimal = P_SICK_DAYS
         Dim dec_ALL_SICK_DAYS As Decimal = P_ALL_SICK_DAYS
         Dim VacationsTypes As New Clshrs_VacationsTypes(Page)
         Dim IsSickVacationsType As DataSet = VacationsTypes.GetIsSickVacations()
         Dim dec_DEDUCTION_TOTAL As Decimal = 0
-        Dim dec_PRE_SICK_LEAVE As Decimal = dec_ALL_SICK_DAYS - dec_SICK_DAYS
+        'Dim dec_PRE_SICK_LEAVE As Decimal = dec_ALL_SICK_DAYS - dec_SICK_DAYS
+        Dim dec_PRE_SICK_LEAVE As Decimal = dec_ALL_SICK_DAYS - UpComingDays - dec_SICK_DAYS
         If dec_PRE_SICK_LEAVE > 90 Then
             dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * P_SICK_DAYS) - ((P_DAY_SALARY * P_SICK_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage3PCT")) / 100))
         ElseIf dec_PRE_SICK_LEAVE > 30 And dec_PRE_SICK_LEAVE <= 90 Then
@@ -2402,14 +2417,17 @@ Partial Class frmEmployeesSelector
                 dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_TT_DAYS) - ((P_DAY_SALARY * dec_TT_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage3PCT")) / 100))
             End If
         Else
-            If dec_PRE_SICK_LEAVE + P_SICK_DAYS <= 30 Then
+            If dec_ALL_SICK_DAYS - UpComingDays <= 30 Then
+                'If dec_PRE_SICK_LEAVE <= 30 Then
                 dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * P_SICK_DAYS) - ((P_DAY_SALARY * P_SICK_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage1PCT")) / 100))
-            Else
-                Dim dec_ST_DAYS As Decimal = dec_PRE_SICK_LEAVE + P_SICK_DAYS - 30
-                Dim dec_FT_DAYS As Decimal = P_SICK_DAYS - dec_ST_DAYS
-                dec_DEDUCTION_TOTAL = (P_DAY_SALARY * dec_ST_DAYS) - ((P_DAY_SALARY * dec_ST_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage2PCT")) / 100))
-                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + ((P_DAY_SALARY * dec_FT_DAYS) - ((P_DAY_SALARY * dec_FT_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage1PCT")) / 100)))
+                Else
+                    Dim dec_ST_DAYS As Decimal = dec_PRE_SICK_LEAVE + P_SICK_DAYS - UpComingDays - 30
+                    Dim dec_FT_DAYS As Decimal = P_SICK_DAYS - dec_ST_DAYS
+                    dec_DEDUCTION_TOTAL = (P_DAY_SALARY * dec_ST_DAYS) - ((P_DAY_SALARY * dec_ST_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage2PCT")) / 100))
+                    dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + ((P_DAY_SALARY * dec_FT_DAYS) - ((P_DAY_SALARY * dec_FT_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage1PCT")) / 100)))
+                'End If
             End If
+
         End If
         Return dec_DEDUCTION_TOTAL
     End Function
@@ -2502,6 +2520,7 @@ Partial Class frmEmployeesSelector
         Dim EmployeeVacation As New Clshrs_EmployeesVacations(Page)
         Dim clsCompanies As New Clssys_Companies(Page)
         Dim VacationPerYear As DataSet = EmployeeVacation.GetEmployeeVacationPerYear(PeriodYear, EmployeeId, VacationTypeId)
+
         Dim VacationDays As Integer = 0
 
         For Each vacation As DataRow In VacationPerYear.Tables(0).Rows()
