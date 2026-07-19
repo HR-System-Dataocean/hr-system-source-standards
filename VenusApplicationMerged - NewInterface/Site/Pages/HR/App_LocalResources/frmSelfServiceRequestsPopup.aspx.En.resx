@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <data name="PageResource1.Title" xml:space="preserve"><value>Acting Assignment &amp; Approval Handover</value></data>
+  <data name="lblPageTitleResource1.Text" xml:space="preserve"><value>Acting Assignment &amp; Approval Handover</value></data>
+  <data name="lblEmployeeHeaderResource1.Text" xml:space="preserve"><value>Employee Under Clearance</value></data>
+  <data name="lblEmployeeCodeCaptionResource1.Text" xml:space="preserve"><value>Employee code:</value></data>
+  <data name="lblEmployeeNameCaptionResource1.Text" xml:space="preserve"><value>Employee name:</value></data>
+  <data name="lblTransferTitleResource1.Text" xml:space="preserve"><value>Acting and Approval Handover Details</value></data>
+  <data name="chkSameEmployeeResource1.Text" xml:space="preserve"><value>Use the same employee for both tasks</value></data>
+  <data name="lblReplacementEmployeeResource1.Text" xml:space="preserve"><value>Replacement Approver:</value></data>
+  <data name="lblDelegateEmployeeResource1.Text" xml:space="preserve"><value>Delegate for Pending Requests:</value></data>
+  <data name="btnSearchReplacementEmpResource1.ToolTip" xml:space="preserve"><value>Search for employee</value></data>
+  <data name="btnSearchDelegateEmpResource1.ToolTip" xml:space="preserve"><value>Search for employee</value></data>
+  <data name="btnTransferApprovalsResource1.Text" xml:space="preserve"><value>Complete Handover</value></data>
+  <data name="lblActionNeededTitleResource1.Text" xml:space="preserve"><value>Pending Requests Requiring Employee Action</value></data>
+  <data name="lblSubmittedOpenTitleResource1.Text" xml:space="preserve"><value>Open Requests Submitted by Employee</value></data>
+  <data name="lblConfigurationTitleResource1.Text" xml:space="preserve"><value>Approval Rules Linked to Employee or Position</value></data>
+  <data name="grdActionNeededResource1.EmptyDataText" xml:space="preserve"><value>No pending requests requiring action</value></data>
+  <data name="grdSubmittedOpenResource1.EmptyDataText" xml:space="preserve"><value>No open requests</value></data>
+  <data name="grdConfigurationResource1.EmptyDataText" xml:space="preserve"><value>No approval rules linked to employee or position</value></data>
+  <data name="colRequestSerialResource1.HeaderText" xml:space="preserve"><value>Request number</value></data>
+  <data name="colRequestNameResource1.HeaderText" xml:space="preserve"><value>Request type</value></data>
+  <data name="colFormCodeResource1.HeaderText" xml:space="preserve"><value>Form code</value></data>
+  <data name="colRankResource1.HeaderText" xml:space="preserve"><value>Approval Level</value></data>
+  <data name="colMatchTypeResource1.HeaderText" xml:space="preserve"><value>Approval Role</value></data>
+  <data name="btnCloseResource1.Text" xml:space="preserve"><value>Close</value></data>
+  <data name="btnRefreshResource1.Text" xml:space="preserve"><value>Refresh</value></data>
+
+  <data name="MsgConfirmHandover" xml:space="preserve"><value>Do you want to complete the approval handover to the selected employees?</value></data>
+  <data name="MsgErrorPrefix" xml:space="preserve"><value>An error occurred: </value></data>
+  <data name="MsgSameEmployee" xml:space="preserve"><value>The end-of-service employee cannot be selected.</value></data>
+  <data name="MsgInvalidEmployee" xml:space="preserve"><value>The employee code is invalid or the employee is inactive.</value></data>
+  <data name="MsgSourceNotSpecified" xml:space="preserve"><value>The end-of-service employee is not specified.</value></data>
+  <data name="MsgEnterEmployee" xml:space="preserve"><value>Enter the replacement or delegated employee code.</value></data>
+  <data name="MsgCannotTransferSame" xml:space="preserve"><value>Approvals cannot be transferred to the same employee.</value></data>
+  <data name="MsgTransferSuccess" xml:space="preserve"><value>Transfer completed successfully. Requests: {0} - Configurations: {1}</value></data>
+  <data name="MsgTransferFailed" xml:space="preserve"><value>Transfer failed: </value></data>
+  <data name="MatchTypeEmployee" xml:space="preserve"><value>Employee</value></data>
+  <data name="MatchTypeDirectManager" xml:space="preserve"><value>Direct Manager</value></data>
+  <data name="MatchTypePosition" xml:space="preserve"><value>Position</value></data>
+</root>

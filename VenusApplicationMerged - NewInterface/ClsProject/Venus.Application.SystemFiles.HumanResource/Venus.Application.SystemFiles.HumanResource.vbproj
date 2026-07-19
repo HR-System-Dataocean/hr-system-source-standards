@@ -152,6 +152,8 @@
     <Compile Include="Clshrs_EmployeesClassCalander.vb" />
     <Compile Include="Clshrs_EmployeesClassesCalenderSet.vb" />
     <Compile Include="Clshrs_EmployeesDecisions.vb" />
+    <Compile Include="Clshrs_ActingPositionAssignments.vb" />
+    <Compile Include="Clshrs_ActingEmployeeAssignments.vb" />
     <Compile Include="Clshrs_EmployeesDepartments.vb" />
     <Compile Include="Clshrs_EmployeesDependants.vb" />
     <Compile Include="Clshrs_EmployeesEducations.vb" />

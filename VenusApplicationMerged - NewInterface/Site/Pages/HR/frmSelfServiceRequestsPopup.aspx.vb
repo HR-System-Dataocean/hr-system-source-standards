@@ -1,15 +1,21 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
+Imports Venus.Application.SystemFiles.System
 Imports Venus.Application.SystemFiles.HumanResource
 
 Partial Class frmSelfServiceRequestsPopup
-    Inherits System.Web.UI.Page
+    Inherits MainPage
 
     Private ClsEmployees As Clshrs_Employees
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             ClsEmployees = New Clshrs_Employees(Page)
+
+            ApplyLayoutDirection()
+            SetupConfirmScript()
+            SetupEmployeeSearchButton()
+            ApplySameEmployeeState()
 
             If Not IsPostBack Then
                 Dim EmployeeID As Integer = 0
@@ -18,58 +24,143 @@ Partial Class frmSelfServiceRequestsPopup
                 End If
 
                 If EmployeeID > 0 Then
-                    ' عرض بيانات الموظف
+                    hdnSourceEmployeeID.Value = EmployeeID.ToString()
+
                     If ClsEmployees.Find("ID=" & EmployeeID) Then
                         lblEmpCode.Text = ClsEmployees.Code
                         lblEmpName.Text = ClsEmployees.FullName
                     End If
 
-                    ' تحميل البيانات
                     LoadData(EmployeeID)
                 Else
-                    ' لو مفيش EmployeeID، نغلق الـ Popup
                     ClientScript.RegisterStartupScript(Me.GetType(), "ClosePopup",
                         "<script language='javascript'>window.close();</script>", False)
                 End If
             End If
 
         Catch ex As Exception
-            Response.Write("<div style='color:red;padding:20px;'>حدث خطأ: " & ex.Message & "</div>")
+            Response.Write("<div style='color:red;padding:20px;'>" & GetRes("MsgErrorPrefix") & ex.Message & "</div>")
+        End Try
+    End Sub
+
+    Private Function GetRes(ByVal key As String) As String
+        Dim value As Object = GetLocalResourceObject(key)
+        If value Is Nothing Then Return key
+        Return value.ToString()
+    End Function
+
+    Private Sub ApplyLayoutDirection()
+        Dim isArabic As Boolean = IsArabicLanguage()
+        Dim direction As String = If(isArabic, "rtl", "ltr")
+        Dim alignment As String = If(isArabic, "right", "left")
+        Dim buttonFloat As String = If(isArabic, "left", "right")
+
+        pageBody.Attributes("dir") = direction
+        pageBody.Style("text-align") = alignment
+        btnClose.Style("float") = buttonFloat
+        btnRefresh.Style("float") = buttonFloat
+    End Sub
+
+    Private Sub SetupConfirmScript()
+        Dim confirmText As String = GetRes("MsgConfirmHandover").Replace("'", "\'")
+        btnTransferApprovals.OnClientClick = "return confirm('" & confirmText & "');"
+    End Sub
+
+    Private Function IsArabicLanguage() As Boolean
+        Return String.Equals(ProfileCls.CurrentLanguage, "Ar", StringComparison.OrdinalIgnoreCase)
+    End Function
+
+    Private Function GetRequestNameSql(ByVal tableAlias As String) As String
+        If IsArabicLanguage() Then
+            Return "ISNULL(" & tableAlias & ".RequestArbName, " & tableAlias & ".RequestEngName) AS RequestName"
+        End If
+        Return "ISNULL(" & tableAlias & ".RequestEngName, " & tableAlias & ".RequestArbName) AS RequestName"
+    End Function
+
+    Private Function GetConfigurationRequestNameSql() As String
+        If IsArabicLanguage() Then
+            Return "ISNULL(SS_RequestTypes.RequestArbName, ISNULL(SS_RequestTypes.RequestEngName, SS_Configuration.FormCode)) AS RequestName"
+        End If
+        Return "ISNULL(SS_RequestTypes.RequestEngName, ISNULL(SS_RequestTypes.RequestArbName, SS_Configuration.FormCode)) AS RequestName"
+    End Function
+
+    Private Sub SetupEmployeeSearchButton()
+        Try
+            Dim ClsObjects As New Clssys_Objects(Page)
+            Dim ClsSearchs As New Clssys_Searchs(Page)
+            ClsObjects.Find(" Code='" & ClsEmployees.Table.Trim() & "'")
+            ClsSearchs.Find(" ObjectID=" & ClsObjects.ID)
+            Dim csSearchID As Integer = ClsSearchs.ID
+
+            Page.Session("ConnectionString") = ClsEmployees.ConnectionString
+
+            Dim UrlString As String = "'frmModalSearchScreen.aspx?TargetControl=" & txtReplacementEmpCode.ID &
+                "&SearchID=" & csSearchID & "&',510,720,false,'" & txtReplacementEmpCode.ClientID & "'"
+            btnSearchReplacementEmp.OnClientClick = "OpenModal1(" & UrlString & "); return false;"
+
+            Dim UrlStringDelegate As String = "'frmModalSearchScreen.aspx?TargetControl=" & txtDelegateEmpCode.ID &
+                "&SearchID=" & csSearchID & "&',510,720,false,'" & txtDelegateEmpCode.ClientID & "'"
+            btnSearchDelegateEmp.OnClientClick = "OpenModal1(" & UrlStringDelegate & "); return false;"
+        Catch ex As Exception
+            btnSearchReplacementEmp.Visible = False
+            btnSearchDelegateEmp.Visible = False
         End Try
     End Sub
 
     Private Sub LoadData(ByVal EmployeeID As Integer)
         Try
             Dim connStr As String = ClsEmployees.ConnectionString
+            Dim requestNameSql As String = GetRequestNameSql("SS_RequestTypes")
 
-            ' استعلام 1: الطلبات المحتاجة أكشن من الموظف
             Dim sqlActionNeeded As String = "SELECT " &
-                "ROW_NUMBER() OVER (ORDER BY SS_RequestActions.ID) AS RowNumber, " &
+                "ROW_NUMBER() OVER (ORDER BY SS_RequestActions.ActionSerial) AS RowNumber, " &
                 "SS_RequestActions.RequestSerial, " &
-                "SS_RequestTypes.RequestArbName, " &
-                "SS_RequestTypes.RequestEngName " &
+                requestNameSql & " " &
                 "FROM SS_RequestActions " &
                 "JOIN SS_RequestTypes ON SS_RequestActions.FormCode = SS_RequestTypes.RequestCode " &
                 "WHERE ActionID IS NULL " &
                 "AND SS_EmployeeID = @EmployeeID " &
                 "AND IsHidden IS NULL"
 
-            ' استعلام 2: الطلبات المقدمة من الموظف واللسه مفتوحة
             Dim sqlSubmittedOpen As String = "SELECT " &
-                "ROW_NUMBER() OVER (ORDER BY SS_RequestActions.ID) AS RowNumber, " &
+                "ROW_NUMBER() OVER (ORDER BY SS_RequestActions.ActionSerial) AS RowNumber, " &
                 "SS_RequestActions.RequestSerial, " &
-                "SS_RequestTypes.RequestArbName, " &
-                "SS_RequestTypes.RequestEngName " &
+                requestNameSql & " " &
                 "FROM SS_RequestActions " &
                 "JOIN SS_RequestTypes ON SS_RequestActions.FormCode = SS_RequestTypes.RequestCode " &
                 "WHERE ActionID IS NULL " &
                 "AND EmployeeID = @EmployeeID " &
                 "AND IsHidden IS NULL"
 
+            Dim sqlConfiguration As String = "SELECT " &
+                "ROW_NUMBER() OVER (ORDER BY SS_Configuration.ID) AS RowNumber, " &
+                "SS_Configuration.FormCode, " &
+                GetConfigurationRequestNameSql() & ", " &
+                "SS_Configuration.Rank, " &
+                "CASE " &
+                "  WHEN ISNULL(SS_Configuration.EmployeeID, 0) = @EmployeeID THEN N'Employee' " &
+                "  WHEN SS_Configuration.UserTypeID = 1 THEN N'DirectManager' " &
+                "  ELSE N'Position' " &
+                "END AS MatchType " &
+                "FROM SS_Configuration " &
+                "LEFT JOIN SS_RequestTypes ON SS_Configuration.FormCode = SS_RequestTypes.RequestCode " &
+                "WHERE SS_Configuration.EmployeeID = @EmployeeID " &
+                "   OR (ISNULL(SS_Configuration.PositionID, 0) > 0 AND SS_Configuration.PositionID IN (" &
+                "       SELECT PositionID FROM hrs_Contracts " &
+                "       WHERE EmployeeID = @EmployeeID " &
+                "       AND CancelDate IS NULL " &
+                "       AND (EndDate IS NULL OR EndDate >= GETDATE())" &
+                "   ))" &
+                "   OR (SS_Configuration.UserTypeID = 1 AND EXISTS (" &
+                "       SELECT 1 FROM hrs_Employees " &
+                "       WHERE ManagerID = @EmployeeID " &
+                "       AND CancelDate IS NULL " &
+                "       AND ExcludeDate IS NULL" &
+                "   ))"
+
             Using conn As New SqlConnection(connStr)
                 conn.Open()
 
-                ' تحميل Grid 1
                 Using cmd As New SqlCommand(sqlActionNeeded, conn)
                     cmd.Parameters.AddWithValue("@EmployeeID", EmployeeID)
                     Using da As New SqlDataAdapter(cmd)
@@ -81,7 +172,6 @@ Partial Class frmSelfServiceRequestsPopup
                     End Using
                 End Using
 
-                ' تحميل Grid 2
                 Using cmd As New SqlCommand(sqlSubmittedOpen, conn)
                     cmd.Parameters.AddWithValue("@EmployeeID", EmployeeID)
                     Using da As New SqlDataAdapter(cmd)
@@ -92,25 +182,266 @@ Partial Class frmSelfServiceRequestsPopup
                         lblSubmittedOpenCount.Text = dt.Rows.Count.ToString()
                     End Using
                 End Using
+
+                Using cmd As New SqlCommand(sqlConfiguration, conn)
+                    cmd.Parameters.AddWithValue("@EmployeeID", EmployeeID)
+                    Using da As New SqlDataAdapter(cmd)
+                        Dim dt As New DataTable()
+                        da.Fill(dt)
+                        For Each row As DataRow In dt.Rows
+                            Select Case row("MatchType").ToString()
+                                Case "Employee"
+                                    row("MatchType") = GetRes("MatchTypeEmployee")
+                                Case "DirectManager"
+                                    row("MatchType") = GetRes("MatchTypeDirectManager")
+                                Case "Position"
+                                    row("MatchType") = GetRes("MatchTypePosition")
+                            End Select
+                        Next
+                        grdConfiguration.DataSource = dt
+                        grdConfiguration.DataBind()
+                        lblConfigurationCount.Text = dt.Rows.Count.ToString()
+                    End Using
+                End Using
             End Using
 
         Catch ex As Exception
-            Response.Write("<div style='color:red;padding:20px;'>حدث خطأ: " & ex.Message & "</div>")
+            Response.Write("<div style='color:red;padding:20px;'>" & GetRes("MsgErrorPrefix") & ex.Message & "</div>")
         End Try
     End Sub
 
-    Protected Sub btnRefresh_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+    Protected Sub txtReplacementEmpCode_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        ResolveEmployeeCode(txtReplacementEmpCode, lblReplacementEmpName, hdnReplacementEmployeeID)
+        If chkSameEmployee.Checked Then CopyReplacementToDelegate()
+    End Sub
+
+    Protected Sub txtDelegateEmpCode_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        ResolveEmployeeCode(txtDelegateEmpCode, lblDelegateEmpName, hdnDelegateEmployeeID)
+    End Sub
+
+    Protected Sub chkSameEmployee_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        ClearMessage()
+        ApplySameEmployeeState()
+    End Sub
+
+    ' إظهار/إخفاء حقل المفوض ونسخ بيانات المعتمد البديل إليه عند تفعيل الخيار
+    Private Sub ApplySameEmployeeState()
+        rowDelegate.Visible = Not chkSameEmployee.Checked
+        If chkSameEmployee.Checked Then CopyReplacementToDelegate()
+    End Sub
+
+    ' النسخ التلقائي من المعتمد البديل إلى المفوض للطلبات المعلقة
+    Private Sub CopyReplacementToDelegate()
+        txtDelegateEmpCode.Text = txtReplacementEmpCode.Text
+        lblDelegateEmpName.Text = lblReplacementEmpName.Text
+        hdnDelegateEmployeeID.Value = hdnReplacementEmployeeID.Value
+    End Sub
+
+    Private Sub ResolveEmployeeCode(ByVal txtCode As TextBox, ByVal lblName As Label, ByVal hdnID As HiddenField)
         Try
-            Dim EmployeeID As Integer = 0
-            If Request.QueryString("EmployeeID") IsNot Nothing Then
-                Integer.TryParse(Request.QueryString("EmployeeID"), EmployeeID)
+            ClearMessage()
+            lblName.Text = ""
+            hdnID.Value = "0"
+
+            Dim code As String = txtCode.Text.Trim()
+            If code = "" Then Return
+
+            Dim sourceEmployeeID As Integer = GetSourceEmployeeID()
+            If ClsEmployees.Find("Code='" & code.Replace("'", "''") & "' AND CancelDate IS NULL AND ExcludeDate IS NULL") Then
+                If ClsEmployees.ID = sourceEmployeeID Then
+                    ShowMessage(GetRes("MsgSameEmployee"), False)
+                    Return
+                End If
+
+                txtCode.Text = ClsEmployees.Code
+                lblName.Text = ClsEmployees.FullName
+                hdnID.Value = ClsEmployees.ID.ToString()
+            Else
+                ShowMessage(GetRes("MsgInvalidEmployee"), False)
+            End If
+        Catch ex As Exception
+            ShowMessage(ex.Message, False)
+        End Try
+    End Sub
+
+    Protected Sub btnTransferApprovals_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Try
+            ClearMessage()
+
+            Dim sourceEmployeeID As Integer = GetSourceEmployeeID()
+            Dim replacementEmployeeID As Integer = 0
+            Dim delegateEmployeeID As Integer = 0
+            Integer.TryParse(hdnReplacementEmployeeID.Value, replacementEmployeeID)
+            Integer.TryParse(hdnDelegateEmployeeID.Value, delegateEmployeeID)
+
+            If delegateEmployeeID <= 0 Then delegateEmployeeID = replacementEmployeeID
+
+            If sourceEmployeeID <= 0 Then
+                ShowMessage(GetRes("MsgSourceNotSpecified"), False)
+                Return
             End If
 
+            If replacementEmployeeID <= 0 AndAlso delegateEmployeeID <= 0 Then
+                ShowMessage(GetRes("MsgEnterEmployee"), False)
+                Return
+            End If
+
+            If replacementEmployeeID = sourceEmployeeID OrElse delegateEmployeeID = sourceEmployeeID Then
+                ShowMessage(GetRes("MsgCannotTransferSame"), False)
+                Return
+            End If
+
+            Dim updatedActions As Integer = 0
+            Dim updatedConfig As Integer = 0
+
+            Using conn As New SqlConnection(ClsEmployees.ConnectionString)
+                conn.Open()
+                Using tran As SqlTransaction = conn.BeginTransaction()
+                    Try
+                        If delegateEmployeeID > 0 Then
+                            ' إدراج صفوف جديدة للمفوَّض بنفس بيانات الطلبات المعلقة (للاحتفاظ بالتاريخ)
+                            Using cmd As New SqlCommand(
+                                "INSERT INTO SS_RequestActions (RequestSerial, SS_EmployeeID, FormCode, EmployeeID, Seen, ConfigID) " &
+                                "SELECT RequestSerial, @TargetEmployeeID, FormCode, EmployeeID, 0, ConfigID " &
+                                "FROM SS_RequestActions " &
+                                "WHERE ActionID IS NULL AND IsHidden IS NULL AND SS_EmployeeID = @SourceEmployeeID", conn, tran)
+                                cmd.Parameters.AddWithValue("@TargetEmployeeID", delegateEmployeeID)
+                                cmd.Parameters.AddWithValue("@SourceEmployeeID", sourceEmployeeID)
+                                cmd.ExecuteNonQuery()
+                            End Using
+
+                            ' إقفال صفوف الموظف الحالي بإجراء التفويض (ActionID=3)
+                            Using cmd As New SqlCommand(
+                                "UPDATE SS_RequestActions " &
+                                "SET Seen = 1, ActionID = 3, ActionDate = GETDATE(), ActionRemarks = N'End of Service' " &
+                                "WHERE ActionID IS NULL AND IsHidden IS NULL AND SS_EmployeeID = @SourceEmployeeID", conn, tran)
+                                cmd.Parameters.AddWithValue("@SourceEmployeeID", sourceEmployeeID)
+                                updatedActions = cmd.ExecuteNonQuery()
+                            End Using
+                        End If
+
+                        If replacementEmployeeID > 0 Then
+                            Using cmd As New SqlCommand(
+                                "UPDATE SS_Configuration " &
+                                "SET EmployeeID = @TargetEmployeeID " &
+                                "WHERE EmployeeID = @SourceEmployeeID", conn, tran)
+                                cmd.Parameters.AddWithValue("@TargetEmployeeID", replacementEmployeeID)
+                                cmd.Parameters.AddWithValue("@SourceEmployeeID", sourceEmployeeID)
+                                updatedConfig = cmd.ExecuteNonQuery()
+                            End Using
+                        End If
+
+                        tran.Commit()
+                    Catch
+                        tran.Rollback()
+                        Throw
+                    End Try
+                End Using
+            End Using
+
+            If replacementEmployeeID > 0 Then
+                CreateActingAssignments(sourceEmployeeID, replacementEmployeeID)
+            End If
+
+            LoadData(sourceEmployeeID)
+            ShowMessage(String.Format(GetRes("MsgTransferSuccess"), updatedActions, updatedConfig), True)
+
+        Catch ex As Exception
+            ShowMessage(GetRes("MsgTransferFailed") & ex.Message, False)
+        End Try
+    End Sub
+
+    ' تسجيل حركات الإنابة (عن موظف/على وظيفة) للمعتمد البديل بسبب نهاية الخدمة
+    Private Sub CreateActingAssignments(ByVal sourceEmployeeID As Integer, ByVal actingEmployeeID As Integer)
+        Const ACTING_REASON As String = "End of Service"
+        Dim effectiveFrom As Date = Date.Today
+        Dim effectiveTo As Date = New Date(2079, 6, 6)
+
+        Dim employeeActing As New Clshrs_ActingEmployeeAssignments(Page)
+        If Not employeeActing.Find("CancelDate IS NULL AND OriginalEmployeeID=" & sourceEmployeeID &
+                                   " AND ActingEmployeeID=" & actingEmployeeID) Then
+            employeeActing.Clear()
+            employeeActing.Code = NextAssignmentCode("hrs_ActingEmployeeAssignments", "EA")
+            employeeActing.OriginalEmployeeID = sourceEmployeeID
+            employeeActing.ActingEmployeeID = actingEmployeeID
+            employeeActing.EffectiveFrom = effectiveFrom
+            employeeActing.EffectiveTo = effectiveTo
+            employeeActing.Reason = ACTING_REASON
+            employeeActing.Remarks = ""
+            employeeActing.Save()
+        End If
+
+        Dim positionID As Integer = GetActivePositionID(sourceEmployeeID)
+        If positionID > 0 Then
+            Dim positionActing As New Clshrs_ActingPositionAssignments(Page)
+            If Not positionActing.Find("CancelDate IS NULL AND OriginalPositionID=" & positionID &
+                                       " AND ActingEmployeeID=" & actingEmployeeID) Then
+                positionActing.Clear()
+                positionActing.Code = NextAssignmentCode("hrs_ActingPositionAssignments", "PA")
+                positionActing.OriginalPositionID = positionID
+                positionActing.ActingEmployeeID = actingEmployeeID
+                positionActing.EffectiveFrom = effectiveFrom
+                positionActing.EffectiveTo = effectiveTo
+                positionActing.Reason = ACTING_REASON
+                positionActing.Remarks = ""
+                positionActing.Save()
+            End If
+        End If
+    End Sub
+
+    Private Function NextAssignmentCode(ByVal tableName As String, ByVal prefix As String) As String
+        Dim sql As String = "SELECT ISNULL(MAX(CASE" &
+            " WHEN ISNUMERIC(RIGHT(Code, LEN(Code) - CHARINDEX('-', Code)))=1" &
+            " THEN CAST(RIGHT(Code, LEN(Code) - CHARINDEX('-', Code)) AS int)" &
+            " ELSE 0 END),0)+1 FROM " & tableName & " WHERE CHARINDEX('-', Code) > 0"
+        Dim number As Integer = Convert.ToInt32(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(
+            ClsEmployees.ConnectionString, CommandType.Text, sql))
+        Return prefix & "-" & number.ToString("000000")
+    End Function
+
+    Private Function GetActivePositionID(ByVal employeeID As Integer) As Integer
+        Dim sql As String = "SELECT TOP 1 PositionID FROM hrs_Contracts" &
+            " WHERE EmployeeID=@EmployeeID AND PositionID IS NOT NULL AND CancelDate IS NULL" &
+            " AND (EndDate IS NULL OR EndDate >= GETDATE()) ORDER BY ID DESC"
+        Using conn As New SqlConnection(ClsEmployees.ConnectionString)
+            Using cmd As New SqlCommand(sql, conn)
+                cmd.Parameters.AddWithValue("@EmployeeID", employeeID)
+                conn.Open()
+                Dim result As Object = cmd.ExecuteScalar()
+                If result Is Nothing OrElse IsDBNull(result) Then Return 0
+                Return Convert.ToInt32(result)
+            End Using
+        End Using
+    End Function
+
+    Protected Sub btnRefresh_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Try
+            Dim EmployeeID As Integer = GetSourceEmployeeID()
             If EmployeeID > 0 Then
                 LoadData(EmployeeID)
             End If
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Function GetSourceEmployeeID() As Integer
+        Dim employeeID As Integer = 0
+        If Not Integer.TryParse(hdnSourceEmployeeID.Value, employeeID) Then
+            If Request.QueryString("EmployeeID") IsNot Nothing Then
+                Integer.TryParse(Request.QueryString("EmployeeID"), employeeID)
+            End If
+        End If
+        Return employeeID
+    End Function
+
+    Private Sub ShowMessage(ByVal message As String, ByVal isSuccess As Boolean)
+        lblTransferMessage.Text = message
+        lblTransferMessage.CssClass = "msg show " & If(isSuccess, "msg-ok", "msg-err")
+    End Sub
+
+    Private Sub ClearMessage()
+        lblTransferMessage.Text = ""
+        lblTransferMessage.CssClass = "msg"
     End Sub
 
 End Class

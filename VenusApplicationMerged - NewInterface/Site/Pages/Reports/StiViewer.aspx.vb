@@ -198,14 +198,39 @@ Partial Class Pages_Reports_StiViewer
             v.Type = GetType(String)
         End If
 
-        ' Coerce date values to yyyy/MM/dd for report parameters.
-        Dim dt As DateTime
-        If DateTime.TryParse(value, dt) Then
-            v.Value = dt.ToString("yyyy/MM/dd")
-        Else
-            v.Value = value
-        End If
+        ' Coerce date/datetime values to yyyy-MM-dd before they are passed to the SQL query.
+        v.Value = NormalizeDateForSql(value)
     End Sub
+
+    ' Converts any recognizable date/datetime string to the SQL-safe yyyy-MM-dd format.
+    ' Non-date values are returned unchanged.
+    Private Function NormalizeDateForSql(ByVal value As String) As String
+        If String.IsNullOrWhiteSpace(value) Then Return value
+
+        Dim raw As String = value.Trim()
+        Dim dt As DateTime
+
+        ' Try common explicit formats first (culture-independent), then a general parse.
+        Dim formats As String() = {
+            "yyyy-MM-dd", "yyyy/MM/dd", "yyyyMMdd",
+            "dd/MM/yyyy", "d/M/yyyy", "MM/dd/yyyy", "M/d/yyyy",
+            "dd-MM-yyyy", "yyyy-MM-dd HH:mm:ss", "yyyy/MM/dd HH:mm:ss",
+            "dd/MM/yyyy HH:mm:ss", "MM/dd/yyyy HH:mm:ss"
+        }
+
+        If DateTime.TryParseExact(raw, formats, System.Globalization.CultureInfo.InvariantCulture,
+                                  System.Globalization.DateTimeStyles.None, dt) Then
+            Return dt.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture)
+        End If
+
+        If DateTime.TryParse(raw, System.Globalization.CultureInfo.InvariantCulture,
+                             System.Globalization.DateTimeStyles.None, dt) OrElse
+           DateTime.TryParse(raw, dt) Then
+            Return dt.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture)
+        End If
+
+        Return value
+    End Function
 
     Private Sub NormalizeReportDateTimeFields(ByVal report As StiReport)
         Try
@@ -236,12 +261,8 @@ Partial Class Pages_Reports_StiViewer
                     Continue For
                 End If
 
-                Dim dt As DateTime
-                If DateTime.TryParse(Convert.ToString(v.Value), dt) Then
-                    v.Value = dt.ToString("yyyy/MM/dd")
-                Else
-                    v.Value = Convert.ToString(v.Value)
-                End If
+                ' Format DateTime variable values as yyyy-MM-dd for SQL parameter binding.
+                v.Value = NormalizeDateForSql(Convert.ToString(v.Value))
             Next
 
             ' 3) Replace direct bindings with null-safe expressions for converted fields.
