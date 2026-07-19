@@ -299,11 +299,22 @@ Partial Class frmSelfServiceRequestsPopup
                 Using tran As SqlTransaction = conn.BeginTransaction()
                     Try
                         If delegateEmployeeID > 0 Then
+                            ' إدراج صفوف جديدة للمفوَّض بنفس بيانات الطلبات المعلقة (للاحتفاظ بالتاريخ)
                             Using cmd As New SqlCommand(
-                                "UPDATE SS_RequestActions " &
-                                "SET SS_EmployeeID = @TargetEmployeeID " &
+                                "INSERT INTO SS_RequestActions (RequestSerial, SS_EmployeeID, FormCode, EmployeeID, Seen, ConfigID) " &
+                                "SELECT RequestSerial, @TargetEmployeeID, FormCode, EmployeeID, 0, ConfigID " &
+                                "FROM SS_RequestActions " &
                                 "WHERE ActionID IS NULL AND IsHidden IS NULL AND SS_EmployeeID = @SourceEmployeeID", conn, tran)
                                 cmd.Parameters.AddWithValue("@TargetEmployeeID", delegateEmployeeID)
+                                cmd.Parameters.AddWithValue("@SourceEmployeeID", sourceEmployeeID)
+                                cmd.ExecuteNonQuery()
+                            End Using
+
+                            ' إقفال صفوف الموظف الحالي بإجراء التفويض (ActionID=3)
+                            Using cmd As New SqlCommand(
+                                "UPDATE SS_RequestActions " &
+                                "SET Seen = 1, ActionID = 3, ActionDate = GETDATE(), ActionRemarks = N'End of Service' " &
+                                "WHERE ActionID IS NULL AND IsHidden IS NULL AND SS_EmployeeID = @SourceEmployeeID", conn, tran)
                                 cmd.Parameters.AddWithValue("@SourceEmployeeID", sourceEmployeeID)
                                 updatedActions = cmd.ExecuteNonQuery()
                             End Using
@@ -328,6 +339,10 @@ Partial Class frmSelfServiceRequestsPopup
                 End Using
             End Using
 
+            If replacementEmployeeID > 0 Then
+                CreateActingAssignments(sourceEmployeeID, replacementEmployeeID)
+            End If
+
             LoadData(sourceEmployeeID)
             ShowMessage(String.Format(GetRes("MsgTransferSuccess"), updatedActions, updatedConfig), True)
 
@@ -335,6 +350,69 @@ Partial Class frmSelfServiceRequestsPopup
             ShowMessage(GetRes("MsgTransferFailed") & ex.Message, False)
         End Try
     End Sub
+
+    ' تسجيل حركات الإنابة (عن موظف/على وظيفة) للمعتمد البديل بسبب نهاية الخدمة
+    Private Sub CreateActingAssignments(ByVal sourceEmployeeID As Integer, ByVal actingEmployeeID As Integer)
+        Const ACTING_REASON As String = "End of Service"
+        Dim effectiveFrom As Date = Date.Today
+        Dim effectiveTo As Date = New Date(2079, 6, 6)
+
+        Dim employeeActing As New Clshrs_ActingEmployeeAssignments(Page)
+        If Not employeeActing.Find("CancelDate IS NULL AND OriginalEmployeeID=" & sourceEmployeeID &
+                                   " AND ActingEmployeeID=" & actingEmployeeID) Then
+            employeeActing.Clear()
+            employeeActing.Code = NextAssignmentCode("hrs_ActingEmployeeAssignments", "EA")
+            employeeActing.OriginalEmployeeID = sourceEmployeeID
+            employeeActing.ActingEmployeeID = actingEmployeeID
+            employeeActing.EffectiveFrom = effectiveFrom
+            employeeActing.EffectiveTo = effectiveTo
+            employeeActing.Reason = ACTING_REASON
+            employeeActing.Remarks = ""
+            employeeActing.Save()
+        End If
+
+        Dim positionID As Integer = GetActivePositionID(sourceEmployeeID)
+        If positionID > 0 Then
+            Dim positionActing As New Clshrs_ActingPositionAssignments(Page)
+            If Not positionActing.Find("CancelDate IS NULL AND OriginalPositionID=" & positionID &
+                                       " AND ActingEmployeeID=" & actingEmployeeID) Then
+                positionActing.Clear()
+                positionActing.Code = NextAssignmentCode("hrs_ActingPositionAssignments", "PA")
+                positionActing.OriginalPositionID = positionID
+                positionActing.ActingEmployeeID = actingEmployeeID
+                positionActing.EffectiveFrom = effectiveFrom
+                positionActing.EffectiveTo = effectiveTo
+                positionActing.Reason = ACTING_REASON
+                positionActing.Remarks = ""
+                positionActing.Save()
+            End If
+        End If
+    End Sub
+
+    Private Function NextAssignmentCode(ByVal tableName As String, ByVal prefix As String) As String
+        Dim sql As String = "SELECT ISNULL(MAX(CASE" &
+            " WHEN ISNUMERIC(RIGHT(Code, LEN(Code) - CHARINDEX('-', Code)))=1" &
+            " THEN CAST(RIGHT(Code, LEN(Code) - CHARINDEX('-', Code)) AS int)" &
+            " ELSE 0 END),0)+1 FROM " & tableName & " WHERE CHARINDEX('-', Code) > 0"
+        Dim number As Integer = Convert.ToInt32(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(
+            ClsEmployees.ConnectionString, CommandType.Text, sql))
+        Return prefix & "-" & number.ToString("000000")
+    End Function
+
+    Private Function GetActivePositionID(ByVal employeeID As Integer) As Integer
+        Dim sql As String = "SELECT TOP 1 PositionID FROM hrs_Contracts" &
+            " WHERE EmployeeID=@EmployeeID AND PositionID IS NOT NULL AND CancelDate IS NULL" &
+            " AND (EndDate IS NULL OR EndDate >= GETDATE()) ORDER BY ID DESC"
+        Using conn As New SqlConnection(ClsEmployees.ConnectionString)
+            Using cmd As New SqlCommand(sql, conn)
+                cmd.Parameters.AddWithValue("@EmployeeID", employeeID)
+                conn.Open()
+                Dim result As Object = cmd.ExecuteScalar()
+                If result Is Nothing OrElse IsDBNull(result) Then Return 0
+                Return Convert.ToInt32(result)
+            End Using
+        End Using
+    End Function
 
     Protected Sub btnRefresh_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Try
