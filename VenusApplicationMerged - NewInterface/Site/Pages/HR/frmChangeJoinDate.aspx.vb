@@ -33,7 +33,7 @@ Partial Class frmChangeJoinDate
             SetPageDirection()
 
             SetupSearchButton()
-
+            txtEmployeeCode.Enabled = False
             txtEmployeeCode.Attributes.Add("onchange", "ChangeIsDataChanged()")
             ClientScript.RegisterClientScriptBlock(ClientScript.GetType, "Load",
                     "<script language=""javascript"">IntializeDataChanged()</script>")
@@ -50,8 +50,10 @@ Partial Class frmChangeJoinDate
                     LoadEmployeeData()
 
                     If Request.QueryString("JoinDate") IsNot Nothing Then
-                        txtCurrentJoinDate.Text = Request.QueryString("JoinDate")
-                        TxtHDJoinDate.Value = Request.QueryString("JoinDate")
+                        txtCurrentJoinDate.Text = Request.QueryString("OldJoinDate")
+                        TxtHDJoinDate.Value = Request.QueryString("OldJoinDate")
+                        txtNewJoinDate.Value = Request.QueryString("JoinDate")
+
                     End If
 
                     'If Request.QueryString("JoinDate") IsNot Nothing Then
@@ -70,6 +72,7 @@ Partial Class frmChangeJoinDate
 
                 RegisterClientVariables()
             End If
+            txtEmployeeCode.Enabled = False
 
         Catch ex As Exception
             mErrorHandler = New Venus.Shared.ErrorsHandler()
@@ -916,13 +919,14 @@ Partial Class frmChangeJoinDate
         End Using
         ClsEmployeeClass.Find("ID=" & newClassID & "")
         Dim expireDate As DateTime = startDate.AddYears(1)
+        expireDate = expireDate.AddDays(90)
         If ClsEmployeeClass.AccumulatedBalance Then
 
             Dim str As String = "select RequiredWorkingMonths from hrs_EmployeesClassesVacations where EmployeeClassID=" & ClsEmployeeClass.ID & ""
 
             Dim RequiredWorkingMonths = Convert.ToString(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, str))
 
-            expireDate = startDate.AddDays(RequiredWorkingMonths)
+            expireDate = startDate.AddDays(RequiredWorkingMonths + 90)
 
         End If
 
