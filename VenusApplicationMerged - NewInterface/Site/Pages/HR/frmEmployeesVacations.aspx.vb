@@ -1545,7 +1545,7 @@ Partial Class frmEmployeesVacations
             ASDate = CDate(CDate(dteWebDateChooser1).ToShortDateString() & " " & "00:00")
             AEDate = CDate(CDate(dteWebDateChooser2).ToShortDateString() & " " & "00:00")
             If AEDate.Year = 1 Then
-                AEDate = Date.Now
+                AEDate = CDate(CDate(WebDateChooser3.Value).ToShortDateString() & " " & "00:00")
             End If
             If AEDate < ASDate Then
                 AEDate = ASDate

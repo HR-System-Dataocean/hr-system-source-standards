@@ -2300,19 +2300,19 @@ Partial Class frmEmployeesVacationsAdvance
             Dim clsContr As New Clshrs_ContractsTransactions(Page)
             clsContr.Find("ID=" & recordID)
             If clsContr.ID > 0 Then
-                If Not clsContr.RegUserID = Nothing Then
-                    clsUser.Find("ID=" & clsContr.RegUserID)
-                    If clsUser.ID > 0 Then
-                        lblRegUserValue.Text = clsUser.EngName
-                    Else
-                        lblRegUserValue.Text = ""
-                    End If
-                End If
-                If Convert.ToDateTime(clsContr.RegDate).Date = Nothing Then
-                    lblRegDateValue.Text = ""
-                Else
-                    ' lblRegDateValue.Text = clsContr.RegDate
-                End If
+                'If Not clsContr.RegUserID = Nothing Then
+                '    clsUser.Find("ID=" & clsContr.RegUserID)
+                '    If clsUser.ID > 0 Then
+                '        lblRegUserValue.Text = clsUser.EngName
+                '    Else
+                '        lblRegUserValue.Text = ""
+                '    End If
+                'End If
+                'If Convert.ToDateTime(clsContr.RegDate).Date = Nothing Then
+                '    lblRegDateValue.Text = ""
+                'Else
+                '    ' lblRegDateValue.Text = clsContr.RegDate
+                'End If
 
             End If
             Return True

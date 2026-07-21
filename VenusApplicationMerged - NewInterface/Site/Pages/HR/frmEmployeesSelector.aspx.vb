@@ -1710,6 +1710,7 @@ Partial Class frmEmployeesSelector
                                                     Continue For
                                                 End If
                                             Next
+
                                             Dim EmployeeVacation As New Clshrs_EmployeesVacations(Page)
 
                                             Dim VacationDaysUpToCurrentMonth As Integer = EmployeeVacation.GetEmployeeVacationUptoCurrentMonth(ved.Year, EmployeeID, VacationTypeId, ved.Month)
@@ -1731,6 +1732,10 @@ Partial Class frmEmployeesSelector
                                                     Continue For
                                                 End If
                                             Next
+                                            Dim EmployeeVacation As New Clshrs_EmployeesVacations(Page)
+
+                                            Dim UpcomingDaysForNextVacations As Integer = EmployeeVacation.GetEmployeeNextVacationsVacationForNextVacations(ved.Year, EmployeeID, VacationTypeId, ved)
+                                            UpcomingSickVacDays = UpcomingSickVacDays + UpcomingDaysForNextVacations
                                         End If
 
 

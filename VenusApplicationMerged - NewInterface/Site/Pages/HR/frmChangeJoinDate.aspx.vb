@@ -47,7 +47,6 @@ Partial Class frmChangeJoinDate
                 If Request.QueryString("EmpCode") IsNot Nothing Then
                     Dim empCode As String = Request.QueryString("EmpCode")
                     txtEmployeeCode.Text = empCode
-                    LoadEmployeeData()
 
                     If Request.QueryString("JoinDate") IsNot Nothing Then
                         txtCurrentJoinDate.Text = Request.QueryString("OldJoinDate")
@@ -55,6 +54,8 @@ Partial Class frmChangeJoinDate
                         txtNewJoinDate.Value = Request.QueryString("JoinDate")
 
                     End If
+
+                    LoadEmployeeData()
 
                     'If Request.QueryString("JoinDate") IsNot Nothing Then
                     '    txtNewJoinDate.Value = Request.QueryString("JoinDate")
@@ -478,6 +479,12 @@ Partial Class frmChangeJoinDate
 
             If validContractID > 0 Then
                 Dim dtContract As DataTable = GetContractDataRead(validContractID)
+                Dim ToBalanceDate As Date = DateTime.Now
+                If CDate(txtNewJoinDate.Text) <> CDate(txtCurrentJoinDate.Text) Then
+                    ToBalanceDate = CDate(txtNewJoinDate.Text)
+
+
+                End If
                 If dtContract IsNot Nothing AndAlso dtContract.Rows.Count > 0 Then
                     Dim employeeClassID As Integer = Convert.ToInt32(dtContract.Rows(0)("EmployeeClassID"))
                     If ClsEmployeeClass.Find("ID=" & employeeClassID) Then
@@ -486,9 +493,9 @@ Partial Class frmChangeJoinDate
                                     "SELECT top(1)Balance, Consumed, Remaining, BalanceTypeID, ExpireDate, DueDate " &
                                     "FROM hrs_VacationsBalance " &
                                     "WHERE EndServiceDate IS NULL AND EmployeeID = " & EmployeeID &
-                                    "  AND ExpireDate >= '" & DateTime.Now.ToString("yyyy-MM-dd") & "'" &
-                                    "  AND DueDate <= '" & DateTime.Now.ToString("yyyy-MM-dd") & "'" &
-                                    "  AND (CancelDate IS NULL OR CancelDate > '" & DateTime.Now.ToString("yyyy-MM-dd") & "')" &
+                                    "  AND ExpireDate >= '" & ToBalanceDate.ToString("yyyy-MM-dd") & "'" &
+                                    "  AND DueDate <= '" & ToBalanceDate.ToString("yyyy-MM-dd") & "'" &
+                                    "  AND (CancelDate IS NULL OR CancelDate > '" & ToBalanceDate.ToString("yyyy-MM-dd") & "')" &
                                     "  AND ISNULL(Posted,0) = 0"
 
                             Dim da As New SqlDataAdapter(strSQL, ClsEmployees.ConnectionString)

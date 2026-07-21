@@ -711,6 +711,20 @@ Partial Class frmEmployees
 
                     If LockJoinDate Then
                         If CDate(JoinDate.Text) <> CDate(TxtHDJoinDate.Value) Or ddlEmployeeClass.SelectedValue <> TxtHDClassID.Value Then
+
+                            If CDate(JoinDate.Text).Year < CDate(TxtHDJoinDate.Value).Year Then
+                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... New Join Date Can't be in a previous year of the current join date  /عفوا...لا يمكن ان يكون تاريخ المباشرة الجديد في عام سابق علي تاريخ المباشرة الحالي  "))
+                                Exit Sub
+                            End If
+                            ClsEmployees.Find("Code='" & txtCode.Text & "'")
+                            Dim strMaxVacationReturnDate = "select max(ActualEndDate) from hrs_EmployeesVacations where VacationTypeID=1 and employeeid=" & ClsEmployees.ID & ""
+                            Dim Maxreturndate As Date = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, CommandType.Text, strMaxVacationReturnDate)
+                            If Maxreturndate <> Nothing Then
+                                If CDate(JoinDate.Text) < Maxreturndate Then
+                                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... New Join Date Can't be in a previous date to the last annual leave return date '" & Maxreturndate & "'  /عفوا...لا يمكن ان يكون تاريخ المباشرة الجديد في تاريخ سابق لتاريخ اخر عودة من اجازة سنويه '" & Maxreturndate & "'  "))
+                                    Exit Sub
+                                End If
+                            End If
                             ' نحفظ الزرار اللي عمل الحفظ
                             Dim pendingID As String = CType(sender, Control).UniqueID
                             hdnPendingSaveControlID.Value = pendingID
