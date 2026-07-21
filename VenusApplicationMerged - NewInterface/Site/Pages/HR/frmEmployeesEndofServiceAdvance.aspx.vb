@@ -2216,13 +2216,22 @@ Partial Class frmEmployeesEndofServiceAdvance
     ' =============================================
     ' التحقق من وجود طلبات خدمة ذاتية مفتوحة
     ' أو وجود الموظف / منصبه في إعدادات الاعتماد SS_Configuration
+    ' مع استثناء من لديه تكليف بالإنابة كموظف أصلي (تم التسليم مسبقاً)
     ' =============================================
     Private Function HasSelfServiceRequests(ByVal EmployeeID As Integer) As Boolean
         Try
             Dim clsEmployee As New Clshrs_Employees(Page)
 
             Dim sql As String =
-                "SELECT CASE WHEN EXISTS (" &
+                "SELECT CASE " &
+                "WHEN EXISTS (" &
+                "    SELECT 1 FROM hrs_ActingEmployeeAssignments " &
+                "    WHERE OriginalEmployeeID = @EmployeeID " &
+                "    AND CancelDate IS NULL " &
+                "    AND EffectiveFrom <= GETDATE() " &
+                "    AND EffectiveTo >= GETDATE()" &
+                ") THEN 0 " &
+                "WHEN EXISTS (" &
                 "    SELECT 1 FROM SS_RequestActions " &
                 "    WHERE ActionID IS NULL " &
                 "    AND IsHidden IS NULL " &
