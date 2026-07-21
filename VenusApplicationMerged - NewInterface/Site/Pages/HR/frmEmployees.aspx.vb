@@ -233,10 +233,7 @@ Partial Class frmEmployees
                 If Not AssignValues_Employees() Then
                     Exit Sub
                 End If
-                'If String.IsNullOrEmpty(txtWorkE_Mail.Text) Then
-                '    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... you have to enter Work E-mail /عفوا...لابد من اخال بريد العمل"))
-                '    Exit Sub
-                'End If
+
                 If DdlNationality.SelectedValue = 0 Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... you have to select nationality /عفوا...لابد من تحديد الجنسية "))
                     Exit Sub
@@ -308,6 +305,15 @@ Partial Class frmEmployees
                         End If
                     End If
                     If txtIdentity.Text <> "" Then
+
+
+                        ' التحقق من عدم وجود مسافات في رقم الهوية
+                        If txtIdentity.Text.Contains(" ") Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... SSNo. cannot contain spaces /عفوا...رقم الهوية لا يمكن أن يحتوي على مسافات"))
+                            txtIdentity.Focus()
+                            Exit Sub
+                        End If
+
                         Dim checkCnt = "select top 1 Code from hrs_employees where SSnNo = '" & txtIdentity.Text & "' and Code <> '" & txtCode.Text & "' and branchID = '" & ddlBranch.SelectedValue & "'"
                         Dim cnt As String = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, CommandType.Text, checkCnt)
                         If cnt <> "" Then
@@ -633,6 +639,9 @@ Partial Class frmEmployees
                 If ClsEmployees.ID > 0 Then
                     txtEmpId.Value = ClsEmployees.ID
                     lblEmpID.Text = ClsEmployees.ID
+
+
+
                     If txtBankAccount.Text <> "" Then
                         Dim checkCnt = "select top 1 Code from hrs_employees where BankAccountNumber = '" & txtBankAccount.Text & "' and Code <> '" & txtCode.Text & "' and branchID = '" & ddlBranch.SelectedValue & "'"
                         Dim cnt As String = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, CommandType.Text, checkCnt)
@@ -642,6 +651,13 @@ Partial Class frmEmployees
                         End If
                     End If
                     If txtIdentity.Text <> "" Then
+                        ' التحقق من عدم وجود مسافات في رقم الهوية
+                        If txtIdentity.Text.Contains(" ") Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... SSNo. cannot contain spaces /عفوا...رقم الهوية لا يمكن أن يحتوي على مسافات"))
+                            txtIdentity.Focus()
+                            Exit Sub
+                        End If
+
                         Dim checkCnt = "select top 1 Code from hrs_employees where SSnNo = '" & txtIdentity.Text & "' and Code <> '" & txtCode.Text & "' and branchID = '" & ddlBranch.SelectedValue & "'"
                         Dim cnt As String = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, CommandType.Text, checkCnt)
                         If cnt <> "" Then

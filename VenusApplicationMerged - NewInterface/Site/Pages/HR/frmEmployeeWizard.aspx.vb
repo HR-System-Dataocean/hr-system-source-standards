@@ -1372,6 +1372,14 @@ Partial Class frmEmployeeWizard
 
 
             If txtIdentity.Text <> "" Then
+
+                ' التحقق من عدم وجود مسافات في رقم الهوية
+                If txtIdentity.Text.Contains(" ") Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... SSNo. cannot contain spaces /عفوا...رقم الهوية لا يمكن أن يحتوي على مسافات"))
+                    txtIdentity.Focus()
+                    Exit Sub
+                End If
+
                 Dim checkCnt = "select top 1 Code from hrs_employees where SSnNo = '" & txtIdentity.Text & "' and Code <> '" & txtCode.Text & "' and branchID = '" & ddlBranch.SelectedValue & "'"
                 Dim cnt As String = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, checkCnt)
                 If cnt <> "" Then
