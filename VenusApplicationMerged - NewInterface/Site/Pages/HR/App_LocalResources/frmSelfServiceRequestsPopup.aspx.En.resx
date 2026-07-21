@@ -54,6 +54,10 @@
   <data name="lblEmployeeNameCaptionResource1.Text" xml:space="preserve"><value>Employee name:</value></data>
   <data name="lblTransferTitleResource1.Text" xml:space="preserve"><value>Acting and Approval Handover Details</value></data>
   <data name="chkSameEmployeeResource1.Text" xml:space="preserve"><value>Use the same employee for both tasks</value></data>
+  <data name="lblEffectiveFromResource1.Text" xml:space="preserve"><value>Effective From:</value></data>
+  <data name="lblEffectiveToResource1.Text" xml:space="preserve"><value>Effective To:</value></data>
+  <data name="MsgEffectiveDatesRequired" xml:space="preserve"><value>Please select the acting Effective From and Effective To dates.</value></data>
+  <data name="MsgEffectiveDatesInvalid" xml:space="preserve"><value>Effective To must be after Effective From.</value></data>
   <data name="lblReplacementEmployeeResource1.Text" xml:space="preserve"><value>Replacement Approver:</value></data>
   <data name="lblDelegateEmployeeResource1.Text" xml:space="preserve"><value>Delegate for Pending Requests:</value></data>
   <data name="btnSearchReplacementEmpResource1.ToolTip" xml:space="preserve"><value>Search for employee</value></data>

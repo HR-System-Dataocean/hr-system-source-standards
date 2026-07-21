@@ -54,6 +54,10 @@
   <data name="lblEmployeeNameCaptionResource1.Text" xml:space="preserve"><value>اسم الموظف:</value></data>
   <data name="lblTransferTitleResource1.Text" xml:space="preserve"><value>بيانات التكليف وتسليم مهام الاعتماد</value></data>
   <data name="chkSameEmployeeResource1.Text" xml:space="preserve"><value>استخدام نفس الموظف للمهمتين</value></data>
+  <data name="lblEffectiveFromResource1.Text" xml:space="preserve"><value>ساري من:</value></data>
+  <data name="lblEffectiveToResource1.Text" xml:space="preserve"><value>ساري إلى:</value></data>
+  <data name="MsgEffectiveDatesRequired" xml:space="preserve"><value>يرجى تحديد تاريخ البداية والنهاية للإنابة.</value></data>
+  <data name="MsgEffectiveDatesInvalid" xml:space="preserve"><value>يجب أن يكون تاريخ نهاية الإنابة بعد تاريخ بدايتها.</value></data>
   <data name="lblReplacementEmployeeResource1.Text" xml:space="preserve"><value>المعتمد البديل:</value></data>
   <data name="lblDelegateEmployeeResource1.Text" xml:space="preserve"><value>المفوَّض للطلبات المعلقة:</value></data>
   <data name="btnSearchReplacementEmpResource1.ToolTip" xml:space="preserve"><value>بحث عن موظف</value></data>

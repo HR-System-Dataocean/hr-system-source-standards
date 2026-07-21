@@ -31,6 +31,9 @@ Partial Class frmSelfServiceRequestsPopup
                         lblEmpName.Text = ClsEmployees.FullName
                     End If
 
+                    txtEffectiveFrom.Value = Date.Today
+                    txtEffectiveTo.Value = New Date(2079, 6, 6)
+
                     LoadData(EmployeeID)
                 Else
                     ClientScript.RegisterStartupScript(Me.GetType(), "ClosePopup",
@@ -291,6 +294,10 @@ Partial Class frmSelfServiceRequestsPopup
                 Return
             End If
 
+            Dim effectiveFrom As Date
+            Dim effectiveTo As Date
+            If Not TryGetEffectiveDates(effectiveFrom, effectiveTo) Then Return
+
             Dim updatedActions As Integer = 0
             Dim updatedConfig As Integer = 0
 
@@ -340,7 +347,7 @@ Partial Class frmSelfServiceRequestsPopup
             End Using
 
             If replacementEmployeeID > 0 Then
-                CreateActingAssignments(sourceEmployeeID, replacementEmployeeID)
+                CreateActingAssignments(sourceEmployeeID, replacementEmployeeID, effectiveFrom, effectiveTo)
             End If
 
             LoadData(sourceEmployeeID)
@@ -351,11 +358,27 @@ Partial Class frmSelfServiceRequestsPopup
         End Try
     End Sub
 
+    Private Function TryGetEffectiveDates(ByRef effectiveFrom As Date, ByRef effectiveTo As Date) As Boolean
+        If Convert.ToString(txtEffectiveFrom.Value) = "" OrElse Convert.ToString(txtEffectiveTo.Value) = "" Then
+            ShowMessage(GetRes("MsgEffectiveDatesRequired"), False)
+            Return False
+        End If
+
+        effectiveFrom = CDate(txtEffectiveFrom.Value).Date
+        effectiveTo = CDate(txtEffectiveTo.Value).Date
+
+        If effectiveFrom > effectiveTo Then
+            ShowMessage(GetRes("MsgEffectiveDatesInvalid"), False)
+            Return False
+        End If
+
+        Return True
+    End Function
+
     ' تسجيل حركات الإنابة (عن موظف/على وظيفة) للمعتمد البديل بسبب نهاية الخدمة
-    Private Sub CreateActingAssignments(ByVal sourceEmployeeID As Integer, ByVal actingEmployeeID As Integer)
+    Private Sub CreateActingAssignments(ByVal sourceEmployeeID As Integer, ByVal actingEmployeeID As Integer,
+                                        ByVal effectiveFrom As Date, ByVal effectiveTo As Date)
         Const ACTING_REASON As String = "End of Service"
-        Dim effectiveFrom As Date = Date.Today
-        Dim effectiveTo As Date = New Date(2079, 6, 6)
 
         Dim employeeActing As New Clshrs_ActingEmployeeAssignments(Page)
         If Not employeeActing.Find("CancelDate IS NULL AND OriginalEmployeeID=" & sourceEmployeeID &

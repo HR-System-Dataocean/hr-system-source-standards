@@ -1,6 +1,9 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="frmSelfServiceRequestsPopup.aspx.vb"
     Inherits="frmSelfServiceRequestsPopup" Culture="auto" UICulture="auto" meta:resourcekey="PageResource1" %>
 
+<%@ Register Assembly="Infragistics35.WebUI.WebDateChooser.v11.1, Version=11.1.20111.1006, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
+    Namespace="Infragistics.WebUI.WebSchedule" TagPrefix="igsch" %>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -246,6 +249,12 @@
                     ImageUrl="./Img/forum_search.gif" Width="24px" Height="18px"
                     meta:resourcekey="btnSearchDelegateEmpResource1" />
                 <asp:Label ID="lblDelegateEmpName" runat="server" CssClass="emp-name-display" />
+            </div>
+            <div class="transfer-row">
+                <asp:Label ID="lblEffectiveFrom" runat="server" meta:resourcekey="lblEffectiveFromResource1" />
+                <igsch:WebDateChooser ID="txtEffectiveFrom" runat="server" Width="145px" Height="18px" />
+                <asp:Label ID="lblEffectiveTo" runat="server" meta:resourcekey="lblEffectiveToResource1" />
+                <igsch:WebDateChooser ID="txtEffectiveTo" runat="server" Width="145px" Height="18px" />
             </div>
             <div class="transfer-row">
                 <asp:Button ID="btnTransferApprovals" runat="server"
