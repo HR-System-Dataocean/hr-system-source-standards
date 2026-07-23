@@ -1,4 +1,4 @@
-'================================================
+ï»¿'================================================
 ' Project      : Venus 
 ' Module       : Report Writer
 ' Developer    : [0256],[0258]
@@ -499,11 +499,11 @@ Partial Class Interfaces_frmReportsViewerCriterias
 
                             ASPDRD = New System.Web.UI.WebControls.DropDownList
                             ObjItem = New System.Web.UI.WebControls.ListItem
-                            ObjItem.Text = IIf(blArCulture, "äÚã", " Yes ")
+                            ObjItem.Text = IIf(blArCulture, "Ù†Ø¹Ù…", " Yes ")
                             ObjItem.Value = 1
                             ASPDRD.Items.Add(ObjItem)
                             ObjItem = New System.Web.UI.WebControls.ListItem
-                            ObjItem.Text = IIf(blArCulture, "áÇ", " No  ")
+                            ObjItem.Text = IIf(blArCulture, "Ù„Ø§", " No  ")
                             ObjItem.Value = 0
                             ASPDRD.Items.Add(ObjItem)
                             ASPDRD.ID = "Drd" & ObjRow.Item("FieldName")
