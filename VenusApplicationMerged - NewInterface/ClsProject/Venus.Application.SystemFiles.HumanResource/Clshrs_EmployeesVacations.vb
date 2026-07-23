@@ -1809,6 +1809,11 @@ Public Class Clshrs_EmployeesVacations
                                     " AND CancelDate IS NULL AND ((YEAR(ActualStartDate) = " & PeriodYear & " OR YEAR(ActualEndDate) = " & PeriodYear & ") And month(ActualEndDate)<= " & CurrentMont & ")"
         Return Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(mConnectionString, CommandType.Text, strcommand)
     End Function
+    Public Function GetEmployeeNextVacationsVacationForNextVacations(PeriodYear As Integer, EmployeeId As Integer, VacationTypeId As Integer, EndDate As Date) As Integer
+        Dim strcommand As String = "SELECT isnull(sum(consumdays),0) FROM hrs_EmployeesVacations WHERE EmployeeID = " & EmployeeId & " AND VacationTypeID = " & VacationTypeId &
+                                    " AND CancelDate IS NULL AND ((YEAR(ActualStartDate) = " & PeriodYear & " OR YEAR(ActualEndDate) = " & PeriodYear & ")) And  ActualStartDate > '" & EndDate.ToString("yyyy-MM-dd") & "'"
+        Return Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(mConnectionString, CommandType.Text, strcommand)
+    End Function
     Public Function GetDefaultVacation(ByVal intEmpID As Integer, _
                                            ByVal intContractID As Integer, ByVal ResetDate As Date?, ByVal UseAddDays As Boolean) As Date
         Try

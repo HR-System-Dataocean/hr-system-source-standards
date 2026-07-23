@@ -106,33 +106,38 @@ Partial Class frmAttEmployeeTransfer
 
             Case "First"
                 ClsEmployees.Find("Code='" & txtCode.Text & "'")
+                ClsEmployees.FirstRecord()
                 If Not String.IsNullOrEmpty(ClsEmployees.ID) Then
                     LoadEmployeeData()
 
                 End If
-                'ClsEmployees.FirstRecord()
+
                 'GetValues(ClsEmployees)
             Case "Previous"
                 ClsEmployees.Find("Code='" & txtCode.Text & "'")
-                If Not ClsEmployees.previousRecord() Then
-                    ClsEmployees.Find("Code='" & txtCode.Text & "'")
+                If ClsEmployees.previousRecord() Then
+
                     If Not String.IsNullOrEmpty(ClsEmployees.ID) Then
                         LoadEmployeeData()
 
                     End If
+                Else
+
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This is the first page /هذه أول صفحة"))
 
                 End If
-                GetValues(ClsEmployees)
+                ''GetValues(ClsEmployees)
             Case "Next"
                 ClsEmployees.Find("Code='" & txtCode.Text & "'")
-                If Not ClsEmployees.NextRecord() Then
-                    ClsEmployees.Find("Code='" & txtCode.Text & "'")
+                If ClsEmployees.NextRecord() Then
+
 
                     If Not String.IsNullOrEmpty(ClsEmployees.ID) Then
                         LoadEmployeeData()
 
                     End If
+                Else
+
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This is the last page /هذه أخر صفحة"))
 
                 End If
@@ -252,7 +257,12 @@ Partial Class frmAttEmployeeTransfer
         ClsEmployees = New Clshrs_Employees(Page)
         Dim ClsCountries As New Clssys_Countries(Page)
         Try
-            ClsEmployees.Find("Code='" & txtCode.Text & "'")
+            If ClsEmployees.Code <> "" Then
+                ClsEmployees.Find("Code='" & ClsEmployees.Code & "'")
+            Else
+                ClsEmployees.Find("Code='" & txtCode.Text & "'")
+            End If
+
             IntId = ClsEmployees.ID
             txtEngName.Focus()
             If ClsEmployees.ID > 0 Then
@@ -597,7 +607,13 @@ Partial Class frmAttEmployeeTransfer
                 Exit Sub
             End If
         End If
-        strchecklocationEMP = "select * from hrs_Employees where code='" & txtCode.Text & "'"
+        If ClsEmployees.Code <> "" Then
+            strchecklocationEMP = "select * from hrs_Employees where code='" & ClsEmployees.Code & "'"
+        Else
+
+
+            strchecklocationEMP = "select * from hrs_Employees where code='" & txtCode.Text & "'"
+        End If
         DSAuthEmployees = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strchecklocationEMP)
         Dim locFilter As String
         If clsCompanies.UseUnitPermission Then
@@ -613,11 +629,13 @@ Partial Class frmAttEmployeeTransfer
 
         If DSAuthEmployees.Tables(0).Rows.Count > 0 Then
 
-            CheckCode()
+            GetValues(ClsEmployees)
+
 
         Else
             If Not clsCompanies.UserDepartmentsPermissions And Not clsCompanies.UseUnitPermission Then
-                CheckCode()
+                GetValues(ClsEmployees)
+
             Else
                 Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsCompanies.ConnectionString)
 

@@ -762,16 +762,31 @@ Partial Class frmEmployeesVacations
             Return False
         End If
     End Function
+
     Private Function CheckDateBetween2DatesNew(ByVal d As Date, ByVal d1 As Date, ByVal d2 As Date) As Boolean
-        If (d1 = Nothing Or d2 = Nothing) Then
+        ' التحقق من أن التواريخ لها قيم صحيحة (ليست القيمة الافتراضية)
+        If d1 = Date.MinValue OrElse d2 = Date.MinValue Then
             Return False
         End If
-        If (Date.Compare(d, d1) >= 0 And Date.Compare(d, d2) < 0) Then
-            Return True
-        Else
-            Return False
-        End If
+
+        ' التأكد من الترتيب الصحيح (d1 أصغر من d2)
+        Dim startDate As Date = If(d1 <= d2, d1, d2)
+        Dim endDate As Date = If(d1 <= d2, d2, d1)
+
+        ' التحقق من أن d تقع بين startDate و endDate
+        ' ملاحظة: startDate شامل، endDate غير شامل (حسب الكود الأصلي)
+        Return d >= startDate AndAlso d < endDate
     End Function
+    'Private Function CheckDateBetween2DatesNew(ByVal d As Date, ByVal d1 As Date, ByVal d2 As Date) As Boolean
+    '    If (d1 = Nothing Or d2 = Nothing) Then
+    '        Return False
+    '    End If
+    '    If (Date.Compare(d, d1) >= 0 And Date.Compare(d, d2) < 0) Then
+    '        Return True
+    '    Else
+    '        Return False
+    '    End If
+    'End Function
     Private Function CheckDateBetween2DatesNew2(ByVal d As Date, ByVal d1 As Date, ByVal d2 As Date) As Boolean
         If (d1 = Nothing Or d2 = Nothing) Then
             Return False
@@ -1545,7 +1560,7 @@ Partial Class frmEmployeesVacations
             ASDate = CDate(CDate(dteWebDateChooser1).ToShortDateString() & " " & "00:00")
             AEDate = CDate(CDate(dteWebDateChooser2).ToShortDateString() & " " & "00:00")
             If AEDate.Year = 1 Then
-                AEDate = Date.Now
+                AEDate = CDate(CDate(WebDateChooser3.Value).ToShortDateString() & " " & "00:00")
             End If
             If AEDate < ASDate Then
                 AEDate = ASDate

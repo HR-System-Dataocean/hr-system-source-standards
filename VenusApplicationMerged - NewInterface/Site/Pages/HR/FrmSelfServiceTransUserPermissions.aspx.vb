@@ -252,6 +252,7 @@ Partial Class frmUsers
                 End If
                 Dim _sys_User As New Clssys_Users(Page)
                 '1- Check if user has permission to delete or not
+                _sys_User.Find("Code='" & txtCode.Text & "'")
                 Dim strCheckPermission As String = " select CanDeleteSelfServiceTransactions from SS_SelfServiceTransactionUserPermissions where UserID=" & _sys_User.ID & ""
                 Dim HasDeletePermission As Boolean = CBool(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsUser.ConnectionString, Data.CommandType.Text, strCheckPermission))
                 If HasDeletePermission Then
@@ -423,7 +424,7 @@ Partial Class frmUsers
         Try
             ObjClsSys_Users = New Clssys_Users(Page)
             ObjClsSys_Users.Find("Code='" & txtCode.Text & "'", False)
-            Dim prevCode = txtCode.Text
+                Dim prevCode = txtCode.Text
 
             If ObjClsSys_Users.ID > 0 Then
                 GetValues()
