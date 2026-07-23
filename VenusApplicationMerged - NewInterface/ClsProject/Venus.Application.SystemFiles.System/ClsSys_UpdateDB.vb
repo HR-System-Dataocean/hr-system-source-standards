@@ -8555,6 +8555,66 @@ IF NOT EXISTS (SELECT 1 FROM sys_FormsPermissions WHERE UserID=1 AND FormID=@For
     VALUES(@FormID2,1,1,1,1,1,1,1,GETDATE());
 "
         ExecuteUpdate(SQL)
+
+
+
+        SQL = "Create or ALTER PROCEDURE [dbo].[GetAllEmployeePreviousVacationsForPeriod] 
+	@EmployeeID AS INT
+	, @PeriodID AS INT
+AS
+BEGIN
+	SET NOCOUNT ON;
+	Declare @PrepareDay as int =(select distinct PrepareDay from sys_Branches)
+	DECLARE @SD AS Date = (SELECT FromDate FROM sys_FiscalYearsPeriods WHERE ID = @PeriodID)
+	DECLARE @ED AS Date = (SELECT ToDate FROM sys_FiscalYearsPeriods WHERE ID = @PeriodID)
+	Declare @Previousmonth as int = month(@SD)-1
+	if @Previousmonth=0
+	begin
+		set @Previousmonth=1
+	end
+	Declare @year int 
+	if @Previousmonth=1
+	begin
+		set @year=year(@SD)-1
+	end
+	else
+	begin
+		set @year=year(@SD)
+	end
+	set @SD = DATEFROMPARTS(@year, @Previousmonth, (@PrepareDay+1))
+	
+	-- التعديل هنا: هنجيب الاجازات اللي بتتداخل مع الفترة المحددة
+	SELECT 
+		OV.ActualStartDate AS VS, 
+		OV.ActualEndDate AS VE, 
+		OV.ConsumDays AS VD, 
+		VT.ID as VTID, 
+		VT.EngName AS VTYPE, 
+		@SD AS FSD,
+		@ED AS FED
+	FROM
+		hrs_EmployeesVacations OV
+		INNER JOIN hrs_VacationsTypes VT ON OV.VacationTypeID = VT.ID
+	WHERE
+		OV.EmployeeID = @EmployeeID 
+		AND OV.CancelDate IS NULL
+		-- التعديل الرئيسي: نتأكد من التداخل بين الفترات
+		AND (
+			-- الاجازة تبدأ خلال الفترة
+			OV.ActualStartDate BETWEEN @SD AND @ED 
+			-- أو تنتهي خلال الفترة
+			OR OV.ActualEndDate BETWEEN @SD AND @ED
+			-- أو تمتد عبر الفترة بأكملها (تبدأ قبل الفترة وتنتهي بعدها)
+			OR (OV.ActualStartDate <= @SD AND OV.ActualEndDate >= @ED)
+			-- أو تبدأ قبل الفترة وتنتهي خلالها
+			OR (OV.ActualStartDate <= @SD AND OV.ActualEndDate BETWEEN @SD AND @ED)
+			-- أو تبدأ خلال الفترة وتنتهي بعدها
+			OR (OV.ActualStartDate BETWEEN @SD AND @ED AND OV.ActualEndDate >= @ED)
+		)
+END"
+
+
+        ExecuteUpdate(SQL)
     End Function
 
     Public Function UpdateSS() As Boolean
@@ -13330,6 +13390,7 @@ FROM     SS_ChangeWorkHoursRequest JOIN
 
         SQL = "create or ALTER   VIEW  [dbo].[SS_VNotification]
 AS
+--Rabie 23-07-2026
 --/1 ============================الاجازة ==============================================/  
  SELECT RequestSerial AS ID, FormCode, ConfigID, SS_VacationRequest.Code AS RequestSerial, hrs_Employees.ID AS EmployeeID, 
  hrs_Employees.code + '  ' + '-' + '  ' + dbo.fn_GetEmpName(hrs_Employees.Code, 1) AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + dbo.fn_GetEmpName(hrs_Employees.Code, 0) AS EmployeeEngName, CONVERT(varchar, 
@@ -14101,10 +14162,8 @@ FROM
 WHERE 
     (Seen IS NULL OR Seen = 0) 
     AND SS_RequestActions.FormCode = 'SS_001928'
-;
-GO "
+"
         ExecuteUpdate(SQL)
-
 
 
 

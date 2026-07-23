@@ -1371,6 +1371,20 @@ Partial Class frmEmployeeWizard
         If ClsEmployees.ID > 0 Then
 
 
+            If txtBankAccount.Text <> "" Then
+                ' التحقق من عدم وجود مسافات في رقم الحساب البنكي
+
+                If txtBankAccount.Text.Contains(" ") Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... Bank Account Number. cannot contain spaces /عفوا...رقم الحساب البنكي لا يمكن أن يحتوي على مسافات"))
+                    txtIdentity.Focus()
+                    Exit Sub
+                End If
+
+            End If
+
+
+
+
             If txtIdentity.Text <> "" Then
 
                 ' التحقق من عدم وجود مسافات في رقم الهوية

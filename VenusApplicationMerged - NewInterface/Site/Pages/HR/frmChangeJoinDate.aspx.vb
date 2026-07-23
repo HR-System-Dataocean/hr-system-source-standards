@@ -586,9 +586,9 @@ Partial Class frmChangeJoinDate
                 End Try
             End If
 
-            If Not joinDateChanged Then
-                newJoinDate = DateTime.Now.ToString("dd/MM/yyyy")
-            End If
+            'If Not joinDateChanged Then
+            '    newJoinDate = DateTime.Now.ToString("dd/MM/yyyy")
+            'End If
             ' هل تغيرت الفئة؟
             Dim currentClassIDText As String = hdnCurrentClassID.Value
             Dim classChanged As Boolean = Not IsDBNull(newClassID) AndAlso

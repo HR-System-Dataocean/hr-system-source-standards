@@ -775,7 +775,7 @@ Partial Class frmEmployeesVacations
 
         ' التحقق من أن d تقع بين startDate و endDate
         ' ملاحظة: startDate شامل، endDate غير شامل (حسب الكود الأصلي)
-        Return d >= startDate AndAlso d < endDate
+        Return d >= startDate AndAlso d <= endDate
     End Function
     'Private Function CheckDateBetween2DatesNew(ByVal d As Date, ByVal d1 As Date, ByVal d2 As Date) As Boolean
     '    If (d1 = Nothing Or d2 = Nothing) Then

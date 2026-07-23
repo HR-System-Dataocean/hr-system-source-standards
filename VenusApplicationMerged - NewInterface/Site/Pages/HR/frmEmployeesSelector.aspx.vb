@@ -2402,40 +2402,109 @@ Partial Class frmEmployeesSelector
             Return False
         End Try
     End Function
+    'Private Function CALCULATE_SICK_DEDUCTIONS(ByVal P_DAY_SALARY As Decimal, ByVal P_SICK_DAYS As Decimal, ByVal P_ALL_SICK_DAYS As Decimal, ByVal UpComingDays As Decimal) As Decimal
+    '    Dim dec_SICK_DAYS As Decimal = P_SICK_DAYS
+    '    Dim dec_ALL_SICK_DAYS As Decimal = P_ALL_SICK_DAYS
+    '    Dim VacationsTypes As New Clshrs_VacationsTypes(Page)
+    '    Dim IsSickVacationsType As DataSet = VacationsTypes.GetIsSickVacations()
+    '    Dim dec_DEDUCTION_TOTAL As Decimal = 0
+    '    'Dim dec_PRE_SICK_LEAVE As Decimal = dec_ALL_SICK_DAYS - dec_SICK_DAYS
+    '    Dim dec_PRE_SICK_LEAVE As Decimal = dec_ALL_SICK_DAYS - UpComingDays - dec_SICK_DAYS
+    '    If dec_PRE_SICK_LEAVE > 90 Then
+    '        dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * P_SICK_DAYS) - ((P_DAY_SALARY * P_SICK_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage3PCT")) / 100))
+    '    ElseIf dec_PRE_SICK_LEAVE > 30 And dec_PRE_SICK_LEAVE <= 90 Then
+    '        If dec_PRE_SICK_LEAVE + P_SICK_DAYS <= 90 Then
+    '            dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * P_SICK_DAYS) - ((P_DAY_SALARY * P_SICK_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage2PCT")) / 100))
+    '        Else
+    '            Dim dec_TT_DAYS As Decimal = dec_PRE_SICK_LEAVE + P_SICK_DAYS - 90
+    '            Dim dec_ST_DAYS As Decimal = P_SICK_DAYS - dec_TT_DAYS
+    '            dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_ST_DAYS) - ((P_DAY_SALARY * dec_ST_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage2PCT")) / 100))
+    '            dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_TT_DAYS) - ((P_DAY_SALARY * dec_TT_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage3PCT")) / 100))
+    '        End If
+    '    Else
+    '        If dec_ALL_SICK_DAYS - UpComingDays <= 30 Then
+    '            'If dec_PRE_SICK_LEAVE <= 30 Then
+    '            dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * P_SICK_DAYS) - ((P_DAY_SALARY * P_SICK_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage1PCT")) / 100))
+    '            Else
+    '            Dim dec_ST_DAYS As Decimal = dec_PRE_SICK_LEAVE + P_SICK_DAYS - 30
+    '            If True Then
+
+    '            End If
+    '            Dim dec_FT_DAYS As Decimal = P_SICK_DAYS - dec_ST_DAYS
+    '                dec_DEDUCTION_TOTAL = (P_DAY_SALARY * dec_ST_DAYS) - ((P_DAY_SALARY * dec_ST_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage2PCT")) / 100))
+    '                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + ((P_DAY_SALARY * dec_FT_DAYS) - ((P_DAY_SALARY * dec_FT_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage1PCT")) / 100)))
+    '            'End If
+    '        End If
+
+    '    End If
+    '    Return dec_DEDUCTION_TOTAL
+    'End Function
     Private Function CALCULATE_SICK_DEDUCTIONS(ByVal P_DAY_SALARY As Decimal, ByVal P_SICK_DAYS As Decimal, ByVal P_ALL_SICK_DAYS As Decimal, ByVal UpComingDays As Decimal) As Decimal
         Dim dec_SICK_DAYS As Decimal = P_SICK_DAYS
         Dim dec_ALL_SICK_DAYS As Decimal = P_ALL_SICK_DAYS
         Dim VacationsTypes As New Clshrs_VacationsTypes(Page)
         Dim IsSickVacationsType As DataSet = VacationsTypes.GetIsSickVacations()
         Dim dec_DEDUCTION_TOTAL As Decimal = 0
-        'Dim dec_PRE_SICK_LEAVE As Decimal = dec_ALL_SICK_DAYS - dec_SICK_DAYS
         Dim dec_PRE_SICK_LEAVE As Decimal = dec_ALL_SICK_DAYS - UpComingDays - dec_SICK_DAYS
-        If dec_PRE_SICK_LEAVE > 90 Then
+
+        If dec_PRE_SICK_LEAVE > 60 Then
+            ' كل الأيام في المرحلة 3
             dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * P_SICK_DAYS) - ((P_DAY_SALARY * P_SICK_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage3PCT")) / 100))
-        ElseIf dec_PRE_SICK_LEAVE > 30 And dec_PRE_SICK_LEAVE <= 90 Then
-            If dec_PRE_SICK_LEAVE + P_SICK_DAYS <= 90 Then
+
+        ElseIf dec_PRE_SICK_LEAVE > 30 And dec_PRE_SICK_LEAVE <= 60 Then
+            ' الأيام مقسمة بين المرحلة 2 والمرحلة 3
+            If dec_PRE_SICK_LEAVE + P_SICK_DAYS <= 60 Then
+                ' كل الأيام في المرحلة 2
                 dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * P_SICK_DAYS) - ((P_DAY_SALARY * P_SICK_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage2PCT")) / 100))
             Else
-                Dim dec_TT_DAYS As Decimal = dec_PRE_SICK_LEAVE + P_SICK_DAYS - 90
-                Dim dec_ST_DAYS As Decimal = P_SICK_DAYS - dec_TT_DAYS
-                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_ST_DAYS) - ((P_DAY_SALARY * dec_ST_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage2PCT")) / 100))
-                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_TT_DAYS) - ((P_DAY_SALARY * dec_TT_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage3PCT")) / 100))
-            End If
-        Else
-            If dec_ALL_SICK_DAYS - UpComingDays <= 30 Then
-                'If dec_PRE_SICK_LEAVE <= 30 Then
-                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * P_SICK_DAYS) - ((P_DAY_SALARY * P_SICK_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage1PCT")) / 100))
-                Else
-                    Dim dec_ST_DAYS As Decimal = dec_PRE_SICK_LEAVE + P_SICK_DAYS - UpComingDays - 30
-                    Dim dec_FT_DAYS As Decimal = P_SICK_DAYS - dec_ST_DAYS
-                    dec_DEDUCTION_TOTAL = (P_DAY_SALARY * dec_ST_DAYS) - ((P_DAY_SALARY * dec_ST_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage2PCT")) / 100))
-                    dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + ((P_DAY_SALARY * dec_FT_DAYS) - ((P_DAY_SALARY * dec_FT_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage1PCT")) / 100)))
-                'End If
+                ' جزء في المرحلة 2 وجزء في المرحلة 3
+                Dim dec_Stage2_Days As Decimal = 60 - dec_PRE_SICK_LEAVE  ' الأيام المتبقية حتى 60
+                Dim dec_Stage3_Days As Decimal = P_SICK_DAYS - dec_Stage2_Days  ' الأيام من 61 فما فوق
+
+                ' المرحلة 2
+                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_Stage2_Days) - ((P_DAY_SALARY * dec_Stage2_Days) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage2PCT")) / 100))
+
+                ' المرحلة 3
+                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_Stage3_Days) - ((P_DAY_SALARY * dec_Stage3_Days) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage3PCT")) / 100))
             End If
 
+        Else
+            ' dec_PRE_SICK_LEAVE <= 30
+            If dec_PRE_SICK_LEAVE + P_SICK_DAYS <= 30 Then
+                ' كل الأيام في المرحلة 1
+                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * P_SICK_DAYS) - ((P_DAY_SALARY * P_SICK_DAYS) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage1PCT")) / 100))
+
+            ElseIf dec_PRE_SICK_LEAVE + P_SICK_DAYS <= 60 Then
+                ' الأيام مقسمة بين المرحلة 1 والمرحلة 2
+                Dim dec_Stage1_Days As Decimal = 30 - dec_PRE_SICK_LEAVE
+                Dim dec_Stage2_Days As Decimal = P_SICK_DAYS - dec_Stage1_Days
+
+                ' المرحلة 1
+                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_Stage1_Days) - ((P_DAY_SALARY * dec_Stage1_Days) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage1PCT")) / 100))
+
+                ' المرحلة 2
+                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_Stage2_Days) - ((P_DAY_SALARY * dec_Stage2_Days) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage2PCT")) / 100))
+
+            Else
+                ' الأيام مقسمة بين المراحل 1 و 2 و 3
+                Dim dec_Stage1_Days As Decimal = 30 - dec_PRE_SICK_LEAVE
+                Dim dec_Stage2_Days As Decimal = 30
+                Dim dec_Stage3_Days As Decimal = P_SICK_DAYS - dec_Stage1_Days - dec_Stage2_Days
+
+                ' المرحلة 1
+                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_Stage1_Days) - ((P_DAY_SALARY * dec_Stage1_Days) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage1PCT")) / 100))
+
+                ' المرحلة 2
+                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_Stage2_Days) - ((P_DAY_SALARY * dec_Stage2_Days) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage2PCT")) / 100))
+
+                ' المرحلة 3
+                dec_DEDUCTION_TOTAL = dec_DEDUCTION_TOTAL + (P_DAY_SALARY * dec_Stage3_Days) - ((P_DAY_SALARY * dec_Stage3_Days) * (CInt(IsSickVacationsType.Tables(0).Rows(0).Item("Stage3PCT")) / 100))
+            End If
         End If
+
         Return dec_DEDUCTION_TOTAL
     End Function
+
     Private Function maxloandeduction(dtDeduct As DataTable, MaxLoanDedution As Double) As DataTable
 
         Dim drows() As DataRow = dtDeduct.Select("EmpSchID >0")
