@@ -775,6 +775,12 @@ Partial Class frmAnnualTicketRelatedRequests
                         strdirectmanager = "select ManagerID from hrs_Employees where Code='" & txtEmployee.Text & "'"
                         Dim DirectManagerID As String
                         DirectManagerID = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(CType(HttpContext.Current.Session("ConnectionString"), String), Data.CommandType.Text, strdirectmanager)
+                        '==================CheckActingAssignment===========
+                        Dim ActingEmpID As Integer
+                        ActingEmpID = CheckActingEmployeeAssignment(DirectManagerID)
+                        If ActingEmpID > 0 Then
+                            DirectManagerID = ActingEmpID
+                        End If
                         '==================CheckDelegation===========
                         Dim DelegatedEmpID As Integer
                         DelegatedEmpID = CheckDelegationSchedule(DirectManagerID)
@@ -818,6 +824,21 @@ Partial Class frmAnnualTicketRelatedRequests
                             End If
                         End If
                         Dim DsPositionEmployees As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnectionString, CommandType.Text, strempinposition)
+                        Dim PositionActingEmpID As Integer = CheckActingPositionAssignment(Row("PositionID"))
+                        If PositionActingEmpID > 0 Then
+                            Dim alreadyExists As Boolean = False
+                            For Each existingRow As DataRow In DsPositionEmployees.Tables(0).Rows
+                                If Convert.ToInt32(existingRow("EmployeeID")) = PositionActingEmpID Then
+                                    alreadyExists = True
+                                    Exit For
+                                End If
+                            Next
+                            If Not alreadyExists Then
+                                Dim newRow As DataRow = DsPositionEmployees.Tables(0).NewRow()
+                                newRow("EmployeeID") = PositionActingEmpID
+                                DsPositionEmployees.Tables(0).Rows.Add(newRow)
+                            End If
+                        End If
                         If DsPositionEmployees.Tables(0).Rows.Count > 0 Then
                             Dim strinsert As String
                             Dim strMaxRequestSerial As String
@@ -866,6 +887,11 @@ Partial Class frmAnnualTicketRelatedRequests
                         SqlCommand.Connection.Open()
                         MaxSerial = CInt(SqlCommand.ExecuteScalar())
                         SqlCommand.Connection.Close()
+                        Dim ActingEmpID As Integer
+                        ActingEmpID = CheckActingEmployeeAssignment(Row("EmployeeID"))
+                        If ActingEmpID > 0 Then
+                            Row("EmployeeID") = ActingEmpID
+                        End If
                         Dim DelegatedEmpID As Integer
                         DelegatedEmpID = CheckDelegationSchedule(Row("EmployeeID"))
                         If DelegatedEmpID > 0 Then
@@ -901,6 +927,36 @@ Partial Class frmAnnualTicketRelatedRequests
 
         Return DelegatedEmpID
 
+    End Function
+
+    Public Function CheckActingEmployeeAssignment(EmpID As Integer) As Integer
+        If EmpID <= 0 Then Return 0
+        Dim sql As String =
+            "SELECT TOP 1 ISNULL(ActingEmployeeID,0) FROM hrs_ActingEmployeeAssignments" &
+            " WHERE OriginalEmployeeID=" & EmpID &
+            " AND CancelDate IS NULL" &
+            " AND CAST(GETDATE() AS date) >= CAST(EffectiveFrom AS date)" &
+            " AND CAST(GETDATE() AS date) <= CAST(EffectiveTo AS date)" &
+            " ORDER BY ID DESC"
+        Dim actingEmpID As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(
+            CType(HttpContext.Current.Session("ConnectionString"), String), Data.CommandType.Text, sql)
+        If actingEmpID Is Nothing OrElse IsDBNull(actingEmpID) Then Return 0
+        Return Convert.ToInt32(actingEmpID)
+    End Function
+
+    Public Function CheckActingPositionAssignment(PositionID As Integer) As Integer
+        If PositionID <= 0 Then Return 0
+        Dim sql As String =
+            "SELECT TOP 1 ISNULL(ActingEmployeeID,0) FROM hrs_ActingPositionAssignments" &
+            " WHERE OriginalPositionID=" & PositionID &
+            " AND CancelDate IS NULL" &
+            " AND CAST(GETDATE() AS date) >= CAST(EffectiveFrom AS date)" &
+            " AND CAST(GETDATE() AS date) <= CAST(EffectiveTo AS date)" &
+            " ORDER BY ID DESC"
+        Dim actingEmpID As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(
+            CType(HttpContext.Current.Session("ConnectionString"), String), Data.CommandType.Text, sql)
+        If actingEmpID Is Nothing OrElse IsDBNull(actingEmpID) Then Return 0
+        Return Convert.ToInt32(actingEmpID)
     End Function
 
     Public Function GetInertedID() As Integer

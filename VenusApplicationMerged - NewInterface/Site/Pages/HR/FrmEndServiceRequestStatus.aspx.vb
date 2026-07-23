@@ -1,4 +1,4 @@
-﻿Imports Venus.Application.SystemFiles.System
+Imports Venus.Application.SystemFiles.System
 Imports Venus.Application.SystemFiles.HumanResource
 Imports System.Data
 Imports System.Data.SqlClient
@@ -29,6 +29,7 @@ Partial Class frmEmployeesVacations
         Else
             btnCancelRequest.Visible = False
         End If
+        txtCancelReason.Visible = btnCancelRequest.Visible
         ClsEmployeesVacations = New Clshrs_EmployeesVacations(Page)
         ClsEndOfService = New Clshrs_EndOfServices(Page)
 
@@ -41,6 +42,16 @@ Partial Class frmEmployeesVacations
             WebHandler.GetCookies(Page, "UserID", User)
             Dim _sys_User As New Clssys_Users(Page)
             _sys_User.Find("ID = '" & User & "'")
+
+            If Not btnCancelRequest.Visible Then
+                Dim strCheckPermission As String = " select CanDeleteSelfServiceTransactions from SS_SelfServiceTransactionUserPermissions where UserID=" & _sys_User.ID & ""
+                Dim objPermission As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strCheckPermission)
+                If objPermission IsNot Nothing AndAlso Not IsDBNull(objPermission) AndAlso CBool(objPermission) Then
+                    btnCancelRequest.Visible = True
+                End If
+            End If
+            txtCancelReason.Visible = btnCancelRequest.Visible
+
             Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
             If Not IsPostBack Then
 
@@ -451,101 +462,166 @@ Partial Class frmEmployeesVacations
         FillEmployeeVacations(ClsEmployees.ID, False)
 
     End Sub
+        Private Function HasCanDeleteSelfServiceTransactions(ConnStr As String) As Boolean
+        Dim User As String = String.Empty
+        Dim WebHandler As New Venus.Shared.Web.WebHandler
+        WebHandler.GetCookies(Page, "UserID", User)
+        Dim _sys_User As New Clssys_Users(Page)
+        _sys_User.Find("ID = '" & User & "'")
+
+        Dim strCheckPermission As String = " select CanDeleteSelfServiceTransactions from SS_SelfServiceTransactionUserPermissions where UserID=" & _sys_User.ID & ""
+        Dim objPermission As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, strCheckPermission)
+        If objPermission IsNot Nothing AndAlso Not IsDBNull(objPermission) AndAlso CBool(objPermission) Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    Private Function IsLastRequestActionNotMaxRank(FormCode As String, RequestSerial As String, ConnStr As String) As Boolean
+        Try
+            Dim strLastRank As String =
+                " select isnull(c.Rank,0) from SS_RequestActions a " &
+                " inner join SS_Configuration c on a.ConfigID = c.ID " &
+                " where a.ActionSerial = (select max(Actionserial) from SS_RequestActions where FormCode='" & FormCode & "' and RequestSerial=" & RequestSerial & " and IsHidden is null) "
+
+            Dim objLastRank As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, strLastRank)
+            If objLastRank Is Nothing OrElse IsDBNull(objLastRank) Then
+                Return False
+            End If
+
+            Dim lastRank As Integer = CInt(objLastRank)
+            Dim strMaxRank As String = " select isnull(max(Rank),0) from SS_Configuration where FormCode='" & FormCode & "' "
+            Dim objMaxRank As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, strMaxRank)
+            If objMaxRank Is Nothing OrElse IsDBNull(objMaxRank) Then
+                Return False
+            End If
+
+            Dim maxRank As Integer = CInt(objMaxRank)
+            Return lastRank <> maxRank AndAlso lastRank < maxRank
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Private Sub CancelRequest(FormCode As String, RequestSerial As String)
         Dim ConfigID As Integer = 0
         Dim CanbeCanceled As Boolean = False
 
-
-        '1-
-        'Get the Current Pending Action
-        Dim StrSelectCommand As String = String.Empty
         Dim mSelectCommand = " select ConfigID from SS_RequestActions where ActionSerial=(select max(Actionserial) from SS_RequestActions  where FormCode='" & FormCode & "' and RequestSerial=" & RequestSerial & "  and IsHidden is null) "
-        Dim mSqlDataAdapter As New SqlClient.SqlDataAdapter
         Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
         Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
         Try
-
             ConfigID = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, mSelectCommand)
-
         Catch ex As Exception
         End Try
-        '2-
-        'CheckIf Request Can be Canceled with this ConfigID Or Not 
+
         If ConfigID > 0 Then
-            Dim StrCheckCanbeCanceled As String = String.Empty
-            StrCheckCanbeCanceled = " Select isnull(CanBeCanceledInThisLevel,0) From SS_Configuration where ID=" & ConfigID & ""
-
             Try
-                CanbeCanceled = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, StrCheckCanbeCanceled)
-
-
+                CanbeCanceled = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, " Select isnull(CanBeCanceledInThisLevel,0) From SS_Configuration where ID=" & ConfigID & "")
             Catch ex As Exception
             End Try
+        End If
+
+        Dim hasDeletePermission As Boolean = HasCanDeleteSelfServiceTransactions(ConnStr)
+
+        If hasDeletePermission Then
+            If Not IsLastRequestActionNotMaxRank(FormCode, RequestSerial, ConnStr) Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Your request can't be canceled in this stage/عفوا... لايمكن الغاء الطلب في هذه المرحلة "))
+                Exit Sub
+            End If
+
+            If String.IsNullOrWhiteSpace(txtCancelReason.Text) Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please enter cancel reason./الرجاء إدخال سبب الإلغاء "))
+                Exit Sub
+            End If
+
+            If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
+            PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, True)
+            Exit Sub
         End If
 
         If CanbeCanceled Then
-            Dim canceledbefor As Integer
-            Dim mSelectCommand2 = " select count(Actionserial) from SS_RequestActions  where FormCode='" & FormCode & "' and RequestSerial=" & RequestSerial & " and ActionID =4 "
-            Dim mSqlDataAdapter2 As New SqlClient.SqlDataAdapter
-            Try
-
-                canceledbefor = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, mSelectCommand2)
-                If canceledbefor > 0 Then
-                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This request Has been canceled Before./تم الغاء هذا الطلب من قبل "))
-                    Exit Sub
-                End If
-            Catch ex As Exception
-
-            End Try
-            '3
-            'Add New Record In SS_RequestAction
-            Dim User As String = String.Empty
-            Dim WebHandler As New Venus.Shared.Web.WebHandler
-            WebHandler.GetCookies(Page, "UserID", User)
-            Dim _sys_User As New Clssys_Users(Page)
-            _sys_User.Find("ID = '" & User & "'")
-            Dim ClsEmployees As New Clshrs_Employees(Me)
-            ClsEmployees.Find("Code='" & _sys_User.Code & "'")
-            Dim InsertCommand As String
-            Dim SqlCommand As Data.SqlClient.SqlCommand
-
-            InsertCommand = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ActionID,ActionDate)  values(" & RequestSerial & " , " & ClsEmployees.ID & ",'" & FormCode & "'," & ClsEmployees.ID & ",1,4,GetDate())"
-            SqlCommand = New SqlClient.SqlCommand
-            SqlCommand.Connection = New SqlClient.SqlConnection(ConnStr)
-            SqlCommand.CommandType = CommandType.Text
-            SqlCommand.CommandText = InsertCommand
-            SqlCommand.Connection.Open()
-            SqlCommand.ExecuteNonQuery()
-            SqlCommand.Connection.Close()
-
-            Dim SqlCommandRank As Data.SqlClient.SqlCommand
-            Dim UpdateCommandRank As String = ""
-            UpdateCommandRank = "UPDATE SS_EndOfServiceRequest SET [RequestStautsTypeID] = 5 WHERE ID=" & RequestSerial & ""
-            SqlCommandRank = New SqlClient.SqlCommand
-            SqlCommandRank.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-            SqlCommandRank.CommandType = CommandType.Text
-            SqlCommandRank.CommandText = UpdateCommandRank
-            SqlCommandRank.Connection.Open()
-            SqlCommandRank.ExecuteNonQuery()
-            SqlCommandRank.Connection.Close()
-            '4- Mark Prvioues Actions as seen to prevent notifications to othes
-            Dim UpdateCommand As String
-
-            UpdateCommand = "update SS_RequestActions set seen=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " And FormCode='" & FormCode & "'"
-            SqlCommand = New SqlClient.SqlCommand
-            SqlCommand.Connection = New SqlClient.SqlConnection(ConnStr)
-            SqlCommand.CommandType = CommandType.Text
-            SqlCommand.CommandText = UpdateCommand
-            SqlCommand.Connection.Open()
-            SqlCommand.ExecuteNonQuery()
-            SqlCommand.Connection.Close()
-            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Your request Has been canceled Successfully./تم الغاء الطلب بنجاح "))
-
+            If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
+            PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, False)
         Else
             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Your request can't be canceled in this stage/عفوا... لايمكن الغاء الطلب في هذه المرحلة "))
-
+            
         End If
     End Sub
+
+    Private Function IsRequestCanceledBefore(FormCode As String, RequestSerial As String, ConnStr As String, ObjNavigationHandler As Venus.Shared.Web.NavigationHandler) As Boolean
+        Try
+            Dim mSelectCommand2 = " select count(Actionserial) from SS_RequestActions  where FormCode='" & FormCode & "' and RequestSerial=" & RequestSerial & " and ActionID =4 "
+            Dim canceledbefor As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, mSelectCommand2)
+            If canceledbefor > 0 Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This request Has been canceled Before./تم الغاء هذا الطلب من قبل "))
+                Return True
+            End If
+        Catch ex As Exception
+        End Try
+        Return False
+    End Function
+
+    Private Sub PerformCancelRequest(FormCode As String, RequestSerial As String, ConfigID As Integer, ConnStr As String, includeCancelReason As Boolean)
+        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
+        Dim User As String = String.Empty
+        Dim WebHandler As New Venus.Shared.Web.WebHandler
+        WebHandler.GetCookies(Page, "UserID", User)
+        Dim _sys_User As New Clssys_Users(Page)
+        _sys_User.Find("ID = '" & User & "'")
+        Dim ClsCurrentUserEmployee As New Clshrs_Employees(Me)
+        ClsCurrentUserEmployee.Find("Code='" & _sys_User.Code & "'")
+
+        Dim InsertCommand As String
+        If includeCancelReason Then
+            Dim requestEmployeeID As Integer = 0
+            Try
+                Dim strRequestEmp As String = " select EmployeeID from SS_EndOfServiceRequest where ID=" & RequestSerial & ""
+                Dim objRequestEmp As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, strRequestEmp)
+                If objRequestEmp IsNot Nothing AndAlso Not IsDBNull(objRequestEmp) Then
+                    requestEmployeeID = CInt(objRequestEmp)
+                End If
+            Catch ex As Exception
+            End Try
+            If requestEmployeeID = 0 Then
+                requestEmployeeID = ClsCurrentUserEmployee.ID
+            End If
+
+            Dim cancelReason As String = txtCancelReason.Text.Replace("'", "''")
+            InsertCommand = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ActionID,ActionDate,ActionRemarks)  values(" & RequestSerial & " , " & ClsCurrentUserEmployee.ID & ",'" & FormCode & "'," & requestEmployeeID & ",1,4,GetDate(),N'" & cancelReason & "')"
+        Else
+            InsertCommand = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ActionID,ActionDate)  values(" & RequestSerial & " , " & ClsCurrentUserEmployee.ID & ",'" & FormCode & "'," & ClsCurrentUserEmployee.ID & ",1,4,GetDate())"
+        End If
+
+        Dim SqlCommand As New SqlClient.SqlCommand
+        SqlCommand.Connection = New SqlClient.SqlConnection(ConnStr)
+        SqlCommand.CommandType = CommandType.Text
+        SqlCommand.CommandText = InsertCommand
+        SqlCommand.Connection.Open()
+        SqlCommand.ExecuteNonQuery()
+        SqlCommand.Connection.Close()
+
+        Dim UpdateCommandRank As String = "UPDATE SS_EndOfServiceRequest SET [RequestStautsTypeID] = 5 WHERE ID=" & RequestSerial & ""
+        Dim SqlCommandRank As New SqlClient.SqlCommand
+        SqlCommandRank.Connection = New SqlClient.SqlConnection(ClsCurrentUserEmployee.ConnectionString)
+        SqlCommandRank.CommandType = CommandType.Text
+        SqlCommandRank.CommandText = UpdateCommandRank
+        SqlCommandRank.Connection.Open()
+        SqlCommandRank.ExecuteNonQuery()
+        SqlCommandRank.Connection.Close()
+
+        Dim UpdateCommand As String = "update SS_RequestActions set seen=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " And FormCode='" & FormCode & "'"
+        SqlCommand = New SqlClient.SqlCommand
+        SqlCommand.Connection = New SqlClient.SqlConnection(ConnStr)
+        SqlCommand.CommandType = CommandType.Text
+        SqlCommand.CommandText = UpdateCommand
+        SqlCommand.Connection.Open()
+        SqlCommand.ExecuteNonQuery()
+        SqlCommand.Connection.Close()
+
+        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Your request Has been canceled Successfully./تم الغاء الطلب بنجاح "))
+    End Sub
+
     Private Function CheckEmpCode() As Boolean
         ClsEmployees = New Clshrs_Employees(Page)
         Dim ClsNationality = New Clssys_Nationality(Page)
