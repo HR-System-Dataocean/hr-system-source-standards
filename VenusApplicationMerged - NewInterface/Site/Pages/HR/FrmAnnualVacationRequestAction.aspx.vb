@@ -710,6 +710,12 @@ Partial Class frmAttendancePreparation
                                     strdirectmanager = "select ManagerID from hrs_Employees where Code='" & txtEmployee.Text & "'"
                                     Dim DirectManagerID As String
                                     DirectManagerID = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, strdirectmanager)
+                                    '==================CheckActingAssignment===========
+                                    Dim ActingEmpID As Integer
+                                    ActingEmpID = CheckActingEmployeeAssignment(DirectManagerID)
+                                    If ActingEmpID > 0 Then
+                                        DirectManagerID = ActingEmpID
+                                    End If
                                     '==================CheckDelegation===========
                                     Dim DelegatedEmpID As Integer
                                     DelegatedEmpID = CheckDelegationSchedule(DirectManagerID, dsconfig.Tables(0).Rows(0)("FormCode"))
@@ -744,6 +750,21 @@ Partial Class frmAttendancePreparation
                                     End If
 
                                     Dim DsPositionEmployees As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strempinposition)
+                                    Dim PositionActingEmpID As Integer = CheckActingPositionAssignment(Row("PositionID"))
+                                    If PositionActingEmpID > 0 Then
+                                        Dim alreadyExists As Boolean = False
+                                        For Each existingRow As DataRow In DsPositionEmployees.Tables(0).Rows
+                                            If Convert.ToInt32(existingRow("EmployeeID")) = PositionActingEmpID Then
+                                                alreadyExists = True
+                                                Exit For
+                                            End If
+                                        Next
+                                        If Not alreadyExists Then
+                                            Dim newRow As DataRow = DsPositionEmployees.Tables(0).NewRow()
+                                            newRow("EmployeeID") = PositionActingEmpID
+                                            DsPositionEmployees.Tables(0).Rows.Add(newRow)
+                                        End If
+                                    End If
                                     If DsPositionEmployees.Tables(0).Rows.Count > 0 Then
                                         For Each RW In DsPositionEmployees.Tables(0).Rows
                                             Dim DelegatedEmpID As Integer
@@ -770,6 +791,11 @@ Partial Class frmAttendancePreparation
                                 End If
                                 'Employee
                                 If Row("UserTypeID") = 3 Then
+                                    Dim ActingEmpID As Integer
+                                    ActingEmpID = CheckActingEmployeeAssignment(Row("EmployeeID"))
+                                    If ActingEmpID > 0 Then
+                                        Row("EmployeeID") = ActingEmpID
+                                    End If
                                     Dim DelegatedEmpID As Integer
                                     DelegatedEmpID = CheckDelegationSchedule(Row("EmployeeID"), dsconfig.Tables(0).Rows(0)("FormCode"))
                                     If DelegatedEmpID > 0 Then
@@ -932,6 +958,39 @@ Partial Class frmAttendancePreparation
         Return DelegatedEmpID
 
     End Function
+
+    Public Function CheckActingEmployeeAssignment(EmpID As Integer) As Integer
+        If EmpID <= 0 Then Return 0
+        Dim ClsEmployees As New Clshrs_Employees(Page)
+        Dim sql As String =
+            "SELECT TOP 1 ISNULL(ActingEmployeeID,0) FROM hrs_ActingEmployeeAssignments" &
+            " WHERE OriginalEmployeeID=" & EmpID &
+            " AND CancelDate IS NULL" &
+            " AND CAST(GETDATE() AS date) >= CAST(EffectiveFrom AS date)" &
+            " AND CAST(GETDATE() AS date) <= CAST(EffectiveTo AS date)" &
+            " ORDER BY ID DESC"
+        Dim actingEmpID As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(
+            ClsEmployees.ConnectionString, Data.CommandType.Text, sql)
+        If actingEmpID Is Nothing OrElse IsDBNull(actingEmpID) Then Return 0
+        Return Convert.ToInt32(actingEmpID)
+    End Function
+
+    Public Function CheckActingPositionAssignment(PositionID As Integer) As Integer
+        If PositionID <= 0 Then Return 0
+        Dim ClsEmployees As New Clshrs_Employees(Page)
+        Dim sql As String =
+            "SELECT TOP 1 ISNULL(ActingEmployeeID,0) FROM hrs_ActingPositionAssignments" &
+            " WHERE OriginalPositionID=" & PositionID &
+            " AND CancelDate IS NULL" &
+            " AND CAST(GETDATE() AS date) >= CAST(EffectiveFrom AS date)" &
+            " AND CAST(GETDATE() AS date) <= CAST(EffectiveTo AS date)" &
+            " ORDER BY ID DESC"
+        Dim actingEmpID As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(
+            ClsEmployees.ConnectionString, Data.CommandType.Text, sql)
+        If actingEmpID Is Nothing OrElse IsDBNull(actingEmpID) Then Return 0
+        Return Convert.ToInt32(actingEmpID)
+    End Function
+
     Protected Sub txtAlternative_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtAlternativeUser.TextChanged
         Try
             If Not String.IsNullOrEmpty(txtAlternativeUser.Text) Then
