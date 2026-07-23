@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="FrmOtherLetterRequestStatus.aspx.vb"
+<%@ Page Language="VB" AutoEventWireup="false" CodeFile="FrmOtherLetterRequestStatus.aspx.vb"
     Inherits="frmEmployeesVacations" Culture="auto" meta:resourcekey="PageResource1"
     UICulture="auto" %>
 
@@ -298,27 +298,17 @@
                             </td>
                         </tr>
                     </table>
-                    <table style="width: 100%; height: 42px; vertical-align: top">
+                                        <table style="width: 100%; height: 42px; vertical-align: top" dir="ltr">
                         <tr>
-                            <td style="width: 32px; vertical-align: top">
+                            <td style="width: 32px; vertical-align: middle; text-align: left;">
                                 <asp:Image ID="Image_Logo" runat="server" ImageAlign="Middle" ImageUrl="~/Common/Images/ToolBox/Hr_ToolBox/edit.png"
                                     meta:resourcekey="Image_LogoResource1" />
                             </td>
-                            <td style="width: 50%; vertical-align: middle">
-                                <asp:Label ID="Label_Header" runat="server" meta:resourcekey="Label_HeaderResource1"></asp:Label>
-                            </td>
-                            <td style="width: 50%; vertical-align: middle">
-                                <table style="width: 100%; vertical-align: top" cellspacing="0">
+                            <td style="vertical-align: middle; text-align: right;">
+                                <table style="width: 75%; margin-left: auto;" dir="ltr" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td style="width: 49%; vertical-align: top">
-                                            <table style="width: 100%; vertical-align: top" cellspacing="0">
-                                                <tr>
-                                                   <%-- <td style="width: 40%; height: 16px; vertical-align: middle;">
-                                                        <asp:Label ID="lblRegDate" runat="server" Text="سجل فى" SkinID="Label_CopyRightsBold"
-                                                            meta:resourcekey="lblRegDateResource1"></asp:Label>
-                                                    </td>--%>
-                                                                                                       <td>
-                                                               <igtxt:WebImageButton ID="btnCancelRequest" runat="server" Height="5px" Style="font-family: Tahoma;
+                                        <td style="width: 130px; vertical-align: middle; white-space: nowrap;">
+                                            <igtxt:WebImageButton ID="btnCancelRequest" runat="server" Height="5px" Style="font-family: Tahoma;
     font-size: 8pt; font-weight: Normal; color: Black" meta:resourcekey="btnCancelRequest"
     Overflow="NoWordWrap" Text=" Cancel Request" UseBrowserDefaults="False" Width="120px">
     <Alignments TextImage="TextRightImageLeft" VerticalImage="Middle" />
@@ -329,60 +319,26 @@
             WidthBottom="1px" WidthLeft="1px" WidthRight="1px" WidthTop="1px" />
     </Appearance>
 </igtxt:WebImageButton>
-               </td>
-                                                    <td style="width: 60%; height: 16px; vertical-align: middle;">
-                                                        <asp:Label ID="lblRegDateValue" runat="server" SkinID="Label_CopyRightsNormal" meta:resourcekey="lblRegDateValueResource1"></asp:Label>
-                                                    </td>
-                                                </tr>
-                                            </table>
                                         </td>
-                                        <td style="width: 2%; vertical-align: top">
-                                        </td>
-                                        <td style="width: 49%; vertical-align: top">
-                                            <table style="width: 100%; vertical-align: top" cellspacing="0">
-                                                <tr>
-                                                    <td style="width: 40%; height: 16px; vertical-align: middle;">
-                                                        <asp:Label ID="lblRegUser" runat="server" Text="سجل بواسطة" SkinID="Label_CopyRightsBold"
-                                                            meta:resourcekey="lblRegUserResource1"></asp:Label>
-                                                    </td>
-                                                    <td style="width: 60%; height: 16px; vertical-align: middle;">
-                                                        <asp:Label ID="lblRegUserValue" runat="server" SkinID="Label_CopyRightsNormal" meta:resourcekey="lblRegUserValueResource1"></asp:Label>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 49%; vertical-align: top">
-                                            <table style="width: 100%; vertical-align: top" cellspacing="0">
-                                                <tr>
-                                                    <td style="width: 40%; height: 16px; vertical-align: middle;">
-                                                        &nbsp;
-                                                    </td>
-                                                    <td style="width: 60%; height: 16px; vertical-align: middle;">
-                                                        &nbsp;
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                        <td style="width: 2%; vertical-align: top">
-                                        </td>
-                                        <td style="width: 49%; vertical-align: top">
-                                            <table style="width: 100%; vertical-align: top" cellspacing="0">
-                                                <tr>
-                                                    <td style="width: 40%; height: 16px; vertical-align: middle;">
-                                                    </td>
-                                                    <td style="width: 60%; height: 16px; vertical-align: middle;">
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                        <td style="width: 100%; vertical-align: middle; padding-left: 6px;">
+                                            <asp:TextBox ID="txtCancelReason" runat="server"
+                                                Height="28px" MaxLength="500" meta:resourcekey="txtCancelReasonResource1"
+                                                Visible="False" style="width: 100% !important; box-sizing: border-box;"></asp:TextBox>
+                                            <asp:Label ID="Label_Header" runat="server" meta:resourcekey="Label_HeaderResource1"></asp:Label>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
-                    </table>
-                </td>
+                        <tr>
+                            <td colspan="2" style="text-align: right; vertical-align: middle;">
+                                <asp:Label ID="lblRegDateValue" runat="server" SkinID="Label_CopyRightsNormal" meta:resourcekey="lblRegDateValueResource1"></asp:Label>
+                                <asp:Label ID="lblRegUser" runat="server" Text="سجل بواسطة" SkinID="Label_CopyRightsBold"
+                                    meta:resourcekey="lblRegUserResource1"></asp:Label>
+                                <asp:Label ID="lblRegUserValue" runat="server" SkinID="Label_CopyRightsNormal" meta:resourcekey="lblRegUserValueResource1"></asp:Label>
+                            </td>
+                        </tr>
+                    </table></td>
             </tr>
 
             <tr>
