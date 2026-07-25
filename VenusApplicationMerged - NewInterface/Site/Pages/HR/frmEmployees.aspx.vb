@@ -40,6 +40,8 @@ Partial Class frmEmployees
     Const uwgDestination = 4
 
     Const csOtherFields = 11
+    Dim joinDateChanged As Boolean = False
+    Dim ClassIDChanged As Boolean = False
 #End Region
 
 #Region "Protected Sub"
@@ -202,7 +204,7 @@ Partial Class frmEmployees
                         End If
 
                         ' إعادة تعيين ClsEmployees بالقيم الجديدة
-                        AssignValues_Employees()
+                        AssignValues_Employees2()
 
                         ' حفظ الموظف
                         If ClsEmployees.ID > 0 Then
@@ -297,6 +299,16 @@ Partial Class frmEmployees
                 If ClsEmployees.ID > 0 Then
 
                     If txtBankAccount.Text <> "" Then
+
+
+                        If txtBankAccount.Text.Contains(" ") Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... Bank Account Number. cannot contain spaces /عفوا...رقم الحساب البنكي لا يمكن أن يحتوي على مسافات"))
+                            txtIdentity.Focus()
+                            Exit Sub
+                        End If
+
+
+
                         Dim checkCnt = "select top 1 Code from hrs_employees where BankAccountNumber = '" & txtBankAccount.Text & "' and Code <> '" & txtCode.Text & "' and branchID = '" & ddlBranch.SelectedValue & "'"
                         Dim cnt As String = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, CommandType.Text, checkCnt)
                         If cnt <> "" Then
@@ -430,6 +442,12 @@ Partial Class frmEmployees
 
                     If LockJoinDate Then
                         If JoinDate.Text <> TxtHDJoinDate.Value Or ddlEmployeeClass.SelectedValue <> TxtHDClassID.Value Then
+                            If JoinDate.Text <> TxtHDJoinDate.Value Then
+                                joinDateChanged = True
+                            End If
+                            If ddlEmployeeClass.SelectedValue <> TxtHDClassID.Value Then
+                                ClassIDChanged = True
+                            End If
                             ' نحفظ الزرار اللي عمل الحفظ
                             Dim pendingID As String = CType(sender, Control).UniqueID
                             hdnPendingSaveControlID.Value = pendingID
@@ -737,7 +755,7 @@ Partial Class frmEmployees
                             Dim Maxreturndate As Date = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, CommandType.Text, strMaxVacationReturnDate)
                             If Maxreturndate <> Nothing Then
                                 If CDate(JoinDate.Text) < Maxreturndate Then
-                                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... New Join Date Can't be in a previous date to the last annual leave return date '" & Maxreturndate & "'  /عفوا...لا يمكن ان يكون تاريخ المباشرة الجديد في تاريخ سابق لتاريخ اخر عودة من اجازة سنويه '" & Maxreturndate & "'  "))
+                                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... New Join Date Can't be in a previous date to the last annual leave return date : '" & Maxreturndate & "'  /عفوا...لا يمكن ان يكون تاريخ المباشرة الجديد في تاريخ سابق لتاريخ اخر عودة من اجازة سنويه : '" & Maxreturndate & "'  "))
                                     Exit Sub
                                 End If
                             End If
@@ -1457,7 +1475,10 @@ Partial Class frmEmployees
                     .PositionID = 0
                 End Try
                 Try
-                    .EmployeeClassID = IIf(ddlEmployeeClass.Items.Count = 0, 0, ddlEmployeeClass.SelectedItem.Value) 'DdlEmployeeClass.SelectedItem.Value
+                    If Not ClassIDChanged Then
+                        .EmployeeClassID = IIf(ddlEmployeeClass.Items.Count = 0, 0, ddlEmployeeClass.SelectedItem.Value) 'DdlEmployeeClass.SelectedItem.Value
+
+                    End If
 
                 Catch ex As Exception
                     .EmployeeClassID = 0
@@ -1838,7 +1859,100 @@ Partial Class frmEmployees
                 .BranchID = ddlBranch.SelectedValue
                 .GosiNumber = txtGosiNumber.Text.Trim()
                 .GOSIJoinDate = SetDate(GOSIJoinDate.Text, GOSIJoinDate.Text) 'IIf(GOSIJoinDate.Value.Trim = "", Nothing, .SetHigriDate(GOSIJoinDate.Text))
-                .JoinDate = SetDate(JoinDate.Text, JoinDate.Text) 'IIf(JoinDate.Value.Trim = "", NClsEmployees.HasTaqatothing, .SetHigriDate(JoinDate.Text))
+                If Not joinDateChanged Then
+                    .JoinDate = SetDate(JoinDate.Text, JoinDate.Text) 'IIf(JoinDate.Value.Trim = "", NClsEmployees.HasTaqatothing, .SetHigriDate(JoinDate.Text))
+
+                End If
+                .GOSIExcludeDate = SetDate(GOSIExcludeDate.Text, GOSIExcludeDate.Text) '' IIf(GOSIExcludeDate.Value.Trim = "", Nothing, .SetHigriDate(GOSIExcludeDate.Text))
+                .AddressAsPerContract = txtAddress.Text.Trim()
+                .EntryNo = txtEntry.Text.Trim()
+                .SSnNo = txtIdentity.Text.Trim()
+                .SSNOIssueDate = txtSSNoIssueDate.Text
+                .SSNOExpireDate = txtSSNoExpireDate.Text
+                .PassPortNo = txtPassport.Text.Trim()
+                .PassportIssueDate = txtPassportIssueDate.Text
+                .PassportExpireDate = textPssportExpDate.Text
+                '.Cost1 = ddlCost1.SelectedValue
+                '.Cost2 = ddlCost2.SelectedValue
+                '.Cost3 = ddlCost3.SelectedValue
+                '.Cost4 = ddlCost4.SelectedValue
+
+                .Cost1 = GetCostCenter1ID(TxtCostCode1.Text)
+                .Cost2 = GetCostCenter2ID(TxtCostCode2.Text)
+                .Cost3 = GetCostCenter3ID(TxtCostCode3.Text)
+                .Cost4 = GetCostCenter4ID(TxtCostCode4.Text)
+                .IsProjectRelated = .IsProjectRelated
+                .IsSpecialForce = .IsSpecialForce
+                .WHours = IIf(.WHours = Nothing, 0, .WHours)
+                .SectorID = ddlSectors.SelectedValue
+                .LedgerCode = txtLedgerCode.Text
+                .HasTaqat = CheckBox1.Checked
+                .Hasflexiblesalarydist = chkflexiblesalarydist.Checked
+                .InsertRequestsForAnotherEmployee = chkInsertRequestsForAnotherEmployee.Checked
+                .IsSocialInsuranceIncluded = chkIsSocialInsuranceIncluded.Checked
+                .paymenttype = ddlLblPaymentType.SelectedValue
+
+
+                .BankAccountType = IIf(ddlBankAccountType.SelectedValue <> "0", ddlBankAccountType.SelectedValue, "")
+
+                Dim clsEmp As New Clshrs_Employees(Page)
+                clsEmp.Find(" Code='" & txtManager.Text & "'")
+                If clsEmp.ID > 0 Then
+                    .ManagerID = clsEmp.ID
+                Else
+                    .ManagerID = Nothing
+                End If
+            End With
+            Return True
+        Catch ex As Exception
+        End Try
+    End Function
+
+    Private Function AssignValues_Employees2() As Boolean
+        Try
+            With ClsEmployees
+
+                .Code = txtCode.Text
+                .EngName = txtEngName.Text
+                .ArbName = txtArbName.Text
+                .FamilyEngName = txtEngFamilyName.Text
+                .FamilyArbName = txtArbFamilyName.Text
+                .FatherEngName = txtEngFathername.Text
+                .FatherArbName = txtArbFatherName.Text
+                .GrandEngName = txtEngGrandName.Text
+                .GrandArbName = txtArbGrandName.Text
+                .E_Mail = txtEmail.Text
+                .WorkE_Mail = txtWorkE_Mail.Text
+                .Phone = txtPhone.Text
+                .Mobile = txtMobile.Text
+                .MachineCode = TextBox_MachineCode.Text
+                .MacAddress = txtMacAddress.Text.Trim()
+
+                .BirthDate = SetDate(txtBirthDate.Text, txtBirthDateH.Text)
+
+                .BirthCityID = DdlBirthCity.SelectedItem.Value
+                .ReligionID = DdlReligion.SelectedItem.Value
+                .MaritalStatusID = DdlMaritalStatus.SelectedItem.Value
+                .MachineCode = IIf(TextBox_MachineCode.Text = "", txtCode.Text, TextBox_MachineCode.Text)
+                '-------------------------------0257 MODIFIED-----------------------------------------
+                If (DdlGender.SelectedValue = "M" Or DdlGender.SelectedValue = "1") Then
+                    .Sex = "M"
+                ElseIf (DdlGender.SelectedValue = "F" Or DdlGender.SelectedValue = "2") Then
+                    .Sex = "F"
+                End If
+                '-------------------------------=============-----------------------------------------
+                .BloodGroupID = DdlBloodGroups.SelectedItem.Value
+                .BankID = ddlBank.SelectedItem.Value
+                .SponsorID = ddlSponsor.SelectedItem.Value
+                .NationalityID = DdlNationality.SelectedItem.Value
+                .BankAccountNumber = txtBankAccount.Text.Trim()
+                .DepartmentID = ddlDepartment.SelectedValue
+                .LocationID = DropDownList_Location.SelectedValue
+                .BranchID = ddlBranch.SelectedValue
+                .GosiNumber = txtGosiNumber.Text.Trim()
+                .GOSIJoinDate = SetDate(GOSIJoinDate.Text, GOSIJoinDate.Text) 'IIf(GOSIJoinDate.Value.Trim = "", Nothing, .SetHigriDate(GOSIJoinDate.Text))
+
+                '.JoinDate = SetDate(JoinDate.Text, JoinDate.Text) 'IIf(JoinDate.Value.Trim = "", NClsEmployees.HasTaqatothing, .SetHigriDate(JoinDate.Text))
                 .GOSIExcludeDate = SetDate(GOSIExcludeDate.Text, GOSIExcludeDate.Text) '' IIf(GOSIExcludeDate.Value.Trim = "", Nothing, .SetHigriDate(GOSIExcludeDate.Text))
                 .AddressAsPerContract = txtAddress.Text.Trim()
                 .EntryNo = txtEntry.Text.Trim()
