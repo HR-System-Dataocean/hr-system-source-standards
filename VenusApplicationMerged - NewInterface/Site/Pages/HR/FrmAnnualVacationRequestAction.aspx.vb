@@ -733,6 +733,17 @@ Partial Class frmAttendancePreparation
                                     SqlCommand.Connection.Open()
                                     SqlCommand.ExecuteNonQuery()
                                     SqlCommand.Connection.Close()
+
+                                    Dim SqlCommand5 As Data.SqlClient.SqlCommand
+                                    Dim UpdateCommand5 As String = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " , ConfirmedNoOfDays=" & txtConfirmedDays.Text & ",ActionDate= GETDATE() , ActionRemarks='" & txtActionRemarks.Text & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " And ActionID is null"
+                                    SqlCommand5 = New SqlClient.SqlCommand
+                                    SqlCommand5.Connection = New SqlClient.SqlConnection(ClsEmployees2.ConnectionString)
+                                    SqlCommand5.CommandType = CommandType.Text
+                                    SqlCommand5.CommandText = UpdateCommand5
+                                    SqlCommand5.Connection.Open()
+                                    SqlCommand5.ExecuteNonQuery()
+                                    SqlCommand5.Connection.Close()
+
                                 End If
                                 'Position
                                 If Row("UserTypeID") = 2 Then
@@ -784,6 +795,15 @@ Partial Class frmAttendancePreparation
                                             SqlCommand.ExecuteNonQuery()
                                             SqlCommand.Connection.Close()
                                         Next
+                                        Dim SqlCommand5 As Data.SqlClient.SqlCommand
+                                        Dim UpdateCommand5 As String = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " , ConfirmedNoOfDays=" & txtConfirmedDays.Text & ",ActionDate= GETDATE() , ActionRemarks='" & txtActionRemarks.Text & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " And ActionID is null"
+                                        SqlCommand5 = New SqlClient.SqlCommand
+                                        SqlCommand5.Connection = New SqlClient.SqlConnection(ClsEmployees2.ConnectionString)
+                                        SqlCommand5.CommandType = CommandType.Text
+                                        SqlCommand5.CommandText = UpdateCommand5
+                                        SqlCommand5.Connection.Open()
+                                        SqlCommand5.ExecuteNonQuery()
+                                        SqlCommand5.Connection.Close()
                                     Else
                                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Can not proceed your request because there are no employees in the next level ...Please contact system admin  / عفوا لايمكن تسجيل الطلب لعدم وجود موظفين في المرحلة التالية ... يرجي مراجعة مدير النظام"))
                                         Return
@@ -812,6 +832,18 @@ Partial Class frmAttendancePreparation
                                     SqlCommand.Connection.Open()
                                     SqlCommand.ExecuteNonQuery()
                                     SqlCommand.Connection.Close()
+
+                                    Dim SqlCommand5 As Data.SqlClient.SqlCommand
+                                    Dim UpdateCommand5 As String = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " , ConfirmedNoOfDays=" & txtConfirmedDays.Text & ",ActionDate= GETDATE() , ActionRemarks='" & txtActionRemarks.Text & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " And ActionID is null"
+                                    SqlCommand5 = New SqlClient.SqlCommand
+                                    SqlCommand5.Connection = New SqlClient.SqlConnection(ClsEmployees2.ConnectionString)
+                                    SqlCommand5.CommandType = CommandType.Text
+                                    SqlCommand5.CommandText = UpdateCommand5
+                                    SqlCommand5.Connection.Open()
+                                    SqlCommand5.ExecuteNonQuery()
+                                    SqlCommand5.Connection.Close()
+
+
                                 End If
                             Next
 
@@ -832,6 +864,7 @@ Partial Class frmAttendancePreparation
 
 
                 End If
+
 
 
 
