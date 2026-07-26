@@ -47,22 +47,62 @@
   <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
 
-  <data name="PageResource1.Title" xml:space="preserve"><value>التكليف بالإنابة وتسليم مهام الاعتماد</value></data>
-  <data name="lblPageTitleResource1.Text" xml:space="preserve"><value>التكليف بالإنابة وتسليم مهام الاعتماد</value></data>
-  <data name="lblEmployeeHeaderResource1.Text" xml:space="preserve"><value>الموظف محل إخلاء الطرف</value></data>
-  <data name="lblEmployeeCodeCaptionResource1.Text" xml:space="preserve"><value>كود الموظف:</value></data>
-  <data name="lblEmployeeNameCaptionResource1.Text" xml:space="preserve"><value>اسم الموظف:</value></data>
-  <data name="lblTransferTitleResource1.Text" xml:space="preserve"><value>بيانات التكليف وتسليم مهام الاعتماد</value></data>
-  <data name="chkSameEmployeeResource1.Text" xml:space="preserve"><value>استخدام نفس الموظف للمهمتين</value></data>
-  <data name="lblEffectiveFromResource1.Text" xml:space="preserve"><value>ساري من:</value></data>
-  <data name="lblEffectiveToResource1.Text" xml:space="preserve"><value>ساري إلى:</value></data>
-  <data name="MsgEffectiveDatesRequired" xml:space="preserve"><value>يرجى تحديد تاريخ البداية والنهاية للإنابة.</value></data>
-  <data name="MsgEffectiveDatesInvalid" xml:space="preserve"><value>يجب أن يكون تاريخ نهاية الإنابة بعد تاريخ بدايتها.</value></data>
-  <data name="lblReplacementEmployeeResource1.Text" xml:space="preserve"><value>المعتمد البديل:</value></data>
-  <data name="lblDelegateEmployeeResource1.Text" xml:space="preserve"><value>المفوَّض للطلبات المعلقة:</value></data>
+  <data name="PageResource1.Title" xml:space="preserve"><value>التكليف بالإنابة وتسليم مهام الاعتماد والعهد المادية</value></data>
+  <data name="lblPageTitleResource1.Text" xml:space="preserve"><value>التكليف بالإنابة وتسليم مهام الاعتماد والعهد المادية</value></data>
+  <data name="lblEmployeeHeaderResource1.Text" xml:space="preserve"><value>الموظف تحت إجراءات المخالصة</value></data>
+  <data name="lblEmployeeCodeCaptionResource1.Text" xml:space="preserve"><value>كود الموظف</value></data>
+  <data name="lblEmployeeNameCaptionResource1.Text" xml:space="preserve"><value>اسم الموظف</value></data>
+  <data name="lblLastWorkingDateCaptionResource1.Text" xml:space="preserve"><value>آخر يوم عمل</value></data>
+  <data name="lblSummaryTitleResource1.Text" xml:space="preserve"><value>ملخص تحليل النظام</value></data>
+  <data name="lblSummaryCompletedResource1.Text" xml:space="preserve"><value>مكتمل</value></data>
+  <data name="lblMetricPendingCaptionResource1.Text" xml:space="preserve"><value>الطلبات المعلقة التي تتطلب إجراء</value></data>
+  <data name="lblMetricRulesCaptionResource1.Text" xml:space="preserve"><value>قواعد الموافقات المرتبطة</value></data>
+  <data name="lblMetricReportsCaptionResource1.Text" xml:space="preserve"><value>الموظفون التابعون مباشرة</value></data>
+  <data name="lblMetricCustodyCaptionResource1.Text" xml:space="preserve"><value>عناصر العهد المادية</value></data>
+  <data name="lblMetricActionsCaptionResource1.Text" xml:space="preserve"><value>الإجراءات المطلوبة من المستخدم</value></data>
+  <data name="lblSummaryDescResource1.Text" xml:space="preserve"><value>قام النظام بتحليل مسؤوليات الاعتماد والطلبات المعلقة والموظفين التابعين والعهد المادية، وحدد الإجراءات المطلوبة لإتمام المخالصة.</value></data>
+  <data name="lblHandoverTitleResource1.Text" xml:space="preserve"><value>بيانات التكليف وتسليم مهام الاعتماد</value></data>
+  <data name="lblActionsBadgeFormat" xml:space="preserve"><value>{0} إجراءات</value></data>
+  <data name="lblEmployeesBadgeFormat" xml:space="preserve"><value>{0} موظفاً</value></data>
+  <data name="lblDirectManagerSectionTitleResource1.Text" xml:space="preserve"><value>مسؤوليات المدير المباشر</value></data>
+  <data name="lblDirectManagerSectionDescFormat" xml:space="preserve"><value>هذا الموظف مسجل حالياً كمدير مباشر لعدد {0} موظفاً.</value></data>
+  <data name="lblNewDirectManagerResource1.Text" xml:space="preserve"><value>المدير المباشر الجديد</value></data>
+  <data name="btnSearchNewManagerResource1.ToolTip" xml:space="preserve"><value>بحث عن موظف</value></data>
+  <data name="lblEmployeeHistoryUpdateResource1.Text" xml:space="preserve"><value>تحديث سجل الموظف</value></data>
+  <data name="lblEmployeeHistoryUpdateValueResource1.Text" xml:space="preserve"><value>نعم - تلقائي</value></data>
+  <data name="lblDirectManagerInfoFormat" xml:space="preserve"><value>سيتم تحديث المدير المحدد في ملفات الموظفين ({0})، وتسجيل كل تغيير في سجل الموظف وسجل التدقيق.</value></data>
+  <data name="lblAutoApprovalSectionTitleResource1.Text" xml:space="preserve"><value>المعالجة التلقائية للموافقات</value></data>
+  <data name="lblAutoApprovalSectionDescResource1.Text" xml:space="preserve"><value>يوجد موظفون نشطون آخرون على نفس الدرجة والفرع وإعداد الموافقة مع تفعيل خيار التطبيق على الجميع.</value></data>
+  <data name="lblNoActionRequiredResource1.Text" xml:space="preserve"><value>لا يلزم إجراء</value></data>
+  <data name="lblAutoApprovalInfoResource1.Text" xml:space="preserve"><value>ستستمر إعدادات الموافقات تلقائياً للموظفين الآخرين المستوفين للشروط، ولا يلزم تحديد بديل لهذه القواعد.</value></data>
+  <data name="lblRemarksResource1.Text" xml:space="preserve"><value>ملاحظات</value></data>
+  <data name="txtRemarksDefault" xml:space="preserve"><value>إخلاء طرف نهاية الخدمة. سيتم تحديث مسؤوليات الاعتماد والطلبات المعلقة وتعيينات المدير المباشر وفقاً للسيناريوهات المكتشفة.</value></data>
+  <data name="lblApprovalConfigResource1.Text" xml:space="preserve"><value>إعدادات الموافقات</value></data>
+  <data name="lblApprovalConfigValueResource1.Text" xml:space="preserve"><value>سيتم التحديث تلقائياً</value></data>
+  <data name="MsgEnterNewManager" xml:space="preserve"><value>يرجى إدخال المدير المباشر الجديد.</value></data>
+  <data name="MsgManagerUpdated" xml:space="preserve"><value>تم تحديث المدير المباشر لعدد {0} موظفاً.</value></data>
+
+  <data name="lblReplacementSectionTitleResource1.Text" xml:space="preserve"><value>استبدال اعتماد الموظف / الوظيفة</value></data>
+  <data name="lblReplacementSectionDescResource1.Text" xml:space="preserve"><value>الموظف مرتبط مباشرة بقواعد موافقات، وهو أيضاً الموظف النشط الوحيد في أحد إعدادات الدرجة الوظيفية بالفرع المحدد.</value></data>
+  <data name="lblUserActionRequiredResource1.Text" xml:space="preserve"><value>يلزم إجراء من المستخدم</value></data>
+  <data name="lblReplacementEmployeeResource1.Text" xml:space="preserve"><value>المعتمد البديل</value></data>
+  <data name="lblEffectiveFromResource1.Text" xml:space="preserve"><value>ساري من</value></data>
+  <data name="lblEffectiveToResource1.Text" xml:space="preserve"><value>ساري إلى</value></data>
+  <data name="lblReplacementInfoResource1.Text" xml:space="preserve"><value>سيؤدي حفظ العملية إلى تحديث إعدادات موافقات الخدمة الذاتية المرتبطة وإنشاء حركة تكليف بالإنابة.</value></data>
+
+  <data name="lblDelegateSectionTitleResource1.Text" xml:space="preserve"><value>تفويض الطلبات المعلقة</value></data>
+  <data name="lblDelegateSectionDescResource1.Text" xml:space="preserve"><value>توجد طلبات معلقة لا يمكن تحويلها تلقائياً لأن خيار التطبيق على الجميع غير مفعل في الإعداد المرتبط.</value></data>
+  <data name="chkSameEmployeeResource1.Text" xml:space="preserve"><value>استخدام المعتمد البديل للطلبات المعلقة</value></data>
+  <data name="lblDelegateEmployeeResource1.Text" xml:space="preserve"><value>معتمد الطلبات المعلقة</value></data>
+  <data name="lblHandlingMethodResource1.Text" xml:space="preserve"><value>طريقة المعالجة</value></data>
+  <data name="lblHandlingMethodValueResource1.Text" xml:space="preserve"><value>إعادة إسناد الطلبات المعلقة الحالية</value></data>
+
   <data name="btnSearchReplacementEmpResource1.ToolTip" xml:space="preserve"><value>بحث عن موظف</value></data>
   <data name="btnSearchDelegateEmpResource1.ToolTip" xml:space="preserve"><value>بحث عن موظف</value></data>
-  <data name="btnTransferApprovalsResource1.Text" xml:space="preserve"><value>إتمام التسليم</value></data>
+  <data name="btnTransferApprovalsResource1.Text" xml:space="preserve"><value>حفظ بيانات التسليم</value></data>
+  <data name="btnCloseResource1.Text" xml:space="preserve"><value>إغلاق</value></data>
+  <data name="btnRefreshResource1.Text" xml:space="preserve"><value>تحديث</value></data>
+
   <data name="lblActionNeededTitleResource1.Text" xml:space="preserve"><value>طلبات معلقة تتطلب إجراءً من الموظف</value></data>
   <data name="lblSubmittedOpenTitleResource1.Text" xml:space="preserve"><value>طلبات مقدمة من الموظف وما زالت مفتوحة</value></data>
   <data name="lblConfigurationTitleResource1.Text" xml:space="preserve"><value>قواعد الاعتماد المرتبطة بالموظف أو الوظيفة</value></data>
@@ -74,8 +114,6 @@
   <data name="colFormCodeResource1.HeaderText" xml:space="preserve"><value>كود النموذج</value></data>
   <data name="colRankResource1.HeaderText" xml:space="preserve"><value>مستوى الاعتماد</value></data>
   <data name="colMatchTypeResource1.HeaderText" xml:space="preserve"><value>صفة الاعتماد</value></data>
-  <data name="btnCloseResource1.Text" xml:space="preserve"><value>إغلاق</value></data>
-  <data name="btnRefreshResource1.Text" xml:space="preserve"><value>تحديث</value></data>
 
   <data name="MsgConfirmHandover" xml:space="preserve"><value>هل تريد إتمام تسليم مهام الاعتماد إلى الموظفين المحددين؟</value></data>
   <data name="MsgErrorPrefix" xml:space="preserve"><value>حدث خطأ: </value></data>
@@ -86,7 +124,80 @@
   <data name="MsgCannotTransferSame" xml:space="preserve"><value>لا يمكن تحويل الاعتمادات لنفس الموظف.</value></data>
   <data name="MsgTransferSuccess" xml:space="preserve"><value>تم التحويل بنجاح. الطلبات: {0} - الإعدادات: {1}</value></data>
   <data name="MsgTransferFailed" xml:space="preserve"><value>فشل التحويل: </value></data>
+  <data name="MsgEffectiveDatesRequired" xml:space="preserve"><value>يرجى تحديد تاريخ البداية والنهاية للإنابة.</value></data>
+  <data name="MsgEffectiveDatesInvalid" xml:space="preserve"><value>يجب أن يكون تاريخ نهاية الإنابة بعد تاريخ بدايتها.</value></data>
   <data name="MatchTypeEmployee" xml:space="preserve"><value>موظف</value></data>
   <data name="MatchTypeDirectManager" xml:space="preserve"><value>مدير مباشر</value></data>
   <data name="MatchTypePosition" xml:space="preserve"><value>منصب</value></data>
+
+  <data name="lblCustodyTitleResource1.Text" xml:space="preserve"><value>العهد المادية المسندة للموظف</value></data>
+  <data name="lblCustodyTotalCaptionResource1.Text" xml:space="preserve"><value>إجمالي العهد المسندة</value></data>
+  <data name="lblCustodyTotalSubResource1.Text" xml:space="preserve"><value>إجمالي العهد المسندة</value></data>
+  <data name="lblCustodyPendingCaptionResource1.Text" xml:space="preserve"><value>بانتظار الإرجاع</value></data>
+  <data name="lblCustodyPendingSubResource1.Text" xml:space="preserve"><value>بانتظار الإرجاع</value></data>
+  <data name="lblCustodyReturnedCaptionResource1.Text" xml:space="preserve"><value>العهد المرتجعة</value></data>
+  <data name="lblCustodyReturnedSubResource1.Text" xml:space="preserve"><value>العهد المرتجعة</value></data>
+  <data name="lblCustodyClearanceCaptionResource1.Text" xml:space="preserve"><value>حالة تصفية العهد</value></data>
+  <data name="lblCustodyClearanceSubResource1.Text" xml:space="preserve"><value>حالة تصفية العهد</value></data>
+  <data name="lblCustodyStatusIncomplete" xml:space="preserve"><value>غير مكتمل</value></data>
+  <data name="lblCustodyStatusComplete" xml:space="preserve"><value>مكتمل</value></data>
+  <data name="txtCustodySearchResource1.ToolTip" xml:space="preserve"><value>ابحث بكود العهدة أو الاسم أو الرقم التسلسلي</value></data>
+  <data name="btnCustodySearchResource1.Text" xml:space="preserve"><value>بحث</value></data>
+  <data name="ddlCustodyFilterAllResource1.Text" xml:space="preserve"><value>جميع العهد</value></data>
+  <data name="ddlCustodyFilterPendingResource1.Text" xml:space="preserve"><value>بانتظار الإرجاع</value></data>
+  <data name="ddlCustodyFilterReturnedResource1.Text" xml:space="preserve"><value>المرتجعة</value></data>
+  <data name="btnMarkAllReturnedResource1.Text" xml:space="preserve"><value>تحديد الكل كمرتجع</value></data>
+  <data name="MsgConfirmMarkAllReturned" xml:space="preserve"><value>هل تريد تعليم جميع العهد المعلقة كمرتجعة؟</value></data>
+  <data name="grdCustodyResource1.EmptyDataText" xml:space="preserve"><value>لا توجد عهد مسندة لهذا الموظف</value></data>
+  <data name="colCustodyRowResource1.HeaderText" xml:space="preserve"><value>#</value></data>
+  <data name="colAssetCodeResource1.HeaderText" xml:space="preserve"><value>كود العهدة</value></data>
+  <data name="colAssetNameResource1.HeaderText" xml:space="preserve"><value>اسم العهدة</value></data>
+  <data name="colSerialNoResource1.HeaderText" xml:space="preserve"><value>الرقم التسلسلي أو المرجعي</value></data>
+  <data name="colReceivedDateResource1.HeaderText" xml:space="preserve"><value>تاريخ الاستلام</value></data>
+  <data name="colCustodyStatusResource1.HeaderText" xml:space="preserve"><value>الحالة</value></data>
+  <data name="colReturnedDateResource1.HeaderText" xml:space="preserve"><value>تاريخ الإرجاع</value></data>
+  <data name="colReturnConditionResource1.HeaderText" xml:space="preserve"><value>حالة الإرجاع</value></data>
+  <data name="colCustodyActionResource1.HeaderText" xml:space="preserve"><value>إجراء</value></data>
+  <data name="lblStatusPendingReturn" xml:space="preserve"><value>بانتظار الإرجاع</value></data>
+  <data name="lblStatusReturned" xml:space="preserve"><value>تم الإرجاع</value></data>
+  <data name="btnConfirmReturn" xml:space="preserve"><value>تأكيد الإرجاع</value></data>
+  <data name="btnCompleted" xml:space="preserve"><value>مكتمل</value></data>
+  <data name="ddlConditionSelect" xml:space="preserve"><value>اختر الحالة</value></data>
+  <data name="ddlConditionGood" xml:space="preserve"><value>حالة جيدة</value></data>
+  <data name="ddlConditionDamaged" xml:space="preserve"><value>تالفة</value></data>
+  <data name="ddlConditionLost" xml:space="preserve"><value>مفقودة</value></data>
+  <data name="ddlConditionOther" xml:space="preserve"><value>أخرى</value></data>
+  <data name="lblCustodyWarningResource1.Text" xml:space="preserve"><value>لا يمكن استكمال المخالصة طالما توجد عهدة بحالة بانتظار الإرجاع، إلا عند تسجيل استثناء معتمد.</value></data>
+  <data name="MsgReturnDateRequired" xml:space="preserve"><value>يرجى إدخال تاريخ الإرجاع.</value></data>
+  <data name="MsgReturnConditionRequired" xml:space="preserve"><value>يرجى اختيار حالة الإرجاع.</value></data>
+  <data name="MsgReturnSuccess" xml:space="preserve"><value>تم تأكيد إرجاع العهدة بنجاح.</value></data>
+  <data name="MsgMarkAllSuccess" xml:space="preserve"><value>تم تعليم {0} عهدة كمرتجعة.</value></data>
+  <data name="MsgAssetLocked" xml:space="preserve"><value>لا يمكن إرجاع هذه العهدة من هذه الشاشة لأنها مرتبطة بالأصول.</value></data>
+  <data name="txtCustodySearchPlaceholder" xml:space="preserve"><value>ابحث بكود العهدة أو الاسم أو الرقم التسلسلي</value></data>
+
+  <data name="btnOpenSelectAllResource1.Text" xml:space="preserve"><value>تحديد الكل</value></data>
+  <data name="btnCancelSelectedOpenResource1.Text" xml:space="preserve"><value>إلغاء المحدد</value></data>
+  <data name="btnRejectCancelSelectedOpenResource1.Text" xml:space="preserve"><value>رفض وإلغاء المحدد</value></data>
+  <data name="btnRefreshOpenRequestsResource1.Text" xml:space="preserve"><value>تحديث</value></data>
+  <data name="lblSelectedCountSuffix" xml:space="preserve"><value>محدد</value></data>
+  <data name="colOpenSelectResource1.HeaderText" xml:space="preserve"><value>اختيار</value></data>
+  <data name="colOpenStatusResource1.HeaderText" xml:space="preserve"><value>حالة الطلب</value></data>
+  <data name="colCurrentStageResource1.HeaderText" xml:space="preserve"><value>مرحلة الاعتماد الحالية</value></data>
+  <data name="colOpenActionResource1.HeaderText" xml:space="preserve"><value>إجراء</value></data>
+  <data name="lblStatusPending" xml:space="preserve"><value>قيد الانتظار</value></data>
+  <data name="StageDirectManager" xml:space="preserve"><value>المدير المباشر</value></data>
+  <data name="StageApprovalLevel" xml:space="preserve"><value>مرحلة الاعتماد {0}</value></data>
+  <data name="btnViewOpenResource1.Text" xml:space="preserve"><value>عرض</value></data>
+  <data name="btnCancelOpenRowResource1.Text" xml:space="preserve"><value>إلغاء</value></data>
+  <data name="btnRejectOpenRowResource1.Text" xml:space="preserve"><value>رفض وإلغاء</value></data>
+  <data name="lblOpenRequestsInfoResource1.Text" xml:space="preserve"><value>تظهر هنا الطلبات المفتوحة المقدمة من الموظف والتي ما زالت قيد الاعتماد. يمكن عرض الطلب أو إلغاؤه أو رفضه حسب صلاحيات المستخدم.</value></data>
+  <data name="MsgConfirmCancelRequest" xml:space="preserve"><value>هل تريد إلغاء هذا الطلب؟</value></data>
+  <data name="MsgConfirmRejectRequest" xml:space="preserve"><value>هل تريد رفض وإلغاء هذا الطلب؟</value></data>
+  <data name="MsgConfirmCancelSelected" xml:space="preserve"><value>هل تريد إلغاء الطلبات المحددة؟</value></data>
+  <data name="MsgConfirmRejectSelected" xml:space="preserve"><value>هل تريد رفض وإلغاء الطلبات المحددة؟</value></data>
+  <data name="MsgNoRequestSelected" xml:space="preserve"><value>يرجى تحديد طلب واحد على الأقل.</value></data>
+  <data name="MsgRequestCanceled" xml:space="preserve"><value>تم إلغاء الطلب بنجاح.</value></data>
+  <data name="MsgRequestRejected" xml:space="preserve"><value>تم رفض وإلغاء الطلب بنجاح.</value></data>
+  <data name="MsgBulkCancelSuccess" xml:space="preserve"><value>تم إلغاء {0} طلب/طلبات.</value></data>
+  <data name="MsgBulkRejectSuccess" xml:space="preserve"><value>تم رفض وإلغاء {0} طلب/طلبات.</value></data>
 </root>

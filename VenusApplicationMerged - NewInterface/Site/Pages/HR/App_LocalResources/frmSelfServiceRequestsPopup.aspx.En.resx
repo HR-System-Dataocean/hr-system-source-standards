@@ -47,22 +47,62 @@
   <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
 
-  <data name="PageResource1.Title" xml:space="preserve"><value>Acting Assignment &amp; Approval Handover</value></data>
-  <data name="lblPageTitleResource1.Text" xml:space="preserve"><value>Acting Assignment &amp; Approval Handover</value></data>
+  <data name="PageResource1.Title" xml:space="preserve"><value>Acting Assignment, Approval Handover &amp; Material Custody</value></data>
+  <data name="lblPageTitleResource1.Text" xml:space="preserve"><value>Acting Assignment, Approval Handover &amp; Material Custody</value></data>
   <data name="lblEmployeeHeaderResource1.Text" xml:space="preserve"><value>Employee Under Clearance</value></data>
-  <data name="lblEmployeeCodeCaptionResource1.Text" xml:space="preserve"><value>Employee code:</value></data>
-  <data name="lblEmployeeNameCaptionResource1.Text" xml:space="preserve"><value>Employee name:</value></data>
-  <data name="lblTransferTitleResource1.Text" xml:space="preserve"><value>Acting and Approval Handover Details</value></data>
-  <data name="chkSameEmployeeResource1.Text" xml:space="preserve"><value>Use the same employee for both tasks</value></data>
-  <data name="lblEffectiveFromResource1.Text" xml:space="preserve"><value>Effective From:</value></data>
-  <data name="lblEffectiveToResource1.Text" xml:space="preserve"><value>Effective To:</value></data>
-  <data name="MsgEffectiveDatesRequired" xml:space="preserve"><value>Please select the acting Effective From and Effective To dates.</value></data>
-  <data name="MsgEffectiveDatesInvalid" xml:space="preserve"><value>Effective To must be after Effective From.</value></data>
-  <data name="lblReplacementEmployeeResource1.Text" xml:space="preserve"><value>Replacement Approver:</value></data>
-  <data name="lblDelegateEmployeeResource1.Text" xml:space="preserve"><value>Delegate for Pending Requests:</value></data>
+  <data name="lblEmployeeCodeCaptionResource1.Text" xml:space="preserve"><value>Employee Code</value></data>
+  <data name="lblEmployeeNameCaptionResource1.Text" xml:space="preserve"><value>Employee Name</value></data>
+  <data name="lblLastWorkingDateCaptionResource1.Text" xml:space="preserve"><value>Last Working Date</value></data>
+  <data name="lblSummaryTitleResource1.Text" xml:space="preserve"><value>System Analysis Summary</value></data>
+  <data name="lblSummaryCompletedResource1.Text" xml:space="preserve"><value>Completed</value></data>
+  <data name="lblMetricPendingCaptionResource1.Text" xml:space="preserve"><value>Pending Requests Requiring Action</value></data>
+  <data name="lblMetricRulesCaptionResource1.Text" xml:space="preserve"><value>Approval Rules Linked</value></data>
+  <data name="lblMetricReportsCaptionResource1.Text" xml:space="preserve"><value>Direct Reports</value></data>
+  <data name="lblMetricCustodyCaptionResource1.Text" xml:space="preserve"><value>Material Custody Items</value></data>
+  <data name="lblMetricActionsCaptionResource1.Text" xml:space="preserve"><value>Required User Actions</value></data>
+  <data name="lblSummaryDescResource1.Text" xml:space="preserve"><value>The system analyzed approval responsibilities, pending requests, direct reports, and material custody items, and identified the actions required to complete clearance.</value></data>
+  <data name="lblHandoverTitleResource1.Text" xml:space="preserve"><value>Acting and Approval Handover Details</value></data>
+  <data name="lblActionsBadgeFormat" xml:space="preserve"><value>{0} Actions</value></data>
+  <data name="lblEmployeesBadgeFormat" xml:space="preserve"><value>{0} Employees</value></data>
+  <data name="lblDirectManagerSectionTitleResource1.Text" xml:space="preserve"><value>Direct Manager Responsibilities</value></data>
+  <data name="lblDirectManagerSectionDescFormat" xml:space="preserve"><value>This employee is currently assigned as Direct Manager for {0} employees.</value></data>
+  <data name="lblNewDirectManagerResource1.Text" xml:space="preserve"><value>New Direct Manager</value></data>
+  <data name="btnSearchNewManagerResource1.ToolTip" xml:space="preserve"><value>Search for employee</value></data>
+  <data name="lblEmployeeHistoryUpdateResource1.Text" xml:space="preserve"><value>Employee History Update</value></data>
+  <data name="lblEmployeeHistoryUpdateValueResource1.Text" xml:space="preserve"><value>Yes - Automatic</value></data>
+  <data name="lblDirectManagerInfoFormat" xml:space="preserve"><value>The selected manager will be updated in the {0} employee records, and each change will be recorded in Employee History and the audit log.</value></data>
+  <data name="lblAutoApprovalSectionTitleResource1.Text" xml:space="preserve"><value>Automatic Approval Handling</value></data>
+  <data name="lblAutoApprovalSectionDescResource1.Text" xml:space="preserve"><value>Other active employees exist under the same grade, branch, and ConfigID where Apply to All is enabled.</value></data>
+  <data name="lblNoActionRequiredResource1.Text" xml:space="preserve"><value>No Action Required</value></data>
+  <data name="lblAutoApprovalInfoResource1.Text" xml:space="preserve"><value>The approval configuration will continue automatically for the other eligible employees. No replacement is required for these rules.</value></data>
+  <data name="lblRemarksResource1.Text" xml:space="preserve"><value>Remarks</value></data>
+  <data name="txtRemarksDefault" xml:space="preserve"><value>Employee end-of-service clearance. Approval responsibilities, pending requests, and direct manager assignments will be updated according to the detected scenarios.</value></data>
+  <data name="lblApprovalConfigResource1.Text" xml:space="preserve"><value>Approval Configuration</value></data>
+  <data name="lblApprovalConfigValueResource1.Text" xml:space="preserve"><value>Will be updated automatically</value></data>
+  <data name="MsgEnterNewManager" xml:space="preserve"><value>Please enter the new Direct Manager.</value></data>
+  <data name="MsgManagerUpdated" xml:space="preserve"><value>Direct manager updated for {0} employees.</value></data>
+
+  <data name="lblReplacementSectionTitleResource1.Text" xml:space="preserve"><value>Position / Employee Approval Replacement</value></data>
+  <data name="lblReplacementSectionDescResource1.Text" xml:space="preserve"><value>The employee is directly linked to approval rules and is also the only active employee on one position-grade configuration in the selected branch.</value></data>
+  <data name="lblUserActionRequiredResource1.Text" xml:space="preserve"><value>User Action Required</value></data>
+  <data name="lblReplacementEmployeeResource1.Text" xml:space="preserve"><value>Replacement Approver</value></data>
+  <data name="lblEffectiveFromResource1.Text" xml:space="preserve"><value>Effective From</value></data>
+  <data name="lblEffectiveToResource1.Text" xml:space="preserve"><value>Effective To</value></data>
+  <data name="lblReplacementInfoResource1.Text" xml:space="preserve"><value>Saving this transaction will update the linked Self-Service approval configuration and create an acting assignment.</value></data>
+
+  <data name="lblDelegateSectionTitleResource1.Text" xml:space="preserve"><value>Pending Requests Delegation</value></data>
+  <data name="lblDelegateSectionDescResource1.Text" xml:space="preserve"><value>There are pending requests that cannot be assigned automatically because Apply to All is not enabled for the related ConfigID.</value></data>
+  <data name="chkSameEmployeeResource1.Text" xml:space="preserve"><value>Use the Replacement Approver for Pending Requests</value></data>
+  <data name="lblDelegateEmployeeResource1.Text" xml:space="preserve"><value>Pending Requests Approver</value></data>
+  <data name="lblHandlingMethodResource1.Text" xml:space="preserve"><value>Handling Method</value></data>
+  <data name="lblHandlingMethodValueResource1.Text" xml:space="preserve"><value>Reassign existing pending</value></data>
+
   <data name="btnSearchReplacementEmpResource1.ToolTip" xml:space="preserve"><value>Search for employee</value></data>
   <data name="btnSearchDelegateEmpResource1.ToolTip" xml:space="preserve"><value>Search for employee</value></data>
-  <data name="btnTransferApprovalsResource1.Text" xml:space="preserve"><value>Complete Handover</value></data>
+  <data name="btnTransferApprovalsResource1.Text" xml:space="preserve"><value>Save Handover Details</value></data>
+  <data name="btnCloseResource1.Text" xml:space="preserve"><value>Close</value></data>
+  <data name="btnRefreshResource1.Text" xml:space="preserve"><value>Refresh</value></data>
+
   <data name="lblActionNeededTitleResource1.Text" xml:space="preserve"><value>Pending Requests Requiring Employee Action</value></data>
   <data name="lblSubmittedOpenTitleResource1.Text" xml:space="preserve"><value>Open Requests Submitted by Employee</value></data>
   <data name="lblConfigurationTitleResource1.Text" xml:space="preserve"><value>Approval Rules Linked to Employee or Position</value></data>
@@ -74,8 +114,6 @@
   <data name="colFormCodeResource1.HeaderText" xml:space="preserve"><value>Form code</value></data>
   <data name="colRankResource1.HeaderText" xml:space="preserve"><value>Approval Level</value></data>
   <data name="colMatchTypeResource1.HeaderText" xml:space="preserve"><value>Approval Role</value></data>
-  <data name="btnCloseResource1.Text" xml:space="preserve"><value>Close</value></data>
-  <data name="btnRefreshResource1.Text" xml:space="preserve"><value>Refresh</value></data>
 
   <data name="MsgConfirmHandover" xml:space="preserve"><value>Do you want to complete the approval handover to the selected employees?</value></data>
   <data name="MsgErrorPrefix" xml:space="preserve"><value>An error occurred: </value></data>
@@ -86,7 +124,80 @@
   <data name="MsgCannotTransferSame" xml:space="preserve"><value>Approvals cannot be transferred to the same employee.</value></data>
   <data name="MsgTransferSuccess" xml:space="preserve"><value>Transfer completed successfully. Requests: {0} - Configurations: {1}</value></data>
   <data name="MsgTransferFailed" xml:space="preserve"><value>Transfer failed: </value></data>
+  <data name="MsgEffectiveDatesRequired" xml:space="preserve"><value>Please select the acting Effective From and Effective To dates.</value></data>
+  <data name="MsgEffectiveDatesInvalid" xml:space="preserve"><value>Effective To must be after Effective From.</value></data>
   <data name="MatchTypeEmployee" xml:space="preserve"><value>Employee</value></data>
   <data name="MatchTypeDirectManager" xml:space="preserve"><value>Direct Manager</value></data>
   <data name="MatchTypePosition" xml:space="preserve"><value>Position</value></data>
+
+  <data name="lblCustodyTitleResource1.Text" xml:space="preserve"><value>Material Custody Assigned to Employee</value></data>
+  <data name="lblCustodyTotalCaptionResource1.Text" xml:space="preserve"><value>Total Assigned Assets</value></data>
+  <data name="lblCustodyTotalSubResource1.Text" xml:space="preserve"><value>Total Assigned Assets</value></data>
+  <data name="lblCustodyPendingCaptionResource1.Text" xml:space="preserve"><value>Pending Return</value></data>
+  <data name="lblCustodyPendingSubResource1.Text" xml:space="preserve"><value>Pending Return</value></data>
+  <data name="lblCustodyReturnedCaptionResource1.Text" xml:space="preserve"><value>Returned Assets</value></data>
+  <data name="lblCustodyReturnedSubResource1.Text" xml:space="preserve"><value>Returned Assets</value></data>
+  <data name="lblCustodyClearanceCaptionResource1.Text" xml:space="preserve"><value>Asset Clearance Status</value></data>
+  <data name="lblCustodyClearanceSubResource1.Text" xml:space="preserve"><value>Asset Clearance Status</value></data>
+  <data name="lblCustodyStatusIncomplete" xml:space="preserve"><value>Incomplete</value></data>
+  <data name="lblCustodyStatusComplete" xml:space="preserve"><value>Complete</value></data>
+  <data name="txtCustodySearchResource1.ToolTip" xml:space="preserve"><value>Search asset code, name or serial number</value></data>
+  <data name="btnCustodySearchResource1.Text" xml:space="preserve"><value>Search</value></data>
+  <data name="ddlCustodyFilterAllResource1.Text" xml:space="preserve"><value>All Assets</value></data>
+  <data name="ddlCustodyFilterPendingResource1.Text" xml:space="preserve"><value>Pending Return</value></data>
+  <data name="ddlCustodyFilterReturnedResource1.Text" xml:space="preserve"><value>Returned</value></data>
+  <data name="btnMarkAllReturnedResource1.Text" xml:space="preserve"><value>Mark All as Returned</value></data>
+  <data name="MsgConfirmMarkAllReturned" xml:space="preserve"><value>Mark all pending custody items as returned?</value></data>
+  <data name="grdCustodyResource1.EmptyDataText" xml:space="preserve"><value>No material custody items assigned to this employee</value></data>
+  <data name="colCustodyRowResource1.HeaderText" xml:space="preserve"><value>#</value></data>
+  <data name="colAssetCodeResource1.HeaderText" xml:space="preserve"><value>Asset Code</value></data>
+  <data name="colAssetNameResource1.HeaderText" xml:space="preserve"><value>Asset Name</value></data>
+  <data name="colSerialNoResource1.HeaderText" xml:space="preserve"><value>Serial / Reference No.</value></data>
+  <data name="colReceivedDateResource1.HeaderText" xml:space="preserve"><value>Received Date</value></data>
+  <data name="colCustodyStatusResource1.HeaderText" xml:space="preserve"><value>Status</value></data>
+  <data name="colReturnedDateResource1.HeaderText" xml:space="preserve"><value>Returned Date</value></data>
+  <data name="colReturnConditionResource1.HeaderText" xml:space="preserve"><value>Return Status / Condition</value></data>
+  <data name="colCustodyActionResource1.HeaderText" xml:space="preserve"><value>Action</value></data>
+  <data name="lblStatusPendingReturn" xml:space="preserve"><value>Pending Return</value></data>
+  <data name="lblStatusReturned" xml:space="preserve"><value>Returned</value></data>
+  <data name="btnConfirmReturn" xml:space="preserve"><value>Confirm Return</value></data>
+  <data name="btnCompleted" xml:space="preserve"><value>Completed</value></data>
+  <data name="ddlConditionSelect" xml:space="preserve"><value>Select Condition</value></data>
+  <data name="ddlConditionGood" xml:space="preserve"><value>Good Condition</value></data>
+  <data name="ddlConditionDamaged" xml:space="preserve"><value>Damaged</value></data>
+  <data name="ddlConditionLost" xml:space="preserve"><value>Lost</value></data>
+  <data name="ddlConditionOther" xml:space="preserve"><value>Other</value></data>
+  <data name="lblCustodyWarningResource1.Text" xml:space="preserve"><value>Clearance cannot be completed while any material custody item is still marked as Pending Return, unless an authorized exception is recorded.</value></data>
+  <data name="MsgReturnDateRequired" xml:space="preserve"><value>Please enter the returned date.</value></data>
+  <data name="MsgReturnConditionRequired" xml:space="preserve"><value>Please select the return condition.</value></data>
+  <data name="MsgReturnSuccess" xml:space="preserve"><value>Custody item return confirmed successfully.</value></data>
+  <data name="MsgMarkAllSuccess" xml:space="preserve"><value>{0} custody item(s) marked as returned.</value></data>
+  <data name="MsgAssetLocked" xml:space="preserve"><value>This custody item cannot be returned from this screen because it is linked to assets.</value></data>
+  <data name="txtCustodySearchPlaceholder" xml:space="preserve"><value>Search asset code, name or serial number</value></data>
+
+  <data name="btnOpenSelectAllResource1.Text" xml:space="preserve"><value>Select All</value></data>
+  <data name="btnCancelSelectedOpenResource1.Text" xml:space="preserve"><value>Cancel Selected</value></data>
+  <data name="btnRejectCancelSelectedOpenResource1.Text" xml:space="preserve"><value>Reject &amp; Cancel Selected</value></data>
+  <data name="btnRefreshOpenRequestsResource1.Text" xml:space="preserve"><value>Refresh</value></data>
+  <data name="lblSelectedCountSuffix" xml:space="preserve"><value>selected</value></data>
+  <data name="colOpenSelectResource1.HeaderText" xml:space="preserve"><value>Select</value></data>
+  <data name="colOpenStatusResource1.HeaderText" xml:space="preserve"><value>Request Status</value></data>
+  <data name="colCurrentStageResource1.HeaderText" xml:space="preserve"><value>Current Approval Stage</value></data>
+  <data name="colOpenActionResource1.HeaderText" xml:space="preserve"><value>Action</value></data>
+  <data name="lblStatusPending" xml:space="preserve"><value>Pending</value></data>
+  <data name="StageDirectManager" xml:space="preserve"><value>Direct Manager</value></data>
+  <data name="StageApprovalLevel" xml:space="preserve"><value>Approval Stage {0}</value></data>
+  <data name="btnViewOpenResource1.Text" xml:space="preserve"><value>View</value></data>
+  <data name="btnCancelOpenRowResource1.Text" xml:space="preserve"><value>Cancel</value></data>
+  <data name="btnRejectOpenRowResource1.Text" xml:space="preserve"><value>Reject &amp; Cancel</value></data>
+  <data name="lblOpenRequestsInfoResource1.Text" xml:space="preserve"><value>This list shows open requests submitted by the employee that are still pending approval. You can view, cancel, or reject and cancel requests according to user permissions.</value></data>
+  <data name="MsgConfirmCancelRequest" xml:space="preserve"><value>Do you want to cancel this request?</value></data>
+  <data name="MsgConfirmRejectRequest" xml:space="preserve"><value>Do you want to reject and cancel this request?</value></data>
+  <data name="MsgConfirmCancelSelected" xml:space="preserve"><value>Do you want to cancel the selected requests?</value></data>
+  <data name="MsgConfirmRejectSelected" xml:space="preserve"><value>Do you want to reject and cancel the selected requests?</value></data>
+  <data name="MsgNoRequestSelected" xml:space="preserve"><value>Please select at least one request.</value></data>
+  <data name="MsgRequestCanceled" xml:space="preserve"><value>Request canceled successfully.</value></data>
+  <data name="MsgRequestRejected" xml:space="preserve"><value>Request rejected and canceled successfully.</value></data>
+  <data name="MsgBulkCancelSuccess" xml:space="preserve"><value>{0} request(s) canceled.</value></data>
+  <data name="MsgBulkRejectSuccess" xml:space="preserve"><value>{0} request(s) rejected and canceled.</value></data>
 </root>

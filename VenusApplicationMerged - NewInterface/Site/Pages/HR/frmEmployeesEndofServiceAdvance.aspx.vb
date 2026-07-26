@@ -171,11 +171,13 @@ Partial Class frmEmployeesEndofServiceAdvance
             ' التحقق من طلبات الخدمة الذاتية (COUNT فقط)
             ' =============================================
             If HasSelfServiceRequests(IntEmployeeId) Then
-                ' فتح Popup وتمرير EmployeeID
+                ' فتح Popup وتمرير EmployeeID + آخر يوم عمل
+                Dim lastWorkingDate As String = CDate(wdcEndOfServiceDate.Value).ToString("dd/MM/yyyy")
                 Dim script As String = "window.open('frmSelfServiceRequestsPopup.aspx?EmployeeID=" & IntEmployeeId &
                                    "&EmpCode=" & Server.UrlEncode(lblDescEmployeeCode.Text) &
                                    "&EmpName=" & Server.UrlEncode(lblDescEnglishName.Text) &
-                                   "', '_blank', 'width=900,height=600,scrollbars=yes,resizable=yes,menubar=no,status=no');"
+                                   "&LastWorkingDate=" & Server.UrlEncode(lastWorkingDate) &
+                                   "', '_blank', 'width=1100,height=750,scrollbars=yes,resizable=yes,menubar=no,status=no');"
 
                 ClientScript.RegisterStartupScript(Me.GetType(), "OpenPopup",
                 "<script language='javascript'>" & script & "</script>", False)
