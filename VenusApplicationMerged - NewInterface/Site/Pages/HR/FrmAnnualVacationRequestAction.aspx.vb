@@ -2380,7 +2380,7 @@ Partial Class frmAttendancePreparation
 
             ' 5- تحديث سجل المراجع (يسجل الـ Action بتاعه)
             Dim SqlCommandReviewer As Data.SqlClient.SqlCommand
-            Dim UpdateReviewer As String = "update SS_RequestActions set seen=1, ActionID=" & ActionID & ", ConfirmedNoOfDays=" & ConfirmedNoOfDays & ", ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & _sys_User.ID & " and IsForwarded=1"
+            Dim UpdateReviewer As String = "update SS_RequestActions set seen=1, ActionID=" & ActionID & ", ConfirmedNoOfDays=" & ConfirmedNoOfDays & ", ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & _sys_User.RelEmployee & " and IsForwarded=1"
             SqlCommandReviewer = New SqlClient.SqlCommand
             SqlCommandReviewer.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
             SqlCommandReviewer.CommandType = CommandType.Text
