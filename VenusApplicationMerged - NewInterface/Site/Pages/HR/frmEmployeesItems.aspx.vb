@@ -725,15 +725,16 @@ Partial Class frmEmployeesItems
     Private Function Load_DataGrid(ByVal intEmpID As Integer) As Boolean
         ClsItems = New Clshrs_Items(Me.Page)
         ClsEmployeesItems = New Clshrs_EmployeesItems(Me.Page)
-        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsItems.ConnectionString)
 
         uwgEmployeeItems.DataSource = Nothing
         uwgEmployeeItems.DataBind()
 
-        ClsItems.GetListItemCode(uwgEmployeeItems.Columns(2).ValueList)
-        ClsItems.GetList(uwgEmployeeItems.Columns(3).ValueList)
-
         ClsEmployeesItems.Find("EmployeeID=" & intEmpID & " And CancelDate Is Null")
+
+        ' Load ValueLists only for this employee's items (not all hrs_Items ~15k+)
+        Dim itemFilter As String = "ID IN (SELECT DISTINCT ItemID FROM hrs_EmployeesItems WHERE EmployeeID=" & intEmpID & " And CancelDate Is Null)"
+        ClsItems.GetListItemCodeAndName(uwgEmployeeItems.Columns(2).ValueList, uwgEmployeeItems.Columns(3).ValueList, itemFilter)
+
         uwgEmployeeItems.DataSource = ClsEmployeesItems.DataSet.Tables(0).DefaultView
         uwgEmployeeItems.DataBind()
     End Function

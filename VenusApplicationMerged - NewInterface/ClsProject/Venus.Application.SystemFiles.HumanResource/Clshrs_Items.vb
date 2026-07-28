@@ -201,7 +201,7 @@ Public Class Clshrs_Items
     'DdlValues             :ValueList     :used to fill it with English name column
     '========================================================================
 
-    Public Function GetList(ByRef DdlValues As Infragistics.WebUI.UltraWebGrid.ValueList) As Boolean
+    Public Function GetList(ByRef DdlValues As Infragistics.WebUI.UltraWebGrid.ValueList, Optional ByVal Filter As String = "") As Boolean
         Dim ObjDataRow As DataRow
         Dim StrCommandString As String
         Dim ObjDataset As New DataSet
@@ -210,14 +210,18 @@ Public Class Clshrs_Items
 
         Try
 
-            'StrCommandString = "Select * From " & Me.mTable & " Where IsNull(CancelDate,'')='' And IsNull(dbo.hrs_GetRecordViewStatus(ID,'" & Me.mTable & "'," & Me.mDataBaseUserRelatedID & "," & Me.GroupID & "),0) <> 1 And CompanyID=" & Me.MainCompanyID
-            StrCommandString = "Select * From " & Me.mTable & " Where IsNull(CancelDate,'')='' And IsNull(dbo.hrs_GetRecordViewStatus(ID,'" & Me.mTable & "'," & Me.mDataBaseUserRelatedID & "," & Me.GroupID & "),0) <> 1"
+            ' Select only display columns; optional Filter avoids loading all items (e.g. employee-scoped lists)
+            StrCommandString = "Select ID, EngName, ArbName From " & Me.mTable & " Where IsNull(CancelDate,'')=''"
+            If Len(Filter) > 0 Then
+                StrCommandString &= " And (" & Filter & ")"
+            Else
+                StrCommandString &= " And IsNull(dbo.hrs_GetRecordViewStatus(ID,'" & Me.mTable & "'," & Me.mDataBaseUserRelatedID & "," & Me.GroupID & "),0) <> 1"
+            End If
             ObjDataset = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(mConnectionString, CommandType.Text, StrCommandString)
             DdlValues.ValueListItems.Clear()
 
             For Each ObjDataRow In ObjDataset.Tables(0).Rows
                 Item = New Infragistics.WebUI.UltraWebGrid.ValueListItem
-                'Item.DisplayText = mDataHandler.DataValue(ObjDataRow("EngName"), SqlDbType.VarChar)
                 Item.DisplayText = mDataHandler.DataValue(ObjDataRow(ObjNavigationHandler.SetLanguage(mPage, "EngName/ArbName")), SqlDbType.VarChar)
                 If (Item.DisplayText.Trim = "") Then
                     Item.DisplayText = mDataHandler.DataValue(ObjDataRow(ObjNavigationHandler.SetLanguage(mPage, "ArbName/EngName")), SqlDbType.VarChar)
@@ -322,7 +326,7 @@ Public Class Clshrs_Items
             If Filter.ToLower.IndexOf("order by") = -1 Then
                 orderByStr = " Order By Code "
             End If
-            'Filter = Filter.Replace("Õ", " AM ").Replace("ã", " PM ")
+            'Filter = Filter.Replace("?", " AM ").Replace("?", " PM ")
             '==================== Order By Modification [ End ]
             'StrSelectCommand = mSelectCommand & IIf(Len(Filter) > 0, " Where IsNull(CancelDate,'')='' And IsNull(dbo.hrs_GetRecordViewStatus(ID,'" & Me.mTable & "'," & Me.mDataBaseUserRelatedID & "," & Me.GroupID & "),0) <> 1 And " & Filter, "  Where IsNull(CancelDate,'')='' And IsNull(dbo.hrs_GetRecordViewStatus(ID,'" & Me.mTable & "'," & Me.mDataBaseUserRelatedID & "," & Me.GroupID & "),0) <> 1 ")
             StrSelectCommand = mSelectCommand & IIf(Len(Filter) > 0, " Where IsNull(dbo.hrs_GetRecordViewStatus(ID,'" & Me.mTable & "'," & Me.mDataBaseUserRelatedID & "," & Me.GroupID & "),0) <> 1 And " & Filter, "  And IsNull(dbo.hrs_GetRecordViewStatus(ID,'" & Me.mTable & "'," & Me.mDataBaseUserRelatedID & "," & Me.GroupID & "),0) <> 1 ")
@@ -681,16 +685,21 @@ Public Class Clshrs_Items
     End Function
 
 
-    Public Function GetListItemCode(ByRef DdlValues As Infragistics.WebUI.UltraWebGrid.ValueList) As Boolean
+    Public Function GetListItemCode(ByRef DdlValues As Infragistics.WebUI.UltraWebGrid.ValueList, Optional ByVal Filter As String = "") As Boolean
         Dim ObjDataRow As DataRow
         Dim StrCommandString As String
         Dim ObjDataset As New DataSet
         Dim Item As Infragistics.WebUI.UltraWebGrid.ValueListItem
-        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(mConnectionString)
 
         Try
 
-            StrCommandString = "Select * From " & Me.mTable & " Where IsNull(CancelDate,'')='' And IsNull(dbo.hrs_GetRecordViewStatus(ID,'" & Me.mTable & "'," & Me.mDataBaseUserRelatedID & "," & Me.GroupID & "),0) <> 1"
+            ' Select only ID/Code; optional Filter avoids loading all items (e.g. employee-scoped lists)
+            StrCommandString = "Select ID, Code From " & Me.mTable & " Where IsNull(CancelDate,'')=''"
+            If Len(Filter) > 0 Then
+                StrCommandString &= " And (" & Filter & ")"
+            Else
+                StrCommandString &= " And IsNull(dbo.hrs_GetRecordViewStatus(ID,'" & Me.mTable & "'," & Me.mDataBaseUserRelatedID & "," & Me.GroupID & "),0) <> 1"
+            End If
             ObjDataset = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(mConnectionString, CommandType.Text, StrCommandString)
             DdlValues.ValueListItems.Clear()
 
@@ -702,6 +711,57 @@ Public Class Clshrs_Items
             Next
 
             If DdlValues.ValueListItems.Count > 0 Then
+                Return True
+            End If
+
+        Catch ex As Exception
+            mPage.Session.Add("ErrorValue", ex)
+            mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, mDataBaseUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
+            mPage.Response.Redirect("ErrorPage.aspx")
+        Finally
+            ObjDataset.Dispose()
+        End Try
+    End Function
+
+    ' Fills Code + Name ValueLists in one query (used by employee items grid)
+    Public Function GetListItemCodeAndName(ByRef CodeValueList As Infragistics.WebUI.UltraWebGrid.ValueList, ByRef NameValueList As Infragistics.WebUI.UltraWebGrid.ValueList, Optional ByVal Filter As String = "") As Boolean
+        Dim ObjDataRow As DataRow
+        Dim StrCommandString As String
+        Dim ObjDataset As New DataSet
+        Dim CodeItem As Infragistics.WebUI.UltraWebGrid.ValueListItem
+        Dim NameItem As Infragistics.WebUI.UltraWebGrid.ValueListItem
+        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(mConnectionString)
+        Dim DisplayName As String
+
+        Try
+            StrCommandString = "Select ID, Code, EngName, ArbName From " & Me.mTable & " Where IsNull(CancelDate,'')=''"
+            If Len(Filter) > 0 Then
+                StrCommandString &= " And (" & Filter & ")"
+            Else
+                StrCommandString &= " And IsNull(dbo.hrs_GetRecordViewStatus(ID,'" & Me.mTable & "'," & Me.mDataBaseUserRelatedID & "," & Me.GroupID & "),0) <> 1"
+            End If
+            ObjDataset = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(mConnectionString, CommandType.Text, StrCommandString)
+
+            CodeValueList.ValueListItems.Clear()
+            NameValueList.ValueListItems.Clear()
+
+            For Each ObjDataRow In ObjDataset.Tables(0).Rows
+                CodeItem = New Infragistics.WebUI.UltraWebGrid.ValueListItem
+                CodeItem.DisplayText = mDataHandler.DataValue(ObjDataRow("Code"), SqlDbType.VarChar)
+                CodeItem.DataValue = ObjDataRow("ID")
+                CodeValueList.ValueListItems.Add(CodeItem)
+
+                NameItem = New Infragistics.WebUI.UltraWebGrid.ValueListItem
+                DisplayName = mDataHandler.DataValue(ObjDataRow(ObjNavigationHandler.SetLanguage(mPage, "EngName/ArbName")), SqlDbType.VarChar)
+                If (DisplayName.Trim = "") Then
+                    DisplayName = mDataHandler.DataValue(ObjDataRow(ObjNavigationHandler.SetLanguage(mPage, "ArbName/EngName")), SqlDbType.VarChar)
+                End If
+                NameItem.DisplayText = DisplayName
+                NameItem.DataValue = ObjDataRow("ID")
+                NameValueList.ValueListItems.Add(NameItem)
+            Next
+
+            If CodeValueList.ValueListItems.Count > 0 Then
                 Return True
             End If
 

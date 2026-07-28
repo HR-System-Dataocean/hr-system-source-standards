@@ -903,9 +903,16 @@ Public Class Clshrs_VacationsTypesBase
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@CompanyId", SqlDbType.Int)).Value = mDataHandler.DataValue_In(Me.MainCompanyID, SqlDbType.Int, True)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@OBalanceTransactionID", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mOBalanceTransactionID, SqlDbType.Int, True)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@OverDueVacationID", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mOverDueVacationID, SqlDbType.Int, True)
-            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Stage1PCT", SqlDbType.Real)).Value = mDataHandler.DataValue_In(mStage1PCT, SqlDbType.Real)
-            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Stage2PCT", SqlDbType.Real)).Value = mDataHandler.DataValue_In(mStage2PCT, SqlDbType.Real)
-            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Stage3PCT", SqlDbType.Real)).Value = mDataHandler.DataValue_In(mStage3PCT, SqlDbType.Real)
+            If mIsSickVacation Then
+                Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Stage1PCT", SqlDbType.Real)).Value = mDataHandler.DataValue_In(mStage1PCT, SqlDbType.Int)
+                Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Stage2PCT", SqlDbType.Real)).Value = mDataHandler.DataValue_In(mStage2PCT, SqlDbType.Int)
+                Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Stage3PCT", SqlDbType.Real)).Value = mDataHandler.DataValue_In(mStage3PCT, SqlDbType.Int)
+            Else
+                Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Stage1PCT", SqlDbType.Real)).Value = mDataHandler.DataValue_In(mStage1PCT, SqlDbType.Real)
+                Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Stage2PCT", SqlDbType.Real)).Value = mDataHandler.DataValue_In(mStage2PCT, SqlDbType.Real)
+                Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Stage3PCT", SqlDbType.Real)).Value = mDataHandler.DataValue_In(mStage3PCT, SqlDbType.Real)
+            End If
+
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ExceededDaysType", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mExceededDaysType, SqlDbType.Int)
 
 

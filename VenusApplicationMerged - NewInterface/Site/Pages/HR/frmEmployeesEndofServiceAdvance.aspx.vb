@@ -161,12 +161,12 @@ Partial Class frmEmployeesEndofServiceAdvance
             ContractStartDate = ClsEmpContracts.StartDate
 
             'Check Employee Items
-            If ClsEmployeesItems.Find("EmployeeID = '" & ClsEmployee.ID & "' and canceldate is null and ReturnedDate is null and isnull(IsConfirmed,0) = 1") Then
-                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ClsObjNav.SetLanguage(Page, "There is an employee items must be recieved / توجد عهد تخص الموظف لابد من تسليمها "))
-                Dim cs As ClientScriptManager = Page.ClientScript
-                cs.RegisterStartupScript(Me.GetType(), "PopupScript", "OpenModal12('frmEmployeesItemsClearance.aspx?EmpCode=" & ClsEmployee.Code & "',400,700);", True)
-                Return
-            End If
+            'If ClsEmployeesItems.Find("EmployeeID = '" & ClsEmployee.ID & "' and canceldate is null and ReturnedDate is null and isnull(IsConfirmed,0) = 1") Then
+            '    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ClsObjNav.SetLanguage(Page, "There is an employee items must be recieved / توجد عهد تخص الموظف لابد من تسليمها "))
+            '    Dim cs As ClientScriptManager = Page.ClientScript
+            '    cs.RegisterStartupScript(Me.GetType(), "PopupScript", "OpenModal12('frmEmployeesItemsClearance.aspx?EmpCode=" & ClsEmployee.Code & "',400,700);", True)
+            '    Return
+            'End If
             ' =============================================
             ' التحقق من طلبات الخدمة الذاتية (COUNT فقط)
             ' =============================================
