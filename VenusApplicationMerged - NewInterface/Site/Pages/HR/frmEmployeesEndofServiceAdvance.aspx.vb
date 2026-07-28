@@ -170,7 +170,7 @@ Partial Class frmEmployeesEndofServiceAdvance
             ' =============================================
             ' التحقق من طلبات الخدمة الذاتية (COUNT فقط)
             ' =============================================
-            If HasSelfServiceRequests(IntEmployeeId) Then
+            If IsShowActingPopUpEndServiceEnabled(ClsEmployee.CompanyID) AndAlso HasSelfServiceRequests(IntEmployeeId) Then
                 ' فتح Popup وتمرير EmployeeID + آخر يوم عمل
                 Dim lastWorkingDate As String = CDate(wdcEndOfServiceDate.Value).ToString("dd/MM/yyyy")
                 Dim script As String = "window.open('frmSelfServiceRequestsPopup.aspx?EmployeeID=" & IntEmployeeId &
@@ -2214,6 +2214,32 @@ Partial Class frmEmployeesEndofServiceAdvance
             uwgExtraDeduction.Rows.Add()
         End If
     End Sub
+
+    ' =============================================
+    ' خيار النظام: إظهار نافذة التكليف/التسليم عند نهاية الخدمة
+    ' =============================================
+    Private Function IsShowActingPopUpEndServiceEnabled(ByVal companyId As Integer) As Boolean
+        Try
+            Dim clsEmployee As New Clshrs_Employees(Page)
+            Dim sql As String =
+                "SELECT TOP 1 ISNULL(showActingPopUpEndService, 0) FROM sys_SystemConfig" &
+                If(companyId > 0, " WHERE CompanyId=@CompanyId", "")
+
+            Using conn As New SqlConnection(clsEmployee.ConnectionString)
+                Using cmd As New SqlCommand(sql, conn)
+                    If companyId > 0 Then
+                        cmd.Parameters.AddWithValue("@CompanyId", companyId)
+                    End If
+                    conn.Open()
+                    Dim result As Object = cmd.ExecuteScalar()
+                    If result Is Nothing OrElse IsDBNull(result) Then Return False
+                    Return Convert.ToBoolean(result)
+                End Using
+            End Using
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 
     ' =============================================
     ' التحقق من وجود طلبات خدمة ذاتية مفتوحة

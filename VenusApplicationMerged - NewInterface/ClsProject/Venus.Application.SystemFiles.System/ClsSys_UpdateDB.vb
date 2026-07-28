@@ -1,4 +1,4 @@
-﻿Public Class ClsSys_UpdateDB
+Public Class ClsSys_UpdateDB
     Inherits ClsDataAcessLayer
 #Region "Class Constructor"
     Public Sub New(ByVal Page As Web.UI.Page)
@@ -8353,6 +8353,9 @@ END
         SQL = " ALTER TABLE dbo.sys_SystemConfig ADD LockJoinDate bit NULL "
         ExecuteUpdate(SQL)
 
+        SQL = "IF COL_LENGTH('sys_SystemConfig', 'showActingPopUpEndService') IS NULL BEGIN ALTER TABLE dbo.sys_SystemConfig ADD showActingPopUpEndService bit NOT NULL CONSTRAINT DF_sys_SystemConfig_showActingPopUpEndService DEFAULT(0) END"
+        ExecuteUpdate(SQL)
+
         SQL = "
 IF OBJECT_ID(N'dbo.hrs_ActingPositionAssignments', N'U') IS NULL
 BEGIN
@@ -14294,6 +14297,7 @@ END
 "
 
         ExecuteUpdate(SQL)
+
 
 
 

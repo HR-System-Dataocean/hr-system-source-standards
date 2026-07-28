@@ -372,4 +372,7 @@
   <data name="LockJoinDateResource1.Text" xml:space="preserve">
     <value>اغلاق تاريخ المباشرة</value>
   </data>
+  <data name="ShowActingPopUpEndServiceResource1.Text" xml:space="preserve">
+    <value>إظهار نافذة التكليف عند نهاية الخدمة</value>
+  </data>
 </root>

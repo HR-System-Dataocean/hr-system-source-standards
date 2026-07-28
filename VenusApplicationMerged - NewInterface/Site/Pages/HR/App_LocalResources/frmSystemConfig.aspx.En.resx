@@ -372,4 +372,7 @@
   <data name="LockJoinDateResource1.Text" xml:space="preserve">
     <value>Lock Join Date</value>
   </data>
+  <data name="ShowActingPopUpEndServiceResource1.Text" xml:space="preserve">
+    <value>Show Acting Popup on End of Service</value>
+  </data>
 </root>

@@ -344,6 +344,18 @@
                    <asp:CheckBox ID="ChkLockJoinDate" runat="server" />
                </td>
            </tr>
+                                   <tr>
+               <td class="SeparArea">
+               </td>
+               <td class="LabelArea">
+                   <asp:Label ID="LblShowActingPopUpEndService" runat="server"
+                       Text="Show Acting Popup on End of Service" SkinID="Label_DefaultNormal"
+                       meta:resourcekey="ShowActingPopUpEndServiceResource1"></asp:Label>
+               </td>
+               <td class="DataArea">
+                   <asp:CheckBox ID="chkShowActingPopUpEndService" runat="server" />
+               </td>
+           </tr>
                     </table>
                 </td>
                 <td style="width: 6%; height: 16px; vertical-align: top">

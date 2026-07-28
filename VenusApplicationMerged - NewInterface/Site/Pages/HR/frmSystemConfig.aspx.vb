@@ -94,7 +94,7 @@ Partial Class frmSystemConfig
             Dim count As Integer = CInt(txtMinimumCostCentersCount.Text)
             Dim journalEmployeeFields As String = txtJournalEmployeeFields.Text.Replace("'", "''")
             Dim Str = "delete from sys_SystemConfig where CompanyId=" & DdlCompany.SelectedValue & "; "
-            Str &= " INSERT INTO [dbo].[sys_SystemConfig] ([UseCostCenter],[MinimumCostCentersCount],PreventChangeContractEndDate,RegUserID,MultiBranchedPosition,CompanyId,AllowDelayInstallmentPart,ShowVacationsNotifications,ShowPostingNotification,JournalEmployeeFields,LockJoinDate) VALUES(" & If(chkUseCostCenter.Checked, "1", "0") & "," & count & "," & If(ChkPreventChangeEndDate.Checked, "1", "0") & ",'" & User & "'," & If(chkMultiBranchedPosition.Checked, "1", "0") & "," & DdlCompany.SelectedValue & "," & If(chkAllowDelayInstallmentPart.Checked, "1", "0") & "," & If(chkShowVacationsNotifications.Checked, "1", "0") & "," & If(chkShowPostingNotification.Checked, "1", "0") & ",'" & journalEmployeeFields & "'," & If(ChkLockJoinDate.Checked, "1", "0") & ")"
+            Str &= " INSERT INTO [dbo].[sys_SystemConfig] ([UseCostCenter],[MinimumCostCentersCount],PreventChangeContractEndDate,RegUserID,MultiBranchedPosition,CompanyId,AllowDelayInstallmentPart,ShowVacationsNotifications,ShowPostingNotification,JournalEmployeeFields,LockJoinDate,showActingPopUpEndService) VALUES(" & If(chkUseCostCenter.Checked, "1", "0") & "," & count & "," & If(ChkPreventChangeEndDate.Checked, "1", "0") & ",'" & User & "'," & If(chkMultiBranchedPosition.Checked, "1", "0") & "," & DdlCompany.SelectedValue & "," & If(chkAllowDelayInstallmentPart.Checked, "1", "0") & "," & If(chkShowVacationsNotifications.Checked, "1", "0") & "," & If(chkShowPostingNotification.Checked, "1", "0") & ",'" & journalEmployeeFields & "'," & If(ChkLockJoinDate.Checked, "1", "0") & "," & If(chkShowActingPopUpEndService.Checked, "1", "0") & ")"
             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsTicketsAgencies.ConnectionString, System.Data.CommandType.Text, Str)
             Return True
         Catch ex As Exception
@@ -150,6 +150,11 @@ Partial Class frmSystemConfig
                 End If
                 If Not IsDBNull(dr("LockJoinDate")) Then
                     ChkLockJoinDate.Checked = CBool(dr("LockJoinDate"))
+                End If
+                If dsActions.Tables(0).Columns.Contains("showActingPopUpEndService") AndAlso Not IsDBNull(dr("showActingPopUpEndService")) Then
+                    chkShowActingPopUpEndService.Checked = CBool(dr("showActingPopUpEndService"))
+                Else
+                    chkShowActingPopUpEndService.Checked = False
                 End If
             Next
             Return True
