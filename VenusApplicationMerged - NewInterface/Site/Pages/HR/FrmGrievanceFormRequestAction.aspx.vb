@@ -236,479 +236,987 @@ Partial Class frmAttendancePreparation
             Page.Response.Redirect("ErrorPage.aspx")
         End Try
     End Sub
+    'Protected Sub btnSave_Click(sender As Object, e As Infragistics.WebUI.WebDataInput.ButtonEventArgs) Handles btnSave.Click
+
+    '    Dim ClsEmployees As New Clshrs_Employees(Page)
+    '    Dim ClsEmployees_SS As New Clshrs_Employees(Page)
+
+    '    Dim objNav As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
+    '    If ddlAction.SelectedValue > 0 Then
+
+
+
+    '        Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
+    '        Dim ConfigID As Integer = Request.QueryString.Item("ConfigID")
+    '        Dim User As String = String.Empty
+    '        Dim WebHandler As New Venus.Shared.Web.WebHandler
+    '        WebHandler.GetCookies(Page, "UserID", User)
+    '        Dim _sys_User As New Clssys_Users(Page)
+    '        _sys_User.Find("ID = '" & User & "'")
+    '        ClsEmployees.Find("Code='" & _sys_User.Code & "'")
+    '        ClsEmployees_SS.Find("Code='" & _sys_User.Code & "'")
+    '        WebHandler.GetCookies(Page, "UserID", User)
+    '        Dim SqlCommand As Data.SqlClient.SqlCommand
+    '        Dim UpdateCommand As String = ""
+
+    '        Dim clsEmp As New Clshrs_Employees(Page)
+    '        clsEmp.Find("Code='" & _sys_User.Code & "'")
+    '        Dim actionIdSql As String
+    '        actionIdSql = "SELECT [ActionSerial] FROM [dbo].[SS_RequestActions]  where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & clsEmp.ID & ""
+    '        Dim actionSerial As String
+    '        actionSerial = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, actionIdSql)
+    '        '============Get ConfigData======================
+    '        If ddlAction.SelectedValue = 2 Then   'رفض
+
+    '            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+    '            SqlCommand = New SqlClient.SqlCommand
+    '            SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+    '            SqlCommand.CommandType = CommandType.Text
+    '            SqlCommand.CommandText = UpdateCommand
+    '            SqlCommand.Connection.Open()
+    '            SqlCommand.ExecuteNonQuery()
+    '            SqlCommand.Connection.Close()
+
+    '            Dim SqlCommandRank As Data.SqlClient.SqlCommand
+    '            Dim UpdateCommandRank As String = ""
+    '            UpdateCommandRank = "UPDATE SS_GrievanceFormRequest SET [RequestStautsTypeID] = 2 WHERE ID=" & RequestSerial & ""
+    '            SqlCommandRank = New SqlClient.SqlCommand
+    '            SqlCommandRank.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '            SqlCommandRank.CommandType = CommandType.Text
+    '            SqlCommandRank.CommandText = UpdateCommandRank
+    '            SqlCommandRank.Connection.Open()
+    '            SqlCommandRank.ExecuteNonQuery()
+    '            SqlCommandRank.Connection.Close()
+
+    '            Dim ConfigCommand As String = "select * from SS_Configuration where ID=" & ConfigID & ""
+    '            Dim adapter As New Data.SqlClient.SqlDataAdapter
+    '            Dim dsconfig As New Data.DataSet()
+    '            Dim connection As Data.SqlClient.SqlConnection
+    '            connection = New Data.SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '            Dim command As Data.SqlClient.SqlCommand
+    '            command = New Data.SqlClient.SqlCommand(ConfigCommand, connection)
+    '            adapter.SelectCommand = command
+    '            adapter.Fill(dsconfig)
+    '            connection.Close()
+
+    '            Dim dsRank As New Data.DataSet()
+    '            If dsconfig.Tables(0).Rows.Count > 0 Then
+    '                If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
+
+    '                    _sys_User.Find("ID = '" & User & "'")
+    '                    ClsEmployees.Find("Code='" & _sys_User.Code & "'")
+    '                    Dim SqlCommand2 As Data.SqlClient.SqlCommand
+    '                    Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <> " & ClsEmployees.ID & ""
+    '                    SqlCommand2 = New SqlClient.SqlCommand
+    '                    SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '                    SqlCommand2.CommandType = CommandType.Text
+    '                    SqlCommand2.CommandText = UpdateCommand2
+    '                    SqlCommand2.Connection.Open()
+    '                    SqlCommand2.ExecuteNonQuery()
+    '                    SqlCommand2.Connection.Close()
+
+
+
+    '                End If
+
+
+    '                If CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
+    '                    '===Insert Vacation Tranaction
+    '                    'If SaveVacation() Then
+    '                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+    '                    Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+    '                    'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
+
+    '                End If
+
+
+
+    '            End If
+
+    '            ClsEmployees.SendEmail("FrmGrievanceFormRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
+    '            ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
+    '            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+    '            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+    '            'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
+    '        End If
+
+    '        If ddlAction.SelectedValue = 1 Then
+
+    '            Dim SqlCommandRank1 As Data.SqlClient.SqlCommand
+    '            Dim UpdateCommandRank1 As String = ""
+    '            UpdateCommandRank1 = "UPDATE SS_GrievanceFormRequest SET [RequestStautsTypeID] = 4 WHERE ID=" & RequestSerial & ""
+    '            SqlCommandRank1 = New SqlClient.SqlCommand
+    '            SqlCommandRank1.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '            SqlCommandRank1.CommandType = CommandType.Text
+    '            SqlCommandRank1.CommandText = UpdateCommandRank1
+    '            SqlCommandRank1.Connection.Open()
+    '            SqlCommandRank1.ExecuteNonQuery()
+    '            SqlCommandRank1.Connection.Close()
+
+    '            Dim ConfigCommand As String = "select * from SS_Configuration where ID=" & ConfigID & ""
+    '            Dim adapter As New Data.SqlClient.SqlDataAdapter
+    '            Dim dsconfig As New Data.DataSet()
+    '            Dim connection As Data.SqlClient.SqlConnection
+    '            connection = New Data.SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '            Dim command2 As Data.SqlClient.SqlCommand
+    '            Dim command As Data.SqlClient.SqlCommand
+    '            Dim NextRank As Integer
+    '            command = New Data.SqlClient.SqlCommand(ConfigCommand, connection)
+    '            adapter.SelectCommand = command
+    '            adapter.Fill(dsconfig)
+    '            connection.Close()
+    '            Dim dsRank As New Data.DataSet()
+    '            If dsconfig.Tables(0).Rows.Count > 0 Then
+
+    '                If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
+
+    '                    _sys_User.Find("ID = '" & User & "'")
+    '                    ClsEmployees.Find("Code='" & _sys_User.Code & "'")
+    '                    Dim SqlCommand2 As Data.SqlClient.SqlCommand
+    '                    Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>  " & ClsEmployees.ID & " "
+    '                    SqlCommand2 = New SqlClient.SqlCommand
+    '                    SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '                    SqlCommand2.CommandType = CommandType.Text
+    '                    SqlCommand2.CommandText = UpdateCommand2
+    '                    SqlCommand2.Connection.Open()
+    '                    SqlCommand2.ExecuteNonQuery()
+    '                    SqlCommand2.Connection.Close()
+
+    '                Else
+    '                    Dim NeededactionIdSql As String
+    '                    NeededactionIdSql = "SELECT [ActionSerial] FROM [dbo].[SS_RequestActions]  where ConfigID=" & ConfigID & " And FormCode='" & dsconfig.Tables(0).Rows(0)("FormCode") & "' and RequestSerial=" & RequestSerial & " and ActionID is null and SS_EmployeeID<>" & ClsEmployees.ID & ""
+    '                    Dim NeededactionSerial As String
+    '                    NeededactionSerial = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, NeededactionIdSql)
+
+    '                    If Not String.IsNullOrWhiteSpace(NeededactionSerial) Then
+
+    '                        UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+    '                        SqlCommand = New SqlClient.SqlCommand
+    '                        SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+    '                        SqlCommand.CommandType = CommandType.Text
+    '                        SqlCommand.CommandText = UpdateCommand
+    '                        SqlCommand.Connection.Open()
+    '                        SqlCommand.ExecuteNonQuery()
+    '                        SqlCommand.Connection.Close()
+
+    '                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+    '                        Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+    '                        Return
+    '                    End If
+
+    '                End If
+    '                If CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
+
+    '                    UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+    '                    SqlCommand = New SqlClient.SqlCommand
+    '                    SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+    '                    SqlCommand.CommandType = CommandType.Text
+    '                    SqlCommand.CommandText = UpdateCommand
+    '                    SqlCommand.Connection.Open()
+    '                    SqlCommand.ExecuteNonQuery()
+    '                    SqlCommand.Connection.Close()
+
+    '                    Dim SqlCommandRank As Data.SqlClient.SqlCommand
+    '                    Dim UpdateCommandRank As String = ""
+    '                    UpdateCommandRank = "UPDATE SS_GrievanceFormRequest SET [RequestStautsTypeID] = 1 WHERE ID=" & RequestSerial & ""
+    '                    SqlCommandRank = New SqlClient.SqlCommand
+    '                    SqlCommandRank.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '                    SqlCommandRank.CommandType = CommandType.Text
+    '                    SqlCommandRank.CommandText = UpdateCommandRank
+    '                    SqlCommandRank.Connection.Open()
+    '                    SqlCommandRank.ExecuteNonQuery()
+    '                    SqlCommandRank.Connection.Close()
+    '                    '===Insert Execuse Tranaction
+    '                    If SaveExecuseTransAction() Then
+    '                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+    '                        Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+    '                        'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
+
+    '                    End If
+
+    '                Else
+    '                    NextRank = CInt(dsconfig.Tables(0).Rows(0)("Rank")) + 1
+    '                    Dim STRNextID As String
+    '                    STRNextID = "select * from SS_Configuration where FormCode='" & dsconfig.Tables(0).Rows(0)("FormCode") & "' and Rank=" & NextRank & ""
+    '                    command2 = New Data.SqlClient.SqlCommand(STRNextID, connection)
+    '                    adapter.SelectCommand = command2
+    '                    adapter.Fill(dsRank)
+    '                    ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+    '                    If dsRank.Tables(0).Rows.Count > 0 Then
+    '                        For Each Row In dsRank.Tables(0).Rows
+    '                            'Direct Manager
+    '                            If Row("UserTypeID") = 1 Then
+    '                                Dim strdirectmanager As String
+    '                                strdirectmanager = "select ManagerID from hrs_Employees where Code='" & txtEmployee.Text & "'"
+    '                                Dim DirectManagerID As String
+    '                                DirectManagerID = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, strdirectmanager)
+    '                                '==================CheckActingAssignment===========
+    '                                Dim ActingEmpID As Integer
+    '                                ActingEmpID = CheckActingEmployeeAssignment(DirectManagerID)
+    '                                If ActingEmpID > 0 Then
+    '                                    DirectManagerID = ActingEmpID
+    '                                End If
+    '                                '==================CheckDelegation===========
+    '                                Dim DelegatedEmpID As Integer
+    '                                DelegatedEmpID = CheckDelegationSchedule(DirectManagerID)
+    '                                If DelegatedEmpID > 0 Then
+
+    '                                    DirectManagerID = DelegatedEmpID
+
+    '                                End If
+
+    '                                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+    '                                SqlCommand = New SqlClient.SqlCommand
+    '                                SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+    '                                SqlCommand.CommandType = CommandType.Text
+    '                                SqlCommand.CommandText = UpdateCommand
+    '                                SqlCommand.Connection.Open()
+    '                                SqlCommand.ExecuteNonQuery()
+    '                                SqlCommand.Connection.Close()
+
+    '                                Dim strinsert As String
+    '                                strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & DirectManagerID & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
+    '                                SqlCommand = New SqlClient.SqlCommand
+    '                                SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '                                SqlCommand.CommandType = CommandType.Text
+    '                                SqlCommand.CommandText = strinsert
+    '                                SqlCommand.Connection.Open()
+    '                                SqlCommand.ExecuteNonQuery()
+    '                                SqlCommand.Connection.Close()
+    '                            End If
+    '                            'Position
+    '                            If Row("UserTypeID") = 2 Then
+    '                                Dim clshrspositions As New Clshrs_Positions(Page)
+    '                                Dim AppIDStr As String = "SELECT MultiBranchedPosition FROM sys_SystemConfig"
+    '                                Dim MultiBranchedPosition As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, AppIDStr)
+
+
+    '                                Dim strempinposition As String = "select  distinct EmployeeID from hrs_Contracts where PositionID=" & Row("PositionID") & " and CancelDate is null And (EndDate>=getdate() or EndDate  is null)"
+    '                                If Not IsDBNull(MultiBranchedPosition) AndAlso CBool(MultiBranchedPosition) Then
+    '                                    If CBool(MultiBranchedPosition) Then
+    '                                        strempinposition = "SELECT hrs_JobBranchesPermission.EmployeeId as EmployeeID FROM hrs_JobBranchesPermission INNER JOIN hrs_JobBranchesPermissionDetails ON hrs_JobBranchesPermission.ID =  hrs_JobBranchesPermissionDetails.JobBranchesPermissionId  where hrs_JobBranchesPermission.PositionID=" & Row("PositionID") & " and hrs_JobBranchesPermissionDetails.BranchId=" & ClsEmployees.BranchID
+    '                                    End If
+    '                                End If
+    '                                Dim DsPositionEmployees As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strempinposition)
+    '                                ' إضافة موظف الإنابة على الوظيفة إلى قائمة موظفي المرحلة (إن وُجدت حركة نشطة)
+    '                                Dim PositionActingEmpID As Integer = CheckActingPositionAssignment(Row("PositionID"))
+    '                                If PositionActingEmpID > 0 Then
+    '                                    Dim alreadyExists As Boolean = False
+    '                                    For Each existingRow As DataRow In DsPositionEmployees.Tables(0).Rows
+    '                                        If Convert.ToInt32(existingRow("EmployeeID")) = PositionActingEmpID Then
+    '                                            alreadyExists = True
+    '                                            Exit For
+    '                                        End If
+    '                                    Next
+    '                                    If Not alreadyExists Then
+    '                                        Dim newRow As DataRow = DsPositionEmployees.Tables(0).NewRow()
+    '                                        newRow("EmployeeID") = PositionActingEmpID
+    '                                        DsPositionEmployees.Tables(0).Rows.Add(newRow)
+    '                                    End If
+    '                                End If
+    '                                If DsPositionEmployees.Tables(0).Rows.Count > 0 Then
+    '                                    For Each RW In DsPositionEmployees.Tables(0).Rows
+    '                                        Dim DelegatedEmpID As Integer
+    '                                        DelegatedEmpID = CheckDelegationSchedule(RW("EmployeeID"))
+    '                                        If DelegatedEmpID > 0 Then
+
+    '                                            RW("EmployeeID") = DelegatedEmpID
+
+    '                                        End If
+
+    '                                        UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+    '                                        SqlCommand = New SqlClient.SqlCommand
+    '                                        SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+    '                                        SqlCommand.CommandType = CommandType.Text
+    '                                        SqlCommand.CommandText = UpdateCommand
+    '                                        SqlCommand.Connection.Open()
+    '                                        SqlCommand.ExecuteNonQuery()
+    '                                        SqlCommand.Connection.Close()
+
+    '                                        Dim strinsert As String
+    '                                        strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & RW("EmployeeID") & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
+    '                                        SqlCommand = New SqlClient.SqlCommand
+    '                                        SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '                                        SqlCommand.CommandType = CommandType.Text
+    '                                        SqlCommand.CommandText = strinsert
+    '                                        SqlCommand.Connection.Open()
+    '                                        SqlCommand.ExecuteNonQuery()
+    '                                        SqlCommand.Connection.Close()
+
+    '                                    Next
+    '                                Else
+    '                                    Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
+    '                                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Can not proceed your request because there are no employees in the next level ...Please contact system admin  / عفوا لايمكن تسجيل الطلب لعدم وجود موظفين في المرحلة التالية ... يرجي مراجعة مدير النظام"))
+    '                                End If
+    '                            End If
+    '                            'Employee
+    '                            If Row("UserTypeID") = 3 Then
+    '                                Dim ActingEmpID As Integer
+    '                                ActingEmpID = CheckActingEmployeeAssignment(Row("EmployeeID"))
+    '                                If ActingEmpID > 0 Then
+    '                                    Row("EmployeeID") = ActingEmpID
+    '                                End If
+    '                                Dim DelegatedEmpID As Integer
+    '                                DelegatedEmpID = CheckDelegationSchedule(Row("EmployeeID"))
+    '                                If DelegatedEmpID > 0 Then
+
+    '                                    Row("EmployeeID") = DelegatedEmpID
+
+    '                                End If
+
+    '                                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+    '                                SqlCommand = New SqlClient.SqlCommand
+    '                                SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+    '                                SqlCommand.CommandType = CommandType.Text
+    '                                SqlCommand.CommandText = UpdateCommand
+    '                                SqlCommand.Connection.Open()
+    '                                SqlCommand.ExecuteNonQuery()
+    '                                SqlCommand.Connection.Close()
+
+    '                                Dim strinsert As String
+    '                                strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & Row("EmployeeID") & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
+    '                                SqlCommand = New SqlClient.SqlCommand
+    '                                SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '                                SqlCommand.CommandType = CommandType.Text
+    '                                SqlCommand.CommandText = strinsert
+    '                                SqlCommand.Connection.Open()
+    '                                SqlCommand.ExecuteNonQuery()
+    '                                SqlCommand.Connection.Close()
+    '                            End If
+    '                        Next
+    '                    Else
+
+    '                        UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+    '                        SqlCommand = New SqlClient.SqlCommand
+    '                        SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+    '                        SqlCommand.CommandType = CommandType.Text
+    '                        SqlCommand.CommandText = UpdateCommand
+    '                        SqlCommand.Connection.Open()
+    '                        SqlCommand.ExecuteNonQuery()
+    '                        SqlCommand.Connection.Close()
+
+    '                        Dim SqlCommandRank As Data.SqlClient.SqlCommand
+    '                        Dim UpdateCommandRank As String = ""
+    '                        UpdateCommandRank = "UPDATE SS_GrievanceFormRequest SET [RequestStautsTypeID] = 1 WHERE ID=" & RequestSerial & ""
+    '                        SqlCommandRank = New SqlClient.SqlCommand
+    '                        SqlCommandRank.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '                        SqlCommandRank.CommandType = CommandType.Text
+    '                        SqlCommandRank.CommandText = UpdateCommandRank
+    '                        SqlCommandRank.Connection.Open()
+    '                        SqlCommandRank.ExecuteNonQuery()
+    '                        SqlCommandRank.Connection.Close()
+    '                    End If
+    '                End If
+
+
+    '            End If
+
+    '            ClsEmployees.SendEmail("FrmGrievanceFormRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
+    '            ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
+    '            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+    '            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+    '            'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
+
+
+
+    '        End If
+    '        If ddlAction.SelectedValue = 3 Then
+    '            If txtDelegated.Text = "" Then
+
+    '                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Please Select Delegated Employee / عفوا لابد من تحديد الموظف المفوض اليه "))
+    '                txtDelegated.Focus()
+    '                Return
+
+    '            End If
+
+    '            Dim SqlCommandRank1 As Data.SqlClient.SqlCommand
+    '            Dim UpdateCommandRank1 As String = ""
+    '            UpdateCommandRank1 = "UPDATE SS_GrievanceFormRequest SET [RequestStautsTypeID] = 4 WHERE ID=" & RequestSerial & ""
+    '            SqlCommandRank1 = New SqlClient.SqlCommand
+    '            SqlCommandRank1.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '            SqlCommandRank1.CommandType = CommandType.Text
+    '            SqlCommandRank1.CommandText = UpdateCommandRank1
+    '            SqlCommandRank1.Connection.Open()
+    '            SqlCommandRank1.ExecuteNonQuery()
+    '            SqlCommandRank1.Connection.Close()
+
+    '            Dim ConfigCommand As String = "select * from SS_Configuration where ID=" & ConfigID & ""
+    '            Dim adapter As New Data.SqlClient.SqlDataAdapter
+    '            Dim dsconfig As New Data.DataSet()
+    '            Dim connection As Data.SqlClient.SqlConnection
+    '            connection = New Data.SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '            Dim command2 As Data.SqlClient.SqlCommand
+    '            Dim command As Data.SqlClient.SqlCommand
+
+    '            ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+    '            command = New Data.SqlClient.SqlCommand(ConfigCommand, connection)
+    '            adapter.SelectCommand = command
+    '            adapter.Fill(dsconfig)
+    '            connection.Close()
+    '            Dim dsRank As New Data.DataSet()
+    '            If dsconfig.Tables(0).Rows.Count > 0 Then
+
+    '                If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
+    '                    _sys_User.Find("ID = '" & User & "'")
+    '                    ClsEmployees.Find("Code='" & _sys_User.Code & "'")
+
+    '                    Dim SqlCommand2 As Data.SqlClient.SqlCommand
+    '                    Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>  " & ClsEmployees.ID & " "
+    '                    SqlCommand2 = New SqlClient.SqlCommand
+    '                    SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '                    SqlCommand2.CommandType = CommandType.Text
+    '                    SqlCommand2.CommandText = UpdateCommand2
+    '                    SqlCommand2.Connection.Open()
+    '                    SqlCommand2.ExecuteNonQuery()
+    '                    SqlCommand2.Connection.Close()
+
+
+
+    '                End If
+    '                ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+
+    '                Dim strinsert As String
+    '                    Dim clsDelegatedEmp As New Clshrs_Employees(Page)
+    '                    clsDelegatedEmp.Find("Code='" & txtDelegated.Text & "'")
+    '                    strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & clsDelegatedEmp.ID & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & dsconfig.Tables(0).Rows(0)("ID") & ")"
+    '                    SqlCommand = New SqlClient.SqlCommand
+    '                    SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+    '                    SqlCommand.CommandType = CommandType.Text
+    '                    SqlCommand.CommandText = strinsert
+    '                    SqlCommand.Connection.Open()
+    '                    SqlCommand.ExecuteNonQuery()
+    '                    SqlCommand.Connection.Close()
+
+
+    '                End If
+
+    '                ClsEmployees.SendEmail("FrmGrievanceFormRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
+    '                ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
+    '                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+    '                Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+    '                'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
+
+
+
+    '            End If
+    '            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+    '            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+    '        Else
+    '            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Sorry...You Have to Select Action Or Close Window  !/!عفوا لابد من اختيار اجراء او اغلاق النافذة"))
+
+    '        End If
+
+
+    'End Sub
     Protected Sub btnSave_Click(sender As Object, e As Infragistics.WebUI.WebDataInput.ButtonEventArgs) Handles btnSave.Click
 
         Dim ClsEmployees As New Clshrs_Employees(Page)
         Dim ClsEmployees_SS As New Clshrs_Employees(Page)
-
         Dim objNav As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
-        If ddlAction.SelectedValue > 0 Then
+        Dim connection As SqlClient.SqlConnection = Nothing
+        Dim transaction As SqlClient.SqlTransaction = Nothing
+        Dim mErrorHandler As New Venus.Shared.ErrorsHandler()
 
+        Try
+            If ddlAction.SelectedValue > 0 Then
 
+                Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
+                Dim ConfigID As Integer = Request.QueryString.Item("ConfigID")
+                Dim User As String = String.Empty
+                Dim WebHandler As New Venus.Shared.Web.WebHandler
+                WebHandler.GetCookies(Page, "UserID", User)
+                Dim _sys_User As New Clssys_Users(Page)
+                _sys_User.Find("ID = '" & User & "'")
+                ClsEmployees.Find("Code='" & _sys_User.Code & "'")
+                ClsEmployees_SS.Find("Code='" & _sys_User.Code & "'")
+                WebHandler.GetCookies(Page, "UserID", User)
+                Dim SqlCommand As Data.SqlClient.SqlCommand
+                Dim UpdateCommand As String = ""
 
-            Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
-            Dim ConfigID As Integer = Request.QueryString.Item("ConfigID")
-            Dim User As String = String.Empty
-            Dim WebHandler As New Venus.Shared.Web.WebHandler
-            WebHandler.GetCookies(Page, "UserID", User)
-            Dim _sys_User As New Clssys_Users(Page)
-            _sys_User.Find("ID = '" & User & "'")
-            ClsEmployees.Find("Code='" & _sys_User.Code & "'")
-            ClsEmployees_SS.Find("Code='" & _sys_User.Code & "'")
-            WebHandler.GetCookies(Page, "UserID", User)
-            Dim SqlCommand As Data.SqlClient.SqlCommand
-            Dim UpdateCommand As String = ""
+                Dim clsEmp As New Clshrs_Employees(Page)
+                clsEmp.Find("Code='" & _sys_User.Code & "'")
 
-            Dim clsEmp As New Clshrs_Employees(Page)
-            clsEmp.Find("Code='" & _sys_User.Code & "'")
-            Dim actionIdSql As String
-            actionIdSql = "SELECT [ActionSerial] FROM [dbo].[SS_RequestActions]  where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & clsEmp.ID & ""
-            Dim actionSerial As String
-            actionSerial = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, actionIdSql)
-            '============Get ConfigData======================
-            If ddlAction.SelectedValue = 2 Then   'رفض
+                ' ===== فتح الاتصال وبدء Transaction =====
+                connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+                connection.Open()
+                transaction = connection.BeginTransaction()
 
-                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
-                SqlCommand = New SqlClient.SqlCommand
-                SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
-                SqlCommand.CommandType = CommandType.Text
-                SqlCommand.CommandText = UpdateCommand
-                SqlCommand.Connection.Open()
-                SqlCommand.ExecuteNonQuery()
-                SqlCommand.Connection.Close()
+                Try
+                    ' ===== جلب ActionSerial باستخدام Parameters =====
+                    Dim actionIdSql As String = "SELECT [ActionSerial] FROM [dbo].[SS_RequestActions] WHERE ConfigID=@ConfigID AND RequestSerial=@RequestSerial AND SS_EmployeeID=@EmployeeID"
+                    Dim actionSerial As String = ""
 
-                Dim SqlCommandRank As Data.SqlClient.SqlCommand
-                Dim UpdateCommandRank As String = ""
-                UpdateCommandRank = "UPDATE SS_GrievanceFormRequest SET [RequestStautsTypeID] = 2 WHERE ID=" & RequestSerial & ""
-                SqlCommandRank = New SqlClient.SqlCommand
-                SqlCommandRank.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                SqlCommandRank.CommandType = CommandType.Text
-                SqlCommandRank.CommandText = UpdateCommandRank
-                SqlCommandRank.Connection.Open()
-                SqlCommandRank.ExecuteNonQuery()
-                SqlCommandRank.Connection.Close()
+                    Using cmd As New SqlClient.SqlCommand(actionIdSql, connection, transaction)
+                        cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                        cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                        cmd.Parameters.AddWithValue("@EmployeeID", clsEmp.ID)
+                        Dim result As Object = cmd.ExecuteScalar()
+                        If result IsNot Nothing AndAlso Not DBNull.Value.Equals(result) Then
+                            actionSerial = result.ToString()
+                        End If
+                    End Using
 
-                Dim ConfigCommand As String = "select * from SS_Configuration where ID=" & ConfigID & ""
-                Dim adapter As New Data.SqlClient.SqlDataAdapter
-                Dim dsconfig As New Data.DataSet()
-                Dim connection As Data.SqlClient.SqlConnection
-                connection = New Data.SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                Dim command As Data.SqlClient.SqlCommand
-                command = New Data.SqlClient.SqlCommand(ConfigCommand, connection)
-                adapter.SelectCommand = command
-                adapter.Fill(dsconfig)
-                connection.Close()
+                    '============Get ConfigData======================
+                    If ddlAction.SelectedValue = 2 Then   'رفض
 
-                Dim dsRank As New Data.DataSet()
-                If dsconfig.Tables(0).Rows.Count > 0 Then
-                    If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
+                        ' ===== 1. تحديث SS_RequestActions =====
+                        UpdateCommand = "UPDATE SS_RequestActions SET seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks WHERE ConfigID=@ConfigID AND FormCode='SS_00196' AND RequestSerial=@RequestSerial AND SS_EmployeeID=@EmployeeID"
+                        Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
+                            cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
+                            cmd.Parameters.AddWithValue("@ActionRemarks", TxtRemarks.Text)
+                            cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                            cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                            cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees_SS.ID)
+                            cmd.ExecuteNonQuery()
+                        End Using
 
-                        _sys_User.Find("ID = '" & User & "'")
-                        ClsEmployees.Find("Code='" & _sys_User.Code & "'")
-                        Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <> " & ClsEmployees.ID & ""
-                        SqlCommand2 = New SqlClient.SqlCommand
-                        SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                        SqlCommand2.CommandType = CommandType.Text
-                        SqlCommand2.CommandText = UpdateCommand2
-                        SqlCommand2.Connection.Open()
-                        SqlCommand2.ExecuteNonQuery()
-                        SqlCommand2.Connection.Close()
+                        ' ===== 2. تحديث SS_GrievanceFormRequest =====
+                        Dim UpdateCommandRank As String = "UPDATE SS_GrievanceFormRequest SET RequestStautsTypeID = @RequestStautsTypeID WHERE ID = @RequestSerial"
+                        Using cmd As New SqlClient.SqlCommand(UpdateCommandRank, connection, transaction)
+                            cmd.Parameters.AddWithValue("@RequestStautsTypeID", 2)
+                            cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                            cmd.ExecuteNonQuery()
+                        End Using
 
+                        ' ===== 3. جلب Config =====
+                        Dim ConfigCommand As String = "SELECT * FROM SS_Configuration WHERE ID = @ConfigID"
+                        Dim dsconfig As New Data.DataSet()
+                        Using cmd As New SqlClient.SqlCommand(ConfigCommand, connection, transaction)
+                            cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                            Using adapter As New SqlClient.SqlDataAdapter(cmd)
+                                adapter.Fill(dsconfig)
+                            End Using
+                        End Using
 
+                        If dsconfig.Tables(0).Rows.Count > 0 Then
+                            If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
+                                _sys_User.Find("ID = '" & User & "'")
+                                ClsEmployees.Find("Code='" & _sys_User.Code & "'")
 
-                    End If
+                                Dim UpdateCommand2 As String = "UPDATE SS_RequestActions SET seen=1, IsHidden=1 WHERE ConfigID=@ConfigID AND ActionID IS NULL AND RequestSerial=@RequestSerial AND SS_EmployeeID <> @EmployeeID"
+                                Using cmd As New SqlClient.SqlCommand(UpdateCommand2, connection, transaction)
+                                    cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                                    cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                    cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees.ID)
+                                    cmd.ExecuteNonQuery()
+                                End Using
+                            End If
 
+                            If CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
+                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+                                Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                            End If
+                        End If
 
-                    If CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
-                        '===Insert Vacation Tranaction
-                        'If SaveVacation() Then
+                        ' ===== إرسال الإيميلات =====
+                        ClsEmployees.SendEmail("FrmGrievanceFormRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
+                        ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
                         Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
-                        'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
 
                     End If
 
+                    If ddlAction.SelectedValue = 1 Then
 
+                        ' ===== 1. تحديث SS_GrievanceFormRequest =====
+                        Dim UpdateCommandRank1 As String = "UPDATE SS_GrievanceFormRequest SET RequestStautsTypeID = @RequestStautsTypeID WHERE ID = @RequestSerial"
+                        Using cmd As New SqlClient.SqlCommand(UpdateCommandRank1, connection, transaction)
+                            cmd.Parameters.AddWithValue("@RequestStautsTypeID", 4)
+                            cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                            cmd.ExecuteNonQuery()
+                        End Using
 
-                End If
+                        ' ===== 2. جلب Config =====
+                        Dim ConfigCommand As String = "SELECT * FROM SS_Configuration WHERE ID = @ConfigID"
+                        Dim dsconfig As New Data.DataSet()
+                        Using cmd As New SqlClient.SqlCommand(ConfigCommand, connection, transaction)
+                            cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                            Using adapter As New SqlClient.SqlDataAdapter(cmd)
+                                adapter.Fill(dsconfig)
+                            End Using
+                        End Using
 
-                ClsEmployees.SendEmail("FrmGrievanceFormRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
-                ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
-                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
-                Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
-                'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
-            End If
+                        Dim dsRank As New Data.DataSet()
+                        If dsconfig.Tables(0).Rows.Count > 0 Then
 
-            If ddlAction.SelectedValue = 1 Then
+                            If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
+                                _sys_User.Find("ID = '" & User & "'")
+                                ClsEmployees.Find("Code='" & _sys_User.Code & "'")
 
-                Dim SqlCommandRank1 As Data.SqlClient.SqlCommand
-                Dim UpdateCommandRank1 As String = ""
-                UpdateCommandRank1 = "UPDATE SS_GrievanceFormRequest SET [RequestStautsTypeID] = 4 WHERE ID=" & RequestSerial & ""
-                SqlCommandRank1 = New SqlClient.SqlCommand
-                SqlCommandRank1.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                SqlCommandRank1.CommandType = CommandType.Text
-                SqlCommandRank1.CommandText = UpdateCommandRank1
-                SqlCommandRank1.Connection.Open()
-                SqlCommandRank1.ExecuteNonQuery()
-                SqlCommandRank1.Connection.Close()
+                                Dim UpdateCommand2 As String = "UPDATE SS_RequestActions SET seen=1, IsHidden=1 WHERE ConfigID=@ConfigID AND ActionID IS NULL AND RequestSerial=@RequestSerial AND SS_EmployeeID <> @EmployeeID"
+                                Using cmd As New SqlClient.SqlCommand(UpdateCommand2, connection, transaction)
+                                    cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                                    cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                    cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees.ID)
+                                    cmd.ExecuteNonQuery()
+                                End Using
 
-                Dim ConfigCommand As String = "select * from SS_Configuration where ID=" & ConfigID & ""
-                Dim adapter As New Data.SqlClient.SqlDataAdapter
-                Dim dsconfig As New Data.DataSet()
-                Dim connection As Data.SqlClient.SqlConnection
-                connection = New Data.SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                Dim command2 As Data.SqlClient.SqlCommand
-                Dim command As Data.SqlClient.SqlCommand
-                Dim NextRank As Integer
-                command = New Data.SqlClient.SqlCommand(ConfigCommand, connection)
-                adapter.SelectCommand = command
-                adapter.Fill(dsconfig)
-                connection.Close()
-                Dim dsRank As New Data.DataSet()
-                If dsconfig.Tables(0).Rows.Count > 0 Then
+                            Else
+                                Dim NeededactionIdSql As String = "SELECT [ActionSerial] FROM [dbo].[SS_RequestActions] WHERE ConfigID=@ConfigID AND FormCode=@FormCode AND RequestSerial=@RequestSerial AND ActionID IS NULL AND SS_EmployeeID<>@EmployeeID"
+                                Dim NeededactionSerial As String = ""
 
-                    If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
+                                Using cmd As New SqlClient.SqlCommand(NeededactionIdSql, connection, transaction)
+                                    cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                                    cmd.Parameters.AddWithValue("@FormCode", dsconfig.Tables(0).Rows(0)("FormCode").ToString())
+                                    cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                    cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees.ID)
+                                    Dim result As Object = cmd.ExecuteScalar()
+                                    If result IsNot Nothing AndAlso Not DBNull.Value.Equals(result) Then
+                                        NeededactionSerial = result.ToString()
+                                    End If
+                                End Using
 
-                        _sys_User.Find("ID = '" & User & "'")
-                        ClsEmployees.Find("Code='" & _sys_User.Code & "'")
-                        Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>  " & ClsEmployees.ID & " "
-                        SqlCommand2 = New SqlClient.SqlCommand
-                        SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                        SqlCommand2.CommandType = CommandType.Text
-                        SqlCommand2.CommandText = UpdateCommand2
-                        SqlCommand2.Connection.Open()
-                        SqlCommand2.ExecuteNonQuery()
-                        SqlCommand2.Connection.Close()
+                                If Not String.IsNullOrWhiteSpace(NeededactionSerial) Then
+                                    UpdateCommand = "UPDATE SS_RequestActions SET seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks WHERE ConfigID=@ConfigID AND FormCode='SS_00196' AND RequestSerial=@RequestSerial AND SS_EmployeeID=@EmployeeID"
+                                    Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
+                                        cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
+                                        cmd.Parameters.AddWithValue("@ActionRemarks", TxtRemarks.Text)
+                                        cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                                        cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                        cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees_SS.ID)
+                                        cmd.ExecuteNonQuery()
+                                    End Using
 
-                    Else
-                        Dim NeededactionIdSql As String
-                        NeededactionIdSql = "SELECT [ActionSerial] FROM [dbo].[SS_RequestActions]  where ConfigID=" & ConfigID & " And FormCode='" & dsconfig.Tables(0).Rows(0)("FormCode") & "' and RequestSerial=" & RequestSerial & " and ActionID is null and SS_EmployeeID<>" & ClsEmployees.ID & ""
-                        Dim NeededactionSerial As String
-                        NeededactionSerial = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, NeededactionIdSql)
+                                    transaction.Commit()
+                                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+                                    Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                                    Return
+                                End If
+                            End If
 
-                        If Not String.IsNullOrWhiteSpace(NeededactionSerial) Then
+                            If CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
+                                UpdateCommand = "UPDATE SS_RequestActions SET seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks WHERE ConfigID=@ConfigID AND FormCode='SS_00196' AND RequestSerial=@RequestSerial AND SS_EmployeeID=@EmployeeID"
+                                Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
+                                    cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
+                                    cmd.Parameters.AddWithValue("@ActionRemarks", TxtRemarks.Text)
+                                    cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                                    cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                    cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees_SS.ID)
+                                    cmd.ExecuteNonQuery()
+                                End Using
 
-                            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
-                            SqlCommand = New SqlClient.SqlCommand
-                            SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
-                            SqlCommand.CommandType = CommandType.Text
-                            SqlCommand.CommandText = UpdateCommand
-                            SqlCommand.Connection.Open()
-                            SqlCommand.ExecuteNonQuery()
-                            SqlCommand.Connection.Close()
+                                Dim UpdateCommandRank As String = "UPDATE SS_GrievanceFormRequest SET RequestStautsTypeID = @RequestStautsTypeID WHERE ID = @RequestSerial"
+                                Using cmd As New SqlClient.SqlCommand(UpdateCommandRank, connection, transaction)
+                                    cmd.Parameters.AddWithValue("@RequestStautsTypeID", 1)
+                                    cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                    cmd.ExecuteNonQuery()
+                                End Using
 
-                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
-                            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                                If SaveExecuseTransAction() Then
+                                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+                                    Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                                End If
+
+                            Else
+                                Dim NextRank As Integer = CInt(dsconfig.Tables(0).Rows(0)("Rank")) + 1
+                                Dim STRNextID As String = "SELECT * FROM SS_Configuration WHERE FormCode=@FormCode AND Rank=@Rank"
+
+                                Using cmd As New SqlClient.SqlCommand(STRNextID, connection, transaction)
+                                    cmd.Parameters.AddWithValue("@FormCode", dsconfig.Tables(0).Rows(0)("FormCode").ToString())
+                                    cmd.Parameters.AddWithValue("@Rank", NextRank)
+                                    Using adapter As New SqlClient.SqlDataAdapter(cmd)
+                                        adapter.Fill(dsRank)
+                                    End Using
+                                End Using
+
+                                ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+
+                                If dsRank.Tables(0).Rows.Count > 0 Then
+                                    For Each Row In dsRank.Tables(0).Rows
+                                        'Direct Manager
+                                        If Row("UserTypeID") = 1 Then
+                                            Dim strdirectmanager As String = "SELECT ManagerID FROM hrs_Employees WHERE Code=@Code"
+                                            Dim DirectManagerID As String = ""
+
+                                            Using cmd As New SqlClient.SqlCommand(strdirectmanager, connection, transaction)
+                                                cmd.Parameters.AddWithValue("@Code", txtEmployee.Text)
+                                                Dim result As Object = cmd.ExecuteScalar()
+                                                If result IsNot Nothing AndAlso Not DBNull.Value.Equals(result) Then
+                                                    DirectManagerID = result.ToString()
+                                                End If
+                                            End Using
+
+                                            '==================CheckActingAssignment===========
+                                            Dim ActingEmpID As Integer = CheckActingEmployeeAssignment(DirectManagerID)
+                                            If ActingEmpID > 0 Then
+                                                DirectManagerID = ActingEmpID.ToString()
+                                            End If
+                                            '==================CheckDelegation===========
+                                            Dim DelegatedEmpID As Integer = CheckDelegationSchedule(DirectManagerID)
+                                            If DelegatedEmpID > 0 Then
+                                                DirectManagerID = DelegatedEmpID.ToString()
+                                            End If
+
+                                            If Not String.IsNullOrEmpty(DirectManagerID) AndAlso DirectManagerID <> "0" Then
+                                                UpdateCommand = "UPDATE SS_RequestActions SET seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks WHERE ConfigID=@ConfigID AND FormCode='SS_00196' AND RequestSerial=@RequestSerial AND SS_EmployeeID=@EmployeeID"
+                                                Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
+                                                    cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
+                                                    cmd.Parameters.AddWithValue("@ActionRemarks", TxtRemarks.Text)
+                                                    cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                                                    cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                                    cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees_SS.ID)
+                                                    cmd.ExecuteNonQuery()
+                                                End Using
+
+                                                Dim strinsert As String = "INSERT INTO SS_RequestActions (RequestSerial, SS_EmployeeID, FormCode, EmployeeID, Seen, ConfigID) VALUES (@RequestSerial, @SS_EmployeeID, @FormCode, @EmployeeID, 0, @ConfigID)"
+                                                Using cmd As New SqlClient.SqlCommand(strinsert, connection, transaction)
+                                                    cmd.Parameters.AddWithValue("@RequestSerial", TxtRequestSerial.Text)
+                                                    cmd.Parameters.AddWithValue("@SS_EmployeeID", DirectManagerID)
+                                                    cmd.Parameters.AddWithValue("@FormCode", dsconfig.Tables(0).Rows(0)("FormCode").ToString())
+                                                    cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees.ID)
+                                                    cmd.Parameters.AddWithValue("@ConfigID", Row("ID"))
+                                                    cmd.ExecuteNonQuery()
+                                                End Using
+                                            Else
+                                                transaction.Rollback()
+                                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, " Sorry Can not proceed your request because there are no employees in the next level(Next Level Rank Is " & NextRank & "  is Direct Manager) ...Please contact HR Departmnet.  / عفوا لايمكن تسجيل الطلب لعدم وجود موظفين في المرحلة التالية( المدير المباشر المرحلة القادمة هي " & NextRank & ") ... يرجي مراجعة مدير شئون العاملين "))
+                                                Return
+                                            End If
+                                        End If
+
+                                        'Position
+                                        If Row("UserTypeID") = 2 Then
+                                            Dim clshrspositions As New Clshrs_Positions(Page)
+
+                                            Dim AppIDStr As String = "SELECT MultiBranchedPosition FROM sys_SystemConfig"
+                                            Dim MultiBranchedPosition As Object
+
+                                            Using cmd As New SqlClient.SqlCommand(AppIDStr, connection, transaction)
+                                                MultiBranchedPosition = cmd.ExecuteScalar()
+                                            End Using
+
+                                            Dim strempinposition As String = "SELECT DISTINCT EmployeeID FROM hrs_Contracts WHERE PositionID=@PositionID AND CancelDate IS NULL AND (EndDate>=GETDATE() OR EndDate IS NULL)"
+                                            If Not IsDBNull(MultiBranchedPosition) AndAlso CBool(MultiBranchedPosition) Then
+                                                strempinposition = "SELECT hrs_JobBranchesPermission.EmployeeId as EmployeeID FROM hrs_JobBranchesPermission INNER JOIN hrs_JobBranchesPermissionDetails ON hrs_JobBranchesPermission.ID = hrs_JobBranchesPermissionDetails.JobBranchesPermissionId WHERE hrs_JobBranchesPermission.PositionID=@PositionID AND hrs_JobBranchesPermissionDetails.BranchId=@BranchID"
+                                            End If
+
+                                            Dim DsPositionEmployees As New Data.DataSet()
+                                            Using cmd As New SqlClient.SqlCommand(strempinposition, connection, transaction)
+                                                cmd.Parameters.AddWithValue("@PositionID", Row("PositionID"))
+                                                If Not IsDBNull(MultiBranchedPosition) AndAlso CBool(MultiBranchedPosition) Then
+                                                    cmd.Parameters.AddWithValue("@BranchID", ClsEmployees.BranchID)
+                                                End If
+                                                Using adapter As New SqlClient.SqlDataAdapter(cmd)
+                                                    adapter.Fill(DsPositionEmployees)
+                                                End Using
+                                            End Using
+
+                                            ' إضافة موظف الإنابة على الوظيفة
+                                            Dim PositionActingEmpID As Integer = CheckActingPositionAssignment(Row("PositionID"))
+                                            If PositionActingEmpID > 0 Then
+                                                Dim alreadyExists As Boolean = False
+                                                For Each existingRow As DataRow In DsPositionEmployees.Tables(0).Rows
+                                                    If Convert.ToInt32(existingRow("EmployeeID")) = PositionActingEmpID Then
+                                                        alreadyExists = True
+                                                        Exit For
+                                                    End If
+                                                Next
+                                                If Not alreadyExists Then
+                                                    Dim newRow As DataRow = DsPositionEmployees.Tables(0).NewRow()
+                                                    newRow("EmployeeID") = PositionActingEmpID
+                                                    DsPositionEmployees.Tables(0).Rows.Add(newRow)
+                                                End If
+                                            End If
+
+                                            If DsPositionEmployees.Tables(0).Rows.Count > 0 Then
+                                                For Each RW In DsPositionEmployees.Tables(0).Rows
+                                                    Dim DelegatedEmpID As Integer = CheckDelegationSchedule(RW("EmployeeID"))
+                                                    If DelegatedEmpID > 0 Then
+                                                        RW("EmployeeID") = DelegatedEmpID
+                                                    End If
+
+                                                    UpdateCommand = "UPDATE SS_RequestActions SET seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks WHERE ConfigID=@ConfigID AND FormCode='SS_00196' AND RequestSerial=@RequestSerial AND SS_EmployeeID=@EmployeeID"
+                                                    Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
+                                                        cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
+                                                        cmd.Parameters.AddWithValue("@ActionRemarks", TxtRemarks.Text)
+                                                        cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                                                        cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                                        cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees_SS.ID)
+                                                        cmd.ExecuteNonQuery()
+                                                    End Using
+
+                                                    Dim strinsert As String = "INSERT INTO SS_RequestActions (RequestSerial, SS_EmployeeID, FormCode, EmployeeID, Seen, ConfigID) VALUES (@RequestSerial, @SS_EmployeeID, @FormCode, @EmployeeID, 0, @ConfigID)"
+                                                    Using cmd As New SqlClient.SqlCommand(strinsert, connection, transaction)
+                                                        cmd.Parameters.AddWithValue("@RequestSerial", TxtRequestSerial.Text)
+                                                        cmd.Parameters.AddWithValue("@SS_EmployeeID", RW("EmployeeID"))
+                                                        cmd.Parameters.AddWithValue("@FormCode", dsconfig.Tables(0).Rows(0)("FormCode").ToString())
+                                                        cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees.ID)
+                                                        cmd.Parameters.AddWithValue("@ConfigID", Row("ID"))
+                                                        cmd.ExecuteNonQuery()
+                                                    End Using
+                                                Next
+                                            Else
+                                                Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
+                                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Can not proceed your request because there are no employees in the next level ...Please contact system admin  / عفوا لايمكن تسجيل الطلب لعدم وجود موظفين في المرحلة التالية ... يرجي مراجعة مدير النظام"))
+                                            End If
+                                        End If
+
+                                        'Employee
+                                        If Row("UserTypeID") = 3 Then
+                                            Dim ActingEmpID As Integer = CheckActingEmployeeAssignment(Row("EmployeeID"))
+                                            If ActingEmpID > 0 Then
+                                                Row("EmployeeID") = ActingEmpID
+                                            End If
+                                            Dim DelegatedEmpID As Integer = CheckDelegationSchedule(Row("EmployeeID"))
+                                            If DelegatedEmpID > 0 Then
+                                                Row("EmployeeID") = DelegatedEmpID
+                                            End If
+
+                                            UpdateCommand = "UPDATE SS_RequestActions SET seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks WHERE ConfigID=@ConfigID AND FormCode='SS_00196' AND RequestSerial=@RequestSerial AND SS_EmployeeID=@EmployeeID"
+                                            Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
+                                                cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
+                                                cmd.Parameters.AddWithValue("@ActionRemarks", TxtRemarks.Text)
+                                                cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                                                cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                                cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees_SS.ID)
+                                                cmd.ExecuteNonQuery()
+                                            End Using
+
+                                            Dim strinsert As String = "INSERT INTO SS_RequestActions (RequestSerial, SS_EmployeeID, FormCode, EmployeeID, Seen, ConfigID) VALUES (@RequestSerial, @SS_EmployeeID, @FormCode, @EmployeeID, 0, @ConfigID)"
+                                            Using cmd As New SqlClient.SqlCommand(strinsert, connection, transaction)
+                                                cmd.Parameters.AddWithValue("@RequestSerial", TxtRequestSerial.Text)
+                                                cmd.Parameters.AddWithValue("@SS_EmployeeID", Row("EmployeeID"))
+                                                cmd.Parameters.AddWithValue("@FormCode", dsconfig.Tables(0).Rows(0)("FormCode").ToString())
+                                                cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees.ID)
+                                                cmd.Parameters.AddWithValue("@ConfigID", Row("ID"))
+                                                cmd.ExecuteNonQuery()
+                                            End Using
+                                        End If
+                                    Next
+                                Else
+                                    UpdateCommand = "UPDATE SS_RequestActions SET seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks WHERE ConfigID=@ConfigID AND FormCode='SS_00196' AND RequestSerial=@RequestSerial AND SS_EmployeeID=@EmployeeID"
+                                    Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
+                                        cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
+                                        cmd.Parameters.AddWithValue("@ActionRemarks", TxtRemarks.Text)
+                                        cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                                        cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                        cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees_SS.ID)
+                                        cmd.ExecuteNonQuery()
+                                    End Using
+
+                                    Dim UpdateCommandRank As String = "UPDATE SS_GrievanceFormRequest SET RequestStautsTypeID = @RequestStautsTypeID WHERE ID = @RequestSerial"
+                                    Using cmd As New SqlClient.SqlCommand(UpdateCommandRank, connection, transaction)
+                                        cmd.Parameters.AddWithValue("@RequestStautsTypeID", 1)
+                                        cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                        cmd.ExecuteNonQuery()
+                                    End Using
+                                End If
+                            End If
+                        End If
+
+                        ' ===== إرسال الإيميلات =====
+                        ClsEmployees.SendEmail("FrmGrievanceFormRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
+                        ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+                        Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+
+                    End If
+
+                    If ddlAction.SelectedValue = 3 Then
+                        If txtDelegated.Text = "" Then
+                            transaction.Rollback()
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Please Select Delegated Employee / عفوا لابد من تحديد الموظف المفوض اليه "))
+                            txtDelegated.Focus()
                             Return
                         End If
 
-                    End If
-                    If CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
+                        ' ===== 1. تحديث SS_GrievanceFormRequest =====
+                        Dim UpdateCommandRank1 As String = "UPDATE SS_GrievanceFormRequest SET RequestStautsTypeID = @RequestStautsTypeID WHERE ID = @RequestSerial"
+                        Using cmd As New SqlClient.SqlCommand(UpdateCommandRank1, connection, transaction)
+                            cmd.Parameters.AddWithValue("@RequestStautsTypeID", 4)
+                            cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                            cmd.ExecuteNonQuery()
+                        End Using
 
-                        UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
-                        SqlCommand = New SqlClient.SqlCommand
-                        SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
-                        SqlCommand.CommandType = CommandType.Text
-                        SqlCommand.CommandText = UpdateCommand
-                        SqlCommand.Connection.Open()
-                        SqlCommand.ExecuteNonQuery()
-                        SqlCommand.Connection.Close()
+                        ' ===== 2. جلب Config =====
+                        Dim ConfigCommand As String = "SELECT * FROM SS_Configuration WHERE ID = @ConfigID"
+                        Dim dsconfig As New Data.DataSet()
+                        Using cmd As New SqlClient.SqlCommand(ConfigCommand, connection, transaction)
+                            cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                            Using adapter As New SqlClient.SqlDataAdapter(cmd)
+                                adapter.Fill(dsconfig)
+                            End Using
+                        End Using
 
-                        Dim SqlCommandRank As Data.SqlClient.SqlCommand
-                        Dim UpdateCommandRank As String = ""
-                        UpdateCommandRank = "UPDATE SS_GrievanceFormRequest SET [RequestStautsTypeID] = 1 WHERE ID=" & RequestSerial & ""
-                        SqlCommandRank = New SqlClient.SqlCommand
-                        SqlCommandRank.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                        SqlCommandRank.CommandType = CommandType.Text
-                        SqlCommandRank.CommandText = UpdateCommandRank
-                        SqlCommandRank.Connection.Open()
-                        SqlCommandRank.ExecuteNonQuery()
-                        SqlCommandRank.Connection.Close()
-                        '===Insert Execuse Tranaction
-                        If SaveExecuseTransAction() Then
-                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
-                            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
-                            'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
-
-                        End If
-
-                    Else
-                        NextRank = CInt(dsconfig.Tables(0).Rows(0)("Rank")) + 1
-                        Dim STRNextID As String
-                        STRNextID = "select * from SS_Configuration where FormCode='" & dsconfig.Tables(0).Rows(0)("FormCode") & "' and Rank=" & NextRank & ""
-                        command2 = New Data.SqlClient.SqlCommand(STRNextID, connection)
-                        adapter.SelectCommand = command2
-                        adapter.Fill(dsRank)
                         ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
-                        If dsRank.Tables(0).Rows.Count > 0 Then
-                            For Each Row In dsRank.Tables(0).Rows
-                                'Direct Manager
-                                If Row("UserTypeID") = 1 Then
-                                    Dim strdirectmanager As String
-                                    strdirectmanager = "select ManagerID from hrs_Employees where Code='" & txtEmployee.Text & "'"
-                                    Dim DirectManagerID As String
-                                    DirectManagerID = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, strdirectmanager)
-                                    '==================CheckActingAssignment===========
-                                    Dim ActingEmpID As Integer
-                                    ActingEmpID = CheckActingEmployeeAssignment(DirectManagerID)
-                                    If ActingEmpID > 0 Then
-                                        DirectManagerID = ActingEmpID
-                                    End If
-                                    '==================CheckDelegation===========
-                                    Dim DelegatedEmpID As Integer
-                                    DelegatedEmpID = CheckDelegationSchedule(DirectManagerID)
-                                    If DelegatedEmpID > 0 Then
 
-                                        DirectManagerID = DelegatedEmpID
+                        If dsconfig.Tables(0).Rows.Count > 0 Then
+                            If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
+                                _sys_User.Find("ID = '" & User & "'")
+                                ClsEmployees.Find("Code='" & _sys_User.Code & "'")
 
-                                    End If
+                                Dim UpdateCommand2 As String = "UPDATE SS_RequestActions SET seen=1, IsHidden=1 WHERE ConfigID=@ConfigID AND ActionID IS NULL AND RequestSerial=@RequestSerial AND SS_EmployeeID <> @EmployeeID"
+                                Using cmd As New SqlClient.SqlCommand(UpdateCommand2, connection, transaction)
+                                    cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                                    cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                    cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees.ID)
+                                    cmd.ExecuteNonQuery()
+                                End Using
+                            End If
 
-                                    UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
-                                    SqlCommand = New SqlClient.SqlCommand
-                                    SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
-                                    SqlCommand.CommandType = CommandType.Text
-                                    SqlCommand.CommandText = UpdateCommand
-                                    SqlCommand.Connection.Open()
-                                    SqlCommand.ExecuteNonQuery()
-                                    SqlCommand.Connection.Close()
+                            ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+                            Dim clsDelegatedEmp As New Clshrs_Employees(Page)
+                            clsDelegatedEmp.Find("Code='" & txtDelegated.Text & "'")
 
-                                    Dim strinsert As String
-                                    strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & DirectManagerID & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
-                                    SqlCommand = New SqlClient.SqlCommand
-                                    SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                                    SqlCommand.CommandType = CommandType.Text
-                                    SqlCommand.CommandText = strinsert
-                                    SqlCommand.Connection.Open()
-                                    SqlCommand.ExecuteNonQuery()
-                                    SqlCommand.Connection.Close()
-                                End If
-                                'Position
-                                If Row("UserTypeID") = 2 Then
-                                    Dim clshrspositions As New Clshrs_Positions(Page)
-                                    Dim AppIDStr As String = "SELECT MultiBranchedPosition FROM sys_SystemConfig"
-                                    Dim MultiBranchedPosition As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, AppIDStr)
-
-
-                                    Dim strempinposition As String = "select  distinct EmployeeID from hrs_Contracts where PositionID=" & Row("PositionID") & " and CancelDate is null And (EndDate>=getdate() or EndDate  is null)"
-                                    If Not IsDBNull(MultiBranchedPosition) AndAlso CBool(MultiBranchedPosition) Then
-                                        If CBool(MultiBranchedPosition) Then
-                                            strempinposition = "SELECT hrs_JobBranchesPermission.EmployeeId as EmployeeID FROM hrs_JobBranchesPermission INNER JOIN hrs_JobBranchesPermissionDetails ON hrs_JobBranchesPermission.ID =  hrs_JobBranchesPermissionDetails.JobBranchesPermissionId  where hrs_JobBranchesPermission.PositionID=" & Row("PositionID") & " and hrs_JobBranchesPermissionDetails.BranchId=" & ClsEmployees.BranchID
-                                        End If
-                                    End If
-                                    Dim DsPositionEmployees As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployees.ConnectionString, CommandType.Text, strempinposition)
-                                    ' إضافة موظف الإنابة على الوظيفة إلى قائمة موظفي المرحلة (إن وُجدت حركة نشطة)
-                                    Dim PositionActingEmpID As Integer = CheckActingPositionAssignment(Row("PositionID"))
-                                    If PositionActingEmpID > 0 Then
-                                        Dim alreadyExists As Boolean = False
-                                        For Each existingRow As DataRow In DsPositionEmployees.Tables(0).Rows
-                                            If Convert.ToInt32(existingRow("EmployeeID")) = PositionActingEmpID Then
-                                                alreadyExists = True
-                                                Exit For
-                                            End If
-                                        Next
-                                        If Not alreadyExists Then
-                                            Dim newRow As DataRow = DsPositionEmployees.Tables(0).NewRow()
-                                            newRow("EmployeeID") = PositionActingEmpID
-                                            DsPositionEmployees.Tables(0).Rows.Add(newRow)
-                                        End If
-                                    End If
-                                    If DsPositionEmployees.Tables(0).Rows.Count > 0 Then
-                                        For Each RW In DsPositionEmployees.Tables(0).Rows
-                                            Dim DelegatedEmpID As Integer
-                                            DelegatedEmpID = CheckDelegationSchedule(RW("EmployeeID"))
-                                            If DelegatedEmpID > 0 Then
-
-                                                RW("EmployeeID") = DelegatedEmpID
-
-                                            End If
-
-                                            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
-                                            SqlCommand = New SqlClient.SqlCommand
-                                            SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
-                                            SqlCommand.CommandType = CommandType.Text
-                                            SqlCommand.CommandText = UpdateCommand
-                                            SqlCommand.Connection.Open()
-                                            SqlCommand.ExecuteNonQuery()
-                                            SqlCommand.Connection.Close()
-
-                                            Dim strinsert As String
-                                            strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & RW("EmployeeID") & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
-                                            SqlCommand = New SqlClient.SqlCommand
-                                            SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                                            SqlCommand.CommandType = CommandType.Text
-                                            SqlCommand.CommandText = strinsert
-                                            SqlCommand.Connection.Open()
-                                            SqlCommand.ExecuteNonQuery()
-                                            SqlCommand.Connection.Close()
-
-                                        Next
-                                    Else
-                                        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
-                                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Can not proceed your request because there are no employees in the next level ...Please contact system admin  / عفوا لايمكن تسجيل الطلب لعدم وجود موظفين في المرحلة التالية ... يرجي مراجعة مدير النظام"))
-                                    End If
-                                End If
-                                'Employee
-                                If Row("UserTypeID") = 3 Then
-                                    Dim ActingEmpID As Integer
-                                    ActingEmpID = CheckActingEmployeeAssignment(Row("EmployeeID"))
-                                    If ActingEmpID > 0 Then
-                                        Row("EmployeeID") = ActingEmpID
-                                    End If
-                                    Dim DelegatedEmpID As Integer
-                                    DelegatedEmpID = CheckDelegationSchedule(Row("EmployeeID"))
-                                    If DelegatedEmpID > 0 Then
-
-                                        Row("EmployeeID") = DelegatedEmpID
-
-                                    End If
-
-                                    UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
-                                    SqlCommand = New SqlClient.SqlCommand
-                                    SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
-                                    SqlCommand.CommandType = CommandType.Text
-                                    SqlCommand.CommandText = UpdateCommand
-                                    SqlCommand.Connection.Open()
-                                    SqlCommand.ExecuteNonQuery()
-                                    SqlCommand.Connection.Close()
-
-                                    Dim strinsert As String
-                                    strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & Row("EmployeeID") & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
-                                    SqlCommand = New SqlClient.SqlCommand
-                                    SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                                    SqlCommand.CommandType = CommandType.Text
-                                    SqlCommand.CommandText = strinsert
-                                    SqlCommand.Connection.Open()
-                                    SqlCommand.ExecuteNonQuery()
-                                    SqlCommand.Connection.Close()
-                                End If
-                            Next
-                        Else
-
-                            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00196' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
-                            SqlCommand = New SqlClient.SqlCommand
-                            SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
-                            SqlCommand.CommandType = CommandType.Text
-                            SqlCommand.CommandText = UpdateCommand
-                            SqlCommand.Connection.Open()
-                            SqlCommand.ExecuteNonQuery()
-                            SqlCommand.Connection.Close()
-
-                            Dim SqlCommandRank As Data.SqlClient.SqlCommand
-                            Dim UpdateCommandRank As String = ""
-                            UpdateCommandRank = "UPDATE SS_GrievanceFormRequest SET [RequestStautsTypeID] = 1 WHERE ID=" & RequestSerial & ""
-                            SqlCommandRank = New SqlClient.SqlCommand
-                            SqlCommandRank.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                            SqlCommandRank.CommandType = CommandType.Text
-                            SqlCommandRank.CommandText = UpdateCommandRank
-                            SqlCommandRank.Connection.Open()
-                            SqlCommandRank.ExecuteNonQuery()
-                            SqlCommandRank.Connection.Close()
+                            Dim strinsert As String = "INSERT INTO SS_RequestActions (RequestSerial, SS_EmployeeID, FormCode, EmployeeID, Seen, ConfigID) VALUES (@RequestSerial, @SS_EmployeeID, @FormCode, @EmployeeID, 0, @ConfigID)"
+                            Using cmd As New SqlClient.SqlCommand(strinsert, connection, transaction)
+                                cmd.Parameters.AddWithValue("@RequestSerial", TxtRequestSerial.Text)
+                                cmd.Parameters.AddWithValue("@SS_EmployeeID", clsDelegatedEmp.ID)
+                                cmd.Parameters.AddWithValue("@FormCode", dsconfig.Tables(0).Rows(0)("FormCode").ToString())
+                                cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees.ID)
+                                cmd.Parameters.AddWithValue("@ConfigID", dsconfig.Tables(0).Rows(0)("ID"))
+                                cmd.ExecuteNonQuery()
+                            End Using
                         End If
-                    End If
 
-
-                End If
-
-                ClsEmployees.SendEmail("FrmGrievanceFormRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
-                ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
-                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
-                Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
-                'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
-
-
-
-            End If
-            If ddlAction.SelectedValue = 3 Then
-                If txtDelegated.Text = "" Then
-
-                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Please Select Delegated Employee / عفوا لابد من تحديد الموظف المفوض اليه "))
-                    txtDelegated.Focus()
-                    Return
-
-                End If
-
-                Dim SqlCommandRank1 As Data.SqlClient.SqlCommand
-                Dim UpdateCommandRank1 As String = ""
-                UpdateCommandRank1 = "UPDATE SS_GrievanceFormRequest SET [RequestStautsTypeID] = 4 WHERE ID=" & RequestSerial & ""
-                SqlCommandRank1 = New SqlClient.SqlCommand
-                SqlCommandRank1.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                SqlCommandRank1.CommandType = CommandType.Text
-                SqlCommandRank1.CommandText = UpdateCommandRank1
-                SqlCommandRank1.Connection.Open()
-                SqlCommandRank1.ExecuteNonQuery()
-                SqlCommandRank1.Connection.Close()
-
-                Dim ConfigCommand As String = "select * from SS_Configuration where ID=" & ConfigID & ""
-                Dim adapter As New Data.SqlClient.SqlDataAdapter
-                Dim dsconfig As New Data.DataSet()
-                Dim connection As Data.SqlClient.SqlConnection
-                connection = New Data.SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                Dim command2 As Data.SqlClient.SqlCommand
-                Dim command As Data.SqlClient.SqlCommand
-
-                ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
-                command = New Data.SqlClient.SqlCommand(ConfigCommand, connection)
-                adapter.SelectCommand = command
-                adapter.Fill(dsconfig)
-                connection.Close()
-                Dim dsRank As New Data.DataSet()
-                If dsconfig.Tables(0).Rows.Count > 0 Then
-
-                    If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
-                        _sys_User.Find("ID = '" & User & "'")
-                        ClsEmployees.Find("Code='" & _sys_User.Code & "'")
-
-                        Dim SqlCommand2 As Data.SqlClient.SqlCommand
-                        Dim UpdateCommand2 As String = "update SS_RequestActions set  seen=1 , IsHidden=1 where ConfigID=" & ConfigID & " and ActionID is null and RequestSerial=" & RequestSerial & " and SS_EmployeeID <>  " & ClsEmployees.ID & " "
-                        SqlCommand2 = New SqlClient.SqlCommand
-                        SqlCommand2.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                        SqlCommand2.CommandType = CommandType.Text
-                        SqlCommand2.CommandText = UpdateCommand2
-                        SqlCommand2.Connection.Open()
-                        SqlCommand2.ExecuteNonQuery()
-                        SqlCommand2.Connection.Close()
-
-
-
-                    End If
-                    ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
-
-                    Dim strinsert As String
-                        Dim clsDelegatedEmp As New Clshrs_Employees(Page)
-                        clsDelegatedEmp.Find("Code='" & txtDelegated.Text & "'")
-                        strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & TxtRequestSerial.Text & " , " & clsDelegatedEmp.ID & ",'" & dsconfig.Tables(0).Rows(0)("FormCode") & "'," & ClsEmployees.ID & ",0," & dsconfig.Tables(0).Rows(0)("ID") & ")"
-                        SqlCommand = New SqlClient.SqlCommand
-                        SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
-                        SqlCommand.CommandType = CommandType.Text
-                        SqlCommand.CommandText = strinsert
-                        SqlCommand.Connection.Open()
-                        SqlCommand.ExecuteNonQuery()
-                        SqlCommand.Connection.Close()
-
+                        ' ===== إرسال الإيميلات =====
+                        ClsEmployees.SendEmail("FrmGrievanceFormRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
+                        ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+                        Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
 
                     End If
 
-                    ClsEmployees.SendEmail("FrmGrievanceFormRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
-                    ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
-                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
-                    Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
-                    'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
+                    ' ===== Commit Transaction =====
+                    transaction.Commit()
 
+                Catch ex As Exception
+                    ' ===== Rollback =====
+                    If transaction IsNot Nothing Then
+                        transaction.Rollback()
+                    End If
+                    Throw ex
+                End Try
 
-
-                End If
-                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
-                Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
             Else
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Sorry...You Have to Select Action Or Close Window  !/!عفوا لابد من اختيار اجراء او اغلاق النافذة"))
-
             End If
 
+        Catch ex As Exception
+            ' ===== Rollback =====
+            If transaction IsNot Nothing Then
+                Try
+                    transaction.Rollback()
+                Catch rollbackEx As Exception
+                    ' تجاهل
+                End Try
+            End If
+
+            mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, ClsEmployees.RegUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, "حدث خطأ: " & ex.Message)
+
+        Finally
+            ' ===== إغلاق الاتصال =====
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Open Then
+                connection.Close()
+                connection.Dispose()
+            End If
+            If transaction IsNot Nothing Then
+                transaction.Dispose()
+            End If
+        End Try
 
     End Sub
-
     Public Function CheckDelegationSchedule(EmpID As Integer) As Integer
         Dim ClsEmployees As New Clshrs_Employees(Page)
         Dim StrGetDelegation As String

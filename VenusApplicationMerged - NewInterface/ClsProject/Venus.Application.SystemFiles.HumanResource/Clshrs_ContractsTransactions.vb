@@ -634,9 +634,16 @@ Public Class Clshrs_ContractsTransactionsBase
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@PaidAtVacation", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mPaidAtVacation, SqlDbType.Int)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@OnceAtPeriod", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mOnceAtPeriod, SqlDbType.Bit)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Remarks", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mRemarks, SqlDbType.VarChar)
-            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ActiveDate", SqlDbType.SmallDateTime)).Value = mDataHandler.DataValue_In(mActiveDate, SqlDbType.SmallDateTime)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ActiveDate", SqlDbType.SmallDateTime)).Value = mDataHandler.DataValue_In(mActiveDate, SqlDbType.Date)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ActiveDate_D", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mActiveDate_D, SqlDbType.VarChar)
+            'If mActiveDate.ToString() IsNot Nothing AndAlso IsDate(mActiveDate) Then
+            '    Dim dt As DateTime = Convert.ToDateTime(mActiveDate, Global.System.Globalization.CultureInfo.InvariantCulture)
+            '    Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ActiveDate", SqlDbType.SmallDateTime)).Value = dt
+            'Else
+            '    Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ActiveDate", SqlDbType.SmallDateTime)).Value = DBNull.Value
+            'End If
 
+            'Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ActiveDate_D", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mActiveDate_D, SqlDbType.VarChar)
             If operationtype = ClsDataAcessLayer.OperationType.Update Then
                 Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@CancelDate", SqlDbType.SmallDateTime)).Value = mDataHandler.DataValue_In(mCancelDate, SqlDbType.SmallDateTime)
             End If
@@ -916,7 +923,8 @@ Public Class Clshrs_ContractsTransactions
                     PaidAtVacation = row.Cells.FromKey("PaidAtVacation").Value
                     OnceAtPeriod = row.Cells.FromKey("OnceAtPeriod").Value
                     ActiveDate = SetHigriDate2(row.Cells.FromKey("ActiveDate").Value, ActiveDate_D)
-
+                    ' ActiveDate = SetHigriDate3(row.Cells.FromKey("ActiveDate").Value, ActiveDate_D)
+                    ActiveDate = ActiveDate.ToString("dd/MM/yyyy")
                     If strMode = "E" Then
                         CancelDate = Nothing
                     End If
@@ -1044,6 +1052,7 @@ Public Class Clshrs_ContractsTransactions
                         IntervalID = mDataHandler.DataValue_Out(row.Cells.FromKey("IntervalID").Value, SqlDbType.Int, True)
                         PaidAtVacation = row.Cells.FromKey("PaidAtVacation").Value
                         OnceAtPeriod = row.Cells.FromKey("OnceAtPeriod").Value
+                        'ActiveDate = SetHigriDate2(row.Cells.FromKey("ActiveDate").Value, ActiveDate_D)
                         ActiveDate = SetHigriDate2(row.Cells.FromKey("ActiveDate").Value, ActiveDate_D)
 
                         If strMode = "E" Then

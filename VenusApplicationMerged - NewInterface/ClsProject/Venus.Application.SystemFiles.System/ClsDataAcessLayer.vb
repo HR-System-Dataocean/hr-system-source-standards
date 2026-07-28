@@ -782,6 +782,56 @@ Public Class ClsDataAcessLayer
 
         Return dteDateOut
     End Function
+
+
+    Public Function SetHigriDate3(ByVal dteDate As Object, ByRef strDetails As String) As Object
+        Dim isHijri As Int16
+        Dim intDiff As Int16 = 0
+        Dim dteDateOut As Object
+
+        If Not CheckValidDate(dteDate) Then
+            strDetails = String.Empty
+            Return Nothing
+        End If
+
+        ' ===== «·Õ·:  ÕÊÌ· ¬„‰ ·· «—ÌŒ =====
+        Dim dt As DateTime
+        Try
+            ' „Õ«Ê·… «· ÕÊÌ· «·„»«‘—
+            dt = Convert.ToDateTime(dteDate)
+        Catch
+            Try
+                ' „Õ«Ê·… Parse »«·’Ì€… «·„ Êﬁ⁄…
+                Dim dateStr As String = dteDate.ToString().Split(" ")(0)
+                dt = DateTime.ParseExact(dateStr, "M/d/yyyy", Global.System.Globalization.CultureInfo.InvariantCulture)
+            Catch
+                strDetails = String.Empty
+                Return Nothing
+            End Try
+        End Try
+
+        ' «” Œœ«„ Œ’«∆’ DateTime »œ·« „‰ «·‹ string parsing
+        If dt.Year < 1900 Then
+            isHijri = 1
+            If dt.Month = 2 AndAlso dt.Day > 28 Then
+                intDiff = dt.Day - 28
+                '  ⁄œÌ· «· «—ÌŒ
+                dt = New DateTime(dt.Year, 2, 28, dt.Hour, dt.Minute, dt.Second)
+            End If
+        Else
+            isHijri = 0
+        End If
+
+        strDetails = isHijri.ToString & "," & intDiff
+
+        If isHijri = 1 Then
+            dteDateOut = GetRelativeDate(dt, DateType.Hijri, Directions.Input)
+        Else
+            dteDateOut = GetRelativeDate(dt, DateType.Gregorian, Directions.Input)
+        End If
+
+        Return CDate(dteDateOut).AddDays(intDiff)
+    End Function
     Public Function SetHigriDate2(ByVal dteDate As Object, ByRef strDetails As String) As Object
         Dim isHijri As Int16
         Dim intDiff As Int16 = 0

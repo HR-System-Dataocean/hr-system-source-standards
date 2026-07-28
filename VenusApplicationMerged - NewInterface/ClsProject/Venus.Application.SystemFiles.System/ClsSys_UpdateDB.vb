@@ -14165,6 +14165,117 @@ WHERE
 "
         ExecuteUpdate(SQL)
 
+        SQL = "alter table ss_RequestActions add IsForwarded bit null"
+
+        ExecuteUpdate(SQL)
+
+        SQL = "alter table ss_RequestActions add ForwardedBy int null"
+        ExecuteUpdate(SQL)
+
+
+
+
+        SQL = "CREATE VIEW [dbo].[V_ExistActiveEmployees]
+AS
+SELECT ID, Code, OldCode, EngName, ArbName, ArbName4S, FamilyEngName, FamilyArbName, FamilyArbName4S, 
+       FatherEngName, FatherArbName, FatherArbName4S, GrandEngName, GrandArbName, GrandArbName4S, 
+       BirthDate, BirthCityID, ReligionID, MaritalStatusID, Sex, BloodGroupID, BankID, NationalityID, 
+       BankAccountNumber, BankAccNumber, DepartmentID, GOSINumber, GOSIJoinDate, GOSIExcludeDate, 
+       JoinDate, ExcludeDate, CompanyID, Remarks, RegUserID, RegComputerID, RegDate, CancelDate, 
+       BranchID, SponsorID, E_Mail, Phone, Mobile, ManagerID, MachineCode, SectorID, SSnNo, PassPortNo, 
+       EntryNo, Cost1, Cost2, Cost3, Cost4, LaborOfficeNo, LocationID, WHours, IsProjectRelated, 
+       IsSpecialForce, MaxLoanDedution, LedgerCode, HasTaqat, BankAccountType, Hasflexiblesalarydist, 
+       paymenttype, WorkE_Mail, SSNOIssueDate, SSNOExpireDate, PassportIssueDate, PassportExpireDate, 
+       AddressAsPerContract, InsertRequestsForAnotherEmployee, IsSocialInsuranceIncluded, UpdateUserID, 
+       UpdateDate, MacAddress
+FROM dbo.hrs_Employees
+WHERE ExcludeDate IS NULL
+  AND hrs_Employees.ID NOT IN (
+      SELECT EmployeeID 
+      FROM hrs_EmployeesVacations 
+      WHERE GETDATE() BETWEEN hrs_EmployeesVacations.ActualStartDate AND hrs_EmployeesVacations.ExpectedEndDate
+        AND (CancelDate IS NULL OR CancelDate > GETDATE())
+  )"
+        ExecuteUpdate(SQL)
+
+
+        SQL = " 
+DECLARE @ObjectID INT
+DECLARE @SearchID INT
+
+IF NOT EXISTS (SELECT 1 FROM sys_Objects WHERE Code = 'V_ExistActiveEmployees')
+BEGIN
+    -- 1- Insert في جدول sys_Objects
+    INSERT INTO sys_Objects (Code, EngName, ArbName, RegDate) 
+    VALUES ('V_ExistActiveEmployees', 'V_ExistActiveEmployees', 'V_ExistActiveEmployees', GETDATE())
+    
+    -- 2- جلب الـ ID اللي حصل له Insert
+    SET @ObjectID = SCOPE_IDENTITY()
+    
+    -- 3- Insert في جدول sys_Searchs
+    INSERT INTO sys_Searchs (Code, EngName, ArbName, ObjectID, RegDate) 
+    VALUES ('Search_V_ExistActiveEmployees', 'Search_V_ExistActiveEmployees', 'بحث الموظفين النشطين', @ObjectID, GETDATE())
+    
+    -- 4- جلب الـ ID اللي حصل له Insert في sys_Searchs
+    SET @SearchID = SCOPE_IDENTITY()
+    
+    -- 5- Insert في جدول sys_SearchsColumns (باستخدام FieldID الحقيقي)
+    INSERT INTO sys_SearchsColumns (SearchID, FieldID, EngName, ArbName, IsCriteria, IsView, InputLength, IsArabic, Alignment, Rank, RegUserID, RegComputerID, RegDate, RankCriteria, RankView, IsTarget)
+    VALUES 
+        (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'Code'), 'Code', 'الكود', 1, 1, 50, 0, 0, NULL, 1, 2, GETDATE(), 0, 0, 0),
+        (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'EngName'), 'Eng Name', 'الاسم إنجليزى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 1, 5, 0),
+        (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'ArbName'), 'Arb Name', 'الاسم عربى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 2, 1, 0),
+        (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'FamilyEngName'), 'FamilyEngName', 'اسم العائلة انجليزى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 7, 8, 0),
+        (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'FamilyArbName'), 'FamilyArbName', 'اسم العائلة عربى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 8, 4, 0),
+        (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'FatherEngName'), 'FatherEngName', 'اسم الاب انجليزى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 3, 6, 0),
+        (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'FatherArbName'), 'FatherArbName', 'اسم الاب عربى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 4, 2, 0)
+END
+ELSE
+BEGIN
+    -- لو الـ Code موجود، جيب الـ ID بتاعه
+    SELECT @ObjectID = ID FROM sys_Objects WHERE Code = 'V_ExistActiveEmployees'
+    
+    -- ولو مش موجود في sys_Searchs، ضيفه
+    IF NOT EXISTS (SELECT 1 FROM sys_Searchs WHERE ObjectID = @ObjectID)
+    BEGIN
+        INSERT INTO sys_Searchs (Code, EngName, ArbName, ObjectID, RegDate) 
+        VALUES ('Search_V_ExistActiveEmployees', 'Search_V_ExistActiveEmployees', 'بحث الموظفين النشطين', @ObjectID, GETDATE())
+        
+        SET @SearchID = SCOPE_IDENTITY()
+        
+        INSERT INTO sys_SearchsColumns (SearchID, FieldID, EngName, ArbName, IsCriteria, IsView, InputLength, IsArabic, Alignment, Rank, RegUserID, RegComputerID, RegDate, RankCriteria, RankView, IsTarget)
+        VALUES 
+            (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'Code'), 'Code', 'الكود', 1, 1, 50, 0, 0, NULL, 1, 2, GETDATE(), 0, 0, 0),
+            (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'EngName'), 'Eng Name', 'الاسم إنجليزى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 1, 5, 0),
+            (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'ArbName'), 'Arb Name', 'الاسم عربى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 2, 1, 0),
+            (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'FamilyEngName'), 'FamilyEngName', 'اسم العائلة انجليزى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 7, 8, 0),
+            (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'FamilyArbName'), 'FamilyArbName', 'اسم العائلة عربى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 8, 4, 0),
+            (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'FatherEngName'), 'FatherEngName', 'اسم الاب انجليزى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 3, 6, 0),
+            (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'FatherArbName'), 'FatherArbName', 'اسم الاب عربى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 4, 2, 0)
+    END
+    ELSE
+    BEGIN
+        SELECT @SearchID = ID FROM sys_Searchs WHERE ObjectID = @ObjectID
+        
+        IF NOT EXISTS (SELECT 1 FROM sys_SearchsColumns WHERE SearchID = @SearchID)
+        BEGIN
+            INSERT INTO sys_SearchsColumns (SearchID, FieldID, EngName, ArbName, IsCriteria, IsView, InputLength, IsArabic, Alignment, Rank, RegUserID, RegComputerID, RegDate, RankCriteria, RankView, IsTarget)
+            VALUES 
+                (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'Code'), 'Code', 'الكود', 1, 1, 50, 0, 0, NULL, 1, 2, GETDATE(), 0, 0, 0),
+                (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'EngName'), 'Eng Name', 'الاسم إنجليزى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 1, 5, 0),
+                (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'ArbName'), 'Arb Name', 'الاسم عربى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 2, 1, 0),
+                (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'FamilyEngName'), 'FamilyEngName', 'اسم العائلة انجليزى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 7, 8, 0),
+                (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'FamilyArbName'), 'FamilyArbName', 'اسم العائلة عربى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 8, 4, 0),
+                (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'FatherEngName'), 'FatherEngName', 'اسم الاب انجليزى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 3, 6, 0),
+                (@SearchID, (SELECT ID FROM sys_Fields WHERE ObjectID = @ObjectID AND FieldName = 'FatherArbName'), 'FatherArbName', 'اسم الاب عربى', 1, 1, 100, 0, 0, NULL, 1, 2, GETDATE(), 4, 2, 0)
+        END
+    END
+END
+
+"
+
+        ExecuteUpdate(SQL)
+
 
 
     End Function
