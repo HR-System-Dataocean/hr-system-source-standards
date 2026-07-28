@@ -8372,6 +8372,8 @@ BEGIN
         CancelUserID int NULL,
         CancelDate datetime NULL,
         CancelReason nvarchar(500) NULL,
+        SourceForm nvarchar(100) NULL,
+        SourceID int NULL,
         CONSTRAINT PK_hrs_ActingPositionAssignments PRIMARY KEY CLUSTERED (ID),
         CONSTRAINT UQ_hrs_ActingPositionAssignments_Code UNIQUE (Code),
         CONSTRAINT CK_hrs_ActingPositionAssignments_Dates CHECK (EffectiveTo >= EffectiveFrom),
@@ -8472,6 +8474,8 @@ BEGIN
         CancelUserID int NULL,
         CancelDate datetime NULL,
         CancelReason nvarchar(500) NULL,
+        SourceForm nvarchar(100) NULL,
+        SourceID int NULL,
         CONSTRAINT PK_hrs_ActingEmployeeAssignments PRIMARY KEY CLUSTERED (ID),
         CONSTRAINT UQ_hrs_ActingEmployeeAssignments_Code UNIQUE (Code),
         CONSTRAINT CK_hrs_ActingEmployeeAssignments_Dates CHECK (EffectiveTo >= EffectiveFrom),
@@ -8615,6 +8619,21 @@ END"
 
 
         ExecuteUpdate(SQL)
+
+                ' Add SourceForm / SourceID to acting assignment tables (existing DBs)
+                SQL = "
+                IF COL_LENGTH('hrs_ActingEmployeeAssignments', 'SourceForm') IS NULL
+                    ALTER TABLE hrs_ActingEmployeeAssignments ADD SourceForm nvarchar(100) NULL
+                IF COL_LENGTH('hrs_ActingEmployeeAssignments', 'SourceID') IS NULL
+                    ALTER TABLE hrs_ActingEmployeeAssignments ADD SourceID int NULL
+                
+                IF COL_LENGTH('hrs_ActingPositionAssignments', 'SourceForm') IS NULL
+                    ALTER TABLE hrs_ActingPositionAssignments ADD SourceForm nvarchar(100) NULL
+                IF COL_LENGTH('hrs_ActingPositionAssignments', 'SourceID') IS NULL
+                    ALTER TABLE hrs_ActingPositionAssignments ADD SourceID int NULL
+                "
+                        ExecuteUpdate(SQL)
+                        
     End Function
 
     Public Function UpdateSS() As Boolean
@@ -14164,6 +14183,8 @@ WHERE
     AND SS_RequestActions.FormCode = 'SS_001928'
 "
         ExecuteUpdate(SQL)
+
+
 
 
 

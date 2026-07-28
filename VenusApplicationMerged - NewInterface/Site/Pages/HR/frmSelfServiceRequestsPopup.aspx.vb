@@ -170,7 +170,7 @@ Partial Class frmSelfServiceRequestsPopup
                 "  FROM SS_RequestActions a " &
                 "  LEFT JOIN SS_Configuration c ON a.ConfigID = c.ID " &
                 "  WHERE a.RequestSerial = v.ID AND a.FormCode = v.FormCode " &
-                "  AND a.ActionID IS NULL AND a.IsHidden IS NULL " &
+                "  AND a.ActionID IS NULL AND a.IsHidden IS NULL AND a.Seen=0 " &
                 "  ORDER BY a.ActionSerial" &
                 "), N'ApprovalStage') AS StageKey, " &
                 "ISNULL((" &
@@ -178,7 +178,7 @@ Partial Class frmSelfServiceRequestsPopup
                 "  FROM SS_RequestActions a " &
                 "  LEFT JOIN SS_Configuration c ON a.ConfigID = c.ID " &
                 "  WHERE a.RequestSerial = v.ID AND a.FormCode = v.FormCode " &
-                "  AND a.ActionID IS NULL AND a.IsHidden IS NULL " &
+                "  AND a.ActionID IS NULL AND a.IsHidden IS NULL AND a.Seen=0 " &
                 "  ORDER BY a.ActionSerial" &
                 "), 0) AS StageRank " &
                 "FROM SS_VFollowup v " &
@@ -187,7 +187,7 @@ Partial Class frmSelfServiceRequestsPopup
                 "AND EXISTS (" &
                 "  SELECT 1 FROM SS_RequestActions a " &
                 "  WHERE a.RequestSerial = v.ID AND a.FormCode = v.FormCode " &
-                "  AND a.ActionID IS NULL AND a.IsHidden IS NULL" &
+                "  AND a.ActionID IS NULL AND a.IsHidden IS NULL AND a.Seen=0 " &
                 ")"
 
             Dim sqlConfiguration As String = "SELECT " &
@@ -842,7 +842,7 @@ Partial Class frmSelfServiceRequestsPopup
                                 "INSERT INTO SS_RequestActions (RequestSerial, SS_EmployeeID, FormCode, EmployeeID, Seen, ConfigID) " &
                                 "SELECT RequestSerial, @TargetEmployeeID, FormCode, EmployeeID, 0, ConfigID " &
                                 "FROM SS_RequestActions " &
-                                "WHERE ActionID IS NULL AND IsHidden IS NULL AND SS_EmployeeID = @SourceEmployeeID", conn, tran)
+                                "WHERE ActionID IS NULL AND IsHidden IS NULL AND Seen = 0 AND SS_EmployeeID = @SourceEmployeeID", conn, tran)
                                 cmd.Parameters.AddWithValue("@TargetEmployeeID", delegateEmployeeID)
                                 cmd.Parameters.AddWithValue("@SourceEmployeeID", sourceEmployeeID)
                                 cmd.ExecuteNonQuery()
@@ -851,7 +851,7 @@ Partial Class frmSelfServiceRequestsPopup
                             Using cmd As New SqlCommand(
                                 "UPDATE SS_RequestActions " &
                                 "SET Seen = 1, ActionID = 3, ActionDate = GETDATE(), ActionRemarks = @Remarks " &
-                                "WHERE ActionID IS NULL AND IsHidden IS NULL AND SS_EmployeeID = @SourceEmployeeID", conn, tran)
+                                "WHERE ActionID IS NULL AND IsHidden IS NULL AND Seen = 0 AND SS_EmployeeID = @SourceEmployeeID", conn, tran)
                                 cmd.Parameters.AddWithValue("@SourceEmployeeID", sourceEmployeeID)
                                 cmd.Parameters.AddWithValue("@Remarks", If(txtRemarks.Text.Trim() = "", "End of Service", txtRemarks.Text.Trim()))
                                 updatedActions = cmd.ExecuteNonQuery()
@@ -951,6 +951,8 @@ Partial Class frmSelfServiceRequestsPopup
             employeeActing.EffectiveTo = effectiveTo
             employeeActing.Reason = ACTING_REASON
             employeeActing.Remarks = ""
+            employeeActing.SourceForm = "frmEmployeesEndofService"
+            employeeActing.SourceID = sourceEmployeeID
             employeeActing.Save()
         End If
 
@@ -967,6 +969,8 @@ Partial Class frmSelfServiceRequestsPopup
                 positionActing.EffectiveTo = effectiveTo
                 positionActing.Reason = ACTING_REASON
                 positionActing.Remarks = ""
+                positionActing.SourceForm = "frmEmployeesEndofService"
+                positionActing.SourceID = sourceEmployeeID
                 positionActing.Save()
             End If
         End If

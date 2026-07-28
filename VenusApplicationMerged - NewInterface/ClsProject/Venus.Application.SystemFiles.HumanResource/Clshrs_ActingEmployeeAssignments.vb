@@ -8,11 +8,12 @@ Public Class Clshrs_ActingEmployeeAssignments
         mTable = " hrs_ActingEmployeeAssignments "
         mSelectCommand = CONFIG_DATEFORMAT & " SELECT * FROM " & mTable
         mInsertCommand = CONFIG_DATEFORMAT & " INSERT INTO " & mTable &
-            " (Code, OriginalEmployeeID, ActingEmployeeID, EffectiveFrom, EffectiveTo, Reason, Remarks, RegUserID, RegDate)" &
-            " VALUES (@Code,@OriginalEmployeeID,@ActingEmployeeID,@EffectiveFrom,@EffectiveTo,@Reason,@Remarks,@RegUserID,GETDATE())"
+            " (Code, OriginalEmployeeID, ActingEmployeeID, EffectiveFrom, EffectiveTo, Reason, Remarks, SourceForm, SourceID, RegUserID, RegDate)" &
+            " VALUES (@Code,@OriginalEmployeeID,@ActingEmployeeID,@EffectiveFrom,@EffectiveTo,@Reason,@Remarks,@SourceForm,@SourceID,@RegUserID,GETDATE())"
         mUpdateCommand = CONFIG_DATEFORMAT & " UPDATE " & mTable &
             " SET OriginalEmployeeID=@OriginalEmployeeID, ActingEmployeeID=@ActingEmployeeID," &
-            " EffectiveFrom=@EffectiveFrom, EffectiveTo=@EffectiveTo, Reason=@Reason, Remarks=@Remarks"
+            " EffectiveFrom=@EffectiveFrom, EffectiveTo=@EffectiveTo, Reason=@Reason, Remarks=@Remarks," &
+            " SourceForm=@SourceForm, SourceID=@SourceID"
     End Sub
 
     Public Property ID As Integer
@@ -23,6 +24,8 @@ Public Class Clshrs_ActingEmployeeAssignments
     Public Property EffectiveTo As Date
     Public Property Reason As String
     Public Property Remarks As String
+    Public Property SourceForm As String
+    Public Property SourceID As Integer?
     Public Property RegUserID As Integer
     Public Property RegDate As DateTime
     Public Property CancelUserID As Integer
@@ -108,6 +111,8 @@ Public Class Clshrs_ActingEmployeeAssignments
         EffectiveTo = Nothing
         Reason = ""
         Remarks = ""
+        SourceForm = Nothing
+        SourceID = Nothing
         RegUserID = 0
         RegDate = Nothing
         CancelUserID = 0
@@ -140,6 +145,10 @@ Public Class Clshrs_ActingEmployeeAssignments
         command.Parameters.Add("@EffectiveTo", SqlDbType.DateTime).Value = EffectiveTo
         command.Parameters.Add("@Reason", SqlDbType.NVarChar, 500).Value = If(Reason, "")
         command.Parameters.Add("@Remarks", SqlDbType.NVarChar, 1000).Value = If(Remarks, "")
+        command.Parameters.Add("@SourceForm", SqlDbType.NVarChar, 100).Value =
+            If(String.IsNullOrEmpty(SourceForm), CType(DBNull.Value, Object), SourceForm)
+        command.Parameters.Add("@SourceID", SqlDbType.Int).Value =
+            If(SourceID.HasValue, CType(SourceID.Value, Object), CType(DBNull.Value, Object))
         If includeCode Then command.Parameters.Add("@RegUserID", SqlDbType.Int).Value = Me.mDataBaseUserRelatedID
     End Sub
 
@@ -152,6 +161,16 @@ Public Class Clshrs_ActingEmployeeAssignments
         EffectiveTo = Convert.ToDateTime(row("EffectiveTo"))
         Reason = If(IsDBNull(row("Reason")), "", Convert.ToString(row("Reason")))
         Remarks = If(IsDBNull(row("Remarks")), "", Convert.ToString(row("Remarks")))
+        If row.Table.Columns.Contains("SourceForm") AndAlso Not IsDBNull(row("SourceForm")) Then
+            SourceForm = Convert.ToString(row("SourceForm"))
+        Else
+            SourceForm = Nothing
+        End If
+        If row.Table.Columns.Contains("SourceID") AndAlso Not IsDBNull(row("SourceID")) Then
+            SourceID = Convert.ToInt32(row("SourceID"))
+        Else
+            SourceID = Nothing
+        End If
         RegUserID = If(IsDBNull(row("RegUserID")), 0, Convert.ToInt32(row("RegUserID")))
         RegDate = If(IsDBNull(row("RegDate")), Nothing, Convert.ToDateTime(row("RegDate")))
         CancelUserID = If(IsDBNull(row("CancelUserID")), 0, Convert.ToInt32(row("CancelUserID")))
