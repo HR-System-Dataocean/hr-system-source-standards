@@ -110,7 +110,7 @@ Partial Class frmAttendancePreparation
         Dim ClsWebHandler As New Venus.Shared.Web.WebHandler
 
         If Not IsPostBack Then
-            'ClsVacationTypes.GetDropDownList(DdlVacationType, False)
+            ClsVacationTypes.GetDropDownList(DdlVacationType, False)
             'Dim strselectAction As String = "select ActionCode as ID,ActionAraName,ActionEngName from SS_UserActions where ID<>4 "
             'Dim Item As Global.System.Web.UI.WebControls.ListItem
             'Item = New Global.System.Web.UI.WebControls.ListItem
@@ -365,7 +365,10 @@ Partial Class frmAttendancePreparation
                 txtContactNo.Text = DS2.Tables(0).Rows(0)("ContactNo").ToString()
                 TxtAlternativeEmpName.Text = DS2.Tables(0).Rows(0)("AlternativeEmployeeName").ToString()
                 txtConfirmedDays.Text = DS2.Tables(0).Rows(0)("NoOfDays").ToString()
-                DdlVacationType.SelectedValue = DS2.Tables(0).Rows(0)("VacationID").ToString()
+
+                Dim vacationID As String = DS2.Tables(0).Rows(0)("VacationID").ToString()
+                'DdlVacationType.SelectedValue = DS2.Tables(0).Rows(0)("VacationID").ToString()
+                DdlVacationType.SelectedValue = vacationID
                 TxtRemarks.Text = DS2.Tables(0).Rows(0)("Remarks").ToString()
                 If CInt(DS2.Tables(0).Rows(0)("VacationID").ToString()) > 1 Then
                     txtAlternativeUser.Visible = False
