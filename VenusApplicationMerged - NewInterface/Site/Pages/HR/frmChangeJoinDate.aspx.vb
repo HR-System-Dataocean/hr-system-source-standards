@@ -70,9 +70,10 @@ Partial Class frmChangeJoinDate
                         ddlNewClass.SelectedValue = Request.QueryString("ClassID")
                     End If
                 End If
-
-                RegisterClientVariables()
             End If
+
+            ' Always register client IDs (needed after AutoPostBack)
+            RegisterClientVariables()
             txtEmployeeCode.Enabled = False
 
         Catch ex As Exception
@@ -106,38 +107,74 @@ Partial Class frmChangeJoinDate
         End Try
     End Sub
 
+    Private Function GetClientIdSafe(ByVal ctrl As Control) As String
+        Try
+            If ctrl IsNot Nothing Then
+                Return ctrl.ClientID
+            End If
+        Catch
+        End Try
+        Return ""
+    End Function
+
+    Private Function GetUniqueIdSafe(ByVal ctrl As Control) As String
+        Try
+            If ctrl IsNot Nothing Then
+                Return ctrl.UniqueID
+            End If
+        Catch
+        End Try
+        Return ""
+    End Function
+
     Private Sub RegisterClientVariables()
         Try
             Dim dir As String = "ltr"
-            If ProfileCls.CurrentLanguage = "Ar" Then
-                dir = "rtl"
-            End If
+            Try
+                If ProfileCls.CurrentLanguage = "Ar" Then
+                    dir = "rtl"
+                End If
+            Catch
+            End Try
 
             Dim script As New System.Text.StringBuilder()
             script.AppendLine("<script type='text/javascript'>")
             script.AppendLine("    var pageDirection = '" & dir & "';")
-            script.AppendLine("    var txtEmployeeCodeID = '" & txtEmployeeCode.ClientID & "';")
-            script.AppendLine("    var txtEmployeeNameID = '" & txtEmployeeName.ClientID & "';")
-            script.AppendLine("    var txtCurrentJoinDateID = '" & txtCurrentJoinDate.ClientID & "';")
-            script.AppendLine("    var txtLastSalaryID = '" & txtLastSalary.ClientID & "';")
-            script.AppendLine("    var txtCurrentClassID = '" & txtCurrentClass.ClientID & "';")
-            script.AppendLine("    var txtCurrentBalanceID = '" & txtCurrentBalance.ClientID & "';")
-            script.AppendLine("    var txtAnnualVacationID = '" & txtAnnualVacation.ClientID & "';")
-            script.AppendLine("    var txtAnnualExpireDateID = '" & txtAnnualExpireDate.ClientID & "';")
-            script.AppendLine("    var txtTransferredVacationID = '" & txtTransferredVacation.ClientID & "';")
-            script.AppendLine("    var txtTransferredExpireDateID = '" & txtTransferredExpireDate.ClientID & "';")
-            script.AppendLine("    var txtNewJoinDateID = '" & txtNewJoinDate.ClientID & "';")
-            script.AppendLine("    var txtReasonJoinDateID = '" & txtReasonJoinDate.ClientID & "';")
-            script.AppendLine("    var txtTransferExpireDateID = '" & txtTransferExpireDate.ClientID & "';")
-            script.AppendLine("    var ddlNewClassID = '" & ddlNewClass.ClientID & "';")
-            script.AppendLine("    var chkTransferBalanceID = '" & chkTransferBalance.ClientID & "';")
-            script.AppendLine("    var hdnCurrentClassIDID = '" & hdnCurrentClassID.ClientID & "';")
-            script.AppendLine("    var lblEmployeeCodeMsgID = '" & lblEmployeeCodeMsg.ClientID & "';")
-            script.AppendLine("    var lblNewJoinDateMsgID = '" & lblNewJoinDateMsg.ClientID & "';")
-            script.AppendLine("    var lblReasonJoinDateMsgID = '" & lblReasonJoinDateMsg.ClientID & "';")
-            script.AppendLine("    var lblTransferExpireDateMsgID = '" & lblTransferExpireDateMsg.ClientID & "';")
-            script.AppendLine("    var lblValidationTitleID = '" & lblValidationTitle.ClientID & "';")
-            script.AppendLine("    var lblConfirmMsgID = '" & lblConfirmMsg.ClientID & "';")
+            script.AppendLine("    var txtEmployeeCodeID = '" & GetClientIdSafe(txtEmployeeCode) & "';")
+            script.AppendLine("    var txtEmployeeNameID = '" & GetClientIdSafe(txtEmployeeName) & "';")
+            script.AppendLine("    var txtCurrentJoinDateID = '" & GetClientIdSafe(txtCurrentJoinDate) & "';")
+            script.AppendLine("    var txtLastSalaryID = '" & GetClientIdSafe(txtLastSalary) & "';")
+            script.AppendLine("    var txtCurrentClassID = '" & GetClientIdSafe(txtCurrentClass) & "';")
+            script.AppendLine("    var txtCurrentBalanceID = '" & GetClientIdSafe(txtCurrentBalance) & "';")
+            script.AppendLine("    var txtAnnualVacationID = '" & GetClientIdSafe(txtAnnualVacation) & "';")
+            script.AppendLine("    var txtAnnualExpireDateID = '" & GetClientIdSafe(txtAnnualExpireDate) & "';")
+            script.AppendLine("    var txtTransferredVacationID = '" & GetClientIdSafe(txtTransferredVacation) & "';")
+            script.AppendLine("    var txtTransferredExpireDateID = '" & GetClientIdSafe(txtTransferredExpireDate) & "';")
+            script.AppendLine("    var txtNewJoinDateID = '" & GetClientIdSafe(txtNewJoinDate) & "';")
+            script.AppendLine("    var txtReasonJoinDateID = '" & GetClientIdSafe(txtReasonJoinDate) & "';")
+            script.AppendLine("    var txtTransferExpireDateID = '" & GetClientIdSafe(txtTransferExpireDate) & "';")
+            script.AppendLine("    var ddlNewClassID = '" & GetClientIdSafe(ddlNewClass) & "';")
+            script.AppendLine("    var chkTransferBalanceID = '" & GetClientIdSafe(chkTransferBalance) & "';")
+            script.AppendLine("    var hdnCurrentClassIDID = '" & GetClientIdSafe(hdnCurrentClassID) & "';")
+            script.AppendLine("    var lblEmployeeCodeMsgID = '" & GetClientIdSafe(lblEmployeeCodeMsg) & "';")
+            script.AppendLine("    var lblNewJoinDateMsgID = '" & GetClientIdSafe(lblNewJoinDateMsg) & "';")
+            script.AppendLine("    var lblReasonJoinDateMsgID = '" & GetClientIdSafe(lblReasonJoinDateMsg) & "';")
+            script.AppendLine("    var lblTransferExpireDateMsgID = '" & GetClientIdSafe(lblTransferExpireDateMsg) & "';")
+            script.AppendLine("    var lblValidationTitleID = '" & GetClientIdSafe(lblValidationTitle) & "';")
+            script.AppendLine("    var lblConfirmMsgID = '" & GetClientIdSafe(lblConfirmMsg) & "';")
+            script.AppendLine("    var ddlChangeTypeID = '" & GetClientIdSafe(ddlChangeType) & "';")
+            script.AppendLine("    var txtClassEffectiveDateID = '" & GetClientIdSafe(txtClassEffectiveDate) & "';")
+            script.AppendLine("    var txtBalanceToTransferID = '" & GetClientIdSafe(txtBalanceToTransfer) & "';")
+            script.AppendLine("    var hdnBalanceActionID = '" & GetClientIdSafe(hdnBalanceAction) & "';")
+            script.AppendLine("    var hdnDueBalanceID = '" & GetClientIdSafe(hdnDueBalance) & "';")
+            script.AppendLine("    var lblDueBalanceID = '" & GetClientIdSafe(lblDueBalance) & "';")
+            script.AppendLine("    var ImageButton_SaveID = '" & GetClientIdSafe(ImageButton_Save) & "';")
+            script.AppendLine("    var ImageButton_SaveUniqueID = '" & GetUniqueIdSafe(ImageButton_Save).Replace("'", "\'") & "';")
+            script.AppendLine("    var ImageButton_NewID = '" & GetClientIdSafe(ImageButton_New) & "';")
+            script.AppendLine("    var btnConfirmSaveUniqueID = '" & GetUniqueIdSafe(btnConfirmSave).Replace("'", "\'") & "';")
+            script.AppendLine("    var lblNewClassMsgID = '" & GetClientIdSafe(lblNewClassMsg) & "';")
+            script.AppendLine("    var lblEffectiveDateMsgID = '" & GetClientIdSafe(lblEffectiveDateMsg) & "';")
+            script.AppendLine("    var lblBalanceAmountMsgID = '" & GetClientIdSafe(lblBalanceAmountMsg) & "';")
             script.AppendLine("</script>")
 
             ClientScript.RegisterStartupScript(Me.GetType(), "ClientVariables", script.ToString())
@@ -201,38 +238,7 @@ Partial Class frmChangeJoinDate
 
 
             Case "Save"
-                If Not ValidateBeforeSave() Then Exit Sub
-                If SaveChanges() Then
-
-                    ' =============================================
-                    ' إغلاق الـ Popup وتنفيذ PostBack في الصفحة الأم
-                    ' =============================================
-                    Dim script As New System.Text.StringBuilder()
-                    script.AppendLine("<script type='text/javascript'>")
-                    script.AppendLine("    try {")
-                    script.AppendLine("        debugger;")
-                    script.AppendLine("        // إغلاق الـ Dialog")
-                    script.AppendLine("        if (window.parent && window.parent.ODialoge) {")
-                    script.AppendLine("            try { window.parent.ODialoge.dialog('close'); } catch(e) {}")
-                    script.AppendLine("        }")
-                    script.AppendLine("        ")
-                    script.AppendLine("        // تنفيذ PostBack في الصفحة الأم")
-                    script.AppendLine("        if (window.parent) {")
-                    script.AppendLine("            window.parent.__doPostBack('', '');")
-                    script.AppendLine("        }")
-                    script.AppendLine("    } catch(e) {")
-                    script.AppendLine("        alert('Error: ' + e.message);")
-                    script.AppendLine("    }")
-                    script.AppendLine("</script>")
-
-                    ClientScript.RegisterClientScriptBlock(Me.GetType(), "SaveAndClose", script.ToString(), False)
-
-                    ClearForm()
-                End If
-
-
-
-
+                DoSave()
 
             Case "Print"
                 Venus.Shared.Web.ClientSideActions.PrintWindow(Me)
@@ -259,6 +265,32 @@ Partial Class frmChangeJoinDate
                 NavigateEmployee(e.CommandArgument.ToString())
         End Select
     End Sub
+
+    Protected Sub btnConfirmSave_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        DoSave()
+    End Sub
+
+    Private Sub DoSave()
+        If Not ValidateBeforeSave() Then Exit Sub
+        If SaveChanges() Then
+            Dim script As New System.Text.StringBuilder()
+            script.AppendLine("<script type='text/javascript'>")
+            script.AppendLine("    try {")
+            script.AppendLine("        if (window.parent && window.parent.ODialoge) {")
+            script.AppendLine("            try { window.parent.ODialoge.dialog('close'); } catch(e) {}")
+            script.AppendLine("        }")
+            script.AppendLine("        if (window.parent) {")
+            script.AppendLine("            window.parent.__doPostBack('', '');")
+            script.AppendLine("        }")
+            script.AppendLine("    } catch(e) {")
+            script.AppendLine("        alert('Error: ' + e.message);")
+            script.AppendLine("    }")
+            script.AppendLine("</script>")
+            ClientScript.RegisterClientScriptBlock(Me.GetType(), "SaveAndClose", script.ToString(), False)
+            ClearForm()
+        End If
+    End Sub
+
     Protected Sub txtEmployeeCode_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtEmployeeCode.TextChanged
         LoadEmployeeData()
     End Sub
@@ -319,8 +351,26 @@ Partial Class frmChangeJoinDate
         lblNewJoinDateMsg.Text = ObjNavigationHandler.SetLanguage(Page, "New Join Date is required / تاريخ المباشرة الجديد مطلوب")
         lblReasonJoinDateMsg.Text = ObjNavigationHandler.SetLanguage(Page, "Reason is required / سبب التغيير مطلوب")
         lblValidationTitle.Text = ObjNavigationHandler.SetLanguage(Page, "Please complete the following data / الرجاء إكمال البيانات التالية")
-        lblConfirmMsg.Text = ObjNavigationHandler.SetLanguage(Page, "Are you sure? / هل أنت متأكد؟")
+        lblConfirmMsg.Text = ObjNavigationHandler.SetLanguage(Page, "Are you sure you want to save these changes? / هل أنت متأكد من حفظ هذه التعديلات؟")
         lblTransferExpireDateMsg.Text = ObjNavigationHandler.SetLanguage(Page, "Please enter the transfer expire date / برجاء إدخال تاريخ انتهاء الرصيد المرحل")
+        If lblConfirmTitleUI IsNot Nothing Then
+            lblConfirmTitleUI.Text = ObjNavigationHandler.SetLanguage(Page, "Confirm Employee Data Change / تأكيد تعديل بيانات الموظف")
+        End If
+        If lblConfirmBody1UI IsNot Nothing Then
+            lblConfirmBody1UI.Text = ObjNavigationHandler.SetLanguage(Page, "Please review the change details before proceeding. / يرجى مراجعة تفاصيل التعديل قبل المتابعة.")
+        End If
+        If lblConfirmBody2UI IsNot Nothing Then
+            lblConfirmBody2UI.Text = ObjNavigationHandler.SetLanguage(Page, "This update may affect the employee’s leave balance, payroll calculations, service duration, and end-of-service benefits. / قد يؤثر هذا التعديل على رصيد الإجازات، واحتساب الرواتب، ومدة خدمة الموظف، ومستحقات نهاية الخدمة.")
+        End If
+        If lblConfirmBody3UI IsNot Nothing Then
+            lblConfirmBody3UI.Text = ObjNavigationHandler.SetLanguage(Page, "Are you sure you want to save these changes? / هل أنت متأكد من حفظ هذه التعديلات؟")
+        End If
+        If litConfirmBtnSave IsNot Nothing Then
+            litConfirmBtnSave.Text = ObjNavigationHandler.SetLanguage(Page, "Confirm & Save / تأكيد وحفظ")
+        End If
+        If litConfirmBtnBack IsNot Nothing Then
+            litConfirmBtnBack.Text = ObjNavigationHandler.SetLanguage(Page, "Back to Review / العودة للمراجعة")
+        End If
     End Sub
 
     Private Sub LoadClasses()
@@ -347,7 +397,15 @@ Partial Class frmChangeJoinDate
                     LoadVacationBalances(ClsEmployees.ID)
                     CalculateDueBalance(ClsEmployees.ID)
                     chkTransferBalance.Checked = False
+                    hdnBalanceAction.Value = "0"
                     txtTransferExpireDate.Value = ""
+                    txtBalanceToTransfer.Text = If(String.IsNullOrEmpty(hdnDueBalance.Value), "0.00", hdnDueBalance.Value)
+                    If String.IsNullOrEmpty(txtClassEffectiveDate.Text) AndAlso Not String.IsNullOrEmpty(txtNewJoinDate.Text) Then
+                        Try
+                            txtClassEffectiveDate.Value = txtNewJoinDate.Value
+                        Catch
+                        End Try
+                    End If
                 Else
                     ClearForm()
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
@@ -535,14 +593,17 @@ Partial Class frmChangeJoinDate
             hdnDueBalance.Value = myTotalBalance.ToString()
             If myTotalBalance <= 0 Then
                 lblDueBalance.Text = "0.00"
+                txtBalanceToTransfer.Text = "0.00"
             Else
                 lblDueBalance.Text = myTotalBalance.ToString("N2")
+                txtBalanceToTransfer.Text = myTotalBalance.ToString("N2")
             End If
 
 
         Catch ex As Exception
             lblDueBalance.Text = "0.00"
             hdnDueBalance.Value = "0"
+            txtBalanceToTransfer.Text = "0.00"
         End Try
     End Sub
 
@@ -564,9 +625,20 @@ Partial Class frmChangeJoinDate
             Dim connStr As String = ClsEmployees.ConnectionString
             Dim regUserID As Integer = ClsEmployees.RegUserID
 
-            ' الرصيد المستحق حتى اليوم (محسوب مسبقاً)
+            ' الرصيد المستحق حتى اليوم (محسوب مسبقاً) — يدعم التعديل اليدوي من الشاشة
             Dim dueBalance As Decimal = 0
-            Decimal.TryParse(hdnDueBalance.Value, dueBalance)
+            If Not String.IsNullOrEmpty(txtBalanceToTransfer.Text) AndAlso
+                    (hdnBalanceAction.Value = "1" OrElse hdnBalanceAction.Value = "2") Then
+                Decimal.TryParse(txtBalanceToTransfer.Text, dueBalance)
+            Else
+                Decimal.TryParse(hdnDueBalance.Value, dueBalance)
+            End If
+
+            If hdnBalanceAction.Value = "1" OrElse hdnBalanceAction.Value = "2" Then
+                chkTransferBalance.Checked = True
+            ElseIf hdnBalanceAction.Value = "0" Then
+                chkTransferBalance.Checked = False
+            End If
 
             ' الفئة الجديدة
             Dim newClassID As Object = DBNull.Value
@@ -1062,7 +1134,14 @@ Partial Class frmChangeJoinDate
         hdnDueBalance.Value = ""
         lblDueBalance.Text = "0.00"
         chkTransferBalance.Checked = False
+        hdnBalanceAction.Value = "0"
         txtTransferExpireDate.Value = ""
+        txtBalanceToTransfer.Text = "0.00"
+        txtClassEffectiveDate.Value = ""
+        Try
+            ddlChangeType.SelectedValue = "both"
+        Catch
+        End Try
         lblMessage.Text = ""
         lblErrorMessage.Text = ""
     End Sub

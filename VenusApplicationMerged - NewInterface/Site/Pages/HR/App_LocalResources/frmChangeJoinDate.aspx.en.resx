@@ -130,7 +130,25 @@
     <value>Please complete the following data</value>
   </data>
   <data name="lblConfirmMsg.Text" xml:space="preserve">
-    <value>Are you sure you want to proceed?</value>
+    <value>Are you sure you want to save these changes?</value>
+  </data>
+  <data name="lblConfirmTitleResource1.Text" xml:space="preserve">
+    <value>Confirm Employee Data Change</value>
+  </data>
+  <data name="lblConfirmBody1Resource1.Text" xml:space="preserve">
+    <value>Please review the change details before proceeding.</value>
+  </data>
+  <data name="lblConfirmBody2Resource1.Text" xml:space="preserve">
+    <value>This update may affect the employee’s leave balance, payroll calculations, service duration, and end-of-service benefits.</value>
+  </data>
+  <data name="lblConfirmBody3Resource1.Text" xml:space="preserve">
+    <value>Are you sure you want to save these changes?</value>
+  </data>
+  <data name="lblConfirmBtnSaveResource1.Text" xml:space="preserve">
+    <value>Confirm &amp; Save</value>
+  </data>
+  <data name="lblConfirmBtnBackResource1.Text" xml:space="preserve">
+    <value>Back to Review</value>
   </data>
   <data name="lblTransferExpireDateMsg.Text" xml:space="preserve">
     <value>Please enter the transfer expire date</value>
@@ -178,7 +196,10 @@
     <value>Help</value>
   </data>
   <data name="Label_HeaderResource1.Text" xml:space="preserve">
-    <value>Change Join Date / Class</value>
+    <value>Employee Join Date &amp; Class Change</value>
+  </data>
+  <data name="Label_HeaderSubResource1.Text" xml:space="preserve">
+    <value>Update employment data and define how accrued leave balance should be handled.</value>
   </data>
   <data name="TabResource2.Text" xml:space="preserve">
     <value>Change Join Date</value>
@@ -193,13 +214,16 @@
     <value>Cancel Date</value>
   </data>
   <data name="lblRegDateValueResource2.Text" xml:space="preserve">
-    <value />
+    <value>—</value>
   </data>
   <data name="lblRegUserValueResource2.Text" xml:space="preserve">
-    <value />
+    <value>—</value>
   </data>
   <data name="lblCancelDateValueResource2.Text" xml:space="preserve">
-    <value />
+    <value>—</value>
+  </data>
+  <data name="lblEmployeeInfoResource1.Text" xml:space="preserve">
+    <value>Employee Information</value>
   </data>
   <data name="lblEmployeeCodeResource1.Text" xml:space="preserve">
     <value>Employee Code</value>
@@ -217,7 +241,7 @@
     <value />
   </data>
   <data name="lblCurrentInfoResource1.Text" xml:space="preserve">
-    <value>Current Employee Information</value>
+    <value>Current Employment Details</value>
   </data>
   <data name="lblCurrentJoinDateResource1.Text" xml:space="preserve">
     <value>Current Join Date</value>
@@ -225,68 +249,89 @@
   <data name="txtCurrentJoinDateResource1.Text" xml:space="preserve">
     <value />
   </data>
+  <data name="lblBalancePayrollResource1.Text" xml:space="preserve">
+    <value>Balance &amp; Payroll Information</value>
+  </data>
   <data name="lblLastSalaryResource1.Text" xml:space="preserve">
-    <value>Last Salary Paid</value>
+    <value>Last Payroll Period</value>
   </data>
   <data name="txtLastSalaryResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblCurrentClassResource1.Text" xml:space="preserve">
-    <value>Current Class</value>
+    <value>Current Employee Class</value>
   </data>
   <data name="txtCurrentClassResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblCurrentBalanceResource1.Text" xml:space="preserve">
-    <value>Current Balance</value>
+    <value>Current Available Balance</value>
   </data>
   <data name="txtCurrentBalanceResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblAnnualVacationResource1.Text" xml:space="preserve">
-    <value>Annual Balance</value>
+    <value>Annual Leave Entitlement</value>
   </data>
   <data name="txtAnnualVacationResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblAnnualExpireDateResource1.Text" xml:space="preserve">
-    <value>Expire Date</value>
+    <value>Balance Expiry Date</value>
   </data>
   <data name="txtAnnualExpireDateResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblTransferredVacationResource1.Text" xml:space="preserve">
-    <value>Transferred Balance</value>
+    <value>Previously Transferred Balance</value>
   </data>
   <data name="txtTransferredVacationResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblTransferredExpireDateResource1.Text" xml:space="preserve">
-    <value>Expire Date</value>
+    <value>Transferred Balance Expiry</value>
   </data>
   <data name="txtTransferredExpireDateResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblDueBalanceTitleResource1.Text" xml:space="preserve">
-    <value>Balance Due Until Today: </value>
+    <value>Accrued leave balance as of today</value>
   </data>
   <data name="lblDueBalanceResource1.Text" xml:space="preserve">
     <value>0.00</value>
   </data>
   <data name="lblDueBalanceUnitResource1.Text" xml:space="preserve">
-    <value> Day(s)</value>
+    <value> Days</value>
   </data>
   <data name="lblNewDataResource1.Text" xml:space="preserve">
-    <value>New Data</value>
+    <value>Proposed Changes</value>
+  </data>
+  <data name="lblChangeTypeResource1.Text" xml:space="preserve">
+    <value>Change Type</value>
+  </data>
+  <data name="ddlChangeType_Both.Text" xml:space="preserve">
+    <value>Join Date and Employee Class</value>
+  </data>
+  <data name="ddlChangeType_Join.Text" xml:space="preserve">
+    <value>Join Date Only</value>
+  </data>
+  <data name="ddlChangeType_Class.Text" xml:space="preserve">
+    <value>Employee Class Only</value>
+  </data>
+  <data name="lblClassEffectiveDateResource1.Text" xml:space="preserve">
+    <value>Class Change Effective Date</value>
   </data>
   <data name="lblNewJoinDateResource1.Text" xml:space="preserve">
     <value>New Join Date</value>
   </data>
   <data name="lblNewClassResource1.Text" xml:space="preserve">
-    <value>New Class</value>
+    <value>New Employee Class</value>
   </data>
   <data name="ddlNewClassResource1.Text" xml:space="preserve">
     <value>-- Select --</value>
+  </data>
+  <data name="lblBalanceHandlingResource1.Text" xml:space="preserve">
+    <value>Balance Handling</value>
   </data>
   <data name="lblClassChangeMessageResource1.Text" xml:space="preserve">
     <value>The class will be changed. Do you want to transfer the balance due until today?</value>
@@ -294,8 +339,29 @@
   <data name="chkTransferBalanceResource1.Text" xml:space="preserve">
     <value>Transfer balance due until today</value>
   </data>
+  <data name="lblOptTransferResource1.Text" xml:space="preserve">
+    <value>Transfer accrued balance to the new class</value>
+  </data>
+  <data name="lblOptTransferDescResource1.Text" xml:space="preserve">
+    <value>The accrued balance up to the effective date will be carried forward.</value>
+  </data>
+  <data name="lblOptNoTransferResource1.Text" xml:space="preserve">
+    <value>Do not transfer the accrued balance</value>
+  </data>
+  <data name="lblOptNoTransferDescResource1.Text" xml:space="preserve">
+    <value>The old balance will not be carried to the new class.</value>
+  </data>
+  <data name="lblOptManualResource1.Text" xml:space="preserve">
+    <value>Adjust balance manually</value>
+  </data>
+  <data name="lblOptManualDescResource1.Text" xml:space="preserve">
+    <value>Enter the exact balance that should be transferred.</value>
+  </data>
+  <data name="lblBalanceToTransferResource1.Text" xml:space="preserve">
+    <value>Balance to Be Transferred</value>
+  </data>
   <data name="lblTransferExpireDateResource1.Text" xml:space="preserve">
-    <value>Transferred Balance Expire Date:</value>
+    <value>Transferred Balance Expiry Date</value>
   </data>
   <data name="txtTransferExpireDateResource1.Text" xml:space="preserve">
     <value />
@@ -304,9 +370,57 @@
     <value>Reason for Change</value>
   </data>
   <data name="lblReasonJoinDateResource1.Text" xml:space="preserve">
-    <value>Reason:</value>
+    <value>Reason</value>
   </data>
   <data name="txtReasonJoinDateResource1.Text" xml:space="preserve">
     <value />
+  </data>
+  <data name="lblChangeSummaryResource1.Text" xml:space="preserve">
+    <value>Change Summary</value>
+  </data>
+  <data name="lblSumJoinDateResource1.Text" xml:space="preserve">
+    <value>Join Date</value>
+  </data>
+  <data name="lblSumClassResource1.Text" xml:space="preserve">
+    <value>Employee Class</value>
+  </data>
+  <data name="lblSumEffectiveResource1.Text" xml:space="preserve">
+    <value>Class Effective Date</value>
+  </data>
+  <data name="lblSumBalanceActionResource1.Text" xml:space="preserve">
+    <value>Balance Action</value>
+  </data>
+  <data name="lblSumExpireResource1.Text" xml:space="preserve">
+    <value>Transferred Balance Expiry</value>
+  </data>
+  <data name="lblWarningSummaryResource1.Text" xml:space="preserve">
+    <value>This change may affect leave balances, payroll calculations, employee service duration, and end-of-service calculations. Please review the summary before saving.</value>
+  </data>
+  <data name="btnCancelResource1.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="btnPreviewImpactResource1.Text" xml:space="preserve">
+    <value>Preview Impact</value>
+  </data>
+  <data name="btnConfirmSaveResource1.Text" xml:space="preserve">
+    <value>Confirm &amp; Save</value>
+  </data>
+  <data name="lblNewClassMsgResource1.Text" xml:space="preserve">
+    <value>New Employee Class is required</value>
+  </data>
+  <data name="lblEffectiveDateMsgResource1.Text" xml:space="preserve">
+    <value>Class Change Effective Date is required</value>
+  </data>
+  <data name="lblBalanceAmountMsgResource1.Text" xml:space="preserve">
+    <value>Please enter balance to transfer</value>
+  </data>
+  <data name="lblSumTransferResource1.Text" xml:space="preserve">
+    <value>Transfer {0} Days</value>
+  </data>
+  <data name="lblSumManualResource1.Text" xml:space="preserve">
+    <value>Manual {0} Days</value>
+  </data>
+  <data name="lblSumNoTransferResource1.Text" xml:space="preserve">
+    <value>Do not transfer</value>
   </data>
 </root>

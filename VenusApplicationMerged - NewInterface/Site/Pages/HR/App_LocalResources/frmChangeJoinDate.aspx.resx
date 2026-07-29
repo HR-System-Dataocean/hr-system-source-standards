@@ -130,7 +130,25 @@
     <value>الرجاء إكمال البيانات التالية</value>
   </data>
   <data name="lblConfirmMsg.Text" xml:space="preserve">
-    <value>هل أنت متأكد من رغبتك في المتابعة؟</value>
+    <value>هل أنت متأكد من حفظ هذه التعديلات؟</value>
+  </data>
+  <data name="lblConfirmTitleResource1.Text" xml:space="preserve">
+    <value>تأكيد تعديل بيانات الموظف</value>
+  </data>
+  <data name="lblConfirmBody1Resource1.Text" xml:space="preserve">
+    <value>يرجى مراجعة تفاصيل التعديل قبل المتابعة.</value>
+  </data>
+  <data name="lblConfirmBody2Resource1.Text" xml:space="preserve">
+    <value>قد يؤثر هذا التعديل على رصيد الإجازات، واحتساب الرواتب، ومدة خدمة الموظف، ومستحقات نهاية الخدمة.</value>
+  </data>
+  <data name="lblConfirmBody3Resource1.Text" xml:space="preserve">
+    <value>هل أنت متأكد من حفظ هذه التعديلات؟</value>
+  </data>
+  <data name="lblConfirmBtnSaveResource1.Text" xml:space="preserve">
+    <value>تأكيد وحفظ</value>
+  </data>
+  <data name="lblConfirmBtnBackResource1.Text" xml:space="preserve">
+    <value>العودة للمراجعة</value>
   </data>
   <data name="lblTransferExpireDateMsg.Text" xml:space="preserve">
     <value>برجاء إدخال تاريخ انتهاء الرصيد المرحل</value>
@@ -178,7 +196,10 @@
     <value>مساعدة</value>
   </data>
   <data name="Label_HeaderResource1.Text" xml:space="preserve">
-    <value>تغيير تاريخ المباشرة / الفئة</value>
+    <value>تغيير تاريخ المباشرة والفئة</value>
+  </data>
+  <data name="Label_HeaderSubResource1.Text" xml:space="preserve">
+    <value>تحديث بيانات التوظيف وتحديد كيفية التعامل مع رصيد الإجازات المستحق.</value>
   </data>
   <data name="TabResource2.Text" xml:space="preserve">
     <value>تغيير تاريخ المباشرة</value>
@@ -193,13 +214,16 @@
     <value>تاريخ الالغاء</value>
   </data>
   <data name="lblRegDateValueResource2.Text" xml:space="preserve">
-    <value />
+    <value>—</value>
   </data>
   <data name="lblRegUserValueResource2.Text" xml:space="preserve">
-    <value />
+    <value>—</value>
   </data>
   <data name="lblCancelDateValueResource2.Text" xml:space="preserve">
-    <value />
+    <value>—</value>
+  </data>
+  <data name="lblEmployeeInfoResource1.Text" xml:space="preserve">
+    <value>بيانات الموظف</value>
   </data>
   <data name="lblEmployeeCodeResource1.Text" xml:space="preserve">
     <value>كود الموظف</value>
@@ -217,7 +241,7 @@
     <value />
   </data>
   <data name="lblCurrentInfoResource1.Text" xml:space="preserve">
-    <value>معلومات الموظف الحالية</value>
+    <value>تفاصيل التوظيف الحالية</value>
   </data>
   <data name="lblCurrentJoinDateResource1.Text" xml:space="preserve">
     <value>تاريخ المباشرة الحالي</value>
@@ -225,50 +249,53 @@
   <data name="txtCurrentJoinDateResource1.Text" xml:space="preserve">
     <value />
   </data>
+  <data name="lblBalancePayrollResource1.Text" xml:space="preserve">
+    <value>معلومات الرصيد والرواتب</value>
+  </data>
   <data name="lblLastSalaryResource1.Text" xml:space="preserve">
-    <value>آخر راتب تم صرفه</value>
+    <value>آخر فترة رواتب</value>
   </data>
   <data name="txtLastSalaryResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblCurrentClassResource1.Text" xml:space="preserve">
-    <value>الفئة الحالية</value>
+    <value>فئة الموظف الحالية</value>
   </data>
   <data name="txtCurrentClassResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblCurrentBalanceResource1.Text" xml:space="preserve">
-    <value>الرصيد الحالي</value>
+    <value>الرصيد المتاح الحالي</value>
   </data>
   <data name="txtCurrentBalanceResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblAnnualVacationResource1.Text" xml:space="preserve">
-    <value>الرصيد السنوي</value>
+    <value>الاستحقاق السنوي للإجازة</value>
   </data>
   <data name="txtAnnualVacationResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblAnnualExpireDateResource1.Text" xml:space="preserve">
-    <value>تاريخ الانتهاء</value>
+    <value>تاريخ انتهاء الرصيد</value>
   </data>
   <data name="txtAnnualExpireDateResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblTransferredVacationResource1.Text" xml:space="preserve">
-    <value>الرصيد المرحل</value>
+    <value>الرصيد المرحل سابقاً</value>
   </data>
   <data name="txtTransferredVacationResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblTransferredExpireDateResource1.Text" xml:space="preserve">
-    <value>تاريخ الانتهاء</value>
+    <value>انتهاء الرصيد المرحل</value>
   </data>
   <data name="txtTransferredExpireDateResource1.Text" xml:space="preserve">
     <value />
   </data>
   <data name="lblDueBalanceTitleResource1.Text" xml:space="preserve">
-    <value>الرصيد المستحق حتى اليوم: </value>
+    <value>الرصيد المستحق حتى اليوم</value>
   </data>
   <data name="lblDueBalanceResource1.Text" xml:space="preserve">
     <value>0.00</value>
@@ -277,16 +304,34 @@
     <value> يوم</value>
   </data>
   <data name="lblNewDataResource1.Text" xml:space="preserve">
-    <value>البيانات الجديدة</value>
+    <value>التغييرات المقترحة</value>
+  </data>
+  <data name="lblChangeTypeResource1.Text" xml:space="preserve">
+    <value>نوع التغيير</value>
+  </data>
+  <data name="ddlChangeType_Both.Text" xml:space="preserve">
+    <value>تاريخ المباشرة وفئة الموظف</value>
+  </data>
+  <data name="ddlChangeType_Join.Text" xml:space="preserve">
+    <value>تاريخ المباشرة فقط</value>
+  </data>
+  <data name="ddlChangeType_Class.Text" xml:space="preserve">
+    <value>فئة الموظف فقط</value>
+  </data>
+  <data name="lblClassEffectiveDateResource1.Text" xml:space="preserve">
+    <value>تاريخ سريان تغيير الفئة</value>
   </data>
   <data name="lblNewJoinDateResource1.Text" xml:space="preserve">
     <value>تاريخ المباشرة الجديد</value>
   </data>
   <data name="lblNewClassResource1.Text" xml:space="preserve">
-    <value>الفئة الجديدة</value>
+    <value>فئة الموظف الجديدة</value>
   </data>
   <data name="ddlNewClassResource1.Text" xml:space="preserve">
     <value>-- اختر --</value>
+  </data>
+  <data name="lblBalanceHandlingResource1.Text" xml:space="preserve">
+    <value>التعامل مع الرصيد</value>
   </data>
   <data name="lblClassChangeMessageResource1.Text" xml:space="preserve">
     <value>سيتم تغيير الفئة. هل تريد ترحيل الرصيد المستحق حتى اليوم؟</value>
@@ -294,8 +339,29 @@
   <data name="chkTransferBalanceResource1.Text" xml:space="preserve">
     <value>ترحيل الرصيد المستحق حتى اليوم</value>
   </data>
+  <data name="lblOptTransferResource1.Text" xml:space="preserve">
+    <value>ترحيل الرصيد المستحق إلى الفئة الجديدة</value>
+  </data>
+  <data name="lblOptTransferDescResource1.Text" xml:space="preserve">
+    <value>سيتم ترحيل الرصيد المستحق حتى تاريخ السريان.</value>
+  </data>
+  <data name="lblOptNoTransferResource1.Text" xml:space="preserve">
+    <value>عدم ترحيل الرصيد المستحق</value>
+  </data>
+  <data name="lblOptNoTransferDescResource1.Text" xml:space="preserve">
+    <value>لن يتم ترحيل الرصيد القديم إلى الفئة الجديدة.</value>
+  </data>
+  <data name="lblOptManualResource1.Text" xml:space="preserve">
+    <value>تعديل الرصيد يدوياً</value>
+  </data>
+  <data name="lblOptManualDescResource1.Text" xml:space="preserve">
+    <value>أدخل الرصيد الدقيق المراد ترحيله.</value>
+  </data>
+  <data name="lblBalanceToTransferResource1.Text" xml:space="preserve">
+    <value>الرصيد المراد ترحيله</value>
+  </data>
   <data name="lblTransferExpireDateResource1.Text" xml:space="preserve">
-    <value>تاريخ انتهاء الرصيد المرحل:</value>
+    <value>تاريخ انتهاء الرصيد المرحل</value>
   </data>
   <data name="txtTransferExpireDateResource1.Text" xml:space="preserve">
     <value />
@@ -304,9 +370,57 @@
     <value>سبب التغيير</value>
   </data>
   <data name="lblReasonJoinDateResource1.Text" xml:space="preserve">
-    <value>سبب التغيير:</value>
+    <value>السبب</value>
   </data>
   <data name="txtReasonJoinDateResource1.Text" xml:space="preserve">
     <value />
+  </data>
+  <data name="lblChangeSummaryResource1.Text" xml:space="preserve">
+    <value>ملخص التغيير</value>
+  </data>
+  <data name="lblSumJoinDateResource1.Text" xml:space="preserve">
+    <value>تاريخ المباشرة</value>
+  </data>
+  <data name="lblSumClassResource1.Text" xml:space="preserve">
+    <value>فئة الموظف</value>
+  </data>
+  <data name="lblSumEffectiveResource1.Text" xml:space="preserve">
+    <value>تاريخ سريان الفئة</value>
+  </data>
+  <data name="lblSumBalanceActionResource1.Text" xml:space="preserve">
+    <value>إجراء الرصيد</value>
+  </data>
+  <data name="lblSumExpireResource1.Text" xml:space="preserve">
+    <value>انتهاء الرصيد المرحل</value>
+  </data>
+  <data name="lblWarningSummaryResource1.Text" xml:space="preserve">
+    <value>قد يؤثر هذا التغيير على أرصدة الإجازات وحسابات الرواتب ومدة الخدمة ومكافأة نهاية الخدمة. يرجى مراجعة الملخص قبل الحفظ.</value>
+  </data>
+  <data name="btnCancelResource1.Text" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="btnPreviewImpactResource1.Text" xml:space="preserve">
+    <value>معاينة الأثر</value>
+  </data>
+  <data name="btnConfirmSaveResource1.Text" xml:space="preserve">
+    <value>تأكيد وحفظ</value>
+  </data>
+  <data name="lblNewClassMsgResource1.Text" xml:space="preserve">
+    <value>الفئة الجديدة مطلوبة</value>
+  </data>
+  <data name="lblEffectiveDateMsgResource1.Text" xml:space="preserve">
+    <value>تاريخ سريان تغيير الفئة مطلوب</value>
+  </data>
+  <data name="lblBalanceAmountMsgResource1.Text" xml:space="preserve">
+    <value>برجاء إدخال الرصيد المراد ترحيله</value>
+  </data>
+  <data name="lblSumTransferResource1.Text" xml:space="preserve">
+    <value>ترحيل {0} يوم</value>
+  </data>
+  <data name="lblSumManualResource1.Text" xml:space="preserve">
+    <value>يدوي {0} يوم</value>
+  </data>
+  <data name="lblSumNoTransferResource1.Text" xml:space="preserve">
+    <value>عدم الترحيل</value>
   </data>
 </root>
