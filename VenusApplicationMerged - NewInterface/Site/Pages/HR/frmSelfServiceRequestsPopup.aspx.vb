@@ -939,6 +939,7 @@ Partial Class frmSelfServiceRequestsPopup
     Private Sub CreateActingAssignments(ByVal sourceEmployeeID As Integer, ByVal actingEmployeeID As Integer,
                                         ByVal effectiveFrom As Date, ByVal effectiveTo As Date)
         Const ACTING_REASON As String = "End of Service"
+        Dim actingRemarks As String = BuildEndOfServiceActingRemarks()
 
         Dim employeeActing As New Clshrs_ActingEmployeeAssignments(Page)
         If Not employeeActing.Find("CancelDate IS NULL AND OriginalEmployeeID=" & sourceEmployeeID &
@@ -950,7 +951,7 @@ Partial Class frmSelfServiceRequestsPopup
             employeeActing.EffectiveFrom = effectiveFrom
             employeeActing.EffectiveTo = effectiveTo
             employeeActing.Reason = ACTING_REASON
-            employeeActing.Remarks = ""
+            employeeActing.Remarks = actingRemarks
             employeeActing.SourceForm = "frmEmployeesEndofService"
             employeeActing.SourceID = sourceEmployeeID
             employeeActing.Save()
@@ -968,13 +969,21 @@ Partial Class frmSelfServiceRequestsPopup
                 positionActing.EffectiveFrom = effectiveFrom
                 positionActing.EffectiveTo = effectiveTo
                 positionActing.Reason = ACTING_REASON
-                positionActing.Remarks = ""
+                positionActing.Remarks = actingRemarks
                 positionActing.SourceForm = "frmEmployeesEndofService"
                 positionActing.SourceID = sourceEmployeeID
                 positionActing.Save()
             End If
         End If
     End Sub
+
+    Private Function BuildEndOfServiceActingRemarks() As String
+        Dim empInfo As String = (lblEmpCode.Text & " - " & lblEmpName.Text).Trim(" "c, "-"c)
+        If empInfo = "" Then
+            Return "End of service of current end of service employee"
+        End If
+        Return "End of service of current end of service employee: " & empInfo
+    End Function
 
     Private Function NextAssignmentCode(ByVal tableName As String, ByVal prefix As String) As String
         Dim sql As String = "SELECT ISNULL(MAX(CASE" &
