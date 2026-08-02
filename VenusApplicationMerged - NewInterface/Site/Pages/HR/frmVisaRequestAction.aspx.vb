@@ -316,7 +316,6 @@ Partial Class frmAttendancePreparation
                 Exit Sub
             End If
 
-            ' ====== باقي الكود الخاص بالمدير (كما هو) ======
             '============Get ConfigData======================
             If ddlAction.SelectedValue = 2 Then   'رفض
 

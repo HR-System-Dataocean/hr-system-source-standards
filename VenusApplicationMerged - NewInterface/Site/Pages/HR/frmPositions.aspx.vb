@@ -428,7 +428,7 @@ Partial Class frmPositions
                 .ApplyValidation = chkApplyValidation.Checked
                 .PositionBudget = TxtPositionBudget.Text
                 .AppraisalTypeGroupID = ddlappraisaltypegroup.SelectedValue
-
+                .ExemptFromDirectManagerMandatory = chkExemptFromDirectManagerMandatory.Checked
 
             End With
 
@@ -451,6 +451,7 @@ Partial Class frmPositions
                 chkApplyValidation.Checked = .ApplyValidation
                 TxtPositionBudget.Text = .PositionBudget
                 ddlappraisaltypegroup.SelectedValue = .AppraisalTypeGroupID
+                chkExemptFromDirectManagerMandatory.Checked = .ExemptFromDirectManagerMandatory
                 Dim item As New System.Web.UI.WebControls.ListItem()
 
                 Dim ClsPos As New Clshrs_PositionsLevels(Page)
@@ -802,6 +803,7 @@ Partial Class frmPositions
         lblRegDateValue.Text = ""
         lblRegDateValue.Text = ""
         lblCancelDateValue.Text = ""
+        chkExemptFromDirectManagerMandatory.Checked = False
     End Function
     Private Sub LoadDataUpdateSchedules(ByVal formName As String)
         Dim controlName As String = String.Empty

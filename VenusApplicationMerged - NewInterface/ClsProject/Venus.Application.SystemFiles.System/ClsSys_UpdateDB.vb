@@ -8679,6 +8679,18 @@ END"
     DeductedFromBasic DECIMAL(18, 2) NULL "
         ExecuteUpdate(SQL)
 
+        SQL = "IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('sys_SystemConfig') AND name = 'DirectManagerIsMandatory')
+BEGIN
+    ALTER TABLE sys_SystemConfig ADD DirectManagerIsMandatory BIT NULL DEFAULT 0
+END"
+        ExecuteUpdate(SQL)
+
+        SQL = "IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('hrs_Positions') AND name = 'ExemptFromDirectManagerMandatory')
+BEGIN
+    ALTER TABLE hrs_Positions ADD ExemptFromDirectManagerMandatory BIT NULL DEFAULT 0
+END"
+        ExecuteUpdate(SQL)
+
     End Function
 
     Public Function UpdateSS() As Boolean

@@ -685,6 +685,38 @@ Partial Class frmEmployees
                             Exit Sub
                         End If
                     End If
+
+
+                    ' ====== التحقق من تفعيل خيار المدير المباشر إلزامي ======
+                    Dim DirectManagerIsMandatory As Boolean = False
+                    Dim companyId As Integer = ClsEmployees.CompanyID
+
+                    If companyId > 0 Then
+                        Dim checkConfigSql As String = "SELECT ISNULL(DirectManagerIsMandatory, 0) FROM sys_SystemConfig WHERE CompanyId=" & companyId
+                        Dim result As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, checkConfigSql)
+                        If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                            DirectManagerIsMandatory = Convert.ToBoolean(result)
+                        End If
+                    End If
+
+                    ' ====== إذا كان الخيار مفعلاً والمدير المباشر غير محدد ======
+                    If DirectManagerIsMandatory AndAlso String.IsNullOrEmpty(txtManager.Text) Then
+                        ' ====== التحقق من استثناء الوظيفة ======
+                        Dim IsExempt As Boolean = False
+                        If Not String.IsNullOrEmpty(TxtPositionID.Value) AndAlso TxtPositionID.Value > 0 Then
+                            Dim checkExemptSql As String = "SELECT ISNULL(ExemptFromDirectManagerMandatory, 0) FROM hrs_Positions WHERE ID = " & TxtPositionID.Value
+                            Dim exemptResult As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, checkExemptSql)
+                            If exemptResult IsNot Nothing AndAlso Not IsDBNull(exemptResult) Then
+                                IsExempt = Convert.ToBoolean(exemptResult)
+                            End If
+                        End If
+
+                        If Not IsExempt Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... Direct Manager is Mandatory / عفوا... المدير المباشر إلزامي"))
+                            txtManager.Focus()
+                            Exit Sub
+                        End If
+                    End If
                     'If String.IsNullOrEmpty(txtWorkE_Mail.Text) Then
                     '    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... you have to enter Work E-mail /عفوا...لابد من اخال بريد العمل"))
                     '    Exit Sub
@@ -1496,8 +1528,10 @@ Partial Class frmEmployees
                 Catch ex As Exception
                     .GradeStepId = 0
                 End Try
-                .StartDate = SetDate(txtStartDate.Text, txtStartDate.Text) 'IIf(txtStartDate.Value.Trim = "", Nothing, .SetHigriDate(txtStartDate.Text))
-                .EndDate = SetDate(txtEndDate.Text, txtEndDate.Text) 'IIf(txtEndDate.Value.Trim = "", Nothing, .SetHigriDate(txtEndDate.Text))
+                '.StartDate = SetDate(txtStartDate.Text, txtStartDate.Text) 'IIf(txtStartDate.Value.Trim = "", Nothing, .SetHigriDate(txtStartDate.Text))
+                ' .EndDate = SetDate(txtEndDate.Text, txtEndDate.Text) 'IIf(txtEndDate.Value.Trim = "", Nothing, .SetHigriDate(txtEndDate.Text))
+                .StartDate = SetDate(txtStartDate.Text, txtStartDate.Text).Date
+                .EndDate = SetDate(txtEndDate.Text, txtEndDate.Text).Date
                 .ContractPeriod = wneContractDuration.Value
 
             End With

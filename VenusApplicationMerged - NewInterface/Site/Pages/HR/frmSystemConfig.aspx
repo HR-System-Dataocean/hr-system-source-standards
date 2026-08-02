@@ -369,6 +369,18 @@
         <asp:CheckBox ID="chkApplyAutoAdvanceDelegation" runat="server" />
     </td>
 </tr>
+
+                        <tr>
+    <td class="SeparArea">
+    </td>
+    <td class="LabelArea">
+        <asp:Label ID="lblDirectManagerIsMandatory" runat="server" Text="Direct Manager Is Mandatory" 
+            SkinID="Label_DefaultNormal" meta:resourcekey="DirectManagerIsMandatoryResource1"></asp:Label>
+    </td>
+    <td class="DataArea">
+        <asp:CheckBox ID="chkDirectManagerIsMandatory" runat="server" />
+    </td>
+</tr>
                     </table>
                 </td>
                 <td style="width: 6%; height: 16px; vertical-align: top">

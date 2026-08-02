@@ -29,9 +29,9 @@ Public Class Clshrs_Positions
 
         MyBase.New(Page)
         mTable = " hrs_Positions "
-        mInsertParameter = " Code,EngName,ArbName,ArbName4S,ParentID,PositionLevelID,EvalEvaluationID,EvalRecruitmentID,Remarks,RegUserID,RegComputerID,EmployeesNo,ApplyValidation,PositionBudget,AppraisalTypeGroupID "
-        mInsertParameterValues = " @Code,@EngName,@ArbName,@ArbName4S,@ParentID,@PositionLevelID,@EvalEvaluationID,@EvalRecruitmentID,@Remarks,@RegUserID,@RegComputerID,@EmployeesNo,@ApplyValidation,@PositionBudget,@AppraisalTypeGroupID "
-        mUpdateParameter = " Code=@Code,EngName=@EngName,ArbName=@ArbName,ArbName4S=@ArbName4S,ParentID=@ParentID,PositionLevelID=@PositionLevelID,EvalEvaluationID=@EvalEvaluationID,EvalRecruitmentID=@EvalRecruitmentID,Remarks=@Remarks,EmployeesNo=@EmployeesNo,ApplyValidation=@ApplyValidation,PositionBudget=@PositionBudget,AppraisalTypeGroupID=@AppraisalTypeGroupID "
+        mInsertParameter = " Code,EngName,ArbName,ArbName4S,ParentID,PositionLevelID,EvalEvaluationID,EvalRecruitmentID,Remarks,RegUserID,RegComputerID,EmployeesNo,ApplyValidation,PositionBudget,AppraisalTypeGroupID,ExemptFromDirectManagerMandatory "
+        mInsertParameterValues = " @Code,@EngName,@ArbName,@ArbName4S,@ParentID,@PositionLevelID,@EvalEvaluationID,@EvalRecruitmentID,@Remarks,@RegUserID,@RegComputerID,@EmployeesNo,@ApplyValidation,@PositionBudget,@AppraisalTypeGroupID,@ExemptFromDirectManagerMandatory "
+        mUpdateParameter = " Code=@Code,EngName=@EngName,ArbName=@ArbName,ArbName4S=@ArbName4S,ParentID=@ParentID,PositionLevelID=@PositionLevelID,EvalEvaluationID=@EvalEvaluationID,EvalRecruitmentID=@EvalRecruitmentID,Remarks=@Remarks,EmployeesNo=@EmployeesNo,ApplyValidation=@ApplyValidation,PositionBudget=@PositionBudget,AppraisalTypeGroupID=@AppraisalTypeGroupID, ExemptFromDirectManagerMandatory=@ExemptFromDirectManagerMandatory "
         mSelectCommand = " Select * from " & mTable
         mInsertCommand = " insert into " & mTable & "( " & mInsertParameter & ")Values(" & mInsertParameterValues & ")"
         mUpdateCommand = " Update " & mTable & " Set " & mUpdateParameter
@@ -63,6 +63,7 @@ Public Class Clshrs_Positions
     Private mCancelDate As Object
     Private mEmployeesNo As Integer
     Private mApplyValidation As Boolean
+    Private mExemptFromDirectManagerMandatory As Boolean
     Private mPositionBudget As String
     Private mAppraisalTypeGroupID As Object
 
@@ -130,6 +131,15 @@ Public Class Clshrs_Positions
         Set(ByVal Value As Boolean)
             mApplyValidation = Value
             mApplyValidation = mStringHandler.ReplaceHamza(Value)
+        End Set
+    End Property
+    Public Property ExemptFromDirectManagerMandatory() As Boolean
+        Get
+            Return mExemptFromDirectManagerMandatory
+        End Get
+        Set(ByVal Value As Boolean)
+            mExemptFromDirectManagerMandatory = Value
+            mExemptFromDirectManagerMandatory = mStringHandler.ReplaceHamza(Value)
         End Set
     End Property
     Public Property PositionBudget() As String
@@ -440,6 +450,7 @@ Public Class Clshrs_Positions
             mCancelDate = Nothing
             mEmployeesNo = 0
             mApplyValidation = False
+            mExemptFromDirectManagerMandatory = False
             mPositionBudget = String.Empty
             mAppraisalTypeGroupID = 0
         Catch ex As Exception
@@ -837,6 +848,7 @@ Public Class Clshrs_Positions
                 mRegDate = mDataHandler.DataValue_Out(.Item("RegDate"), SqlDbType.DateTime)
                 mEmployeesNo = mDataHandler.DataValue_Out(.Item("EmployeesNo"), SqlDbType.Int)
                 mApplyValidation = mDataHandler.DataValue_Out(.Item("ApplyValidation"), SqlDbType.Bit)
+                mExemptFromDirectManagerMandatory = mDataHandler.DataValue_Out(.Item("ExemptFromDirectManagerMandatory"), SqlDbType.Bit)
                 mPositionBudget = mDataHandler.DataValue_Out(.Item("PositionBudget"), SqlDbType.VarChar)
                 mAppraisalTypeGroupID = mDataHandler.DataValue_Out(.Item("AppraisalTypeGroupID"), SqlDbType.Int, True)
             End With
@@ -868,6 +880,7 @@ Public Class Clshrs_Positions
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Remarks", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mRemarks, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@EmployeesNo", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mEmployeesNo, SqlDbType.Int)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ApplyValidation", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mApplyValidation, SqlDbType.Bit)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ExemptFromDirectManagerMandatory", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mExemptFromDirectManagerMandatory, SqlDbType.Bit)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@PositionBudget", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mPositionBudget, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@AppraisalTypeGroupID", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mAppraisalTypeGroupID, SqlDbType.Int, True)
             Select Case OperationType

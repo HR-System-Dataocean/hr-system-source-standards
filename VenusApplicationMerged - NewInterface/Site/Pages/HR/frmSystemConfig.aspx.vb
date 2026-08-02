@@ -94,7 +94,7 @@ Partial Class frmSystemConfig
             Dim count As Integer = CInt(txtMinimumCostCentersCount.Text)
             Dim journalEmployeeFields As String = txtJournalEmployeeFields.Text.Replace("'", "''")
             Dim Str = "delete from sys_SystemConfig where CompanyId=" & DdlCompany.SelectedValue & "; "
-            Str &= " INSERT INTO [dbo].[sys_SystemConfig] ([UseCostCenter],[MinimumCostCentersCount],PreventChangeContractEndDate,RegUserID,MultiBranchedPosition,CompanyId,AllowDelayInstallmentPart,ShowVacationsNotifications,ShowPostingNotification,JournalEmployeeFields,LockJoinDate,showActingPopUpEndService,ApplyAutoDelegateWithAvnnualVacationRequest) VALUES(" & If(chkUseCostCenter.Checked, "1", "0") & "," & count & "," & If(ChkPreventChangeEndDate.Checked, "1", "0") & ",'" & User & "'," & If(chkMultiBranchedPosition.Checked, "1", "0") & "," & DdlCompany.SelectedValue & "," & If(chkAllowDelayInstallmentPart.Checked, "1", "0") & "," & If(chkShowVacationsNotifications.Checked, "1", "0") & "," & If(chkShowPostingNotification.Checked, "1", "0") & ",'" & journalEmployeeFields & "'," & If(ChkLockJoinDate.Checked, "1", "0") & "," & If(chkShowActingPopUpEndService.Checked, "1", "0") & "," & If(chkApplyAutoAdvanceDelegation.Checked, "1", "0") & ")"
+            Str &= " INSERT INTO [dbo].[sys_SystemConfig] ([UseCostCenter],[MinimumCostCentersCount],PreventChangeContractEndDate,RegUserID,MultiBranchedPosition,CompanyId,AllowDelayInstallmentPart,ShowVacationsNotifications,ShowPostingNotification,JournalEmployeeFields,LockJoinDate,showActingPopUpEndService,ApplyAutoDelegateWithAvnnualVacationRequest,DirectManagerIsMandatory) VALUES(" & If(chkUseCostCenter.Checked, "1", "0") & "," & count & "," & If(ChkPreventChangeEndDate.Checked, "1", "0") & ",'" & User & "'," & If(chkMultiBranchedPosition.Checked, "1", "0") & "," & DdlCompany.SelectedValue & "," & If(chkAllowDelayInstallmentPart.Checked, "1", "0") & "," & If(chkShowVacationsNotifications.Checked, "1", "0") & "," & If(chkShowPostingNotification.Checked, "1", "0") & ",'" & journalEmployeeFields & "'," & If(ChkLockJoinDate.Checked, "1", "0") & "," & If(chkShowActingPopUpEndService.Checked, "1", "0") & "," & If(chkApplyAutoAdvanceDelegation.Checked, "1", "0") & "," & If(chkDirectManagerIsMandatory.Checked, 1, 0) & ")"
             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsTicketsAgencies.ConnectionString, System.Data.CommandType.Text, Str)
             Return True
         Catch ex As Exception
@@ -160,6 +160,11 @@ Partial Class frmSystemConfig
                     chkApplyAutoAdvanceDelegation.Checked = CBool(dr("ApplyAutoDelegateWithAvnnualVacationRequest"))
                 Else
                     chkShowActingPopUpEndService.Checked = False
+                End If
+                If dsActions.Tables(0).Columns.Contains("DirectManagerIsMandatory") AndAlso Not IsDBNull(dr("DirectManagerIsMandatory")) Then
+                    chkDirectManagerIsMandatory.Checked = CBool(dr("DirectManagerIsMandatory"))
+                Else
+                    chkDirectManagerIsMandatory.Checked = False
                 End If
             Next
             Return True
