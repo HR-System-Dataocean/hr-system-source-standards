@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <data name="PageResource1.Title" xml:space="preserve"><value>إنهاء التكليف</value></data>
+  <data name="lblPageTitleResource1.Text" xml:space="preserve"><value>إنهاء التكليف</value></data>
+  <data name="lblSubtitleResource1.Text" xml:space="preserve"><value>إنهاء التكليف وإعادة إسناد المسؤوليات</value></data>
+  <data name="lblSelectSectionResource1.Text" xml:space="preserve"><value>اختيار التكليف النشط</value></data>
+  <data name="lblActiveAssignmentResource1.Text" xml:space="preserve"><value>التكليف النشط</value></data>
+  <data name="btnSearchAssignmentResource1.Text" xml:space="preserve"><value>بحث</value></data>
+  <data name="lblSelectInfoResource1.Text" xml:space="preserve"><value>اختر التكليف النشط المطلوب إنهاؤه. يظهر البحث رقم المصدر والملاحظات بشكل مميز من تكليف الموظف وتكليف الوظيفة.</value></data>
+  <data name="lblDetailsSectionResource1.Text" xml:space="preserve"><value>بيانات التكليف الحالي</value></data>
+  <data name="lblAssignmentNoCaptionResource1.Text" xml:space="preserve"><value>رقم التكليف</value></data>
+  <data name="lblOriginalEmployeeCaptionResource1.Text" xml:space="preserve"><value>الموظف الأصلي</value></data>
+  <data name="lblActingEmployeeCaptionResource1.Text" xml:space="preserve"><value>الموظف القائم بالأعمال</value></data>
+  <data name="lblPositionGradeCaptionResource1.Text" xml:space="preserve"><value>الدرجة الوظيفية</value></data>
+  <data name="lblBranchCaptionResource1.Text" xml:space="preserve"><value>الفرع</value></data>
+  <data name="lblEffectiveFromCaptionResource1.Text" xml:space="preserve"><value>ساري من</value></data>
+  <data name="lblScopeCaptionResource1.Text" xml:space="preserve"><value>نطاق المسؤوليات</value></data>
+  <data name="lblStatusCaptionResource1.Text" xml:space="preserve"><value>الحالة</value></data>
+  <data name="lblReassignSectionResource1.Text" xml:space="preserve"><value>إنهاء التكليف وإعادة إسناد المسؤوليات</value></data>
+  <data name="lblEffectiveToResource1.Text" xml:space="preserve"><value>ساري حتى</value></data>
+  <data name="lblNewApprovalResource1.Text" xml:space="preserve"><value>إسناد الموافقات الجديد</value></data>
+  <data name="chkAssignEmployeeResource1.Text" xml:space="preserve"><value>إسناد إلى موظف</value></data>
+  <data name="chkAssignPositionResource1.Text" xml:space="preserve"><value>إسناد إلى درجة وظيفة</value></data>
+  <data name="lblAssignEmployeeHelpResource1.Text" xml:space="preserve"><value>سيتم إسناد مسؤولية الموافقات إلى الموظف المحدد.</value></data>
+  <data name="lblAssignPositionHelpResource1.Text" xml:space="preserve"><value>سيتم ربط قواعد الموافقات بالدرجة الوظيفية المحددة.</value></data>
+  <data name="btnSearchApprovalEmpResource1.ToolTip" xml:space="preserve"><value>بحث عن موظف</value></data>
+  <data name="btnSearchPositionResource1.ToolTip" xml:space="preserve"><value>بحث عن درجة وظيفية</value></data>
+  <data name="lblNewManagerResource1.Text" xml:space="preserve"><value>المدير المباشر الجديد</value></data>
+  <data name="btnSearchNewManagerResource1.ToolTip" xml:space="preserve"><value>بحث عن موظف</value></data>
+  <data name="lblRemarksResource1.Text" xml:space="preserve"><value>ملاحظات</value></data>
+  <data name="txtRemarksDefault" xml:space="preserve"><value>تم تعيين البديل الفعلي. سيتم إغلاق التكليف وإعادة إسناد المسؤوليات.</value></data>
+  <data name="lblEndInfoResource1.Text" xml:space="preserve"><value>سيتم إغلاق التكليف المحدد، وإسناد مسؤوليات الموافقات إلى الموظف أو الدرجة الوظيفية أو كليهما، وتحديث المدير المباشر للموظفين المرتبطين.</value></data>
+  <data name="btnEndAssignmentResource1.Text" xml:space="preserve"><value>إنهاء التكليف</value></data>
+  <data name="btnCancelResource1.Text" xml:space="preserve"><value>إلغاء</value></data>
+  <data name="lblStatusActive" xml:space="preserve"><value>نشط</value></data>
+  <data name="lblStatusClosed" xml:space="preserve"><value>مغلق</value></data>
+  <data name="ScopeApprovalsAndManager" xml:space="preserve"><value>الموافقات والمدير المباشر</value></data>
+  <data name="ScopeApprovals" xml:space="preserve"><value>الموافقات</value></data>
+  <data name="ScopeDirectManager" xml:space="preserve"><value>المدير المباشر</value></data>
+  <data name="ScopeNone" xml:space="preserve"><value>—</value></data>
+  <data name="MsgConfirmEnd" xml:space="preserve"><value>هل تريد إنهاء هذا التكليف وإعادة إسناد المسؤوليات؟</value></data>
+  <data name="MsgSelectAssignment" xml:space="preserve"><value>يرجى اختيار تكليف نشط.</value></data>
+  <data name="MsgAssignmentNotFound" xml:space="preserve"><value>لم يتم العثور على التكليف.</value></data>
+  <data name="MsgAssignmentAlreadyClosed" xml:space="preserve"><value>هذا التكليف مغلق مسبقاً.</value></data>
+  <data name="MsgAssignmentNotActive" xml:space="preserve"><value>التكليف غير نشط أو تم إغلاقه مسبقاً.</value></data>
+  <data name="MsgEffectiveToRequired" xml:space="preserve"><value>يرجى إدخال تاريخ ساري حتى.</value></data>
+  <data name="MsgEffectiveToInvalid" xml:space="preserve"><value>تاريخ ساري حتى يجب أن يكون في أو بعد تاريخ ساري من.</value></data>
+  <data name="MsgSelectApprovalTarget" xml:space="preserve"><value>يرجى اختيار إسناد إلى موظف و/أو درجة وظيفية.</value></data>
+  <data name="MsgEnterApprovalEmployee" xml:space="preserve"><value>يرجى اختيار الموظف لإسناد الموافقات.</value></data>
+  <data name="MsgEnterPosition" xml:space="preserve"><value>يرجى اختيار الدرجة الوظيفية لإسناد الموافقات.</value></data>
+  <data name="MsgEnterNewManager" xml:space="preserve"><value>يرجى إدخال المدير المباشر الجديد.</value></data>
+  <data name="MsgCannotAssignSame" xml:space="preserve"><value>لا يمكن إسناد المسؤوليات إلى نفس الموظف القائم بالأعمال.</value></data>
+  <data name="MsgInvalidEmployee" xml:space="preserve"><value>رمز الموظف غير صحيح.</value></data>
+  <data name="MsgInvalidPosition" xml:space="preserve"><value>رمز الدرجة الوظيفية غير صحيح.</value></data>
+  <data name="MsgEndSuccess" xml:space="preserve"><value>تم إنهاء التكليف. قواعد الموافقات المحدثة: {0}. سجلات المدير المباشر المحدثة: {1}.</value></data>
+  <data name="MsgEndFailed" xml:space="preserve"><value>فشل إنهاء التكليف: </value></data>
+  <data name="MsgErrorPrefix" xml:space="preserve"><value>خطأ: </value></data>
+</root>
