@@ -462,4 +462,13 @@
   <data name="LblRequestIDResource1.Text" xml:space="preserve">
     <value>Request ID</value>
   </data>
+  <data name="DeductedFromBasicResource1.Header.Caption" xml:space="preserve">
+    <value>Deduction From New</value>
+  </data>
+  <data name="DeductedFromCompensationResource1.Header.Caption" xml:space="preserve">
+    <value>Deduction From Compensation</value>
+  </data>
+  <data name="DeductedFromTransferedResource1.Header.Caption" xml:space="preserve">
+    <value>Deduction From Transfered</value>
+  </data>
 </root>

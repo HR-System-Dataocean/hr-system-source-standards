@@ -133,6 +133,8 @@ Partial Class frmEmployees
             End If
             AddEventToControls()
 
+            LBMaxCode.OnClientClick = "OpenModal12('frmMaxCodeInfo.aspx?FrmID=1&Lang=" & ProfileCls.CurrentLanguage & "',560,850); return false;"
+
 
             If Not IsPostBack Then
                 LoadDataIntoControls()

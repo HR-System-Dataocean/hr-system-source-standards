@@ -281,6 +281,64 @@
                                             </td>
                                         </tr>
 
+                                        <%-- المراجع (Forward for Review) --%>
+<tr>
+    <td style="width: 47%; height: 16px; vertical-align: top">
+        <table style="width: 100%; vertical-align: top" cellspacing="0">
+            <tr>
+                <td class="SeparArea">
+                </td>
+                <td class="LabelArea">
+                    <asp:Label ID="lblReviewer" Width="120px" runat="server" Text="المراجع"
+                        SkinID="Label_DefaultBold" meta:resourcekey="lblReviewerResource1"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtReviewer" Width="110px" runat="server" MaxLength="15"
+                        AutoPostBack="True" meta:resourcekey="txtReviewerResource1">
+                    </asp:TextBox>
+
+                    <igtxt:WebImageButton ID="btnReviewerSearch" runat="server" Height="18px" AutoSubmit="False"
+                        meta:resourcekey="btnReviewerSearchResource1" Overflow="NoWordWrap" UseBrowserDefaults="False"
+                        Width="24px">
+                        <Alignments TextImage="ImageBottom" />
+                        <Appearance>
+                            <Image Url="./Img/forum_search.gif" />
+                        </Appearance>
+                    </igtxt:WebImageButton>
+                </td>
+                <td class="spacearea">
+                </td>
+                <td class="spacearea">
+                </td>
+                <td>
+                    <asp:TextBox ID="txtReviewerName" Width="260px" runat="server" MaxLength="100"
+                        AutoPostBack="false" Enabled="false" meta:resourcekey="txtReviewerNameResource1">
+                    </asp:TextBox>
+                </td>
+                <td class="spacearea">
+                </td>
+                <td class="spacearea">
+                </td>
+            </tr>
+        </table>
+    </td>
+    <td style="width: 6%; height: 16px; vertical-align: top">
+    </td>
+    <td style="width: 47%; height: 16px; vertical-align: top">
+        <table style="width: 100%; vertical-align: top" cellspacing="0">
+            <tr>
+                <td class="SeparArea">
+                </td>
+                <td class="LabelArea">
+                </td>
+                <td class="DataArea">
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+
+
                                                                                   <tr>
     <td style="width: 47%; height: 16px; vertical-align: top">
         <table style="width: 98%; vertical-align: top" cellspacing="0">

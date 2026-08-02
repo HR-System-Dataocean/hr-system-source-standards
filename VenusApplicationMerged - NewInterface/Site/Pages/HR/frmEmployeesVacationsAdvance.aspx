@@ -984,6 +984,36 @@
                                                                             <RowLayoutColumnInfo OriginX="9" />
                                                                         </Footer>
                                                                     </igtbl:UltraGridColumn>
+                                                                    
+<igtbl:UltraGridColumn BaseColumnName="DeductedFromBasic" DataType="System.Double" 
+    Key="DeductedFromBasic" meta:resourcekey="DeductedFromBasicResource1" Width="10%">
+    <Header Caption="من الأساسي">
+        <RowLayoutColumnInfo OriginX="9" />
+    </Header>
+    <Footer>
+        <RowLayoutColumnInfo OriginX="9" />
+    </Footer>
+</igtbl:UltraGridColumn>
+<igtbl:UltraGridColumn BaseColumnName="DeductedFromTransfered" DataType="System.Double" 
+    Key="DeductedFromTransfered" meta:resourcekey="DeductedFromTransferedResource1" Width="10%">
+    <Header Caption="من المرحل">
+        <RowLayoutColumnInfo OriginX="9" />
+    </Header>
+    <Footer>
+        <RowLayoutColumnInfo OriginX="9" />
+    </Footer>
+</igtbl:UltraGridColumn>
+
+<igtbl:UltraGridColumn BaseColumnName="DeductedFromCompensation" DataType="System.Double" 
+    Key="DeductedFromCompensation" meta:resourcekey="DeductedFromCompensationResource1" Width="10%">
+    <Header Caption="من التعويضي">
+        <RowLayoutColumnInfo OriginX="9" />
+    </Header>
+    <Footer>
+        <RowLayoutColumnInfo OriginX="9" />
+    </Footer>
+</igtbl:UltraGridColumn>
+
 
                                                                     <igtbl:UltraGridColumn BaseColumnName="OverdueDays" DataType="System.Int32" 
                                                                         Key="OverdueDays" meta:resourcekey="UltraGridColumnResource13" Width="5%">

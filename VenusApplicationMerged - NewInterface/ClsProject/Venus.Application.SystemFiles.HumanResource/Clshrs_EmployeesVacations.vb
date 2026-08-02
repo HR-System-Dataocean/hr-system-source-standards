@@ -28,9 +28,9 @@ Public Class Clshrs_EmployeesVacations
     Public Sub New(ByVal Page As Web.UI.Page)
         MyBase.New(Page)
         mTable = " hrs_EmployeesVacations "
-        mInsertParameter = " EmployeeID,VacationTypeID,ExpectedStartDate,ExpectedEndDate,EmployeeRequestRemarks,IsContracial,ActualStartDate,ActualEndDate,TotalDays,RemainingDays,ConsumDays,Remarks,RegUserID,RegComputerID,HijriExpectedStartDate,HijriExpectedEndDate,HijriActualStartDate,HijriActualEndDate,OverDueVacation ,TotalBalance,PaidFromBalance,RemainingBalance,vactiondays,OverdueDays,ParentVacationID,ZeroingBalance,Src,VacationRequestID"
-        mInsertParameterValues = " @EmployeeID,@VacationTypeID,@ExpectedStartDate,@ExpectedEndDate,@EmployeeRequestRemarks,@IsContracial,@ActualStartDate,@ActualEndDate,@TotalDays,@RemainingDays,@ConsumDays,@Remarks,@RegUserID,@RegComputerID,@HijriExpectedStartDate,@HijriExpectedEndDate,@HijriActualStartDate,@HijriActualEndDate,@OverDueVacation,@TotalBalance,@PaidFromBalance,@RemainingBalance,@vactiondays,@OverdueDays,@ParentVacationID,@ZeroingBalance,@Src,@VacationRequestID "
-        mUpdateParameter = " EmployeeID=@EmployeeID,VacationTypeID=@VacationTypeID,ExpectedStartDate=@ExpectedStartDate,ExpectedEndDate=@ExpectedEndDate,EmployeeRequestRemarks=@EmployeeRequestRemarks,IsContracial=@IsContracial,ActualStartDate=@ActualStartDate,ActualEndDate=@ActualEndDate,TotalDays=@TotalDays,RemainingDays=@RemainingDays,ConsumDays=@ConsumDays,Remarks=@Remarks,RegUserID=@RegUserID,RegComputerID=@RegComputerID,HijriExpectedStartDate=@HijriExpectedStartDate,HijriExpectedEndDate=@HijriExpectedEndDate,HijriActualStartDate=@HijriActualStartDate,HijriActualEndDate=@HijriActualEndDate,OverDueVacation=@OverDueVacation,TotalBalance=@TotalBalance,PaidFromBalance=@PaidFromBalance,RemainingBalance=@RemainingBalance,vactiondays=@vactiondays,OverdueDays=@OverdueDays,ParentVacationID=@ParentVacationID,ZeroingBalance=@ZeroingBalance,Src=@Src,VacationRequestID=@VacationRequestID "
+        mInsertParameter = " EmployeeID,VacationTypeID,ExpectedStartDate,ExpectedEndDate,EmployeeRequestRemarks,IsContracial,ActualStartDate,ActualEndDate,TotalDays,RemainingDays,ConsumDays,Remarks,RegUserID,RegComputerID,HijriExpectedStartDate,HijriExpectedEndDate,HijriActualStartDate,HijriActualEndDate,OverDueVacation ,TotalBalance,PaidFromBalance,RemainingBalance,vactiondays,OverdueDays,ParentVacationID,ZeroingBalance,Src,VacationRequestID,DeductedFromTransfered ,DeductedFromCompensation ,deductedFromBasic"
+        mInsertParameterValues = " @EmployeeID,@VacationTypeID,@ExpectedStartDate,@ExpectedEndDate,@EmployeeRequestRemarks,@IsContracial,@ActualStartDate,@ActualEndDate,@TotalDays,@RemainingDays,@ConsumDays,@Remarks,@RegUserID,@RegComputerID,@HijriExpectedStartDate,@HijriExpectedEndDate,@HijriActualStartDate,@HijriActualEndDate,@OverDueVacation,@TotalBalance,@PaidFromBalance,@RemainingBalance,@vactiondays,@OverdueDays,@ParentVacationID,@ZeroingBalance,@Src,@VacationRequestID ,@DeductedFromTransfered, @DeductedFromCompensation ,@deductedFromBasic"
+        mUpdateParameter = " EmployeeID=@EmployeeID,VacationTypeID=@VacationTypeID,ExpectedStartDate=@ExpectedStartDate,ExpectedEndDate=@ExpectedEndDate,EmployeeRequestRemarks=@EmployeeRequestRemarks,IsContracial=@IsContracial,ActualStartDate=@ActualStartDate,ActualEndDate=@ActualEndDate,TotalDays=@TotalDays,RemainingDays=@RemainingDays,ConsumDays=@ConsumDays,Remarks=@Remarks,RegUserID=@RegUserID,RegComputerID=@RegComputerID,HijriExpectedStartDate=@HijriExpectedStartDate,HijriExpectedEndDate=@HijriExpectedEndDate,HijriActualStartDate=@HijriActualStartDate,HijriActualEndDate=@HijriActualEndDate,OverDueVacation=@OverDueVacation,TotalBalance=@TotalBalance,PaidFromBalance=@PaidFromBalance,RemainingBalance=@RemainingBalance,vactiondays=@vactiondays,OverdueDays=@OverdueDays,ParentVacationID=@ParentVacationID,ZeroingBalance=@ZeroingBalance,Src=@Src,VacationRequestID=@VacationRequestID, DeductedFromTransfered=@DeductedFromTransfered, DeductedFromCompensation=@DeductedFromCompensation,deductedFromBasic=@deductedFromBasic  "
 
         mSelectCommand = CONFIG_DATEFORMAT & " Select * From  " & mTable
         mInsertCommand = CONFIG_DATEFORMAT & " insert into " & mTable & "( " & mInsertParameter & ")Values(" & mInsertParameterValues & ")"
@@ -86,6 +86,10 @@ Public Class Clshrs_EmployeesVacations
 
     Private mSrc As String
     Private mVacationRequestID As Object
+
+    Private mDeductedFromTransfered As Integer
+    Private mDeductedFromCompensation As Integer
+    Private mdeductedFromBasic As Integer
 
 #End Region
 
@@ -355,6 +359,32 @@ Public Class Clshrs_EmployeesVacations
         End Get
         Set(ByVal Value As Integer)
             mVacationRequestID = Value
+        End Set
+    End Property
+
+
+    Public Property deductedFromTransfered() As Integer
+        Get
+            Return mDeductedFromTransfered
+        End Get
+        Set(ByVal Value As Integer)
+            mDeductedFromTransfered = Value
+        End Set
+    End Property
+    Public Property deductedFromCompensation() As Integer
+        Get
+            Return mDeductedFromCompensation
+        End Get
+        Set(ByVal Value As Integer)
+            mDeductedFromCompensation = Value
+        End Set
+    End Property
+    Public Property deductedFromBasic() As Integer
+        Get
+            Return mdeductedFromBasic
+        End Get
+        Set(ByVal Value As Integer)
+            mdeductedFromBasic = Value
         End Set
     End Property
 
@@ -897,7 +927,9 @@ Public Class Clshrs_EmployeesVacations
             mZeroingBalance = False
             mSrc = String.Empty
             mVacationRequestID = 0
-
+            mdeductedFromBasic = 0
+            mDeductedFromCompensation = 0
+            mDeductedFromTransfered = 0
         Catch ex As Exception
             mPage.Session.Add("ErrorValue", ex)
             mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, mDataBaseUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
@@ -2004,6 +2036,9 @@ Public Class Clshrs_EmployeesVacations
 
                 mSrc = mDataHandler.DataValue_Out(.Item("Src"), SqlDbType.VarChar)
                 mVacationRequestID = mDataHandler.DataValue_Out(.Item("VacationRequestID"), SqlDbType.Int, True)
+                mdeductedFromBasic = mDataHandler.DataValue_Out(.Item("deductedFromBasic"), SqlDbType.Int, True)
+                mDeductedFromCompensation = mDataHandler.DataValue_Out(.Item("DeductedFromCompensation"), SqlDbType.Int, True)
+                mDeductedFromTransfered = mDataHandler.DataValue_Out(.Item("DeductedFromTransfered"), SqlDbType.Int, True)
 
             End With
             Return True
@@ -2072,6 +2107,10 @@ Public Class Clshrs_EmployeesVacations
 
 
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@VacationRequestID", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mVacationRequestID, SqlDbType.Int)
+
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@deductedFromBasic", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mdeductedFromBasic, SqlDbType.Int)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@DeductedFromCompensation", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mDeductedFromCompensation, SqlDbType.Int)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@DeductedFromTransfered", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mDeductedFromTransfered, SqlDbType.Int)
 
         Catch ex As Exception
             mPage.Session.Add("ErrorValue", ex)

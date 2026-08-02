@@ -419,11 +419,15 @@
                                     <asp:LinkButton ID="LinkButton_Role" runat="server" Text="الإجراءات" meta:resourcekey="LinkButton_RoleResource1"
                                         OnClientClick="OpenModal12('CompanyRoles.aspx?FrmID=1',450,844); return false;"></asp:LinkButton>
                                 </td>
-                                <td style="width: 40px">
+                          <%--      <td style="width: 40px">
                                     <asp:LinkButton ID="LBMaxCode" runat="server" CommandArgument="Import" Style="font-family: Tahoma; font-size: 8pt; font-weight: Normal;"
                                         Text="استعلامات" meta:resourcekey="LinkButton_MaxCodeResource1" Visible="True"
                                         OnClientClick="OpenModal12('frmMaxCodeInfo.aspx?FrmID=1',560,850); return false;"></asp:LinkButton>
-                                </td>
+                                </td>--%>
+                                <td style="width: 40px">
+    <asp:LinkButton ID="LBMaxCode" runat="server" CommandArgument="Import" Style="font-family: Tahoma; font-size: 8pt; font-weight: Normal;"
+        Text="استعلامات" meta:resourcekey="LinkButton_MaxCodeResource1" Visible="True"></asp:LinkButton>
+</td>
                                 <td style="width: 5%"></td>
                             </tr>
                         </table>

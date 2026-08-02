@@ -375,4 +375,7 @@
   <data name="ShowActingPopUpEndServiceResource1.Text" xml:space="preserve">
     <value>Show Acting Popup on End of Service</value>
   </data>
+  <data name="ApplyAutoAdvanceDelegationResource1.Text" xml:space="preserve">
+    <value>Apply Auto Delegate With Annual Vacation Request</value>
+  </data>
 </root>

@@ -319,9 +319,10 @@ Partial Class frmAnnualVacationsRequestAdvance
             Dim Diffe As Integer
             Diffe = (DateDiff(DateInterval.Day, WebDateChooser1.Value, WebDateChooser2.Value))
             Dim OfficialVac = GetOverlappingOfficialVacationDays(WebDateChooser1.Value, CDate(WebDateChooser2.Value).AddDays(-1))
-            If OfficialVac > 0 Then
-                Diffe = Diffe - OfficialVac
-            End If
+            'Rabie 28-07-2026
+            'If OfficialVac > 0 Then
+            '    Diffe = Diffe - OfficialVac
+            'End If
             lbRemainVal.Text = CStr(Diffe)
         End If
     End Sub

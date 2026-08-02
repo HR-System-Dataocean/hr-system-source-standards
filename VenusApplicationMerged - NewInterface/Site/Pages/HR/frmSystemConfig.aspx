@@ -356,6 +356,19 @@
                    <asp:CheckBox ID="chkShowActingPopUpEndService" runat="server" />
                </td>
            </tr>
+
+                        <tr>
+    <td class="SeparArea">
+    </td>
+    <td class="LabelArea">
+        <asp:Label ID="lblApplyAutoAdvanceDelegation" runat="server" Text="Apply Auto Advance Delegation" 
+            SkinID="Label_DefaultNormal"
+             meta:resourcekey="ApplyAutoAdvanceDelegationResource1"></asp:Label>
+    </td>
+    <td class="DataArea">
+        <asp:CheckBox ID="chkApplyAutoAdvanceDelegation" runat="server" />
+    </td>
+</tr>
                     </table>
                 </td>
                 <td style="width: 6%; height: 16px; vertical-align: top">

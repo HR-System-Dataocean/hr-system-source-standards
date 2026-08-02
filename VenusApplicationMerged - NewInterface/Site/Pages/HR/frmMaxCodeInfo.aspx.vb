@@ -1,7 +1,5 @@
 Imports Venus.Application.SystemFiles.System
 Imports Venus.Application.SystemFiles.HumanResource
-Imports System.IO
-Imports System.Data.OleDb
 Imports System.Data
 
 Partial Class Interfaces_frmMaxCodeInfo
@@ -10,70 +8,97 @@ Partial Class Interfaces_frmMaxCodeInfo
 #Region "Public Decleration"
     Dim mErrorHandler As Venus.Shared.ErrorsHandler
     Dim clsMainOtherFields As clsSys_MainOtherFields
-
     Dim ClsEmployee As Clshrs_Employees
-
+    Private ObjNavigationHandler As Venus.Shared.Web.NavigationHandler
 #End Region
 
 #Region "Protected Sub"
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim clsBranch As New Clssys_Branches(Page)
-        'Me.RightToLeft = Windows.Forms.RightToLeft.Yes
-        'Me.RightToLeftLayout = True
+        ObjNavigationHandler = New Venus.Shared.Web.NavigationHandler(clsBranch.ConnectionString)
+
+        ' ÿ™ÿπŸäŸäŸÜ ÿßŸÑŸÑÿ∫ÿ©
+        SetLanguage()
+
         If Not IsPostBack Then
             clsBranch.GetDropDownList(ddlBranch, True, "sys_CompaniesBranches.CompanyID=" & clsBranch.MainCompanyID & " And UserID=" & clsBranch.DataBaseUserRelatedID & " AND CanView= 1")
-            Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsBranch.ConnectionString)
-            lblBranch.Text = ObjNavigationHandler.SetLanguage(Me.Page, "Branch/«·›—⁄")
-            lblEmp.Text = ObjNavigationHandler.SetLanguage(Me.Page, "Employee/«·„ÊŸ›")
-            lblPrefix.Text = ObjNavigationHandler.SetLanguage(Me.Page, "Numbering according/«· —ﬁÌ„ Õ”»")
-            lblSearch.Text = ObjNavigationHandler.SetLanguage(Me.Page, "Employee Code Start/ﬂÊœ «·„ÊŸ› Ì»œ√ »‹")
-            btnSearch.Text = ObjNavigationHandler.SetLanguage(Me.Page, "Search/»ÕÀ")
-            'lblSearch.Text = ObjNavigationHandler.SetLanguage(Me.Page, "Search/»ÕÀ")
+
+            ' ÿ™ÿπŸäŸäŸÜ ÿßŸÑŸÜÿµŸàÿµ
+            lblPrefix.Text = GetText("Numbering according", "ÿßŸÑÿ™ÿ±ŸÇŸäŸÖ ÿ≠ÿ≥ÿ®")
+            lblBranch.Text = GetText("Branch", "ÿßŸÑŸÅÿ±ÿπ")
+            lblEmp.Text = GetText("Employee", "ÿßŸÑŸÖŸàÿ∏ŸÅ")
+            lblSearch.Text = GetText("Employee Code Start", "ŸÉŸàÿØ ÿßŸÑŸÖŸàÿ∏ŸÅ Ÿäÿ®ÿØÿ£ ÿ®ŸÄ")
+            btnSearch.Text = GetText("Search", "ÿ®ÿ≠ÿ´")
+
+            ddlprefix.Items(0).Text = GetText("Branch", "ÿßŸÑŸÅÿ±ÿπ")
+            ddlprefix.Items(1).Text = GetText("Department", "ÿßŸÑÿ•ÿØÿßÿ±ÿ©")
+            ddlprefix.Items(2).Text = GetText("Position", "ÿßŸÑŸàÿ∏ŸäŸÅÿ©")
+
             Dim empRow As DataRow = GetEmployeeWithMaxCode("")
             If empRow IsNot Nothing Then
                 Dim code As String = empRow("Code").ToString()
                 Dim name As String = empRow("Name").ToString()
-
                 TxtCode.Text = code
                 TxtName.Text = name
-
             End If
         End If
     End Sub
 
-    Protected Sub ddlprefix_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles ddlprefix.SelectedIndexChanged
+    Private Sub SetLanguage()
+        Try
+            Dim lang As String = Request.QueryString("Lang")
 
+            If Not String.IsNullOrEmpty(lang) Then
+                If lang = "Ar" Then
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo("ar-EG")
+                    System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("ar-EG")
+                    DIV1.Attributes("dir") = "rtl"
+                Else
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo("en-US")
+                    System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+                    DIV1.Attributes("dir") = "ltr"
+                End If
+            ElseIf ProfileCls.CurrentLanguage = "Ar" Then
+                System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo("ar-EG")
+                System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("ar-EG")
+                DIV1.Attributes("dir") = "rtl"
+            Else
+                System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo("en-US")
+                System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+                DIV1.Attributes("dir") = "ltr"
+            End If
+        Catch
+        End Try
+    End Sub
+
+    Private Function GetText(ByVal english As String, ByVal arabic As String) As String
+        Try
+            If ProfileCls.CurrentLanguage = "Ar" Then
+                Return arabic
+            Else
+                Return english
+            End If
+        Catch
+            Return english
+        End Try
+    End Function
+
+    Protected Sub ddlprefix_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles ddlprefix.SelectedIndexChanged
         If ddlprefix.SelectedValue = 0 Then
             Dim clsBranch As New Clssys_Branches(Page)
-            Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(clsBranch.ConnectionString)
-
-            lblBranch.Text = ObjNavigationHandler.SetLanguage(Me.Page, "Branch/«·›—⁄")
-
             clsBranch.GetDropDownList(ddlBranch, True, "sys_CompaniesBranches.CompanyID=" & clsBranch.MainCompanyID & " And UserID=" & clsBranch.DataBaseUserRelatedID & " AND CanView= 1")
-
-
             ddlBranch.Focus()
         End If
 
         If ddlprefix.SelectedValue = 1 Then
             Dim ClsDepartment As New Clssys_Departments(Me.Page)
-            Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsDepartment.ConnectionString)
-
-            lblBranch.Text = ObjNavigationHandler.SetLanguage(Me.Page, "Department/«·ﬁ”„")
-
             ClsDepartment.GetDropDownList(ddlBranch, True)
-
             ddlBranch.Focus()
         End If
 
         If ddlprefix.SelectedValue = 2 Then
             Dim ClsPosition As New Clshrs_Positions(Me.Page)
-
-            Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsPosition.ConnectionString)
-
-            lblBranch.Text = ObjNavigationHandler.SetLanguage(Me.Page, "Position/«·ÊŸÌ›…")
-
             ClsPosition.GetDropDownList(ddlBranch, True)
             ddlBranch.Focus()
         End If
@@ -82,30 +107,23 @@ Partial Class Interfaces_frmMaxCodeInfo
         If empRow IsNot Nothing Then
             Dim code As String = empRow("Code").ToString()
             Dim name As String = empRow("Name").ToString()
-
             TxtCode.Text = code
             TxtName.Text = name
-
         End If
-
     End Sub
 
     Protected Sub ddlBranch_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles ddlBranch.SelectedIndexChanged
         If ddlBranch.SelectedValue <> 0 Then
-            Dim ClsDepartment As New Clssys_Departments(Me.Page)
             Dim criteria = ""
             If ddlprefix.SelectedValue = 0 Then
-
                 criteria = " and BranchID=" & ddlBranch.SelectedValue
             End If
 
             If ddlprefix.SelectedValue = 1 Then
-
                 criteria = " and DepartmentID=" & ddlBranch.SelectedValue
             End If
 
             If ddlprefix.SelectedValue = 2 Then
-
                 criteria = " and ID in (Select EmployeeID from hrs_Contracts where  StartDate <= '" & Format(DateTime.Now, "dd/MM/yyyy") & "' And (enddate is null or '" & Format(DateTime.Now, "dd/MM/yyyy") & "' Between StartDate and EndDate)  and  PositionID=" & ddlBranch.SelectedValue & " ) "
             End If
             Dim empRow As DataRow = GetEmployeeWithMaxCode(criteria)
@@ -113,10 +131,8 @@ Partial Class Interfaces_frmMaxCodeInfo
             If empRow IsNot Nothing Then
                 Dim code As String = empRow("Code").ToString()
                 Dim name As String = empRow("Name").ToString()
-
                 TxtCode.Text = code
                 TxtName.Text = name
-
             End If
 
             ddlBranch.Focus()
@@ -128,12 +144,10 @@ Partial Class Interfaces_frmMaxCodeInfo
         Dim EmpName As String
         If ProfileCls.CurrentLanguage = "Ar" Then
             EmpName = " [dbo].[fn_GetEmpName](hrs_Employees.Code,1) "
-
         Else
             EmpName = " [dbo].[fn_GetEmpName](hrs_Employees.Code,0) "
-
         End If
-        ' Step 2: get employee row with that max code
+
         Dim empSql As String = "SELECT  Code," & EmpName & " as EmpName " &
                            "FROM hrs_Employees " &
                            "WHERE 1=1 "
@@ -148,34 +162,42 @@ Partial Class Interfaces_frmMaxCodeInfo
         UwgSearchEmployees.DisplayLayout.ViewType = Infragistics.WebUI.UltraWebGrid.ViewType.Hierarchical
         UwgSearchEmployees.DataSource = dt
         UwgSearchEmployees.DataBind()
+
+        ' ÿ™ÿπŸäŸäŸÜ ÿπŸÜÿßŸàŸäŸÜ ÿßŸÑÿ£ÿπŸÖÿØÿ©
+        Try
+            Dim colCode As Infragistics.WebUI.UltraWebGrid.UltraGridColumn = UwgSearchEmployees.Bands(0).Columns.FromKey("Code")
+            If colCode IsNot Nothing Then
+                colCode.Header.Caption = GetText("Employee Code", "ŸÉŸàÿØ ÿßŸÑŸÖŸàÿ∏ŸÅ")
+            End If
+
+            Dim colEmpName As Infragistics.WebUI.UltraWebGrid.UltraGridColumn = UwgSearchEmployees.Bands(0).Columns.FromKey("EmpName")
+            If colEmpName IsNot Nothing Then
+                colEmpName.Header.Caption = GetText("Employee Name", "ÿßÿ≥ŸÖ ÿßŸÑŸÖŸàÿ∏ŸÅ")
+            End If
+        Catch
+        End Try
     End Sub
 #End Region
 
-
-
     Public Function GetEmployeeWithMaxCode(criteria As String) As DataRow
         Dim clsBranch As New Clssys_Branches(Page)
-        ' Base query for max code
         Dim maxCodeSql As String = "SELECT TOP 1 CODE FROM hrs_Employees WHERE CODE LIKE '%[0-9]%' " & criteria &
                            " ORDER BY TRY_CAST(SUBSTRING(CODE, PATINDEX('%[0-9]%', CODE), LEN(CODE)) AS INT) DESC"
 
-        ' Step 1: get max code
         Dim maxCode As String = Convert.ToString(
-        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsBranch.ConnectionString, CommandType.Text, maxCodeSql)
-    )
+        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsBranch.ConnectionString, CommandType.Text, maxCodeSql))
 
         If String.IsNullOrEmpty(maxCode) Then
             Return Nothing
         End If
+
         Dim EmpName As String
         If ProfileCls.CurrentLanguage = "Ar" Then
             EmpName = " [dbo].[fn_GetEmpName](hrs_Employees.Code,1) "
-
         Else
             EmpName = " [dbo].[fn_GetEmpName](hrs_Employees.Code,0) "
-
         End If
-        ' Step 2: get employee row with that max code
+
         Dim empSql As String = "SELECT TOP 1 Code," & EmpName & " as Name " &
                            "FROM hrs_Employees " &
                            "WHERE CONVERT(NVARCHAR, Code) LIKE '%" & maxCode & "'"
@@ -183,7 +205,7 @@ Partial Class Interfaces_frmMaxCodeInfo
         Dim dt As DataTable = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(clsBranch.ConnectionString, Data.CommandType.Text, empSql).Tables(0)
 
         If dt.Rows.Count > 0 Then
-            Return dt.Rows(0)   ' return first match
+            Return dt.Rows(0)
         End If
 
         Return Nothing

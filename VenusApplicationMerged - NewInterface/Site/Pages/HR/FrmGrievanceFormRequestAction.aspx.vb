@@ -24,11 +24,11 @@ Partial Class frmAttendancePreparation
 #End Region
 
 #Region "Protected Sub"
-
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
         Dim RequestType As Integer = Request.QueryString.Item("RequestType")
         Dim FormCode As String = Request.QueryString.Item("FormCode")
+        Dim ConfigID As Integer = Request.QueryString.Item("ConfigID")
         Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
         Dim clsEmployees As New Clshrs_Employees(Page)
         Dim ClsVacationsTypes As New Clshrs_VacationsTypes(Page)
@@ -36,8 +36,31 @@ Partial Class frmAttendancePreparation
         Dim ClsWebHandler As New Venus.Shared.Web.WebHandler
 
         If Not IsPostBack Then
-            Dim strselectAction As String = "select ActionCode as ID,ActionAraName,ActionEngName from SS_UserActions where ID<4 "
+
+            ' ====== التحقق: هل المستخدم الحالي هو مراجع؟ ======
+            Dim User As String = String.Empty
+            Dim WebHandler As New Venus.Shared.Web.WebHandler
+            WebHandler.GetCookies(Page, "UserID", User)
+            Dim _sys_User As New Clssys_Users(Page)
+            _sys_User.Find("ID = '" & User & "'")
+
+            Dim IsReviewer As Integer = 0
+            If RequestSerial > 0 AndAlso ConfigID > 0 Then
+                Dim CheckReviewer As String = "SELECT COUNT(*) FROM SS_RequestActions WHERE ConfigID=" & ConfigID & " AND RequestSerial=" & RequestSerial & " AND SS_EmployeeID=" & _sys_User.RelEmployee & " AND IsForwarded=1 AND (Seen=0 or seen is null)"
+                IsReviewer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(clsEmployees.ConnectionString, Data.CommandType.Text, CheckReviewer)
+            End If
+            ViewState("IsReviewer") = IsReviewer
+
+            ' ====== بناء الـ DropDownList حسب نوع المستخدم ======
+            Dim strselectAction As String = ""
             Dim Item As Global.System.Web.UI.WebControls.ListItem
+
+            If IsReviewer > 0 Then
+                strselectAction = "select ActionCode as ID,ActionAraName,ActionEngName from SS_UserActions where ID IN (1,2)"
+            Else
+                strselectAction = "select ActionCode as ID,ActionAraName,ActionEngName from SS_UserActions where ID IN (1,2,3,5)"
+            End If
+
             Item = New Global.System.Web.UI.WebControls.ListItem
             Item.Value = 0
             Item.Text = ObjNavigationHandler.SetLanguage(Page, "[Select Your Action]/[ برجاء الاختيار ]")
@@ -54,7 +77,6 @@ Partial Class frmAttendancePreparation
                 End If
                 ddlAction.Items.Add(Item)
             Next
-            Dim ConfigID As Integer = Request.QueryString.Item("ConfigID")
 
             Dim CanEdit As Boolean = False
             Dim ConfigCommand As String = "select * from SS_Configuration where ID=" & ConfigID & ""
@@ -75,22 +97,20 @@ Partial Class frmAttendancePreparation
             TxtRequestSerial.Enabled = False
             txtRequestDate.Enabled = False
             txtDescEnglishName.Enabled = False
-
             TxtRequestRemarks.Enabled = False
             FillEmployeeVacations()
 
-
             btnDelete.Visible = False
+
             Dim ClsSearchs As New Clssys_Searchs(Page)
-            'Dim SearchID As Integer = 0
-            'clsEmployees As New Clshrs_Employees(Page)
             Dim ClsObjects As New Clssys_Objects(Page)
-            ClsObjects.Find(" Code='" & clsEmployees.Table.Trim & "'")
+            ClsObjects.Find(" Code='V_ExistActiveEmployees'")
             ClsSearchs.Find(" ObjectID=" & ClsObjects.ID)
             Dim csSearchID As Integer
             csSearchID = ClsSearchs.ID
             Dim IntDimension As Integer = 510
 
+            ' ====== Search للمفوض اليه ======
             Dim UrlString = "'frmModalSearchScreen.aspx?TargetControl=" & txtDelegated.ID & "&SearchID=" & csSearchID & "&'," & IntDimension & ",720,false,'" & txtDelegated.ClientID & "'"
             btnDelegatedSearch.ClientSideEvents.Click = "OpenModal1(" & UrlString & ")"
             lblDelegated.Visible = False
@@ -98,6 +118,16 @@ Partial Class frmAttendancePreparation
             btnDelegatedSearch.Visible = False
             txtDelegatedName.Visible = False
             txtDelegatedName.Enabled = False
+
+            ' ====== Search للمراجع ======
+            UrlString = "'frmModalSearchScreen.aspx?TargetControl=" & txtReviewer.ID & "&SearchID=" & csSearchID & "&'," & IntDimension & ",720,false,'" & txtReviewer.ClientID & "'"
+            btnReviewerSearch.ClientSideEvents.Click = "OpenModal1(" & UrlString & ")"
+            lblReviewer.Visible = False
+            txtReviewer.Visible = False
+            btnReviewerSearch.Visible = False
+            txtReviewerName.Visible = False
+            txtReviewerName.Enabled = False
+
         End If
         Dim ClsCountries As New Clssys_Countries(Me.Page)
         Dim clsMainCurrency As New ClsSys_Currencies(Me.Page)
@@ -755,7 +785,26 @@ Partial Class frmAttendancePreparation
                             actionSerial = result.ToString()
                         End If
                     End Using
+                    ' ====== استرجاع القيمة من ViewState ======
+                    Dim IsReviewer As Integer = 0
+                    If ViewState("IsReviewer") IsNot Nothing Then
+                        IsReviewer = Convert.ToInt32(ViewState("IsReviewer"))
+                    End If
 
+                    If IsReviewer > 0 Then
+                        If ddlAction.SelectedValue = 1 Then
+                            If ProcessReviewerDecision(RequestSerial, ConfigID, 1, TxtRemarks.Text, "0") Then
+                                Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                            End If
+                        ElseIf ddlAction.SelectedValue = 2 Then
+                            If ProcessReviewerDecision(RequestSerial, ConfigID, 2, TxtRemarks.Text, "0") Then
+                                Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                            End If
+                        Else
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Invalid Action for Reviewer / اجراء غير صحيح للمراجع"))
+                        End If
+                        Exit Sub
+                    End If
                     '============Get ConfigData======================
                     If ddlAction.SelectedValue = 2 Then   'رفض
 
@@ -1177,6 +1226,19 @@ Partial Class frmAttendancePreparation
 
                     End If
 
+                    'إحالة للمراجعة (Forward for Review) - ActionID = 5
+                    If ddlAction.SelectedValue = 5 Then
+                        If txtReviewer.Text = "" Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Please Select Reviewer Employee / عفوا لابد من تحديد الموظف المراجع"))
+                            txtReviewer.Focus()
+                            Return
+                        End If
+
+                        If ProcessForwardForReview(RequestSerial, ConfigID, txtReviewer.Text, TxtRemarks.Text, "0") Then
+                            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                        End If
+                        Exit Sub
+                    End If
                     ' ===== Commit Transaction =====
                     transaction.Commit()
 
@@ -1307,24 +1369,49 @@ Partial Class frmAttendancePreparation
     End Function
 
     Protected Sub ddlAction_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ddlAction.SelectedIndexChanged
-        ' Cast the sender to a DropDownList
-        'Dim ddl As DropDownList = CType(sender, DropDownList)
+        Dim IsReviewer As Integer = 0
+        If ViewState("IsReviewer") IsNot Nothing Then
+            IsReviewer = Convert.ToInt32(ViewState("IsReviewer"))
+        End If
 
-        '' Get the selected value
-        'Dim selectedValue As String = ddl.SelectedValue
-
-        '' Perform your logic here
-        'lblMessage.Text = "You selected: " & selectedValue
-        If ddlAction.SelectedValue = 3 Then
-            lblDelegated.Visible = True
-            txtDelegated.Visible = True
-            btnDelegatedSearch.Visible = True
-            txtDelegatedName.Visible = True
-        Else
+        If IsReviewer > 0 Then
             lblDelegated.Visible = False
             txtDelegated.Visible = False
             btnDelegatedSearch.Visible = False
             txtDelegatedName.Visible = False
+            lblReviewer.Visible = False
+            txtReviewer.Visible = False
+            btnReviewerSearch.Visible = False
+            txtReviewerName.Visible = False
+        Else
+            If ddlAction.SelectedValue = 3 Then
+                lblDelegated.Visible = True
+                txtDelegated.Visible = True
+                btnDelegatedSearch.Visible = True
+                txtDelegatedName.Visible = True
+                lblReviewer.Visible = False
+                txtReviewer.Visible = False
+                btnReviewerSearch.Visible = False
+                txtReviewerName.Visible = False
+            ElseIf ddlAction.SelectedValue = 5 Then
+                lblDelegated.Visible = False
+                txtDelegated.Visible = False
+                btnDelegatedSearch.Visible = False
+                txtDelegatedName.Visible = False
+                lblReviewer.Visible = True
+                txtReviewer.Visible = True
+                btnReviewerSearch.Visible = True
+                txtReviewerName.Visible = True
+            Else
+                lblDelegated.Visible = False
+                txtDelegated.Visible = False
+                btnDelegatedSearch.Visible = False
+                txtDelegatedName.Visible = False
+                lblReviewer.Visible = False
+                txtReviewer.Visible = False
+                btnReviewerSearch.Visible = False
+                txtReviewerName.Visible = False
+            End If
         End If
     End Sub
     Protected Sub txtDelegated_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDelegated.TextChanged
@@ -1370,5 +1457,195 @@ Partial Class frmAttendancePreparation
     End Sub
 
 #End Region
+    Protected Sub txtReviewer_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtReviewer.TextChanged
+        Try
+            If Not String.IsNullOrEmpty(txtReviewer.Text) Then
+                Dim ClsEmployees As New Clshrs_Employees(Page)
+                Dim EmpName As String
+                If ProfileCls.CurrentLanguage = "Ar" Then
+                    EmpName = " isnull(hrs_Employees.arbname,'')+' '+isnull(hrs_Employees.FatherArbName,'')+' '+isnull(hrs_Employees.GrandArbName,'')+' '+isnull(hrs_Employees.FamilyArbName,'') "
+                Else
+                    EmpName = " isnull(hrs_Employees.EngName,'')+' '+isnull(hrs_Employees.FatherEngName,'')+' '+isnull(hrs_Employees.GrandEngName,'')+' '+isnull(hrs_Employees.FamilyEngName,'')"
+                End If
+                Dim objNav As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
 
+                Dim strselect As String = "select " & EmpName & " FROM Hrs_Employees where Code='" & txtReviewer.Text & "'"
+                Dim ReviewerName As String = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, strselect)
+                ClsEmployees.Find("Code='" & txtReviewer.Text & "'")
+                If ClsEmployees.ID > 0 Then
+                    txtReviewerName.Text = ReviewerName
+                Else
+                    txtReviewerName.Text = ""
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Sorry there is no employee with this code !/!عفوا لا يوجد موظف مسجل بهذا الكود"))
+                End If
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Function ProcessForwardForReview(ByVal RequestSerial As Integer, ByVal ConfigID As Integer, ByVal ReviewerCode As String, ByVal ActionRemarks As String, ByVal ConfirmedNoOfDays As String) As Boolean
+        Try
+            Dim ClsEmployees As New Clshrs_Employees(Page)
+            Dim objNav As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
+            Dim User As String = String.Empty
+            Dim WebHandler As New Venus.Shared.Web.WebHandler
+            WebHandler.GetCookies(Page, "UserID", User)
+            Dim _sys_User As New Clssys_Users(Page)
+            _sys_User.Find("ID = '" & User & "'")
+
+            Dim clsReviewerEmp As New Clshrs_Employees(Page)
+            clsReviewerEmp.Find("Code='" & ReviewerCode & "'")
+            If clsReviewerEmp.ID = 0 Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Please Select Reviewer Employee / عفوا لابد من تحديد الموظف المراجع"))
+                Return False
+            End If
+
+            If clsReviewerEmp.ID = _sys_User.RelEmployee Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "You cannot forward to yourself / لا يمكنك الإحالة لنفسك"))
+                Return False
+            End If
+
+            Dim ClsRequestEmployee As New Clshrs_Employees(Page)
+            ClsRequestEmployee.Find("Code='" & txtEmployee.Text & "'")
+            If clsReviewerEmp.ID = ClsRequestEmployee.ID Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "You cannot forward to the request owner / لا يمكنك الإحالة لصاحب الطلب"))
+                Return False
+            End If
+
+            Dim SqlCommandStatus As Data.SqlClient.SqlCommand
+            Dim UpdateStatus As String = "UPDATE SS_GrievanceFormRequest SET [RequestStautsTypeID] = 4 WHERE ID=" & RequestSerial & ""
+            SqlCommandStatus = New SqlClient.SqlCommand
+            SqlCommandStatus.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+            SqlCommandStatus.CommandType = CommandType.Text
+            SqlCommandStatus.CommandText = UpdateStatus
+            SqlCommandStatus.Connection.Open()
+            SqlCommandStatus.ExecuteNonQuery()
+            SqlCommandStatus.Connection.Close()
+
+            Dim ClsEmployees2 As New Clshrs_Employees(Page)
+            ClsEmployees2.Find("Code='" & _sys_User.Code & "'")
+            Dim SqlCommand As Data.SqlClient.SqlCommand
+            Dim UpdateCommand As String = "update SS_RequestActions set seen=1, ActionID=5, ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & ""
+            SqlCommand = New SqlClient.SqlCommand
+            SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+            SqlCommand.CommandType = CommandType.Text
+            SqlCommand.CommandText = UpdateCommand
+            SqlCommand.Connection.Open()
+            SqlCommand.ExecuteNonQuery()
+            SqlCommand.Connection.Close()
+
+            Dim ConfigCommand As String = "select * from SS_Configuration where ID=" & ConfigID & ""
+            Dim adapter As New Data.SqlClient.SqlDataAdapter
+            Dim dsconfig As New Data.DataSet()
+            Dim connection As Data.SqlClient.SqlConnection
+            connection = New Data.SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+            Dim command As Data.SqlClient.SqlCommand
+            command = New Data.SqlClient.SqlCommand(ConfigCommand, connection)
+            adapter.SelectCommand = command
+            adapter.Fill(dsconfig)
+            connection.Close()
+
+            Dim strinsert As String
+            strinsert = "Insert Into SS_RequestActions (RequestSerial, SS_EmployeeID, FormCode, EmployeeID, Seen, ConfigID, IsForwarded, ForwardedBy) " &
+                        "values(" & RequestSerial & ", " & clsReviewerEmp.ID & ", '" & dsconfig.Tables(0).Rows(0)("FormCode") & "', " & ClsRequestEmployee.ID & ", 0, " & ConfigID & ", 1, " & _sys_User.RelEmployee & ")"
+            Dim SqlCommandInsert = New SqlClient.SqlCommand
+            SqlCommandInsert.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+            SqlCommandInsert.CommandType = CommandType.Text
+            SqlCommandInsert.CommandText = strinsert
+            SqlCommandInsert.Connection.Open()
+            SqlCommandInsert.ExecuteNonQuery()
+            SqlCommandInsert.Connection.Close()
+
+            Dim actionIdSql As String = "SELECT [ActionSerial] FROM [dbo].[SS_RequestActions] where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & ""
+            Dim actionSerial As String = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, actionIdSql)
+
+            ClsEmployees.SendEmail("frmExitEntryRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
+            ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
+
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Forwarded for Review Successfully !/!تم الإحالة للمراجعة بنجاح"))
+
+            Return True
+
+        Catch ex As Exception
+            mErrorHandler = New Venus.Shared.ErrorsHandler(ClsEmployees.ConnectionString)
+            Page.Session.Add("ErrorValue", ex)
+            mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, ClsEmployees.RegUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
+            Return False
+        End Try
+    End Function
+
+    Private Function ProcessReviewerDecision(ByVal RequestSerial As Integer, ByVal ConfigID As Integer, ByVal ActionID As Integer, ByVal ActionRemarks As String, ByVal ConfirmedNoOfDays As String) As Boolean
+        Try
+            Dim ClsEmployees As New Clshrs_Employees(Page)
+            Dim objNav As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
+            Dim User As String = String.Empty
+            Dim WebHandler As New Venus.Shared.Web.WebHandler
+            WebHandler.GetCookies(Page, "UserID", User)
+            Dim _sys_User As New Clssys_Users(Page)
+            _sys_User.Find("ID = '" & User & "'")
+
+            Dim CheckReviewer As String = "SELECT COUNT(*) FROM SS_RequestActions WHERE ConfigID=" & ConfigID & " AND RequestSerial=" & RequestSerial & " AND SS_EmployeeID=" & _sys_User.RelEmployee & " AND IsForwarded=1 AND Seen=0"
+            Dim IsReviewer As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, CheckReviewer)
+
+            If IsReviewer = 0 Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "You are not authorized to take action on this request / ليس لديك صلاحية للاجراء على هذا الطلب"))
+                Return False
+            End If
+
+            Dim GetForwardedBy As String = "SELECT TOP 1 ForwardedBy FROM SS_RequestActions WHERE ConfigID=" & ConfigID & " AND RequestSerial=" & RequestSerial & " AND IsForwarded=1"
+            Dim ForwardedBy As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, GetForwardedBy)
+
+            If ForwardedBy = 0 Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Error: Unable to determine the original manager / خطأ: لا يمكن تحديد المدير الأصلي"))
+                Return False
+            End If
+
+            Dim GetEmployeeID As String = "SELECT TOP 1 EmployeeID FROM SS_RequestActions WHERE ConfigID=" & ConfigID & " AND RequestSerial=" & RequestSerial & " AND IsForwarded=1"
+            Dim EmployeeID As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, GetEmployeeID)
+
+            Dim GetFormCode As String = "SELECT TOP 1 FormCode FROM SS_RequestActions WHERE ConfigID=" & ConfigID & " AND RequestSerial=" & RequestSerial & " AND IsForwarded=1"
+            Dim FormCode As String = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, GetFormCode)
+
+            Dim SqlCommandReviewer As Data.SqlClient.SqlCommand
+            Dim UpdateReviewer As String = "update SS_RequestActions set seen=1, ActionID=" & ActionID & ", ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & _sys_User.RelEmployee & " and IsForwarded=1"
+            SqlCommandReviewer = New SqlClient.SqlCommand
+            SqlCommandReviewer.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+            SqlCommandReviewer.CommandType = CommandType.Text
+            SqlCommandReviewer.CommandText = UpdateReviewer
+            SqlCommandReviewer.Connection.Open()
+            SqlCommandReviewer.ExecuteNonQuery()
+            SqlCommandReviewer.Connection.Close()
+
+            Dim SqlCommandInsert As Data.SqlClient.SqlCommand
+            Dim InsertManager As String = "Insert Into SS_RequestActions (RequestSerial, SS_EmployeeID, FormCode, EmployeeID, Seen, ConfigID) " &
+                                          "values(" & RequestSerial & ", " & ForwardedBy & ", '" & FormCode & "', " & EmployeeID & ", 0, " & ConfigID & ")"
+            SqlCommandInsert = New SqlClient.SqlCommand
+            SqlCommandInsert.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+            SqlCommandInsert.CommandType = CommandType.Text
+            SqlCommandInsert.CommandText = InsertManager
+            SqlCommandInsert.Connection.Open()
+            SqlCommandInsert.ExecuteNonQuery()
+            SqlCommandInsert.Connection.Close()
+
+            Dim SqlCommandStatus As Data.SqlClient.SqlCommand
+            Dim UpdateStatus As String = "UPDATE SS_GrievanceFormRequest SET [RequestStautsTypeID] = 4 WHERE ID=" & RequestSerial & ""
+            SqlCommandStatus = New SqlClient.SqlCommand
+            SqlCommandStatus.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+            SqlCommandStatus.CommandType = CommandType.Text
+            SqlCommandStatus.CommandText = UpdateStatus
+            SqlCommandStatus.Connection.Open()
+            SqlCommandStatus.ExecuteNonQuery()
+            SqlCommandStatus.Connection.Close()
+
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Your review has been sent to the manager successfully / تم إرسال رأيك للمدير بنجاح"))
+
+            Return True
+
+        Catch ex As Exception
+            mErrorHandler = New Venus.Shared.ErrorsHandler(ClsEmployees.ConnectionString)
+            Page.Session.Add("ErrorValue", ex)
+            mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, ClsEmployees.RegUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
+            Return False
+        End Try
+    End Function
 End Class
