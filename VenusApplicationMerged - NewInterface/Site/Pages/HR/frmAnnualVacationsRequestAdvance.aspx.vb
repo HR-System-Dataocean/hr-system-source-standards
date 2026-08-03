@@ -998,7 +998,6 @@ Partial Class frmAnnualVacationsRequestAdvance
     End Function
     Public Function SaveFirstLeveNotification() As Boolean
         Try
-
             Dim SqlCommand As Data.SqlClient.SqlCommand
             Dim ClsEmployees As New Clshrs_Employees(Page)
             ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
@@ -1006,46 +1005,62 @@ Partial Class frmAnnualVacationsRequestAdvance
             ConnectionString = ConfigurationManager.AppSettings("Connstring").ToString()
             Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnectionString)
 
+            ' ====== جلب المرحلة الأولى فقط ======
             Dim strselect As String
-            strselect = "select * from SS_Configuration where FormCode='SS_0011'and Rank=1"
+            strselect = "select * from SS_Configuration where FormCode='SS_0011' and Rank=1"
             Dim DsFirstLevel As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnectionString, CommandType.Text, strselect)
-            If DsFirstLevel.Tables(0).Rows.Count > 0 Then
-                For Each Row As Data.DataRow In DsFirstLevel.Tables(0).Rows
-                    'DirectManager
-                    If Row("UserTypeID") = 1 Then
-                        Dim strdirectmanager As String
-                        strdirectmanager = "select ManagerID from hrs_Employees where Code='" & txtEmployee.Text & "'"
-                        Dim DirectManagerID As String
-                        DirectManagerID = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(CType(HttpContext.Current.Session("ConnectionString"), String), Data.CommandType.Text, strdirectmanager)
-                        '==================CheckActingAssignment===========
-                        Dim ActingEmpID As Integer
-                        ActingEmpID = CheckActingEmployeeAssignment(DirectManagerID)
-                        If ActingEmpID > 0 Then
-                            DirectManagerID = ActingEmpID
-                        End If
-                        '==================CheckDelegation===========
-                        Dim DelegatedEmpID As Integer
-                        DelegatedEmpID = CheckDelegationSchedule(DirectManagerID)
-                        If DelegatedEmpID > 0 Then
 
-                            DirectManagerID = DelegatedEmpID
+            If DsFirstLevel.Tables(0).Rows.Count = 0 Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Can not proceed your request because there are no levels for this request ...Please contact system admin  / عفوا لايمكن تسجيل الطلب لعدم وجود مراحل ... يرجي مراجعة مدير النظام"))
+                Return False
+            End If
 
-                        End If
+            ' ====== جلب Max Request Serial ======
+            Dim strMaxRequestSerial As String
+            strMaxRequestSerial = "select isnull(Max(ID),1) from SS_VacationRequest where EmployeeID=" & ClsEmployees.ID & " and VacationType='SS_0011'"
+            Dim MaxSerial As Integer
+            SqlCommand = New SqlClient.SqlCommand
+            SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)
+            SqlCommand.CommandType = CommandType.Text
+            SqlCommand.CommandText = strMaxRequestSerial
+            SqlCommand.Connection.Open()
+            MaxSerial = CInt(SqlCommand.ExecuteScalar())
+            SqlCommand.Connection.Close()
+
+            Dim Processed As Boolean = False
+            Dim DirectManagerSkipped As Boolean = False
+
+            ' ====== معالجة المرحلة الأولى (Rank = 1) ======
+            For Each Row As Data.DataRow In DsFirstLevel.Tables(0).Rows
+
+                '------------------------------------------------------------
+                ' UserTypeID = 1 : مدير مباشر
+                '------------------------------------------------------------
+                If Row("UserTypeID") = 1 Then
+                    Dim strdirectmanager As String
+                    strdirectmanager = "select ManagerID from hrs_Employees where Code='" & txtEmployee.Text & "'"
+                    Dim DirectManagerID As String
+                    DirectManagerID = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnectionString, Data.CommandType.Text, strdirectmanager)
+
+                    '==================CheckActingAssignment===========
+                    Dim ActingEmpID As Integer
+                    ActingEmpID = CheckActingEmployeeAssignment(DirectManagerID)
+                    If ActingEmpID > 0 Then
+                        DirectManagerID = ActingEmpID
+                    End If
+
+                    '==================CheckDelegation===========
+                    Dim DelegatedEmpID As Integer
+                    DelegatedEmpID = CheckDelegationSchedule(DirectManagerID)
+                    If DelegatedEmpID > 0 Then
+                        DirectManagerID = DelegatedEmpID
+                    End If
+
+                    ' ====== التحقق: هل يوجد مدير مباشر؟ ======
+                    If Not String.IsNullOrEmpty(DirectManagerID) AndAlso DirectManagerID <> "0" AndAlso DirectManagerID <> "null" Then
+                        ' يوجد مدير مباشر => نضيف السجل وننهي
                         Dim strinsert As String
-                        Dim strMaxRequestSerial As String
-                        strMaxRequestSerial = "select isnull(Max (ID),1) from SS_VacationRequest where EmployeeID=" & ClsEmployees.ID & " and VacationType='SS_0011' "
-                        Dim MaxSerial As Integer
-                        SqlCommand = New SqlClient.SqlCommand
-                        SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)
-                        SqlCommand.CommandType = CommandType.Text
-                        SqlCommand.CommandText = strMaxRequestSerial
-                        SqlCommand.Connection.Open()
-                        MaxSerial = CInt(SqlCommand.ExecuteScalar())
-                        SqlCommand.Connection.Close()
-
-
-
-                        strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & MaxSerial & " , " & DirectManagerID & ",'SS_0011'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
+                        strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID) values(" & MaxSerial & " , " & DirectManagerID & ",'SS_0011'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
                         SqlCommand = New SqlClient.SqlCommand
                         SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)
                         SqlCommand.CommandType = CommandType.Text
@@ -1053,117 +1068,220 @@ Partial Class frmAnnualVacationsRequestAdvance
                         SqlCommand.Connection.Open()
                         SqlCommand.ExecuteNonQuery()
                         SqlCommand.Connection.Close()
+                        Processed = True
+                    Else
+                        ' ====== مفيش مدير مباشر => نروح للمرحلة الثانية ======
+                        DirectManagerSkipped = True
+                        Processed = False
+                        Exit For
+                    End If
+                End If
+
+                '------------------------------------------------------------
+                ' UserTypeID = 2 : Position
+                '------------------------------------------------------------
+                If Row("UserTypeID") = 2 Then
+                    Dim clshrspositions As New Clshrs_Positions(Page)
+                    Dim AppIDStr As String = "SELECT MultiBranchedPosition FROM sys_SystemConfig"
+                    Dim MultiBranchedPosition As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, AppIDStr)
+
+                    Dim strempinposition As String = "select distinct EmployeeID from hrs_Contracts where PositionID=" & Row("PositionID") & " and CancelDate is null And (EndDate>=getdate() or EndDate is null)"
+                    If Not IsDBNull(MultiBranchedPosition) AndAlso CBool(MultiBranchedPosition) Then
+                        If CBool(MultiBranchedPosition) Then
+                            strempinposition = "SELECT hrs_JobBranchesPermission.EmployeeId as EmployeeID FROM hrs_JobBranchesPermission INNER JOIN hrs_JobBranchesPermissionDetails ON hrs_JobBranchesPermission.ID = hrs_JobBranchesPermissionDetails.JobBranchesPermissionId where hrs_JobBranchesPermission.PositionID=" & Row("PositionID") & " and hrs_JobBranchesPermissionDetails.BranchId=" & ClsEmployees.BranchID
+                        End If
                     End If
 
-                    'Position
-                    If Row("UserTypeID") = 2 Then
-                        Dim clshrspositions As New Clshrs_Positions(Page)
-                        Dim AppIDStr As String = "SELECT MultiBranchedPosition FROM sys_SystemConfig"
-                        Dim MultiBranchedPosition As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, AppIDStr)
+                    Dim DsPositionEmployees As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnectionString, CommandType.Text, strempinposition)
 
-
-                        Dim strempinposition As String = "select  distinct EmployeeID from hrs_Contracts where PositionID=" & Row("PositionID") & " and CancelDate is null And (EndDate>=getdate() or EndDate  is null)"
-                        If Not IsDBNull(MultiBranchedPosition) AndAlso CBool(MultiBranchedPosition) Then
-                            If CBool(MultiBranchedPosition) Then
-                                strempinposition = "SELECT hrs_JobBranchesPermission.EmployeeId as EmployeeID FROM hrs_JobBranchesPermission INNER JOIN hrs_JobBranchesPermissionDetails ON hrs_JobBranchesPermission.ID =  hrs_JobBranchesPermissionDetails.JobBranchesPermissionId  where hrs_JobBranchesPermission.PositionID=" & Row("PositionID") & " and hrs_JobBranchesPermissionDetails.BranchId=" & ClsEmployees.BranchID
+                    Dim PositionActingEmpID As Integer = CheckActingPositionAssignment(Row("PositionID"))
+                    If PositionActingEmpID > 0 Then
+                        Dim alreadyExists As Boolean = False
+                        For Each existingRow As DataRow In DsPositionEmployees.Tables(0).Rows
+                            If Convert.ToInt32(existingRow("EmployeeID")) = PositionActingEmpID Then
+                                alreadyExists = True
+                                Exit For
                             End If
+                        Next
+                        If Not alreadyExists Then
+                            Dim newRow As DataRow = DsPositionEmployees.Tables(0).NewRow()
+                            newRow("EmployeeID") = PositionActingEmpID
+                            DsPositionEmployees.Tables(0).Rows.Add(newRow)
                         End If
+                    End If
 
-                        Dim DsPositionEmployees As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnectionString, CommandType.Text, strempinposition)
-                        Dim PositionActingEmpID As Integer = CheckActingPositionAssignment(Row("PositionID"))
-                        If PositionActingEmpID > 0 Then
-                            Dim alreadyExists As Boolean = False
-                            For Each existingRow As DataRow In DsPositionEmployees.Tables(0).Rows
-                                If Convert.ToInt32(existingRow("EmployeeID")) = PositionActingEmpID Then
-                                    alreadyExists = True
-                                    Exit For
-                                End If
-                            Next
-                            If Not alreadyExists Then
-                                Dim newRow As DataRow = DsPositionEmployees.Tables(0).NewRow()
-                                newRow("EmployeeID") = PositionActingEmpID
-                                DsPositionEmployees.Tables(0).Rows.Add(newRow)
+                    If DsPositionEmployees.Tables(0).Rows.Count > 0 Then
+                        For Each RW In DsPositionEmployees.Tables(0).Rows
+                            Dim DelegatedEmpID As Integer
+                            DelegatedEmpID = CheckDelegationSchedule(RW("EmployeeID"))
+                            If DelegatedEmpID > 0 Then
+                                RW("EmployeeID") = DelegatedEmpID
                             End If
-                        End If
-                        If DsPositionEmployees.Tables(0).Rows.Count > 0 Then
+
                             Dim strinsert As String
-                            Dim strMaxRequestSerial As String
-                            strMaxRequestSerial = "select isnull(Max (ID),1) from SS_VacationRequest where EmployeeID=" & ClsEmployees.ID & " and VacationType='SS_0011' "
-                            Dim MaxSerial As Integer
+                            strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID) values(" & MaxSerial & " , " & RW("EmployeeID") & ",'SS_0011'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
                             SqlCommand = New SqlClient.SqlCommand
                             SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)
                             SqlCommand.CommandType = CommandType.Text
-                            SqlCommand.CommandText = strMaxRequestSerial
+                            SqlCommand.CommandText = strinsert
                             SqlCommand.Connection.Open()
-                            MaxSerial = CInt(SqlCommand.ExecuteScalar())
+                            SqlCommand.ExecuteNonQuery()
                             SqlCommand.Connection.Close()
+                            Processed = True
+                        Next
+                    Else
+                        Dim clsPositions As New Clshrs_Positions(Page)
+                        clsPositions.Find("ID= " & Row("PositionID"))
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Can not proceed your request because there are no employees in the next level ...Please contact system admin  / عفوا لايمكن تسجيل الطلب لعدم وجود موظفين في المرحلة التالية ... يرجي مراجعة مدير النظام"))
+                        Return False
+                    End If
+                End If
 
-                            For Each RW In DsPositionEmployees.Tables(0).Rows
-                                Dim DelegatedEmpID As Integer
-                                DelegatedEmpID = CheckDelegationSchedule(RW("EmployeeID"))
-                                If DelegatedEmpID > 0 Then
+                '------------------------------------------------------------
+                ' UserTypeID = 3 : Employee
+                '------------------------------------------------------------
+                If Row("UserTypeID") = 3 Then
+                    Dim ActingEmpID As Integer
+                    ActingEmpID = CheckActingEmployeeAssignment(Row("EmployeeID"))
+                    Dim EmpID As Integer = Row("EmployeeID")
+                    If ActingEmpID > 0 Then
+                        EmpID = ActingEmpID
+                    End If
 
-                                    RW("EmployeeID") = DelegatedEmpID
+                    Dim DelegatedEmpID As Integer
+                    DelegatedEmpID = CheckDelegationSchedule(EmpID)
+                    If DelegatedEmpID > 0 Then
+                        EmpID = DelegatedEmpID
+                    End If
 
+                    Dim strinsert As String
+                    strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID) values(" & MaxSerial & " , " & EmpID & ",'SS_0011'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
+                    SqlCommand = New SqlClient.SqlCommand
+                    SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)
+                    SqlCommand.CommandType = CommandType.Text
+                    SqlCommand.CommandText = strinsert
+                    SqlCommand.Connection.Open()
+                    SqlCommand.ExecuteNonQuery()
+                    SqlCommand.Connection.Close()
+                    Processed = True
+                End If
+
+            Next
+
+            ' ====== إذا تم تخطي المدير المباشر، نروح للمرحلة الثانية ======
+            If DirectManagerSkipped AndAlso Not Processed Then
+                Dim strSecondLevel As String
+                strSecondLevel = "select * from SS_Configuration where FormCode='SS_0011' and Rank=2"
+                Dim DsSecondLevel As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnectionString, CommandType.Text, strSecondLevel)
+
+                If DsSecondLevel.Tables(0).Rows.Count > 0 Then
+                    For Each Row As Data.DataRow In DsSecondLevel.Tables(0).Rows
+
+                        '------------------------------------------------------------
+                        ' UserTypeID = 2 : Position
+                        '------------------------------------------------------------
+                        If Row("UserTypeID") = 2 Then
+                            Dim clshrspositions As New Clshrs_Positions(Page)
+                            Dim AppIDStr As String = "SELECT MultiBranchedPosition FROM sys_SystemConfig"
+                            Dim MultiBranchedPosition As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, AppIDStr)
+
+                            Dim strempinposition As String = "select distinct EmployeeID from hrs_Contracts where PositionID=" & Row("PositionID") & " and CancelDate is null And (EndDate>=getdate() or EndDate is null)"
+                            If Not IsDBNull(MultiBranchedPosition) AndAlso CBool(MultiBranchedPosition) Then
+                                If CBool(MultiBranchedPosition) Then
+                                    strempinposition = "SELECT hrs_JobBranchesPermission.EmployeeId as EmployeeID FROM hrs_JobBranchesPermission INNER JOIN hrs_JobBranchesPermissionDetails ON hrs_JobBranchesPermission.ID = hrs_JobBranchesPermissionDetails.JobBranchesPermissionId where hrs_JobBranchesPermission.PositionID=" & Row("PositionID") & " and hrs_JobBranchesPermissionDetails.BranchId=" & ClsEmployees.BranchID
                                 End If
-                                strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & MaxSerial & " , " & RW("EmployeeID") & ",'SS_0011'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
-                                SqlCommand = New SqlClient.SqlCommand
-                                SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)
-                                SqlCommand.CommandType = CommandType.Text
-                                SqlCommand.CommandText = strinsert
-                                SqlCommand.Connection.Open()
-                                SqlCommand.ExecuteNonQuery()
-                                SqlCommand.Connection.Close()
+                            End If
 
-                            Next
-                        Else
-                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Can not proceed your request because there are no employees in the next level ...Please contact system admin  / عفوا لايمكن تسجيل الطلب لعدم وجود موظفين في المرحلة التالية ... يرجي مراجعة مدير النظام"))
+                            Dim DsPositionEmployees As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnectionString, CommandType.Text, strempinposition)
+
+                            Dim PositionActingEmpID As Integer = CheckActingPositionAssignment(Row("PositionID"))
+                            If PositionActingEmpID > 0 Then
+                                Dim alreadyExists As Boolean = False
+                                For Each existingRow As DataRow In DsPositionEmployees.Tables(0).Rows
+                                    If Convert.ToInt32(existingRow("EmployeeID")) = PositionActingEmpID Then
+                                        alreadyExists = True
+                                        Exit For
+                                    End If
+                                Next
+                                If Not alreadyExists Then
+                                    Dim newRow As DataRow = DsPositionEmployees.Tables(0).NewRow()
+                                    newRow("EmployeeID") = PositionActingEmpID
+                                    DsPositionEmployees.Tables(0).Rows.Add(newRow)
+                                End If
+                            End If
+
+                            If DsPositionEmployees.Tables(0).Rows.Count > 0 Then
+                                For Each RW In DsPositionEmployees.Tables(0).Rows
+                                    Dim DelegatedEmpID As Integer
+                                    DelegatedEmpID = CheckDelegationSchedule(RW("EmployeeID"))
+                                    If DelegatedEmpID > 0 Then
+                                        RW("EmployeeID") = DelegatedEmpID
+                                    End If
+
+                                    Dim strinsert As String
+                                    strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID) values(" & MaxSerial & " , " & RW("EmployeeID") & ",'SS_0011'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
+                                    SqlCommand = New SqlClient.SqlCommand
+                                    SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)
+                                    SqlCommand.CommandType = CommandType.Text
+                                    SqlCommand.CommandText = strinsert
+                                    SqlCommand.Connection.Open()
+                                    SqlCommand.ExecuteNonQuery()
+                                    SqlCommand.Connection.Close()
+                                    Processed = True
+                                Next
+                            Else
+                                Dim clsPositions As New Clshrs_Positions(Page)
+                                clsPositions.Find("ID= " & Row("PositionID"))
+                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Can not proceed your request because there are no employees in the next level ...Please contact system admin  / عفوا لايمكن تسجيل الطلب لعدم وجود موظفين في المرحلة التالية ... يرجي مراجعة مدير النظام"))
+                                Return False
+                            End If
                         End If
-                    End If
-                    If Row("UserTypeID") = 3 Then
-                        Dim strinsert As String
-                        Dim strMaxRequestSerial As String
-                        strMaxRequestSerial = "select isnull(Max (ID),1) from SS_VacationRequest where EmployeeID=" & ClsEmployees.ID & " "
-                        Dim MaxSerial As Integer
-                        SqlCommand = New SqlClient.SqlCommand
-                        SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)
-                        SqlCommand.CommandType = CommandType.Text
-                        SqlCommand.CommandText = strMaxRequestSerial
-                        SqlCommand.Connection.Open()
-                        MaxSerial = CInt(SqlCommand.ExecuteScalar())
-                        SqlCommand.Connection.Close()
 
-                        Dim ActingEmpID As Integer
-                        ActingEmpID = CheckActingEmployeeAssignment(Row("EmployeeID"))
-                        If ActingEmpID > 0 Then
-                            Row("EmployeeID") = ActingEmpID
+                        '------------------------------------------------------------
+                        ' UserTypeID = 3 : Employee
+                        '------------------------------------------------------------
+                        If Row("UserTypeID") = 3 Then
+                            Dim ActingEmpID As Integer
+                            ActingEmpID = CheckActingEmployeeAssignment(Row("EmployeeID"))
+                            Dim EmpID As Integer = Row("EmployeeID")
+                            If ActingEmpID > 0 Then
+                                EmpID = ActingEmpID
+                            End If
+
+                            Dim DelegatedEmpID As Integer
+                            DelegatedEmpID = CheckDelegationSchedule(EmpID)
+                            If DelegatedEmpID > 0 Then
+                                EmpID = DelegatedEmpID
+                            End If
+
+                            Dim strinsert As String
+                            strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID) values(" & MaxSerial & " , " & EmpID & ",'SS_0011'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
+                            SqlCommand = New SqlClient.SqlCommand
+                            SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)
+                            SqlCommand.CommandType = CommandType.Text
+                            SqlCommand.CommandText = strinsert
+                            SqlCommand.Connection.Open()
+                            SqlCommand.ExecuteNonQuery()
+                            SqlCommand.Connection.Close()
+                            Processed = True
                         End If
-                        Dim DelegatedEmpID As Integer
-                        DelegatedEmpID = CheckDelegationSchedule(Row("EmployeeID"))
-                        If DelegatedEmpID > 0 Then
 
-                            Row("EmployeeID") = DelegatedEmpID
-
-                        End If
-                        strinsert = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ConfigID)  values(" & MaxSerial & " , " & Row("EmployeeID") & ",'SS_0011'," & ClsEmployees.ID & ",0," & Row("ID") & ")"
-                        SqlCommand = New SqlClient.SqlCommand
-                        SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)
-                        SqlCommand.CommandType = CommandType.Text
-                        SqlCommand.CommandText = strinsert
-                        SqlCommand.Connection.Open()
-                        SqlCommand.ExecuteNonQuery()
-                        SqlCommand.Connection.Close()
-                    End If
-                Next
-                ClsEmployees.SendEmail("SSRequests", Me.Page, 1, "SS_VacationRequest", PrintRequestSerial)
-            Else
-                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Can not proceed your request because there are no levels for this request ...Please contact system admin  / عفوا لايمكن تسجيل الطلب لعدم وجود مراحل ... يرجي مراجعة مدير النظام"))
-
+                    Next
+                Else
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry Can not proceed your request because there are no levels for this request ...Please contact system admin  / عفوا لايمكن تسجيل الطلب لعدم وجود مراحل ... يرجي مراجعة مدير النظام"))
+                    Return False
+                End If
             End If
 
+            ' ====== إرسال الإيميل ======
+            If Processed Then
+                ClsEmployees.SendEmail("SSRequests", Me.Page, 1, "SS_VacationRequest", PrintRequestSerial)
+            End If
+
+            Return True
 
         Catch ex As Exception
-
+            Return False
         End Try
     End Function
 
