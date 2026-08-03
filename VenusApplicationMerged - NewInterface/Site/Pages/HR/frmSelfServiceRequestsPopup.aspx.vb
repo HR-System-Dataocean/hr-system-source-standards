@@ -54,7 +54,7 @@ Partial Class frmSelfServiceRequestsPopup
                     End If
 
                     txtEffectiveFrom.Value = effectiveFromDate
-                    txtEffectiveTo.Value = New Date(3000, 1, 1)
+                    txtEffectiveTo.Value = Nothing
                     lblEffectiveTo.Visible = False
                     txtEffectiveTo.Visible = False
                     txtRemarks.Text = GetRes("txtRemarksDefault")
@@ -152,7 +152,8 @@ Partial Class frmSelfServiceRequestsPopup
                 "JOIN SS_RequestTypes ON SS_RequestActions.FormCode = SS_RequestTypes.RequestCode " &
                 "WHERE ActionID IS NULL " &
                 "AND SS_EmployeeID = @EmployeeID " &
-                "AND IsHidden IS NULL"
+                "AND IsHidden IS NULL " &
+                "AND Seen = 0"
 
             Dim sqlSubmittedOpen As String = "SELECT " &
                 "ROW_NUMBER() OVER (ORDER BY v.RequestDate DESC, v.ID DESC) AS RowNumber, " &
@@ -553,6 +554,8 @@ Partial Class frmSelfServiceRequestsPopup
 
             clsItem.ReturnedDate = returnedDate
             clsItem.ReturningItemstatus = condition
+            clsItem.SourceForm = "frmEmployeesEndofService"
+            clsItem.SourceID = GetSourceEmployeeID()
             clsItem.Update("ID=" & itemID)
 
             ShowMessage(GetRes("MsgReturnSuccess"), True)
@@ -596,6 +599,8 @@ Partial Class frmSelfServiceRequestsPopup
                                 If String.IsNullOrEmpty(Convert.ToString(clsItem.ReturningItemstatus)) Then
                                     clsItem.ReturningItemstatus = GetRes("ddlConditionGood")
                                 End If
+                                clsItem.SourceForm = "frmEmployeesEndofService"
+                                clsItem.SourceID = employeeID
                                 clsItem.Update("ID=" & id)
                                 updated += 1
                             End If
@@ -824,7 +829,10 @@ Partial Class frmSelfServiceRequestsPopup
             End If
 
             Dim effectiveFrom As Date = Date.Today
-            Dim effectiveTo As Date = New Date(3000, 1, 1)
+            Dim effectiveTo As Date? = Nothing
+            If Convert.ToString(txtEffectiveTo.Value) <> "" Then
+                effectiveTo = CDate(txtEffectiveTo.Value).Date
+            End If
             If cardReplacement.Visible Then
                 If Not TryGetEffectiveDates(effectiveFrom, effectiveTo) Then Return
             End If
@@ -915,19 +923,15 @@ Partial Class frmSelfServiceRequestsPopup
         End Using
     End Function
 
-    Private Function TryGetEffectiveDates(ByRef effectiveFrom As Date, ByRef effectiveTo As Date) As Boolean
+    Private Function TryGetEffectiveDates(ByRef effectiveFrom As Date, ByRef effectiveTo As Date?) As Boolean
         If Convert.ToString(txtEffectiveFrom.Value) = "" Then
             ShowMessage(GetRes("MsgEffectiveDatesRequired"), False)
             Return False
         End If
 
         effectiveFrom = CDate(txtEffectiveFrom.Value).Date
-        If Convert.ToString(txtEffectiveTo.Value) = "" Then
-            txtEffectiveTo.Value = New Date(3000, 1, 1)
-        End If
-        effectiveTo = CDate(txtEffectiveTo.Value).Date
 
-        If effectiveFrom > effectiveTo Then
+        If effectiveTo.HasValue AndAlso effectiveFrom > effectiveTo.Value Then
             ShowMessage(GetRes("MsgEffectiveDatesInvalid"), False)
             Return False
         End If
@@ -937,7 +941,7 @@ Partial Class frmSelfServiceRequestsPopup
 
     ' تسجيل حركات الإنابة (عن موظف/على وظيفة) للمعتمد البديل بسبب نهاية الخدمة
     Private Sub CreateActingAssignments(ByVal sourceEmployeeID As Integer, ByVal actingEmployeeID As Integer,
-                                        ByVal effectiveFrom As Date, ByVal effectiveTo As Date)
+                                        ByVal effectiveFrom As Date, ByVal effectiveTo As Date?)
         Const ACTING_REASON As String = "End of Service"
         Dim actingRemarks As String = BuildEndOfServiceActingRemarks()
 
@@ -949,7 +953,7 @@ Partial Class frmSelfServiceRequestsPopup
             employeeActing.OriginalEmployeeID = sourceEmployeeID
             employeeActing.ActingEmployeeID = actingEmployeeID
             employeeActing.EffectiveFrom = effectiveFrom
-            employeeActing.EffectiveTo = effectiveTo
+            employeeActing.EffectiveTo = Nothing
             employeeActing.Reason = ACTING_REASON
             employeeActing.Remarks = actingRemarks
             employeeActing.SourceForm = "frmEmployeesEndofService"
@@ -967,7 +971,7 @@ Partial Class frmSelfServiceRequestsPopup
                 positionActing.OriginalPositionID = positionID
                 positionActing.ActingEmployeeID = actingEmployeeID
                 positionActing.EffectiveFrom = effectiveFrom
-                positionActing.EffectiveTo = effectiveTo
+                positionActing.EffectiveTo = Nothing
                 positionActing.Reason = ACTING_REASON
                 positionActing.Remarks = actingRemarks
                 positionActing.SourceForm = "frmEmployeesEndofService"

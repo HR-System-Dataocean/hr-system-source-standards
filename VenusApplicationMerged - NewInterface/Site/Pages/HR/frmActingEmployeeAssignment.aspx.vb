@@ -214,7 +214,7 @@ Partial Class frmActingEmployeeAssignment
             txtActingEmployeeName.Text = EmployeeName(actingEmployee.Code)
         End If
         txtEffectiveFrom.Value = Assignment.EffectiveFrom
-        txtEffectiveTo.Value = Assignment.EffectiveTo
+        txtEffectiveTo.Value = If(Assignment.EffectiveTo.HasValue, CType(Assignment.EffectiveTo.Value, Object), Nothing)
         txtReason.Text = Assignment.Reason
         txtRemarks.Text = Assignment.Remarks
         lblRegDateValue.Text = If(Assignment.RegDate = Nothing, "", Assignment.RegDate.ToString("dd/MM/yyyy"))
@@ -272,7 +272,8 @@ Partial Class frmActingEmployeeAssignment
         Dim sql As String = "SELECT A.Code, O.Code+' - '+ISNULL(" & originalNameExpression & ",'') OriginalEmployee," &
             " E.Code+' - '+ISNULL(" & nameExpression & ",'') ActingEmployee, A.EffectiveFrom, A.EffectiveTo" &
             " FROM hrs_ActingEmployeeAssignments A INNER JOIN hrs_Employees O ON O.ID=A.OriginalEmployeeID" &
-            " INNER JOIN hrs_Employees E ON E.ID=A.ActingEmployeeID ORDER BY A.RegDate DESC, A.ID DESC"
+            " INNER JOIN hrs_Employees E ON E.ID=A.ActingEmployeeID" &
+            " WHERE A.CancelDate IS NULL ORDER BY A.RegDate DESC, A.ID DESC"
         Dim data As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(Assignment.ConnectionString, CommandType.Text, sql)
         uwgAssignments.DataSource = data
         uwgAssignments.DataBind()

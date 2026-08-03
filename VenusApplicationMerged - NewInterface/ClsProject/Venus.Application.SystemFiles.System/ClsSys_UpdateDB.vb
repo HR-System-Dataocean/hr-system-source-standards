@@ -8564,6 +8564,37 @@ IF NOT EXISTS (SELECT 1 FROM sys_FormsPermissions WHERE UserID=1 AND FormID=@For
         ExecuteUpdate(SQL)
 
         SQL = "
+IF COL_LENGTH('hrs_ActingEmployeeAssignments', 'EffectiveTo') IS NOT NULL
+BEGIN
+    IF EXISTS (SELECT 1 FROM sys.check_constraints WHERE name='CK_hrs_ActingEmployeeAssignments_Dates')
+        ALTER TABLE dbo.hrs_ActingEmployeeAssignments DROP CONSTRAINT CK_hrs_ActingEmployeeAssignments_Dates;
+    ALTER TABLE dbo.hrs_ActingEmployeeAssignments ALTER COLUMN EffectiveTo datetime NULL;
+    IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name='CK_hrs_ActingEmployeeAssignments_Dates')
+        ALTER TABLE dbo.hrs_ActingEmployeeAssignments WITH NOCHECK
+        ADD CONSTRAINT CK_hrs_ActingEmployeeAssignments_Dates CHECK (EffectiveTo IS NULL OR EffectiveTo >= EffectiveFrom);
+END;
+
+IF COL_LENGTH('hrs_ActingPositionAssignments', 'EffectiveTo') IS NOT NULL
+BEGIN
+    IF EXISTS (SELECT 1 FROM sys.check_constraints WHERE name='CK_hrs_ActingPositionAssignments_Dates')
+        ALTER TABLE dbo.hrs_ActingPositionAssignments DROP CONSTRAINT CK_hrs_ActingPositionAssignments_Dates;
+    ALTER TABLE dbo.hrs_ActingPositionAssignments ALTER COLUMN EffectiveTo datetime NULL;
+    IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name='CK_hrs_ActingPositionAssignments_Dates')
+        ALTER TABLE dbo.hrs_ActingPositionAssignments WITH NOCHECK
+        ADD CONSTRAINT CK_hrs_ActingPositionAssignments_Dates CHECK (EffectiveTo IS NULL OR EffectiveTo >= EffectiveFrom);
+END;
+"
+        ExecuteUpdate(SQL)
+
+        SQL = "
+IF COL_LENGTH('hrs_EmployeesItems', 'SourceForm') IS NULL
+    ALTER TABLE dbo.hrs_EmployeesItems ADD SourceForm nvarchar(100) NULL;
+IF COL_LENGTH('hrs_EmployeesItems', 'SourceID') IS NULL
+    ALTER TABLE dbo.hrs_EmployeesItems ADD SourceID int NULL;
+"
+        ExecuteUpdate(SQL)
+
+        SQL = "
 IF NOT EXISTS (SELECT 1 FROM sys_Forms WHERE Code='frmEndActingAssignment')
     INSERT INTO sys_Forms(Code,EngName,ArbName,ArbName4S,EngDescription,ArbDescription,Rank,ModuleID,Height,Width,RegDate)
     VALUES('frmEndActingAssignment','frmEndActingAssignment.aspx',N'إنهاء التكليف',N'إنهاء التكليف',
