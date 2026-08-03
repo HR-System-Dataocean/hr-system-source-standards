@@ -375,4 +375,7 @@
   <data name="ShowActingPopUpEndServiceResource1.Text" xml:space="preserve">
     <value>إظهار نافذة التكليف عند نهاية الخدمة</value>
   </data>
+  <data name="ApplyAutoAdvanceDelegationResource1.Text" xml:space="preserve">
+    <value>تطبيق التفويض التقائي مع طلب الاجازة السنوي</value>
+  </data>
 </root>

@@ -462,4 +462,13 @@
   <data name="LblRequestIDResource1.Text" xml:space="preserve">
     <value>مسلسل الطلب</value>
   </data>
+  <data name="DeductedFromBasicResource1.Header.Caption" xml:space="preserve">
+    <value>خصم من الحالي</value>
+  </data>
+  <data name="DeductedFromCompensationResource1.Header.Caption" xml:space="preserve">
+    <value>خصم من التعويضي</value>
+  </data>
+  <data name="DeductedFromTransferedResource1.Header.Caption" xml:space="preserve">
+    <value>خصم من المرحل</value>
+  </data>
 </root>

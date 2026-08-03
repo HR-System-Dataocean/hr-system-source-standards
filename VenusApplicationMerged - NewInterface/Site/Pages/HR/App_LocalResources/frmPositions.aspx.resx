@@ -468,4 +468,7 @@
   <data name="lblappraisaltypegroupResource1.Text" xml:space="preserve">
     <value>مجموعة التقييمات</value>
   </data>
+  <data name="lblExemptFromDirectManagerMandatoryResource1.Text" xml:space="preserve">
+    <value>المدير المباشر غير مطلوب</value>
+  </data>
 </root>

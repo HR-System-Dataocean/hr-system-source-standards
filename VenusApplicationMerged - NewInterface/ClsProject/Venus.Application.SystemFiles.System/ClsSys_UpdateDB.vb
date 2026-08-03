@@ -8690,8 +8690,8 @@ END"
 
         ExecuteUpdate(SQL)
 
-                ' Add SourceForm / SourceID to acting assignment tables (existing DBs)
-                SQL = "
+        ' Add SourceForm / SourceID to acting assignment tables (existing DBs)
+        SQL = "
                 IF COL_LENGTH('hrs_ActingEmployeeAssignments', 'SourceForm') IS NULL
                     ALTER TABLE hrs_ActingEmployeeAssignments ADD SourceForm nvarchar(100) NULL
                 IF COL_LENGTH('hrs_ActingEmployeeAssignments', 'SourceID') IS NULL
@@ -8702,8 +8702,26 @@ END"
                 IF COL_LENGTH('hrs_ActingPositionAssignments', 'SourceID') IS NULL
                     ALTER TABLE hrs_ActingPositionAssignments ADD SourceID int NULL
                 "
-                        ExecuteUpdate(SQL)
-                        
+        ExecuteUpdate(SQL)
+
+        SQL = "ALTER TABLE hrs_EmployeesVacations ADD
+    DeductedFromTransfered DECIMAL(18, 2) NULL,  
+    DeductedFromCompensation DECIMAL(18, 2) NULL,  
+    DeductedFromBasic DECIMAL(18, 2) NULL "
+        ExecuteUpdate(SQL)
+
+        SQL = "IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('sys_SystemConfig') AND name = 'DirectManagerIsMandatory')
+BEGIN
+    ALTER TABLE sys_SystemConfig ADD DirectManagerIsMandatory BIT NULL DEFAULT 0
+END"
+        ExecuteUpdate(SQL)
+
+        SQL = "IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('hrs_Positions') AND name = 'ExemptFromDirectManagerMandatory')
+BEGIN
+    ALTER TABLE hrs_Positions ADD ExemptFromDirectManagerMandatory BIT NULL DEFAULT 0
+END"
+        ExecuteUpdate(SQL)
+
     End Function
 
     Public Function UpdateSS() As Boolean
@@ -14363,6 +14381,12 @@ END
 
 "
 
+        ExecuteUpdate(SQL)
+
+        SQL = "IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('sys_SystemConfig') AND name = 'ApplyAutoDelegateWithAvnnualVacationRequest')
+BEGIN
+    ALTER TABLE sys_SystemConfig ADD ApplyAutoDelegateWithAvnnualVacationRequest BIT NULL DEFAULT 0
+END"
         ExecuteUpdate(SQL)
 
 

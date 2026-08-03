@@ -465,6 +465,19 @@
             <td class="LabelArea">
 
                                                       </tr>
+
+
+                                                        <tr>
+    <td class="SeparArea"></td>
+    <td class="LabelArea">
+        <asp:Label ID="lblExemptFromDirectManagerMandatory" runat="server" SkinID="Label_DefaultNormal" 
+            Text="Exempt From Direct Manager Mandatory" meta:resourcekey="lblExemptFromDirectManagerMandatoryResource1"></asp:Label>
+    </td>
+    <td class="DataArea">
+        <asp:CheckBox ID="chkExemptFromDirectManagerMandatory" runat="server" />
+    </td>
+    <td class="LabelArea"></td>
+</tr>
                                                     </table>
                                                 </td>
                                                 <td style="width: 6%; height: 16px; vertical-align: top"></td>

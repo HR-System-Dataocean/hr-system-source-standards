@@ -788,7 +788,23 @@ Partial Class frmEmployeesVacations
         SqlCommand.Connection.Open()
         SqlCommand.ExecuteNonQuery()
         SqlCommand.Connection.Close()
+        ' ====== إلغاء التفويض التلقائي (إن وجد) ======
+        Try
+            ' جلب بيانات الإجازة (EmployeeID, StartDate, EndDate)
+            Dim getVacationSql As String = "SELECT EmployeeID, StartDate, EndDate FROM SS_VacationRequest WHERE ID = " & RequestSerial
+            Dim dtVacation As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnStr, Data.CommandType.Text, getVacationSql)
 
+            If dtVacation.Tables(0).Rows.Count > 0 Then
+                Dim EmployeeID As Integer = Convert.ToInt32(dtVacation.Tables(0).Rows(0)("EmployeeID"))
+                Dim StartDate As Date = Convert.ToDateTime(dtVacation.Tables(0).Rows(0)("StartDate"))
+                Dim EndDate As Date = Convert.ToDateTime(dtVacation.Tables(0).Rows(0)("EndDate"))
+
+                ' استدعاء دالة إلغاء التفويض
+                CancelAutoDelegation(EmployeeID, StartDate, EndDate)
+            End If
+        Catch ex As Exception
+            ' تجاهل الأخطاء
+        End Try
         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Your request Has been canceled Successfully./تم الغاء الطلب بنجاح "))
     End Sub
 
@@ -1303,7 +1319,34 @@ Partial Class frmEmployeesVacations
     End Function
 
 #End Region
+    Private Sub CancelAutoDelegation(ByVal EmployeeID As Integer, ByVal StartDate As Date, ByVal EndDate As Date)
+        Try
+            Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
 
+            ' 1- البحث عن التفويض التلقائي المرتبط بهذه الفترة
+            Dim searchDelegationSql As String = "SELECT ID FROM SS_DelegationSChedule " &
+                                            "WHERE DelegatorEmployeeID = " & EmployeeID & " " &
+                                            "AND ISNULL(IsCanceled, 0) = 0 " &
+                                            "AND Remarks LIKE '%تم إنشاء التفويض تلقائياً من طلب إجازة%' " &
+                                            "AND FromDate = '" & StartDate.ToString("yyyy-MM-dd") & "' " &
+                                            "AND Todate = '" & EndDate.ToString("yyyy-MM-dd") & "'"
+
+            Dim delegationId As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, searchDelegationSql)
+
+            If delegationId IsNot Nothing AndAlso Not IsDBNull(delegationId) AndAlso Convert.ToInt32(delegationId) > 0 Then
+                ' 2- إلغاء التفويض (تحديث IsCanceled = 1 و CancelDate = GETDATE())
+                Dim cancelDelegationSql As String = "UPDATE SS_DelegationSChedule SET " &
+                                                 "IsCanceled = 1, " &
+                                                 "CancelDate = GETDATE() " &
+                                                 "WHERE ID = " & delegationId
+
+                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ConnStr, Data.CommandType.Text, cancelDelegationSql)
+            End If
+
+        Catch ex As Exception
+            ' تجاهل الأخطاء (لا نريد إيقاف عملية الإلغاء بسبب فشل إلغاء التفويض)
+        End Try
+    End Sub
 #Region "PageMethods"
     <System.Web.Services.WebMethod()>
     Public Shared Function GetEmployeeID(ByVal strEmpCode As String) As String

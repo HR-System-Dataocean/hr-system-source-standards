@@ -174,6 +174,107 @@ Partial Class frmEmployeesVacationsAdvance
                 End If
             Case "New"
                 SetNew()
+
+        'Rabie 29-07-2026
+            'Case "Delete"
+            '    If CheckEmployee() And CheckVacation() Then
+            '        ClsEmployeesVacations.Find("ID=" & lbVactionID.Text)
+            '        EmpVacationId.Value = ClsEmployeesVacations.ID
+
+            '        If ClsEmployeesVacations.RegComputerID > 0 Then
+            '            Dim Cls_EmployeeVacationOpenBalance As New Clshrs_EmployeeVacationOpenBalance(Me.Page)
+            '            Cls_EmployeeVacationOpenBalance.Find("ID = " & ClsEmployeesVacations.RegComputerID)
+            '            Cls_EmployeeVacationOpenBalance.RegComputerID = 0
+            '            Cls_EmployeeVacationOpenBalance.Update("ID = " & ClsEmployeesVacations.RegComputerID)
+            '        End If
+            '        ClsEmployeesTransactions.Find("EmployeesVacationsID=" & ClsEmployeesVacations.ID)
+            '        Dim User As String = String.Empty
+            '        Dim WebHandler As New Venus.Shared.Web.WebHandler
+
+            '        WebHandler.GetCookies(Page, "UserID", User)
+            '        Dim _sys_User As New Clssys_Users(Page)
+            '        _sys_User.Find("ID = '" & User & "'")
+            '        If Not String.IsNullOrWhiteSpace(ClsEmployeesVacations.Src) Then
+            '            'Rabie 31-03-2026
+            '            '1- Check if user has permission to delete or not
+            '            Dim strCheckPermission As String = " select CanDeleteSelfServiceTransactions from SS_SelfServiceTransactionUserPermissions where UserID=" & _sys_User.ID & ""
+            '            Dim HasDeletePermission As Boolean = CBool(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strCheckPermission))
+            '            If HasDeletePermission Then
+            '                Dim Url As String
+            '                Url = "OpenModal1('FrmDeleteSelfSrviceAnnualvacationAdvance.aspx?TrnsID=" & IIf(lbVactionID.Text = "", 0, lbVactionID.Text) & "&FormCode=" & ClsEmployeesVacations.Src & "&VacationRequestID=" & ClsEmployeesVacations.VacationRequestID & "',600,900,false,'');"
+            '                Page.ClientScript.RegisterStartupScript(Me.GetType(), "", Url, True)
+            '            Else
+            '                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This vacation was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الإجازة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))
+
+            '            End If
+
+
+
+
+
+
+            '            Exit Sub
+
+            '        End If
+            '        If (ClsEmployeesTransactions.DataSet.Tables(0).Rows.Count < 1) Then
+            '            If ClsEmployeesVacations.OverDueVacation > 0 Then
+            '                ClsEmployeesVacations.Delete("ID=" & ClsEmployeesVacations.OverDueVacation)
+            '                ClsEmployeesVacations.Delete("ID=" & lbVactionID.Text)
+            '                Dim cls_OTHER_VACATION = New Clshrs_EmployeesVacations(Page)
+            '                If cls_OTHER_VACATION.Find("ParentVacationID = " & lbVactionID.Text) Then
+            '                    cls_OTHER_VACATION.Delete("ParentVacationID = " & lbVactionID.Text)
+            '                End If
+            '            End If
+
+            '        Else
+            '            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Cannot delete this vacation because it has a transaction  /لا يمكن حذف الاجازة لان لها مستحقات "))
+            '        End If
+
+            '        Dim Diffe As Single = 0
+
+            '        Try
+            '            If WebDateChooser2.Value <> Nothing Then
+            '                Diffe = (DateDiff(DateInterval.Day, ClsEmployeesVacations.ActualStartDate, ClsEmployeesVacations.ActualEndDate))
+            '            End If
+            '        Catch ex As Exception
+            '            Diffe = 0
+            '        End Try
+
+            '        Dim cls_Employee = New Clshrs_Employees(Page)
+            '        cls_Employee.Find("Code='" & txtEmployee.Text & "'")
+
+            '        Dim str = "SELECT    Consumed FROM hrs_VacationsBalance where ISNULL(Posted,0)=0 and  BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
+            '        Dim remainTrans As Decimal
+            '        remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
+            '        If remainTrans = 0 Then
+            '            str = "SELECT    Consumed FROM hrs_VacationsBalance where ISNULL(Posted,0)=0 and  BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "')"
+            '            remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
+            '            If remainTrans > 0 Then
+            '                str = "SELECT    ExpireDate FROM hrs_VacationsBalance where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "')"
+            '                Dim expire As Date = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
+            '                Dim AllowDays = (DateDiff(DateInterval.Day, WebDateChooser1.Value, expire))
+            '                If AllowDays < remainTrans Then
+            '                    remainTrans = AllowDays
+            '                End If
+            '            End If
+            '        End If
+            '        If remainTrans > Diffe Then
+            '            Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & Diffe & " ,Remaining = Remaining+" & Diffe & " where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
+            '            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateTrans)
+            '        Else
+            '            If remainTrans > 0 Then
+            '                Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & remainTrans & " ,Remaining = Remaining+" & remainTrans & " where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
+            '                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateTrans)
+            '            End If
+            '            Dim strUpdateNew As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & (Diffe - remainTrans) & " ,Remaining = Remaining+" & (Diffe - remainTrans) & " where ISNULL(Posted,0)=0 and BalanceTypeID=1 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
+            '            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateNew)
+            '        End If
+
+            '    End If
+            '    CheckEmpCode()
+            '    SetNew()
+
+
             Case "Delete"
                 If CheckEmployee() And CheckVacation() Then
                     ClsEmployeesVacations.Find("ID=" & lbVactionID.Text)
@@ -185,6 +286,7 @@ Partial Class frmEmployeesVacationsAdvance
                         Cls_EmployeeVacationOpenBalance.RegComputerID = 0
                         Cls_EmployeeVacationOpenBalance.Update("ID = " & ClsEmployeesVacations.RegComputerID)
                     End If
+
                     ClsEmployeesTransactions.Find("EmployeesVacationsID=" & ClsEmployeesVacations.ID)
                     Dim User As String = String.Empty
                     Dim WebHandler As New Venus.Shared.Web.WebHandler
@@ -192,9 +294,8 @@ Partial Class frmEmployeesVacationsAdvance
                     WebHandler.GetCookies(Page, "UserID", User)
                     Dim _sys_User As New Clssys_Users(Page)
                     _sys_User.Find("ID = '" & User & "'")
+
                     If Not String.IsNullOrWhiteSpace(ClsEmployeesVacations.Src) Then
-                        'Rabie 31-03-2026
-                        '1- Check if user has permission to delete or not
                         Dim strCheckPermission As String = " select CanDeleteSelfServiceTransactions from SS_SelfServiceTransactionUserPermissions where UserID=" & _sys_User.ID & ""
                         Dim HasDeletePermission As Boolean = CBool(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strCheckPermission))
                         If HasDeletePermission Then
@@ -203,17 +304,10 @@ Partial Class frmEmployeesVacationsAdvance
                             Page.ClientScript.RegisterStartupScript(Me.GetType(), "", Url, True)
                         Else
                             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This vacation was automatically generated from Self-Service and cannot be deleted from the system !  /هذه الإجازة مُنشأة تلقائيًا من الخدمة الذاتية، لذلك لا يمكن حذفها من النظام. "))
-
                         End If
-
-
-
-
-
-
                         Exit Sub
-
                     End If
+
                     If (ClsEmployeesTransactions.DataSet.Tables(0).Rows.Count < 1) Then
                         If ClsEmployeesVacations.OverDueVacation > 0 Then
                             ClsEmployeesVacations.Delete("ID=" & ClsEmployeesVacations.OverDueVacation)
@@ -228,6 +322,10 @@ Partial Class frmEmployeesVacationsAdvance
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Cannot delete this vacation because it has a transaction  /لا يمكن حذف الاجازة لان لها مستحقات "))
                     End If
 
+                    ' ====== إرجاع الرصيد عند الحذف ======
+                    ' الترتيب العكسي: أساسي (1) ← تعويضي (3) ← مرحل (2)
+                    ' لأننا بنرجع الخصم، بنرجع من الأعمق للأول
+
                     Dim Diffe As Single = 0
 
                     Try
@@ -238,34 +336,70 @@ Partial Class frmEmployeesVacationsAdvance
                         Diffe = 0
                     End Try
 
-                    Dim cls_Employee = New Clshrs_Employees(Page)
-                    cls_Employee.Find("Code='" & txtEmployee.Text & "'")
+                    If Diffe > 0 Then
+                        Dim cls_Employee = New Clshrs_Employees(Page)
+                        cls_Employee.Find("Code='" & txtEmployee.Text & "'")
 
-                    Dim str = "SELECT    Consumed FROM hrs_VacationsBalance where ISNULL(Posted,0)=0 and  BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
-                    Dim remainTrans As Decimal
-                    remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
-                    If remainTrans = 0 Then
-                        str = "SELECT    Consumed FROM hrs_VacationsBalance where ISNULL(Posted,0)=0 and  BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "')"
-                        remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
-                        If remainTrans > 0 Then
-                            str = "SELECT    ExpireDate FROM hrs_VacationsBalance where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "')"
-                            Dim expire As Date = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
-                            Dim AllowDays = (DateDiff(DateInterval.Day, WebDateChooser1.Value, expire))
-                            If AllowDays < remainTrans Then
-                                remainTrans = AllowDays
-                            End If
+                        ' جلب تفاصيل الخصم من الإجازة
+                        Dim getDeductionSql As String = "SELECT ISNULL(DeductedFromBasic,0) AS DeductedFromBasic, ISNULL(DeductedFromCompensation,0) AS DeductedFromCompensation,  ISNULL(DeductedFromTransfered,0) AS DeductedFromTransfered  FROM hrs_EmployeesVacations  WHERE ID = " & ClsEmployeesVacations.ID
+
+                        Dim dtDeduction As DataTable = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(
+                            ClsEmployeesVacations.ConnectionString,
+                            Data.CommandType.Text,
+                            getDeductionSql
+                        ).Tables(0)
+
+                        Dim deductedFromBasic As Double = 0
+                        Dim deductedFromCompensation As Double = 0
+                        Dim deductedFromTransfered As Double = 0
+
+                        If dtDeduction.Rows.Count > 0 Then
+                            deductedFromBasic = Convert.ToDouble(dtDeduction.Rows(0)("DeductedFromBasic"))
+                            deductedFromCompensation = Convert.ToDouble(dtDeduction.Rows(0)("DeductedFromCompensation"))
+                            deductedFromTransfered = Convert.ToDouble(dtDeduction.Rows(0)("DeductedFromTransfered"))
                         End If
-                    End If
-                    If remainTrans > Diffe Then
-                        Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & Diffe & " ,Remaining = Remaining+" & Diffe & " where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
-                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateTrans)
-                    Else
-                        If remainTrans > 0 Then
-                            Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & remainTrans & " ,Remaining = Remaining+" & remainTrans & " where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
-                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateTrans)
+
+                        ' 1- إرجاع الرصيد الأساسي (BalanceTypeID=1)
+                        If deductedFromBasic > 0 Then
+                            Dim updateBasicSql As String = "UPDATE hrs_VacationsBalance   SET Remaining = Remaining + " & deductedFromBasic & ", Consumed = ISNULL(Consumed,0) - " & deductedFromBasic & "  WHERE EmployeeID = " & cls_Employee.ID & " AND BalanceTypeID = 1   AND ISNULL(Posted,0) = 0  AND (CancelDate IS NULL OR CancelDate > GETDATE())  AND ExpireDate >= '" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "'  AND DueDate <= '" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "'"
+
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(
+                                ClsEmployeesVacations.ConnectionString,
+                                Data.CommandType.Text,
+                                updateBasicSql
+                            )
                         End If
-                        Dim strUpdateNew As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & (Diffe - remainTrans) & " ,Remaining = Remaining+" & (Diffe - remainTrans) & " where ISNULL(Posted,0)=0 and BalanceTypeID=1 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "')"
-                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateNew)
+
+                        ' 2- إرجاع الرصيد التعويضي (BalanceTypeID=3)
+                        If deductedFromCompensation > 0 Then
+                            Dim updateCompSql As String = "UPDATE hrs_VacationsBalance   SET Remaining = Remaining + " & deductedFromCompensation & ", Consumed = ISNULL(Consumed,0) - " & deductedFromCompensation & "  WHERE EmployeeID = " & cls_Employee.ID & " AND BalanceTypeID = 3  AND ISNULL(Posted,0) = 0  AND (CancelDate IS NULL OR CancelDate > GETDATE()) AND ExpireDate >= '" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "' AND DueDate <= '" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "'"
+
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(
+                                ClsEmployeesVacations.ConnectionString,
+                                Data.CommandType.Text,
+                                updateCompSql
+                            )
+                        End If
+
+                        ' 3- إرجاع الرصيد المرحل (BalanceTypeID=2)
+                        If deductedFromTransfered > 0 Then
+                            Dim updateTransferedSql As String = "UPDATE hrs_VacationsBalance   SET Remaining = Remaining + " & deductedFromTransfered & ",  Consumed = ISNULL(Consumed,0) - " & deductedFromTransfered & "  WHERE EmployeeID = " & cls_Employee.ID & "  AND BalanceTypeID = 2   AND ISNULL(Posted,0) = 0   AND (CancelDate IS NULL OR CancelDate > GETDATE())  AND ExpireDate >= '" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "'   AND DueDate <= '" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "'"
+
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(
+                                ClsEmployeesVacations.ConnectionString,
+                                Data.CommandType.Text,
+                                updateTransferedSql
+                            )
+                        End If
+
+                        ' حذف الرصيد التعويضي المرتبط بهذه الإجازة (إن وجد)
+                        Dim deleteCompSql As String = "DELETE FROM hrs_VacationsBalance   WHERE EmployeeID = " & cls_Employee.ID & "  AND BalanceTypeID = 3    AND ISNULL(Posted,0) = 0    AND Src = 'FrmAnnualVacationRequestAction'     AND DueDate = '" & ClsEmployeesVacations.ActualStartDate.ToString("yyyy-MM-dd") & "'   AND ExpireDate >= '" & ClsEmployeesVacations.ActualEndDate.ToString("yyyy-MM-dd") & "'"
+
+                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(
+                            ClsEmployeesVacations.ConnectionString,
+                            Data.CommandType.Text,
+                            deleteCompSql
+                        )
                     End If
 
                 End If
@@ -1032,9 +1166,12 @@ Partial Class frmEmployeesVacationsAdvance
             Dim adapter As New Data.SqlClient.SqlDataAdapter
             connetionString = ClsEmployees.ConnectionString
             connection = New Data.SqlClient.SqlConnection(connetionString)
-
             Dim str1 As String = "select A.ID AS ID,A.EmployeeID,A.VacationTypeID,A.ExpectedStartDate,A.ExpectedEndDate,A.EmployeeRequestRemarks" &
-                                 ",A.IsContracial,A.ActualStartDate,ISNULL((select Due.ActualEndDate from hrs_EmployeesVacations AS Due where Due.ID = A.OverDueVacation and due.CancelDate is null),A.ActualEndDate) as ActualEndDate,Round (a.TotalDays,0) as totaldays, Round(a.ConsumDays,0) as ConsumDays,Round(vactiondays,0) as vactiondays,Round(OverdueDays,0) as OverdueDays,Round(RemainingDays,0) as RemainingDays,PaymentTrnID as PaymentTrnID,A.ZeroingBalance from hrs_EmployeesVacations AS A where A.canceldate is null and A.EmployeeID=" & EmployeeID & " and A.VacationTypeID = " & DdlVacationType.SelectedValue
+                     ",A.IsContracial,A.ActualStartDate,ISNULL((select Due.ActualEndDate from hrs_EmployeesVacations AS Due where Due.ID = A.OverDueVacation and due.CancelDate is null),A.ActualEndDate) as ActualEndDate,Round (a.TotalDays,0) as totaldays, Round(a.ConsumDays,0) as ConsumDays,Round(vactiondays,0) as vactiondays,Round(OverdueDays,0) as OverdueDays,Round(RemainingDays,0) as RemainingDays,PaymentTrnID as PaymentTrnID,A.ZeroingBalance, " &
+                     "ISNULL(A.DeductedFromTransfered,0) AS DeductedFromTransfered, " &
+                     "ISNULL(A.DeductedFromCompensation,0) AS DeductedFromCompensation, " &
+                     "ISNULL(A.DeductedFromBasic,0) AS DeductedFromBasic " &
+                     "from hrs_EmployeesVacations AS A where A.canceldate is null and A.EmployeeID=" & EmployeeID & " and A.VacationTypeID = " & DdlVacationType.SelectedValue
 
             Dim str2 As String = "select A.ID,A.EmployeeID,A.VacationTypeID,A.ActualStartDate,A.ActualEndDate,isnull((select B.ID from hrs_EmployeesVacations as B where B.OverDueVacation = A.ID ),A.ID) AS RelCol,A.ZeroingBalance from  hrs_EmployeesVacations AS A where A.EmployeeID=" & EmployeeID
 
@@ -1193,6 +1330,372 @@ Partial Class frmEmployeesVacationsAdvance
         End Try
     End Function
 
+    'Rabie 29-07-2026
+    'Private Function SavePart() As Boolean
+
+
+    '    ClsEmployeesVacations = New Clshrs_EmployeesVacations(Page)
+    '    Dim ClsEmployeesVacations2 = New Clshrs_EmployeesVacations(Page)
+
+    '    Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
+    '    Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployeesVacations.ConnectionString)
+    '    If txtVactiondays.Text = 0 And lbVactionID.Text = "" Then
+    '        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please set vaction days  /برجاء إدخال عدد ايام الاجازة"))
+    '        Exit Function
+    '    End If
+
+    '    Dim cls_Company = New Clssys_Companies(Page)
+    '    Dim cls_Employee = New Clshrs_Employees(Page)
+    '    'Dim dec_PaidVacation As Decimal = 0
+    '    'Dim dec_UnPaidVacation As Decimal = 0
+    '    cls_Employee.Find("Code = " & txtEmployee.Text)
+    '    cls_Company.Find("ID = " & cls_Employee.CompanyID)
+    '    If CDec(txtVactiondays.Text) > CDec(lbTotalVal.Text) Then
+    '        If Not cls_Company.AllowOverVacation Then
+    '            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Vaction days more the current balance / أيام الإجازة أكثر من الرصيد المستحق"))
+    '            Exit Function
+    '            'Else
+    '            '    dec_UnPaidVacation = CDec(txtVactiondays.Text) - CDec(lbTotalVal.Text)
+    '            '    dec_PaidVacation = CDec(lbTotalVal.Text)
+
+    '            '    Dim dat_VacationStartDate As DateTime = WebDateChooser1.Value
+    '            '    WebDateChooser3.Value = dat_VacationStartDate.AddDays(dec_PaidVacation)
+    '            '    WebDateChooser2.Value = WebDateChooser3.Value
+    '            '    txtVactiondays.Text = dec_PaidVacation.ToString()
+    '        End If
+    '    End If
+
+    '    ClsVacationTypes.Find("ID = " & DdlVacationType.SelectedValue)
+    '    clsMainOtherFields = New clsSys_MainOtherFields(Page)
+    '    Dim recordId As Integer
+    '    Dim RemVal As Integer = 0
+    '    Try
+
+
+    '        If Not String.IsNullOrEmpty(WebDateChooser2.Value) Then
+    '            If WebDateChooser1.Value >= WebDateChooser2.Value Then
+    '                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Vaction return date must be greater than start date /تاريخ الرجوع من الاجازة يجب أن يكون اكبر من تاريخ البداية "))
+    '                Exit Function
+    '            End If
+    '        End If
+
+    '        If lbVactionID.Text.Trim <> "" Then
+    '            If CheckEmployee() Then
+    '                ClsEmployeesVacations.Find("ID=" & lbVactionID.Text)
+    '                If Not AssignValue(ClsEmployeesVacations) Then
+    '                    Exit Function
+    '                End If
+
+    '                If ClsEmployeesVacations2.GetEmployeeLastVacation(ClsEmployeesVacations.EmployeeID) Then
+    '                    If IsDBNull(ClsEmployeesVacations2.ActualEndDate) Then
+    '                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "There is a vacation without return date /يوجد اجازة سابقة من غير تاريخ رجوع  "))
+    '                        Exit Function
+    '                    End If
+    '                End If
+
+    '                Dim Cls_EmployeeVacationOpenBalance As New Clshrs_EmployeeVacationOpenBalance(Me.Page)
+    '                If Cls_EmployeeVacationOpenBalance.Find("RegComputerID <> 1 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and VacationTypeID = " & DdlVacationType.SelectedValue) Then
+    '                    ClsEmployeesVacations.RegComputerID = Cls_EmployeeVacationOpenBalance.ID
+    '                    Cls_EmployeeVacationOpenBalance.RegComputerID = 1
+    '                    Cls_EmployeeVacationOpenBalance.Update("EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and VacationTypeID = " & DdlVacationType.SelectedValue)
+    '                End If
+    '                If WebDateChooser2.Value <> Nothing Then
+    '                    'Dim dteWebDateChooser2 As Date = WebDateChooser2.Value
+    '                    Dim Cls_Contracts As New Clshrs_Contracts(Page)
+    '                    Dim dec_ALLOWED_ANNUAL = Cls_Contracts.GET_EMPLOYEE_VACATION_BALANCE_TO_DATE(cls_Employee.Code, CDate(WebDateChooser1.Value))
+    '                    Dim dat_ACTUALL_RETRUN As Date = CDate(WebDateChooser2.Value)
+    '                    ' WebDateChooser2.Value = CDate(WebDateChooser1.Value).AddDays(dec_ALLOWED_ANNUAL)
+    '                    Dim dat_NEW_RETURN As Date = CDate(WebDateChooser2.Value)
+    '                    If dat_ACTUALL_RETRUN > CDate(WebDateChooser2.Value) Then
+    '                        Dim dat_VacationStartDate As DateTime = WebDateChooser2.Value
+    '                        WebDateChooser1.Value = dat_VacationStartDate
+    '                        WebDateChooser2.Value = dat_ACTUALL_RETRUN
+    '                        WebDateChooser3.Value = dat_ACTUALL_RETRUN
+    '                        TxtEndDate.Text = (CDate(WebDateChooser2.Value).AddDays(-1)).ToString("dd/MM/yyyy")
+    '                        lbVactionID.Text = ""
+    '                        txtVactiondays.Text = ""
+    '                        lbTotalVal.Text = ""
+    '                        Dim ClsEmployeesUnpaidVacations = New Clshrs_EmployeesVacations(Page)
+    '                        'AssignValueUnpaid(ClsEmployeesUnpaidVacations)
+    '                        'ClsEmployeesUnpaidVacations.ParentVacationID = ClsEmployeesVacations.ID
+    '                        'ClsEmployeesUnpaidVacations.SaveVacation()
+    '                    Else
+    '                        WebDateChooser2.Value = dat_ACTUALL_RETRUN
+    '                        TxtEndDate.Text = (CDate(WebDateChooser2.Value).AddDays(-1)).ToString("dd/MM/yyyy")
+    '                        dat_NEW_RETURN = WebDateChooser2.Value
+    '                    End If
+
+    '                    '===================== Overdue =======================
+    '                    setOverDueDays(ClsVacationTypes, dat_NEW_RETURN)
+    '                    '=====================================================
+    '                    ClsEmployeesVacations.TotalBalance = lblTotalDays.Text
+    '                    'ClsEmployeesVacations.RemainingDays = lblTotalDays.Text - txtVactiondays.Text
+    '                    If chk_ZeroingBalance.Checked Then
+    '                        ClsEmployeesVacations.RemainingDays = 0
+    '                    Else
+    '                        ClsEmployeesVacations.RemainingDays = Convert.ToDouble(ClsEmployeesVacations.TotalDays) - Convert.ToDouble(ClsEmployeesVacations.ConsumDays)
+    '                    End If
+
+    '                    ClsEmployeesVacations.ZeroingBalance = chk_ZeroingBalance.Checked
+
+    '                    recordId = ClsEmployeesVacations.ID
+    '                    ClsEmployeesVacations.ActualEndDate = CDate(CDate(dat_NEW_RETURN).ToShortDateString() & " " & "00:00")
+
+    '                    ClsEmployeesVacations.Update("ID=" & ClsEmployeesVacations.ID)
+
+    '                    If ClsEmployees.IsProjectRelated Then
+    '                        Dim hrsProjectPlacementEmployees As New Clshrs_ProjectPlacementEmployees(Me)
+    '                        If hrsProjectPlacementEmployees.Find("EmployeeID = " & ClsEmployeesVacations.EmployeeID & " and (ToDate is null or ToDate >= convert(Datetime," & ClsEmployeesVacations.ActualStartDate & "))") Then
+    '                            Dim DTPlacement As DataTable = hrsProjectPlacementEmployees.DataSet.Tables(0)
+    '                            For Each DrPlacement As DataRow In DTPlacement.Rows
+    '                                hrsProjectPlacementEmployees = New Clshrs_ProjectPlacementEmployees(Me)
+    '                                hrsProjectPlacementEmployees.Find("ID = " & DrPlacement("ID"))
+    '                                hrsProjectPlacementEmployees.ToDate = ClsEmployeesVacations.ActualStartDate.AddDays(-1)
+    '                                hrsProjectPlacementEmployees.Update("ID = " & DrPlacement("ID"))
+    '                            Next
+    '                        End If
+    '                        Dim strDelcommand As String = "set dateformat dmy; delete from Att_AttendTransactions where EmployeeID = " & ClsEmployeesVacations.EmployeeID & " and TrnsDatetime > '" & ClsEmployeesVacations.ActualStartDate.AddDays(-1).ToString("dd/MM/yyyy") & "'"
+    '                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(hrsProjectPlacementEmployees.ConnectionString, Data.CommandType.Text, strDelcommand)
+    '                    End If
+
+    '                    recordId = ClsEmployeesVacations.ID
+    '                    If RemVal <> 0 Then
+    '                        'Dim ClsEmployeesVacations2 As New Clshrs_EmployeesVacations(Page)
+    '                        'ClsEmployeesVacations2.EmployeeID = ClsEmployeesVacations.EmployeeID
+    '                        'ClsEmployeesVacations2.VacationTypeID = ClsVacationTypes.OverDueVacationID
+    '                        'ClsEmployeesVacations2.ExpectedStartDate = ClsEmployeesVacations.SetHigriDate(ClsEmployeesVacations.ActualEndDate.AddDays(1))
+    '                        'ClsEmployeesVacations2.ExpectedEndDate = ClsEmployeesVacations.SetHigriDate(ClsEmployeesVacations.ActualEndDate.AddDays(RemVal))
+    '                        'ClsEmployeesVacations2.ActualStartDate = ClsEmployeesVacations.SetHigriDate(ClsEmployeesVacations.ActualEndDate.AddDays(1))
+    '                        'ClsEmployeesVacations2.ActualEndDate = ClsEmployeesVacations.SetHigriDate(ClsEmployeesVacations.ActualEndDate.AddDays(RemVal))
+    '                        'ClsEmployeesVacations2.Remarks = "OverDue Days From Vacation No " & recordId & " ==== " & "إيام تجاوز لاجازة رقم " & recordId
+    '                        'ClsEmployeesVacations2.RegUserID = ClsEmployeesVacations.RegUserID
+    '                        'ClsEmployeesVacations2.RegDate = ClsEmployeesVacations.RegDate
+    '                        'ClsEmployeesVacations2.TotalDays = ClsEmployeesVacations2.ActualEndDate.Subtract(ClsEmployeesVacations2.ActualStartDate).Days + 1
+    '                        'Dim OVDID As Integer = ClsEmployeesVacations2.SaveVacation()
+    '                        'ClsEmployeesVacations.OverDueVacation = OVDID
+    '                        'ClsEmployeesVacations.Update("ID=" & recordId)
+    '                    End If
+    '                Else
+    '                    recordId = ClsEmployeesVacations.ID
+    '                    ClsEmployeesVacations.Update("ID=" & ClsEmployeesVacations.ID)
+
+    '                    If ClsEmployees.IsProjectRelated Then
+    '                        Dim hrsProjectPlacementEmployees As New Clshrs_ProjectPlacementEmployees(Me)
+    '                        If hrsProjectPlacementEmployees.Find("EmployeeID = " & ClsEmployeesVacations.EmployeeID & " and (ToDate is null or ToDate >= '" & ClsEmployeesVacations.ActualStartDate.ToString("dd/MM/yyyy") & "')") Then
+    '                            Dim DTPlacement As DataTable = hrsProjectPlacementEmployees.DataSet.Tables(0)
+    '                            For Each DrPlacement As DataRow In DTPlacement.Rows
+    '                                hrsProjectPlacementEmployees = New Clshrs_ProjectPlacementEmployees(Me)
+    '                                hrsProjectPlacementEmployees.Find("ID = " & DrPlacement("ID"))
+    '                                hrsProjectPlacementEmployees.ToDate = ClsEmployeesVacations.ActualStartDate.AddDays(-1)
+    '                                hrsProjectPlacementEmployees.Update("ID = " & DrPlacement("ID"))
+    '                            Next
+    '                        End If
+    '                        Dim strDelcommand As String = "set dateformat dmy; delete from Att_AttendTransactions where EmployeeID = " & ClsEmployeesVacations.EmployeeID & " and TrnsDatetime > '" & ClsEmployeesVacations.ActualStartDate.AddDays(-1).ToString("dd/MM/yyyy") & "'"
+    '                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(hrsProjectPlacementEmployees.ConnectionString, Data.CommandType.Text, strDelcommand)
+    '                    End If
+    '                    recordId = ClsEmployeesVacations.ID
+    '                End If
+    '            Else
+    '                Exit Function
+    '            End If
+    '        Else
+    '            If CheckEmployee() Then
+    '                If Not AssignValue(ClsEmployeesVacations) Then
+    '                    Exit Function
+    '                End If
+
+    '                If ClsEmployeesVacations2.GetEmployeeLastVacation(ClsEmployeesVacations.EmployeeID) Then
+    '                    If ClsEmployeesVacations2.ActualEndDate = Date.MinValue Then
+    '                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "There is a vacation without return date /يوجد اجازة سابقة من غير تاريخ رجوع  "))
+    '                        Exit Function
+    '                    End If
+    '                    If ClsEmployeesVacations2.ActualEndDate > WebDateChooser1.Text Then
+    '                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "There is a vacation with end date greater than the inserted date /يوجد اجازة سابقة بتاريخ رجوع أكبر من التاريخ المدخل  "))
+    '                        Exit Function
+    '                    End If
+    '                End If
+
+    '                Dim Cls_EmployeeVacationOpenBalance As New Clshrs_EmployeeVacationOpenBalance(Me.Page)
+    '                If Cls_EmployeeVacationOpenBalance.Find("RegComputerID <> 1 and EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and VacationTypeID = " & DdlVacationType.SelectedValue) Then
+    '                    ClsEmployeesVacations.RegComputerID = Cls_EmployeeVacationOpenBalance.ID
+    '                    Cls_EmployeeVacationOpenBalance.RegComputerID = 1
+    '                    Cls_EmployeeVacationOpenBalance.Update("EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and VacationTypeID = " & DdlVacationType.SelectedValue)
+    '                End If
+    '                If WebDateChooser2.Value <> Nothing Then
+    '                    Dim Cls_Contracts As New Clshrs_Contracts(Page)
+    '                    Dim dec_ALLOWED_ANNUAL = Cls_Contracts.GET_EMPLOYEE_VACATION_BALANCE_TO_DATE(cls_Employee.Code, CDate(WebDateChooser1.Value))
+    '                    Dim dat_ACTUALL_RETRUN As Date = CDate(WebDateChooser2.Value)
+    '                    'Dim dat_MAX_RETURN = CDate(WebDateChooser1.Value).AddDays(dec_ALLOWED_ANNUAL)
+    '                    'WebDateChooser2.Value = CDate(WebDateChooser1.Value).AddDays(dec_ALLOWED_ANNUAL)
+    '                    'If dat_ACTUALL_RETRUN > dat_MAX_RETURN Then
+    '                    'ClsEmployeesVacations.ActualEndDate = dat_MAX_RETURN
+    '                    'WebDateChooser2.Value = dat_MAX_RETURN
+    '                    'End If
+    '                    '===================== Overdue =======================
+    '                    setOverDueDays(ClsVacationTypes, dat_ACTUALL_RETRUN)
+    '                    '=====================================================
+    '                    recordId = ClsEmployeesVacations.SaveVacation()
+    '                    If dat_ACTUALL_RETRUN <> CDate(WebDateChooser2.Value) Then
+    '                        Dim dat_VacationStartDate As DateTime = WebDateChooser2.Value
+    '                        WebDateChooser1.Value = dat_VacationStartDate
+    '                        WebDateChooser2.Value = dat_ACTUALL_RETRUN
+    '                        WebDateChooser3.Value = dat_ACTUALL_RETRUN
+    '                        TxtEndDate.Text = (CDate(WebDateChooser2.Value).AddDays(-1)).ToString("dd/MM/yyyy")
+    '                        lbVactionID.Text = ""
+    '                        txtVactiondays.Text = ""
+    '                        lbTotalVal.Text = ""
+    '                        Dim ClsEmployeesUnpaidVacations = New Clshrs_EmployeesVacations(Page)
+    '                        'AssignValueUnpaid(ClsEmployeesUnpaidVacations)
+    '                        'ClsEmployeesUnpaidVacations.ParentVacationID = recordId
+    '                        'ClsEmployeesUnpaidVacations.SaveVacation()
+    '                    End If
+
+    '                    If ClsEmployees.IsProjectRelated Then
+    '                        Dim hrsProjectPlacementEmployees As New Clshrs_ProjectPlacementEmployees(Me)
+    '                        If hrsProjectPlacementEmployees.Find("EmployeeID = " & ClsEmployeesVacations.EmployeeID & " and (ToDate is null or ToDate >= '" & ClsEmployeesVacations.ActualStartDate.ToString("dd/MM/yyyy") & "')") Then
+    '                            Dim DTPlacement As DataTable = hrsProjectPlacementEmployees.DataSet.Tables(0)
+    '                            For Each DrPlacement As DataRow In DTPlacement.Rows
+    '                                hrsProjectPlacementEmployees = New Clshrs_ProjectPlacementEmployees(Me)
+    '                                hrsProjectPlacementEmployees.Find("ID = " & DrPlacement("ID"))
+    '                                hrsProjectPlacementEmployees.ToDate = ClsEmployeesVacations.ActualStartDate.AddDays(-1)
+    '                                hrsProjectPlacementEmployees.Update("ID = " & DrPlacement("ID"))
+    '                            Next
+    '                        End If
+    '                        Dim strDelcommand As String = "set dateformat dmy; delete from Att_AttendTransactions where EmployeeID = " & ClsEmployeesVacations.EmployeeID & " and TrnsDatetime > '" & ClsEmployeesVacations.ActualStartDate.AddDays(-1).ToString("dd/MM/yyyy") & "'"
+    '                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(hrsProjectPlacementEmployees.ConnectionString, Data.CommandType.Text, strDelcommand)
+    '                    End If
+    '                Else
+    '                    recordId = ClsEmployeesVacations.SaveVacation()
+    '                    If ClsEmployees.IsProjectRelated Then
+    '                        Dim hrsProjectPlacementEmployees As New Clshrs_ProjectPlacementEmployees(Me)
+    '                        If hrsProjectPlacementEmployees.Find("EmployeeID = " & ClsEmployeesVacations.EmployeeID & " and (ToDate is null or ToDate >= '" & ClsEmployeesVacations.ActualStartDate.ToString("dd/MM/yyyy") & "')") Then
+    '                            Dim DTPlacement As DataTable = hrsProjectPlacementEmployees.DataSet.Tables(0)
+    '                            For Each DrPlacement As DataRow In DTPlacement.Rows
+    '                                hrsProjectPlacementEmployees = New Clshrs_ProjectPlacementEmployees(Me)
+    '                                hrsProjectPlacementEmployees.Find("ID = " & DrPlacement("ID"))
+    '                                hrsProjectPlacementEmployees.ToDate = ClsEmployeesVacations.ActualStartDate.AddDays(-1)
+    '                                hrsProjectPlacementEmployees.Update("ID = " & DrPlacement("ID"))
+    '                            Next
+    '                        End If
+    '                        Dim strDelcommand As String = "set dateformat dmy; delete from Att_AttendTransactions where EmployeeID = " & ClsEmployeesVacations.EmployeeID & " and TrnsDatetime > '" & ClsEmployeesVacations.ActualStartDate.AddDays(-1).ToString("dd/MM/yyyy") & "'"
+    '                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(hrsProjectPlacementEmployees.ConnectionString, Data.CommandType.Text, strDelcommand)
+    '                    End If
+    '                End If
+
+    '                'If dec_UnPaidVacation > 0 Then
+    '                '    Dim dat_VacationStartDate As DateTime = WebDateChooser2.Value
+    '                '    WebDateChooser1.Value = dat_VacationStartDate.AddDays(1)
+    '                '    WebDateChooser2.Value = Nothing
+    '                '    WebDateChooser3.Value = Nothing
+    '                '    lbVactionID.Text = ""
+    '                '    txtVactiondays.Text = ""
+    '                '    lbTotalVal.Text = ""
+    '                '    Dim ClsEmployeesUnpaidVacations = New Clshrs_EmployeesVacations(Page)
+    '                '    AssignValueUnpaid(ClsEmployeesUnpaidVacations)
+    '                '    ClsEmployeesUnpaidVacations.SaveVacation()
+    '                'End If
+    '            Else
+    '                Exit Function
+    '            End If
+    '        End If
+
+    '        clsMainOtherFields.CollectDataAndSave(value.Text, ClsEmployeesVacations.Table, recordId)
+
+    '        Dim Diffe As Single = 0
+    '        Try
+    '            If WebDateChooser2.Value <> Nothing Then
+    '                Diffe = (DateDiff(DateInterval.Day, WebDateChooser1.Value, WebDateChooser2.Value))
+    '            End If
+    '        Catch ex As Exception
+    '            Diffe = 0
+    '        End Try
+
+    '        If WebDateChooser2.Value = Nothing Then
+    '            WebDateChooser2.Value = WebDateChooser1.Value
+    '        End If
+
+    '        Dim str = "SELECT    Remaining FROM hrs_VacationsBalance where BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "'  and ISNULL(Posted,0)=0)"
+    '        Dim remainTrans As Decimal
+
+    '        remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
+    '        If remainTrans = 0 Then
+    '            str = "SELECT    Remaining FROM hrs_VacationsBalance where BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "'  and ISNULL(Posted,0)=0)"
+    '            remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
+    '            If remainTrans > 0 Then
+    '                str = "SELECT    ExpireDate FROM hrs_VacationsBalance where BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "'  and ISNULL(Posted,0)=0)"
+    '                Dim expire As Date = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
+    '                Dim AllowDays = (DateDiff(DateInterval.Day, WebDateChooser1.Value, expire))
+    '                If AllowDays < remainTrans Then
+    '                    remainTrans = AllowDays
+    '                End If
+    '            End If
+    '        End If
+
+    '        If remainTrans > Diffe Then
+    '            Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed+" & Diffe & " ,Remaining = Remaining-" & Diffe & " where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "')"
+    '            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateTrans)
+    '        Else
+    '            If remainTrans + Convert.ToDecimal(lblNewRemain.Text) < Diffe Then
+    '                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Vaction days more the current balance-review Balance Expire Date /  أيام الإجازة أكثر من الرصيد المستحق - برجاء مراجعة تاريخ صلاحية الرصيد"))
+    '                Exit Function
+    '            End If
+    '            If remainTrans > 0 Then
+    '                Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed+" & remainTrans & " ,Remaining = Remaining-" & remainTrans & " where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "')"
+    '                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateTrans)
+    '            End If
+    '            Dim strUpdateNew As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed+" & (Diffe - remainTrans) & " ,Remaining = Remaining-" & (Diffe - remainTrans) & " where ISNULL(Posted,0)=0 and BalanceTypeID<>2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "')"
+    '            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateNew)
+    '        End If
+
+    '        Dim OfficialVacationDays As Integer = 0
+
+    '        OfficialVacationDays = GetOverlappingOfficialVacationDays(WebDateChooser1.Value, WebDateChooser2.Value)
+    '        If OfficialVacationDays > 0 Then
+    '            Dim User As String = String.Empty
+    '            Dim WebHandler As New Venus.Shared.Web.WebHandler
+    '            WebHandler.GetCookies(Page, "UserID", User)
+    '            Dim startDate As String = CDate(WebDateChooser1.Value).ToString("yyyy-MM-dd")
+    '            Dim expireQuery As String = "SELECT TOP 1 ExpireDate FROM hrs_VacationsBalance WHERE BalanceTypeID < 3 and canceldate IS NULL  and ISNULL(Posted,0)=0 AND EmployeeID = @EmployeeID AND ExpireDate > @NewEnd ORDER BY BalanceTypeID Desc"
+    '            Dim expireDate As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(
+    '                    cls_Employee.ConnectionString,
+    '                    CommandType.Text,
+    '                    expireQuery,
+    '                    New SqlClient.SqlParameter("@EmployeeID", cls_Employee.ID),
+    '                    New SqlClient.SqlParameter("@NewEnd", startDate)
+    '                )
+    '            'If expireDate IsNot Nothing Then
+    '            ' Insert compensation balance
+    '            Dim insertQuery As String = "INSERT INTO [dbo].[hrs_VacationsBalance] " &
+    '                "([EmployeeID], [Year], [Balance], [Consumed], [Remaining], [BalanceTypeID], [ExpireDate], [Src], [Reguser], [RegDate], [DueDate]) " &
+    '                "VALUES (@EmployeeID, @Year, @Balance, 0, @Balance, 3, @ExpireDate, '" & Page.ToString() & "', @User, @RegDate, @DueDate)"
+
+    '            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(
+    '                cls_Employee.ConnectionString,
+    '                CommandType.Text,
+    '                insertQuery,
+    '                New SqlClient.SqlParameter("@EmployeeID", cls_Employee.ID),
+    '                New SqlClient.SqlParameter("@Year", CDate(startDate).Year),
+    '                New SqlClient.SqlParameter("@Balance", OfficialVacationDays),
+    '                New SqlClient.SqlParameter("@ExpireDate", CDate(expireDate)),
+    '                New SqlClient.SqlParameter("@User", User),
+    '                New SqlClient.SqlParameter("@RegDate", DateTime.Now.Date),
+    '                New SqlClient.SqlParameter("@DueDate", CDate(TxtEndDate.Text))
+    '            )
+    '            'End If
+    '        End If
+
+    '        value.Text = ""
+    '        CheckEmpCode()
+    '        SetNew()
+    '        Return True
+    '    Catch ex As Exception
+    '        Return False
+    '        mErrorHandler = New Venus.Shared.ErrorsHandler(ClsEmployeesVacations.ConnectionString)
+    '        Page.Session.Add("ErrorValue", ex)
+    '        mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, ClsEmployeesVacations.RegUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
+    '        Page.Response.Redirect("ErrorPage.aspx")
+    '    End Try
+    'End Function
     Private Function SavePart() As Boolean
 
 
@@ -1208,22 +1711,12 @@ Partial Class frmEmployeesVacationsAdvance
 
         Dim cls_Company = New Clssys_Companies(Page)
         Dim cls_Employee = New Clshrs_Employees(Page)
-        'Dim dec_PaidVacation As Decimal = 0
-        'Dim dec_UnPaidVacation As Decimal = 0
         cls_Employee.Find("Code = " & txtEmployee.Text)
         cls_Company.Find("ID = " & cls_Employee.CompanyID)
         If CDec(txtVactiondays.Text) > CDec(lbTotalVal.Text) Then
             If Not cls_Company.AllowOverVacation Then
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Vaction days more the current balance / أيام الإجازة أكثر من الرصيد المستحق"))
                 Exit Function
-                'Else
-                '    dec_UnPaidVacation = CDec(txtVactiondays.Text) - CDec(lbTotalVal.Text)
-                '    dec_PaidVacation = CDec(lbTotalVal.Text)
-
-                '    Dim dat_VacationStartDate As DateTime = WebDateChooser1.Value
-                '    WebDateChooser3.Value = dat_VacationStartDate.AddDays(dec_PaidVacation)
-                '    WebDateChooser2.Value = WebDateChooser3.Value
-                '    txtVactiondays.Text = dec_PaidVacation.ToString()
             End If
         End If
 
@@ -1262,11 +1755,9 @@ Partial Class frmEmployeesVacationsAdvance
                         Cls_EmployeeVacationOpenBalance.Update("EmployeeID=" & ClsEmployeesVacations.EmployeeID & " and VacationTypeID = " & DdlVacationType.SelectedValue)
                     End If
                     If WebDateChooser2.Value <> Nothing Then
-                        'Dim dteWebDateChooser2 As Date = WebDateChooser2.Value
                         Dim Cls_Contracts As New Clshrs_Contracts(Page)
                         Dim dec_ALLOWED_ANNUAL = Cls_Contracts.GET_EMPLOYEE_VACATION_BALANCE_TO_DATE(cls_Employee.Code, CDate(WebDateChooser1.Value))
                         Dim dat_ACTUALL_RETRUN As Date = CDate(WebDateChooser2.Value)
-                        ' WebDateChooser2.Value = CDate(WebDateChooser1.Value).AddDays(dec_ALLOWED_ANNUAL)
                         Dim dat_NEW_RETURN As Date = CDate(WebDateChooser2.Value)
                         If dat_ACTUALL_RETRUN > CDate(WebDateChooser2.Value) Then
                             Dim dat_VacationStartDate As DateTime = WebDateChooser2.Value
@@ -1278,9 +1769,6 @@ Partial Class frmEmployeesVacationsAdvance
                             txtVactiondays.Text = ""
                             lbTotalVal.Text = ""
                             Dim ClsEmployeesUnpaidVacations = New Clshrs_EmployeesVacations(Page)
-                            'AssignValueUnpaid(ClsEmployeesUnpaidVacations)
-                            'ClsEmployeesUnpaidVacations.ParentVacationID = ClsEmployeesVacations.ID
-                            'ClsEmployeesUnpaidVacations.SaveVacation()
                         Else
                             WebDateChooser2.Value = dat_ACTUALL_RETRUN
                             TxtEndDate.Text = (CDate(WebDateChooser2.Value).AddDays(-1)).ToString("dd/MM/yyyy")
@@ -1291,7 +1779,6 @@ Partial Class frmEmployeesVacationsAdvance
                         setOverDueDays(ClsVacationTypes, dat_NEW_RETURN)
                         '=====================================================
                         ClsEmployeesVacations.TotalBalance = lblTotalDays.Text
-                        'ClsEmployeesVacations.RemainingDays = lblTotalDays.Text - txtVactiondays.Text
                         If chk_ZeroingBalance.Checked Then
                             ClsEmployeesVacations.RemainingDays = 0
                         Else
@@ -1322,20 +1809,6 @@ Partial Class frmEmployeesVacationsAdvance
 
                         recordId = ClsEmployeesVacations.ID
                         If RemVal <> 0 Then
-                            'Dim ClsEmployeesVacations2 As New Clshrs_EmployeesVacations(Page)
-                            'ClsEmployeesVacations2.EmployeeID = ClsEmployeesVacations.EmployeeID
-                            'ClsEmployeesVacations2.VacationTypeID = ClsVacationTypes.OverDueVacationID
-                            'ClsEmployeesVacations2.ExpectedStartDate = ClsEmployeesVacations.SetHigriDate(ClsEmployeesVacations.ActualEndDate.AddDays(1))
-                            'ClsEmployeesVacations2.ExpectedEndDate = ClsEmployeesVacations.SetHigriDate(ClsEmployeesVacations.ActualEndDate.AddDays(RemVal))
-                            'ClsEmployeesVacations2.ActualStartDate = ClsEmployeesVacations.SetHigriDate(ClsEmployeesVacations.ActualEndDate.AddDays(1))
-                            'ClsEmployeesVacations2.ActualEndDate = ClsEmployeesVacations.SetHigriDate(ClsEmployeesVacations.ActualEndDate.AddDays(RemVal))
-                            'ClsEmployeesVacations2.Remarks = "OverDue Days From Vacation No " & recordId & " ==== " & "إيام تجاوز لاجازة رقم " & recordId
-                            'ClsEmployeesVacations2.RegUserID = ClsEmployeesVacations.RegUserID
-                            'ClsEmployeesVacations2.RegDate = ClsEmployeesVacations.RegDate
-                            'ClsEmployeesVacations2.TotalDays = ClsEmployeesVacations2.ActualEndDate.Subtract(ClsEmployeesVacations2.ActualStartDate).Days + 1
-                            'Dim OVDID As Integer = ClsEmployeesVacations2.SaveVacation()
-                            'ClsEmployeesVacations.OverDueVacation = OVDID
-                            'ClsEmployeesVacations.Update("ID=" & recordId)
                         End If
                     Else
                         recordId = ClsEmployeesVacations.ID
@@ -1387,12 +1860,6 @@ Partial Class frmEmployeesVacationsAdvance
                         Dim Cls_Contracts As New Clshrs_Contracts(Page)
                         Dim dec_ALLOWED_ANNUAL = Cls_Contracts.GET_EMPLOYEE_VACATION_BALANCE_TO_DATE(cls_Employee.Code, CDate(WebDateChooser1.Value))
                         Dim dat_ACTUALL_RETRUN As Date = CDate(WebDateChooser2.Value)
-                        'Dim dat_MAX_RETURN = CDate(WebDateChooser1.Value).AddDays(dec_ALLOWED_ANNUAL)
-                        'WebDateChooser2.Value = CDate(WebDateChooser1.Value).AddDays(dec_ALLOWED_ANNUAL)
-                        'If dat_ACTUALL_RETRUN > dat_MAX_RETURN Then
-                        'ClsEmployeesVacations.ActualEndDate = dat_MAX_RETURN
-                        'WebDateChooser2.Value = dat_MAX_RETURN
-                        'End If
                         '===================== Overdue =======================
                         setOverDueDays(ClsVacationTypes, dat_ACTUALL_RETRUN)
                         '=====================================================
@@ -1407,9 +1874,6 @@ Partial Class frmEmployeesVacationsAdvance
                             txtVactiondays.Text = ""
                             lbTotalVal.Text = ""
                             Dim ClsEmployeesUnpaidVacations = New Clshrs_EmployeesVacations(Page)
-                            'AssignValueUnpaid(ClsEmployeesUnpaidVacations)
-                            'ClsEmployeesUnpaidVacations.ParentVacationID = recordId
-                            'ClsEmployeesUnpaidVacations.SaveVacation()
                         End If
 
                         If ClsEmployees.IsProjectRelated Then
@@ -1443,19 +1907,6 @@ Partial Class frmEmployeesVacationsAdvance
                             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(hrsProjectPlacementEmployees.ConnectionString, Data.CommandType.Text, strDelcommand)
                         End If
                     End If
-
-                    'If dec_UnPaidVacation > 0 Then
-                    '    Dim dat_VacationStartDate As DateTime = WebDateChooser2.Value
-                    '    WebDateChooser1.Value = dat_VacationStartDate.AddDays(1)
-                    '    WebDateChooser2.Value = Nothing
-                    '    WebDateChooser3.Value = Nothing
-                    '    lbVactionID.Text = ""
-                    '    txtVactiondays.Text = ""
-                    '    lbTotalVal.Text = ""
-                    '    Dim ClsEmployeesUnpaidVacations = New Clshrs_EmployeesVacations(Page)
-                    '    AssignValueUnpaid(ClsEmployeesUnpaidVacations)
-                    '    ClsEmployeesUnpaidVacations.SaveVacation()
-                    'End If
                 Else
                     Exit Function
                 End If
@@ -1476,42 +1927,39 @@ Partial Class frmEmployeesVacationsAdvance
                 WebDateChooser2.Value = WebDateChooser1.Value
             End If
 
-            Dim str = "SELECT    Remaining FROM hrs_VacationsBalance where BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "'  and ISNULL(Posted,0)=0)"
-            Dim remainTrans As Decimal
+            ' ====== خصم الرصيد بالأولوية: مرحل (2) ← تعويضي (3) ← أساسي (1) ======
+            ' استخدام الفانكشن الجديدة للخصم بالترتيب
 
-            remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
-            If remainTrans = 0 Then
-                str = "SELECT    Remaining FROM hrs_VacationsBalance where BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "'  and ISNULL(Posted,0)=0)"
-                remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
-                If remainTrans > 0 Then
-                    str = "SELECT    ExpireDate FROM hrs_VacationsBalance where BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "'  and ISNULL(Posted,0)=0)"
-                    Dim expire As Date = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(cls_Employee.ConnectionString, Data.CommandType.Text, str)
-                    Dim AllowDays = (DateDiff(DateInterval.Day, WebDateChooser1.Value, expire))
-                    If AllowDays < remainTrans Then
-                        remainTrans = AllowDays
-                    End If
-                End If
-            End If
+            Dim dtDeductionDetails As DataTable = DeductVacationBalance(cls_Employee.ID, Diffe, CDate(WebDateChooser1.Value), CDate(WebDateChooser2.Value))
 
-            If remainTrans > Diffe Then
-                Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed+" & Diffe & " ,Remaining = Remaining-" & Diffe & " where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "')"
-                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateTrans)
-            Else
-                If remainTrans + Convert.ToDecimal(lblNewRemain.Text) < Diffe Then
-                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Vaction days more the current balance-review Balance Expire Date /  أيام الإجازة أكثر من الرصيد المستحق - برجاء مراجعة تاريخ صلاحية الرصيد"))
-                    Exit Function
-                End If
-                If remainTrans > 0 Then
-                    Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed+" & remainTrans & " ,Remaining = Remaining-" & remainTrans & " where ISNULL(Posted,0)=0 and BalanceTypeID=2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "')"
-                    Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateTrans)
-                End If
-                Dim strUpdateNew As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed+" & (Diffe - remainTrans) & " ,Remaining = Remaining-" & (Diffe - remainTrans) & " where ISNULL(Posted,0)=0 and BalanceTypeID<>2 and EmployeeID=" & cls_Employee.ID & " and ExpireDate >='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and DueDate<='" & DateTime.Parse(WebDateChooser1.Value).ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & DateTime.Parse(WebDateChooser2.Value).ToString("yyyy-MM-dd") & "')"
-                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateNew)
-            End If
+            ' ====== حفظ تفاصيل الخصم في جدول الإجازة ======
+            Dim deductedFromTransfered As Double = 0
+            Dim deductedFromCompensation As Double = 0
+            Dim deductedFromBasic As Double = 0
 
+            For Each row As DataRow In dtDeductionDetails.Rows
+                Select Case Convert.ToInt32(row("BalanceTypeID"))
+                    Case 2
+                        deductedFromTransfered = Convert.ToDouble(row("DeductedDays"))
+                    Case 3
+                        deductedFromCompensation = Convert.ToDouble(row("DeductedDays"))
+                    Case 1
+                        deductedFromBasic = Convert.ToDouble(row("DeductedDays"))
+                End Select
+            Next
+
+            ' تحديث الإجازة بتفاصيل الخصم
+            Dim updateVacSql As String = "UPDATE hrs_EmployeesVacations  SET DeductedFromTransfered = " & deductedFromTransfered & ", DeductedFromCompensation = " & deductedFromCompensation & ",  DeductedFromBasic = " & deductedFromBasic & "  WHERE ID = " & recordId
+
+            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(
+    ClsEmployeesVacations.ConnectionString,
+    Data.CommandType.Text,
+    updateVacSql
+)
+            ' ====== إضافة الرصيد التعويضي عن الأيام الرسمية ======
             Dim OfficialVacationDays As Integer = 0
-
             OfficialVacationDays = GetOverlappingOfficialVacationDays(WebDateChooser1.Value, WebDateChooser2.Value)
+
             If OfficialVacationDays > 0 Then
                 Dim User As String = String.Empty
                 Dim WebHandler As New Venus.Shared.Web.WebHandler
@@ -1519,31 +1967,29 @@ Partial Class frmEmployeesVacationsAdvance
                 Dim startDate As String = CDate(WebDateChooser1.Value).ToString("yyyy-MM-dd")
                 Dim expireQuery As String = "SELECT TOP 1 ExpireDate FROM hrs_VacationsBalance WHERE BalanceTypeID < 3 and canceldate IS NULL  and ISNULL(Posted,0)=0 AND EmployeeID = @EmployeeID AND ExpireDate > @NewEnd ORDER BY BalanceTypeID Desc"
                 Dim expireDate As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(
-                        cls_Employee.ConnectionString,
-                        CommandType.Text,
-                        expireQuery,
-                        New SqlClient.SqlParameter("@EmployeeID", cls_Employee.ID),
-                        New SqlClient.SqlParameter("@NewEnd", startDate)
-                    )
-                'If expireDate IsNot Nothing Then
-                ' Insert compensation balance
-                Dim insertQuery As String = "INSERT INTO [dbo].[hrs_VacationsBalance] " &
-                    "([EmployeeID], [Year], [Balance], [Consumed], [Remaining], [BalanceTypeID], [ExpireDate], [Src], [Reguser], [RegDate], [DueDate]) " &
-                    "VALUES (@EmployeeID, @Year, @Balance, 0, @Balance, 3, @ExpireDate, '" & Page.ToString() & "', @User, @RegDate, @DueDate)"
-
-                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(
                     cls_Employee.ConnectionString,
                     CommandType.Text,
-                    insertQuery,
+                    expireQuery,
                     New SqlClient.SqlParameter("@EmployeeID", cls_Employee.ID),
-                    New SqlClient.SqlParameter("@Year", CDate(startDate).Year),
-                    New SqlClient.SqlParameter("@Balance", OfficialVacationDays),
-                    New SqlClient.SqlParameter("@ExpireDate", CDate(expireDate)),
-                    New SqlClient.SqlParameter("@User", User),
-                    New SqlClient.SqlParameter("@RegDate", DateTime.Now.Date),
-                    New SqlClient.SqlParameter("@DueDate", CDate(TxtEndDate.Text))
+                    New SqlClient.SqlParameter("@NewEnd", startDate)
                 )
-                'End If
+
+                Dim insertQuery As String = "INSERT INTO [dbo].[hrs_VacationsBalance] " &
+                "([EmployeeID], [Year], [Balance], [Consumed], [Remaining], [BalanceTypeID], [ExpireDate], [Src], [Reguser], [RegDate], [DueDate]) " &
+                "VALUES (@EmployeeID, @Year, @Balance, 0, @Balance, 3, @ExpireDate, '" & Page.ToString() & "', @User, @RegDate, @DueDate)"
+
+                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(
+                cls_Employee.ConnectionString,
+                CommandType.Text,
+                insertQuery,
+                New SqlClient.SqlParameter("@EmployeeID", cls_Employee.ID),
+                New SqlClient.SqlParameter("@Year", CDate(startDate).Year),
+                New SqlClient.SqlParameter("@Balance", OfficialVacationDays),
+                New SqlClient.SqlParameter("@ExpireDate", CDate(expireDate)),
+                New SqlClient.SqlParameter("@User", User),
+                New SqlClient.SqlParameter("@RegDate", DateTime.Now.Date),
+                New SqlClient.SqlParameter("@DueDate", CDate(TxtEndDate.Text))
+            )
             End If
 
             value.Text = ""
@@ -1558,7 +2004,6 @@ Partial Class frmEmployeesVacationsAdvance
             Page.Response.Redirect("ErrorPage.aspx")
         End Try
     End Function
-
     Private Sub setOverDueDays(ClsVacationTypes As Clshrs_VacationsTypes, dat_NEW_RETURN As Date)
 
         ClsEmployeesVacations.ConsumDays = dat_NEW_RETURN.Subtract(ClsEmployeesVacations.ActualStartDate).Days
@@ -2607,4 +3052,139 @@ Partial Class frmEmployeesVacationsAdvance
         Return totalDays
     End Function
 
+
+
+
+    Private Function DeductVacationBalance(EmployeeID As Integer, TotalDays As Double, StartDate As Date, EndDate As Date) As DataTable
+        Dim dtResult As New DataTable()
+        dtResult.Columns.Add("BalanceTypeID", GetType(Integer))
+        dtResult.Columns.Add("DeductedDays", GetType(Double))
+
+        Try
+            If TotalDays <= 0 Then Return dtResult
+
+            Dim remainingToDeduct As Double = TotalDays
+            Dim deductedFromTransfered As Double = 0
+            Dim deductedFromCompensation As Double = 0
+            Dim deductedFromBasic As Double = 0
+
+            ' ====== 1- خصم من الرصيد المرحل (BalanceTypeID=2) أولاً ======
+            Dim strSql As String = "SELECT ID, Remaining FROM hrs_VacationsBalance   WHERE EmployeeID = " & EmployeeID & " AND BalanceTypeID = 2  AND ISNULL(Posted,0) = 0  AND (CancelDate IS NULL OR CancelDate > GETDATE())  AND Remaining > 0  AND ExpireDate >= '" & EndDate.ToString("yyyy-MM-dd") & "' AND DueDate <= '" & StartDate.ToString("yyyy-MM-dd") & "'  ORDER BY ExpireDate ASC"
+
+            Dim dtBalance As DataTable = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(
+            ClsEmployeesVacations.ConnectionString,
+            Data.CommandType.Text,
+            strSql
+        ).Tables(0)
+
+            ' خصم من المرحل
+            For Each row As DataRow In dtBalance.Rows
+                If remainingToDeduct <= 0 Then Exit For
+
+                Dim balanceId As Integer = Convert.ToInt32(row("ID"))
+                Dim availableBalance As Double = Convert.ToDouble(row("Remaining"))
+                Dim deductAmount As Double = Math.Min(remainingToDeduct, availableBalance)
+
+                Dim updateSql As String = "UPDATE hrs_VacationsBalance  SET Remaining = Remaining - " & deductAmount & ", Consumed = ISNULL(Consumed,0) + " & deductAmount & "   WHERE ID = " & balanceId
+
+                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(
+                ClsEmployeesVacations.ConnectionString,
+                Data.CommandType.Text,
+                updateSql
+            )
+
+                remainingToDeduct -= deductAmount
+                deductedFromTransfered += deductAmount
+            Next
+
+            ' ====== 2- لو باقي أيام، خصم من الرصيد التعويضي (BalanceTypeID=3) ======
+            If remainingToDeduct > 0 Then
+                strSql = "SELECT ID, Remaining FROM hrs_VacationsBalance  WHERE EmployeeID = " & EmployeeID & "   AND BalanceTypeID = 3  AND ISNULL(Posted,0) = 0   AND (CancelDate IS NULL OR CancelDate > GETDATE())   AND Remaining > 0   AND ExpireDate >= '" & EndDate.ToString("yyyy-MM-dd") & "'  AND DueDate <= '" & StartDate.ToString("yyyy-MM-dd") & "'   ORDER BY ExpireDate ASC"
+
+                dtBalance = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(
+                ClsEmployeesVacations.ConnectionString,
+                Data.CommandType.Text,
+                strSql
+            ).Tables(0)
+
+                For Each row As DataRow In dtBalance.Rows
+                    If remainingToDeduct <= 0 Then Exit For
+
+                    Dim balanceId As Integer = Convert.ToInt32(row("ID"))
+                    Dim availableBalance As Double = Convert.ToDouble(row("Remaining"))
+                    Dim deductAmount As Double = Math.Min(remainingToDeduct, availableBalance)
+
+                    Dim updateSql As String = "UPDATE hrs_VacationsBalance   SET Remaining = Remaining - " & deductAmount & ",  Consumed = ISNULL(Consumed,0) + " & deductAmount & "   WHERE ID = " & balanceId
+
+                    Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(
+                    ClsEmployeesVacations.ConnectionString,
+                    Data.CommandType.Text,
+                    updateSql
+                )
+
+                    remainingToDeduct -= deductAmount
+                    deductedFromCompensation += deductAmount
+                Next
+            End If
+
+            ' ====== 3- لو باقي أيام، خصم من الرصيد الأساسي (BalanceTypeID=1) ======
+            If remainingToDeduct > 0 Then
+                strSql = "SELECT ID, Remaining FROM hrs_VacationsBalance   WHERE EmployeeID = " & EmployeeID & "  AND BalanceTypeID = 1  AND ISNULL(Posted,0) = 0  AND (CancelDate IS NULL OR CancelDate > GETDATE())   AND Remaining > 0   AND ExpireDate >= '" & EndDate.ToString("yyyy-MM-dd") & "'  AND DueDate <= '" & StartDate.ToString("yyyy-MM-dd") & "'   ORDER BY ExpireDate ASC"
+
+                dtBalance = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(
+                ClsEmployeesVacations.ConnectionString,
+                Data.CommandType.Text,
+                strSql
+            ).Tables(0)
+
+                For Each row As DataRow In dtBalance.Rows
+                    If remainingToDeduct <= 0 Then Exit For
+
+                    Dim balanceId As Integer = Convert.ToInt32(row("ID"))
+                    Dim availableBalance As Double = Convert.ToDouble(row("Remaining"))
+                    Dim deductAmount As Double = Math.Min(remainingToDeduct, availableBalance)
+
+                    Dim updateSql As String = "UPDATE hrs_VacationsBalance   SET Remaining = Remaining - " & deductAmount & ",  Consumed = ISNULL(Consumed,0) + " & deductAmount & "   WHERE ID = " & balanceId
+
+                    Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(
+                    ClsEmployeesVacations.ConnectionString,
+                    Data.CommandType.Text,
+                    updateSql
+                )
+
+                    remainingToDeduct -= deductAmount
+                    deductedFromBasic += deductAmount
+                Next
+            End If
+
+            ' ====== 4- إضافة النتائج إلى DataTable ======
+            Dim rowResult As DataRow = dtResult.NewRow()
+            rowResult("BalanceTypeID") = 2
+            rowResult("DeductedDays") = deductedFromTransfered
+            dtResult.Rows.Add(rowResult)
+
+            rowResult = dtResult.NewRow()
+            rowResult("BalanceTypeID") = 3
+            rowResult("DeductedDays") = deductedFromCompensation
+            dtResult.Rows.Add(rowResult)
+
+            rowResult = dtResult.NewRow()
+            rowResult("BalanceTypeID") = 1
+            rowResult("DeductedDays") = deductedFromBasic
+            dtResult.Rows.Add(rowResult)
+
+            ' ====== 5- لو لسه باقي أيام، الرصيد غير كافي ======
+            If remainingToDeduct > 0 Then
+                Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployeesVacations.ConnectionString)
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page,
+                ObjNavigationHandler.SetLanguage(Page,
+                    "Insufficient balance! Remaining days: " & remainingToDeduct & " / الرصيد غير كافي! الأيام المتبقية: " & remainingToDeduct))
+            End If
+
+            Return dtResult
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 End Class
