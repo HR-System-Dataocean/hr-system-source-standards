@@ -404,7 +404,7 @@ Partial Class frmEndActingAssignment
         Dim positionGrade As String = "—"
         Dim branch As String = "—"
         Dim effectiveFrom As Date = Date.Today
-        Dim effectiveTo As Date = Date.Today
+        Dim effectiveTo As Date? = Nothing
         Dim cancelDate As Object = DBNull.Value
         Dim remarks As String = ""
         Dim actingId As Integer = 0
@@ -417,7 +417,7 @@ Partial Class frmEndActingAssignment
             actingEmployee = Convert.ToString(empRow("ActingCode")) & " - " & Convert.ToString(empRow("ActingName"))
             branch = Convert.ToString(empRow("BranchName"))
             effectiveFrom = Convert.ToDateTime(empRow("EffectiveFrom"))
-            effectiveTo = Convert.ToDateTime(empRow("EffectiveTo"))
+            If Not IsDBNull(empRow("EffectiveTo")) Then effectiveTo = Convert.ToDateTime(empRow("EffectiveTo"))
             cancelDate = empRow("CancelDate")
             remarks = Convert.ToString(empRow("Remarks"))
             actingId = Convert.ToInt32(empRow("ActingEmployeeID"))
@@ -439,7 +439,7 @@ Partial Class frmEndActingAssignment
             End If
             If empRow Is Nothing Then
                 effectiveFrom = Convert.ToDateTime(posRow("EffectiveFrom"))
-                effectiveTo = Convert.ToDateTime(posRow("EffectiveTo"))
+                If Not IsDBNull(posRow("EffectiveTo")) Then effectiveTo = Convert.ToDateTime(posRow("EffectiveTo"))
                 cancelDate = posRow("CancelDate")
                 remarks = Convert.ToString(posRow("Remarks"))
                 actingId = Convert.ToInt32(posRow("ActingEmployeeID"))
@@ -450,8 +450,11 @@ Partial Class frmEndActingAssignment
                 ' both closed
             ElseIf IsDBNull(posRow("CancelDate")) Then
                 cancelDate = DBNull.Value
-                If Convert.ToDateTime(posRow("EffectiveTo")) < effectiveTo Then
-                    effectiveTo = Convert.ToDateTime(posRow("EffectiveTo"))
+                If Not IsDBNull(posRow("EffectiveTo")) Then
+                    Dim posEffectiveTo As Date = Convert.ToDateTime(posRow("EffectiveTo"))
+                    If Not effectiveTo.HasValue OrElse posEffectiveTo < effectiveTo.Value Then
+                        effectiveTo = posEffectiveTo
+                    End If
                 End If
             End If
         End If
@@ -471,7 +474,7 @@ Partial Class frmEndActingAssignment
         hdnHasApprovals.Value = If(hasApprovals, "1", "0")
         hdnHasDirectManager.Value = If(hasManager, "1", "0")
 
-        Dim isActive As Boolean = IsDBNull(cancelDate) AndAlso effectiveTo.Date >= Date.Today
+        Dim isActive As Boolean = IsDBNull(cancelDate) AndAlso (Not effectiveTo.HasValue OrElse effectiveTo.Value.Date >= Date.Today)
         Dim scope As String = BuildScopeText(hasApprovals, hasManager)
         Dim statusText As String = If(isActive, GetRes("lblStatusActive"), GetRes("lblStatusClosed"))
 
@@ -511,8 +514,8 @@ Partial Class frmEndActingAssignment
         btnEndAssignment.Enabled = isActive
 
         If isActive Then
-            If effectiveTo.Year < 2900 Then
-                txtEffectiveTo.Value = effectiveTo
+            If effectiveTo.HasValue AndAlso effectiveTo.Value.Year < 2900 Then
+                txtEffectiveTo.Value = effectiveTo.Value
             Else
                 txtEffectiveTo.Value = Date.Today
             End If

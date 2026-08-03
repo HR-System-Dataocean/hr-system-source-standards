@@ -170,7 +170,8 @@ Partial Class frmEmployeesEndofServiceAdvance
             ' =============================================
             ' التحقق من طلبات الخدمة الذاتية (COUNT فقط)
             ' =============================================
-            If IsShowActingPopUpEndServiceEnabled(ClsEmployee.CompanyID) AndAlso HasSelfServiceRequests(IntEmployeeId) Then
+            If IsShowActingPopUpEndServiceEnabled(ClsEmployee.CompanyID) AndAlso
+               (HasSelfServiceRequests(IntEmployeeId) OrElse HasPendingEmployeeItems(IntEmployeeId)) Then
                 ' فتح Popup وتمرير EmployeeID + آخر يوم عمل
                 Dim lastWorkingDate As String = CDate(wdcEndOfServiceDate.Value).ToString("dd/MM/yyyy")
                 Dim script As String = "window.open('frmSelfServiceRequestsPopup.aspx?EmployeeID=" & IntEmployeeId &
@@ -557,6 +558,17 @@ Partial Class frmEmployeesEndofServiceAdvance
             cmdstring = cmdstring & Environment.NewLine & "update hrs_employees set ExcludeDate = null where ID = " & IntEmployeeId
             cmdstring = cmdstring & Environment.NewLine & "update hrs_EmployeesJoins set EndOfServiceID = null,EndOfServiceDate = null,EndOfServiceReson = null,EndOfServiceDateText = null,EOSDays = null,EOSMonths = null,EOSYears = null where CONVERT(varchar(10),EndOfServiceDate,103) = '" & lasteosdate.ToString("dd/MM/yyyy") & "' and EmployeeID = " & IntEmployeeId
             cmdstring = cmdstring & Environment.NewLine & "update hrs_VacationsBalance set EndServiceDate = null where EmployeeID = " & IntEmployeeId
+            cmdstring = cmdstring & Environment.NewLine &
+                "update hrs_ActingEmployeeAssignments set EffectiveTo=CONVERT(date,GETDATE()), CancelDate=GETDATE()," &
+                " CancelReason=N'Refund end Service', CancelUserID=" & ClsEmployeesTrancations.DataBaseUserRelatedID &
+                " where SourceID=" & IntEmployeeId & " and CancelDate is null and SourceForm='frmEmployeesEndofService'"
+            cmdstring = cmdstring & Environment.NewLine &
+                "update hrs_ActingPositionAssignments set EffectiveTo=CONVERT(date,GETDATE()), CancelDate=GETDATE()," &
+                " CancelReason=N'Refund end Service', CancelUserID=" & ClsEmployeesTrancations.DataBaseUserRelatedID &
+                " where SourceID=" & IntEmployeeId & " and CancelDate is null and SourceForm='frmEmployeesEndofService'"
+            cmdstring = cmdstring & Environment.NewLine &
+                "update hrs_EmployeesItems set ReturnedDate=null, ReturningItemstatus=null, SourceForm=null, SourceID=null" &
+                " where SourceID=" & IntEmployeeId & " and SourceForm='frmEmployeesEndofService' and CancelDate is null"
             Dim rws As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesTrancations.ConnectionString, CommandType.Text, "Set DateFormat DMY; " & cmdstring)
             If rws > 0 Then
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ClsObjNav.SetLanguage(Page, "Refunds Done /الإستعادة تمت "))
@@ -2257,7 +2269,7 @@ Partial Class frmEmployeesEndofServiceAdvance
                 "    WHERE OriginalEmployeeID = @EmployeeID " &
                 "    AND CancelDate IS NULL " &
                 "    AND EffectiveFrom <= GETDATE() " &
-                "    AND EffectiveTo >= GETDATE()" &
+                "    AND (EffectiveTo IS NULL OR EffectiveTo >= GETDATE())" &
                 ") THEN 0 " &
                 "WHEN EXISTS (" &
                 "    SELECT 1 FROM SS_RequestActions " &
@@ -2290,6 +2302,31 @@ Partial Class frmEmployeesEndofServiceAdvance
                 End Using
             End Using
 
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    ' عهد الموظف المؤكدة وغير المسلّمة بعد
+    Private Function HasPendingEmployeeItems(ByVal EmployeeID As Integer) As Boolean
+        Try
+            Dim clsEmployee As New Clshrs_Employees(Page)
+            Dim sql As String =
+                "SELECT CASE WHEN EXISTS (" &
+                "  SELECT 1 FROM hrs_EmployeesItems" &
+                "  WHERE EmployeeID=@EmployeeID" &
+                "  AND CancelDate IS NULL" &
+                "  AND ISNULL(IsConfirmed,0)=1" &
+                "  AND ReturnedDate IS NULL" &
+                ") THEN 1 ELSE 0 END"
+
+            Using conn As New SqlConnection(clsEmployee.ConnectionString)
+                Using cmd As New SqlCommand(sql, conn)
+                    cmd.Parameters.AddWithValue("@EmployeeID", EmployeeID)
+                    conn.Open()
+                    Return Convert.ToInt32(cmd.ExecuteScalar()) > 0
+                End Using
+            End Using
         Catch ex As Exception
             Return False
         End Try

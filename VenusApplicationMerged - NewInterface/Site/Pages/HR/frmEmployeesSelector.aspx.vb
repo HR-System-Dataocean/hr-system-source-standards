@@ -3,7 +3,6 @@ Imports System.Data.SqlClient
 Imports System.Diagnostics
 Imports System.Globalization
 Imports System.IO
-Imports System.Windows.Forms
 Imports OfficeOpenXml
 Imports Venus.Application.SystemFiles.HumanResource
 Imports Venus.Application.SystemFiles.System
@@ -43,6 +42,8 @@ Partial Class frmEmployeesSelector
         Dim ClsSearchs As New Clssys_Searchs(Page)
         Dim clsContracttype As New Clshrs_ContractTypes(Page)
         Dim clsSponsor As New Clshrs_Sponsors(Page)
+
+        SetPageDirection()
 
         Dim clsSearchsColumns As New Clssys_SearchsColumns(Page)
         If ClsObjects.Find(" Code='" & ClsEmployee.Table.Trim & "'") Then
@@ -102,33 +103,135 @@ Partial Class frmEmployeesSelector
             Page.Session.Add("Lage", lblLage.Text)
             Page.Session.Add("ConnectionString", ClsEmployee.ConnectionString)
 
+            ApplyModernUiLabels(ClsNavigationHandler, StrMode)
+
             If StrMode = "Att" Then
-                Label_Header.Text = IIf(lblLage.Text = 0, "<b> Attendance Preparation : </b>(This form is designed to prepare or refund for attendance)", "<b>شاشة تجهيز الدوام </b>(تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للدوام)")
-                LinkButton_Import.Visible = True
-                ImageButton_Import.Visible = True
-                LinkButton_Fingerprint.Visible = True
-                ImageButton_Fingerprint.Visible = True
+                Label_Header.Text = ClsNavigationHandler.SetLanguage(Page, "Attendance Preparation/تجهيز الدوام")
+                Label_HeaderSub.Text = ClsNavigationHandler.SetLanguage(Page, "This form is designed to prepare or refund for attendance./تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للدوام")
+                LinkButton_Prepare.Text = ClsNavigationHandler.SetLanguage(Page, "Prepare Attendance/تجهيز الدوام")
+                LinkButton_Refund.Text = ClsNavigationHandler.SetLanguage(Page, "Cancel Preparation/إلغاء التجهيز")
+                spanImport.Visible = True
+                spanFingerprint.Visible = True
                 UwgSearchEmployees.Columns(4).Hidden = True
                 ddlFilter.Items(3).Enabled = True
-                'fltr_Row1.Visible = True
             End If
 
             If StrMode = "Sal" Then
-                Label_Header.Text = IIf(lblLage.Text = 0, "<b> Salary Preparation : </b>(This form is designed to prepare or refund for salaries)", "<b>شاشة تجهيز الرواتب </b>(تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للرواتب)")
+                Label_Header.Text = ClsNavigationHandler.SetLanguage(Page, "Salary Preparation/تجهيز رواتب الموظفين")
+                Label_HeaderSub.Text = ClsNavigationHandler.SetLanguage(Page, "This form is designed to prepare or refund for salaries./تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للرواتب")
+                LinkButton_Prepare.Text = ClsNavigationHandler.SetLanguage(Page, "Prepare Salaries/تجهيز الرواتب")
+                LinkButton_Refund.Text = ClsNavigationHandler.SetLanguage(Page, "Cancel Preparation/إلغاء التجهيز")
                 UwgSearchEmployees.Columns(4).Hidden = True
                 ddlFilter.Items(3).Enabled = True
-                'fltr_Row1.Visible = True
+                pnlPeriodAlert.Visible = True
             End If
 
             If StrMode = "Dis" Then
-                Label_Header.Text = IIf(lblLage.Text = 0, "<b> Salary Distribution : </b>(This form is designed to prepare or refund for salaries distribution)", "<b>شاشة توزيع الرواتب </b>(تم تصميم هذا النموذج لتجهيز أو إلغاء توزيع الرواتب)")
+                Label_Header.Text = ClsNavigationHandler.SetLanguage(Page, "Salary Distribution/توزيع الرواتب")
+                Label_HeaderSub.Text = ClsNavigationHandler.SetLanguage(Page, "This form is designed to prepare or refund for salaries distribution./تم تصميم هذا النموذج لتجهيز أو إلغاء توزيع الرواتب")
+                LinkButton_Prepare.Text = ClsNavigationHandler.SetLanguage(Page, "Distribute Salary/توزيع الراتب")
+                LinkButton_Refund.Text = ClsNavigationHandler.SetLanguage(Page, "Cancel Distribution/إلغاء التوزيع")
                 UwgSearchEmployees.Columns(4).Hidden = False
-                LinkButton_Prepare.Text = IIf(lblLage.Text = 0, "Distribute Salary", "توزيع الراتب")
                 ddlFilter.Items(3).Enabled = False
-                'fltr_Row1.Visible = False
             End If
             ddlFilter.SelectedValue = ConfigurationManager.AppSettings("AttendaceFilterDefaultValue")
         End If
+
+        UpdateCurrentPeriodBadge()
+        SetPageDirection()
+        RegisterPageDirectionScript()
+    End Sub
+
+    Private Function ResolvePageDirection() As String
+        Try
+            If ProfileCls.CurrentLanguage = "Ar" Then
+                Return "rtl"
+            End If
+        Catch
+        End Try
+        Try
+            If Session("Language") IsNot Nothing Then
+                Dim lang As String = Session("Language").ToString()
+                If lang = "ar" OrElse lang = "AR" OrElse lang = "1" Then
+                    Return "rtl"
+                End If
+            End If
+        Catch
+        End Try
+        Try
+            If lblLage IsNot Nothing AndAlso lblLage.Text = "1" Then
+                Return "rtl"
+            End If
+        Catch
+        End Try
+        Return "ltr"
+    End Function
+
+    Private Sub SetPageDirection()
+        Try
+            DIV.Attributes("dir") = ResolvePageDirection()
+        Catch
+        End Try
+    End Sub
+
+    Private Sub RegisterPageDirectionScript()
+        Try
+            Dim sb As New System.Text.StringBuilder()
+            sb.AppendLine("var pageDirection = '" & ResolvePageDirection() & "';")
+            sb.AppendLine("var esClientIds = {")
+            sb.AppendLine("  DdlPeriods: '" & If(DdlPeriods Is Nothing, "", DdlPeriods.ClientID) & "',")
+            sb.AppendLine("  lblCurrentPeriodValue: '" & If(lblCurrentPeriodValue Is Nothing, "", lblCurrentPeriodValue.ClientID) & "',")
+            sb.AppendLine("  ImageButton_Prepare: '" & If(ImageButton_Prepare Is Nothing, "", ImageButton_Prepare.ClientID) & "',")
+            sb.AppendLine("  LinkButton_Prepare: '" & If(LinkButton_Prepare Is Nothing, "", LinkButton_Prepare.ClientID) & "',")
+            sb.AppendLine("  ImageButton_Refund: '" & If(ImageButton_Refund Is Nothing, "", ImageButton_Refund.ClientID) & "',")
+            sb.AppendLine("  LinkButton_Refund: '" & If(LinkButton_Refund Is Nothing, "", LinkButton_Refund.ClientID) & "',")
+            sb.AppendLine("  ImageButton1: '" & If(ImageButton1 Is Nothing, "", ImageButton1.ClientID) & "'")
+            sb.AppendLine("};")
+            ClientScript.RegisterClientScriptBlock(Me.GetType(), "pageDirection", sb.ToString(), True)
+        Catch
+        End Try
+    End Sub
+
+    Private Sub ApplyModernUiLabels(ByVal nav As Venus.Shared.Web.NavigationHandler, ByVal strMode As String)
+        lblCurrentPeriod.Text = nav.SetLanguage(Page, "Current Period:/الفترة الحالية:")
+        lblCode.Text = nav.SetLanguage(Page, "Employee Code/كود الموظف")
+        lblCode1.Text = nav.SetLanguage(Page, "Payroll Period/فترة الرواتب")
+        lblDepartment.Text = nav.SetLanguage(Page, "Department/الإدارة")
+        lblBranch.Text = nav.SetLanguage(Page, "Branch/الفرع")
+        Label_Contract.Text = nav.SetLanguage(Page, "Contract Type/نوع التعاقد")
+        Label_Sponsor.Text = nav.SetLanguage(Page, "Sponsor/الكفيل")
+        lblNationality.Text = nav.SetLanguage(Page, "Nationality/الجنسية")
+        Label_Project.Text = nav.SetLanguage(Page, "Employee Scope/نطاق الموظفين")
+        lblFilter.Text = nav.SetLanguage(Page, "Preparation Status/حالة التجهيز")
+        lblMainInfo.Text = nav.SetLanguage(Page, "Main Info./عام")
+        lnkReviewNow.Text = nav.SetLanguage(Page, "Review Now/مراجعة الآن")
+        lblPeriodAlertTitle.Text = nav.SetLanguage(Page, "Alert: Unprepared salaries exist from the previous period./تنبيه: توجد رواتب غير مجهزة من الفترة السابقة.")
+        lblPeriodAlertSub.Text = nav.SetLanguage(Page, "Review previous-period cases through Retroactive Payroll Processing./راجع حالات الفترة السابقة من خلال معالجة الرواتب بأثر رجعي.")
+        If strMode = "Sal" Then
+            lblGridNote.Text = nav.SetLanguage(Page, "* Standard preparation applies to the selected period. Unprepared salaries from earlier periods are reviewed through Retroactive Payroll Processing./* التجهيز القياسي يطبق على الفترة المحددة. الرواتب غير المجهزة من فترات سابقة تراجع عبر معالجة الرواتب بأثر رجعي.")
+        Else
+            lblGridNote.Text = ""
+        End If
+    End Sub
+
+    Private Sub UpdateCurrentPeriodBadge()
+        Try
+            If DdlPeriods IsNot Nothing AndAlso DdlPeriods.SelectedItem IsNot Nothing Then
+                lblCurrentPeriodValue.Text = DdlPeriods.SelectedItem.Text
+            End If
+        Catch
+        End Try
+    End Sub
+
+    Protected Sub lnkReviewNow_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Try
+            If ddlFilter IsNot Nothing AndAlso ddlFilter.Items.FindByValue("2") IsNot Nothing Then
+                ddlFilter.SelectedValue = "2"
+            End If
+            GetData(True)
+            pnlPeriodAlert.Visible = False
+        Catch
+        End Try
     End Sub
 
     Protected Sub DdlPeriods_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DdlPeriods.SelectedIndexChanged
@@ -141,6 +244,7 @@ Partial Class frmEmployeesSelector
         DropDownList_Project.Items(0).Text = ClsNavigationHandler.SetLanguage(Page, "[All Employee Has Not Attendance Transactions]/ [ جميع الموظفين بدون إدخالات حضور وانصراف]")
         DropDownList_Project.Items.Insert(0, New System.Web.UI.WebControls.ListItem(ClsNavigationHandler.SetLanguage(Page, "[All Employee Has Attendance Transactions]/ [ جميع الموظفين مع إدخالات حضور وانصراف]"), -1))
         DropDownList_Project.Items.Insert(0, New System.Web.UI.WebControls.ListItem(ClsNavigationHandler.SetLanguage(Page, "[All Employees]/ [ جميع الموظفين]"), -2))
+        UpdateCurrentPeriodBadge()
         GetData(True)
         HandleShowVacationsNotifications()
     End Sub

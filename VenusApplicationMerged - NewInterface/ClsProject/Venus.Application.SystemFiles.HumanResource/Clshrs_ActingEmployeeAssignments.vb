@@ -21,7 +21,7 @@ Public Class Clshrs_ActingEmployeeAssignments
     Public Property OriginalEmployeeID As Integer
     Public Property ActingEmployeeID As Integer
     Public Property EffectiveFrom As Date
-    Public Property EffectiveTo As Date
+    Public Property EffectiveTo As Date?
     Public Property Reason As String
     Public Property Remarks As String
     Public Property SourceForm As String
@@ -142,7 +142,8 @@ Public Class Clshrs_ActingEmployeeAssignments
         command.Parameters.Add("@OriginalEmployeeID", SqlDbType.Int).Value = OriginalEmployeeID
         command.Parameters.Add("@ActingEmployeeID", SqlDbType.Int).Value = ActingEmployeeID
         command.Parameters.Add("@EffectiveFrom", SqlDbType.DateTime).Value = EffectiveFrom
-        command.Parameters.Add("@EffectiveTo", SqlDbType.DateTime).Value = EffectiveTo
+        command.Parameters.Add("@EffectiveTo", SqlDbType.DateTime).Value =
+            If(EffectiveTo.HasValue, CType(EffectiveTo.Value, Object), CType(DBNull.Value, Object))
         command.Parameters.Add("@Reason", SqlDbType.NVarChar, 500).Value = If(Reason, "")
         command.Parameters.Add("@Remarks", SqlDbType.NVarChar, 1000).Value = If(Remarks, "")
         command.Parameters.Add("@SourceForm", SqlDbType.NVarChar, 100).Value =
@@ -158,7 +159,11 @@ Public Class Clshrs_ActingEmployeeAssignments
         OriginalEmployeeID = Convert.ToInt32(row("OriginalEmployeeID"))
         ActingEmployeeID = Convert.ToInt32(row("ActingEmployeeID"))
         EffectiveFrom = Convert.ToDateTime(row("EffectiveFrom"))
-        EffectiveTo = Convert.ToDateTime(row("EffectiveTo"))
+        If IsDBNull(row("EffectiveTo")) Then
+            EffectiveTo = Nothing
+        Else
+            EffectiveTo = Convert.ToDateTime(row("EffectiveTo"))
+        End If
         Reason = If(IsDBNull(row("Reason")), "", Convert.ToString(row("Reason")))
         Remarks = If(IsDBNull(row("Remarks")), "", Convert.ToString(row("Remarks")))
         If row.Table.Columns.Contains("SourceForm") AndAlso Not IsDBNull(row("SourceForm")) Then

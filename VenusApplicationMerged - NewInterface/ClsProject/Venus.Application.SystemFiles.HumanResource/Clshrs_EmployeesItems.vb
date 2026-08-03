@@ -15,9 +15,9 @@ Public Class Clshrs_EmployeesItemsBase
     Public Sub New(ByVal Page As Web.UI.Page)
         MyBase.New(Page)
         mTable = " hrs_EmployeesItems "
-        mInsertParameter = " EmployeeID,ItemID,ReceivedDate,ReturnedDate,ReceivingItemstatus,ReturningItemstatus,Remarks,RegUserID,RegComputerID,IsFromAssets,IsConfirmed "
-        mInsertParameterValues = " @EmployeeID,@ItemID,@ReceivedDate,@ReturnedDate,@ReceivingItemstatus,@ReturningItemstatus,@Remarks,@RegUserID,@RegComputerID,@IsFromAssets,@IsConfirmed "
-        mUpdateParameter = " EmployeeID=@EmployeeID,ItemID=@ItemID,ReceivedDate=@ReceivedDate,ReturnedDate=@ReturnedDate,ReceivingItemstatus=@ReceivingItemstatus,ReturningItemstatus=@ReturningItemstatus,Remarks=@Remarks,IsFromAssets=@IsFromAssets,IsConfirmed=@IsConfirmed "
+        mInsertParameter = " EmployeeID,ItemID,ReceivedDate,ReturnedDate,ReceivingItemstatus,ReturningItemstatus,Remarks,RegUserID,RegComputerID,IsFromAssets,IsConfirmed,SourceForm,SourceID "
+        mInsertParameterValues = " @EmployeeID,@ItemID,@ReceivedDate,@ReturnedDate,@ReceivingItemstatus,@ReturningItemstatus,@Remarks,@RegUserID,@RegComputerID,@IsFromAssets,@IsConfirmed,@SourceForm,@SourceID "
+        mUpdateParameter = " EmployeeID=@EmployeeID,ItemID=@ItemID,ReceivedDate=@ReceivedDate,ReturnedDate=@ReturnedDate,ReceivingItemstatus=@ReceivingItemstatus,ReturningItemstatus=@ReturningItemstatus,Remarks=@Remarks,IsFromAssets=@IsFromAssets,IsConfirmed=@IsConfirmed,SourceForm=@SourceForm,SourceID=@SourceID "
         mSelectCommand = " Select * From  " & mTable
         mInsertCommand = " insert into " & mTable & "( " & mInsertParameter & ")Values(" & mInsertParameterValues & ")"
         mUpdateCommand = " Update " & mTable & " Set " & mUpdateParameter
@@ -44,6 +44,8 @@ Public Class Clshrs_EmployeesItemsBase
     Private mIsFromAssets As Object
     Private mIsConfirmed As Object
     Private mRemarks As String
+    Private mSourceForm As String
+    Private mSourceID As Object
     Private mRegUserID As Object
     Private mRegComputerID As Object
     Private mRegDate As Object
@@ -137,6 +139,22 @@ Public Class Clshrs_EmployeesItemsBase
         End Get
         Set(ByVal Value As String)
             mRemarks = Value
+        End Set
+    End Property
+    Public Property SourceForm() As String
+        Get
+            Return mSourceForm
+        End Get
+        Set(ByVal Value As String)
+            mSourceForm = Value
+        End Set
+    End Property
+    Public Property SourceID() As Object
+        Get
+            Return mSourceID
+        End Get
+        Set(ByVal Value As Object)
+            mSourceID = Value
         End Set
     End Property
     Public Property RegUserID() As Object
@@ -367,6 +385,8 @@ Public Class Clshrs_EmployeesItemsBase
             mReceivingItemstatus = String.Empty
             mReturningItemstatus = String.Empty
             mRemarks = String.Empty
+            mSourceForm = String.Empty
+            mSourceID = Nothing
             mRegUserID = 0
             mRegComputerID = 0
             mIsConfirmed = False
@@ -565,6 +585,16 @@ Public Class Clshrs_EmployeesItemsBase
                 mIsConfirmed = mDataHandler.DataValue_Out(.Item("IsConfirmed"), SqlDbType.Bit)
                 mIsFromAssets = mDataHandler.DataValue_Out(.Item("IsFromAssets"), SqlDbType.Bit)
                 mRemarks = mDataHandler.DataValue_Out(.Item("Remarks"), SqlDbType.VarChar)
+                If Ds.Tables(0).Columns.Contains("SourceForm") AndAlso Not IsDBNull(.Item("SourceForm")) Then
+                    mSourceForm = Convert.ToString(.Item("SourceForm"))
+                Else
+                    mSourceForm = String.Empty
+                End If
+                If Ds.Tables(0).Columns.Contains("SourceID") AndAlso Not IsDBNull(.Item("SourceID")) Then
+                    mSourceID = mDataHandler.DataValue_Out(.Item("SourceID"), SqlDbType.Int, True)
+                Else
+                    mSourceID = Nothing
+                End If
                 mRegUserID = mDataHandler.DataValue_Out(.Item("RegUserID"), SqlDbType.Int, True)
                 mRegComputerID = mDataHandler.DataValue_Out(.Item("RegComputerID"), SqlDbType.Int, True)
                 mRegDate = mDataHandler.DataValue_Out(.Item("RegDate"), SqlDbType.DateTime)
@@ -595,6 +625,11 @@ Public Class Clshrs_EmployeesItemsBase
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@IsFromAssets", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mIsFromAssets, SqlDbType.Bit)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@IsConfirmed", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mIsConfirmed, SqlDbType.Bit)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Remarks", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mRemarks, SqlDbType.VarChar)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@SourceForm", SqlDbType.NVarChar, 100)).Value =
+                If(String.IsNullOrEmpty(mSourceForm), CType(DBNull.Value, Object), mSourceForm)
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@SourceID", SqlDbType.Int)).Value =
+                If(mSourceID Is Nothing OrElse IsDBNull(mSourceID) OrElse Convert.ToString(mSourceID) = "" OrElse Convert.ToInt32(mSourceID) = 0,
+                   CType(DBNull.Value, Object), Convert.ToInt32(mSourceID))
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@RegUserID", SqlDbType.Int)).Value = mDataHandler.DataValue_In(Me.mDataBaseUserRelatedID, SqlDbType.Int, True)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@RegComputerID", SqlDbType.Int)).Value = mDataHandler.DataValue_In(mRegComputerID, SqlDbType.Int, True)
         Catch ex As Exception

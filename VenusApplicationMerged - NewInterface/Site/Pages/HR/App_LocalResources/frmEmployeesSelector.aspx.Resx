@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LinkButton_PrepareResource1.Text" xml:space="preserve">
-    <value>تجهيز</value>
+    <value>تجهيز الرواتب</value>
   </data>
   <data name="LinkButton_RefundResource1.Text" xml:space="preserve">
-    <value>استعادة</value>
+    <value>إلغاء التجهيز</value>
   </data>
   <data name="ImageButton_HelpResource1.ToolTip" xml:space="preserve">
     <value>مساعدة</value>
@@ -136,13 +136,13 @@
     <value>عام</value>
   </data>
   <data name="lblCodeResource1.Text" xml:space="preserve">
-    <value>الكود</value>
+    <value>كود الموظف</value>
   </data>
   <data name="lblCode1Resource1.Text" xml:space="preserve">
-    <value>الفترة الزمنية</value>
+    <value>فترة الرواتب</value>
   </data>
   <data name="lblDepartmentResource1.Text" xml:space="preserve">
-    <value>القسم</value>
+    <value>الإدارة</value>
   </data>
   <data name="lblBranchResource1.Text" xml:space="preserve">
     <value>الفرع</value>
@@ -175,7 +175,7 @@
     <value>جميع البيانات</value>
   </data>
   <data name="lblFilterResource1.Text" xml:space="preserve">
-    <value>تصفية البيانات</value>
+    <value>حالة التجهيز</value>
   </data>
   <data name="NotPreparedRes.Text" xml:space="preserve">
     <value>الغير المجهز</value>
