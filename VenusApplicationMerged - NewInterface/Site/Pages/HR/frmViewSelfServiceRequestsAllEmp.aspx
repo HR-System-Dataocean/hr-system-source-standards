@@ -84,7 +84,7 @@
             var mode = window.location.search.split('&')[0];
             var RequestSerial = Row.getCellFromKey("ID").getValue();
             var FormCode = Row.getCellFromKey("FormCode").getValue();
-            var Type = 2;
+            var Type = 3;
             var CanBeCanceled = false;
 
             if (cell.Column.Index == 8) {

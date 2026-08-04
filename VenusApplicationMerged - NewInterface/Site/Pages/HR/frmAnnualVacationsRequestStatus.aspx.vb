@@ -40,14 +40,14 @@ Partial Class frmEmployeesVacations
             Dim _sys_User As New Clssys_Users(Page)
             _sys_User.Find("ID = '" & User & "'")
 
-            If Not btnCancelRequest.Visible Then
+            If Type = "3" Then
                 Dim strCheckPermission As String = " select CanDeleteSelfServiceTransactions from SS_SelfServiceTransactionUserPermissions where UserID=" & _sys_User.ID & ""
                 Dim objPermission As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strCheckPermission)
                 If objPermission IsNot Nothing AndAlso Not IsDBNull(objPermission) AndAlso CBool(objPermission) Then
-                    btnCancelRequest.Visible = True
+                    btnCancelRequestAllEmployee.Visible = True
+                    txtCancelReason.Visible = True
                 End If
             End If
-            txtCancelReason.Visible = btnCancelRequest.Visible
 
             Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
             If Not IsPostBack Then
@@ -214,7 +214,7 @@ Partial Class frmEmployeesVacations
         Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
         Dim FormCode As String = Request.QueryString.Item("FormCode")
         Dim Type As String = Request.QueryString.Item("Type")
-        If Type = 2 Then
+        If Type = 2 Or Type = 3 Or Type = 1 Then
             Try
                 Dim User As String = String.Empty
                 Dim WebHandler As New Venus.Shared.Web.WebHandler
@@ -418,6 +418,14 @@ Partial Class frmEmployeesVacations
         Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
         Dim FormCode As String = Request.QueryString.Item("FormCode")
 
+        Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
+        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
+
+        If String.IsNullOrWhiteSpace(txtCancelReason.Text) Then
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please enter cancel reason./الرجاء إدخال سبب الإلغاء "))
+            Return
+        End If
+
         Dim User As String = String.Empty
         Dim WebHandler As New Venus.Shared.Web.WebHandler
 
@@ -432,8 +440,7 @@ Partial Class frmEmployeesVacations
 
 
             If ClsEmployeesVacations.ExpectedStartDate <= DateTime.Now.Date Then
-                Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
-                Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
+
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This request cant be canceled its start Before Current day./لا يمكن إلعاء الطلب لان بدايته قبل اليوم الحالي "))
                 Return
             End If
@@ -442,8 +449,7 @@ Partial Class frmEmployeesVacations
             Dim transCount As Integer = Convert.ToInt32(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, CommandType.Text, hasTransSql,
                 New SqlParameter("@VacationID", ClsEmployeesVacations.ID)))
             If transCount > 0 Then
-                Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
-                Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
+
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "This request cannot be canceled because payables were added for it./لا يمكن الغاء الاجازة لانه تم اضافة مستحقات لها"))
                 Return
             End If
@@ -451,97 +457,110 @@ Partial Class frmEmployeesVacations
         End If
 
         If CancelRequest(FormCode, RequestSerial) Then
+            ApplyAfterVacationRequestCanceled(FormCode, RequestSerial, ClsEmployees.ID)
+        End If
+    End Sub
+
+    Protected Sub CancelRequestAllEmployee_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles btnCancelRequestAllEmployee.Command
+        Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
+        Dim FormCode As String = Request.QueryString.Item("FormCode")
+
+        If CancelRequestByPermission(FormCode, RequestSerial) Then
+            Dim requestEmployeeID As Integer = 0
+            Try
+                Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
+                Dim objEmp As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, " select EmployeeID from SS_VacationRequest where ID=" & RequestSerial & "")
+                If objEmp IsNot Nothing AndAlso Not IsDBNull(objEmp) Then
+                    requestEmployeeID = CInt(objEmp)
+                End If
+            Catch ex As Exception
+            End Try
+            If requestEmployeeID = 0 AndAlso ClsEmployees IsNot Nothing Then
+                requestEmployeeID = ClsEmployees.ID
+            End If
+            ApplyAfterVacationRequestCanceled(FormCode, RequestSerial, requestEmployeeID)
+        End If
+    End Sub
+
+    Private Sub ApplyAfterVacationRequestCanceled(FormCode As String, RequestSerial As Integer, EmployeeID As Integer)
+        FillEmployeeVacations(EmployeeID, False)
+
+        ClsEmployeesVacations.Find(" Src = '" & FormCode & "' and VacationRequestID=" & RequestSerial)
+        Dim Diffe As Single = 0
+        If ClsEmployeesVacations.ID > 0 Then
+
+            If ClsEmployeesVacations.VacationTypeID = 1 Then
+                If ClsEmployeesVacations.ExpectedStartDate > DateTime.Now.Date Then
+                    ClsEmployeesVacations.CancelDate = DateTime.Now.Date
 
 
 
 
-            FillEmployeeVacations(ClsEmployees.ID, False)
+                    Try
+                        If ClsEmployeesVacations.ExpectedEndDate <> Nothing Then
+                            Diffe = (DateDiff(DateInterval.Day, ClsEmployeesVacations.ExpectedStartDate, ClsEmployeesVacations.ExpectedEndDate))
+                        End If
+                    Catch ex As Exception
+                        Diffe = 0
+                    End Try
 
 
-            ClsEmployeesVacations.Find(" Src = '" & FormCode & "' and VacationRequestID=" & RequestSerial)
-            Dim Diffe As Single = 0
-            If ClsEmployeesVacations.ID > 0 Then
-
-                If ClsEmployeesVacations.VacationTypeID = 1 Then
-                    If ClsEmployeesVacations.ExpectedStartDate > DateTime.Now.Date Then
-                        ClsEmployeesVacations.CancelDate = DateTime.Now.Date
-
-
-
-
-                        Try
-                            If ClsEmployeesVacations.ExpectedEndDate <> Nothing Then
-                                Diffe = (DateDiff(DateInterval.Day, ClsEmployeesVacations.ExpectedStartDate, ClsEmployeesVacations.ExpectedEndDate))
-                            End If
-                        Catch ex As Exception
-                            Diffe = 0
-                        End Try
-
-
-                        Dim str = "SELECT    Consumed FROM hrs_VacationsBalance where BalanceTypeID=2 and EmployeeID=" & ClsEmployees.ID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "')"
-                        Dim remainTrans As Decimal
-                        remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, str)
-                        If remainTrans = 0 Then
-                            str = "SELECT    Consumed FROM hrs_VacationsBalance where BalanceTypeID=2 and EmployeeID=" & ClsEmployees.ID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "')"
-                            remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, str)
-                            If remainTrans > 0 Then
-                                str = "SELECT    ExpireDate FROM hrs_VacationsBalance where BalanceTypeID=2 and EmployeeID=" & ClsEmployees.ID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "')"
-                                Dim expire As Date = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, str)
-                                Dim AllowDays = (DateDiff(DateInterval.Day, ClsEmployeesVacations.ExpectedStartDate, expire))
-                                If AllowDays < remainTrans Then
-                                    remainTrans = AllowDays
-                                End If
+                    Dim str = "SELECT    Consumed FROM hrs_VacationsBalance where BalanceTypeID=2 and EmployeeID=" & EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "')"
+                    Dim remainTrans As Decimal
+                    remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, str)
+                    If remainTrans = 0 Then
+                        str = "SELECT    Consumed FROM hrs_VacationsBalance where BalanceTypeID=2 and EmployeeID=" & EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "')"
+                        remainTrans = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, str)
+                        If remainTrans > 0 Then
+                            str = "SELECT    ExpireDate FROM hrs_VacationsBalance where BalanceTypeID=2 and EmployeeID=" & EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "')"
+                            Dim expire As Date = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, str)
+                            Dim AllowDays = (DateDiff(DateInterval.Day, ClsEmployeesVacations.ExpectedStartDate, expire))
+                            If AllowDays < remainTrans Then
+                                remainTrans = AllowDays
                             End If
                         End If
-                        If remainTrans > Diffe Then
-                            Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & Diffe & " ,Remaining = Remaining+" & Diffe & " where BalanceTypeID=2 and EmployeeID=" & ClsEmployees.ID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "') and ISNULL(Posted,0)=0"
-                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateTrans)
-                        Else
-                            If remainTrans > 0 Then
-                                Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & remainTrans & " ,Remaining = Remaining+" & remainTrans & " where BalanceTypeID=2 and EmployeeID=" & ClsEmployees.ID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "') and ISNULL(Posted,0)=0"
-                                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateTrans)
-                            End If
-                            Dim strUpdateNew As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & (Diffe - remainTrans) & " ,Remaining = Remaining+" & (Diffe - remainTrans) & " where BalanceTypeID<>2 and EmployeeID=" & ClsEmployees.ID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "') and ISNULL(Posted,0)=0"
-                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateNew)
-                        End If
-
-
-                        'ClsEmployeesVacations.Update("ID=" & ClsEmployeesVacations.ID)
-
+                    End If
+                    If remainTrans > Diffe Then
+                        Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & Diffe & " ,Remaining = Remaining+" & Diffe & " where BalanceTypeID=2 and EmployeeID=" & EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "') and ISNULL(Posted,0)=0"
+                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateTrans)
                     Else
-                        'Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
-                        'Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
-                        'Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " This request cant be canceled its start Before Current day./لا يمكن إلعاء الطلب لان بدايته قبل اليوم الحالي "))
-                        'Return
+                        If remainTrans > 0 Then
+                            Dim strUpdateTrans As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & remainTrans & " ,Remaining = Remaining+" & remainTrans & " where BalanceTypeID=2 and EmployeeID=" & EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "') and ISNULL(Posted,0)=0"
+                            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateTrans)
+                        End If
+                        Dim strUpdateNew As String = "UPDATE [dbo].[hrs_VacationsBalance]  SET Consumed = Consumed-" & (Diffe - remainTrans) & " ,Remaining = Remaining+" & (Diffe - remainTrans) & " where BalanceTypeID<>2 and EmployeeID=" & EmployeeID & " and ExpireDate >='" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "' and DueDate<='" & ClsEmployeesVacations.ExpectedStartDate.ToString("yyyy-MM-dd") & "' and (CancelDate is null or CancelDate>'" & ClsEmployeesVacations.ExpectedEndDate.ToString("yyyy-MM-dd") & "') and ISNULL(Posted,0)=0"
+                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateNew)
                     End If
 
 
-                End If
-
-                'ضبط الارصدة في الاجازات التالية
-                Dim strAdjustQuery As String = "select ID from hrs_EmployeesVacations where EmployeeID=" & ClsEmployees.ID & " and id > " & ClsEmployeesVacations.ID & ""
-                Dim ds As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strAdjustQuery)
-                If ds.Tables(0).Rows.Count > 0 Then
-
-                    For Each row As DataRow In ds.Tables(0).Rows
-                        Dim strAdustUpdate As String = "Update hrs_EmployeesVacations set TotalDays=TotalDays + " & Diffe & " , RemainingDays=RemainingDays + " & Diffe & " , TotalBalance=TotalBalance+" & Diffe & " , RemainingBalance=RemainingBalance+" & Diffe & " where ID= " & row("ID") & ""
-                        Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strAdustUpdate)
-
-                    Next
+                    'ClsEmployeesVacations.Update("ID=" & ClsEmployeesVacations.ID)
 
                 End If
 
 
+            End If
 
-                Dim strUpdateVB As String = "UPDATE [dbo].[hrs_EmployeesVacations]  SET CancelDate = '" & DateTime.Now.Date.ToString("yyyy-MM-dd") & "' where ID=" & ClsEmployeesVacations.ID
-                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateVB)
+            'ضبط الارصدة في الاجازات التالية
+            Dim strAdjustQuery As String = "select ID from hrs_EmployeesVacations where EmployeeID=" & EmployeeID & " and id > " & ClsEmployeesVacations.ID & ""
+            Dim ds As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strAdjustQuery)
+            If ds.Tables(0).Rows.Count > 0 Then
 
-                If ClsEmployeesVacations.VacationTypeID <> 1 Then
-                    CheckVacationsOverlapping()
-                End If
+                For Each row As DataRow In ds.Tables(0).Rows
+                    Dim strAdustUpdate As String = "Update hrs_EmployeesVacations set TotalDays=TotalDays + " & Diffe & " , RemainingDays=RemainingDays + " & Diffe & " , TotalBalance=TotalBalance+" & Diffe & " , RemainingBalance=RemainingBalance+" & Diffe & " where ID= " & row("ID") & ""
+                    Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strAdustUpdate)
+
+                Next
+
             End If
 
 
+
+            Dim strUpdateVB As String = "UPDATE [dbo].[hrs_EmployeesVacations]  SET CancelDate = '" & DateTime.Now.Date.ToString("yyyy-MM-dd") & "' where ID=" & ClsEmployeesVacations.ID
+            Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strUpdateVB)
+
+            If ClsEmployeesVacations.VacationTypeID <> 1 Then
+                CheckVacationsOverlapping()
+            End If
         End If
     End Sub
     Public Function CheckVacationsOverlapping() As Boolean
@@ -672,68 +691,42 @@ Partial Class frmEmployeesVacations
         End Try
     End Function
 
-    Private Function CancelRequest(FormCode As String, RequestSerial As String) As Boolean
+    Private Function CancelRequestByPermission(FormCode As String, RequestSerial As String) As Boolean
         Dim ConfigID As Integer = 0
-        Dim CanbeCanceled As Boolean = False
-
-        Dim mSelectCommand = " select ConfigID from SS_RequestActions where ActionSerial=(select max(Actionserial) from SS_RequestActions  where FormCode='" & FormCode & "' and RequestSerial=" & RequestSerial & "  and IsHidden is null) "
         Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
         Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
+
+        If Not HasCanDeleteSelfServiceTransactions(ConnStr) Then
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Your request can't be canceled in this stage/عفوا... لايمكن الغاء الطلب في هذه المرحلة "))
+            Return False
+        End If
+
         Try
+            Dim mSelectCommand = " select ConfigID from SS_RequestActions where ActionSerial=(select max(Actionserial) from SS_RequestActions  where FormCode='" & FormCode & "' and RequestSerial=" & RequestSerial & "  and IsHidden is null) "
             ConfigID = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, mSelectCommand)
         Catch ex As Exception
         End Try
 
-        If ConfigID > 0 Then
-            Try
-                CanbeCanceled = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, " Select isnull(CanBeCanceledInThisLevel,0) From SS_Configuration where ID=" & ConfigID & "")
-            Catch ex As Exception
-            End Try
-        End If
-
-        Dim hasDeletePermission As Boolean = HasCanDeleteSelfServiceTransactions(ConnStr)
-
-        If hasDeletePermission Then
-            If Not IsLastRequestActionNotMaxRank(FormCode, RequestSerial, ConnStr) Then
-                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Your request can't be canceled in this stage/عفوا... لايمكن الغاء الطلب في هذه المرحلة "))
-                Return False
-            End If
-
-            If String.IsNullOrWhiteSpace(txtCancelReason.Text) Then
-                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please enter cancel reason./الرجاء إدخال سبب الإلغاء "))
-                Return False
-            End If
-
-            If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Return False
-            PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, True)
-            Return True
-        End If
-
-        If CanbeCanceled Then
-            If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Return False
-            PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, False)
-            Return True
-        Else
+        If Not IsLastRequestActionNotMaxRank(FormCode, RequestSerial, ConnStr) Then
             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Your request can't be canceled in this stage/عفوا... لايمكن الغاء الطلب في هذه المرحلة "))
             Return False
         End If
-    End Function
 
-    Private Function IsRequestCanceledBefore(FormCode As String, RequestSerial As String, ConnStr As String, ObjNavigationHandler As Venus.Shared.Web.NavigationHandler) As Boolean
+        If String.IsNullOrWhiteSpace(txtCancelReason.Text) Then
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please enter cancel reason./الرجاء إدخال سبب الإلغاء "))
+            Return False
+        End If
+
         Try
             Dim mSelectCommand2 = " select count(Actionserial) from SS_RequestActions  where FormCode='" & FormCode & "' and RequestSerial=" & RequestSerial & " and( ActionID =4 or ActionID =2)"
             Dim canceledbefor As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, mSelectCommand2)
             If canceledbefor > 0 Then
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry...You Can't cancel the Rejected or canceled requests ./عفوا... لا يمكن الغاء الطلبات المرفوضة او الملغاة من قبل."))
-                Return True
+                Return False
             End If
         Catch ex As Exception
         End Try
-        Return False
-    End Function
 
-    Private Sub PerformCancelRequest(FormCode As String, RequestSerial As String, ConfigID As Integer, ConnStr As String, includeCancelReason As Boolean)
-        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
         Dim User As String = String.Empty
         Dim WebHandler As New Venus.Shared.Web.WebHandler
         WebHandler.GetCookies(Page, "UserID", User)
@@ -742,27 +735,20 @@ Partial Class frmEmployeesVacations
         Dim ClsCurrentUserEmployee As New Clshrs_Employees(Me)
         ClsCurrentUserEmployee.Find("Code='" & _sys_User.Code & "'")
 
-        Dim InsertCommand As String
-        If includeCancelReason Then
-            Dim requestEmployeeID As Integer = 0
-            Try
-                Dim strRequestEmp As String = " select EmployeeID from SS_VacationRequest where ID=" & RequestSerial & ""
-                Dim objRequestEmp As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, strRequestEmp)
-                If objRequestEmp IsNot Nothing AndAlso Not IsDBNull(objRequestEmp) Then
-                    requestEmployeeID = CInt(objRequestEmp)
-                End If
-            Catch ex As Exception
-            End Try
-            If requestEmployeeID = 0 Then
-                requestEmployeeID = ClsCurrentUserEmployee.ID
+        Dim requestEmployeeID As Integer = 0
+        Try
+            Dim objRequestEmp As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, " select EmployeeID from SS_VacationRequest where ID=" & RequestSerial & "")
+            If objRequestEmp IsNot Nothing AndAlso Not IsDBNull(objRequestEmp) Then
+                requestEmployeeID = CInt(objRequestEmp)
             End If
-
-            Dim cancelReason As String = txtCancelReason.Text.Replace("'", "''")
-            InsertCommand = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ActionID,ActionDate,ActionRemarks)  values(" & RequestSerial & " , " & ClsCurrentUserEmployee.ID & ",'" & FormCode & "'," & requestEmployeeID & ",1,4,GetDate(),N'" & cancelReason & "')"
-        Else
-            InsertCommand = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ActionID,ActionDate)  values(" & RequestSerial & " , " & ClsCurrentUserEmployee.ID & ",'" & FormCode & "'," & ClsCurrentUserEmployee.ID & ",1,4,GetDate())"
+        Catch ex As Exception
+        End Try
+        If requestEmployeeID = 0 Then
+            requestEmployeeID = ClsCurrentUserEmployee.ID
         End If
 
+        Dim cancelReason As String = txtCancelReason.Text.Replace("'", "''")
+        Dim InsertCommand As String = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ActionID,ActionDate,ActionRemarks)  values(" & RequestSerial & " , " & ClsCurrentUserEmployee.ID & ",'" & FormCode & "'," & requestEmployeeID & ",1,4,GetDate(),N'" & cancelReason & "')"
         Dim SqlCommand As New SqlClient.SqlCommand
         SqlCommand.Connection = New SqlClient.SqlConnection(ConnStr)
         SqlCommand.CommandType = CommandType.Text
@@ -788,26 +774,144 @@ Partial Class frmEmployeesVacations
         SqlCommand.Connection.Open()
         SqlCommand.ExecuteNonQuery()
         SqlCommand.Connection.Close()
-        ' ====== إلغاء التفويض التلقائي (إن وجد) ======
+
         Try
-            ' جلب بيانات الإجازة (EmployeeID, StartDate, EndDate)
             Dim getVacationSql As String = "SELECT EmployeeID, StartDate, EndDate FROM SS_VacationRequest WHERE ID = " & RequestSerial
             Dim dtVacation As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnStr, Data.CommandType.Text, getVacationSql)
-
             If dtVacation.Tables(0).Rows.Count > 0 Then
-                Dim EmployeeID As Integer = Convert.ToInt32(dtVacation.Tables(0).Rows(0)("EmployeeID"))
+                Dim EmpID As Integer = Convert.ToInt32(dtVacation.Tables(0).Rows(0)("EmployeeID"))
                 Dim StartDate As Date = Convert.ToDateTime(dtVacation.Tables(0).Rows(0)("StartDate"))
                 Dim EndDate As Date = Convert.ToDateTime(dtVacation.Tables(0).Rows(0)("EndDate"))
-
-                ' استدعاء دالة إلغاء التفويض
-                CancelAutoDelegation(EmployeeID, StartDate, EndDate)
+                CancelAutoDelegation(EmpID, StartDate, EndDate)
             End If
         Catch ex As Exception
-            ' تجاهل الأخطاء
         End Try
-        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Your request Has been canceled Successfully./تم الغاء الطلب بنجاح "))
-    End Sub
 
+        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Your request Has been canceled Successfully./تم الغاء الطلب بنجاح "))
+        Return True
+    End Function
+
+    Private Function CancelRequest(FormCode As String, RequestSerial As String) As Boolean
+        Dim ConfigID As Integer = 0
+        Dim CanbeCanceled As Boolean = False
+
+
+        '1-
+        'Get the Current Pending Action
+        Dim StrSelectCommand As String = String.Empty
+        Dim mSelectCommand = " select ConfigID from SS_RequestActions where ActionSerial=(select max(Actionserial) from SS_RequestActions  where FormCode='" & FormCode & "' and RequestSerial=" & RequestSerial & "  and IsHidden is null) "
+        Dim mSqlDataAdapter As New SqlClient.SqlDataAdapter
+        Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
+        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
+        Try
+
+            ConfigID = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, mSelectCommand)
+
+        Catch ex As Exception
+        End Try
+        '2-
+        'CheckIf Request Can be Canceled with this ConfigID Or Not 
+        If ConfigID > 0 Then
+            Dim StrCheckCanbeCanceled As String = String.Empty
+            StrCheckCanbeCanceled = " Select isnull(CanBeCanceledInThisLevel,0) From SS_Configuration where ID=" & ConfigID & ""
+
+            Try
+                CanbeCanceled = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, StrCheckCanbeCanceled)
+
+
+            Catch ex As Exception
+            End Try
+        End If
+
+        If CanbeCanceled Then
+            Dim isFullyApproved As Boolean
+            Dim CountNullActions As Integer
+            Dim canceledbefor As Integer
+            Dim mSelectCommand2 = " select count(Actionserial) from SS_RequestActions  where FormCode='" & FormCode & "' and RequestSerial=" & RequestSerial & " and( ActionID =4 or ActionID =2)"
+            Dim mSqlDataAdapter2 As New SqlClient.SqlDataAdapter
+            Dim strIsFullApproved = " select count(Actionserial) from SS_RequestActions  where FormCode='" & FormCode & "' and RequestSerial=" & RequestSerial & " and ActionID is null "
+            CountNullActions = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, strIsFullApproved)
+            If CountNullActions = 0 Then
+                isFullyApproved = 1
+            End If
+            Try
+
+                canceledbefor = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, mSelectCommand2)
+                If canceledbefor > 0 Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry...You Can't cancel the Rejected or canceled requests ./عفوا... لا يمكن الغاء الطلبات المرفوضة او الملغاة من قبل."))
+                    Return False
+                End If
+            Catch ex As Exception
+
+            End Try
+            '3
+            'Add New Record In SS_RequestAction
+            Dim User As String = String.Empty
+            Dim WebHandler As New Venus.Shared.Web.WebHandler
+            WebHandler.GetCookies(Page, "UserID", User)
+            Dim _sys_User As New Clssys_Users(Page)
+            _sys_User.Find("ID = '" & User & "'")
+            Dim ClsEmployees As New Clshrs_Employees(Me)
+            ClsEmployees.Find("Code='" & _sys_User.Code & "'")
+            Dim InsertCommand As String
+            Dim SqlCommand As Data.SqlClient.SqlCommand
+
+            InsertCommand = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ActionID,ActionDate)  values(" & RequestSerial & " , " & ClsEmployees.ID & ",'" & FormCode & "'," & ClsEmployees.ID & ",1,4,GetDate())"
+            SqlCommand = New SqlClient.SqlCommand
+            SqlCommand.Connection = New SqlClient.SqlConnection(ConnStr)
+            SqlCommand.CommandType = CommandType.Text
+            SqlCommand.CommandText = InsertCommand
+            SqlCommand.Connection.Open()
+            SqlCommand.ExecuteNonQuery()
+            SqlCommand.Connection.Close()
+
+            Dim SqlCommandRank As Data.SqlClient.SqlCommand
+            Dim UpdateCommandRank As String = ""
+            UpdateCommandRank = "UPDATE SS_VacationRequest SET [RequestStautsTypeID] = 5 WHERE ID=" & RequestSerial & ""
+            SqlCommandRank = New SqlClient.SqlCommand
+            SqlCommandRank.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
+            SqlCommandRank.CommandType = CommandType.Text
+            SqlCommandRank.CommandText = UpdateCommandRank
+            SqlCommandRank.Connection.Open()
+            SqlCommandRank.ExecuteNonQuery()
+            SqlCommandRank.Connection.Close()
+            '4- Mark Prvioues Actions as seen to prevent notifications to othes
+            Dim UpdateCommand As String
+
+            UpdateCommand = "update SS_RequestActions set seen=1 where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " And FormCode='" & FormCode & "'"
+            SqlCommand = New SqlClient.SqlCommand
+            SqlCommand.Connection = New SqlClient.SqlConnection(ConnStr)
+            SqlCommand.CommandType = CommandType.Text
+            SqlCommand.CommandText = UpdateCommand
+            SqlCommand.Connection.Open()
+            SqlCommand.ExecuteNonQuery()
+            SqlCommand.Connection.Close()
+
+            ' ====== إلغاء التفويض التلقائي (إن وجد) ======
+            Try
+                ' جلب بيانات الإجازة (EmployeeID, StartDate, EndDate)
+                Dim getVacationSql As String = "SELECT EmployeeID, StartDate, EndDate FROM SS_VacationRequest WHERE ID = " & RequestSerial
+                Dim dtVacation As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ConnStr, Data.CommandType.Text, getVacationSql)
+
+                If dtVacation.Tables(0).Rows.Count > 0 Then
+                    Dim EmployeeID As Integer = Convert.ToInt32(dtVacation.Tables(0).Rows(0)("EmployeeID"))
+                    Dim StartDate As Date = Convert.ToDateTime(dtVacation.Tables(0).Rows(0)("StartDate"))
+                    Dim EndDate As Date = Convert.ToDateTime(dtVacation.Tables(0).Rows(0)("EndDate"))
+
+                    ' استدعاء دالة إلغاء التفويض
+                    CancelAutoDelegation(EmployeeID, StartDate, EndDate)
+                End If
+            Catch ex As Exception
+                ' تجاهل الأخطاء
+            End Try
+
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Your request Has been canceled Successfully./تم الغاء الطلب بنجاح "))
+            Return True
+        Else
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Your request can't be canceled in this stage/عفوا... لايمكن الغاء الطلب في هذه المرحلة "))
+            Return False
+        End If
+    End Function
 
     Private Function CheckEmpCode() As Boolean
         ClsEmployees = New Clshrs_Employees(Page)
