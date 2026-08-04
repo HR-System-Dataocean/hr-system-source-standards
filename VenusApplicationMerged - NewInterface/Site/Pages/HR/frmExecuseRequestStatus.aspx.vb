@@ -29,6 +29,7 @@ Partial Class frmEmployeesVacations
             btnCancelRequest.Visible = False
         End If
         txtCancelReason.Visible = btnCancelRequest.Visible
+        btnCancelRequestAllEmployee.Visible = False
 
         Try
             Dim WebHandler As New Venus.Shared.Web.WebHandler
@@ -37,15 +38,14 @@ Partial Class frmEmployeesVacations
             WebHandler.GetCookies(Page, "UserID", User)
             Dim _sys_User As New Clssys_Users(Page)
             _sys_User.Find("ID = '" & User & "'")
-
-            If Not btnCancelRequest.Visible Then
+            If Type = "3" Then
                 Dim strCheckPermission As String = " select CanDeleteSelfServiceTransactions from SS_SelfServiceTransactionUserPermissions where UserID=" & _sys_User.ID & ""
                 Dim objPermission As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, Data.CommandType.Text, strCheckPermission)
                 If objPermission IsNot Nothing AndAlso Not IsDBNull(objPermission) AndAlso CBool(objPermission) Then
-                    btnCancelRequest.Visible = True
+                    btnCancelRequestAllEmployee.Visible = True
+                    txtCancelReason.Visible = True
                 End If
             End If
-            txtCancelReason.Visible = btnCancelRequest.Visible
 
             Dim ClsVacationTypes As New Clshrs_VacationsTypes(Page)
             If Not IsPostBack Then
@@ -478,14 +478,22 @@ Partial Class frmEmployeesVacations
     End Sub
 
 
-    Protected Sub CanelTequest_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles btnCancelRequest.Command
+        Protected Sub CanelTequest_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles btnCancelRequest.Command
         Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
         Dim FormCode As String = Request.QueryString.Item("FormCode")
         CancelRequest(FormCode, RequestSerial)
         FillEmployeeVacations(ClsEmployees.ID, False)
 
     End Sub
-        Private Function HasCanDeleteSelfServiceTransactions(ConnStr As String) As Boolean
+
+    Protected Sub CancelRequestAllEmployee_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles btnCancelRequestAllEmployee.Command
+        Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
+        Dim FormCode As String = Request.QueryString.Item("FormCode")
+        CancelRequestByPermission(FormCode, RequestSerial)
+        FillEmployeeVacations(ClsEmployees.ID, False)
+    End Sub
+
+    Private Function HasCanDeleteSelfServiceTransactions(ConnStr As String) As Boolean
         Dim User As String = String.Empty
         Dim WebHandler As New Venus.Shared.Web.WebHandler
         WebHandler.GetCookies(Page, "UserID", User)
@@ -526,6 +534,36 @@ Partial Class frmEmployeesVacations
         End Try
     End Function
 
+    Private Sub CancelRequestByPermission(FormCode As String, RequestSerial As String)
+        Dim ConfigID As Integer = 0
+        Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
+        Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ConnStr)
+
+        If Not HasCanDeleteSelfServiceTransactions(ConnStr) Then
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Your request can't be canceled in this stage/عفوا... لايمكن الغاء الطلب في هذه المرحلة "))
+            Exit Sub
+        End If
+
+        Try
+            Dim mSelectCommand = " select ConfigID from SS_RequestActions where ActionSerial=(select max(Actionserial) from SS_RequestActions  where FormCode='" & FormCode & "' and RequestSerial=" & RequestSerial & "  and IsHidden is null) "
+            ConfigID = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, mSelectCommand)
+        Catch ex As Exception
+        End Try
+
+        If Not IsLastRequestActionNotMaxRank(FormCode, RequestSerial, ConnStr) Then
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Your request can't be canceled in this stage/عفوا... لايمكن الغاء الطلب في هذه المرحلة "))
+            Exit Sub
+        End If
+
+        If String.IsNullOrWhiteSpace(txtCancelReason.Text) Then
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please enter cancel reason./الرجاء إدخال سبب الإلغاء "))
+            Exit Sub
+        End If
+
+        If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
+        PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, True)
+    End Sub
+
     Private Sub CancelRequest(FormCode As String, RequestSerial As String)
         Dim ConfigID As Integer = 0
         Dim CanbeCanceled As Boolean = False
@@ -545,30 +583,11 @@ Partial Class frmEmployeesVacations
             End Try
         End If
 
-        Dim hasDeletePermission As Boolean = HasCanDeleteSelfServiceTransactions(ConnStr)
-
-        If hasDeletePermission Then
-            If Not IsLastRequestActionNotMaxRank(FormCode, RequestSerial, ConnStr) Then
-                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Your request can't be canceled in this stage/عفوا... لايمكن الغاء الطلب في هذه المرحلة "))
-                Exit Sub
-            End If
-
-            If String.IsNullOrWhiteSpace(txtCancelReason.Text) Then
-                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please enter cancel reason./الرجاء إدخال سبب الإلغاء "))
-                Exit Sub
-            End If
-
-            If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
-            PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, True)
-            Exit Sub
-        End If
-
         If CanbeCanceled Then
             If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
             PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, False)
         Else
             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Your request can't be canceled in this stage/عفوا... لايمكن الغاء الطلب في هذه المرحلة "))
-            
         End If
     End Sub
 
@@ -596,6 +615,7 @@ Partial Class frmEmployeesVacations
         ClsCurrentUserEmployee.Find("Code='" & _sys_User.Code & "'")
 
         Dim InsertCommand As String
+        Dim cancelReason As String = If(txtCancelReason.Text, "").Replace("'", "''")
         If includeCancelReason Then
             Dim requestEmployeeID As Integer = 0
             Try
@@ -610,10 +630,9 @@ Partial Class frmEmployeesVacations
                 requestEmployeeID = ClsCurrentUserEmployee.ID
             End If
 
-            Dim cancelReason As String = txtCancelReason.Text.Replace("'", "''")
             InsertCommand = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ActionID,ActionDate,ActionRemarks)  values(" & RequestSerial & " , " & ClsCurrentUserEmployee.ID & ",'" & FormCode & "'," & requestEmployeeID & ",1,4,GetDate(),N'" & cancelReason & "')"
         Else
-            InsertCommand = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ActionID,ActionDate)  values(" & RequestSerial & " , " & ClsCurrentUserEmployee.ID & ",'" & FormCode & "'," & ClsCurrentUserEmployee.ID & ",1,4,GetDate())"
+            InsertCommand = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ActionID,ActionDate,ActionRemarks)  values(" & RequestSerial & " , " & ClsCurrentUserEmployee.ID & ",'" & FormCode & "'," & ClsCurrentUserEmployee.ID & ",1,4,GetDate(),N'" & cancelReason & "')"
         End If
 
         Dim SqlCommand As New SqlClient.SqlCommand
@@ -644,8 +663,7 @@ Partial Class frmEmployeesVacations
 
         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Your request Has been canceled Successfully./تم الغاء الطلب بنجاح "))
     End Sub
-
-    Private Function CheckEmpCode() As Boolean
+Private Function CheckEmpCode() As Boolean
         ClsEmployees = New Clshrs_Employees(Page)
         Dim ClsNationality = New Clssys_Nationality(Page)
         Dim BolExist As Boolean

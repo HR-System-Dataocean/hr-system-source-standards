@@ -319,6 +319,17 @@
             WidthBottom="1px" WidthLeft="1px" WidthRight="1px" WidthTop="1px" />
     </Appearance>
 </igtxt:WebImageButton>
+                                            <igtxt:WebImageButton ID="btnCancelRequestAllEmployee" runat="server" Height="5px" Style="font-family: Tahoma;
+    font-size: 8pt; font-weight: Normal; color: Black; margin-left: 4px;" meta:resourcekey="btnCancelRequestAllEmployee"
+    Overflow="NoWordWrap" Text=" Cancel Request" UseBrowserDefaults="False" Width="120px" Visible="False">
+    <Alignments TextImage="TextRightImageLeft" VerticalImage="Middle" />
+    <Appearance>
+        <Image Url="~/Common/Images/ToolBox/Hr_ToolBox/ImgCancelRequest.jpg" />
+        <InnerBorder ColorBottom="160, 160, 160" ColorLeft="White" ColorRight="160, 160, 160"
+            ColorTop="White" StyleBottom="Solid" StyleLeft="Solid" StyleRight="Solid" StyleTop="Solid"
+            WidthBottom="1px" WidthLeft="1px" WidthRight="1px" WidthTop="1px" />
+    </Appearance>
+</igtxt:WebImageButton>
                                         </td>
                                         <td style="width: 100%; vertical-align: middle; padding-left: 6px;">
                                             <asp:TextBox ID="txtCancelReason" runat="server"

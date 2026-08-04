@@ -351,4 +351,10 @@
   <data name="lblRequestTypeResource1.Text" xml:space="preserve">
     <value>نوع الطلب</value>
   </data>
+  <data name="btnCancelRequest.Text" xml:space="preserve">
+    <value>الغاء الطلب</value>
+  </data>
+  <data name="btnCancelRequestAllEmployee.Text" xml:space="preserve">
+    <value>الغاء طلب الموظف</value>
+  </data>
 </root>

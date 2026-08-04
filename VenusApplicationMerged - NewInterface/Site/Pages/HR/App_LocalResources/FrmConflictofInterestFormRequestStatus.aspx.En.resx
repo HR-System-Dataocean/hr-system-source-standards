@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -345,4 +345,9 @@
   <data name="lblRequestTypeResource1.Text" xml:space="preserve">
     <value>Request Type</value>
   </data>
-</root>
+  <data name="btnCancelRequest.Text" xml:space="preserve">
+    <value>Cancel Request</value>
+  </data>
+  <data name="btnCancelRequestAllEmployee.Text" xml:space="preserve">
+    <value>Cancel Employee Request</value>
+  </data></root>

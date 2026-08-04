@@ -856,7 +856,8 @@ Partial Class frmEmployeesVacations
             Dim InsertCommand As String
             Dim SqlCommand As Data.SqlClient.SqlCommand
 
-            InsertCommand = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ActionID,ActionDate)  values(" & RequestSerial & " , " & ClsEmployees.ID & ",'" & FormCode & "'," & ClsEmployees.ID & ",1,4,GetDate())"
+            Dim cancelReason As String = If(txtCancelReason.Text, "").Replace("'", "''")
+            InsertCommand = "Insert Into SS_RequestActions (RequestSerial,SS_EmployeeID,FormCode,EmployeeID,Seen,ActionID,ActionDate,ActionRemarks)  values(" & RequestSerial & " , " & ClsEmployees.ID & ",'" & FormCode & "'," & ClsEmployees.ID & ",1,4,GetDate(),N'" & cancelReason & "')"
             SqlCommand = New SqlClient.SqlCommand
             SqlCommand.Connection = New SqlClient.SqlConnection(ConnStr)
             SqlCommand.CommandType = CommandType.Text

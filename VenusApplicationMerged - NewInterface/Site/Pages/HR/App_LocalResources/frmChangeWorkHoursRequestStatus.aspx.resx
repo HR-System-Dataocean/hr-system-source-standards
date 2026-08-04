@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -354,4 +354,9 @@
   <data name="lblRemarksResource1.Text" xml:space="preserve">
     <value>سبب التغيير</value>
   </data>
-</root>
+  <data name="btnCancelRequest.Text" xml:space="preserve">
+    <value>الغاء الطلب</value>
+  </data>
+  <data name="btnCancelRequestAllEmployee.Text" xml:space="preserve">
+    <value>الغاء طلب الموظف</value>
+  </data></root>
