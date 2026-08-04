@@ -1271,7 +1271,7 @@ Public Class Clshrs_FormulaSolver
                         Dim Deserveddays As Integer
                         Deserveddays = ClsEmployeeClass.GetEmployeeClassDesrvedAnnualVacationsBalance(ClsEmployeeClass.ID, NoOfTotalWorkingDays)
                         mCost = IIf(IsNumeric(ClsSolver.Output), ClsSolver.Output, 0)
-                        mCost = mCost / 360 * Deserveddays
+                        mCost = (mCost / 360 * Deserveddays) * 12
                         Return CDbl(mCost)
                     Catch ex As Exception
                         Dim x As String = ex.Message.ToString()
