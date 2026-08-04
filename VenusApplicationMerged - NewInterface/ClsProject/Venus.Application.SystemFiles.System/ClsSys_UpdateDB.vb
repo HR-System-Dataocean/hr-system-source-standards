@@ -8722,6 +8722,28 @@ BEGIN
 END"
         ExecuteUpdate(SQL)
 
+
+        SQL = "create or ALTER   PROCEDURE [dbo].[hrs_GetEmployeeClassDesrvedAnnualVacationsBalance] 
+	@EmployeeClassID Int = 0,
+	@NoOfDays int=0
+
+ As
+Set DateFormat dmy
+Select 
+ 
+isnull(	DurationDays,0) as DurationDays
+	 
+From 
+	hrs_EmployeesClassesVacations Inner Join 
+	hrs_VacationsTypes On hrs_VacationsTypes.ID = hrs_EmployeesClassesVacations.VacationTypeID   
+Where
+	hrs_VacationsTypes.CancelDate Is Null
+	And EmployeeClassID = @EmployeeClassID
+	And hrs_VacationsTypes.IsAnnual = 1
+    and   @NoOfDays>=FromMonth
+	and (@NoOfDays<=ToMonth or tomonth is null)"
+        ExecuteUpdate(SQL)
+
     End Function
 
     Public Function UpdateSS() As Boolean
