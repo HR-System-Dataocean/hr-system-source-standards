@@ -287,6 +287,54 @@ Partial Class frmEmployees
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... you have to Enter Start Date   /عفوا...لابد من ادخال تاريخ البدء  "))
                     Exit Sub
                 End If
+
+
+
+                ' ====== التحقق من تفعيل خيار المدير المباشر إلزامي ======
+                Dim DirectManagerIsMandatory As Boolean = False
+                Dim companyId As Integer = ClsEmployees.CompanyID
+
+                If companyId > 0 Then
+                    Dim checkConfigSql As String = "SELECT ISNULL(DirectManagerIsMandatory, 0) FROM sys_SystemConfig WHERE CompanyId=" & companyId
+                    Dim result As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, checkConfigSql)
+                    If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                        DirectManagerIsMandatory = Convert.ToBoolean(result)
+                    End If
+                End If
+
+                ' ====== إذا كان الخيار مفعلاً والمدير المباشر غير محدد ======
+                If DirectManagerIsMandatory AndAlso String.IsNullOrEmpty(txtManager.Text) Then
+                    ' ====== التحقق من استثناء الوظيفة ======
+                    Dim IsExempt As Boolean = False
+                    If Not String.IsNullOrEmpty(TxtPositionID.Value) AndAlso TxtPositionID.Value > 0 Then
+                        ClsEmployeesManager = New Clshrs_Employees(Me.Page)
+                        If String.IsNullOrEmpty(txtManager.Text) Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... Direct Manager is Mandatory / عفوا... المدير المباشر إلزامي"))
+                            txtManager.Focus()
+                            Exit Sub
+                        End If
+
+                        ClsEmployeesManager.Find("Code=" & txtManager.Text & "")
+                        If ClsEmployeesManager.ID <= 0 Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... Direct Manager is Not Exist / عفوا... المدير المباشر غير موجود"))
+                            txtManager.Focus()
+                            Exit Sub
+                        End If
+                        Dim checkExemptSql As String = "SELECT ISNULL(ExemptFromDirectManagerMandatory, 0) FROM hrs_Positions WHERE ID = " & TxtPositionID.Value
+                        Dim exemptResult As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, checkExemptSql)
+                        If exemptResult IsNot Nothing AndAlso Not IsDBNull(exemptResult) Then
+                            IsExempt = Convert.ToBoolean(exemptResult)
+                        End If
+                    End If
+
+                    If Not IsExempt Then
+                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... Direct Manager is Mandatory / عفوا... المدير المباشر إلزامي"))
+                        txtManager.Focus()
+                        Exit Sub
+                    End If
+                End If
+
+
                 'Edited by: Hassan Kurdi
                 'Edit Date: 2021-06-09
                 'Purpose: Get the value of Taqat checkbox
@@ -433,6 +481,7 @@ Partial Class frmEmployees
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry...You Can't Exceed The maximum No Of Employees For This Position. /عفوا لا يمكن تجاوز الحد الاقصي للعدد الموظفين في هذه الوظيفة"))
                         Exit Sub
                     End If
+
 
 
 
@@ -706,6 +755,11 @@ Partial Class frmEmployees
                         Dim IsExempt As Boolean = False
                         If Not String.IsNullOrEmpty(TxtPositionID.Value) AndAlso TxtPositionID.Value > 0 Then
                             ClsEmployeesManager = New Clshrs_Employees(Me.Page)
+                            If String.IsNullOrEmpty(txtManager.Text) Then
+                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... Direct Manager is Mandatory / عفوا... المدير المباشر إلزامي"))
+                                txtManager.Focus()
+                                Exit Sub
+                            End If
 
                             ClsEmployeesManager.Find("Code=" & txtManager.Text & "")
                             If ClsEmployeesManager.ID <= 0 Then
@@ -880,9 +934,51 @@ Partial Class frmEmployees
                         End If
                     End If
 
-                    'Added By Mohannad
-                    '2022-06-15
-                    '-----------------------------------------------
+
+                    ' ====== التحقق من تفعيل خيار المدير المباشر إلزامي ======
+                    Dim DirectManagerIsMandatory As Boolean = False
+
+                    Dim mDataHandler As New Venus.Shared.DataHandler
+
+                    Dim checkConfigSql As String = "SELECT ISNULL(DirectManagerIsMandatory, 0) FROM sys_SystemConfig "
+                        Dim result As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, checkConfigSql)
+                        If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                            DirectManagerIsMandatory = Convert.ToBoolean(result)
+                        End If
+
+
+                    ' ====== إذا كان الخيار مفعلاً والمدير المباشر غير محدد ======
+                    If DirectManagerIsMandatory AndAlso String.IsNullOrEmpty(txtManager.Text) Then
+                        ' ====== التحقق من استثناء الوظيفة ======
+                        Dim IsExempt As Boolean = False
+                        If Not String.IsNullOrEmpty(TxtPositionID.Value) AndAlso TxtPositionID.Value > 0 Then
+                            ClsEmployeesManager = New Clshrs_Employees(Me.Page)
+                            If String.IsNullOrEmpty(txtManager.Text) Then
+                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... Direct Manager is Mandatory / عفوا... المدير المباشر إلزامي"))
+                                txtManager.Focus()
+                                Exit Sub
+                            End If
+
+                            ClsEmployeesManager.Find("Code=" & txtManager.Text & "")
+                            If ClsEmployeesManager.ID <= 0 Then
+                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... Direct Manager is Not Exist / عفوا... المدير المباشر غير موجود"))
+                                txtManager.Focus()
+                                Exit Sub
+                            End If
+                            Dim checkExemptSql As String = "SELECT ISNULL(ExemptFromDirectManagerMandatory, 0) FROM hrs_Positions WHERE ID = " & TxtPositionID.Value
+                            Dim exemptResult As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, checkExemptSql)
+                            If exemptResult IsNot Nothing AndAlso Not IsDBNull(exemptResult) Then
+                                IsExempt = Convert.ToBoolean(exemptResult)
+                            End If
+                        End If
+
+                        If Not IsExempt Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... Direct Manager is Mandatory / عفوا... المدير المباشر إلزامي"))
+                            txtManager.Focus()
+                            Exit Sub
+                        End If
+                    End If
+
                     If ClsEmployees.Find("SSnNo LIKE '" & txtIdentity.Text.Trim() & "'") Then
                         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " The SSNO is used /رقم الهوية مستخدم لموظف آخر"))
                         Exit Sub
@@ -1542,7 +1638,16 @@ Partial Class frmEmployees
                 '.StartDate = SetDate(txtStartDate.Text, txtStartDate.Text) 'IIf(txtStartDate.Value.Trim = "", Nothing, .SetHigriDate(txtStartDate.Text))
                 ' .EndDate = SetDate(txtEndDate.Text, txtEndDate.Text) 'IIf(txtEndDate.Value.Trim = "", Nothing, .SetHigriDate(txtEndDate.Text))
                 .StartDate = CDate(txtStartDate.Text).ToString("dd/MM/yyyy")
-                .EndDate = CDate(txtEndDate.Text).ToString("dd/MM/yyyy")
+                If Not String.IsNullOrEmpty(txtEndDate.Text) Then
+                    Dim digitsOnly As String = Regex.Replace(txtEndDate.Text, "[^\d]", "")
+
+                    If String.IsNullOrEmpty(digitsOnly) Then
+
+                    Else
+                        Dim parsedDate As DateTime = SetDate(txtEndDate.Text, "dd/MM/yyyy")
+                        .EndDate = parsedDate.ToString("dd/MM/yyyy")
+                    End If
+                End If
                 .ContractPeriod = wneContractDuration.Value
 
             End With
