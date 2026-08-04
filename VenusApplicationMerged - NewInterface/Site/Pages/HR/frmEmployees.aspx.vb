@@ -8,6 +8,7 @@ Partial Class frmEmployees
 
 #Region "Public Decleration"
     Private ClsEmployees As Clshrs_Employees
+    Private ClsEmployeesManager As Clshrs_Employees
     Private ClsPositions As Clshrs_Positions
     Private ClsDocumentsInformations As Clssys_DocumentsInformations
     Private ClsDocumentAttachment As Clssys_DocumentsInformationAttachments
@@ -704,6 +705,14 @@ Partial Class frmEmployees
                         ' ====== التحقق من استثناء الوظيفة ======
                         Dim IsExempt As Boolean = False
                         If Not String.IsNullOrEmpty(TxtPositionID.Value) AndAlso TxtPositionID.Value > 0 Then
+                            ClsEmployeesManager = New Clshrs_Employees(Me.Page)
+
+                            ClsEmployeesManager.Find("Code=" & txtManager.Text & "")
+                            If ClsEmployeesManager.ID <= 0 Then
+                                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... Direct Manager is Not Exist / عفوا... المدير المباشر غير موجود"))
+                                txtManager.Focus()
+                                Exit Sub
+                            End If
                             Dim checkExemptSql As String = "SELECT ISNULL(ExemptFromDirectManagerMandatory, 0) FROM hrs_Positions WHERE ID = " & TxtPositionID.Value
                             Dim exemptResult As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, checkExemptSql)
                             If exemptResult IsNot Nothing AndAlso Not IsDBNull(exemptResult) Then
@@ -785,38 +794,40 @@ Partial Class frmEmployees
                                 Exit Sub
                             End If
                             ClsEmployees.Find("Code='" & txtCode.Text & "'")
-                            Dim strMaxVacationReturnDate = "select max(ActualEndDate) from hrs_EmployeesVacations where VacationTypeID=1 and employeeid=" & ClsEmployees.ID & ""
+                            Dim strMaxVacationReturnDate = "select ISNULL(max(ActualEndDate), '1900-01-01') from hrs_EmployeesVacations where VacationTypeID=1 and employeeid=" & ClsEmployees.ID & ""
                             Dim Maxreturndate As Date = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, CommandType.Text, strMaxVacationReturnDate)
-                            If Maxreturndate <> Nothing Then
-                                If CDate(JoinDate.Text) < Maxreturndate Then
-                                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... New Join Date Can't be in a previous date to the last annual leave return date : '" & Maxreturndate & "'  /عفوا...لا يمكن ان يكون تاريخ المباشرة الجديد في تاريخ سابق لتاريخ اخر عودة من اجازة سنويه : '" & Maxreturndate & "'  "))
-                                    Exit Sub
+                            If Maxreturndate > #1/1/1900# Then
+                                If Maxreturndate <> Nothing Then
+                                    If CDate(JoinDate.Text) < Maxreturndate Then
+                                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Sorry... New Join Date Can't be in a previous date to the last annual leave return date : '" & Maxreturndate & "'  /عفوا...لا يمكن ان يكون تاريخ المباشرة الجديد في تاريخ سابق لتاريخ اخر عودة من اجازة سنويه : '" & Maxreturndate & "'  "))
+                                        Exit Sub
+                                    End If
                                 End If
                             End If
                             ' نحفظ الزرار اللي عمل الحفظ
                             Dim pendingID As String = CType(sender, Control).UniqueID
-                            hdnPendingSaveControlID.Value = pendingID
+                                hdnPendingSaveControlID.Value = pendingID
 
-                            ' حفظ حالة أننا في انتظار الـ Popup
-                            Session("IsWaitingForPopup") = True
-                            Session("PendingSaveControlID") = pendingID
-                            Session("EmployeeCode") = txtCode.Text
+                                ' حفظ حالة أننا في انتظار الـ Popup
+                                Session("IsWaitingForPopup") = True
+                                Session("PendingSaveControlID") = pendingID
+                                Session("EmployeeCode") = txtCode.Text
 
-                            ' تمرير معرف الزرار للـ Popup
-                            Dim url As String = "frmChangeJoinDate.aspx?EmpCode=" & Server.UrlEncode(txtCode.Text) &
+                                ' تمرير معرف الزرار للـ Popup
+                                Dim url As String = "frmChangeJoinDate.aspx?EmpCode=" & Server.UrlEncode(txtCode.Text) &
             "&JoinDate=" & Server.UrlEncode(JoinDate.Text) &
             "&ClassID=" & ddlEmployeeClass.SelectedValue &
             "&OldJoinDate=" & Server.UrlEncode(TxtHDJoinDate.Value) &
             "&OldClassID=" & TxtHDClassID.Value
 
-                            Dim script As String = "OpenModal11('" & url & "', 650, 950, false, false, '');"
-                            ClientScript.RegisterStartupScript(Me.GetType(), "OpenChangeJoinDate",
+                                Dim script As String = "OpenModal11('" & url & "', 650, 950, false, false, '');"
+                                ClientScript.RegisterStartupScript(Me.GetType(), "OpenChangeJoinDate",
             "<script language='javascript'>" & script & "</script>", False)
 
-                            ' ✅ استخدم Return بدلاً من Exit Sub
-                            Return
+                                ' ✅ استخدم Return بدلاً من Exit Sub
+                                Return
+                            End If
                         End If
-                    End If
 
                     If LockJoinDate Then
 
@@ -1530,8 +1541,8 @@ Partial Class frmEmployees
                 End Try
                 '.StartDate = SetDate(txtStartDate.Text, txtStartDate.Text) 'IIf(txtStartDate.Value.Trim = "", Nothing, .SetHigriDate(txtStartDate.Text))
                 ' .EndDate = SetDate(txtEndDate.Text, txtEndDate.Text) 'IIf(txtEndDate.Value.Trim = "", Nothing, .SetHigriDate(txtEndDate.Text))
-                .StartDate = SetDate(txtStartDate.Text, txtStartDate.Text).Date
-                .EndDate = SetDate(txtEndDate.Text, txtEndDate.Text).Date
+                .StartDate = CDate(txtStartDate.Text).ToString("dd/MM/yyyy")
+                .EndDate = CDate(txtEndDate.Text).ToString("dd/MM/yyyy")
                 .ContractPeriod = wneContractDuration.Value
 
             End With
