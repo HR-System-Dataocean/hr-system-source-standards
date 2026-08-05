@@ -2600,7 +2600,7 @@ Partial Class frmAttendancePreparation
         Try
             Dim ClsEmployees As New Clshrs_Employees(Page)
             Dim objNav As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
-
+            EndDate = EndDate.AddDays(-1)
             ' 1- التحقق من تفعيل الإعداد
             Dim IsAutoDelegateEnabled As Boolean = False
             Dim CompanyId As Integer = 0
