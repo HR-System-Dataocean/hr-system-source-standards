@@ -48,6 +48,7 @@
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
   <data name="PageResource1.Title" xml:space="preserve"><value>التكليف بالإنابة عن موظف</value></data>
   <data name="Label_HeaderResource1.Text" xml:space="preserve"><value>التكليف بالإنابة عن موظف</value></data>
+  <data name="lblSubtitleResource1.Text" xml:space="preserve"><value>استعراض بيانات تكليف الموظف بالإنابة وفترة السريان والحالة ومعلومات التسجيل.</value></data>
   <data name="ImageButton_SaveResource1.ToolTip" xml:space="preserve"><value>حفظ</value></data>
   <data name="ImageButton_SaveNResource1.ToolTip" xml:space="preserve"><value>حفظ مع جديد</value></data>
   <data name="ImageButton_NewResource1.ToolTip" xml:space="preserve"><value>جديد</value></data>
@@ -57,12 +58,14 @@
   <data name="ImageButton_RemarksResource1.ToolTip" xml:space="preserve"><value>ملاحظات</value></data>
   <data name="LinkButton_SaveNResource1.Text" xml:space="preserve"><value>حفظ مع جديد</value></data>
   <data name="LinkButton_DeleteResource1.Text" xml:space="preserve"><value>إلغاء</value></data>
-  <data name="LinkButton_PropertiesResource1.Text" xml:space="preserve"><value>خصائص</value></data>
-  <data name="LinkButton_RemarksResource1.Text" xml:space="preserve"><value>ملاحظات</value></data>
+  <data name="LinkButton_PrintTextResource1.Text" xml:space="preserve"><value>طباعة</value></data>
+  <data name="LinkButton_PropertiesResource1.Text" xml:space="preserve"><value>الخصائص</value></data>
+  <data name="LinkButton_RemarksResource1.Text" xml:space="preserve"><value>الملاحظات</value></data>
   <data name="lblRegDateResource1.Text" xml:space="preserve"><value>سجل في</value></data>
   <data name="lblRegUserResource1.Text" xml:space="preserve"><value>سجل بواسطة</value></data>
   <data name="lblCancelDateResource1.Text" xml:space="preserve"><value>تاريخ الإلغاء</value></data>
-  <data name="TabResource1.Text" xml:space="preserve"><value>عام</value></data>
+  <data name="TabResource1.Text" xml:space="preserve"><value>البيانات العامة</value></data>
+  <data name="TabAuditResource1.Text" xml:space="preserve"><value>سجل النسخ</value></data>
   <data name="lblCodeResource1.Text" xml:space="preserve"><value>الكود</value></data>
   <data name="lblOriginalEmployeeResource1.Text" xml:space="preserve"><value>الموظف المُناب عنه</value></data>
   <data name="lblActingEmployeeResource1.Text" xml:space="preserve"><value>الموظف القائم بالإنابة</value></data>
@@ -70,9 +73,64 @@
   <data name="lblEffectiveToResource1.Text" xml:space="preserve"><value>تاريخ نهاية الإنابة</value></data>
   <data name="lblReasonResource1.Text" xml:space="preserve"><value>سبب الإنابة</value></data>
   <data name="lblRemarksResource1.Text" xml:space="preserve"><value>ملاحظات</value></data>
-  <data name="GridCodeResource1.Header.Caption" xml:space="preserve"><value>رقم الحركة</value></data>
+  <data name="GridCodeResource1.Header.Caption" xml:space="preserve"><value>رقم المعاملة</value></data>
   <data name="GridOriginalEmployeeResource1.Header.Caption" xml:space="preserve"><value>الموظف المُناب عنه</value></data>
   <data name="GridActingEmployeeResource1.Header.Caption" xml:space="preserve"><value>الموظف القائم بالإنابة</value></data>
   <data name="GridEffectiveFromResource1.Header.Caption" xml:space="preserve"><value>تاريخ بداية الإنابة</value></data>
   <data name="GridEffectiveToResource1.Header.Caption" xml:space="preserve"><value>تاريخ نهاية الإنابة</value></data>
+  <data name="litColCodeResource1.Text" xml:space="preserve"><value>رقم المعاملة</value></data>
+  <data name="litColOriginalEmployeeResource1.Text" xml:space="preserve"><value>الموظف المُناب عنه</value></data>
+  <data name="litColActingEmployeeResource1.Text" xml:space="preserve"><value>الموظف القائم بالإنابة</value></data>
+  <data name="litColStartResource1.Text" xml:space="preserve"><value>تاريخ البداية</value></data>
+  <data name="litColEndResource1.Text" xml:space="preserve"><value>تاريخ النهاية</value></data>
+  <data name="litColReasonResource1.Text" xml:space="preserve"><value>السبب</value></data>
+  <data name="litColStatusResource1.Text" xml:space="preserve"><value>الحالة</value></data>
+  <data name="litColViewResource1.Text" xml:space="preserve"><value>عرض</value></data>
+  <data name="litSumTxnResource1.Text" xml:space="preserve"><value>رقم المعاملة</value></data>
+  <data name="litSumRegResource1.Text" xml:space="preserve"><value>تاريخ التسجيل</value></data>
+  <data name="litSumStatusResource1.Text" xml:space="preserve"><value>الحالة</value></data>
+  <data name="litDetailsTitleResource1.Text" xml:space="preserve"><value>بيانات التكليف</value></data>
+  <data name="litReadonlyResource1.Text" xml:space="preserve"><value>للعرض فقط</value></data>
+  <data name="litDetailsSubResource1.Text" xml:space="preserve"><value>هذه الشاشة للعرض فقط. يتم عرض البيانات للمراجعة والرجوع إليها.</value></data>
+  <data name="litSecReplacedResource1.Text" xml:space="preserve"><value>بيانات الموظف المُناب عنه</value></data>
+  <data name="litSecActingResource1.Text" xml:space="preserve"><value>بيانات الموظف القائم بالإنابة</value></data>
+  <data name="litSecPeriodResource1.Text" xml:space="preserve"><value>فترة التكليف</value></data>
+  <data name="litSecReasonResource1.Text" xml:space="preserve"><value>سبب التكليف والملاحظات</value></data>
+  <data name="litFldDeptResource1.Text" xml:space="preserve"><value>الإدارة</value></data>
+  <data name="litFldCurrPosResource1.Text" xml:space="preserve"><value>الوظيفة الحالية</value></data>
+  <data name="litFldDurationResource1.Text" xml:space="preserve"><value>مدة التكليف</value></data>
+  <data name="litRecordStatusResource1.Text" xml:space="preserve"><value>حالة السجل</value></data>
+  <data name="litTxnPrefixResource1.Text" xml:space="preserve"><value>المعاملة</value></data>
+  <data name="litTlRegisteredResource1.Text" xml:space="preserve"><value>تم تسجيل التكليف</value></data>
+  <data name="litTlActiveResource1.Text" xml:space="preserve"><value>التكليف ساري</value></data>
+  <data name="litMetaModeResource1.Text" xml:space="preserve"><value>وضع الشاشة</value></data>
+  <data name="litModeValueResource1.Text" xml:space="preserve"><value>عرض فقط</value></data>
+  <data name="litInfoReadonlyResource1.Text" xml:space="preserve"><value>لا يمكن إضافة أو تعديل أو تفعيل أو إلغاء البيانات من هذه الشاشة.</value></data>
+  <data name="litRecordsTitleResource1.Text" xml:space="preserve"><value>سجلات تكليف الموظف بالإنابة</value></data>
+  <data name="litRecordsSubResource1.Text" xml:space="preserve"><value>استعرض وافتح معاملات تكليف الموظف بالإنابة.</value></data>
+  <data name="litEmptyGridResource1.Text" xml:space="preserve"><value>لا توجد سجلات تكليف موظف بالإنابة.</value></data>
+  <data name="litAuditSubResource1.Text" xml:space="preserve"><value>محطات التسجيل والحالة لهذه المعاملة.</value></data>
+  <data name="liAllStatusesResource1.Text" xml:space="preserve"><value>جميع الحالات</value></data>
+  <data name="liActiveResource1.Text" xml:space="preserve"><value>ساري</value></data>
+  <data name="liEndedResource1.Text" xml:space="preserve"><value>منتهٍ</value></data>
+  <data name="liCancelledResource1.Text" xml:space="preserve"><value>ملغى</value></data>
+  <data name="txtSearchResource1.Text" xml:space="preserve"><value></value></data>
+  <data name="txtSearchPlaceholder" xml:space="preserve"><value>ابحث برقم المعاملة أو الموظف...</value></data>
+  <data name="StatusActive" xml:space="preserve"><value>ساري</value></data>
+  <data name="StatusEnded" xml:space="preserve"><value>منتهٍ</value></data>
+  <data name="StatusCancelled" xml:space="preserve"><value>ملغى</value></data>
+  <data name="StatusPending" xml:space="preserve"><value>مجدول</value></data>
+  <data name="OpenEnded" xml:space="preserve"><value>مفتوح المدة</value></data>
+  <data name="DurationOngoing" xml:space="preserve"><value>مستمر</value></data>
+  <data name="DaysUnit" xml:space="preserve"><value>أيام</value></data>
+  <data name="MonthsUnit" xml:space="preserve"><value>أشهر</value></data>
+  <data name="YearsUnit" xml:space="preserve"><value>سنوات</value></data>
+  <data name="ByPrefix" xml:space="preserve"><value>بواسطة</value></data>
+  <data name="litTlCancelled" xml:space="preserve"><value>تم إلغاء التكليف</value></data>
+  <data name="litTlEnded" xml:space="preserve"><value>انتهى التكليف</value></data>
+  <data name="litTlPending" xml:space="preserve"><value>التكليف مجدول</value></data>
+  <data name="litTlActive" xml:space="preserve"><value>التكليف ساري</value></data>
+  <data name="StartsOn" xml:space="preserve"><value>يبدأ في</value></data>
+  <data name="ActiveFromOngoing" xml:space="preserve"><value>ساري اعتبارًا من {0} وحتى تاريخه</value></data>
+  <data name="ActiveFromTo" xml:space="preserve"><value>ساري من {0} إلى {1}</value></data>
 </root>
