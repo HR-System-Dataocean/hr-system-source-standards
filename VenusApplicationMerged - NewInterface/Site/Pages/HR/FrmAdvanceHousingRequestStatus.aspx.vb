@@ -1,4 +1,4 @@
-﻿Imports Venus.Application.SystemFiles.System
+Imports Venus.Application.SystemFiles.System
 Imports Venus.Application.SystemFiles.HumanResource
 Imports System.Data
 Imports System.Data.SqlClient
@@ -600,6 +600,10 @@ Partial Class frmEmployeesVacations
 
         ' Normal path: CanBeCanceled from configuration — ActionRemarks from txtCancelReason
         If CanbeCanceled Then
+            If String.IsNullOrWhiteSpace(txtCancelReason.Text) Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please enter cancel reason./الرجاء إدخال سبب الإلغاء "))
+                Exit Sub
+            End If
             If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
             PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, False)
         Else

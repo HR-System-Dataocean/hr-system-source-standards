@@ -222,8 +222,8 @@ Partial Class frmEmployeesVacations
     Private Sub FillEmployeeVacations(ByVal EmployeeID As Integer, Optional ByVal showFirstRecord As Boolean = False)
 
         Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
-            Dim FormCode As String = Request.QueryString.Item("FormCode")
-            Dim Type As String = Request.QueryString.Item("Type")
+        Dim FormCode As String = Request.QueryString.Item("FormCode")
+        Dim Type As String = Request.QueryString.Item("Type")
         If Type = 2 Then
             Try
                 Dim User As String = String.Empty
@@ -451,11 +451,11 @@ Partial Class frmEmployeesVacations
 
 
         Dim ConnectionString As String
-            ConnectionString = ConfigurationManager.AppSettings("Connstring").ToString()
+        ConnectionString = ConfigurationManager.AppSettings("Connstring").ToString()
 
     End Sub
 
-        Protected Sub CanelTequest_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles btnCancelRequest.Command
+    Protected Sub CanelTequest_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles btnCancelRequest.Command
         Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
         Dim FormCode As String = Request.QueryString.Item("FormCode")
         CancelRequest(FormCode, RequestSerial)
@@ -561,6 +561,10 @@ Partial Class frmEmployeesVacations
         End If
 
         If CanbeCanceled Then
+            If String.IsNullOrWhiteSpace(txtCancelReason.Text) Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please enter cancel reason./الرجاء إدخال سبب الإلغاء "))
+                Exit Sub
+            End If
             If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
             PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, False)
         Else
@@ -640,7 +644,7 @@ Partial Class frmEmployeesVacations
 
         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Your request Has been canceled Successfully./تم الغاء الطلب بنجاح "))
     End Sub
-Private Function CheckEmpCode() As Boolean
+    Private Function CheckEmpCode() As Boolean
         ClsEmployees = New Clshrs_Employees(Page)
         Dim ClsNationality = New Clssys_Nationality(Page)
         Dim BolExist As Boolean

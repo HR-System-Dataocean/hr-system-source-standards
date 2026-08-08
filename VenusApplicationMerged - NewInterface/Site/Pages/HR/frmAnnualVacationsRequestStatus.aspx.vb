@@ -824,6 +824,10 @@ Partial Class frmEmployeesVacations
         End If
 
         If CanbeCanceled Then
+            If String.IsNullOrWhiteSpace(txtCancelReason.Text) Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please enter cancel reason./الرجاء إدخال سبب الإلغاء "))
+                Return False
+            End If
             Dim isFullyApproved As Boolean
             Dim CountNullActions As Integer
             Dim canceledbefor As Integer
