@@ -360,6 +360,9 @@
   <data name="lblShowVacationsNotificationsResource1.Text" xml:space="preserve">
     <value>عرض إشعارات الإجازات</value>
   </data>
+  <data name="lblReviewPreviousPeriodSalariesResource1.Text" xml:space="preserve">
+    <value>مراجعة رواتب الفترة السابقة</value>
+  </data>
   <data name="TabResource4.Text" xml:space="preserve">
     <value>رواتب الموظفين</value>
   </data>

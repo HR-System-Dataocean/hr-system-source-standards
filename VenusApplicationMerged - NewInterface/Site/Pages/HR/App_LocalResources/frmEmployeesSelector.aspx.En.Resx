@@ -148,7 +148,7 @@
     <value>Branch</value>
   </data>
   <data name="Label_Title1Resource1.Text" xml:space="preserve">
-    <value>Please select employees</value>
+    <value>Please Select Employees</value>
   </data>
   <data name="btnSearchCodeResource1.ToolTip" xml:space="preserve">
     <value>Search</value>
@@ -157,13 +157,16 @@
     <value>√</value>
   </data>
   <data name="UltraGridColumnResource3.Header.Caption" xml:space="preserve">
-    <value>Code</value>
+    <value>Employee Code</value>
   </data>
   <data name="UltraGridColumnResource4.Header.Caption" xml:space="preserve">
     <value>Employee Name</value>
   </data>
   <data name="UltraGridColumnResource5.Header.Caption" xml:space="preserve">
     <value>Prepared</value>
+  </data>
+  <data name="UltraGridColumnResource6.Header.Caption" xml:space="preserve">
+    <value>Details</value>
   </data>
   <data name="btnFindRes.Text" xml:space="preserve">
     <value>Search</value>
@@ -172,7 +175,7 @@
     <value>Import Attendance</value>
   </data>
   <data name="AllDataRes.Text" xml:space="preserve">
-    <value>All Data</value>
+    <value>All Statuses</value>
   </data>
   <data name="lblFilterResource1.Text" xml:space="preserve">
     <value>Preparation Status</value>
@@ -203,5 +206,26 @@
   </data>
   <data name="LinkButton_I_FingerprintResource.Text" xml:space="preserve">
     <value>Import Fingerprint Attendance</value>
+  </data>
+  <data name="Label_HeaderSubResource1.Text" xml:space="preserve">
+    <value>This form is designed to prepare or refund for salaries.</value>
+  </data>
+  <data name="lblCurrentPeriodResource1.Text" xml:space="preserve">
+    <value>Current Period:</value>
+  </data>
+  <data name="Label_ProjectResource1.Text" xml:space="preserve">
+    <value>Employee Scope</value>
+  </data>
+  <data name="lnkReviewNowResource1.Text" xml:space="preserve">
+    <value>Review Now</value>
+  </data>
+  <data name="lblPeriodAlertTitleResource1.Text" xml:space="preserve">
+    <value>Alert: Unprepared salaries exist from the previous period.</value>
+  </data>
+  <data name="lblPeriodAlertSubResource1.Text" xml:space="preserve">
+    <value>Review previous-period cases through Retroactive Payroll Processing.</value>
+  </data>
+  <data name="lblGridNoteResource1.Text" xml:space="preserve">
+    <value>* Standard preparation applies to the selected period. Unprepared salaries from earlier periods are reviewed through Retroactive Payroll Processing.</value>
   </data>
 </root>

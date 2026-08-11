@@ -157,22 +157,25 @@
     <value>√</value>
   </data>
   <data name="UltraGridColumnResource3.Header.Caption" xml:space="preserve">
-    <value>الكود</value>
+    <value>كود الموظف</value>
   </data>
   <data name="UltraGridColumnResource4.Header.Caption" xml:space="preserve">
     <value>اسم الموظف</value>
   </data>
   <data name="UltraGridColumnResource5.Header.Caption" xml:space="preserve">
-    <value>مجهز</value>
+    <value>تم التجهيز</value>
+  </data>
+  <data name="UltraGridColumnResource6.Header.Caption" xml:space="preserve">
+    <value>تفاصيل</value>
   </data>
   <data name="btnFindRes.Text" xml:space="preserve">
-    <value>ابحث</value>
+    <value>بحث</value>
   </data>
   <data name="LinkButton_ImportResource1.Text" xml:space="preserve">
     <value>استيراد الدوام</value>
   </data>
   <data name="AllDataRes.Text" xml:space="preserve">
-    <value>جميع البيانات</value>
+    <value>جميع الحالات</value>
   </data>
   <data name="lblFilterResource1.Text" xml:space="preserve">
     <value>حالة التجهيز</value>
@@ -206,5 +209,26 @@
   </data>
   <data name="LinkButton_I_FingerprintResource.Text" xml:space="preserve">
     <value>سحب بصمة الموظفين</value>
+  </data>
+  <data name="Label_HeaderSubResource1.Text" xml:space="preserve">
+    <value>تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للرواتب</value>
+  </data>
+  <data name="lblCurrentPeriodResource1.Text" xml:space="preserve">
+    <value>الفترة الحالية:</value>
+  </data>
+  <data name="Label_ProjectResource1.Text" xml:space="preserve">
+    <value>نطاق الموظفين</value>
+  </data>
+  <data name="lnkReviewNowResource1.Text" xml:space="preserve">
+    <value>مراجعة الآن</value>
+  </data>
+  <data name="lblPeriodAlertTitleResource1.Text" xml:space="preserve">
+    <value>تنبيه: توجد رواتب غير مجهزة من الفترة السابقة.</value>
+  </data>
+  <data name="lblPeriodAlertSubResource1.Text" xml:space="preserve">
+    <value>راجع حالات الفترة السابقة من خلال معالجة الرواتب بأثر رجعي.</value>
+  </data>
+  <data name="lblGridNoteResource1.Text" xml:space="preserve">
+    <value>* التجهيز القياسي يطبق على الفترة المحددة. الرواتب غير المجهزة من فترات سابقة تراجع عبر معالجة الرواتب بأثر رجعي.</value>
   </data>
 </root>

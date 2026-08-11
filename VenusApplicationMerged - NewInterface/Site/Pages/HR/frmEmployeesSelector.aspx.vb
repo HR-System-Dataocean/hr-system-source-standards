@@ -3,7 +3,6 @@ Imports System.Data.SqlClient
 Imports System.Diagnostics
 Imports System.Globalization
 Imports System.IO
-Imports System.Windows.Forms
 Imports OfficeOpenXml
 Imports Venus.Application.SystemFiles.HumanResource
 Imports Venus.Application.SystemFiles.System
@@ -43,6 +42,8 @@ Partial Class frmEmployeesSelector
         Dim ClsSearchs As New Clssys_Searchs(Page)
         Dim clsContracttype As New Clshrs_ContractTypes(Page)
         Dim clsSponsor As New Clshrs_Sponsors(Page)
+
+        SetPageDirection()
 
         Dim clsSearchsColumns As New Clssys_SearchsColumns(Page)
         If ClsObjects.Find(" Code='" & ClsEmployee.Table.Trim & "'") Then
@@ -102,33 +103,203 @@ Partial Class frmEmployeesSelector
             Page.Session.Add("Lage", lblLage.Text)
             Page.Session.Add("ConnectionString", ClsEmployee.ConnectionString)
 
+            ApplyModernUiLabels(ClsNavigationHandler, StrMode)
+
             If StrMode = "Att" Then
-                Label_Header.Text = IIf(lblLage.Text = 0, "<b> Attendance Preparation : </b>(This form is designed to prepare or refund for attendance)", "<b>شاشة تجهيز الدوام </b>(تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للدوام)")
-                LinkButton_Import.Visible = True
-                ImageButton_Import.Visible = True
-                LinkButton_Fingerprint.Visible = True
-                ImageButton_Fingerprint.Visible = True
+                Label_Header.Text = ClsNavigationHandler.SetLanguage(Page, "Attendance Preparation/تجهيز الدوام")
+                Label_HeaderSub.Text = ClsNavigationHandler.SetLanguage(Page, "This form is designed to prepare or refund for attendance./تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للدوام")
+                LinkButton_Prepare.Text = ClsNavigationHandler.SetLanguage(Page, "Prepare Attendance/تجهيز الدوام")
+                LinkButton_Refund.Text = ClsNavigationHandler.SetLanguage(Page, "Cancel Preparation/إلغاء التجهيز")
+                spanImport.Visible = True
+                spanFingerprint.Visible = True
                 UwgSearchEmployees.Columns(4).Hidden = True
                 ddlFilter.Items(3).Enabled = True
-                'fltr_Row1.Visible = True
             End If
 
             If StrMode = "Sal" Then
-                Label_Header.Text = IIf(lblLage.Text = 0, "<b> Salary Preparation : </b>(This form is designed to prepare or refund for salaries)", "<b>شاشة تجهيز الرواتب </b>(تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للرواتب)")
+                Label_Header.Text = ClsNavigationHandler.SetLanguage(Page, "Salary Preparation/تجهيز رواتب الموظفين")
+                Label_HeaderSub.Text = ClsNavigationHandler.SetLanguage(Page, "This form is designed to prepare or refund for salaries./تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للرواتب")
+                LinkButton_Prepare.Text = ClsNavigationHandler.SetLanguage(Page, "Prepare Salaries/تجهيز الرواتب")
+                LinkButton_Refund.Text = ClsNavigationHandler.SetLanguage(Page, "Cancel Preparation/إلغاء التجهيز")
                 UwgSearchEmployees.Columns(4).Hidden = True
                 ddlFilter.Items(3).Enabled = True
-                'fltr_Row1.Visible = True
+                pnlPeriodAlert.Visible = ShouldShowRetroactiveAlert(ClsEmployee.ConnectionString, clsBranch.MainCompanyID, CInt(Val(DdlPeriods.SelectedValue)))
+            Else
+                pnlPeriodAlert.Visible = False
             End If
 
             If StrMode = "Dis" Then
-                Label_Header.Text = IIf(lblLage.Text = 0, "<b> Salary Distribution : </b>(This form is designed to prepare or refund for salaries distribution)", "<b>شاشة توزيع الرواتب </b>(تم تصميم هذا النموذج لتجهيز أو إلغاء توزيع الرواتب)")
+                Label_Header.Text = ClsNavigationHandler.SetLanguage(Page, "Salary Distribution/توزيع الرواتب")
+                Label_HeaderSub.Text = ClsNavigationHandler.SetLanguage(Page, "This form is designed to prepare or refund for salaries distribution./تم تصميم هذا النموذج لتجهيز أو إلغاء توزيع الرواتب")
+                LinkButton_Prepare.Text = ClsNavigationHandler.SetLanguage(Page, "Distribute Salary/توزيع الراتب")
+                LinkButton_Refund.Text = ClsNavigationHandler.SetLanguage(Page, "Cancel Distribution/إلغاء التوزيع")
                 UwgSearchEmployees.Columns(4).Hidden = False
-                LinkButton_Prepare.Text = IIf(lblLage.Text = 0, "Distribute Salary", "توزيع الراتب")
                 ddlFilter.Items(3).Enabled = False
-                'fltr_Row1.Visible = False
             End If
             ddlFilter.SelectedValue = ConfigurationManager.AppSettings("AttendaceFilterDefaultValue")
         End If
+
+        UpdateCurrentPeriodBadge()
+        SetPageDirection()
+        RegisterPageDirectionScript()
+    End Sub
+
+    Private Function IsReviewPreviousPeriodSalariesEnabled(ByVal connStr As String, ByVal companyId As Integer) As Boolean
+        Try
+            If String.IsNullOrEmpty(connStr) OrElse companyId <= 0 Then
+                Return False
+            End If
+            Dim showSettingObj As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(connStr, CommandType.Text,
+                "select top 1 isnull(ReviewPreviousPeriodSalaries,0) from sys_SystemConfig where CompanyId=" & companyId)
+            If showSettingObj IsNot Nothing AndAlso Not IsDBNull(showSettingObj) Then
+                Return CBool(showSettingObj)
+            End If
+        Catch
+        End Try
+        Return False
+    End Function
+
+    Private Function ShouldShowRetroactiveAlert(ByVal connStr As String, ByVal companyId As Integer, ByVal currentPeriodId As Integer) As Boolean
+        Try
+            If Not IsReviewPreviousPeriodSalariesEnabled(connStr, companyId) Then Return False
+            If currentPeriodId <= 0 Then Return False
+
+            Dim prevObj As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(connStr, CommandType.Text,
+                "SELECT TOP 1 ID FROM sys_FiscalYearsPeriods WHERE ISNULL(CancelDate,'')='' " &
+                "AND FromDate < (SELECT FromDate FROM sys_FiscalYearsPeriods WHERE ID=" & currentPeriodId & ") ORDER BY FromDate DESC")
+            If prevObj Is Nothing OrElse IsDBNull(prevObj) Then Return False
+            Dim prevPeriodId As Integer = CInt(prevObj)
+
+            Dim cntObj As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(connStr, CommandType.Text,
+                "SELECT COUNT(1) FROM hrs_Employees e " &
+                "WHERE ISNULL(e.RegComputerID,0)=0 " &
+                "AND dbo.fn_CheckEndOfServiceByPeriod(e.ID," & prevPeriodId & ")>0 " &
+                "AND NOT EXISTS (SELECT 1 FROM hrs_EmployeesTransactions t WHERE t.EmployeeID=e.ID AND t.FiscalYearPeriodID=" & prevPeriodId & " AND t.PrepareType='N') " &
+                "AND NOT EXISTS (SELECT 1 FROM hrs_RetroactiveSalaryExclusions x WHERE x.EmployeeID=e.ID AND x.AccrualPeriodID=" & prevPeriodId & ") " &
+                "AND NOT EXISTS (SELECT 1 FROM hrs_EmployeeExtraItems ei WHERE ei.EmployeeCode=e.Code AND ei.FiscalPeriodID=" & currentPeriodId & " AND ei.Src=6 AND ei.TransactionNo='" & prevPeriodId & "')")
+            If cntObj IsNot Nothing AndAlso Not IsDBNull(cntObj) Then
+                Return CInt(cntObj) > 0
+            End If
+        Catch
+        End Try
+        Return False
+    End Function
+
+    Private Function ResolvePageDirection() As String
+        Try
+            If ProfileCls.CurrentLanguage = "Ar" Then
+                Return "rtl"
+            End If
+        Catch
+        End Try
+        Try
+            If Session("Language") IsNot Nothing Then
+                Dim lang As String = Session("Language").ToString()
+                If lang = "ar" OrElse lang = "AR" OrElse lang = "1" Then
+                    Return "rtl"
+                End If
+            End If
+        Catch
+        End Try
+        Try
+            If lblLage IsNot Nothing AndAlso lblLage.Text = "1" Then
+                Return "rtl"
+            End If
+        Catch
+        End Try
+        Return "ltr"
+    End Function
+
+    Private Sub SetPageDirection()
+        Try
+            DIV.Attributes("dir") = ResolvePageDirection()
+        Catch
+        End Try
+    End Sub
+
+    Private Sub RegisterPageDirectionScript()
+        Try
+            Dim sb As New System.Text.StringBuilder()
+            sb.AppendLine("var pageDirection = '" & ResolvePageDirection() & "';")
+            sb.AppendLine("var esClientIds = {")
+            sb.AppendLine("  DdlPeriods: '" & If(DdlPeriods Is Nothing, "", DdlPeriods.ClientID) & "',")
+            sb.AppendLine("  lblCurrentPeriodValue: '" & If(lblCurrentPeriodValue Is Nothing, "", lblCurrentPeriodValue.ClientID) & "',")
+            sb.AppendLine("  ImageButton_Prepare: '" & If(ImageButton_Prepare Is Nothing, "", ImageButton_Prepare.ClientID) & "',")
+            sb.AppendLine("  LinkButton_Prepare: '" & If(LinkButton_Prepare Is Nothing, "", LinkButton_Prepare.ClientID) & "',")
+            sb.AppendLine("  ImageButton_Refund: '" & If(ImageButton_Refund Is Nothing, "", ImageButton_Refund.ClientID) & "',")
+            sb.AppendLine("  LinkButton_Refund: '" & If(LinkButton_Refund Is Nothing, "", LinkButton_Refund.ClientID) & "',")
+            sb.AppendLine("  ImageButton1: '" & If(ImageButton1 Is Nothing, "", ImageButton1.ClientID) & "'")
+            sb.AppendLine("};")
+            ClientScript.RegisterClientScriptBlock(Me.GetType(), "pageDirection", sb.ToString(), True)
+        Catch
+        End Try
+    End Sub
+
+    Private Sub ApplyModernUiLabels(ByVal nav As Venus.Shared.Web.NavigationHandler, ByVal strMode As String)
+        lblCurrentPeriod.Text = nav.SetLanguage(Page, "Current Period:/الفترة الحالية:")
+        lblCode.Text = nav.SetLanguage(Page, "Employee Code/كود الموظف")
+        lblCode1.Text = nav.SetLanguage(Page, "Payroll Period/فترة الرواتب")
+        lblDepartment.Text = nav.SetLanguage(Page, "Department/الإدارة")
+        lblBranch.Text = nav.SetLanguage(Page, "Branch/الفرع")
+        Label_Contract.Text = nav.SetLanguage(Page, "Contract Type/نوع التعاقد")
+        Label_Sponsor.Text = nav.SetLanguage(Page, "Sponsor/الكفيل")
+        lblNationality.Text = nav.SetLanguage(Page, "Nationality/الجنسية")
+        Label_Project.Text = nav.SetLanguage(Page, "Employee Scope/نطاق الموظفين")
+        lblFilter.Text = nav.SetLanguage(Page, "Preparation Status/حالة التجهيز")
+        lblMainInfo.Text = nav.SetLanguage(Page, "Main Info./عام")
+        lnkReviewNow.Text = nav.SetLanguage(Page, "Review Now/مراجعة الآن")
+        lblPeriodAlertTitle.Text = nav.SetLanguage(Page, "Alert: Unprepared salaries exist from the previous period./تنبيه: توجد رواتب غير مجهزة من الفترة السابقة.")
+        lblPeriodAlertSub.Text = nav.SetLanguage(Page, "Review previous-period cases through Retroactive Payroll Processing./راجع حالات الفترة السابقة من خلال معالجة الرواتب بأثر رجعي.")
+        If strMode = "Sal" Then
+            lblGridNote.Text = nav.SetLanguage(Page, "* Standard preparation applies to the selected period. Unprepared salaries from earlier periods are reviewed through Retroactive Payroll Processing./* التجهيز القياسي يطبق على الفترة المحددة. الرواتب غير المجهزة من فترات سابقة تراجع عبر معالجة الرواتب بأثر رجعي.")
+        Else
+            lblGridNote.Text = ""
+        End If
+    End Sub
+
+    Private Sub UpdateCurrentPeriodBadge()
+        Try
+            If DdlPeriods IsNot Nothing AndAlso DdlPeriods.SelectedItem IsNot Nothing Then
+                lblCurrentPeriodValue.Text = DdlPeriods.SelectedItem.Text
+            End If
+        Catch
+        End Try
+    End Sub
+
+    Private Function GetSelectedEmployeeIdsForPreparation() As String
+        Dim ids As New System.Text.StringBuilder()
+        Try
+            For Each row As Infragistics.WebUI.UltraWebGrid.UltraGridRow In UwgSearchEmployees.Rows
+                If row.Cells(1).Value = True Then
+                    Dim empId As Integer = 0
+                    Integer.TryParse(Convert.ToString(row.Cells(0).Value), empId)
+                    If empId > 0 Then
+                        If ids.Length > 0 Then ids.Append(",")
+                        ids.Append(empId.ToString())
+                    End If
+                End If
+            Next
+        Catch
+        End Try
+        Return ids.ToString()
+    End Function
+
+    Protected Sub lnkReviewNow_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Try
+            Dim periodId As Integer = 0
+            If DdlPeriods IsNot Nothing AndAlso DdlPeriods.SelectedValue IsNot Nothing Then
+                Integer.TryParse(DdlPeriods.SelectedValue, periodId)
+            End If
+            If periodId <= 0 Then
+                Return
+            End If
+
+            Session.Remove("RetroSelectedEmpIDs")
+            Dim script As String =
+                "OpenModal1('frmRetroactiveSalaryReview.aspx?PeriodID=" & periodId & "', 680, 1020, false, '');"
+            ClientScript.RegisterStartupScript(Me.GetType(), "OpenRetroReview", script, True)
+        Catch
+        End Try
     End Sub
 
     Protected Sub DdlPeriods_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DdlPeriods.SelectedIndexChanged
@@ -141,6 +312,15 @@ Partial Class frmEmployeesSelector
         DropDownList_Project.Items(0).Text = ClsNavigationHandler.SetLanguage(Page, "[All Employee Has Not Attendance Transactions]/ [ جميع الموظفين بدون إدخالات حضور وانصراف]")
         DropDownList_Project.Items.Insert(0, New System.Web.UI.WebControls.ListItem(ClsNavigationHandler.SetLanguage(Page, "[All Employee Has Attendance Transactions]/ [ جميع الموظفين مع إدخالات حضور وانصراف]"), -1))
         DropDownList_Project.Items.Insert(0, New System.Web.UI.WebControls.ListItem(ClsNavigationHandler.SetLanguage(Page, "[All Employees]/ [ جميع الموظفين]"), -2))
+        UpdateCurrentPeriodBadge()
+        Try
+            Dim StrMode As String = Request.QueryString.Item("SM")
+            If StrMode = "Sal" Then
+                Dim clsBranch As New Clssys_Branches(Page)
+                pnlPeriodAlert.Visible = ShouldShowRetroactiveAlert(ClsEmployee.ConnectionString, clsBranch.MainCompanyID, CInt(Val(DdlPeriods.SelectedValue)))
+            End If
+        Catch
+        End Try
         GetData(True)
         HandleShowVacationsNotifications()
     End Sub
@@ -1491,11 +1671,30 @@ Partial Class frmEmployeesSelector
         End Try
     End Function
 
+    Private Function WasSalaryPreparedRetroactively(ByVal employeeCode As String, ByVal accrualPeriodId As Integer, ByVal connStr As String) As Boolean
+        Try
+            If String.IsNullOrEmpty(employeeCode) OrElse accrualPeriodId <= 0 OrElse String.IsNullOrEmpty(connStr) Then
+                Return False
+            End If
+            Dim sql As String =
+                "SELECT COUNT(1) FROM hrs_EmployeeExtraItems " &
+                "WHERE EmployeeCode='" & employeeCode.Replace("'", "''") & "' " &
+                "AND Src=6 AND TransactionNo='" & accrualPeriodId & "'"
+            Dim obj As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(connStr, CommandType.Text, sql)
+            If obj IsNot Nothing AndAlso Not IsDBNull(obj) Then
+                Return CInt(obj) > 0
+            End If
+        Catch
+        End Try
+        Return False
+    End Function
+
     Private Function SetData_Salary(Optional ByVal IsSave As Boolean = True) As Boolean
         Try
             Dim clsProject As New Clshrs_Projects(Page, "hrs_Projects")
             If Not Load_ClsLayers() Then Return False
 
+            Dim retroPreparedEmployees As New System.Collections.Generic.List(Of String)
             Dim baseFormula As String = ""
             For Each ObjRow In UwgSearchEmployees.Rows
                 Try
@@ -1506,6 +1705,22 @@ Partial Class frmEmployeesSelector
                         If EmployeeID = 0 Then Continue For
                         ClsEmployees = New Clshrs_Employees(Page)
                         ClsEmployees.Find("ID=" & EmployeeID)
+
+                        ' Skip employees whose accrual period salary was already paid via retro ExtraItems
+                        If WasSalaryPreparedRetroactively(ClsEmployees.Code, IntFisicalPeriod, ClsEmployees.ConnectionString) Then
+                            Dim empLabel As String = Convert.ToString(ClsEmployees.Code)
+                            Try
+                                Dim empName As String = Convert.ToString(ObjRow.Cells.FromKey("FullName").Value)
+                                If Not String.IsNullOrEmpty(empName) Then
+                                    empLabel = empLabel & " - " & empName
+                                End If
+                            Catch
+                            End Try
+                            If Not retroPreparedEmployees.Contains(empLabel) Then
+                                retroPreparedEmployees.Add(empLabel)
+                            End If
+                            Continue For
+                        End If
 
                         If Not CheckEmployee(ClsEmployees.ID, IntFisicalPeriod) Then Continue For
                         Dim Amount As Double = 0
@@ -2392,6 +2607,17 @@ Partial Class frmEmployeesSelector
 
             Dim strlog As String = "INsert into Hrs_Att_Salary_Log values('Salary','Prepare/تجهيز','" & txtCode.Text & "'," & _sys_User.ID & ",'" & DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") & "'," & DdlPeriods.SelectedValue & "," & ddlDepartment.SelectedValue & "," & ddlBranche.SelectedValue & ",'" & TextBox_Contract.Text & "','" & TextBox_Sponsor.Text & "'," & DropDownList_Project.SelectedValue & "," & ddlNationality.SelectedValue & ",'" & ddlFilter.SelectedItem.Text & "') "
             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsFisicalPeriods.ConnectionString, Data.CommandType.Text, strlog)
+
+            If retroPreparedEmployees.Count > 0 Then
+                Dim nav As Venus.Shared.Web.NavigationHandler = ObjNavigationHandler
+                If nav Is Nothing Then
+                    nav = New Venus.Shared.Web.NavigationHandler(ClsFisicalPeriods.ConnectionString)
+                End If
+                Dim empList As String = String.Join(vbCrLf, retroPreparedEmployees.ToArray())
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, nav.SetLanguage(Page,
+                    "The following employee(s) were already prepared retroactively for this period and were skipped:" & vbCrLf & empList &
+                    "/الموظف/الموظفون التاليون تم تجهيز راتبهم بأثر رجعي مسبقاً لهذه الفترة وتم تخطيهم:" & vbCrLf & empList))
+            End If
 
             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Operation Done !/!تمت العملية"))
             GetData(True)

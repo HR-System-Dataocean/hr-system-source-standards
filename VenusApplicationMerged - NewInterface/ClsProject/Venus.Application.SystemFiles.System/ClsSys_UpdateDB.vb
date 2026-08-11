@@ -14411,10 +14411,71 @@ BEGIN
 END"
         ExecuteUpdate(SQL)
 
+        SQL = "IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('sys_SystemConfig') AND name = 'ReviewPreviousPeriodSalaries')
+BEGIN
+    ALTER TABLE sys_SystemConfig ADD ReviewPreviousPeriodSalaries BIT NOT NULL CONSTRAINT DF_sys_SystemConfig_ReviewPreviousPeriodSalaries DEFAULT(0)
+END"
+        ExecuteUpdate(SQL)
 
+        SQL = "IF OBJECT_ID(N'dbo.hrs_RetroactiveSalaryExclusions', N'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.hrs_RetroactiveSalaryExclusions
+    (
+        ID int IDENTITY(1,1) NOT NULL,
+        EmployeeID int NOT NULL,
+        AccrualPeriodID int NOT NULL,
+        PaymentPeriodID int NULL,
+        ExclusionReason nvarchar(500) NOT NULL,
+        RegUserID int NULL,
+        RegDate datetime NOT NULL CONSTRAINT DF_hrs_RetroactiveSalaryExclusions_RegDate DEFAULT(GETDATE()),
+        CONSTRAINT PK_hrs_RetroactiveSalaryExclusions PRIMARY KEY CLUSTERED (ID),
+        CONSTRAINT UQ_hrs_RetroactiveSalaryExclusions UNIQUE (EmployeeID, AccrualPeriodID)
+    )
+END"
+        ExecuteUpdate(SQL)
 
+        SQL = "IF OBJECT_ID(N'dbo.hrs_RetroTransactionMapping', N'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.hrs_RetroTransactionMapping
+    (
+        ID int IDENTITY(1,1) NOT NULL,
+        TransactionTypeID int NOT NULL,
+        RetroTransactionTypeID int NULL,
+        IsActive bit NOT NULL CONSTRAINT DF_hrs_RetroTransactionMapping_IsActive DEFAULT(0),
+        RegUserID int NULL,
+        RegDate datetime NOT NULL CONSTRAINT DF_hrs_RetroTransactionMapping_RegDate DEFAULT(GETDATE()),
+        CONSTRAINT PK_hrs_RetroTransactionMapping PRIMARY KEY CLUSTERED (ID),
+        CONSTRAINT UQ_hrs_RetroTransactionMapping_Txn UNIQUE (TransactionTypeID)
+    )
+END"
+        ExecuteUpdate(SQL)
 
+        SQL = "
+IF NOT EXISTS (SELECT 1 FROM sys_Forms WHERE Code = 'frmRetroTransactionMapping')
+    INSERT INTO sys_Forms(Code,EngName,ArbName,ArbName4S,EngDescription,ArbDescription,Rank,ModuleID,Height,Width,RegDate)
+    VALUES('frmRetroTransactionMapping','frmRetroTransactionMapping.aspx',N'ربط بنود الفروقات بأثر رجعي',N'ربط بنود الفروقات بأثر رجعي',
+           'Linking differences items retrospectively',N'ربط بنود الفروقات بأثر رجعي',0,2,750,1200,GETDATE());
 
+DECLARE @FormID_RTM int=(SELECT ID FROM sys_Forms WHERE Code='frmRetroTransactionMapping');
+
+IF @FormID_RTM IS NOT NULL AND NOT EXISTS (SELECT 1 FROM sys_Menus WHERE Code='frmRetroTransactionMapping')
+BEGIN
+    DECLARE @ParentID_RTM int=(SELECT TOP 1 ID FROM sys_Menus WHERE CODE='0024');
+    IF @ParentID_RTM IS NULL
+        SET @ParentID_RTM=(SELECT TOP 1 ParentID FROM sys_Menus WHERE Code='frmSalaryProductionFilesSetting');
+    IF @ParentID_RTM IS NULL SET @ParentID_RTM=240;
+
+    INSERT INTO sys_Menus(Code,EngName,ArbName,ArbName4S,ParentID,Rank,FormID,IsHide,ViewType,RegDate)
+    VALUES('frmRetroTransactionMapping','Linking differences items retrospectively',N'ربط بنود الفروقات بأثر رجعي',N'ربط بنود الفروقات بأثر رجعي',
+           @ParentID_RTM, ISNULL((SELECT MAX(Rank)+1 FROM sys_Menus WHERE ParentID=@ParentID_RTM),1),
+           @FormID_RTM,0,1,GETDATE());
+END
+
+IF @FormID_RTM IS NOT NULL AND NOT EXISTS (SELECT 1 FROM sys_FormsPermissions WHERE UserID=1 AND FormID=@FormID_RTM)
+    INSERT INTO sys_FormsPermissions(FormID,UserID,AllowView,AllowAdd,AllowEdit,AllowDelete,AllowPrint,RegUserID,RegDate)
+    VALUES(@FormID_RTM,1,1,1,1,1,1,1,GETDATE());
+"
+        ExecuteUpdate(SQL)
 
     End Function
     Public Function ExecuteUpdate(ByVal mySQLQuery As String) As Boolean

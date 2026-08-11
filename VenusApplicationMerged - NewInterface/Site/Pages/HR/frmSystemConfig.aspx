@@ -434,8 +434,11 @@
                                 <td class="SeparArea">
                                 </td>
                                 <td class="LabelArea">
+                                    <asp:Label ID="lblReviewPreviousPeriodSalaries" runat="server" Text="Review previous-period salaries" SkinID="Label_DefaultNormal"
+                                        meta:resourcekey="lblReviewPreviousPeriodSalariesResource1"></asp:Label>
                                 </td>
                                 <td class="DataArea">
+                                    <asp:CheckBox ID="chkReviewPreviousPeriodSalaries" runat="server" />
                                 </td>
                             </tr>
                         </table>
