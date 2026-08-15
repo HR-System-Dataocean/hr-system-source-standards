@@ -722,6 +722,15 @@ Partial Class frmAttendancePreparation
                 Dim dsRank As New Data.DataSet()
                 If dsconfig.Tables(0).Rows.Count > 0 Then
 
+                    UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001914' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                    SqlCommand = New SqlClient.SqlCommand
+                    SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+                    SqlCommand.CommandType = CommandType.Text
+                    SqlCommand.CommandText = UpdateCommand
+                    SqlCommand.Connection.Open()
+                    SqlCommand.ExecuteNonQuery()
+                    SqlCommand.Connection.Close()
+
                     If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
                         _sys_User.Find("ID = '" & User & "'")
                         ClsEmployees.Find("Code='" & _sys_User.Code & "'")
@@ -755,15 +764,6 @@ Partial Class frmAttendancePreparation
 
 
                 End If
-
-                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001914' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
-                SqlCommand = New SqlClient.SqlCommand
-                SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
-                SqlCommand.CommandType = CommandType.Text
-                SqlCommand.CommandText = UpdateCommand
-                SqlCommand.Connection.Open()
-                SqlCommand.ExecuteNonQuery()
-                SqlCommand.Connection.Close()
 
                 ClsEmployees.SendEmail("frmAdvanceSalaryRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
                 ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
@@ -1225,7 +1225,7 @@ Partial Class frmAttendancePreparation
             Dim ClsEmployees2 As New Clshrs_Employees(Page)
             ClsEmployees2.Find("Code='" & _sys_User.Code & "'")
             Dim SqlCommand As Data.SqlClient.SqlCommand
-            Dim UpdateCommand As String = "update SS_RequestActions set seen=1, ActionID=5, ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & ""
+            Dim UpdateCommand As String = "update SS_RequestActions set seen=1, ActionID=5, ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " and ActionID is null and seen<>1"
             SqlCommand = New SqlClient.SqlCommand
             SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
             SqlCommand.CommandType = CommandType.Text

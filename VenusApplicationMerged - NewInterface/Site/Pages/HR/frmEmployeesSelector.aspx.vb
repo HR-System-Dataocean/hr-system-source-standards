@@ -16,6 +16,87 @@ Partial Class frmEmployeesSelector
         End Get
     End Property
 
+    Private Function FindEsControl(ByVal controlId As String) As System.Web.UI.Control
+        Dim c As System.Web.UI.Control = Me.FindControl(controlId)
+        If c Is Nothing AndAlso UltraWebTab1 IsNot Nothing Then
+            Try
+                c = UltraWebTab1.FindControl(controlId)
+            Catch
+            End Try
+        End If
+        If c Is Nothing Then
+            c = RecursiveFindControl(Me, controlId)
+        End If
+        Return c
+    End Function
+
+    Private Function RecursiveFindControl(ByVal parent As System.Web.UI.Control, ByVal controlId As String) As System.Web.UI.Control
+        If parent Is Nothing Then Return Nothing
+        Dim found As System.Web.UI.Control = parent.FindControl(controlId)
+        If found IsNot Nothing Then Return found
+        For Each child As System.Web.UI.Control In parent.Controls
+            found = RecursiveFindControl(child, controlId)
+            If found IsNot Nothing Then Return found
+        Next
+        Return Nothing
+    End Function
+
+    Private ReadOnly Property Ctrl_Label_HeaderSub As Global.System.Web.UI.WebControls.Label
+        Get
+            Return TryCast(FindEsControl("Label_HeaderSub"), Global.System.Web.UI.WebControls.Label)
+        End Get
+    End Property
+    Private ReadOnly Property Ctrl_spanImport As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+        Get
+            Return TryCast(FindEsControl("spanImport"), Global.System.Web.UI.HtmlControls.HtmlGenericControl)
+        End Get
+    End Property
+    Private ReadOnly Property Ctrl_spanFingerprint As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+        Get
+            Return TryCast(FindEsControl("spanFingerprint"), Global.System.Web.UI.HtmlControls.HtmlGenericControl)
+        End Get
+    End Property
+    Private ReadOnly Property Ctrl_lblCurrentPeriod As Global.System.Web.UI.WebControls.Label
+        Get
+            Return TryCast(FindEsControl("lblCurrentPeriod"), Global.System.Web.UI.WebControls.Label)
+        End Get
+    End Property
+    Private ReadOnly Property Ctrl_lblCurrentPeriodValue As Global.System.Web.UI.WebControls.Label
+        Get
+            Return TryCast(FindEsControl("lblCurrentPeriodValue"), Global.System.Web.UI.WebControls.Label)
+        End Get
+    End Property
+    Private ReadOnly Property Ctrl_lblMainInfo As Global.System.Web.UI.WebControls.Label
+        Get
+            Return TryCast(FindEsControl("lblMainInfo"), Global.System.Web.UI.WebControls.Label)
+        End Get
+    End Property
+    Private ReadOnly Property Ctrl_pnlPeriodAlert As Global.System.Web.UI.WebControls.Panel
+        Get
+            Return TryCast(FindEsControl("pnlPeriodAlert"), Global.System.Web.UI.WebControls.Panel)
+        End Get
+    End Property
+    Private ReadOnly Property Ctrl_lblPeriodAlertTitle As Global.System.Web.UI.WebControls.Label
+        Get
+            Return TryCast(FindEsControl("lblPeriodAlertTitle"), Global.System.Web.UI.WebControls.Label)
+        End Get
+    End Property
+    Private ReadOnly Property Ctrl_lblPeriodAlertSub As Global.System.Web.UI.WebControls.Label
+        Get
+            Return TryCast(FindEsControl("lblPeriodAlertSub"), Global.System.Web.UI.WebControls.Label)
+        End Get
+    End Property
+    Private ReadOnly Property Ctrl_lnkReviewNow As Global.System.Web.UI.WebControls.LinkButton
+        Get
+            Return TryCast(FindEsControl("lnkReviewNow"), Global.System.Web.UI.WebControls.LinkButton)
+        End Get
+    End Property
+    Private ReadOnly Property Ctrl_lblGridNote As Global.System.Web.UI.WebControls.Label
+        Get
+            Return TryCast(FindEsControl("lblGridNote"), Global.System.Web.UI.WebControls.Label)
+        End Get
+    End Property
+
     Protected Overrides Sub Render(ByVal writer As HtmlTextWriter)
         If VacNotifyConfirmButton IsNot Nothing Then
             ClientScript.RegisterForEventValidation(VacNotifyConfirmButton.UniqueID, "STEP1_YES")
@@ -107,30 +188,32 @@ Partial Class frmEmployeesSelector
 
             If StrMode = "Att" Then
                 Label_Header.Text = ClsNavigationHandler.SetLanguage(Page, "Attendance Preparation/تجهيز الدوام")
-                Label_HeaderSub.Text = ClsNavigationHandler.SetLanguage(Page, "This form is designed to prepare or refund for attendance./تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للدوام")
+                If Ctrl_Label_HeaderSub IsNot Nothing Then Ctrl_Label_HeaderSub.Text = ClsNavigationHandler.SetLanguage(Page, "This form is designed to prepare or refund for attendance./تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للدوام")
                 LinkButton_Prepare.Text = ClsNavigationHandler.SetLanguage(Page, "Prepare Attendance/تجهيز الدوام")
                 LinkButton_Refund.Text = ClsNavigationHandler.SetLanguage(Page, "Cancel Preparation/إلغاء التجهيز")
-                spanImport.Visible = True
-                spanFingerprint.Visible = True
+                If Ctrl_spanImport IsNot Nothing Then Ctrl_spanImport.Visible = True
+                If Ctrl_spanFingerprint IsNot Nothing Then Ctrl_spanFingerprint.Visible = True
                 UwgSearchEmployees.Columns(4).Hidden = True
                 ddlFilter.Items(3).Enabled = True
             End If
 
             If StrMode = "Sal" Then
                 Label_Header.Text = ClsNavigationHandler.SetLanguage(Page, "Salary Preparation/تجهيز رواتب الموظفين")
-                Label_HeaderSub.Text = ClsNavigationHandler.SetLanguage(Page, "This form is designed to prepare or refund for salaries./تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للرواتب")
+                If Ctrl_Label_HeaderSub IsNot Nothing Then Ctrl_Label_HeaderSub.Text = ClsNavigationHandler.SetLanguage(Page, "This form is designed to prepare or refund for salaries./تم تصميم هذا النموذج لتجهيز أو إلغاء التجهيز للرواتب")
                 LinkButton_Prepare.Text = ClsNavigationHandler.SetLanguage(Page, "Prepare Salaries/تجهيز الرواتب")
                 LinkButton_Refund.Text = ClsNavigationHandler.SetLanguage(Page, "Cancel Preparation/إلغاء التجهيز")
                 UwgSearchEmployees.Columns(4).Hidden = True
                 ddlFilter.Items(3).Enabled = True
-                pnlPeriodAlert.Visible = ShouldShowRetroactiveAlert(ClsEmployee.ConnectionString, clsBranch.MainCompanyID, CInt(Val(DdlPeriods.SelectedValue)))
+                If Ctrl_pnlPeriodAlert IsNot Nothing Then
+                    Ctrl_pnlPeriodAlert.Visible = ShouldShowRetroactiveAlert(ClsEmployee.ConnectionString, clsBranch.MainCompanyID, CInt(Val(DdlPeriods.SelectedValue)))
+                End If
             Else
-                pnlPeriodAlert.Visible = False
+                If Ctrl_pnlPeriodAlert IsNot Nothing Then Ctrl_pnlPeriodAlert.Visible = False
             End If
 
             If StrMode = "Dis" Then
                 Label_Header.Text = ClsNavigationHandler.SetLanguage(Page, "Salary Distribution/توزيع الرواتب")
-                Label_HeaderSub.Text = ClsNavigationHandler.SetLanguage(Page, "This form is designed to prepare or refund for salaries distribution./تم تصميم هذا النموذج لتجهيز أو إلغاء توزيع الرواتب")
+                If Ctrl_Label_HeaderSub IsNot Nothing Then Ctrl_Label_HeaderSub.Text = ClsNavigationHandler.SetLanguage(Page, "This form is designed to prepare or refund for salaries distribution./تم تصميم هذا النموذج لتجهيز أو إلغاء توزيع الرواتب")
                 LinkButton_Prepare.Text = ClsNavigationHandler.SetLanguage(Page, "Distribute Salary/توزيع الراتب")
                 LinkButton_Refund.Text = ClsNavigationHandler.SetLanguage(Page, "Cancel Distribution/إلغاء التوزيع")
                 UwgSearchEmployees.Columns(4).Hidden = False
@@ -223,7 +306,7 @@ Partial Class frmEmployeesSelector
             sb.AppendLine("var pageDirection = '" & ResolvePageDirection() & "';")
             sb.AppendLine("var esClientIds = {")
             sb.AppendLine("  DdlPeriods: '" & If(DdlPeriods Is Nothing, "", DdlPeriods.ClientID) & "',")
-            sb.AppendLine("  lblCurrentPeriodValue: '" & If(lblCurrentPeriodValue Is Nothing, "", lblCurrentPeriodValue.ClientID) & "',")
+            sb.AppendLine("  lblCurrentPeriodValue: '" & If(Ctrl_lblCurrentPeriodValue Is Nothing, "", Ctrl_lblCurrentPeriodValue.ClientID) & "',")
             sb.AppendLine("  ImageButton_Prepare: '" & If(ImageButton_Prepare Is Nothing, "", ImageButton_Prepare.ClientID) & "',")
             sb.AppendLine("  LinkButton_Prepare: '" & If(LinkButton_Prepare Is Nothing, "", LinkButton_Prepare.ClientID) & "',")
             sb.AppendLine("  ImageButton_Refund: '" & If(ImageButton_Refund Is Nothing, "", ImageButton_Refund.ClientID) & "',")
@@ -236,7 +319,7 @@ Partial Class frmEmployeesSelector
     End Sub
 
     Private Sub ApplyModernUiLabels(ByVal nav As Venus.Shared.Web.NavigationHandler, ByVal strMode As String)
-        lblCurrentPeriod.Text = nav.SetLanguage(Page, "Current Period:/الفترة الحالية:")
+        If Ctrl_lblCurrentPeriod IsNot Nothing Then Ctrl_lblCurrentPeriod.Text = nav.SetLanguage(Page, "Current Period:/الفترة الحالية:")
         lblCode.Text = nav.SetLanguage(Page, "Employee Code/كود الموظف")
         lblCode1.Text = nav.SetLanguage(Page, "Payroll Period/فترة الرواتب")
         lblDepartment.Text = nav.SetLanguage(Page, "Department/الإدارة")
@@ -246,21 +329,23 @@ Partial Class frmEmployeesSelector
         lblNationality.Text = nav.SetLanguage(Page, "Nationality/الجنسية")
         Label_Project.Text = nav.SetLanguage(Page, "Employee Scope/نطاق الموظفين")
         lblFilter.Text = nav.SetLanguage(Page, "Preparation Status/حالة التجهيز")
-        lblMainInfo.Text = nav.SetLanguage(Page, "Main Info./عام")
-        lnkReviewNow.Text = nav.SetLanguage(Page, "Review Now/مراجعة الآن")
-        lblPeriodAlertTitle.Text = nav.SetLanguage(Page, "Alert: Unprepared salaries exist from the previous period./تنبيه: توجد رواتب غير مجهزة من الفترة السابقة.")
-        lblPeriodAlertSub.Text = nav.SetLanguage(Page, "Review previous-period cases through Retroactive Payroll Processing./راجع حالات الفترة السابقة من خلال معالجة الرواتب بأثر رجعي.")
-        If strMode = "Sal" Then
-            lblGridNote.Text = nav.SetLanguage(Page, "* Standard preparation applies to the selected period. Unprepared salaries from earlier periods are reviewed through Retroactive Payroll Processing./* التجهيز القياسي يطبق على الفترة المحددة. الرواتب غير المجهزة من فترات سابقة تراجع عبر معالجة الرواتب بأثر رجعي.")
-        Else
-            lblGridNote.Text = ""
+        If Ctrl_lblMainInfo IsNot Nothing Then Ctrl_lblMainInfo.Text = nav.SetLanguage(Page, "Main Info./عام")
+        If Ctrl_lnkReviewNow IsNot Nothing Then Ctrl_lnkReviewNow.Text = nav.SetLanguage(Page, "Review Now/مراجعة الآن")
+        If Ctrl_lblPeriodAlertTitle IsNot Nothing Then Ctrl_lblPeriodAlertTitle.Text = nav.SetLanguage(Page, "Alert: Unprepared salaries exist from the previous period./تنبيه: توجد رواتب غير مجهزة من الفترة السابقة.")
+        If Ctrl_lblPeriodAlertSub IsNot Nothing Then Ctrl_lblPeriodAlertSub.Text = nav.SetLanguage(Page, "Review previous-period cases through Retroactive Payroll Processing./راجع حالات الفترة السابقة من خلال معالجة الرواتب بأثر رجعي.")
+        If Ctrl_lblGridNote IsNot Nothing Then
+            If strMode = "Sal" Then
+                Ctrl_lblGridNote.Text = nav.SetLanguage(Page, "* Standard preparation applies to the selected period. Unprepared salaries from earlier periods are reviewed through Retroactive Payroll Processing./* التجهيز القياسي يطبق على الفترة المحددة. الرواتب غير المجهزة من فترات سابقة تراجع عبر معالجة الرواتب بأثر رجعي.")
+            Else
+                Ctrl_lblGridNote.Text = ""
+            End If
         End If
     End Sub
 
     Private Sub UpdateCurrentPeriodBadge()
         Try
-            If DdlPeriods IsNot Nothing AndAlso DdlPeriods.SelectedItem IsNot Nothing Then
-                lblCurrentPeriodValue.Text = DdlPeriods.SelectedItem.Text
+            If DdlPeriods IsNot Nothing AndAlso DdlPeriods.SelectedItem IsNot Nothing AndAlso Ctrl_lblCurrentPeriodValue IsNot Nothing Then
+                Ctrl_lblCurrentPeriodValue.Text = DdlPeriods.SelectedItem.Text
             End If
         Catch
         End Try
@@ -317,7 +402,9 @@ Partial Class frmEmployeesSelector
             Dim StrMode As String = Request.QueryString.Item("SM")
             If StrMode = "Sal" Then
                 Dim clsBranch As New Clssys_Branches(Page)
-                pnlPeriodAlert.Visible = ShouldShowRetroactiveAlert(ClsEmployee.ConnectionString, clsBranch.MainCompanyID, CInt(Val(DdlPeriods.SelectedValue)))
+                If Ctrl_pnlPeriodAlert IsNot Nothing Then
+                    Ctrl_pnlPeriodAlert.Visible = ShouldShowRetroactiveAlert(ClsEmployee.ConnectionString, clsBranch.MainCompanyID, CInt(Val(DdlPeriods.SelectedValue)))
+                End If
             End If
         Catch
         End Try
@@ -2816,7 +2903,7 @@ Partial Class frmEmployeesSelector
     'Added: Hassan Kurdi
     'Date: 2022-04-04
     'Purpose: Count vacation days per year for an employee
-    Private Function CountVacationDaysPerYear(PeriodYear As Integer, EmployeeId As Integer, VacationTypeId As Integer)
+    Private Function CountVacationDaysPerYear(PeriodYear As Integer, EmployeeId As Integer, VacationTypeId As Integer) As Integer
         Dim EmployeeVacation As New Clshrs_EmployeesVacations(Page)
         Dim clsCompanies As New Clssys_Companies(Page)
         Dim VacationPerYear As DataSet = EmployeeVacation.GetEmployeeVacationPerYear(PeriodYear, EmployeeId, VacationTypeId)

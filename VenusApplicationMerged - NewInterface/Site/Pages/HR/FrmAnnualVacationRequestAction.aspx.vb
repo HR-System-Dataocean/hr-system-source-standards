@@ -2257,7 +2257,7 @@ Partial Class frmAttendancePreparation
             Dim ClsEmployees2 As New Clshrs_Employees(Page)
             ClsEmployees2.Find("Code='" & _sys_User.Code & "'")
             Dim SqlCommand As Data.SqlClient.SqlCommand
-            Dim UpdateCommand As String = "update SS_RequestActions set seen=1, ActionID=5, ConfirmedNoOfDays=" & ConfirmedNoOfDays & ", ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & ""
+            Dim UpdateCommand As String = "update SS_RequestActions set seen=1, ActionID=5, ConfirmedNoOfDays=" & ConfirmedNoOfDays & ", ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " and ActionID is null and seen<>1"
             SqlCommand = New SqlClient.SqlCommand
             SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
             SqlCommand.CommandType = CommandType.Text
@@ -2638,12 +2638,17 @@ Partial Class frmAttendancePreparation
                 Return
             End If
 
-            ' 3- التحقق من عدم وجود تفويض مسبق لنفس الفترة
+            Dim sourceForm As String = "FrmAnnualVacationRequestAction"
+            Dim sourceId As Integer = 0
+            Integer.TryParse(TxtRequestSerial.Text, sourceId)
+
+            ' 3- التحقق من عدم وجود تفويض مسبق لنفس الفترة أو لنفس الطلب
             Dim checkDelegationSql As String = "SELECT COUNT(*) FROM SS_DelegationSChedule " &
-                                               "WHERE DelegatorEmployeeID = " & clsEmployee.ID & " " &
+                                               "WHERE ISNULL(IsCanceled, 0) = 0 " &
+                                               "AND ((SourceForm = '" & sourceForm & "' AND SourceId = " & sourceId & ") " &
+                                               "OR (DelegatorEmployeeID = " & clsEmployee.ID & " " &
                                                "AND DelegatedEmployeeID = " & clsAlternative.ID & " " &
-                                               "AND IsCanceled = 0 " &
-                                               "AND ((FromDate <= '" & EndDate.ToString("yyyy-MM-dd") & "' AND Todate >= '" & StartDate.ToString("yyyy-MM-dd") & "'))"
+                                               "AND ((FromDate <= '" & EndDate.ToString("yyyy-MM-dd") & "' AND Todate >= '" & StartDate.ToString("yyyy-MM-dd") & "'))))"
 
             Dim existingCount As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, checkDelegationSql)
 
@@ -2663,7 +2668,7 @@ Partial Class frmAttendancePreparation
 
             ' 5- إدراج التفويض في جدول SS_DelegationSChedule
             Dim insertDelegationSql As String = "INSERT INTO SS_DelegationSChedule " &
-                                                "(Code, DelegatorEmployeeID, DelegatedEmployeeID, FromDate, Todate, Remarks, IsCanceled, RegUserID, RegDate) " &
+                                                "(Code, DelegatorEmployeeID, DelegatedEmployeeID, FromDate, Todate, Remarks, IsCanceled, RegUserID, RegDate, SourceForm, SourceId) " &
                                                 "VALUES (" &
                                                 maxCode & ", " &
                                                 clsEmployee.ID & ", " &
@@ -2671,7 +2676,7 @@ Partial Class frmAttendancePreparation
                                                 "'" & StartDate.ToString("yyyy-MM-dd") & "', " &
                                                 "'" & EndDate.ToString("yyyy-MM-dd") & "', " &
                                                 "'تم إنشاء التفويض تلقائياً من طلب إجازة رقم " & TxtRequestSerial.Text & "', " &
-                                                "0, '" & User & "', GETDATE())"
+                                                "0, '" & User & "', GETDATE(), '" & sourceForm & "', " & sourceId & ")"
 
             Dim scheduleId As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, insertDelegationSql & " SELECT SCOPE_IDENTITY()")
 

@@ -1,4 +1,4 @@
-﻿Imports Venus.Application.SystemFiles.System
+Imports Venus.Application.SystemFiles.System
 Imports Venus.Application.SystemFiles.HumanResource
 Imports System.Data
 Imports Venus.Shared.Web
@@ -295,7 +295,29 @@ Partial Class frmAttendancePreparation
             Dim actionSerial As String
             actionSerial = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, actionIdSql)
 
+            ' ====== استرجاع القيمة من ViewState ======
+            Dim IsReviewer As Integer = 0
+            If ViewState("IsReviewer") IsNot Nothing Then
+                IsReviewer = Convert.ToInt32(ViewState("IsReviewer"))
+            End If
 
+            If IsReviewer > 0 Then
+                ' ====== المستخدم هو مراجع ======
+                If ddlAction.SelectedValue = 1 Then  ' موافقة
+                    If ProcessReviewerDecision(RequestSerial, ConfigID, 1, TxtRemarks.Text, "0") Then
+                        Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                    End If
+                ElseIf ddlAction.SelectedValue = 2 Then  ' رفض
+                    If ProcessReviewerDecision(RequestSerial, ConfigID, 2, TxtRemarks.Text, "0") Then
+                        Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                    End If
+                Else
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Invalid Action for Reviewer / اجراء غير صحيح للمراجع"))
+                End If
+                Exit Sub
+            End If
+
+            ' ====== باقي الكود الخاص بالمدير (كما هو) ======
             '============Get ConfigData======================
             If ddlAction.SelectedValue = 2 Then   'رفض
 
@@ -687,6 +709,14 @@ Partial Class frmAttendancePreparation
                 Dim dsRank As New Data.DataSet()
                 If dsconfig.Tables(0).Rows.Count > 0 Then
 
+                    UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_00194' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                    SqlCommand = New SqlClient.SqlCommand
+                    SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
+                    SqlCommand.CommandType = CommandType.Text
+                    SqlCommand.CommandText = UpdateCommand
+                    SqlCommand.Connection.Open()
+                    SqlCommand.ExecuteNonQuery()
+                    SqlCommand.Connection.Close()
                     If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
 
                         _sys_User.Find("ID = '" & User & "'")
@@ -723,13 +753,27 @@ Partial Class frmAttendancePreparation
                 End If
                 ClsEmployees.SendEmail("FrmOtherLetterRequestAction", Me.Page, 1, "SS_RequestActions", actionSerial)
                 ClsEmployees.SendEmail("SSRequestActions", Me.Page, 1, "SS_RequestActions", actionSerial)
-                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
-                Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
-                'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
+            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+            Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+            'Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseWindow()", True)
 
 
 
             End If
+            'إحالة للمراجعة (Forward for Review) - ActionID = 5
+            If ddlAction.SelectedValue = 5 Then
+                If txtReviewer.Text = "" Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Please Select Reviewer Employee / عفوا لابد من تحديد الموظف المراجع"))
+                    txtReviewer.Focus()
+                    Return
+                End If
+
+                If ProcessForwardForReview(RequestSerial, ConfigID, txtReviewer.Text, TxtRemarks.Text, "0") Then
+                    Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
+                End If
+                Exit Sub
+            End If
+
             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
             Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseMe()", True)
         Else
@@ -987,7 +1031,7 @@ Partial Class frmAttendancePreparation
             Dim ClsEmployees2 As New Clshrs_Employees(Page)
             ClsEmployees2.Find("Code='" & _sys_User.Code & "'")
             Dim SqlCommand As Data.SqlClient.SqlCommand
-            Dim UpdateCommand As String = "update SS_RequestActions set seen=1, ActionID=5, ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & ""
+            Dim UpdateCommand As String = "update SS_RequestActions set seen=1, ActionID=5, ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " and ActionID is null and seen<>1"
             SqlCommand = New SqlClient.SqlCommand
             SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
             SqlCommand.CommandType = CommandType.Text

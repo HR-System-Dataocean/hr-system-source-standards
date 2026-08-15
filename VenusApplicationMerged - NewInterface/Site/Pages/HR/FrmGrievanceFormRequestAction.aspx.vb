@@ -1190,6 +1190,16 @@ Partial Class frmAttendancePreparation
                         ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
 
                         If dsconfig.Tables(0).Rows.Count > 0 Then
+                            UpdateCommand = "UPDATE SS_RequestActions SET seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks WHERE ConfigID=@ConfigID AND FormCode='SS_00196' AND RequestSerial=@RequestSerial AND SS_EmployeeID=@EmployeeID"
+                            Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
+                                cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
+                                cmd.Parameters.AddWithValue("@ActionRemarks", TxtRemarks.Text)
+                                cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                                cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees_SS.ID)
+                                cmd.ExecuteNonQuery()
+                            End Using
+
                             If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
                                 _sys_User.Find("ID = '" & User & "'")
                                 ClsEmployees.Find("Code='" & _sys_User.Code & "'")
@@ -1525,7 +1535,7 @@ Partial Class frmAttendancePreparation
             Dim ClsEmployees2 As New Clshrs_Employees(Page)
             ClsEmployees2.Find("Code='" & _sys_User.Code & "'")
             Dim SqlCommand As Data.SqlClient.SqlCommand
-            Dim UpdateCommand As String = "update SS_RequestActions set seen=1, ActionID=5, ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & ""
+            Dim UpdateCommand As String = "update SS_RequestActions set seen=1, ActionID=5, ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "' where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " and ActionID is null and seen<>1"
             SqlCommand = New SqlClient.SqlCommand
             SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
             SqlCommand.CommandType = CommandType.Text

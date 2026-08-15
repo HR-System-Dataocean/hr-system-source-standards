@@ -476,12 +476,12 @@ Partial Class frmEmployeesVacations
 
 
         Dim ConnectionString As String
-            ConnectionString = ConfigurationManager.AppSettings("Connstring").ToString()
+        ConnectionString = ConfigurationManager.AppSettings("Connstring").ToString()
 
     End Sub
 
 
-        Protected Sub CanelTequest_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles btnCancelRequest.Command
+    Protected Sub CanelTequest_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles btnCancelRequest.Command
         Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
         Dim FormCode As String = Request.QueryString.Item("FormCode")
         CancelRequest(FormCode, RequestSerial)
@@ -564,6 +564,7 @@ Partial Class frmEmployeesVacations
         End If
 
         If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
+        If IsEntitlementPeriodPrepared(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
         PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, True)
     End Sub
 
@@ -586,27 +587,90 @@ Partial Class frmEmployeesVacations
             End Try
         End If
 
-        Dim isFinal As Boolean = False
-        If ConfigID > 0 Then
-            Try
-                isFinal = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, " Select isnull(IsFinal,0) From SS_Configuration where ID=" & ConfigID & "")
-            Catch ex As Exception
-            End Try
-        End If
-        If isFinal Then
-            Exit Sub
-        End If
+        'Dim isFinal As Boolean = False
+        'If ConfigID > 0 Then
+        '    Try
+        '        isFinal = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, " Select isnull(IsFinal,0) From SS_Configuration where ID=" & ConfigID & "")
+        '    Catch ex As Exception
+        '    End Try
+        'End If
+        'If isFinal Then
+        '    Exit Sub
+        'End If
         If CanbeCanceled Then
             If String.IsNullOrWhiteSpace(txtCancelReason.Text) Then
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please enter cancel reason./الرجاء إدخال سبب الإلغاء "))
                 Exit Sub
             End If
             If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
+            If IsEntitlementPeriodPrepared(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
             PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, False)
         Else
             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Your request can't be canceled in this stage/عفوا... لايمكن الغاء الطلب في هذه المرحلة "))
         End If
     End Sub
+
+    Private Function IsEntitlementPeriodPrepared(FormCode As String, RequestSerial As String, ConnStr As String, ObjNavigationHandler As Venus.Shared.Web.NavigationHandler) As Boolean
+        Try
+            Dim payabilitySrc As String = If(String.IsNullOrWhiteSpace(FormCode), "SS_001919", FormCode)
+            Dim ClsEmployeesPayability As New Clshrs_EmployeesPayability(Page)
+            If Not ClsEmployeesPayability.Find("Src='" & payabilitySrc & "' AND RequestID='" & RequestSerial & "' AND IsNull(CancelDate,'')=''") Then
+                Return False
+            End If
+            If ClsEmployeesPayability.ID Is Nothing OrElse CInt(ClsEmployeesPayability.ID) = 0 Then
+                Return False
+            End If
+
+            Dim entitlementDate As Object = Nothing
+            Dim objDueDate As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text,
+                "SELECT TOP 1 DueDate FROM hrs_EmployeesPayabilitiesSchedules WHERE EmployeePayabilityId=" & ClsEmployeesPayability.ID & " AND IsNull(CancelDate,'')='' ORDER BY DueDate")
+            If objDueDate IsNot Nothing AndAlso Not IsDBNull(objDueDate) Then
+                entitlementDate = objDueDate
+            Else
+                Dim objRequestDate As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text,
+                    "SELECT OvertimeDate FROM SS_OvertimeRequest WHERE ID=" & RequestSerial)
+                If objRequestDate IsNot Nothing AndAlso Not IsDBNull(objRequestDate) Then
+                    entitlementDate = objRequestDate
+                Else
+                    entitlementDate = ClsEmployeesPayability.TransactionDate
+                End If
+            End If
+
+            If entitlementDate Is Nothing OrElse IsDBNull(entitlementDate) Then
+                Return False
+            End If
+
+            Dim ClsEmp As New Clshrs_Employees(Page)
+            Dim dateStr As String
+            If IsDate(entitlementDate) Then
+                dateStr = ClsEmp.SetHigriDate(CDate(entitlementDate))
+            Else
+                dateStr = entitlementDate.ToString()
+            End If
+
+            Dim ClsFisicalYearsPeriods As New Clssys_FiscalYearsPeriods(Page)
+            If Not ClsFisicalYearsPeriods.Find("FromDate <= '" & dateStr & "' and ToDate >='" & dateStr & "'") Then
+                Return False
+            End If
+            If ClsFisicalYearsPeriods.ID Is Nothing OrElse CInt(ClsFisicalYearsPeriods.ID) = 0 Then
+                Return False
+            End If
+
+            Dim periodSql As String = "select count(ID) from hrs_EmployeesTransactions where PrepareType='N' and EmployeeID=" & ClsEmployeesPayability.EmployeeID & " and FiscalYearPeriodID=" & ClsFisicalYearsPeriods.ID & " and IsNull(CancelDate,'')=''"
+            Dim objPrepared As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text, periodSql)
+            Dim periodPrepared As Integer = 0
+            If objPrepared IsNot Nothing AndAlso Not IsDBNull(objPrepared) Then
+                periodPrepared = CInt(objPrepared)
+            End If
+
+            If periodPrepared > 0 Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Entitlement period is prepared, this request cannot be canceled./عفوا... فترة الاستحقاق مجهزة، لا يمكن الغاء الطلب "))
+                Return True
+            End If
+        Catch ex As Exception
+        End Try
+        Return False
+    End Function
 
     Private Function IsRequestCanceledBefore(FormCode As String, RequestSerial As String, ConnStr As String, ObjNavigationHandler As Venus.Shared.Web.NavigationHandler) As Boolean
         Try
@@ -678,9 +742,26 @@ Partial Class frmEmployeesVacations
         SqlCommand.ExecuteNonQuery()
         SqlCommand.Connection.Close()
 
+        CancelRelatedEmployeesPayability(FormCode, RequestSerial)
+
         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Your request Has been canceled Successfully./تم الغاء الطلب بنجاح "))
     End Sub
-Private Function CheckEmpCode() As Boolean
+
+    Private Sub CancelRelatedEmployeesPayability(FormCode As String, RequestSerial As String)
+        Dim ClsEmployeesPayability As New Clshrs_EmployeesPayability(Page)
+        Dim payabilitySrc As String = If(String.IsNullOrWhiteSpace(FormCode), "SS_001919", FormCode)
+        If ClsEmployeesPayability.Find("Src='" & payabilitySrc & "' AND RequestID='" & RequestSerial & "' AND CancelDate IS NULL") Then
+            If ClsEmployeesPayability.ID IsNot Nothing AndAlso CInt(ClsEmployeesPayability.ID) > 0 Then
+                ClsEmployeesPayability.CancelDate = DateTime.Now
+                Dim strUpdatePayability As String = "UPDATE hrs_EmployeesPayabilities SET CancelDate = GETDATE() WHERE ID=" & ClsEmployeesPayability.ID
+                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesPayability.ConnectionString, Data.CommandType.Text, strUpdatePayability)
+
+                Dim strUpdateSchedules As String = "UPDATE hrs_EmployeesPayabilitiesSchedules SET CancelDate = GETDATE() WHERE EmployeePayabilityId=" & ClsEmployeesPayability.ID & " AND CancelDate IS NULL"
+                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesPayability.ConnectionString, Data.CommandType.Text, strUpdateSchedules)
+            End If
+        End If
+    End Sub
+    Private Function CheckEmpCode() As Boolean
         ClsEmployees = New Clshrs_Employees(Page)
         Dim ClsNationality = New Clssys_Nationality(Page)
         Dim BolExist As Boolean

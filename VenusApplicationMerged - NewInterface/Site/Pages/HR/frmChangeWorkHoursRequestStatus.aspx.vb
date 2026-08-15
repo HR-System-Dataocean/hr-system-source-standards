@@ -426,7 +426,7 @@ Partial Class frmChangeWorkHoursRequestStatus
                     firstshifName = "first shif"
                     secondshifName = "second shift"
                 End If
-                strselect = "select SS_ChangeWorkHoursRequest.Code as RequestSerial ,Convert(date,RequestDate) as RequestDate,Remarks from SS_ChangeWorkHoursRequest  where  SS_ChangeWorkHoursRequest.ID=" & RequestSerial & ""
+                strselect = "select SS_ChangeWorkHoursRequest.Code as RequestSerial ,Convert(date,RequestDate) as RequestDate,Remarks,FromTime,ToTime,FromDate,ToDate,EmployeeID from SS_ChangeWorkHoursRequest   where  SS_ChangeWorkHoursRequest.ID=" & RequestSerial & ""
                 command2 = New Data.SqlClient.SqlCommand(strselect, connection2)
                 adapter2.SelectCommand = command2
                 adapter2.Fill(DS2, "Table1")
@@ -440,6 +440,18 @@ Partial Class frmChangeWorkHoursRequestStatus
                     TxtRequestDate.Text = CDate(DS2.Tables(0).Rows(0)("RequestDate").ToString()).ToShortDateString()
 
                     TxtRemarks.Text = DS2.Tables(0).Rows(0)("Remarks").ToString()
+
+                    txtToDate.Enabled = False
+                    txtFromTime.Enabled = False
+                    txtToTime.Enabled = False
+                    If Convert.ToString(DS2.Tables(0).Rows(0)("FromDate")) <> "" Then
+                        txtFromDate.Value = Convert.ToDateTime(DS2.Tables(0).Rows(0)("FromDate")).ToString("yyyy-MM-dd")
+                    End If
+                    If Convert.ToString(DS2.Tables(0).Rows(0)("ToDate")) <> "" Then
+                        txtToDate.Value = Convert.ToDateTime(DS2.Tables(0).Rows(0)("ToDate")).ToString("yyyy-MM-dd")
+                    End If
+                    txtFromTime.Text = Convert.ToString(DS2.Tables(0).Rows(0)("FromTime"))
+                    txtToTime.Text = Convert.ToString(DS2.Tables(0).Rows(0)("ToTime"))
                 End If
 
                 Dim SelectRequestType As String = ""

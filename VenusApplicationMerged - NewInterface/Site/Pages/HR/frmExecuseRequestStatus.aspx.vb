@@ -216,10 +216,10 @@ Partial Class frmEmployeesVacations
     Private Sub FillEmployeeVacations(ByVal EmployeeID As Integer, Optional ByVal showFirstRecord As Boolean = False)
 
         Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
-            Dim FormCode As String = Request.QueryString.Item("FormCode")
-            Dim Type As String = Request.QueryString.Item("Type")
-            Dim User As String = String.Empty
-            Dim WebHandler As New Venus.Shared.Web.WebHandler
+        Dim FormCode As String = Request.QueryString.Item("FormCode")
+        Dim Type As String = Request.QueryString.Item("Type")
+        Dim User As String = String.Empty
+        Dim WebHandler As New Venus.Shared.Web.WebHandler
         If Type = 2 Then
             Try
 
@@ -473,12 +473,12 @@ Partial Class frmEmployeesVacations
 
 
         Dim ConnectionString As String
-            ConnectionString = ConfigurationManager.AppSettings("Connstring").ToString()
+        ConnectionString = ConfigurationManager.AppSettings("Connstring").ToString()
 
     End Sub
 
 
-        Protected Sub CanelTequest_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles btnCancelRequest.Command
+    Protected Sub CanelTequest_Command(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles btnCancelRequest.Command
         Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
         Dim FormCode As String = Request.QueryString.Item("FormCode")
         CancelRequest(FormCode, RequestSerial)
@@ -561,6 +561,7 @@ Partial Class frmEmployeesVacations
         End If
 
         If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
+        If IsExcuseDatePassed(RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
         PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, True)
     End Sub
 
@@ -589,11 +590,27 @@ Partial Class frmEmployeesVacations
                 Exit Sub
             End If
             If IsRequestCanceledBefore(FormCode, RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
+            If IsExcuseDatePassed(RequestSerial, ConnStr, ObjNavigationHandler) Then Exit Sub
             PerformCancelRequest(FormCode, RequestSerial, ConfigID, ConnStr, False)
         Else
             Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Your request can't be canceled in this stage/عفوا... لايمكن الغاء الطلب في هذه المرحلة "))
         End If
     End Sub
+
+    Private Function IsExcuseDatePassed(RequestSerial As String, ConnStr As String, ObjNavigationHandler As Venus.Shared.Web.NavigationHandler) As Boolean
+        Try
+            Dim objExcuseDate As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ConnStr, Data.CommandType.Text,
+                "SELECT ExecuseDate FROM SS_ExecuseRequest WHERE ID=" & RequestSerial)
+            If objExcuseDate IsNot Nothing AndAlso Not IsDBNull(objExcuseDate) Then
+                If DateTime.Now.Date > CDate(objExcuseDate).Date Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Excuse date has already passed, this request cannot be canceled./عفوا... تاريخ الاذن قد مضى، لا يمكن الغاء الطلب "))
+                    Return True
+                End If
+            End If
+        Catch ex As Exception
+        End Try
+        Return False
+    End Function
 
     Private Function IsRequestCanceledBefore(FormCode As String, RequestSerial As String, ConnStr As String, ObjNavigationHandler As Venus.Shared.Web.NavigationHandler) As Boolean
         Try
@@ -665,9 +682,23 @@ Partial Class frmEmployeesVacations
         SqlCommand.ExecuteNonQuery()
         SqlCommand.Connection.Close()
 
+        CancelRelatedEmployeesExcuse(FormCode, RequestSerial)
+
         Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Your request Has been canceled Successfully./تم الغاء الطلب بنجاح "))
     End Sub
-Private Function CheckEmpCode() As Boolean
+
+    Private Sub CancelRelatedEmployeesExcuse(FormCode As String, RequestSerial As String)
+        Dim ClsEmployeesExcuses As New Clshrs_EmployeesExcuses(Page)
+        Dim excuseSrc As String = If(String.IsNullOrWhiteSpace(FormCode), "SS_0014", FormCode)
+        If ClsEmployeesExcuses.Find("SRC='" & excuseSrc & "' AND RequestID='" & RequestSerial & "' AND CancelDate IS NULL") Then
+            If ClsEmployeesExcuses.ID > 0 Then
+                ClsEmployeesExcuses.CancelDate = DateTime.Now
+                Dim strUpdateExcuse As String = "UPDATE hrs_EmployeesExcuses SET CancelDate = GETDATE() WHERE ID=" & ClsEmployeesExcuses.ID
+                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployeesExcuses.ConnectionString, Data.CommandType.Text, strUpdateExcuse)
+            End If
+        End If
+    End Sub
+    Private Function CheckEmpCode() As Boolean
         ClsEmployees = New Clshrs_Employees(Page)
         Dim ClsNationality = New Clssys_Nationality(Page)
         Dim BolExist As Boolean

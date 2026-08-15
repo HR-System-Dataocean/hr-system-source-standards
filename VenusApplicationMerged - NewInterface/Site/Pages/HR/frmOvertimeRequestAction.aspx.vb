@@ -1402,15 +1402,17 @@ Partial Class frmOvertimeRequestAction
                                 End Using
 
                                 '===Insert Execuse Tranaction
-                                If SaveExecuseTransAction() Then
-                                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
-                                    Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseModalAndRefresh()", True)
-                                End If
+
 
                                 '===Insert OverTime Payabilities
                                 Dim ClsEmployee As New Clshrs_Employees(Page)
                                 ClsEmployee.Find("Code='" & txtEmployee.Text & "'")
                                 SaveOverTimePayabilities(ClsEmployee.ID)
+
+                                If SaveExecuseTransAction() Then
+                                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Save Done !/!تم الحفظ"))
+                                    Page.ClientScript.RegisterStartupScript(Me.GetType(), "", "CloseModalAndRefresh()", True)
+                                End If
                             Else
                                 NextRank = CInt(dsconfig.Tables(0).Rows(0)("Rank")) + 1
                                 Dim STRNextID As String
@@ -1709,6 +1711,20 @@ Partial Class frmOvertimeRequestAction
 
                         Dim dsRank As New Data.DataSet()
                         If dsconfig.Tables(0).Rows.Count > 0 Then
+                            UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID"
+                            Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
+                                cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
+                                cmd.Parameters.AddWithValue("@ActionRemarks", TxtRemarks.Text)
+                                cmd.Parameters.AddWithValue("@HoursCount", txtConfirmedHours.Text)
+                                cmd.Parameters.AddWithValue("@MinutsCount", txtConfirmedMinuts.Text)
+                                cmd.Parameters.AddWithValue("@OvertimeDate", OverTimeDate.Value)
+                                cmd.Parameters.AddWithValue("@OvertimeType", ddlOverTimeType.SelectedValue)
+                                cmd.Parameters.AddWithValue("@ConfigID", ConfigID)
+                                cmd.Parameters.AddWithValue("@RequestSerial", RequestSerial)
+                                cmd.Parameters.AddWithValue("@EmployeeID", ClsEmployees_SS.ID)
+                                cmd.ExecuteNonQuery()
+                            End Using
+
                             If CBool(dsconfig.Tables(0).Rows(0)("ApplyForAll")) Then
                                 _sys_User.Find("ID = '" & User & "'")
                                 ClsEmployees.Find("Code='" & _sys_User.Code & "'")
@@ -2272,7 +2288,7 @@ Partial Class frmOvertimeRequestAction
             Dim ClsEmployees2 As New Clshrs_Employees(Page)
             ClsEmployees2.Find("Code='" & _sys_User.Code & "'")
             Dim SqlCommand As Data.SqlClient.SqlCommand
-            Dim UpdateCommand As String = "update SS_RequestActions set seen=1, ActionID=5, ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "', HoursCount=" & txtConfirmedHours.Text & ", MinutsCount=" & txtConfirmedMinuts.Text & ", OvertimeDate=convert(datetime, '" & OverTimeDate.Value & "',103), OvertimeType=" & ddlOverTimeType.SelectedValue & " where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & ""
+            Dim UpdateCommand As String = "update SS_RequestActions set seen=1, ActionID=5, ActionDate=GETDATE(), ActionRemarks='" & ActionRemarks & "', HoursCount=" & txtConfirmedHours.Text & ", MinutsCount=" & txtConfirmedMinuts.Text & ", OvertimeDate=convert(datetime, '" & OverTimeDate.Value & "',103), OvertimeType=" & ddlOverTimeType.SelectedValue & " where ConfigID=" & ConfigID & " and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees2.ID & " and ActionID is null and seen<>1"
             SqlCommand = New SqlClient.SqlCommand
             SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
             SqlCommand.CommandType = CommandType.Text

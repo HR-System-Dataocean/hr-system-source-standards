@@ -9820,6 +9820,8 @@ IF NOT EXISTS
 	[CancelDate] [date] NULL,
 	[RegUserID] [nvarchar](50) NULL,
 	[RegDate] [date] NULL,
+	[SourceForm] [nvarchar](100) NULL,
+	[SourceId] [int] NULL,
  CONSTRAINT [PK_SS_DelegationSChedule] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -14409,6 +14411,14 @@ END
 BEGIN
     ALTER TABLE sys_SystemConfig ADD ApplyAutoDelegateWithAvnnualVacationRequest BIT NULL DEFAULT 0
 END"
+        ExecuteUpdate(SQL)
+
+        SQL = "
+                IF COL_LENGTH('SS_DelegationSChedule', 'SourceForm') IS NULL
+                    ALTER TABLE SS_DelegationSChedule ADD SourceForm nvarchar(100) NULL
+                IF COL_LENGTH('SS_DelegationSChedule', 'SourceId') IS NULL
+                    ALTER TABLE SS_DelegationSChedule ADD SourceId int NULL
+                "
         ExecuteUpdate(SQL)
 
         SQL = "IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('sys_SystemConfig') AND name = 'ReviewPreviousPeriodSalaries')
