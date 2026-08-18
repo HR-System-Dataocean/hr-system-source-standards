@@ -56,6 +56,8 @@ Public Class ClsSS_DelegationSChedule
     Private mCancelDate As Date
     Private mRegUserID As Integer
     Private mRegDate As DateTime
+    Private mSourceForm As String
+    Private mSourceId As Integer
 
 #End Region
 #Region "Public Property"
@@ -148,6 +150,22 @@ Public Class ClsSS_DelegationSChedule
         End Get
         Set(ByVal Value As DateTime)
             mRegDate = Value
+        End Set
+    End Property
+    Public Property SourceForm() As String
+        Get
+            Return mSourceForm
+        End Get
+        Set(ByVal Value As String)
+            mSourceForm = Value
+        End Set
+    End Property
+    Public Property SourceId() As Integer
+        Get
+            Return mSourceId
+        End Get
+        Set(ByVal Value As Integer)
+            mSourceId = Value
         End Set
     End Property
 
@@ -366,6 +384,8 @@ Public Class ClsSS_DelegationSChedule
             mCancelDate = Nothing
             mRegUserID = 0
             mRegDate = Nothing
+            mSourceForm = String.Empty
+            mSourceId = 0
         Catch ex As Exception
             mPage.Session.Add("ErrorValue", ex)
             mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, mDataBaseUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_ErrorsLog)
@@ -406,6 +426,16 @@ Public Class ClsSS_DelegationSChedule
                 'mCancelDate = mDataHandler.DataValue_Out(.Item("CancelDate"), SqlDbType.Date)
                 mRegUserID = mDataHandler.DataValue_Out(.Item("RegUserID"), SqlDbType.Int, True)
                 mRegDate = mDataHandler.DataValue_Out(.Item("RegDate"), SqlDbType.DateTime)
+                If Ds.Tables(0).Columns.Contains("SourceForm") AndAlso Not IsDBNull(.Item("SourceForm")) Then
+                    mSourceForm = Convert.ToString(.Item("SourceForm"))
+                Else
+                    mSourceForm = String.Empty
+                End If
+                If Ds.Tables(0).Columns.Contains("SourceId") AndAlso Not IsDBNull(.Item("SourceId")) Then
+                    mSourceId = Convert.ToInt32(.Item("SourceId"))
+                Else
+                    mSourceId = 0
+                End If
             End With
             Return True
         Catch ex As Exception

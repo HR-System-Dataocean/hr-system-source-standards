@@ -124,6 +124,10 @@ Partial Class frmDelegationSChedule
         Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsDelegationSChedule.ConnectionString)
         Select Case e.CommandArgument
             Case "SaveNew"
+                If IsVacationActionDelegation() Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Can't update this delegation because it was created from vacation action! / عفوا... لا يمكن تعديل هذا التفويض لأنه تم إنشاؤه من حركة الإجازة!"))
+                    Exit Sub
+                End If
                 If txtCode.Text = "" Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please Enter Code /برجاء إدخال الكود"))
                     Exit Sub
@@ -157,6 +161,10 @@ Partial Class frmDelegationSChedule
                 AfterOperation()
                 Clear()
             Case "Save"
+                If IsVacationActionDelegation() Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Can't update this delegation because it was created from vacation action! / عفوا... لا يمكن تعديل هذا التفويض لأنه تم إنشاؤه من حركة الإجازة!"))
+                    Exit Sub
+                End If
                 If txtCode.Text = "" Then
                     Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, " Please Enter Code /برجاء إدخال الكود"))
                     Exit Sub
@@ -203,6 +211,10 @@ Partial Class frmDelegationSChedule
                 txtCode.Text = If(IsDBNull(MaxAppointCode), "1", MaxAppointCode.ToString())
                 txtCode.Text = If(IsDBNull(MaxAppointCode), "1", MaxAppointCode.ToString())
             Case "Delete"
+                If IsVacationActionDelegation() Then
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, ObjNavigationHandler.SetLanguage(Page, "Sorry... Can't delete this delegation because it was created from vacation action! / عفوا... لا يمكن حذف هذا التفويض لأنه تم إنشاؤه من حركة الإجازة!"))
+                    Exit Sub
+                End If
                 ClsDelegationSChedule.Delete("Code='" & txtCode.Text & "'")
                 AfterOperation()
             Case "Property"
@@ -255,6 +267,19 @@ Partial Class frmDelegationSChedule
 #End Region
 
 #Region "Private Functions"
+    Private Function IsVacationActionDelegation() As Boolean
+        If String.IsNullOrEmpty(txtCode.Text) Then
+            Return False
+        End If
+        ClsDelegationSChedule.Find("Code='" & txtCode.Text & "'")
+        If ClsDelegationSChedule.ID <= 0 Then
+            Return False
+        End If
+        If String.IsNullOrEmpty(ClsDelegationSChedule.SourceForm) Then
+            Return False
+        End If
+        Return String.Equals(ClsDelegationSChedule.SourceForm.Trim(), "FrmAnnualVacationRequestAction", StringComparison.OrdinalIgnoreCase)
+    End Function
     Private Function AddNewRow() As Boolean
         Try
 
@@ -360,6 +385,12 @@ Partial Class frmDelegationSChedule
 
 
             ClsDelegationSChedule.Find("Code='" & txtCode.Text & "'")
+
+            If Not String.IsNullOrEmpty(ClsDelegationSChedule.SourceForm) AndAlso
+               String.Equals(ClsDelegationSChedule.SourceForm.Trim(), "FrmAnnualVacationRequestAction", StringComparison.OrdinalIgnoreCase) Then
+                Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Sorry... Can't update this delegation because it was created from vacation action! / عفوا... لا يمكن تعديل هذا التفويض لأنه تم إنشاؤه من حركة الإجازة!"))
+                Exit Function
+            End If
 
             If ClsDelegationSChedule.ID > 0 Then
 

@@ -342,7 +342,7 @@ Partial Class frmEmployeesVacations
                 Dim _sys_User As New Clssys_Users(Page)
                 _sys_User.Find("ID = '" & User & "'")
                 Dim ClsEmployees As New Clshrs_Employees(Page)
-                ClsEmployees.Find("Code='" & _sys_User.Code & "'")
+                'ClsEmployees.Find("Code='" & _sys_User.Code & "'")
                 Dim DS1 As New Data.DataSet()
                 Dim connetionString As String
                 Dim connection As Data.SqlClient.SqlConnection
@@ -362,7 +362,7 @@ Partial Class frmEmployeesVacations
 
 
                 Dim str1 As String
-                str1 = "select " & EmpName & " as EmployeeName,( case when " & ActionName & " is not null then " & ActionName & " else 'Pending ...' end) As Action ,convert(varchar, ActionDate,101) as ActionDate,ActionRemarks  from SS_EndOfServiceRequest join SS_RequestActions on SS_EndOfServiceRequest.ID=SS_RequestActions.RequestSerial and SS_EndOfServiceRequest.EmployeeID=SS_RequestActions.EmployeeID join hrs_Employees on hrs_Employees.ID= SS_RequestActions.SS_EmployeeID left join SS_UserActions on SS_RequestActions.ActionID=SS_UserActions.ID where RequestSerial=" & RequestSerial & " And SS_RequestActions.FormCode='" & FormCode & "' and ( SS_RequestActions.IsHidden is null or SS_RequestActions.IsHidden=0 ) and SS_EndOfServiceRequest.EmployeeID=" & ClsEmployees.ID & " "
+                str1 = "select " & EmpName & " as EmployeeName,( case when " & ActionName & " is not null then " & ActionName & " else 'Pending ...' end) As Action ,convert(varchar, ActionDate,101) as ActionDate,ActionRemarks  from SS_EndOfServiceRequest join SS_RequestActions on SS_EndOfServiceRequest.ID=SS_RequestActions.RequestSerial and SS_EndOfServiceRequest.EmployeeID=SS_RequestActions.EmployeeID join hrs_Employees on hrs_Employees.ID= SS_RequestActions.SS_EmployeeID left join SS_UserActions on SS_RequestActions.ActionID=SS_UserActions.ID where RequestSerial=" & RequestSerial & " And SS_RequestActions.FormCode='" & FormCode & "' and ( SS_RequestActions.IsHidden is null or SS_RequestActions.IsHidden=0 )"
 
                 command = New Data.SqlClient.SqlCommand(str1, connection)
                 adapter.SelectCommand = command

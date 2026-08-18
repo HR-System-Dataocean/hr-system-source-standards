@@ -1285,16 +1285,9 @@ Partial Class frmEmployeesVacations
             End If
 
             ' ====== جلب Max Request Serial ======
-            Dim strMaxRequestSerial As String
-            strMaxRequestSerial = "select isnull(Max(ID),1) from SS_VacationRequest where EmployeeID=" & ClsEmployees.ID & " and VacationType='SS_0015'"
             Dim MaxSerial As Integer
-            SqlCommand = New SqlClient.SqlCommand
-            SqlCommand.Connection = New SqlClient.SqlConnection(ConnectionString)
-            SqlCommand.CommandType = CommandType.Text
-            SqlCommand.CommandText = strMaxRequestSerial
-            SqlCommand.Connection.Open()
-            MaxSerial = CInt(SqlCommand.ExecuteScalar())
-            SqlCommand.Connection.Close()
+
+            MaxSerial = GetInertedID()
 
             Dim Processed As Boolean = False
             Dim DirectManagerSkipped As Boolean = False
