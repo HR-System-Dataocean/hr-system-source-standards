@@ -1123,7 +1123,7 @@ Partial Class frmOvertimeRequestAction
                         'SqlCommand.Connection.Close()
 
                         ' الكود الجديد باستخدام Parameters
-                        UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID"
+                        UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID And ActionID Is Null "
 
                         Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
                             cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
@@ -1355,7 +1355,7 @@ Partial Class frmOvertimeRequestAction
                                 NeededactionSerial = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, NeededactionIdSql, New SqlClient.SqlParameter("@ConfigID", ConfigID), New SqlClient.SqlParameter("@FormCode", dsconfig.Tables(0).Rows(0)("FormCode")), New SqlClient.SqlParameter("@RequestSerial", RequestSerial), New SqlClient.SqlParameter("@EmployeeID", ClsEmployees.ID))
 
                                 If Not String.IsNullOrWhiteSpace(NeededactionSerial) Then
-                                    UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID"
+                                    UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID And ActionID Is Null "
 
                                     Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
                                         cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
@@ -1379,7 +1379,7 @@ Partial Class frmOvertimeRequestAction
                             End If
 
                             If CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
-                                UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID"
+                                UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID And ActionID Is Null "
 
                                 Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
                                     cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
@@ -1448,7 +1448,7 @@ Partial Class frmOvertimeRequestAction
 
                                             If Not String.IsNullOrEmpty(DirectManagerID) AndAlso DirectManagerID <> "0" Then
                                                 hasEmployees = True
-                                                UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID"
+                                                UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID And ActionID Is Null "
 
                                                 Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
                                                     cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
@@ -1521,7 +1521,7 @@ Partial Class frmOvertimeRequestAction
                                                     End If
 
                                                     hasEmployees = True
-                                                    UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID"
+                                                    UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID And ActionID Is Null "
 
                                                     Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
                                                         cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
@@ -1572,7 +1572,7 @@ Partial Class frmOvertimeRequestAction
                                             End If
 
                                             hasEmployees = True
-                                            UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID"
+                                            UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID And ActionID Is Null "
 
                                             Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
                                                 cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
@@ -1609,7 +1609,7 @@ Partial Class frmOvertimeRequestAction
                                     '    Return
                                     'End If
                                 Else
-                                    UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID"
+                                    UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID And ActionID Is Null "
 
                                     Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
                                         cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
@@ -1711,7 +1711,7 @@ Partial Class frmOvertimeRequestAction
 
                         Dim dsRank As New Data.DataSet()
                         If dsconfig.Tables(0).Rows.Count > 0 Then
-                            UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID"
+                            UpdateCommand = "update SS_RequestActions set seen=1, ActionID=@ActionID, ActionDate=GETDATE(), ActionRemarks=@ActionRemarks, HoursCount=@HoursCount, MinutsCount=@MinutsCount, OvertimeDate=convert(datetime, @OvertimeDate, 103), OvertimeType=@OvertimeType where ConfigID=@ConfigID And FormCode='SS_001919' and RequestSerial=@RequestSerial and SS_EmployeeID=@EmployeeID And ActionID Is Null "
                             Using cmd As New SqlClient.SqlCommand(UpdateCommand, connection, transaction)
                                 cmd.Parameters.AddWithValue("@ActionID", ddlAction.SelectedValue)
                                 cmd.Parameters.AddWithValue("@ActionRemarks", TxtRemarks.Text)

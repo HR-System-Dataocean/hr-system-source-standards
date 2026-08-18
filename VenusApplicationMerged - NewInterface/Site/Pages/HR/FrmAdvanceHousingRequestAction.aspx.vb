@@ -378,7 +378,7 @@ Partial Class frmAttendancePreparation
 
                 SqlCommand = New Data.SqlClient.SqlCommand
                 Dim UpdateCommand As String = ""
-                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "',OvertimeDate=convert(datetime, '" & InstallmentDate.Value & "',103),HoursCount=" & txtInstallmentsNo.Text & "  where ConfigID=" & ConfigID & " And FormCode='SS_001913' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees.ID & ""
+                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "',OvertimeDate=convert(datetime, '" & InstallmentDate.Value & "',103),HoursCount=" & txtInstallmentsNo.Text & "  where ConfigID=" & ConfigID & " And FormCode='SS_001913' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees.ID & " And ActionID Is Null And (Seen=0 or Seen Is Null)"
                 SqlCommand = New SqlClient.SqlCommand
                 SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                 SqlCommand.CommandType = CommandType.Text
@@ -459,7 +459,7 @@ Partial Class frmAttendancePreparation
 
                 SqlCommand = New Data.SqlClient.SqlCommand
                 Dim UpdateCommand As String = ""
-                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "',OvertimeDate=convert(datetime, '" & InstallmentDate.Value & "',103),HoursCount=" & txtInstallmentsNo.Text & "  where ConfigID=" & ConfigID & " And FormCode='SS_001913' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees.ID & ""
+                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "',OvertimeDate=convert(datetime, '" & InstallmentDate.Value & "',103),HoursCount=" & txtInstallmentsNo.Text & "  where ConfigID=" & ConfigID & " And FormCode='SS_001913' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees.ID & " And ActionID Is Null And (Seen=0 or Seen Is Null) "
                 SqlCommand = New SqlClient.SqlCommand
                 SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                 SqlCommand.CommandType = CommandType.Text
@@ -693,7 +693,7 @@ Partial Class frmAttendancePreparation
 
                 SqlCommand = New Data.SqlClient.SqlCommand
                 Dim UpdateCommand As String = ""
-                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "',OvertimeDate=convert(datetime, '" & InstallmentDate.Value & "',103),HoursCount=" & txtInstallmentsNo.Text & "  where ConfigID=" & ConfigID & " And FormCode='SS_001913' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees.ID & ""
+                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "',OvertimeDate=convert(datetime, '" & InstallmentDate.Value & "',103),HoursCount=" & txtInstallmentsNo.Text & "  where ConfigID=" & ConfigID & " And FormCode='SS_001913' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees.ID & " And ActionID Is Null And (Seen=0 or Seen Is Null) "
                 SqlCommand = New SqlClient.SqlCommand
                 SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees.ConnectionString)
                 SqlCommand.CommandType = CommandType.Text
