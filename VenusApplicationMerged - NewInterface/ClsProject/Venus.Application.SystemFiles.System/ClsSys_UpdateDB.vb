@@ -9821,7 +9821,7 @@ IF NOT EXISTS
 	[RegUserID] [nvarchar](50) NULL,
 	[RegDate] [nvarchar](50) NULL,
 	[Src] [nvarchar](100) NULL,
-	[DelegationRequestId] [int] NULL,
+	[VacationRequestID] [int] NULL,
  CONSTRAINT [PK_SS_DelegationSChedule] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -14418,10 +14418,12 @@ END"
                     EXEC sp_rename 'SS_DelegationSChedule.SourceForm', 'Src', 'COLUMN'
                 IF COL_LENGTH('SS_DelegationSChedule', 'Src') IS NULL
                     ALTER TABLE SS_DelegationSChedule ADD Src nvarchar(100) NULL
-                IF COL_LENGTH('SS_DelegationSChedule', 'DelegationRequestId') IS NULL AND COL_LENGTH('SS_DelegationSChedule', 'SourceId') IS NOT NULL
-                    EXEC sp_rename 'SS_DelegationSChedule.SourceId', 'DelegationRequestId', 'COLUMN'
-                IF COL_LENGTH('SS_DelegationSChedule', 'DelegationRequestId') IS NULL
-                    ALTER TABLE SS_DelegationSChedule ADD DelegationRequestId int NULL
+                IF COL_LENGTH('SS_DelegationSChedule', 'VacationRequestID') IS NULL AND COL_LENGTH('SS_DelegationSChedule', 'DelegationRequestId') IS NOT NULL
+                    EXEC sp_rename 'SS_DelegationSChedule.DelegationRequestId', 'VacationRequestID', 'COLUMN'
+                IF COL_LENGTH('SS_DelegationSChedule', 'VacationRequestID') IS NULL AND COL_LENGTH('SS_DelegationSChedule', 'SourceId') IS NOT NULL
+                    EXEC sp_rename 'SS_DelegationSChedule.SourceId', 'VacationRequestID', 'COLUMN'
+                IF COL_LENGTH('SS_DelegationSChedule', 'VacationRequestID') IS NULL
+                    ALTER TABLE SS_DelegationSChedule ADD VacationRequestID int NULL
                 "
         ExecuteUpdate(SQL)
 

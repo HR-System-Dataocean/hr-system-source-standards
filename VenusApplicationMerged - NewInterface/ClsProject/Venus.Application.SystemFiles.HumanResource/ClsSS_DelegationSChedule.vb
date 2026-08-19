@@ -57,7 +57,7 @@ Public Class ClsSS_DelegationSChedule
     Private mRegUserID As Integer
     Private mRegDate As DateTime
     Private mSrc As String
-    Private mDelegationRequestId As Integer
+    Private mVacationRequestID As Integer
 
 #End Region
 #Region "Public Property"
@@ -160,12 +160,12 @@ Public Class ClsSS_DelegationSChedule
             mSrc = Value
         End Set
     End Property
-    Public Property DelegationRequestId() As Integer
+    Public Property VacationRequestID() As Integer
         Get
-            Return mDelegationRequestId
+            Return mVacationRequestID
         End Get
         Set(ByVal Value As Integer)
-            mDelegationRequestId = Value
+            mVacationRequestID = Value
         End Set
     End Property
 
@@ -385,7 +385,7 @@ Public Class ClsSS_DelegationSChedule
             mRegUserID = 0
             mRegDate = Nothing
             mSrc = String.Empty
-            mDelegationRequestId = 0
+            mVacationRequestID = 0
         Catch ex As Exception
             mPage.Session.Add("ErrorValue", ex)
             mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, mDataBaseUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_ErrorsLog)
@@ -433,12 +433,14 @@ Public Class ClsSS_DelegationSChedule
                 Else
                     mSrc = String.Empty
                 End If
-                If Ds.Tables(0).Columns.Contains("DelegationRequestId") AndAlso Not IsDBNull(.Item("DelegationRequestId")) Then
-                    mDelegationRequestId = Convert.ToInt32(.Item("DelegationRequestId"))
+                If Ds.Tables(0).Columns.Contains("VacationRequestID") AndAlso Not IsDBNull(.Item("VacationRequestID")) Then
+                    mVacationRequestID = Convert.ToInt32(.Item("VacationRequestID"))
+                ElseIf Ds.Tables(0).Columns.Contains("DelegationRequestId") AndAlso Not IsDBNull(.Item("DelegationRequestId")) Then
+                    mVacationRequestID = Convert.ToInt32(.Item("DelegationRequestId"))
                 ElseIf Ds.Tables(0).Columns.Contains("SourceId") AndAlso Not IsDBNull(.Item("SourceId")) Then
-                    mDelegationRequestId = Convert.ToInt32(.Item("SourceId"))
+                    mVacationRequestID = Convert.ToInt32(.Item("SourceId"))
                 Else
-                    mDelegationRequestId = 0
+                    mVacationRequestID = 0
                 End If
             End With
             Return True

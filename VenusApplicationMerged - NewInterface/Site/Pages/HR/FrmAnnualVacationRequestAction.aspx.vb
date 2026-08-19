@@ -2648,7 +2648,7 @@ Partial Class frmAttendancePreparation
             ' 3- التحقق من عدم وجود تفويض مسبق لنفس الفترة أو لنفس الطلب
             Dim checkDelegationSql As String = "SELECT COUNT(*) FROM SS_DelegationSChedule " &
                                                "WHERE ISNULL(IsCanceled, 0) = 0 " &
-                                               "AND ((Src = '" & formCode.Replace("'", "''") & "' AND DelegationRequestId = " & sourceId & ") " &
+                                               "AND ((Src = '" & formCode.Replace("'", "''") & "' AND VacationRequestID = " & sourceId & ") " &
                                                "OR (DelegatorEmployeeID = " & clsEmployee.ID & " " &
                                                "AND DelegatedEmployeeID = " & clsAlternative.ID & " " &
                                                "AND ((FromDate <= '" & EndDate.ToString("yyyy-MM-dd") & "' AND Todate >= '" & StartDate.ToString("yyyy-MM-dd") & "'))))"
@@ -2671,7 +2671,7 @@ Partial Class frmAttendancePreparation
 
             ' 5- إدراج التفويض في جدول SS_DelegationSChedule
             Dim insertDelegationSql As String = "INSERT INTO SS_DelegationSChedule " &
-                                                "(Code, DelegatorEmployeeID, DelegatedEmployeeID, FromDate, Todate, Remarks, IsCanceled, RegUserID, RegDate, Src, DelegationRequestId) " &
+                                                "(Code, DelegatorEmployeeID, DelegatedEmployeeID, FromDate, Todate, Remarks, IsCanceled, RegUserID, RegDate, Src, VacationRequestID) " &
                                                 "VALUES (" &
                                                 maxCode & ", " &
                                                 clsEmployee.ID & ", " &

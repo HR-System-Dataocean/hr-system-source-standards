@@ -1418,10 +1418,10 @@ Partial Class frmEmployeesVacations
     End Function
 
 #End Region
-    Private Sub CancelAutoDelegation(ByVal Src As String, ByVal DelegationRequestId As Integer)
+    Private Sub CancelAutoDelegation(ByVal Src As String, ByVal VacationRequestID As Integer)
         Try
             Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
-            If String.IsNullOrEmpty(Src) OrElse DelegationRequestId <= 0 Then
+            If String.IsNullOrEmpty(Src) OrElse VacationRequestID <= 0 Then
                 Return
             End If
 
@@ -1429,7 +1429,7 @@ Partial Class frmEmployeesVacations
                                              "IsCanceled = 1, " &
                                              "CancelDate = GETDATE() " &
                                              "WHERE Src = '" & Src.Replace("'", "") & "' " &
-                                             "AND DelegationRequestId = " & DelegationRequestId & " " &
+                                             "AND VacationRequestID = " & VacationRequestID & " " &
                                              "AND ISNULL(IsCanceled, 0) = 0"
 
             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ConnStr, Data.CommandType.Text, cancelDelegationSql)

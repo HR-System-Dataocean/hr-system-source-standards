@@ -276,7 +276,7 @@ Partial Class frmDelegationSChedule
         If ClsDelegationSChedule.ID <= 0 Then
             Return False
         End If
-        If ClsDelegationSChedule.DelegationRequestId > 0 Then
+        If ClsDelegationSChedule.VacationRequestID > 0 Then
             Return True
         End If
         If String.IsNullOrEmpty(ClsDelegationSChedule.Src) Then
@@ -394,7 +394,7 @@ Partial Class frmDelegationSChedule
 
             ClsDelegationSChedule.Find("Code='" & txtCode.Text & "'")
 
-            If ClsDelegationSChedule.DelegationRequestId > 0 OrElse
+            If ClsDelegationSChedule.VacationRequestID > 0 OrElse
                (Not String.IsNullOrEmpty(ClsDelegationSChedule.Src)) Then
                 Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, objNav.SetLanguage(Page, "Sorry... Can't update this delegation because it was created from vacation action! / عفوا... لا يمكن تعديل هذا التفويض لأنه تم إنشاؤه من حركة الإجازة!"))
                 Exit Function
