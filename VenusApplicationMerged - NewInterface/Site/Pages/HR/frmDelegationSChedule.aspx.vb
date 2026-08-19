@@ -308,7 +308,11 @@ Partial Class frmDelegationSChedule
             Else
                 requestName = " RequestEngName "
             End If
-            Dim str As String = " select SS_DelegationSCheduleRequests.ID, " & ScheduleId & " as ScheduleId,RequestCode as RequestTypeId," & requestName & " as RequestTypeName,case when SS_DelegationSCheduleRequests.ScheduleId is null then 0 else 1 end as 'Select' from SS_RequestTypes left outer join SS_DelegationSCheduleRequests on SS_DelegationSCheduleRequests.RequestTypeId=SS_RequestTypes.RequestCode and SS_DelegationSCheduleRequests.ScheduleId=" & ScheduleId & " Where SS_DelegationSCheduleRequests.ScheduleId is null or SS_DelegationSCheduleRequests.ScheduleId = " & ScheduleId
+            Dim scheduleIds As String = ScheduleId.ToString()
+            If ClsDelegationSChedule IsNot Nothing AndAlso ClsDelegationSChedule.ID > 0 AndAlso ClsDelegationSChedule.ID <> ScheduleId Then
+                scheduleIds &= "," & ClsDelegationSChedule.ID
+            End If
+            Dim str As String = " select SS_DelegationSCheduleRequests.ID, " & ScheduleId & " as ScheduleId,RequestCode as RequestTypeId," & requestName & " as RequestTypeName,case when SS_DelegationSCheduleRequests.ScheduleId is null then 0 else 1 end as 'Select' from SS_RequestTypes left outer join SS_DelegationSCheduleRequests on SS_DelegationSCheduleRequests.RequestTypeId=SS_RequestTypes.RequestCode and SS_DelegationSCheduleRequests.ScheduleId IN (" & scheduleIds & ") Where SS_DelegationSCheduleRequests.ScheduleId is null or SS_DelegationSCheduleRequests.ScheduleId IN (" & scheduleIds & ")"
 
             Dim ds As New Data.DataSet
             ds = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(ClsDelegationSChedule.ConnectionString, Data.CommandType.Text, str)
@@ -535,6 +539,16 @@ Partial Class frmDelegationSChedule
                 End If
 
             End With
+            If ClsDelegationSChedule.ID > 0 Then
+                Dim intScheduleId As Integer = 0
+                Integer.TryParse(ClsDelegationSChedule.Code, intScheduleId)
+                If intScheduleId <= 0 Then
+                    intScheduleId = ClsDelegationSChedule.ID
+                End If
+                GetData(intScheduleId)
+            Else
+                GetData(0)
+            End If
             Return True
         Catch ex As Exception
         End Try
