@@ -2638,14 +2638,17 @@ Partial Class frmAttendancePreparation
                 Return
             End If
 
-            Dim sourceForm As String = "FrmAnnualVacationRequestAction"
+            Dim formCode As String = Convert.ToString(Request.QueryString.Item("FormCode"))
+            If String.IsNullOrEmpty(formCode) Then
+                formCode = String.Empty
+            End If
             Dim sourceId As Integer = 0
             Integer.TryParse(TxtRequestSerial.Text, sourceId)
 
             ' 3- التحقق من عدم وجود تفويض مسبق لنفس الفترة أو لنفس الطلب
             Dim checkDelegationSql As String = "SELECT COUNT(*) FROM SS_DelegationSChedule " &
                                                "WHERE ISNULL(IsCanceled, 0) = 0 " &
-                                               "AND ((SourceForm = '" & sourceForm & "' AND SourceId = " & sourceId & ") " &
+                                               "AND ((Src = '" & formCode.Replace("'", "''") & "' AND DelegationRequestId = " & sourceId & ") " &
                                                "OR (DelegatorEmployeeID = " & clsEmployee.ID & " " &
                                                "AND DelegatedEmployeeID = " & clsAlternative.ID & " " &
                                                "AND ((FromDate <= '" & EndDate.ToString("yyyy-MM-dd") & "' AND Todate >= '" & StartDate.ToString("yyyy-MM-dd") & "'))))"
@@ -2668,7 +2671,7 @@ Partial Class frmAttendancePreparation
 
             ' 5- إدراج التفويض في جدول SS_DelegationSChedule
             Dim insertDelegationSql As String = "INSERT INTO SS_DelegationSChedule " &
-                                                "(Code, DelegatorEmployeeID, DelegatedEmployeeID, FromDate, Todate, Remarks, IsCanceled, RegUserID, RegDate, SourceForm, SourceId) " &
+                                                "(Code, DelegatorEmployeeID, DelegatedEmployeeID, FromDate, Todate, Remarks, IsCanceled, RegUserID, RegDate, Src, DelegationRequestId) " &
                                                 "VALUES (" &
                                                 maxCode & ", " &
                                                 clsEmployee.ID & ", " &
@@ -2676,7 +2679,7 @@ Partial Class frmAttendancePreparation
                                                 "'" & StartDate.ToString("yyyy-MM-dd") & "', " &
                                                 "'" & EndDate.ToString("yyyy-MM-dd") & "', " &
                                                 "'تم إنشاء التفويض تلقائياً من طلب إجازة رقم " & TxtRequestSerial.Text & "', " &
-                                                "0, '" & User & "', GETDATE(), '" & sourceForm & "', " & sourceId & ")"
+                                                "0, '" & User & "', GETDATE(), '" & formCode.Replace("'", "") & "', " & sourceId & ")"
 
             Dim scheduleId As Integer = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, insertDelegationSql & " SELECT SCOPE_IDENTITY()")
 
@@ -2684,7 +2687,7 @@ Partial Class frmAttendancePreparation
                 ' 6- إدراج الطلبات المفوض فيها (كل أنواع الطلبات)
                 ' نأخذ جميع الـ RequestTypes المسموح بتفويضها
                 Dim insertRequestsSql As String = "INSERT INTO SS_DelegationSCheduleRequests (ScheduleId, RequestTypeId, RegDate) " &
-                                                   "SELECT " & scheduleId & ", RequestCode, GETDATE() FROM SS_RequestTypes WHERE IsActive = 1"
+                                                   "SELECT " & scheduleId & ", RequestCode, GETDATE() FROM SS_RequestTypes WHERE NotActive = 0"
 
                 Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, insertRequestsSql)
 

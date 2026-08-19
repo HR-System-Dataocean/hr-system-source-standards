@@ -9819,9 +9819,9 @@ IF NOT EXISTS
 	[IsCanceled] [bit] NULL,
 	[CancelDate] [date] NULL,
 	[RegUserID] [nvarchar](50) NULL,
-	[RegDate] [date] NULL,
-	[SourceForm] [nvarchar](100) NULL,
-	[SourceId] [int] NULL,
+	[RegDate] [nvarchar](50) NULL,
+	[Src] [nvarchar](100) NULL,
+	[DelegationRequestId] [int] NULL,
  CONSTRAINT [PK_SS_DelegationSChedule] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -14414,11 +14414,51 @@ END"
         ExecuteUpdate(SQL)
 
         SQL = "
-                IF COL_LENGTH('SS_DelegationSChedule', 'SourceForm') IS NULL
-                    ALTER TABLE SS_DelegationSChedule ADD SourceForm nvarchar(100) NULL
-                IF COL_LENGTH('SS_DelegationSChedule', 'SourceId') IS NULL
-                    ALTER TABLE SS_DelegationSChedule ADD SourceId int NULL
+                IF COL_LENGTH('SS_DelegationSChedule', 'Src') IS NULL AND COL_LENGTH('SS_DelegationSChedule', 'SourceForm') IS NOT NULL
+                    EXEC sp_rename 'SS_DelegationSChedule.SourceForm', 'Src', 'COLUMN'
+                IF COL_LENGTH('SS_DelegationSChedule', 'Src') IS NULL
+                    ALTER TABLE SS_DelegationSChedule ADD Src nvarchar(100) NULL
+                IF COL_LENGTH('SS_DelegationSChedule', 'DelegationRequestId') IS NULL AND COL_LENGTH('SS_DelegationSChedule', 'SourceId') IS NOT NULL
+                    EXEC sp_rename 'SS_DelegationSChedule.SourceId', 'DelegationRequestId', 'COLUMN'
+                IF COL_LENGTH('SS_DelegationSChedule', 'DelegationRequestId') IS NULL
+                    ALTER TABLE SS_DelegationSChedule ADD DelegationRequestId int NULL
                 "
+        ExecuteUpdate(SQL)
+
+        SQL = "
+IF COL_LENGTH('SS_DelegationSChedule', 'RegDate') IS NOT NULL
+AND EXISTS (
+    SELECT 1
+    FROM sys.columns
+    WHERE object_id = OBJECT_ID('dbo.SS_DelegationSChedule')
+      AND name = 'RegDate'
+      AND system_type_id = TYPE_ID('date')
+)
+BEGIN
+    ALTER TABLE dbo.SS_DelegationSChedule ALTER COLUMN RegDate nvarchar(50) NULL
+END
+"
+        ExecuteUpdate(SQL)
+
+        SQL = "
+IF COL_LENGTH('SS_DelegationSChedule', 'CancelDate') IS NOT NULL
+BEGIN
+    DECLARE @CancelDateDefault sysname
+    SELECT @CancelDateDefault = dc.name
+    FROM sys.default_constraints dc
+    INNER JOIN sys.columns c ON c.default_object_id = dc.object_id
+    WHERE dc.parent_object_id = OBJECT_ID('dbo.SS_DelegationSChedule')
+      AND c.name = 'CancelDate'
+    IF @CancelDateDefault IS NOT NULL
+        EXEC('ALTER TABLE dbo.SS_DelegationSChedule DROP CONSTRAINT [' + @CancelDateDefault + ']')
+
+    ALTER TABLE dbo.SS_DelegationSChedule ALTER COLUMN CancelDate date NULL
+
+    UPDATE dbo.SS_DelegationSChedule
+    SET CancelDate = NULL
+    WHERE CancelDate = '0001-01-01'
+END
+"
         ExecuteUpdate(SQL)
 
         SQL = "IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('sys_SystemConfig') AND name = 'ReviewPreviousPeriodSalaries')

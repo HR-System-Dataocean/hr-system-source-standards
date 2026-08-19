@@ -25,7 +25,7 @@ Public Class ClsSS_DelegationSChedule
           " @Todate," &
           " @Remarks," &
           " @IsCanceled," &
-          " @CancelDate," &
+          " NULL," &
           " @RegUserID," &
           "@RegDate"
         mUpdateParameter = "" &
@@ -41,7 +41,7 @@ Public Class ClsSS_DelegationSChedule
         mSelectCommand = CONFIG_DATEFORMAT & " Select * From  " & mTable
         mInsertCommand = CONFIG_DATEFORMAT & " insert into " & mTable & "( " & mInsertParameter & ")Values(" & mInsertParameterValues & ")"
         mUpdateCommand = CONFIG_DATEFORMAT & " Update " & mTable & " Set " & mUpdateParameter
-        mDeleteCommand = CONFIG_DATEFORMAT & " Update " & mTable & " Set CancelDate=GetDate()"
+        mDeleteCommand = CONFIG_DATEFORMAT & " Update " & mTable & " Set IsCanceled=1, CancelDate=GetDate()"
     End Sub
 #End Region
 #Region "Private Members"
@@ -56,8 +56,8 @@ Public Class ClsSS_DelegationSChedule
     Private mCancelDate As Date
     Private mRegUserID As Integer
     Private mRegDate As DateTime
-    Private mSourceForm As String
-    Private mSourceId As Integer
+    Private mSrc As String
+    Private mDelegationRequestId As Integer
 
 #End Region
 #Region "Public Property"
@@ -152,20 +152,20 @@ Public Class ClsSS_DelegationSChedule
             mRegDate = Value
         End Set
     End Property
-    Public Property SourceForm() As String
+    Public Property Src() As String
         Get
-            Return mSourceForm
+            Return mSrc
         End Get
         Set(ByVal Value As String)
-            mSourceForm = Value
+            mSrc = Value
         End Set
     End Property
-    Public Property SourceId() As Integer
+    Public Property DelegationRequestId() As Integer
         Get
-            Return mSourceId
+            Return mDelegationRequestId
         End Get
         Set(ByVal Value As Integer)
-            mSourceId = Value
+            mDelegationRequestId = Value
         End Set
     End Property
 
@@ -384,8 +384,8 @@ Public Class ClsSS_DelegationSChedule
             mCancelDate = Nothing
             mRegUserID = 0
             mRegDate = Nothing
-            mSourceForm = String.Empty
-            mSourceId = 0
+            mSrc = String.Empty
+            mDelegationRequestId = 0
         Catch ex As Exception
             mPage.Session.Add("ErrorValue", ex)
             mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, mDataBaseUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_ErrorsLog)
@@ -426,15 +426,19 @@ Public Class ClsSS_DelegationSChedule
                 'mCancelDate = mDataHandler.DataValue_Out(.Item("CancelDate"), SqlDbType.Date)
                 mRegUserID = mDataHandler.DataValue_Out(.Item("RegUserID"), SqlDbType.Int, True)
                 mRegDate = mDataHandler.DataValue_Out(.Item("RegDate"), SqlDbType.DateTime)
-                If Ds.Tables(0).Columns.Contains("SourceForm") AndAlso Not IsDBNull(.Item("SourceForm")) Then
-                    mSourceForm = Convert.ToString(.Item("SourceForm"))
+                If Ds.Tables(0).Columns.Contains("Src") AndAlso Not IsDBNull(.Item("Src")) Then
+                    mSrc = Convert.ToString(.Item("Src"))
+                ElseIf Ds.Tables(0).Columns.Contains("SourceForm") AndAlso Not IsDBNull(.Item("SourceForm")) Then
+                    mSrc = Convert.ToString(.Item("SourceForm"))
                 Else
-                    mSourceForm = String.Empty
+                    mSrc = String.Empty
                 End If
-                If Ds.Tables(0).Columns.Contains("SourceId") AndAlso Not IsDBNull(.Item("SourceId")) Then
-                    mSourceId = Convert.ToInt32(.Item("SourceId"))
+                If Ds.Tables(0).Columns.Contains("DelegationRequestId") AndAlso Not IsDBNull(.Item("DelegationRequestId")) Then
+                    mDelegationRequestId = Convert.ToInt32(.Item("DelegationRequestId"))
+                ElseIf Ds.Tables(0).Columns.Contains("SourceId") AndAlso Not IsDBNull(.Item("SourceId")) Then
+                    mDelegationRequestId = Convert.ToInt32(.Item("SourceId"))
                 Else
-                    mSourceId = 0
+                    mDelegationRequestId = 0
                 End If
             End With
             Return True
@@ -470,10 +474,23 @@ Public Class ClsSS_DelegationSChedule
             'Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ToFixedCondition", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mToFixedCondition, SqlDbType.VarChar)
             'Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@ToFormCondition", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mToFormCondition, SqlDbType.VarChar)
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@Remarks", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mRemarks, SqlDbType.VarChar)
-            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@RegDate", SqlDbType.VarChar)).Value = mDataHandler.DataValue_In(mRegDate, SqlDbType.VarChar)
+            Dim strRegDate As String = String.Empty
+            If IsDate(mRegDate) AndAlso mRegDate <> Date.MinValue Then
+                strRegDate = Convert.ToDateTime(mRegDate).ToString("dd/MM/yyyy HH:mm:ss", Globalization.CultureInfo.InvariantCulture)
+            End If
+            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@RegDate", SqlDbType.NVarChar, 50)).Value = mDataHandler.DataValue_In(strRegDate, SqlDbType.NVarChar)
 
             Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@IsCanceled", SqlDbType.Bit)).Value = mDataHandler.DataValue_In(mIsCanceled, SqlDbType.Bit, True)
-            Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@CancelDate", SqlDbType.Date)).Value = mDataHandler.DataValue_In(mCancelDate, SqlDbType.Date, True)
+            If strMode.Trim.ToUpper <> "SAVE" Then
+                Dim pCancelDate As New SqlClient.SqlParameter("@CancelDate", SqlDbType.Date)
+                pCancelDate.IsNullable = True
+                If mCancelDate = Date.MinValue Then
+                    pCancelDate.Value = DBNull.Value
+                Else
+                    pCancelDate.Value = mCancelDate
+                End If
+                Sqlcommand.Parameters.Add(pCancelDate)
+            End If
             If (strMode.Trim.ToUpper = "SAVE") Then
                 Sqlcommand.Parameters.Add(New SqlClient.SqlParameter("@RegUserID", SqlDbType.Int)).Value = mDataHandler.DataValue_In(Me.mDataBaseUserRelatedID, SqlDbType.Int, True)
             End If

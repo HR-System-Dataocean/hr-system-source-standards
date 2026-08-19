@@ -779,7 +779,7 @@ Partial Class frmEmployeesVacations
             Dim sourceId As Integer = 0
             Integer.TryParse(RequestSerial, sourceId)
             If sourceId > 0 Then
-                CancelAutoDelegation("FrmAnnualVacationRequestAction", sourceId)
+                CancelAutoDelegation(FormCode, sourceId)
             End If
         Catch ex As Exception
         End Try
@@ -894,7 +894,7 @@ Partial Class frmEmployeesVacations
                 Dim sourceId As Integer = 0
                 Integer.TryParse(RequestSerial, sourceId)
                 If sourceId > 0 Then
-                    CancelAutoDelegation("FrmAnnualVacationRequestAction", sourceId)
+                    CancelAutoDelegation(FormCode, sourceId)
                 End If
             Catch ex As Exception
                 ' تجاهل الأخطاء
@@ -1418,18 +1418,18 @@ Partial Class frmEmployeesVacations
     End Function
 
 #End Region
-    Private Sub CancelAutoDelegation(ByVal SourceForm As String, ByVal SourceId As Integer)
+    Private Sub CancelAutoDelegation(ByVal Src As String, ByVal DelegationRequestId As Integer)
         Try
             Dim ConnStr As String = CType(HttpContext.Current.Session("ConnectionString"), String)
-            If String.IsNullOrEmpty(SourceForm) OrElse SourceId <= 0 Then
+            If String.IsNullOrEmpty(Src) OrElse DelegationRequestId <= 0 Then
                 Return
             End If
 
             Dim cancelDelegationSql As String = "UPDATE SS_DelegationSChedule SET " &
                                              "IsCanceled = 1, " &
                                              "CancelDate = GETDATE() " &
-                                             "WHERE SourceForm = '" & SourceForm.Replace("'", "''") & "' " &
-                                             "AND SourceId = " & SourceId & " " &
+                                             "WHERE Src = '" & Src.Replace("'", "") & "' " &
+                                             "AND DelegationRequestId = " & DelegationRequestId & " " &
                                              "AND ISNULL(IsCanceled, 0) = 0"
 
             Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ConnStr, Data.CommandType.Text, cancelDelegationSql)
