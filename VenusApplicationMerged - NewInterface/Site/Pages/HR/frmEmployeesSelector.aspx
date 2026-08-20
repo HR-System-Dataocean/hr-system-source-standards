@@ -171,11 +171,16 @@
             gap: 6px;
             min-height: 26px;
         }
-        .field-label {
-            font-size: 11px;
+        .field-label,
+        .field-label span,
+        .field-label label {
+            font-size: 14px;
+            font-weight: normal;
             color: #334455;
+        }
+        .field-label {
             white-space: nowrap;
-            min-width: 110px;
+            min-width: 140px;
             flex-shrink: 0;
         }
         .field-control { flex: 1; min-width: 0; }
@@ -195,6 +200,7 @@
             border-radius: 3px;
             font-family: Tahoma, Arial, sans-serif;
             font-size: 11px;
+            font-weight: bold;
             background: #fff;
             color: #2c3e50;
             height: 24px;

@@ -2687,7 +2687,7 @@ Partial Class frmAttendancePreparation
                 ' 6- إدراج الطلبات المفوض فيها (كل أنواع الطلبات)
                 ' نأخذ جميع الـ RequestTypes المسموح بتفويضها
                 Dim insertRequestsSql As String = "INSERT INTO SS_DelegationSCheduleRequests (ScheduleId, RequestTypeId, RegDate) " &
-                                                   "SELECT " & scheduleId & ", RequestCode, GETDATE() FROM SS_RequestTypes WHERE NotActive = 0"
+                                                   "SELECT " & scheduleId & ", RequestCode, GETDATE() FROM SS_RequestTypes WHERE isnull(NotActive,0) = 0"
 
                 Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ClsEmployees.ConnectionString, Data.CommandType.Text, insertRequestsSql)
 
