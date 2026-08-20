@@ -357,4 +357,10 @@
   <data name="RequestTypeResource3.Header.Caption" xml:space="preserve">
     <value>Request Type</value>
   </data>
+  <data name="lblRequestBalanceResource1.Text" xml:space="preserve">
+    <value>Available Request Balance</value>
+  </data>
+  <data name="NoOfDaysResource3.Header.Caption" xml:space="preserve">
+    <value>No OF Days</value>
+  </data>
 </root>

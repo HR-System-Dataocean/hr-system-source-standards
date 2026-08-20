@@ -267,9 +267,6 @@ Partial Class frmEmployeesVacations
                 uwgEmployeeVacations.DataSource = DS1
                 uwgEmployeeVacations.DataBind()
 
-
-
-
                 Dim DS2 As New Data.DataSet()
                 Dim connetionString2 As String
                 Dim connection2 As Data.SqlClient.SqlConnection
@@ -355,7 +352,7 @@ Partial Class frmEmployeesVacations
                 Dim _sys_User As New Clssys_Users(Page)
                 _sys_User.Find("ID = '" & User & "'")
                 Dim ClsEmployees As New Clshrs_Employees(Page)
-                ClsEmployees.Find("Code='" & _sys_User.Code & "'")
+                'ClsEmployees.Find("Code='" & _sys_User.Code & "'")
                 Dim DS1 As New Data.DataSet()
                 Dim connetionString As String
                 Dim connection As Data.SqlClient.SqlConnection
@@ -374,10 +371,10 @@ Partial Class frmEmployeesVacations
                     ActionName = " SS_UserActions.ActionEngName "
                 End If
 
+
                 Dim str1 As String
                 'str1 = "select " & EmpName & " as EmployeeName,( case when SS_UserActions.ActionAraName is not null then SS_UserActions.ActionAraName else 'Pending ...' end) As Action ,convert(varchar, ActionDate,101) as ActionDate,ActionRemarks  from SS_OvertimeRequest join SS_RequestActions on SS_OvertimeRequest.ID=SS_RequestActions.RequestSerial and SS_OvertimeRequest.EmployeeID=SS_RequestActions.EmployeeID join hrs_Employees on hrs_Employees.ID= SS_RequestActions.SS_EmployeeID left join SS_UserActions on SS_RequestActions.ActionID=SS_UserActions.ID where RequestSerial=" & RequestSerial & " And SS_RequestActions.FormCode='" & FormCode & "' and ( SS_RequestActions.IsHidden is null or SS_RequestActions.IsHidden=0 ) and SS_OvertimeRequest.EmployeeID=" & ClsEmployees.ID & " "
-                str1 = "select " & EmpName & " as EmployeeName,( case when " & ActionName & " is not null then " & ActionName & " else 'Pending ...' end) As Action ,convert(varchar, ActionDate,101) as ActionDate,ActionRemarks  from SS_OvertimeRequest join SS_RequestActions on SS_OvertimeRequest.ID=SS_RequestActions.RequestSerial and SS_OvertimeRequest.EmployeeID=SS_RequestActions.EmployeeID join hrs_Employees on hrs_Employees.ID= SS_RequestActions.SS_EmployeeID left join SS_UserActions on SS_RequestActions.ActionID=SS_UserActions.ID where RequestSerial=" & RequestSerial & " And SS_RequestActions.FormCode='" & FormCode & "' and ( SS_RequestActions.IsHidden is null or SS_RequestActions.IsHidden=0 ) "
-
+                str1 = "select " & EmpName & " as EmployeeName,( case when " & ActionName & " is not null then " & ActionName & " else 'Pending ...' end) As Action ,convert(varchar, ActionDate,101) as ActionDate,ActionRemarks ,ISNULL(SS_RequestActions.HoursCount,0) as ConfirmedNoOfdays  from SS_OvertimeRequest join SS_RequestActions on SS_OvertimeRequest.ID=SS_RequestActions.RequestSerial and SS_OvertimeRequest.EmployeeID=SS_RequestActions.EmployeeID join hrs_Employees on hrs_Employees.ID= SS_RequestActions.SS_EmployeeID left join SS_UserActions on SS_RequestActions.ActionID=SS_UserActions.ID where RequestSerial=" & RequestSerial & " And SS_RequestActions.FormCode='" & FormCode & "' and ( SS_RequestActions.IsHidden is null or SS_RequestActions.IsHidden=0 )  "
 
                 command = New Data.SqlClient.SqlCommand(str1, connection)
                 adapter.SelectCommand = command
@@ -396,11 +393,6 @@ Partial Class frmEmployeesVacations
 
 
 
-                'If ProfileCls.CurrentLanguage = "Ar" Then
-                '    EmpName = " hrs_Employees.arbname+' '+FatherArbName+' '+GrandArbName+' '+FamilyArbName "
-                'Else
-                '    EmpName = "hrs_Employees.EngName+' '+FatherEngName+' '+GrandEngName+' '+FamilyEngName"
-                'End If
 
                 Dim DS2 As New Data.DataSet()
                 Dim connetionString2 As String
@@ -420,7 +412,8 @@ Partial Class frmEmployeesVacations
                     firstshifName = "first shif"
                     secondshifName = "second shift"
                 End If
-                strselect = "select SS_OvertimeRequest.Code as RequestSerial ,Convert(date,RequestDate) as RequestDate,Remarks from SS_OvertimeRequest  where  SS_OvertimeRequest.ID=" & RequestSerial & ""
+
+                strselect = "select SS_OvertimeRequest.Code as RequestSerial ,Convert(date,RequestDate) as RequestDate,Remarks,SS_OvertimeRequest.HoursCount,SS_OvertimeRequest.MinutsCount,SS_OvertimeRequest.OvertimeDate,SS_OvertimeRequest.OvertimeType from SS_OvertimeRequest  where  SS_OvertimeRequest.ID=" & RequestSerial & ""
                 command2 = New Data.SqlClient.SqlCommand(strselect, connection2)
                 adapter2.SelectCommand = command2
                 adapter2.Fill(DS2, "Table1")
@@ -434,34 +427,45 @@ Partial Class frmEmployeesVacations
                     TxtRequestDate.Text = CDate(DS2.Tables(0).Rows(0)("RequestDate").ToString()).ToShortDateString()
 
                     TxtRemarks.Text = DS2.Tables(0).Rows(0)("Remarks").ToString()
-                End If
-                Dim SelectRequestType As String = ""
-                Dim RequestType As String = ""
-                If ProfileCls.CurrentLanguage = "Ar" Then
-                    SelectRequestType = "RequestArbName"
-                Else
-                    SelectRequestType = "RequestEngName"
+
+                    Dim SelectRequestType As String = ""
+                    Dim RequestType As String = ""
+                    If ProfileCls.CurrentLanguage = "Ar" Then
+                        SelectRequestType = "RequestArbName"
+                    Else
+                        SelectRequestType = "RequestEngName"
+
+                    End If
+                    'Fill Request type
+                    Dim requesttypestr As String
+                    requesttypestr = "Select " & SelectRequestType & " from SS_RequestTypes where RequestCode='" & FormCode & "'"
+                    RequestType = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, requesttypestr)
+
+                    txtRequestType.Text = RequestType.ToString()
+
+
+                    Dim strRequester As String = "select distinct Employeeid from SS_RequestActions where RequestSerial=" & RequestSerial & " and FormCode='" & FormCode & "'"
+                    Dim requesterid As Integer = CInt(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, strRequester))
+                    Dim RequesterData As String = "select Code," & EmpName & " as EmployeeName From hrs_Employees where ID=" & requesterid & ""
+                    Dim DsRequesterData As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(
+    ClsEmployees.ConnectionString,
+    CommandType.Text,
+    RequesterData,
+    New SqlClient.SqlParameter("@EmployeeID", requesterid)
+)
+                    If DsRequesterData.Tables(0).Rows.Count > 0 Then
+                        TxtEmpCode.Text = DsRequesterData.Tables(0).Rows(0)("Code")
+                        TxtEmpName.Text = DsRequesterData.Tables(0).Rows(0)("EmployeeName")
+                    End If
+
+                    If Not String.IsNullOrWhiteSpace(Convert.ToString(DS2.Tables(0).Rows(0)("HoursCount"))) Then
+                        txtHoursNo.Text = DS2.Tables(0).Rows(0)("HoursCount").ToString()
+                        txtMinutsNo.Text = DS2.Tables(0).Rows(0)("MinutsCount").ToString()
+                        OverTimeDate.Value = _sys_User.GetHigriDate(DS2.Tables(0).Rows(0)("OvertimeDate").ToString())
+                        ddlOverTimeType.SelectedValue = DS2.Tables(0).Rows(0)("OvertimeType").ToString()
+                    End If
 
                 End If
-                'Fill Request type
-                Dim strRequester As String = "select distinct Employeeid from SS_RequestActions where RequestSerial=" & RequestSerial & " and FormCode='" & FormCode & "'"
-                Dim requesterid As Integer = CInt(Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, strRequester))
-                Dim RequesterData As String = "select Code," & EmpName & " as EmployeeName From hrs_Employees where ID=" & requesterid & ""
-                Dim DsRequesterData As DataSet = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteDataset(
-        ClsEmployees.ConnectionString,
-        CommandType.Text,
-        RequesterData,
-        New SqlClient.SqlParameter("@EmployeeID", requesterid)
-    )
-                If DsRequesterData.Tables(0).Rows.Count > 0 Then
-                    TxtEmpCode.Text = DsRequesterData.Tables(0).Rows(0)("Code")
-                    TxtEmpName.Text = DsRequesterData.Tables(0).Rows(0)("EmployeeName")
-                End If
-                Dim requesttypestr As String
-                requesttypestr = "Select " & SelectRequestType & " from SS_RequestTypes where RequestCode='" & FormCode & "'"
-                RequestType = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployees.ConnectionString, Data.CommandType.Text, requesttypestr)
-
-                txtRequestType.Text = RequestType.ToString()
             Catch ex As Exception
                 mErrorHandler = New Venus.Shared.ErrorsHandler(ClsEmployeesVacations.ConnectionString)
                 Page.Session.Add("ErrorValue", ex)

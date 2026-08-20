@@ -360,4 +360,10 @@
   <data name="RequestTypeResource3.Header.Caption" xml:space="preserve">
     <value>نوع الطلب</value>
   </data>
+  <data name="lblRequestBalanceResource1.Text" xml:space="preserve">
+    <value>الرصيد المتاح للطلبات</value>
+  </data>
+  <data name="NoOfDaysResource3.Header.Caption" xml:space="preserve">
+    <value>عدد الايام</value>
+  </data>
 </root>

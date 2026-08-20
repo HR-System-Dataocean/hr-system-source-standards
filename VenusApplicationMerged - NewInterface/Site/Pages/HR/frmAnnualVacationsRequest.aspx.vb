@@ -80,6 +80,7 @@ Partial Class frmEmployeesVacations
                 End If
                 ClsVacationTypes.Find("IsAnnual=1")
                 CheckEmpCode()
+
                 Dim DteStartDate As Date = Date.Now
                 Dim DteEndDate As Date = Date.Now
                 If Request.QueryString.Count > 0 Then
@@ -117,13 +118,14 @@ Partial Class frmEmployeesVacations
                     SetTime()
 
                 End If
+
+
+
             Else
-                'txtEmployee_TextChanged(Nothing, Nothing)
-                'txtAlternative_TextChanged(Nothing, Nothing)
-                'lbRemainVal_TextChanged(Nothing, Nothing)
+
             End If
 
-
+            LoadRequestBalance()
 
         Catch ex As Exception
             mErrorHandler = New Venus.Shared.ErrorsHandler(ClsEmployeesVacations.ConnectionString)
@@ -229,6 +231,7 @@ Partial Class frmEmployeesVacations
         Try
             Session("EmpVacID") = 0
             CheckEmpCode()
+            LoadRequestBalance()
             Dim ClsEmployeesVacations As New Clshrs_EmployeesVacations(Page)
             ClsEmployees = New Clshrs_Employees(Page)
             Dim clsContract As New Clshrs_Contracts(Page)
@@ -653,6 +656,10 @@ Partial Class frmEmployeesVacations
 
         Dim recordId As Integer
         Dim RemVal As Integer = 0
+
+        If Not ValidateBalanceBeforeSave() Then
+            Exit Function
+        End If
         Try
             If DdlVacationType.SelectedValue = 0 Then
 
@@ -672,26 +679,35 @@ Partial Class frmEmployeesVacations
             If clsVacationType.IsAnnual Then
                 Dim clsEmp As New Clshrs_Employees(Page)
                 clsEmp.Find("Code='" & txtEmployee.Text & "'")
-                If clsEmp.ID > 0 Then
-                    Dim currentVacTypeId As Integer = CInt(DdlVacationType.SelectedValue)
-                    Dim strCheck As String = "SELECT COUNT(1) FROM SS_VacationRequest " &
-                        "WHERE EmployeeID=" & clsEmp.ID & " AND VacationTypeID=" & currentVacTypeId & " " &
-                        "AND (RequestStautsTypeID IS NULL OR RequestStautsTypeID IN (3,4))"
-                    Dim existingCountObj As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, CommandType.Text, strCheck)
-                    Dim existingCount As Integer = 0
-                    If Not IsDBNull(existingCountObj) AndAlso existingCountObj IsNot Nothing Then
-                        Integer.TryParse(existingCountObj.ToString(), existingCount)
-                    End If
-                    If existingCount > 0 Then
-                        Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, "There is an incomplete annual leave request. Please complete the steps for the current request first./يوجد طلب اجازة سنوى لم يكتمل بعد برجاء اكمال مراحل الطلب السارى اولا")
-                        ImageButton_Save.Enabled = False
-                        Return False
-                        'Exit Function
+                Dim strConfig As String = "SELECT ApplyAnnualvacationrequestBalancevalidation FROM sys_SystemConfig"
+                Dim ApplyValidation As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(
+                ClsEmployees.ConnectionString,
+                CommandType.Text,
+                strConfig
+            )
+                If Not ApplyValidation Then
+
+
+                    If clsEmp.ID > 0 Then
+                        Dim currentVacTypeId As Integer = CInt(DdlVacationType.SelectedValue)
+                        Dim strCheck As String = "SELECT COUNT(1) FROM SS_VacationRequest " &
+                            "WHERE EmployeeID=" & clsEmp.ID & " AND VacationTypeID=" & currentVacTypeId & " " &
+                            "AND (RequestStautsTypeID IS NULL OR RequestStautsTypeID IN (3,4))"
+                        Dim existingCountObj As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(ClsEmployeesVacations.ConnectionString, CommandType.Text, strCheck)
+                        Dim existingCount As Integer = 0
+                        If Not IsDBNull(existingCountObj) AndAlso existingCountObj IsNot Nothing Then
+                            Integer.TryParse(existingCountObj.ToString(), existingCount)
+                        End If
+                        If existingCount > 0 Then
+                            Venus.Shared.Web.ClientSideActions.MsgBoxBasic(Page, "There is an incomplete annual leave request. Please complete the steps for the current request first./يوجد طلب اجازة سنوى لم يكتمل بعد برجاء اكمال مراحل الطلب السارى اولا")
+                            ImageButton_Save.Enabled = False
+                            Return False
+                            'Exit Function
+                        End If
                     End If
                 End If
+
             End If
-
-
 
 
 
@@ -2014,7 +2030,7 @@ Partial Class frmEmployeesVacations
 
 
 
-            Dim str1 As String = "select ID,VacationType, RequestSerial ,EmployeeID ," & EmpName & " as EmployeeName,RequestDate , " & RequestName & " as RequestType, FormCode from SS_VFollowup where  EmployeeID= " & ClsEmployees.ID & "  and FormCode='SS_0011' Order By RequestDate desc"
+            Dim str1 As String = "select ID,VacationType, RequestSerial ,EmployeeID ," & EmpName & " as EmployeeName,RequestDate ,NoOfDays, " & RequestName & " as RequestType, FormCode from SS_VAnnualVacationsFollowup where  EmployeeID= " & ClsEmployees.ID & "  and FormCode='SS_0011' Order By RequestDate desc"
 
 
 
@@ -2586,6 +2602,97 @@ Partial Class frmEmployeesVacations
 
         Return totalDays
     End Function
+    Private Sub LoadRequestBalance()
+        Try
+            Dim ClsEmployees As New Clshrs_Employees(Page)
+            ClsEmployees.Find("Code='" & txtEmployee.Text & "'")
+
+            ' قراءة الإعداد من System Configuration
+            Dim strConfig As String = "SELECT ApplyAnnualvacationrequestBalancevalidation FROM sys_SystemConfig"
+            Dim ApplyValidation As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(
+                ClsEmployees.ConnectionString,
+                CommandType.Text,
+                strConfig
+            )
+
+            If ApplyValidation IsNot Nothing AndAlso Convert.ToBoolean(ApplyValidation) Then
+                ' إظهار الحقول
+                lblRequestBalance.Visible = True
+                TxtRequestBalance.Visible = True
+
+                ' حساب رصيد الطلبات (الموافقة 3 أو 4)
+                Dim strRequestBalance As String = " SELECT ISNULL(SUM(NoOfDays), 0) FROM SS_VAnnualVacationsFollowup WHERE EmployeeID = " & ClsEmployees.ID & " AND FormCode = 'SS_0011' AND RequestStautsTypeID IN (3, 4)"
+
+                Dim RequestBalance As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(
+                    ClsEmployees.ConnectionString,
+                    CommandType.Text,
+                    strRequestBalance
+                )
+
+                TxtRequestBalance.Text = Convert.ToDecimal(lbTotalVal.Text) - Convert.ToDecimal(RequestBalance).ToString("0.00")
+
+                ' مقارنة الرصيد الحالي مع رصيد الطلبات
+                Dim CurrentBalance As Decimal = Convert.ToDecimal(lbTotalVal.Text)
+                Dim RequestBalanceValue As Decimal = Convert.ToDecimal(TxtRequestBalance.Text)
+
+                If RequestBalanceValue > CurrentBalance Then
+                    ' تغيير لون التحذير
+                    TxtRequestBalance.BackColor = Drawing.Color.LightCoral
+                    TxtRequestBalance.ForeColor = Drawing.Color.DarkRed
+
+                Else
+                    TxtRequestBalance.BackColor = Drawing.Color.LightGreen
+                    TxtRequestBalance.ForeColor = Drawing.Color.DarkGreen
+                End If
+
+            Else
+                ' إخفاء الحقول
+                lblRequestBalance.Visible = False
+                TxtRequestBalance.Visible = False
+            End If
+
+        Catch ex As Exception
+            ' معالجة الأخطاء
+            mErrorHandler = New Venus.Shared.ErrorsHandler(ClsEmployees.ConnectionString)
+            Page.Session.Add("ErrorValue", ex)
+            mErrorHandler.RecordExceptions_DataBase("", ex, Err.Number, ClsEmployees.RegUserID, Venus.Shared.ErrorsHandler.eRecordingType.System_DataBase)
+            Page.Response.Redirect("ErrorPage.aspx")
+        End Try
+    End Sub
+    Private Function ValidateBalanceBeforeSave() As Boolean
+        Try
+            ' التحقق من تفعيل الخاصية
+            Dim strConfig As String = "SELECT ApplyAnnualvacationrequestBalancevalidation FROM sys_SystemConfig"
+            Dim ApplyValidation As Object = Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteScalar(
+                ClsEmployees.ConnectionString,
+                CommandType.Text,
+                strConfig
+            )
+
+            If ApplyValidation IsNot Nothing AndAlso Convert.ToBoolean(ApplyValidation) Then
+                Dim CurrentBalance As Decimal = Convert.ToDecimal(lbTotalVal.Text)
+                Dim RequestBalance As Decimal = Convert.ToDecimal(TxtRequestBalance.Text)
+                Dim NewRequestDays As Decimal = Convert.ToDecimal(lbRemainVal.Text)
+                If NewRequestDays > RequestBalance Then
+                    Dim ObjNavigationHandler As New Venus.Shared.Web.NavigationHandler(ClsEmployees.ConnectionString)
+                    Venus.Shared.Web.ClientSideActions.MsgBoxBasic(
+                        Page,
+                        ObjNavigationHandler.SetLanguage(
+                            Page,
+                            "Cannot save: Requests Available Balance Is Not Enough for The Requested Days! / لا يمكن الحفظ: الرصيد المتاح للطلبات غير كافي للطلب الحالي!"
+                        )
+                    )
+                    Return False
+                End If
+            End If
+
+            Return True
+
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
 
 
 End Class

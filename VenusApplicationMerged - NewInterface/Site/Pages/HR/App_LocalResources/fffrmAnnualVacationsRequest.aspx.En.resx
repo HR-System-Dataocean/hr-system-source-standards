@@ -349,4 +349,7 @@
   <data name="LblTickectDateResource1.Text" xml:space="preserve">
     <value>Ticket Date</value>
   </data>
+  <data name="lblRequestBalanceResource1.Text" xml:space="preserve">
+    <value>Available Request Balance</value>
+  </data>
 </root>

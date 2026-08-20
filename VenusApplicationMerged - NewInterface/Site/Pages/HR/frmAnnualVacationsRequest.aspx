@@ -807,6 +807,64 @@
                                                 </table>
                                             </td>
                                                     </tr>
+                                                            <tr>
+            <td class="SeparArea">
+            </td>
+            <td class="LabelArea">
+                <asp:Label ID="lblRequestBalance" runat="server" Width="90px" SkinID="Label_DefaultNormal"
+                    Text="الرصيد المتاح للطلبات" meta:resourcekey="lblRequestBalanceResource1"></asp:Label>
+            </td>
+            <td class="DataArea">
+                <asp:TextBox ID="TxtRequestBalance" runat="server" SkinID="TextBox_SmalltNormalc" meta:resourcekey="lbTotalValResource1"
+                    TabIndex="4" ReadOnly="True"></asp:TextBox>
+                <asp:Label ID="Label5" runat="server" meta:resourcekey="lblRegDateValueResource1"
+                    SkinID="Label_CopyRightsNormal"></asp:Label>
+            </td>
+              <td style="width: 47%; height: 16px; vertical-align: top">
+    <table style="width: 47%; vertical-align: top" cellspacing="0">
+        <tr>
+              <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+             <td class="SeparArea">
+            </td>
+            <td class="LabelArea">
+                 
+            </td>
+            <td class="DataArea">
+                
+            </td>
+        </tr>
+    </table>
+</td>
+        </tr>
                                                 </table>
                                             </td>
                                             <td style="width: 6%; height: 16px; vertical-align: top">
@@ -1043,6 +1101,18 @@
                                                                     </CellStyle>
                                                                         <Footer>
                                                                             <RowLayoutColumnInfo OriginX="1" />
+                                                                        </Footer>
+                                                                    </igtbl:UltraGridColumn>
+                                                                    <igtbl:UltraGridColumn BaseColumnName="NoOfDays" Width="15%" DataType="System.string"
+                                                                          Hidden="False" Key="NoOfDays" meta:resourcekey="NoOfDaysResource3">
+                                                                        
+                                                                        <Header Caption="عدد الايام">
+                                                                            <RowLayoutColumnInfo OriginX="2" />
+                                                                        </Header>
+                                                                        <CellStyle HorizontalAlign="Center">
+                                                                    </CellStyle>
+                                                                        <Footer>
+                                                                            <RowLayoutColumnInfo OriginX="2" />
                                                                         </Footer>
                                                                     </igtbl:UltraGridColumn>
                                                                     <igtbl:UltraGridColumn BaseColumnName="RequestType" Width="15%" DataType="System.string"

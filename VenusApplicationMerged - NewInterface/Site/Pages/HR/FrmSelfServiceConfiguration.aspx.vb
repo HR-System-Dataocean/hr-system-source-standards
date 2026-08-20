@@ -465,8 +465,7 @@ Partial Class frmEmployeesVacations
             End If
             Dim regUserId As Integer = _sys_User.ID
 
-            'Dim Deletecommand As String = "Delete from SS_Configuration where FormCode='" & FormCode & "' "
-            'Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(ConnectionString, Data.CommandType.Text, Deletecommand)
+
             Dim CanEdit As Boolean
             Dim IsFinal As Boolean
             Dim ApplyForAll As Boolean

@@ -14529,6 +14529,37 @@ IF @FormID_RTM IS NOT NULL AND NOT EXISTS (SELECT 1 FROM sys_FormsPermissions WH
 "
         ExecuteUpdate(SQL)
 
+        SQL = "
+create view SS_VAnnualVacationsFollowup
+as
+ SELECT SS_VacationRequest.ID, SS_VacationRequest.VacationType, SS_VacationRequest.Code AS RequestSerial, SS_VacationRequest.EmployeeID, SS_VacationRequest.NoOfDays,
+                  hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 1) + ' ' + '-' + ' ' + sys_branches.arbname AS EmployeeArbName, hrs_Employees.code + '  ' + '-' + '  ' + [dbo].[fn_GetEmpName](hrs_Employees.Code, 0) 
+                  + ' ' + '-' + ' ' + sys_branches.engname AS EmployeeEngName, SS_VacationRequest.RequestDate, CASE WHEN SS_VacationRequest.VacationType = 'SS_0011' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'اجازة سنوي اداري' WHEN SS_VacationRequest.VacationType = 'SS_0012' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'اجازة سنوي طبي' WHEN SS_VacationRequest.VacationType = 'SS_0030' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'اجازة سنوي تشغيلي' WHEN SS_VacationRequest.VacationType = 'SS_0031' THEN 'اجازة اخرى تشغيلي' WHEN SS_VacationRequest.VacationType = 'SS_0035' THEN 'طلب اجازة اخرى – إداري داخلي' WHEN SS_VacationRequest.VacationType
+                   = 'SS_0036' THEN 'طلب اجازة اخرى – تمريض' WHEN SS_VacationRequest.VacationType = 'SS_0037' THEN 'طلب اجازة اخرى – الإدارة العامة' WHEN SS_VacationRequest.VacationType = 'SS_0032' THEN 'طلب إجازة سنوية – إداري داخلي' WHEN SS_VacationRequest.VacationType
+                   = 'SS_0033' THEN 'طلب إجازة سنوية – تمريض' WHEN SS_VacationRequest.VacationType = 'SS_0034' THEN 'طلب إجازة سنوية – الإدارة العامة' ELSE hrs_VacationsTypes.ArbName4S END AS RequestArbName, 
+                  CASE WHEN SS_VacationRequest.VacationType = 'SS_0011' AND SS_VacationRequest.VacationTypeID = 1 THEN 'Annual Vacation Admin' WHEN SS_VacationRequest.VacationType = 'SS_0012' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'Annual Vacation Medical' WHEN SS_VacationRequest.VacationType = 'SS_0030' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'Annual Vacation Operational' WHEN SS_VacationRequest.VacationType = 'SS_0031' THEN 'Other Vacation Operational' WHEN SS_VacationRequest.VacationType = 'SS_0032' THEN 'Annual Leave Request – Internal Administration'
+                   WHEN SS_VacationRequest.VacationType = 'SS_0033' THEN 'Annual Leave Request – Nursing' WHEN SS_VacationRequest.VacationType = 'SS_0034' THEN 'Annual Leave Request – General Administration' WHEN SS_VacationRequest.VacationType
+                   = 'SS_0035' THEN 'Other Leave Request – Internal Administration' WHEN SS_VacationRequest.VacationType = 'SS_0036' THEN 'Other Leave Request – Nursing' WHEN SS_VacationRequest.VacationType = 'SS_0037' THEN 'Other Leave Request – General Administration'
+                   ELSE hrs_VacationsTypes.EngName END AS RequestEngName, CASE WHEN SS_VacationRequest.VacationType = 'SS_0011' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'SS_0011' WHEN SS_VacationRequest.VacationType = 'SS_0012' AND SS_VacationRequest.VacationTypeID = 1 THEN 'SS_0012' WHEN SS_VacationRequest.VacationType = 'SS_0030' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'SS_0030' WHEN SS_VacationRequest.VacationType = 'SS_0031' THEN 'SS_0031' WHEN SS_VacationRequest.VacationType = 'SS_0032' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'SS_0032' WHEN SS_VacationRequest.VacationType = 'SS_0033' AND SS_VacationRequest.VacationTypeID = 1 THEN 'SS_0033' WHEN SS_VacationRequest.VacationType = 'SS_0034' AND 
+                  SS_VacationRequest.VacationTypeID = 1 THEN 'SS_0034' WHEN SS_VacationRequest.VacationType = 'SS_0035' THEN 'SS_0035' WHEN SS_VacationRequest.VacationType = 'SS_0036' THEN 'SS_0036' WHEN SS_VacationRequest.VacationType
+                   = 'SS_0037' THEN 'SS_0037' WHEN SS_VacationRequest.VacationType = 'SS_0018' THEN 'SS_0018' ELSE 'SS_0013' END AS FormCode, RequestStautsTypeID, SS_VacationRequest.StartDate AS TrxDate
+FROM     SS_VacationRequest JOIN
+                  hrs_Employees ON SS_VacationRequest.EmployeeID = hrs_Employees.id JOIN
+                  hrs_VacationsTypes ON SS_VacationRequest.VacationTypeID = hrs_VacationsTypes.ID INNER JOIN
+                  sys_Branches ON hrs_Employees.BranchID = sys_Branches.ID"
+        ExecuteUpdate(SQL)
+
+        SQL = "alter table sys_systemconfig add ApplyAnnualvacationrequestBalancevalidation bit null"
+        ExecuteUpdate(SQL)
+
     End Function
     Public Function ExecuteUpdate(ByVal mySQLQuery As String) As Boolean
 

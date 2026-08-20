@@ -321,7 +321,7 @@ Partial Class frmBusinessORTrainingTravelAction
             '============Get ConfigData======================
             If ddlAction.SelectedValue = 2 Then   'رفض
 
-                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & " And ActionID Is Null"
                 SqlCommand = New SqlClient.SqlCommand
                 SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
                 SqlCommand.CommandType = CommandType.Text
@@ -444,7 +444,7 @@ Partial Class frmBusinessORTrainingTravelAction
 
                         If Not String.IsNullOrWhiteSpace(NeededactionSerial) Then
 
-                            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & " And ActionID Is Null "
                             SqlCommand = New SqlClient.SqlCommand
                             SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
                             SqlCommand.CommandType = CommandType.Text
@@ -461,7 +461,7 @@ Partial Class frmBusinessORTrainingTravelAction
                     End If
                     If CBool(dsconfig.Tables(0).Rows(0)("IsFinal")) Then
 
-                        UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                        UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & " And ActionID Is Null "
                         SqlCommand = New SqlClient.SqlCommand
                         SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
                         SqlCommand.CommandType = CommandType.Text
@@ -518,7 +518,7 @@ Partial Class frmBusinessORTrainingTravelAction
                                         DirectManagerID = DelegatedEmpID
 
                                     End If
-                                    UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                                    UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & " And ActionID Is Null "
                                     SqlCommand = New SqlClient.SqlCommand
                                     SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
                                     SqlCommand.CommandType = CommandType.Text
@@ -577,7 +577,7 @@ Partial Class frmBusinessORTrainingTravelAction
 
                                             End If
 
-                                            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                                            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & " And ActionID Is Null "
                                             SqlCommand = New SqlClient.SqlCommand
                                             SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
                                             SqlCommand.CommandType = CommandType.Text
@@ -616,7 +616,7 @@ Partial Class frmBusinessORTrainingTravelAction
                                         Row("EmployeeID") = DelegatedEmpID
 
                                     End If
-                                    UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                                    UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & " And ActionID Is Null "
                                     SqlCommand = New SqlClient.SqlCommand
                                     SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
                                     SqlCommand.CommandType = CommandType.Text
@@ -637,7 +637,7 @@ Partial Class frmBusinessORTrainingTravelAction
                                 End If
                             Next
                         Else
-                            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & ""
+                            UpdateCommand = "update SS_RequestActions set  seen=1 , ActionID=" & ddlAction.SelectedValue & " ,ActionDate= GETDATE(),ActionRemarks='" + TxtRemarks.Text + "'  where ConfigID=" & ConfigID & " And FormCode='SS_001927' and RequestSerial=" & RequestSerial & " and SS_EmployeeID=" & ClsEmployees_SS.ID & " And ActionID Is Null "
                             SqlCommand = New SqlClient.SqlCommand
                             SqlCommand.Connection = New SqlClient.SqlConnection(ClsEmployees_SS.ConnectionString)
                             SqlCommand.CommandType = CommandType.Text
