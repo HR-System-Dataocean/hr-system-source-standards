@@ -224,7 +224,7 @@ Partial Class frmEmployeesVacations
         Dim RequestSerial As Integer = Request.QueryString.Item("RequestSerial")
         Dim FormCode As String = Request.QueryString.Item("FormCode")
         Dim Type As String = Request.QueryString.Item("Type")
-        If Type = 2 Then
+        If Type = 2 Or Type = 3 Or Type = 1 Then
             Try
                 Dim User As String = String.Empty
                 Dim WebHandler As New Venus.Shared.Web.WebHandler

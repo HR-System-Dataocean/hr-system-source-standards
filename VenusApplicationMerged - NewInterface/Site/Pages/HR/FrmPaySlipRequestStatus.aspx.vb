@@ -223,7 +223,7 @@ Partial Class frmEmployeesVacations
         Dim Type As String = Request.QueryString.Item("Type")
         Dim User As String = String.Empty
         Dim WebHandler As New Venus.Shared.Web.WebHandler
-        If Type = 2 Then
+        If Type = 2 Or Type = 3 Or Type = 1 Then
             Try
 
                 WebHandler.GetCookies(Page, "UserID", User)
